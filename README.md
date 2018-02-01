@@ -7,14 +7,14 @@ Business intelligence for your children
 Stack
 -----
 
-Angular 5
-Serverless framework
+- Angular 5
+- Serverless framework
 
 
 Third party
 -----------
 
-AWS Lambda
-AWS DynamoDB
-Algolia
-Auth0
+- AWS Lambda
+- AWS DynamoDB
+- Algolia
+- Auth0

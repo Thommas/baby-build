@@ -1,20 +1,27 @@
 Roadmap
 =======
 
-Setup angular
-Setup routing
-Setup auth0
-Design homepage
+Short term
+----------
 
-Modules:
+- Setup angular
+- Setup routing
+- Setup auth0
+- Design homepage
+
+
+Modules
+-------
+
 - Build with focus per year and open possibilities to explore new skills
-- Whitelist book/anime/tv show/movie/video game/boardgame (need unique identifier)
+- Whitelist media contents
 - RTFM
 - Lazyness vs effort with reward system
 
-Test many visualization libraries
 
-Goals:
+Goals
+-----
+
 - Lack of technology control leads to bad growth
 - Dopamine control
 - Not too much control
@@ -22,3 +29,10 @@ Goals:
 - Need community tools
 - Gender equity
 - Allow specific culture, religion, belief, family traditions
+
+
+Stack
+-----
+
+Test many visualization libraries
+Need unique identifier for youtube video/book/anime/tv show/movie/video game/boardgame
