@@ -91,3 +91,15 @@ Other
 - Parent also level up for every interaction with the platform
 - Allow other family member to input data
 - Make a list of what this platform should not be used for
+- Lots of stories of parents who let their kid play 10 hours per day.
+  We have a whole generation of parents who have no idea what hardcore gaming is.
+  They should know how to put limits.
+  Kids mimics parent behavior, it's important to show a good example.
+
+
+Links
+-----
+
+https://www.reddit.com/r/Parenting/comments/7ta1mk/1314_yr_olds_how_do_you_handle_technologyvideo/
+https://www.reddit.com/r/Parenting/comments/64da9v/child_is_addicted_to_video_games/
+https://www.reddit.com/r/Parenting/comments/53vl3e/precious_moment_after_finishing_our_first_video/
