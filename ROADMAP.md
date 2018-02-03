@@ -4,19 +4,63 @@ Roadmap
 Short term
 ----------
 
-- Setup angular
-- Setup routing
-- Setup auth0
 - Design homepage
-
+- Setup auth0
 
 Modules
 -------
 
-- Build with focus per year and open possibilities to explore new skills
-- Whitelist media contents
-- RTFM
+#### Build
+
+The goal is to encourage curiosity.
+
+- How often (per year, per month, per 6 month) ?
+- Prepare possibilities and choices
+
+Examples:
+1) Pick a book (dinosaur, planets, flowers)
+2) Pick an instrument (piano, guitar, other)
+3) Pick a sport and register to local club (basket, tennis, soccer)
+
+Everytime the kid makes a choice, he will get XP and level up.
+When the kid level up, the parent can give points to primary and secondary attributes.
+Primary and secondary attributes to be defined.
+
+https://en.wikipedia.org/wiki/Attribute_(role-playing_games)
+https://www.16personalities.com/articles/our-theory
+
+#### Whitelist
+
+Whitelist media contents to give access to the kid. Each content will have a minimum age required.
+
+Contents can be:
+- books
+- movies
+- tv show
+- anime
+- video game
+- board game
+- online video
+
+#### Life tutorial aka RTFM
+
+Parents accumulate knowledge with experience and wants to give a summary
+for their kid to access at some point in their life.
+
+Example:
+1) How to manage a car
+
+#### Lazyness meter
+
+Mobile app design
+
 - Lazyness vs effort with reward system
+
+Monitor each day/week the amount of effort that the kid produces to
+learn new things or behave vs his lazyness (passively watching TV or youtube).
+
+Also when kid level up, the parents can decide to reward the kid curiosity
+by providing access to more technology and media contents.
 
 
 Goals

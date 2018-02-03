@@ -9,6 +9,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
@@ -33,6 +34,7 @@ import { AuthGuardService } from './services';
     BrowserModule,
     RouterModule,
     routing,
+    FlexLayoutModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
