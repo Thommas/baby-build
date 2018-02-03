@@ -23,8 +23,9 @@ Goals
 -----
 
 - Lack of technology control leads to bad growth
-- Dopamine control
-- Not too much control
+- Lack of interaction (parent let their kid on tv instead of doing an activity with them)
+- Dopamine control (cultivate depth instead of short interaction)
+- Not too much control (balance big brother vs security concerns)
 - Make access to technology a reward
 - Need community tools
 - Gender equity
@@ -34,5 +35,15 @@ Goals
 Stack
 -----
 
-Test many visualization libraries
-Need unique identifier for youtube video/book/anime/tv show/movie/video game/boardgame
+- Test many visualization libraries
+- Need unique identifier for youtube video/book/anime/tv show/movie/video game/boardgame
+
+
+Other
+-----
+
+- Thema for each year ?
+- Primary and secondary stats +1 per year
+- Parent also level up for every interaction with the platform
+- Allow other family member to input data
+- Make a list of what this platform should not be used for
