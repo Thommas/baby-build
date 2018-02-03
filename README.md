@@ -1,7 +1,7 @@
 Path of child
 =============
 
-Business intelligence for your children
+Gamified life planning platform for your child
 
 
 Stack

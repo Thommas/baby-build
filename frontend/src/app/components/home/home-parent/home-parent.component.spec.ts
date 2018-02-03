@@ -1,18 +1,19 @@
 /**
  * Path of child
  *
- * App
+ * Component - Home - Home Parent
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-describe('AppComponent', () => {
+import { HomeParentComponent } from './home-parent.component';
+
+describe('HomeParentComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        HomeParentComponent
       ],
     }).compileComponents();
   }));
