@@ -10,9 +10,12 @@
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    LOGO
-    SCORE
-    LOCALE
+    <button mat-icon-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
+      LOGIN
+    </button>
+    <button mat-icon-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
+      LOGOUT
+    </button>
   </mat-toolbar>
   <div class="app-content">
     <router-outlet></router-outlet>

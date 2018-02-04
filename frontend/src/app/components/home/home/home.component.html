@@ -1,1 +1,2 @@
-<app-home-parent-cmp></app-home-parent-cmp>
+<app-home-anonymous-cmp *ngIf="!authService.isAuthenticated()"></app-home-anonymous-cmp>
+<app-home-parent-cmp *ngIf="authService.isAuthenticated()"></app-home-parent-cmp>

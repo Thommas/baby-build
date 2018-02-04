@@ -8,10 +8,17 @@
 
 import { Component } from '@angular/core';
 
+import { AuthService } from '../../../services';
+
 @Component({
   selector: 'app-home-cmp',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  /**
+   * Constructor
+   */
+  constructor(protected authService: AuthService) {
+  }
 }

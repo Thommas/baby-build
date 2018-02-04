@@ -9,10 +9,20 @@
  import { NgModule } from '@angular/core';
  import { BrowserModule } from '@angular/platform-browser';
  import { FlexLayoutModule } from '@angular/flex-layout';
+ import {
+   MatButtonModule,
+   MatCardModule,
+   MatIconModule,
+   MatProgressBarModule,
+   MatSidenavModule,
+   MatToolbarModule,
+   MatTooltipModule
+ } from '@angular/material';
 
  import {
    homeRouting,
    HomeComponent,
+   HomeAnonymousComponent,
    HomeParentComponent
  } from './';
 
@@ -20,10 +30,18 @@
    imports: [
      BrowserModule,
      FlexLayoutModule,
-     homeRouting
+     homeRouting,
+     MatButtonModule,
+     MatCardModule,
+     MatIconModule,
+     MatProgressBarModule,
+     MatSidenavModule,
+     MatToolbarModule,
+     MatTooltipModule
    ],
    declarations: [
      HomeComponent,
+     HomeAnonymousComponent,
      HomeParentComponent
    ]
  })

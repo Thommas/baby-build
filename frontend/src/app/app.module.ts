@@ -13,6 +13,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
+  MatCardModule,
   MatIconModule,
   MatProgressBarModule,
   MatSidenavModule,
@@ -24,7 +25,7 @@ import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { HomeModule } from './components/home/home.module';
 import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
-import { AuthGuardService } from './services';
+import { AuthGuardService, AuthService } from './services';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AuthGuardService } from './services';
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
     MatProgressBarModule,
     MatSidenavModule,
@@ -47,7 +49,8 @@ import { AuthGuardService } from './services';
   ],
   providers: [
     appRoutingProviders,
-    AuthGuardService
+    AuthGuardService,
+    AuthService
   ],
   bootstrap: [
     AppComponent
