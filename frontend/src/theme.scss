@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$path-of-child-primary: mat-palette($mat-indigo);
+$path-of-child-accent:  mat-palette($mat-pink, A200, A100, A400);
+$path-of-child-warn:    mat-palette($mat-red);
+$path-of-child-theme:   mat-light-theme($path-of-child-primary, $path-of-child-accent, $path-of-child-warn);
+
+@include angular-material-theme($path-of-child-theme);
+
+.path-of-child-theme {
+  button {
+    background: -moz-linear-gradient(45deg, #6ee5ad 0%, #aa5592 50%, #4c9eef 100%);
+    background: -webkit-linear-gradient(45deg, #6ee5ad 0%,#aa5592 50%,#4c9eef 100%);
+    background: linear-gradient(45deg, #6ee5ad 0%,#aa5592 50%,#4c9eef 100%);
+    border-radius: 4px;
+    color: #ffffff;
+  }
+}

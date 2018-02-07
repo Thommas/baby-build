@@ -1,29 +1,33 @@
-<div fxLayout="column" fxLayoutAlign="center" [ngStyle]="{'margin': '20px'}">
-  <h1>Path of child</h1>
+<div fxLayout="column" fxLayoutAlign="center center" [ngStyle]="{'padding': '20px', 'background-color': '#eee'}">
   <h2>Child education gamification platform</h2>
   <p>Have fun taking care of your child</p>
-  <button>Sign in</button>
+  <button mat-raised-button>Sign in</button>
 </div>
 <h2>
   Path of child is a gamification platform to help parents plan the long term education of their child.<br>
   Organize digital contents that the child will slowly get access to.<br>
-  Each parent can tailor the platform to match their vision of education.<br>
-  Other family members can also contribute.
+  Each parent can tailor the platform to match their vision of education.
 </h2>
-<div fxLayout="column" fxLayoutAlign="space-around center" [ngStyle]="{'margin': '20px'}">
+<div fxLayout="column" fxLayoutAlign="space-around center">
   <h2>Core platform values</h2>
-  <div fxLayout="row" fxLayoutAlign="space-around center" [ngStyle]="{'margin': '20px'}">
-    <div>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxLayout="column" fxLayoutAlign="center">
       <h3>Technology control</h3>
       <p>Parents are putting their children in danger by letting them passively consume digital contents.</p>
     </div>
-    <div>
+      <div fxLayout="column" fxLayoutAlign="center">
       <h3>Dopamine control</h3>
       <p>Cultivate depth and curiosity instead of short interaction and waste of time.</p>
     </div>
-    <div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxLayout="column" fxLayoutAlign="center">
       <h3>Community powered</h3>
       <p>This is a place where parents care. The platform will help share popular education tips.</p>
+    </div>
+      <div fxLayout="column" fxLayoutAlign="center">
+      <h3>Collaboration tool</h3>
+      <p>Other family members can also contribute.</p>
     </div>
   </div>
 </div>

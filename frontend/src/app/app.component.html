@@ -1,23 +1,16 @@
-<mat-sidenav-container fullscreen #sidenavLayout>
-  <mat-progress-bar
-    color="accent"
-    mode="determinate">
-  </mat-progress-bar>
-  <mat-sidenav #sidenav #start fxLayout="column" mode="push">
-    SIDE BAR
-  </mat-sidenav>
-  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <button mat-icon-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
-      LOGIN
-    </button>
-    <button mat-icon-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
-      LOGOUT
-    </button>
-  </mat-toolbar>
-  <div class="app-content">
-    <router-outlet></router-outlet>
-  </div>
-</mat-sidenav-container>
+<mat-progress-bar
+  color="accent"
+  mode="determinate">
+</mat-progress-bar>
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+  <h1>Path of child</h1>
+  <button mat-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
+    LOGIN
+  </button>
+  <button mat-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
+    LOGOUT
+  </button>
+</mat-toolbar>
+<div class="app-content">
+  <router-outlet></router-outlet>
+</div>
