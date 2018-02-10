@@ -4,12 +4,17 @@
 </mat-progress-bar>
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
   <h1>Path of child</h1>
-  <button mat-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
-    LOGIN
-  </button>
-  <button mat-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
-    LOGOUT
-  </button>
+  <div>
+    <button mat-button (click)="switchChild()" *ngIf="authService.isAuthenticated()">
+      Switch child
+    </button>
+    <button mat-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
+      LOGIN
+    </button>
+    <button mat-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
+      LOGOUT
+    </button>
+</div>
 </mat-toolbar>
 <div class="app-content">
   <router-outlet></router-outlet>

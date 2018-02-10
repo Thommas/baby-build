@@ -22,4 +22,8 @@ export class AppComponent {
   constructor(protected authService: AuthService) {
     authService.handleAuthentication();
   }
+
+  switchChild() {
+    localStorage.removeItem('child');
+  }
 }

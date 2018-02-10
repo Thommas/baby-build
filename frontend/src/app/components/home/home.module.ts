@@ -23,6 +23,7 @@
    homeRouting,
    HomeComponent,
    HomeAnonymousComponent,
+   HomeParentChildIndexComponent,
    HomeParentComponent
  } from './';
 
@@ -42,6 +43,7 @@
    declarations: [
      HomeComponent,
      HomeAnonymousComponent,
+     HomeParentChildIndexComponent,
      HomeParentComponent
    ]
  })

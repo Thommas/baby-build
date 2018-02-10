@@ -7,13 +7,13 @@
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { HomeParentComponent } from './home-parent.component';
+import { HomeParentChildIndexComponent } from './home-parent-child-index.component';
 
-describe('HomeParentComponent', () => {
+describe('HomeParentChildIndexComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        HomeParentComponent
+        HomeParentChildIndexComponent
       ],
     }).compileComponents();
   }));
