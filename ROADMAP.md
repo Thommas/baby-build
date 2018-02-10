@@ -4,72 +4,103 @@ Roadmap
 Short term
 ----------
 
+- Build kitchen sink for design
 - Design homepage
-- Setup auth0
 
 
 Long term
 ---------
 
-- Design mobile first
+- Adapt design for mobile
 - Find logo
 
 
-Modules
--------
+Entities
+--------
 
-#### Build
+### User (parent)
+
+Login
+XP
+Level
+
+### Child
+
+A child has a name, birthdate, xp and level, laziness gauge.
+
+### Build
+
+A build is the following:
+- For each month a list of quests
+- Rewards unlock progressively based on month and child xp/level or attributes
+- Setting goals for each month and each year
+
+### Month
+
+- Past will record stats and consolidate build
+- Present will present stuff to introduce to the child
+- Future will plan
+
+### Laziness
+
+Monitor each month the amount of laziness of your child.
+We want to prevent passively watching TV or youtube for instance.
+Same for video game with empty gameplay (Candy crush)
+
+### Quest
+
+- Main quest
+- Bonus quests
 
 The goal is to encourage curiosity.
 
-- How often (per year, per month, per 6 month) ?
-- Prepare possibilities and choices
+Type of quest:
+
+1) 3 choices
 
 Examples:
-1) Pick a book (dinosaur, planets, flowers)
-2) Pick an instrument (piano, guitar, other)
-3) Pick a sport and register to local club (basket, tennis, soccer)
+- At 6 year old pick a book (dinosaur, planets, flowers)
+- At 9 year old pick a sport and register to local club (basket, tennis, soccer)
+- At 12 year old pick an instrument (piano, guitar, other)
 
-Everytime the child makes a choice, he will get XP and level up.
+Finishing quest grants XP.
+
 When the child level up, the parent can give points to primary and secondary attributes.
 Primary and secondary attributes to be defined.
 
 https://en.wikipedia.org/wiki/Attribute_(role-playing_games)
 https://www.16personalities.com/articles/our-theory
 
-#### Whitelist
+### Reward
 
-Whitelist media contents to give access to the child. Each content will have a minimum age required.
+1) Activity
 
-Contents can be:
+2) Access to tool or technology
+
+3) Digital content
+
+Examples:
 - books
 - movies
 - tv show
 - anime
 - video game
 - board game
-- online video
+- online video (spend X hours on youtube only whitelisted playlist)
 
-#### Life tutorial
+4) Life tutorial
 
 Parents accumulate knowledge with experience and wants to give a summary
 for their children to access at some point in their life.
 Create life tutorial dedicated to your child in the future.
 
-Example:
-1) How to deal with an aggressive girlfriend or boyfriend
-2) How to manage a car
+Examples:
+- How to deal with an aggressive girlfriend or boyfriend
+- How to manage a car
 
-#### Laziness meter
+5) Time capsule congratulation message
 
-- Mesure laziness vs effort with reward system
-
-Monitor each day/week the amount of laziness of your child.
-We want to prevent passively watching TV or youtube for instance.
-Same for video game with empty gameplay (Candy crush)
-
-Also when the child levels up, the parents can decide to reward his or her curiosity
-by providing access to more technology and media contents.
+Store date it was written.
 
 
 Goals
@@ -104,6 +135,7 @@ Other
   We have a whole generation of parents who have no idea what hardcore gaming is.
   They should know how to put limits.
   childs mimics parent behavior, it's important to show a good example.
+- In Japan they get money for high grades
 
 
 Links
@@ -112,3 +144,34 @@ Links
 https://www.reddit.com/r/Parenting/comments/7ta1mk/1314_yr_olds_how_do_you_handle_technologyvideo/
 https://www.reddit.com/r/Parenting/comments/64da9v/child_is_addicted_to_video_games/
 https://www.reddit.com/r/Parenting/comments/53vl3e/precious_moment_after_finishing_our_first_video/
+
+
+Storyboard
+----------
+
+- Register to the website
+- List without any child > create a new child
+- Form to create a new child
+- Select a child
+- List without any build > create a new build
+- Form to create a new build
+
+### Main interface
+
+1) Header
+
+- Logo
+- Selected child name, level and XP bar
+- Button to switch child/build
+- Link to settings
+
+2) Calendar per month (display both Mxx and Y-m)
+- For a future month: Create quest
+- For a future month: Create reward
+- For a present month: Display the list of quests and rewards
+- For a past month: Upload picture select 1/2/3 quality
+
+3) Global lists
+
+- Setup goals per year and per month
+- Manage the whitelist
