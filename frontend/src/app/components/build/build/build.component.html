@@ -1,1 +1,10 @@
-BUILD
+<div class="container">
+  <mat-tab-group [@.disabled]="true">
+    <mat-tab label="Instructions">
+      <app-build-instructions-cmp></app-build-instructions-cmp>
+    </mat-tab>
+    <mat-tab label="Build list">
+      <app-build-index-cmp></app-build-index-cmp>
+    </mat-tab>
+  </mat-tab-group>
+</div>
