@@ -1,44 +1,49 @@
-<div fxLayout="column" fxLayoutAlign="center center" [ngStyle]="{'padding': '20px', 'background-color': '#eee'}">
-  <h2>Child education gamification platform</h2>
-  <p>Have fun taking care of your child</p>
-  <button mat-raised-button>Sign in</button>
-</div>
-<h2>
-  Path of child is a gamification platform to help parents plan the long term education of their child.<br>
-  Organize digital contents that the child will slowly get access to.<br>
-  Each parent can tailor the platform to match their vision of education.
-</h2>
-<div fxLayout="column" fxLayoutAlign="space-around center">
-  <h2>Core platform values</h2>
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <div fxLayout="column" fxLayoutAlign="center">
-      <h3>Technology control</h3>
-      <p>Parents are putting their children in danger by letting them passively consume digital contents.</p>
-    </div>
-      <div fxLayout="column" fxLayoutAlign="center">
-      <h3>Dopamine control</h3>
-      <p>Cultivate depth and curiosity instead of short interaction and waste of time.</p>
-    </div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <div fxLayout="column" fxLayoutAlign="center">
-      <h3>Community powered</h3>
-      <p>This is a place where parents care. The platform will help share popular education tips.</p>
-    </div>
-      <div fxLayout="column" fxLayoutAlign="center">
-      <h3>Collaboration tool</h3>
-      <p>Other family members can also contribute.</p>
-    </div>
+<div fxLayout="column" fxLayoutAlign="center center" class="path-of-child-bg hero">
+  <div class="container" fxLayout="column" fxLayoutAlign="start start">
+    <h2>Have fun planning<br />the future of your child</h2>
+    <h3>
+      Path of child is a gamification platform to help parents<br />plan and enjoy the long term education of their child.
+    </h3>
+    <button mat-raised-button (click)="signUp()">Get started</button>
   </div>
 </div>
-<div>
-  <h3>Main features</h3>
-  <ul>
-    <li>Limited time investment, it takes a few minutes every day to use the platform.</li>
-    <li>We want to find a nice balance between acting like big brother and real security concerns.</li>
-    <li>Make access to technology a reward for the child.</li>
-    <li>Community tools.</li>
-    <li>Promote gender equity.</li>
-    <li>Allow specific culture, religion, belief, family traditions.</li>
-  </ul>
+<div class="container">
+  <h2>
+    Organize digital contents that the child will slowly get access to.<br>
+    Each parent can tailor the platform to match their vision of education.
+  </h2>
+  <div fxLayout="column" fxLayoutAlign="space-around center">
+    <h2>Core platform values</h2>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxLayout="column" fxLayoutAlign="center">
+        <h3>Technology control</h3>
+        <p>Parents are putting their children in danger by letting them passively consume digital contents.</p>
+      </div>
+        <div fxLayout="column" fxLayoutAlign="center">
+        <h3>Dopamine control</h3>
+        <p>Cultivate depth and curiosity instead of short interaction and waste of time.</p>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxLayout="column" fxLayoutAlign="center">
+        <h3>Community powered</h3>
+        <p>This is a place where parents care. The platform will help share popular education tips.</p>
+      </div>
+        <div fxLayout="column" fxLayoutAlign="center">
+        <h3>Collaboration tool</h3>
+        <p>Other family members can also contribute.</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h3>Main features</h3>
+    <ul>
+      <li>Limited time investment. We know parents are busy.</li>
+      <li>We want to find a nice balance between acting like big brother and real security concerns.</li>
+      <li>Make access to technology a reward for the child.</li>
+      <li>Community tools.</li>
+      <li>Promote gender equity.</li>
+      <li>Allow specific culture, religion, belief, family traditions.</li>
+    </ul>
+  </div>
 </div>

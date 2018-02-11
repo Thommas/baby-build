@@ -14,4 +14,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-anonymous.component.scss']
 })
 export class HomeAnonymousComponent {
+  signUp() {
+    // FIXME
+  }
 }

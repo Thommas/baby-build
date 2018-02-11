@@ -1,19 +1,21 @@
 <div class="container">
-  <mat-list>
-    <div *ngFor="let year of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
-      <h3>{{ year }} year old</h3>
-      <div>
-        <div *ngFor="let month of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-             fxLayout="row" fxLayoutAlign="space-between center">
-          <h4>month {{ month }}</h4>
-          <span fxFlex="50">Quest 1, Quest 2, Quest 3</span>
-          <span fxFlex="10">Laziness 3h</span>
-          <button mat-button>
-            Add
-          </button>
-        </div>
-      </div>
-      <mat-divider></mat-divider>
+  <mat-expansion-panel *ngFor="let month of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Month {{ month }}
+      </mat-panel-title>
+      <mat-panel-description>
+        0 quest
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div>
+      <h4>month {{ month }}</h4>
+      <span fxFlex="50">Quest 1, Quest 2, Quest 3</span>
+      <span fxFlex="10">Laziness 3h</span>
+      <button mat-button>
+        Add a quest
+      </button>
     </div>
-  </mat-list>
+  </mat-expansion-panel>
 </div>

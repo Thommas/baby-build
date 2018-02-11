@@ -4,7 +4,7 @@
 </mat-progress-bar>
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
   <div class="container" fxLayout="row" fxLayoutAlign="space-between center">
-    <img src="https://placehold.it/203x31" />
+    <img src="https://placehold.it/203x31"  [routerLink]="['']"/>
     <div fxLayout="row" fxFlex="60" *ngIf="authService.isAuthenticated()">
       <a href="javascript:;" [routerLink]="['build']">Build</a>
       <a href="javascript:;" [routerLink]="['whitelist']">Whitelist</a>
@@ -12,13 +12,13 @@
     </div>
     <div>
       <button mat-button [matMenuTriggerFor]="childrenMenu" *ngIf="authService.isAuthenticated()">
-        Leo
+        selectedChildName
       </button>
       <button mat-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
-        LOGIN
+        Log in
       </button>
       <button mat-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
-        LOGOUT
+        Log out
       </button>
     </div>
   </div>

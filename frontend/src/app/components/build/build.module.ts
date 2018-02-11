@@ -12,6 +12,7 @@
  import {
    MatButtonModule,
    MatCardModule,
+   MatExpansionModule,
    MatIconModule,
    MatListModule,
    MatProgressBarModule,
@@ -35,6 +36,7 @@
      routing,
      MatButtonModule,
      MatCardModule,
+     MatExpansionModule,
      MatIconModule,
      MatListModule,
      MatProgressBarModule,

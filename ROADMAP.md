@@ -165,16 +165,19 @@ Storyboard
 - Button to switch child/build
 - Link to settings
 
-2) Calendar per month (display both Mxx and Y-m)
-- For a future month: Create quest
-- For a future month: Create reward
-- For a present month: Display the list of quests and rewards
-- For a past month: Upload picture select 1/2/3 quality
+2) Build
 
-3) Global lists
+Calendar per year or month
+- Future and present: Setup goal, create quests with rewards
+- Past: Upload picture select 1/2/3 quality, describe goal results
 
-- Setup goals per year and per month
-- Manage the whitelist
+Note: calendar per month will be unlocked later (display both Mxx and Y-m)
+
+3) Whitelist
+
+- Add/remove/edit entries
+- Dynamic categories ??
+- Dynamic additional metadata (like minimum age) ??
 
 
 Similar apps
