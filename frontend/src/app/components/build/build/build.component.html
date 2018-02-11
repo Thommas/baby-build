@@ -1,10 +1,19 @@
 <div class="container">
-  <mat-tab-group [@.disabled]="true">
-    <mat-tab label="Instructions">
-      <app-build-instructions-cmp></app-build-instructions-cmp>
-    </mat-tab>
-    <mat-tab label="Build list">
-      <app-build-index-cmp></app-build-index-cmp>
-    </mat-tab>
-  </mat-tab-group>
+  <mat-list>
+    <div *ngFor="let year of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+      <h3>{{ year }} year old</h3>
+      <div>
+        <div *ngFor="let month of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+             fxLayout="row" fxLayoutAlign="space-between center">
+          <h4>month {{ month }}</h4>
+          <span fxFlex="50">Quest 1, Quest 2, Quest 3</span>
+          <span fxFlex="10">Laziness 3h</span>
+          <button mat-button>
+            Add
+          </button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
 </div>
