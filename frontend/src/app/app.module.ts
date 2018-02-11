@@ -15,6 +15,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatIconModule,
+  MatMenuModule,
   MatProgressBarModule,
   MatSidenavModule,
   MatToolbarModule,
@@ -25,8 +26,7 @@ import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { BuildModule } from './components/build/build.module';
 import { HomeModule } from './components/home/home.module';
-import { LazinessMeterModule } from './components/laziness-meter/laziness-meter.module';
-import { LifeTutorialModule } from './components/life-tutorial/life-tutorial.module';
+import { KitchenModule } from './components/kitchen/kitchen.module';
 import { WhitelistModule } from './components/whitelist/whitelist.module';
 import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
 import { AuthGuardService, AuthService } from './services';
@@ -44,14 +44,14 @@ import { AuthGuardService, AuthService } from './services';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    MatMenuModule,
     MatProgressBarModule,
     MatSidenavModule,
     MatToolbarModule,
     MatTooltipModule,
     BuildModule,
     HomeModule,
-    LazinessMeterModule,
-    LifeTutorialModule,
+    KitchenModule,
     WhitelistModule,
     PageNotFoundModule
   ],

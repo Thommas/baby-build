@@ -2,20 +2,32 @@
   color="accent"
   mode="determinate">
 </mat-progress-bar>
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
-  <h1>Path of child</h1>
-  <div>
-    <button mat-button (click)="switchChild()" *ngIf="authService.isAuthenticated()">
-      Switch child
-    </button>
-    <button mat-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
-      LOGIN
-    </button>
-    <button mat-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
-      LOGOUT
-    </button>
-</div>
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+  <div class="container" fxLayout="row" fxLayoutAlign="space-between center">
+    <img src="https://placehold.it/203x31" />
+    <div fxLayout="row" fxFlex="60" *ngIf="authService.isAuthenticated()">
+      <a href="javascript:;" [routerLink]="['build']">Build</a>
+      <a href="javascript:;" [routerLink]="['whitelist']">Whitelist</a>
+      <a href="javascript:;" [routerLink]="['kitchen']">Kitchen</a>
+    </div>
+    <div>
+      <button mat-button [matMenuTriggerFor]="childrenMenu" *ngIf="authService.isAuthenticated()">
+        Leo
+      </button>
+      <button mat-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
+        LOGIN
+      </button>
+      <button mat-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
+        LOGOUT
+      </button>
+    </div>
+  </div>
 </mat-toolbar>
 <div class="app-content">
   <router-outlet></router-outlet>
 </div>
+<mat-menu #childrenMenu="matMenu">
+  <button mat-menu-item>Leo</button>
+  <button mat-menu-item>Misaki</button>
+  <button mat-menu-item (click)="switchChild()">Manage children</button>
+</mat-menu>

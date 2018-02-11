@@ -175,3 +175,10 @@ Storyboard
 
 - Setup goals per year and per month
 - Manage the whitelist
+
+
+Similar apps
+------------
+
+https://www.choremonster.com
+https://www.classcraft.com

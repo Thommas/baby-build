@@ -1,6 +1,29 @@
-<mat-card>
-  <button mat-button (click)="addNewChild()">Add a new child</button>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Leo</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Description
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="selectChild('leo')">Leo</button>
+  </mat-card-actions>
 </mat-card>
-<mat-card>
-  <button mat-button (click)="selectChild('leo')">Leo</button>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title></mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Create a new child
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="addNewChild()">Add a new child</button>
+  </mat-card-actions>
 </mat-card>

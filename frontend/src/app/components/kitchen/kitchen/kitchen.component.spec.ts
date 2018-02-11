@@ -1,19 +1,19 @@
 /**
  * Path of child
  *
- * Component - LifeTutorial - LifeTutorial
+ * Component - Kitchen
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { LifeTutorialComponent } from './life-tutorial.component';
+import { KitchenComponent } from './kitchen.component';
 
-describe('LifeTutorialComponent', () => {
+describe('KitchenComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        KitchenComponent
       ],
     }).compileComponents();
   }));

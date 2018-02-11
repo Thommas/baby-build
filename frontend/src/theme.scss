@@ -1,8 +1,9 @@
 @import '~@angular/material/theming';
+@import 'palette';
 
 @include mat-core();
 
-$path-of-child-primary: mat-palette($mat-indigo);
+$path-of-child-primary: mat-palette($path-of-child-white);
 $path-of-child-accent:  mat-palette($mat-pink, A200, A100, A400);
 $path-of-child-warn:    mat-palette($mat-red);
 $path-of-child-theme:   mat-light-theme($path-of-child-primary, $path-of-child-accent, $path-of-child-warn);
@@ -18,7 +19,39 @@ $path-of-child-theme:   mat-light-theme($path-of-child-primary, $path-of-child-a
     background: -o-linear-gradient(45deg, rgba(138,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(209,181,255,1) 100%);
     background: -ms-linear-gradient(45deg, rgba(138,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(209,181,255,1) 100%);
     background: linear-gradient(45deg, rgba(138,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(209,181,255,1) 100%);
-    border-radius: 4px;
     color: #212121;
+    span {
+      color: #212121;
+    }
+  }
+
+  mat-progress-bar {
+    height: 2px;
+  }
+
+  mat-toolbar {
+    margin: 0 auto;
+    min-height: 68px;
+    border-bottom: 1px solid #e1e1e1;
+
+    .container {
+      width: 1170px;
+    }
+    a {
+      margin-right: 20px;
+      color: #1a1a1a;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 0 10px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+  }
+
+  .container {
+    width: 960px;
+    padding: 10px;
   }
 }

@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - LazinessMeter
+ * Component - Home
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -13,6 +13,7 @@
    MatButtonModule,
    MatCardModule,
    MatIconModule,
+   MatMenuModule,
    MatProgressBarModule,
    MatSidenavModule,
    MatToolbarModule,
@@ -21,9 +22,7 @@
 
  import {
    routing,
-   LazinessMeterComponent,
-   LazinessMeterIndexComponent,
-   LazinessMeterInstructionsComponent
+   KitchenComponent
  } from './';
 
  @NgModule({
@@ -34,16 +33,15 @@
      MatButtonModule,
      MatCardModule,
      MatIconModule,
+     MatMenuModule,
      MatProgressBarModule,
      MatSidenavModule,
      MatToolbarModule,
      MatTooltipModule
    ],
    declarations: [
-     LazinessMeterComponent,
-     LazinessMeterIndexComponent,
-     LazinessMeterInstructionsComponent
+     KitchenComponent
    ]
  })
- export class LazinessMeterModule {
+ export class KitchenModule {
  }

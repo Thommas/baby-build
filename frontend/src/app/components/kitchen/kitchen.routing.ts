@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - LifeTutorial
+ * Component - Home
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,12 +9,12 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { LifeTutorialComponent } from './life-tutorial/life-tutorial.component';
+import { KitchenComponent } from './kitchen/kitchen.component';
 
 const routes: Routes = [
   {
-    path: 'life-tutorial',
-    component: LifeTutorialComponent,
+    path: 'kitchen',
+    component: KitchenComponent,
     canActivate: [AuthGuardService]
   }
 ];

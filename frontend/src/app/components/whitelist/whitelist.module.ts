@@ -15,6 +15,7 @@
    MatIconModule,
    MatProgressBarModule,
    MatSidenavModule,
+   MatTabsModule,
    MatToolbarModule,
    MatTooltipModule
  } from '@angular/material';
@@ -36,6 +37,7 @@
      MatIconModule,
      MatProgressBarModule,
      MatSidenavModule,
+     MatTabsModule,
      MatToolbarModule,
      MatTooltipModule
    ],
