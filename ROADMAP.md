@@ -6,13 +6,13 @@ Short term
 
 - Build kitchen sink for design
 - Design homepage
-
+- Find logo
+- Setup GraphQL for child and build
 
 Long term
 ---------
 
 - Adapt design for mobile
-- Find logo
 
 
 Entities
@@ -101,19 +101,6 @@ Examples:
 5) Time capsule congratulation message
 
 Store date it was written.
-
-
-Goals
------
-
-- Lack of technology control leads to bad growth
-- Lack of interaction (parent let their child on tv instead of doing an activity with them)
-- Dopamine control (cultivate depth instead of short interaction)
-- Not too much control (balance big brother vs security concerns)
-- Make access to technology a reward
-- Need community tools
-- Gender equity
-- Allow specific culture, religion, belief, family traditions
 
 
 Stack

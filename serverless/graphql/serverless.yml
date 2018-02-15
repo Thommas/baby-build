@@ -1,0 +1,86 @@
+service: graphql-api
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  secrets: ${file(secrets.yml):${self:custom.stage}}
+  serverless-offline:
+    port: 4001
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+
+package:
+  exclude:
+    - secrets.yml
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: arn:aws:dynamodb:eu-west-1:*:*
+  environment:
+    API_KEY: "${self:custom.secrets.API_KEY}"
+    API_SECRET: "${self:custom.secrets.API_SECRET}"
+    COMMON_API_KEY: "${self:custom.secrets.COMMON_API_KEY}"
+    COMMON_API_SECRET: "${self:custom.secrets.COMMON_API_SECRET}"
+
+functions:
+  graphql:
+    handler: lib/handler.graphql
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+
+resources:
+  Resources:
+    gamesTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'child'
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+    spellsTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'build'
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
