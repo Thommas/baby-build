@@ -1,5 +1,5 @@
 /**
- * VGADB
+ * Path of child
  *
  * GraphQL - DynamoDB
  *
@@ -9,14 +9,21 @@
 import uuid = require('uuid/v4');
 import * as db from './dynamo';
 
-const TableName = 'childs';
+const TableName = 'child';
 
-export function getChilds() {
+export function getChildren() {
   const params = {
     TableName,
     AttributesToGet: [
       'id',
-      'title'
+      'firstname',
+      'middlename',
+      'lastname',
+      'nickname',
+      'birthdate',
+      'gender',
+      'xp',
+      'level'
     ],
   };
 
@@ -39,7 +46,9 @@ export function createChild(args) {
     TableName,
     Item: {
       id: uuid(),
-      title: args.title
+      xp: 0,
+      level: 1,
+      ...args
     },
   };
 
@@ -48,14 +57,14 @@ export function createChild(args) {
 
 export function updateChild(args) {
   const params = {
-    TableName: 'childs',
+    TableName,
     Key: {
       id: args.id,
     },
     ExpressionAttributeValues: {
-      ':title': args.title
+      ':firstname': args.firstname
     },
-    UpdateExpression: 'SET title = :title',
+    UpdateExpression: 'SET firstname = :firstname',
     ReturnValues: 'ALL_NEW',
   };
 

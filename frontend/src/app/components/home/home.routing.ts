@@ -10,8 +10,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
 import { HomeComponent } from './home/home.component';
+import { HomeParentChildCreateComponent } from './home-parent-child-create/home-parent-child-create.component';
 
-const homeRoutes: Routes = [
+const routes: Routes = [
+  {
+    path: 'child/create',
+    component: HomeParentChildCreateComponent,
+    canActivate: [AuthGuardService]
+  },
   {
     path: '',
     component: HomeComponent,
@@ -19,4 +25,4 @@ const homeRoutes: Routes = [
   }
 ];
 
-export const homeRouting = RouterModule.forChild(homeRoutes);
+export const routing = RouterModule.forChild(routes);

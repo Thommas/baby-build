@@ -14,6 +14,7 @@
     "express": "^4.15.4",
     "express-graphql": "^0.6.7",
     "graphql": "^0.10.5",
+    "graphql-iso-date": "^3.5.0",
     "graphql-server-lambda": "^1.1.0",
     "graphql-tools": "^1.1.0",
     "lodash": "^4.17.4",

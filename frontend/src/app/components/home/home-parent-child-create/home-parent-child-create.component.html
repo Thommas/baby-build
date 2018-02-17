@@ -1,0 +1,30 @@
+<form #childForm="ngForm" class="container" fxLayout="column" fxLayoutAlign="start start">
+  <mat-form-field>
+    <input matInput placeholder="First name"
+           [(ngModel)]="child.firstname" name="firstname">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Middle names"
+           [(ngModel)]="child.middlename" name="middlename">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Last name"
+           [(ngModel)]="child.lastname" name="lastname">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Nickname"
+           [(ngModel)]="child.nickname" name="nickname">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Birthdate"
+           [(ngModel)]="child.birthdate" name="birthdate">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Gender"
+                [(ngModel)]="child.gender" name="gender">
+      <mat-option value="0">Girl</mat-option>
+      <mat-option value="1">Boy</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-button type="submit" (click)="submit()">Submit</button>
+</form>

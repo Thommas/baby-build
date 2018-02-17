@@ -1,19 +1,19 @@
 /**
  * Path of child
  *
- * Component - Home - Home Parent Child Index
+ * Component - Home - Home Parent Child Create
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { HomeParentChildIndexComponent } from './home-parent-child-index.component';
+import { HomeParentChildCreateComponent } from './home-parent-child-create.component';
 
-describe('HomeParentChildIndexComponent', () => {
+describe('HomeParentChildCreateComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        HomeParentChildIndexComponent
+        HomeParentChildCreateComponent
       ],
     }).compileComponents();
   }));

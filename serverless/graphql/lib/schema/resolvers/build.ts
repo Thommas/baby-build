@@ -1,22 +1,21 @@
 /**
- * VGADB
+ * Path of child
  *
  * GraphQL - Resolvers
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dbChilds from '../../dynamo/child';
-import * as dbBuilds from '../../dynamo/build';
+import * as dbBuild from '../../dynamo/build';
 
 export default {
   Query: {
-    builds: () => dbBuilds.getBuilds(),
-    build: (_, args) => dbBuilds.getBuildById(args.id),
+    builds: () => dbBuild.getBuilds(),
+    build: (_, args) => dbBuild.getBuildById(args.id),
   },
   Mutation: {
-    createBuild: (_, args) => dbBuilds.createBuild(args),
-    updateBuild: (_, args) => dbBuilds.updateBuild(args),
-    deleteBuild: (_, args) => dbBuilds.deleteBuild(args),
+    createBuild: (_, args) => dbBuild.createBuild(args),
+    updateBuild: (_, args) => dbBuild.updateBuild(args),
+    deleteBuild: (_, args) => dbBuild.deleteBuild(args),
   }
 };

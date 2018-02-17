@@ -1,5 +1,5 @@
 /**
- * VGADB
+ * Path of child
  *
  * GraphQL - Handler
  *

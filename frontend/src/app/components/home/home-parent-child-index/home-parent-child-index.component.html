@@ -1,8 +1,12 @@
 <div class="container">
   <h1>Your family</h1>
   <div fxLayout="column">
-    <button mat-button (click)="selectChild('leo')">Leo (June 2018)</button>
-    <button mat-button (click)="selectChild('misaki')">Misaki (January 2021)</button>
-    <button mat-button (click)="addNewChild()">Add a new child</button>
+    <button mat-button [routerLink]="['/child/create']">Add a new child</button>
+    <button mat-button (click)="selectChild(child)" *ngFor="let child of children">
+      <p>{{ child.firstname }} {{ child.middlename }} {{ child.lastname }}</p>
+      <p>{{ child.nickname }}</p>
+      <p>{{ child.birthdate }}</p>
+      <p>{{ child.gender == '0' ? 'Girl' : 'Boy' }}</p>
+    </button>
   </div>
 </div>

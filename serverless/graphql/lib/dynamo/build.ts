@@ -1,5 +1,5 @@
 /**
- * VGADB
+ * Path of child
  *
  * GraphQL - DynamoDB
  *
@@ -9,7 +9,7 @@
 import uuid = require('uuid/v4');
 import * as db from './dynamo';
 
-const TableName = 'builds';
+const TableName = 'build';
 
 export function getBuilds() {
   const params = {
@@ -62,7 +62,7 @@ export function createBuild(args) {
 
 export function updateBuild(args) {
   const params = {
-    TableName: 'builds',
+    TableName,
     Key: {
       id: args.id,
     },

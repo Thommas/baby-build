@@ -52,7 +52,7 @@ functions:
 
 resources:
   Resources:
-    gamesTable:
+    childTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -68,7 +68,7 @@ resources:
         TableName: 'child'
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    spellsTable:
+    buildTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:

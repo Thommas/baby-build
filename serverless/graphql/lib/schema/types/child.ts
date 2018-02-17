@@ -1,5 +1,5 @@
 /**
- * VGADB
+ * Path of child
  *
  * GraphQL - Child
  *
@@ -9,7 +9,14 @@
 const Child = `
   type Child {
     id: String!
-    title: String
+    firstname: String
+    middlename: String
+    lastname: String
+    nickname: String
+    birthdate: Int
+    gender: Boolean
+    xp: Int
+    level: Int
     builds: [Build]
   }
   type ChildContainer {
@@ -20,16 +27,26 @@ const Child = `
     node: Child
   }
   type Query {
-    childs: [Child]
+    children: [Child]
     child(id: ID!): Child
   }
   type Mutation {
     createChild(
-      title: String!
+      firstname: String!
+      middlename: String!
+      lastname: String!
+      nickname: String!
+      birthdate: Int!
+      gender: Boolean!
     ): Child
     updateChild(
       id: ID!
-      title: String!
+      firstname: String
+      middlename: String
+      lastname: String
+      nickname: String
+      birthdate: Int
+      gender: Boolean
     ): Child
     deleteChild(
       id: ID!
