@@ -1,0 +1,33 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h1>Your family</h1>
+    <button mat-button [routerLink]="['/child/create']">
+      <mat-icon>add_circle</mat-icon>
+      Add a new child
+    </button>
+  </div>
+  <div fxLayout="column">
+    <mat-card *ngFor="let child of children">
+      <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
+        {{ child.nickname }}
+        <button mat-icon-button
+                [matMenuTriggerFor]="actionsMenu"
+                [matMenuTriggerData]="{child: child}">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-card-title>
+      <mat-card-actions>
+        <button mat-button (click)="selectChild(child)">
+          Select
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+<mat-menu #actionsMenu="matMenu">
+  <ng-template matMenuContent let-child="child">
+    <button mat-menu-item [routerLink]="['/child/update/' + child.id]">Edit</button>
+    <button mat-menu-item [routerLink]="['/child/delete/' + child.id]"
+            *ngIf="child.level === 1">Remove</button>
+  </ng-template>
+</mat-menu>

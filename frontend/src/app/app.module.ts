@@ -31,6 +31,7 @@ import {
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { BuildModule } from './components/build/build.module';
+import { ChildModule } from './components/child/child.module';
 import { HomeModule } from './components/home/home.module';
 import { KitchenModule } from './components/kitchen/kitchen.module';
 import { WhitelistModule } from './components/whitelist/whitelist.module';
@@ -59,6 +60,7 @@ import { AuthGuardService, AuthService } from './services';
     MatToolbarModule,
     MatTooltipModule,
     BuildModule,
+    ChildModule,
     HomeModule,
     KitchenModule,
     WhitelistModule,

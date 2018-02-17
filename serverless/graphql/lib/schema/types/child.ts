@@ -13,8 +13,8 @@ const Child = `
     middlename: String
     lastname: String
     nickname: String
-    birthdate: Int
-    gender: Boolean
+    birthdate: String
+    gender: String
     xp: Int
     level: Int
     builds: [Build]
@@ -36,8 +36,8 @@ const Child = `
       middlename: String!
       lastname: String!
       nickname: String!
-      birthdate: Int!
-      gender: Boolean!
+      birthdate: String!
+      gender: String!
     ): Child
     updateChild(
       id: ID!
@@ -45,8 +45,8 @@ const Child = `
       middlename: String
       lastname: String
       nickname: String
-      birthdate: Int
-      gender: Boolean
+      birthdate: String
+      gender: String
     ): Child
     deleteChild(
       id: ID!

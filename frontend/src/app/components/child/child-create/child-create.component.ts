@@ -1,11 +1,12 @@
 /**
  * Path of child
  *
- * Component - Home - Home Parent Child Create
+ * Component - Child - Child Create
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import { clone } from 'lodash';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
@@ -17,7 +18,7 @@ const createChildMutation = gql`
     $middlename: String!
     $lastname: String!
     $nickname: String!
-    $birthdate: Int!
+    $birthdate: String!
     $gender: Boolean!
   ) {
     createChild(
@@ -34,12 +35,11 @@ const createChildMutation = gql`
 `;
 
 @Component({
-  selector: 'app-home-parent-child-create-cmp',
-  templateUrl: './home-parent-child-create.component.html',
-  styleUrls: ['./home-parent-child-create.component.scss']
+  selector: 'app-child-create-cmp',
+  templateUrl: './child-create.component.html',
+  styleUrls: ['./child-create.component.scss']
 })
-export class HomeParentChildCreateComponent {
-  child: any;
+export class ChildCreateComponent {
   child: any;
   loading: boolean;
 
@@ -48,14 +48,15 @@ export class HomeParentChildCreateComponent {
   }
 
   submit() {
-    console.log(this.child);
+    let child = clone(this.child);
+    child.birthdate = child.birthdate.format('x');
     this.apollo.mutate({
       mutation: createChildMutation,
       variables: {
-        ...this.child
+        ...child
       }
     }).subscribe(
-      res => this.router.navigate(['/']);
+      res => this.router.navigate(['/child'])
     );
   }
 }

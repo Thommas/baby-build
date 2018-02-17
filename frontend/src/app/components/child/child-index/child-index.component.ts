@@ -1,13 +1,14 @@
 /**
  * Path of child
  *
- * Component - Home - Home Parent Child Index
+ * Component - Child - Child Index
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { clone } from 'lodash';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
@@ -20,6 +21,7 @@ const getChildren = gql`
       lastname
       nickname
       birthdate
+      gender
       xp
       level
     }
@@ -27,15 +29,15 @@ const getChildren = gql`
 `;
 
 @Component({
-  selector: 'app-home-parent-child-index-cmp',
-  templateUrl: './home-parent-child-index.component.html',
-  styleUrls: ['./home-parent-child-index.component.scss']
+  selector: 'app-child-index-cmp',
+  templateUrl: './child-index.component.html',
+  styleUrls: ['./child-index.component.scss']
 })
-export class HomeParentChildIndexComponent implements OnInit {
+export class ChildIndexComponent implements OnInit {
   loading: boolean;
   children: any;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private router: Router, private apollo: Apollo) {}
 
   ngOnInit() {
     this.getChildren();
@@ -47,14 +49,13 @@ export class HomeParentChildIndexComponent implements OnInit {
     })
       .valueChanges
       .subscribe(({ data, loading }) => {
-        console.log('data', data)
         this.loading = loading;
         this.children = data.children;
-        console.log(this.children)
       });
   }
 
   selectChild(child) {
     localStorage.setItem('child', child);
+    this.router.navigate(['/']);
   }
 }

@@ -62,9 +62,19 @@ export function updateChild(args) {
       id: args.id,
     },
     ExpressionAttributeValues: {
-      ':firstname': args.firstname
+      ':firstname': args.firstname,
+      ':middlename': args.middlename,
+      ':lastname': args.lastname,
+      ':nickname': args.nickname,
+      ':birthdate': args.birthdate,
+      ':gender': args.gender
     },
-    UpdateExpression: 'SET firstname = :firstname',
+    UpdateExpression: `SET firstname = :firstname,
+    middlename = :middlename,
+    lastname = :lastname,
+    nickname = :nickname,
+    birthdate = :birthdate,
+    gender = :gender`,
     ReturnValues: 'ALL_NEW',
   };
 

@@ -4,15 +4,8 @@ Roadmap
 Short term
 ----------
 
-- Build kitchen sink for design
-- Design homepage
-- Find logo
-- Setup GraphQL for child and build
-
-Long term
----------
-
-- Adapt design for mobile
+- Build kitchen sink for design/Design homepage/Find logo
+- i18n
 
 
 Entities

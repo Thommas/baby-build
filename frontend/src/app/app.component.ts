@@ -23,7 +23,7 @@ export class AppComponent {
     authService.handleAuthentication();
   }
 
-  switchChild() {
-    localStorage.removeItem('child');
+  getChild() {
+    return localStorage.getItem('child');
   }
 }

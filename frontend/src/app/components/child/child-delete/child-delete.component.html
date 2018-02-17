@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <button mat-icon-button [routerLink]="['/child']">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+</mat-toolbar>
+<form #childForm="ngForm" class="container">
+  <mat-card>
+    <mat-card-title fxLayout="row">
+      Remove a child
+    </mat-card-title>
+    <mat-card-content fxLayout="column">
+      Are you sure you want to remove this child entry?
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button type="submit" (click)="submit()">Yes</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

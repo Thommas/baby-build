@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Home
+ * Component - Child
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -18,6 +18,7 @@ import {
   MatCardModule,
   MatDatepickerModule,
   MatIconModule,
+  MatMenuModule,
   MatOptionModule,
   MatSelectModule,
   MatInputModule,
@@ -31,9 +32,10 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import {
   routing,
-  HomeComponent,
-  HomeAnonymousComponent,
-  HomeParentComponent
+  ChildCreateComponent,
+  ChildDeleteComponent,
+  ChildIndexComponent,
+  ChildUpdateComponent
 } from './';
 
 @NgModule({
@@ -50,6 +52,7 @@ import {
     MatDatepickerModule,
     MatMomentDateModule,
     MatIconModule,
+    MatMenuModule,
     MatOptionModule,
     MatSelectModule,
     MatInputModule,
@@ -60,10 +63,11 @@ import {
     MatTooltipModule
   ],
   declarations: [
-    HomeComponent,
-    HomeAnonymousComponent,
-    HomeParentComponent
+    ChildCreateComponent,
+    ChildDeleteComponent,
+    ChildIndexComponent,
+    ChildUpdateComponent
   ]
 })
-export class HomeModule {
+export class ChildModule {
 }

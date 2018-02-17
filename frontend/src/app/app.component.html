@@ -11,13 +11,16 @@
       <a href="javascript:;" [routerLink]="['kitchen']">Kitchen</a>
     </div>
     <div>
-      <button mat-button [matMenuTriggerFor]="childrenMenu" *ngIf="authService.isAuthenticated()">
-        selectedChildName
+      <button mat-button [matMenuTriggerFor]="childrenMenu"
+              *ngIf="authService.isAuthenticated()">
+        selected child name
       </button>
-      <button mat-button (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
+      <button mat-button (click)="authService.login()"
+              *ngIf="!authService.isAuthenticated()">
         Log in
       </button>
-      <button mat-button (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
+      <button mat-button (click)="authService.logout()"
+              *ngIf="authService.isAuthenticated()">
         Log out
       </button>
     </div>
@@ -27,7 +30,5 @@
   <router-outlet></router-outlet>
 </div>
 <mat-menu #childrenMenu="matMenu">
-  <button mat-menu-item>Leo</button>
-  <button mat-menu-item>Misaki</button>
-  <button mat-menu-item (click)="switchChild()">Manage children</button>
+  <button mat-menu-item [routerLink]="['/child']">Manage children</button>
 </mat-menu>

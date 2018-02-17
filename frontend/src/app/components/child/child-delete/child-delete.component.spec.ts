@@ -1,19 +1,19 @@
 /**
  * Path of child
  *
- * Component - Home - Home Parent Child Index
+ * Component - Child - Child Delete
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { HomeParentChildIndexComponent } from './home-parent-child-index.component';
+import { ChildDeleteComponent } from './child-delete.component';
 
-describe('HomeParentChildIndexComponent', () => {
+describe('ChildDeleteComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        HomeParentChildIndexComponent
+        ChildDeleteComponent
       ],
     }).compileComponents();
   }));
