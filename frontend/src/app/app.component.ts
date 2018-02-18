@@ -6,9 +6,9 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component } from '@angular/core';
+import { Component, Inject, LOCALE_ID } from '@angular/core';
 
-import { AuthService } from './services';
+import { AuthService, BrowserService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -16,14 +16,34 @@ import { AuthService } from './services';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  locales = [
+    { value: 'en', label: 'English'},
+    { value: 'fr', label: 'Français'},
+    { value: 'ja', label: '日本語'}
+  ];
+
   /**
    * Constructor
    */
-  constructor(protected authService: AuthService) {
+  constructor(
+    @Inject(LOCALE_ID) private _locale: string,
+    public authService: AuthService,
+    private browserService: BrowserService
+  ) {
     authService.handleAuthentication();
   }
 
   getChild() {
     return localStorage.getItem('child');
+  }
+
+  /**
+   * Switch to selected locale
+   */
+  switchLocale(locale: any) {
+    const window = this.browserService.window;
+    if (window && window.location) {
+      window.location.href = '/' + locale + '/';
+    }
   }
 }

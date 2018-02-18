@@ -30,13 +30,35 @@
 .story {
   padding: 20px;
   border-bottom: 1px solid #e1e1e1;
+
+  .container div {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 26px;
+    font-weight: normal;
+  }
+  ul li {
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
 }
 
-.story-bg {
+.story-idea {
   background: #fff;
-  background: -moz-linear-gradient(45deg, #3cd9c5 0%, #ffffff 51%, #ffffff 100%);
-  background: -webkit-linear-gradient(45deg, #3cd9c5 0%,#ffffff 51%,#ffffff 100%);
-  background: linear-gradient(45deg, #3cd9c5 0%,#ffffff 51%,#ffffff 100%);
+}
+
+.story-path {
+  background: #fff;
+  background: -moz-linear-gradient(45deg, #ffffff 0%, #ffffff 51%, #ce8eef 100%);
+  background: -webkit-linear-gradient(45deg, #ffffff 0%,#ffffff 51%,#ce8eef 100%);
+  background: linear-gradient(45deg, #ffffff 0%,#ffffff 51%,#ce8eef 100%);
+}
+
+.story-share {
+  background-color: #8fcdc8;
 }
 
 .path-of-child-description {
@@ -52,4 +74,13 @@
     color: grey;
     font-size: 14px;
   }
+  p {
+    color: #1a1a1a;
+    font-style: italic;
+    font-size: 14px;
+  }
+}
+
+.primary {
+  color: #85b4dA;
 }

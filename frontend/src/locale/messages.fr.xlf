@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="1c6dc811653170d16b1051eda5ee6c04fa4841fe" datatype="html">
+        <source>shared.page_not_found.title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/shared/page-not-found/page-not-found.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fb82cc663976a94294f26ca8dd45034a7cd363bc" datatype="html">
+        <source>shared.page_not_found.description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/shared/page-not-found/page-not-found.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ec515efebab17ac56329c9610cd0fb0450145874" datatype="html">
+        <source>shared.page_not_found.back</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/shared/page-not-found/page-not-found.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -19,7 +19,8 @@ export class HomeComponent {
   /**
    * Constructor
    */
-  constructor(protected authService: AuthService) {}
+  constructor(public authService: AuthService) {
+  }
 
   isChildSelected() {
     return localStorage.getItem('child');

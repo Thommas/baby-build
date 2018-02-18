@@ -31,7 +31,10 @@
 </div>
 <footer fxLayout="row" fxFill fxLayoutAlign="space-around center">
   <div fxLayout="column" fxLayoutAlign="start start">
-    LOCALE SWITCHER HERE
+    <button mat-button class="locale-button" [matMenuTriggerFor]="localeMenu">
+       <span i18n>app.footer.locale</span>
+       <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
   </div>
   <div fxLayout="column" fxLayoutAlign="start start">
     Terms & privacy
@@ -45,4 +48,10 @@
 </footer>
 <mat-menu #childrenMenu="matMenu">
   <button mat-menu-item [routerLink]="['/child']">Manage children</button>
+</mat-menu>
+<mat-menu #localeMenu="matMenu">
+  <button mat-menu-item *ngFor="let locale of locales"
+          (click)="switchLocale(locale.value)">
+    {{ locale.label }}
+  </button>
 </mat-menu>
