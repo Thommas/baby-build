@@ -21,6 +21,10 @@ h1 {
 
 .image-gallery {
   min-height: 203px !important;
+  img {
+    width: 100%;
+    max-height: 80px;
+  }
 }
 
 .white {

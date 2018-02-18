@@ -4,7 +4,7 @@ Roadmap
 Short term
 ----------
 
-- Build kitchen sink for design/Design homepage/Find logo
+- Build kitchen sink for design/Design homepage
 - i18n
 
 
