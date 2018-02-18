@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Home
+ * Component - Static
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -13,15 +13,19 @@
    MatButtonModule,
    MatCardModule,
    MatIconModule,
+   MatFormFieldModule,
+   MatInputModule,
    MatMenuModule,
    MatProgressBarModule,
    MatSidenavModule,
+   MatTabsModule,
    MatToolbarModule,
    MatTooltipModule
  } from '@angular/material';
 
  import {
    routing,
+   BrandingComponent,
    KitchenComponent
  } from './';
 
@@ -33,15 +37,19 @@
      MatButtonModule,
      MatCardModule,
      MatIconModule,
+     MatFormFieldModule,
+     MatInputModule,
      MatMenuModule,
      MatProgressBarModule,
      MatSidenavModule,
+     MatTabsModule,
      MatToolbarModule,
      MatTooltipModule
    ],
    declarations: [
+     BrandingComponent,
      KitchenComponent
    ]
  })
- export class KitchenModule {
+ export class StaticModule {
  }

@@ -1,17 +1,15 @@
 /**
  * Path of child
  *
- * Component - Kitchen
+ * Component - Static - Kitchen
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { Component } from '@angular/core';
 
-import { AuthService } from '../../../services';
-
 @Component({
-  selector: 'app-kitchen-cmp',
+  selector: 'app-static-kitchen-cmp',
   templateUrl: './kitchen.component.html',
   styleUrls: ['./kitchen.component.scss']
 })

@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Kitchen
+ * Component - Static - Kitchen
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

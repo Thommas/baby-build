@@ -1,0 +1,64 @@
+:host {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  place-content: center space-around;
+  align-items: center;
+  padding-bottom: 150px;
+}
+
+header {
+  border-bottom: 1px solid #e1e1e1;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  color: black;
+}
+
+.image-gallery {
+  min-height: 203px !important;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.black {
+  background-color: #000000;
+}
+
+.primary {
+  background-color: #85b4dA;
+}
+
+.palette {
+  div {
+    color: #ffffff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px 40px;
+  }
+  .primary {
+    background-color: #85b4dA;
+  }
+  .black {
+    background-color: #1a1a1a;
+  }
+  .blue {
+    background-color: #3cd9c5;
+  }
+  .pink {
+    background-color: #ce8eef;
+  }
+  .grey {
+    background-color: #cccccc;
+  }
+  .white {
+    color: #000000;
+    background-color: #ffffff;
+  }
+}

@@ -29,10 +29,14 @@
 
 .story {
   padding: 20px;
+  border-bottom: 1px solid #e1e1e1;
 }
 
 .story-bg {
-  background-color: blue;
+  background: #fff;
+  background: -moz-linear-gradient(45deg, #3cd9c5 0%, #ffffff 51%, #ffffff 100%);
+  background: -webkit-linear-gradient(45deg, #3cd9c5 0%,#ffffff 51%,#ffffff 100%);
+  background: linear-gradient(45deg, #3cd9c5 0%,#ffffff 51%,#ffffff 100%);
 }
 
 .path-of-child-description {

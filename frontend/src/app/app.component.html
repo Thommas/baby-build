@@ -3,7 +3,7 @@
   mode="determinate">
 </mat-progress-bar>
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
-  <div class="container" fxLayout="row" fxLayoutAlign="space-between center">
+  <header class="container" fxLayout="row" fxLayoutAlign="space-between center">
     <img src="https://placehold.it/203x31"  [routerLink]="['']"/>
     <div fxLayout="row" fxFlex="60" *ngIf="authService.isAuthenticated()">
       <a href="javascript:;" [routerLink]="['build']">Build</a>
@@ -24,7 +24,7 @@
         Logout
       </button>
     </div>
-  </div>
+  </header>
 </mat-toolbar>
 <div class="app-content">
   <router-outlet></router-outlet>
