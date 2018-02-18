@@ -1,26 +1,24 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="path-of-child-bg hero">
   <div class="container" fxLayout="column" fxLayoutAlign="start start">
-    <h1>Have fun planning your child's future</h1>
-    <!--<h1>Amusez-vous a planifier le futur de vos enfants</h1>
-    <h1>Tanoshimu kosodate</h1>-->
+    <h1 i18n>home.title</h1>
     <div class="line-with-icon" fxLayout="row" fxLayoutAlign="start start">
-      <mat-icon class="primary">date_range</mat-icon>
-      <p>Organize education goals</p>
+      <mat-icon>date_range</mat-icon>
+      <p i18n>home.hero1</p>
     </div>
     <div class="line-with-icon" fxLayout="row" fxLayoutAlign="start start">
-      <mat-icon class="primary">music_video</mat-icon>
-      <p>Prepare incentives and rewards</p>
+      <mat-icon>music_video</mat-icon>
+      <p i18n>home.hero2</p>
     </div>
     <div class="line-with-icon" fxLayout="row" fxLayoutAlign="start start">
-      <mat-icon class="primary">chat</mat-icon>
-      <p>Share your ideas and learn new tips</p>
+      <mat-icon>chat</mat-icon>
+      <p i18n>home.hero3</p>
     </div>
     <div class="line-with-icon" fxLayout="row" fxLayoutAlign="start start">
-      <mat-icon class="primary">call_split</mat-icon>
-      <p>Enjoy imagining new possibilities</p>
+      <mat-icon>call_split</mat-icon>
+      <p i18n>home.hero4</p>
     </div>
     <div class="actions" fxLayout="column" fxLayoutAlign="center center">
-      <button mat-raised-button (click)="signUp()">Sign up</button>
+      <button mat-raised-button (click)="signUp()" i18n>home.signup</button>
     </div>
   </div>
 </div>
@@ -30,34 +28,7 @@
       <img fxFill src="/assets/img/story-idea.jpg"/>
     </div>
     <div fxFlex="50" fxLayout="column" fxLayoutAlign="start start">
-      <h2>
-        Each parent can tailor the platform to match their vision of education
-        <ul>
-          <li>Plan technology and digital contents that the child will get access to</li>
-          <li>Limited time investment and easy to use</li>
-          <li>Promote gender equity and allow specific culture, religion, belief, family traditions</li>
-          <li>Cherry pick a few quality photos every month</li>
-          <li>Write time capsule messages for your child to read in the future</li>
-        </ul>
-      </h2>
-    </div>
-  </div>
-</div>
-<div class="story story-path" fxFill fxLayout="row" fxLayoutAlign="center">
-  <div class="container" fxLayout="row" fxLayoutAlign="start start">
-    <div fxFlex="50" fxLayout="column" fxLayoutAlign="start start">
-      <h2>
-        Cultivate depth and curiosity instead of short interaction and waste of time
-        <ul>
-          <li>Improve your child curiosity by giving interesting choices to explore</li>
-          <li>Give positive incentives for your child to try new things</li>
-          <li>Identify and prevent passivity like watching TV, youtube or playing bad quality games</li>
-          <li>Stay in control of what you give access to your child</li>
-        </ul>
-      </h2>
-    </div>
-    <div fxFlex="50">
-      <img fxFill src="/assets/img/story-path.jpg"/>
+      <h2 i18n>home.story.idea</h2>
     </div>
   </div>
 </div>
@@ -67,20 +38,22 @@
       <img fxFill src="/assets/img/story-share.jpg"/>
     </div>
     <div fxFlex="50" fxLayout="column" fxLayoutAlign="start start">
-      <h2>
-        The platform will help share popular education tips
-        <ul>
-          <li>Other family members can also contribute</li>
-          <li>See statistics about recommended age to access digital contents</li>
-          <li>Share your ideas with the community</li>
-          <li>Read about how to best ensure your child's success</li>
-        </ul>
-      </h2>
+      <h2 i18n>home.story.share</h2>
+    </div>
+  </div>
+</div>
+<div class="story story-path" fxFill fxLayout="row" fxLayoutAlign="center">
+  <div class="container" fxLayout="row" fxLayoutAlign="start start">
+    <div fxFlex="50" fxLayout="column" fxLayoutAlign="start start">
+      <h2 i18n>home.story.path</h2>
+    </div>
+    <div fxFlex="50">
+      <img fxFill src="/assets/img/story-path.jpg"/>
     </div>
   </div>
 </div>
 <div class="path-of-child-description" fxLayout="column" fxLayoutAlign="center center">
-  <h2>What is path of child?</h2>
-  <h3>Path of child is a gamification platform for planning the life and education of your children. You can have fun and share useful information with other family members and parents.</h3>
-  <p>Prepare the child for the path, not the path for the child.</p>
+  <h2 i18n>home.path_of_child.title</h2>
+  <h3 i18n>home.path_of_child.description</h3>
+  <p i18n>home.path_of_child.quote</p>
 </div>

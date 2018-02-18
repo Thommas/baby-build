@@ -9,19 +9,42 @@
 }
 
 .path-of-child-bg {
-  height: 500px;
+  height: 450px;
 }
 
 .hero {
+  background-color: #85b4dA;
+  width: 100%;
+  color: #ffffff;
+
+  .container {
+    width: 700px;
+  }
   h1 {
     font-weight: normal;
     font-size: 34px;
     line-height: 1.6;
+    margin-top: 0;
+  }
+  .line-with-icon {
+    margin: 5px 0 5px 20px;
+    p {
+      margin-bottom: 0;
+      margin-top: 10px;
+      font-size: 24px;
+    }
+    mat-icon {
+      font-size: 46px;
+      width: inherit;
+      vertical-align: middle;
+      margin-right: 12px;
+    }
   }
   .actions {
     width: 100%;
     margin-top: 40px;
     button {
+      color: #1a1a1a;
       width: 300px;
     }
   }
@@ -52,9 +75,6 @@
 
 .story-path {
   background: #fff;
-  background: -moz-linear-gradient(45deg, #ffffff 0%, #ffffff 51%, #ce8eef 100%);
-  background: -webkit-linear-gradient(45deg, #ffffff 0%,#ffffff 51%,#ce8eef 100%);
-  background: linear-gradient(45deg, #ffffff 0%,#ffffff 51%,#ce8eef 100%);
 }
 
 .story-share {

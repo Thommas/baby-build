@@ -2,7 +2,7 @@
   color="accent"
   mode="determinate">
 </mat-progress-bar>
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+<mat-toolbar fxLayout="row" fxLayoutAlign="center center">
   <header class="container" fxLayout="row" fxLayoutAlign="space-between center">
     <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
     <div fxLayout="row" fxFlex="60" *ngIf="authService.isAuthenticated()">
@@ -11,15 +11,15 @@
       <a href="javascript:;" [routerLink]="['kitchen']">Kitchen</a>
     </div>
     <div>
-      <button mat-button [matMenuTriggerFor]="childrenMenu"
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="childrenMenu"
               *ngIf="authService.isAuthenticated()">
         selected child name
       </button>
-      <button mat-button (click)="authService.login()"
+      <button mat-raised-button color="primary" (click)="authService.login()"
               *ngIf="!authService.isAuthenticated()">
         Login
       </button>
-      <button mat-button (click)="authService.logout()"
+      <button mat-raised-button color="primary" (click)="authService.logout()"
               *ngIf="authService.isAuthenticated()">
         Logout
       </button>
