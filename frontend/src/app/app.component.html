@@ -17,11 +17,11 @@
       </button>
       <button mat-button (click)="authService.login()"
               *ngIf="!authService.isAuthenticated()">
-        Log in
+        Login
       </button>
       <button mat-button (click)="authService.logout()"
               *ngIf="authService.isAuthenticated()">
-        Log out
+        Logout
       </button>
     </div>
   </div>
@@ -29,6 +29,20 @@
 <div class="app-content">
   <router-outlet></router-outlet>
 </div>
+<footer fxLayout="row" fxFill fxLayoutAlign="space-around center">
+  <div fxLayout="column" fxLayoutAlign="start start">
+    LOCALE SWITCHER HERE
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start start">
+    Terms & privacy
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start start">
+    Social icons
+  </div>
+  <div fxLayout="column" fxLayoutAlign="start start">
+    Contact
+  </div>
+</footer>
 <mat-menu #childrenMenu="matMenu">
   <button mat-menu-item [routerLink]="['/child']">Manage children</button>
 </mat-menu>

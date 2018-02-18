@@ -1,92 +1,83 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="path-of-child-bg hero">
   <div class="container" fxLayout="column" fxLayoutAlign="start start">
-    <h2>Have fun planning your child's future</h2>
-    <!--<h2>Amusez-vous a planifier le futur de vos enfants</h2>
-    <h2>Tanoshimu kosodate</h2>-->
-    <div fxLayout="row" fxLayoutAlign="start start">
-      <mat-icon>home</mat-icon>
+    <h1>Have fun planning your child's future</h1>
+    <!--<h1>Amusez-vous a planifier le futur de vos enfants</h1>
+    <h1>Tanoshimu kosodate</h1>-->
+    <div class="line-with-icon" fxLayout="row" fxLayoutAlign="start start">
+      <mat-icon>date_range</mat-icon>
       <p>Organize education goals</p>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start start">
-      <mat-icon>home</mat-icon>
-      <p>Create incentives and rewards</p>
+    <div class="line-with-icon" fxLayout="row" fxLayoutAlign="start start">
+      <mat-icon>music_video</mat-icon>
+      <p>Prepare incentives and rewards</p>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start start">
-      <mat-icon>home</mat-icon>
-      <p>Share your ideas with other parents</p>
+    <div class="line-with-icon" fxLayout="row" fxLayoutAlign="start start">
+      <mat-icon>chat</mat-icon>
+      <p>Share your ideas with family members and other parents</p>
     </div>
-    <button mat-raised-button (click)="signUp()">Get started</button>
+    <div class="line-with-icon" fxLayout="row" fxLayoutAlign="start start">
+      <mat-icon>call_split</mat-icon>
+      <p>Enjoy exploring new ideas and possibilities</p>
+    </div>
+    <div class="actions" fxLayout="column" fxLayoutAlign="center center">
+      <button mat-raised-button (click)="signUp()">Get started</button>
+    </div>
   </div>
 </div>
-<div class="container">
-  <div fxLayout="row" fxLayoutAlign="start start">
-    <img src="http://www.placehold.it/300x300"/>
-    <div fxLayout="column" fxLayoutAlign="start start">
-      <h2>
-        Each parent can tailor the platform to match their vision of education
-        <ul>
-          <li>Plan technology and digital contents that the child will get access to</li>
-          <li>Limited time investment and immediate benefit</li>
-          <li>Promote gender equity and allow specific culture, religion, belief, family traditions</li>
-        </ul>
-      </h2>
-    </div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="start start">
-    <div fxLayout="column" fxLayoutAlign="start start">
-      <h2>
-        Cultivate depth and curiosity instead of short interaction and waste of time
-        <ul>
-          <li>Cultivate the kid curiosity by giving interesting choices to explore</li>
-          <li>Identify and get rid of dangerous behavior like passively watching TV/youtube or playing mindless games</li>
-          <li>Find a nice balance between acting like big brother and real security concerns</li>
-        </ul>
-      </h2>
-    </div>
-    <img src="http://www.placehold.it/300x300"/>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="start start">
-    <img src="http://www.placehold.it/300x300"/>
-    <div fxLayout="column" fxLayoutAlign="start start">
-      <h2>
-        The platform will help share popular education tips<br>
-        <ul>
-          <li>Other family members can also contribute</li>
-          <li>See statistics about recommended age to access digital contents</li>
-          <li>Share your ideas with the community</li>
-        </ul>
-      </h2>
-    </div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="start start">
-    <div fxLayout="column" fxLayoutAlign="start start">
-      <h2>
-        Organize the life of your child
-        <ul>
-          <li>Cherry pick a few quality photos every month</li>
-          <li>Write time capsule messages for your child to read in the future</li>
-          <li>Share ideas with other parents on how to save money for your child's future</li>
-        </ul>
-      </h2>
-    </div>
-    <img src="http://www.placehold.it/300x300"/>
-  </div>
+<div class="story" fxLayout="row" fxLayoutAlign="start start">
+  <img src="http://www.placehold.it/300x300"/>
   <div fxLayout="column" fxLayoutAlign="start start">
-    <h2>What is path of child ?</h2>
-    <h3>Path of child is a gamification platform for planning the life and education of your children. You can have fun and share useful information with other parents.</h3>
+    <h2>
+      Each parent can tailor the platform to match their vision of education
+      <ul>
+        <li>Plan technology and digital contents that the child will get access to</li>
+        <li>Limited time investment and immediate benefit</li>
+        <li>Promote gender equity and allow specific culture, religion, belief, family traditions</li>
+      </ul>
+    </h2>
   </div>
 </div>
-<footer class="container" fxLayout="row" fxFill fxLayoutAlign="space-around center">
+<div class="story story-bg" fxLayout="row" fxLayoutAlign="start start">
   <div fxLayout="column" fxLayoutAlign="start start">
-    COLUMN1
+    <h2>
+      Cultivate depth and curiosity instead of short interaction and waste of time
+      <ul>
+        <li>Cultivate the kid curiosity by giving interesting choices to explore</li>
+        <li>Identify and get rid of dangerous behavior like passively watching TV/youtube or playing mindless games</li>
+        <li>Find a nice balance between acting like big brother and real security concerns</li>
+      </ul>
+    </h2>
   </div>
+  <img src="http://www.placehold.it/300x300"/>
+</div>
+<div class="story" fxLayout="row" fxLayoutAlign="start start">
+  <img src="http://www.placehold.it/300x300"/>
   <div fxLayout="column" fxLayoutAlign="start start">
-    COLUMN2
+    <h2>
+      The platform will help share popular education tips<br>
+      <ul>
+        <li>Other family members can also contribute</li>
+        <li>See statistics about recommended age to access digital contents</li>
+        <li>Share your ideas with the community</li>
+      </ul>
+    </h2>
   </div>
+</div>
+<div class="story story-bg" fxLayout="row" fxLayoutAlign="start start">
   <div fxLayout="column" fxLayoutAlign="start start">
-    COLUMN3
+    <h2>
+      Organize the life of your child
+      <ul>
+        <li>Cherry pick a few quality photos every month</li>
+        <li>Write time capsule messages for your child to read in the future</li>
+        <li>Share ideas with other parents on how to save money for your child's future</li>
+      </ul>
+    </h2>
   </div>
-  <div fxLayout="column" fxLayoutAlign="start start">
-    COLUMN4
-  </div>
-</footer>
+  <img src="http://www.placehold.it/300x300"/>
+</div>
+<div class="path-of-child-description" fxLayout="column" fxLayoutAlign="center center">
+  <h2>What is path of child?</h2>
+  <h3>Path of child is a gamification platform for planning the life and education of your children. You can have fun and share useful information with other parents.</h3>
+  <p>Prepare the child for the path, not the path for the child.</p>
+</div>

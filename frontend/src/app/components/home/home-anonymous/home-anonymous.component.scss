@@ -9,22 +9,43 @@
 }
 
 .path-of-child-bg {
-  height: 400px;
+  height: 500px;
 }
 
 .hero {
-  h2 {
+  h1 {
     font-weight: normal;
     font-size: 34px;
     line-height: 1.6;
   }
-  h3 {
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 1.6;
+  .actions {
+    width: 100%;
+    margin-top: 40px;
+    button {
+      width: 300px;
+    }
   }
 }
 
-footer {
-  background: grey;
+.story {
+  padding: 20px;
+}
+
+.story-bg {
+  background-color: blue;
+}
+
+.path-of-child-description {
+  padding: 60px;
+  h2 {
+    text-align: center;
+    font-size: 15px;
+    color: #bbbbbb;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  h3 {
+    color: grey;
+    font-size: 14px;
+  }
 }
