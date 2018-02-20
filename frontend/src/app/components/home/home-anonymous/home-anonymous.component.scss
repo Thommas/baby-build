@@ -1,3 +1,6 @@
+@import '~@angular/material/theming';
+@import 'src/theme.scss';
+
 :host {
   display: flex;
   box-sizing: border-box;
@@ -13,7 +16,7 @@
 }
 
 .hero {
-  background-color: #85b4dA;
+  background-color: mat-color($path-of-child-primary);
   width: 100%;
   color: #ffffff;
 
@@ -99,8 +102,4 @@
     font-style: italic;
     font-size: 14px;
   }
-}
-
-.primary {
-  color: #85b4dA;
 }

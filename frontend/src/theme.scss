@@ -3,8 +3,8 @@
 
 @include mat-core();
 
-$path-of-child-primary: mat-palette($path-of-child-blue);
-$path-of-child-accent:  mat-palette($mat-pink, A200, A100, A400);
+$path-of-child-primary: mat-palette($path-of-child-primary);
+$path-of-child-accent:  mat-palette($path-of-child-accent);
 $path-of-child-warn:    mat-palette($mat-red);
 $path-of-child-theme:   mat-light-theme($path-of-child-primary, $path-of-child-accent, $path-of-child-warn);
 
