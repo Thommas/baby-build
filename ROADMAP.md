@@ -4,9 +4,13 @@ Roadmap
 Short term
 ----------
 
-- Build kitchen sink for design/Design homepage
-- i18n
-
+- Finish customizing homepage pictures
+- Finish i18n
+- Improve kitchen sink
+- Improve auth0 login/register
+- Implement add/remove/edit build
+- Implement terms and privacy
+- Implement contact
 
 Entities
 --------
