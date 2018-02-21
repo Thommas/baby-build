@@ -7,7 +7,8 @@ Short term
 - Finish customizing homepage pictures
 - Finish i18n
 - Improve kitchen sink
-- Improve auth0 login/register
+- Improve auth0 login/register design
+- Auth0 register should create User entity in DynamoDB
 - Implement add/remove/edit build
 - Implement terms and privacy
 - Implement contact
@@ -98,6 +99,15 @@ Examples:
 5) Time capsule congratulation message
 
 Store date it was written.
+
+6) Build hidden achievement unlockable
+
+Should be a short message.
+
+7) Give some exploration time
+
+Allow full access to internet with privacy
+Should be unlocked as a reward and time should increase progressively
 
 
 Stack
