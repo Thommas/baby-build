@@ -7,18 +7,18 @@
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { KitchenComponent } from './kitchen.component';
+import { ContactComponent } from './contact.component';
 
-describe('KitchenComponent', () => {
+describe('ContactComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        KitchenComponent
+        ContactComponent
       ],
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(KitchenComponent);
+    const fixture = TestBed.createComponent(ContactComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
