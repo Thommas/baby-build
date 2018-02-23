@@ -138,6 +138,7 @@ Links
 https://www.reddit.com/r/Parenting/comments/7ta1mk/1314_yr_olds_how_do_you_handle_technologyvideo/
 https://www.reddit.com/r/Parenting/comments/64da9v/child_is_addicted_to_video_games/
 https://www.reddit.com/r/Parenting/comments/53vl3e/precious_moment_after_finishing_our_first_video/
+http://www.atlantico.fr/decryptage/protegezvosgosses-nikita-belluci-star-x-qui-alerte-parents-francais-inconscience-face-effarante-consommation-porno-enfants-et-3289001.html
 
 
 Storyboard
