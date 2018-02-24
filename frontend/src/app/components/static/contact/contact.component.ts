@@ -23,7 +23,6 @@ export class ContactComponent {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(ContactDialogComponent, {
-      width: '800px',
       data: { name: this.name, animal: this.animal }
     });
 

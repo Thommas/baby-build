@@ -48,6 +48,10 @@ $path-of-child-theme:   mat-light-theme($path-of-child-primary, $path-of-child-a
     height: 80px;
   }
 
+  mat-dialog-container {
+    height: 80vh;
+  }
+
   .container {
     width: 970px;
     padding: 10px;

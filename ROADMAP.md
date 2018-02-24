@@ -4,12 +4,11 @@ Roadmap
 Short term
 ----------
 
-- Create data fixtures for local dynamoDB
+- Finish contact form with google captcha and lambda
+- Implement add/remove/edit build/whitelist
+- Refactor children index combined with build index
+- Design calendar for build
 - Secure lambda with auth0
-- Implement add/remove/edit build
-- Implement contact form with google captcha and lambda
-- Implement calendar for build
-
 - Auth0 register should create User entity in DynamoDB
 - Implement xp and level to unlock calendar
 
@@ -20,6 +19,12 @@ Mid term
 - Finish customizing homepage pictures
 
 
+Long term
+---------
+
+- Implement giving access to a child to other family members
+
+
 Deployment
 ----------
 
@@ -27,8 +32,8 @@ Deployment
 - Implement terms and privacy
 
 
-Long term ideas
----------------
+Bonus ideas
+-----------
 
 - Messaging system for child
 Santa claus or to report a problem like a confessional
@@ -247,3 +252,12 @@ Share ideas:
 - Singapore
 - Amsterdam
 - Seoul
+
+
+Social network
+--------------
+
+- Open gmail account
+- Open subreddit /r/pathofchild
+- Open twitter account @pathofchild
+- Open discord channel

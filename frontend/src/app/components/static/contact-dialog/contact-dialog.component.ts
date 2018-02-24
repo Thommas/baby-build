@@ -15,15 +15,22 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./contact-dialog.component.scss']
 })
 export class ContactDialogComponent {
+  contact: any;
+
   constructor(
     public dialogRef: MatDialogRef<ContactDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   )
   {
-
+    this.contact = {
+      name: '',
+      email: '',
+      message: ''
+    }
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  submit() {
+    console.log('submit form');
+    // this.dialogRef.close();
   }
 }
