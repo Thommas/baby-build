@@ -33,6 +33,7 @@ import { AppComponent } from './app.component';
 import { BuildModule } from './components/build/build.module';
 import { ChildModule } from './components/child/child.module';
 import { HomeModule } from './components/home/home.module';
+import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
 import { WhitelistModule } from './components/whitelist/whitelist.module';
 import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
@@ -62,6 +63,7 @@ import { AuthGuardService, AuthService, BrowserService } from './services';
     BuildModule,
     ChildModule,
     HomeModule,
+    SecurityModule,
     StaticModule,
     WhitelistModule,
     PageNotFoundModule

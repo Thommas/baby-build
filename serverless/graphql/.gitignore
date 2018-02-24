@@ -2,3 +2,4 @@
 /secrets.yml
 /.build
 /.serverless
+/npm-debug.log

@@ -4,18 +4,26 @@ Roadmap
 Short term
 ----------
 
-- Improve auth0 login/register design
 - Auth0 register should create User entity in DynamoDB
+- Secure lambda with auth0
 - Implement add/remove/edit build
-- Implement terms and privacy
-- Implement contact
+- Implement contact form with google captcha and lambda
 - Implement calendar for build
 - Implement xp and level to unlock calendar
+
 
 Mid term
 --------
 
 - Finish customizing homepage pictures
+
+
+Deployment
+----------
+
+- Add icon for auth0
+- Implement terms and privacy
+
 
 Long term ideas
 ---------------

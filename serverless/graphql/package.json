@@ -19,7 +19,8 @@
     "graphql-tools": "^1.1.0",
     "lodash": "^4.17.4",
     "merge-graphql-schemas": "^1.1.2",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "jsonwebtoken": "^8.1.1"
   },
   "devDependencies": {
     "@types/aws-sdk": "0.0.42",

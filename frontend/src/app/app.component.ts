@@ -30,7 +30,7 @@ export class AppComponent {
     public authService: AuthService,
     private browserService: BrowserService
   ) {
-    authService.handleAuthentication();
+    // authService.handleAuthentication();
   }
 
   getChild() {
