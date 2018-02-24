@@ -1,16 +1,32 @@
 <mat-progress-bar
+  class="loading-bar"
   color="accent"
   mode="determinate">
 </mat-progress-bar>
 <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
   <header class="container" fxLayout="row" fxLayoutAlign="space-between center">
-    <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
-    <div fxLayout="row" fxFlex="60" *ngIf="authService.isAuthenticated()">
-      <a href="javascript:;" [routerLink]="['build']" i18n>nav.build</a>
-      <a href="javascript:;" [routerLink]="['whitelist']" i18n>nav.whitelist</a>
-      <a href="javascript:;" [routerLink]="['kitchen']">Kitchen</a>
+    <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
+      <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
+      <div fxLayout="row" *ngIf="authService.isAuthenticated()">
+        <a href="javascript:;" [routerLink]="['build']" i18n>nav.build</a>
+        <a href="javascript:;" [routerLink]="['whitelist']" i18n>nav.whitelist</a>
+        <a href="javascript:;" [routerLink]="['kitchen']">Kitchen</a>
+      </div>
     </div>
-    <div>
+    <div class="container" fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
+      <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
+        <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+          <span>60/100</span>
+          <span>Level 1</span>
+        </div>
+        <mat-progress-bar mode="determinate"
+                          value="60"
+                          color="accent"
+                          *ngIf="authService.isAuthenticated()">
+        </mat-progress-bar>
+      </div>
+    </div>
+    <div class="container" fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
       <button mat-button color="primary" [matMenuTriggerFor]="childrenMenu"
               *ngIf="authService.isAuthenticated()">
         selected child name

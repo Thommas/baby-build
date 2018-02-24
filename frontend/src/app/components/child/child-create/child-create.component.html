@@ -1,6 +1,7 @@
 <mat-toolbar>
   <button mat-icon-button [routerLink]="['/child']">
     <mat-icon>keyboard_arrow_left</mat-icon>
+    <span>Go back</span>
   </button>
 </mat-toolbar>
 <form #childForm="ngForm" class="container">
@@ -8,8 +9,8 @@
     <mat-card-title fxLayout="row">
       Add your child information
     </mat-card-title>
-    <mat-card-content fxLayout="column">
-      <div fxLayout="row">
+    <mat-card-content fxLayout="row">
+      <div fxLayout="row" fxFlex="50" fxLayoutWrap>
         <mat-form-field>
           <input matInput placeholder="First name"
                  [(ngModel)]="child.firstname" name="firstname">
@@ -22,8 +23,6 @@
           <input matInput placeholder="Last name"
                  [(ngModel)]="child.lastname" name="lastname">
         </mat-form-field>
-      </div>
-      <div fxLayout="row">
         <mat-form-field>
           <input matInput placeholder="Nickname"
                  [(ngModel)]="child.nickname" name="nickname">
@@ -34,17 +33,21 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        <mat-form-field>
-          <mat-select placeholder="Gender"
-                      [(ngModel)]="child.gender" name="gender">
-            <mat-option value="0">Girl</mat-option>
-            <mat-option value="1">Boy</mat-option>
-          </mat-select>
-        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around  center">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <img src="https://www.shareicon.net/download/2016/06/25/786542_people.svg"/>
+          <span i18n>child_create.boy</span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <img src="https://www.shareicon.net/download/2016/06/25/786540_people.svg"/>
+          <span i18n>child_create.girl</span>
+        </div>
       </div>
     </mat-card-content>
-    <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
-      <button mat-button type="submit" (click)="submit()">Submit</button>
+    <mat-divider></mat-divider>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button type="submit" (click)="submit()" color="primary">Submit</button>
     </mat-card-actions>
   </mat-card>
 </form>

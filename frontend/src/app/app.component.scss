@@ -12,6 +12,14 @@
   -webkit-box-direction: normal;
 }
 
+.app-content {
+  min-height: 500px;
+}
+
+mat-progress-bar.loading-bar {
+  height: 1px;
+}
+
 mat-toolbar {
   border-bottom: 1px solid #e1e1e1;
   header {

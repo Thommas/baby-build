@@ -1,12 +1,26 @@
 <div class="container">
-  <h2>
-    How to use the platform?
-    <ul>
-      <li>Add your children</li>
-      <li>For each child, create as many build as you want</li>
-      <li>Builds define your long term goal</li>
-      <li>The whitelist will define which contents you want your children to access</li>
-    </ul>
-  </h2>
-  <button mat-button [routerLink]="['/child']">Get started</button>
+  <h2>How to use the platform?</h2>
+  <div fxLayout="row" fxLayoutAlign="space-around start">
+    <mat-card fxFlex="30" fxLayout="column">
+      <mat-card-title>Manage your family</mat-card-title>
+      <mat-card-content fxFlex="100">Start by adding your first child</mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button [routerLink]="['/child']" color="primary">Get started</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card fxFlex="30" fxLayout="column" *ngIf="false">
+      <mat-card-title>Manage builds</mat-card-title>
+      <mat-card-content fxFlex="100">For each child, create as many build as you want<br>Builds define your long term goal</mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button [routerLink]="['/build']" color="primary">Manage builds</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card fxFlex="30" fxLayout="column">
+      <mat-card-title>Whitelist</mat-card-title>
+      <mat-card-content fxFlex="100">The whitelist will define which contents you want your children to access</mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button [routerLink]="['/whitelist']" color="primary">Access</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

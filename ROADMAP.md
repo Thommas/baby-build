@@ -4,11 +4,12 @@ Roadmap
 Short term
 ----------
 
-- Auth0 register should create User entity in DynamoDB
 - Secure lambda with auth0
 - Implement add/remove/edit build
 - Implement contact form with google captcha and lambda
 - Implement calendar for build
+
+- Auth0 register should create User entity in DynamoDB
 - Implement xp and level to unlock calendar
 
 
