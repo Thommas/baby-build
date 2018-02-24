@@ -4,6 +4,7 @@ Roadmap
 Short term
 ----------
 
+- Create data fixtures for local dynamoDB
 - Secure lambda with auth0
 - Implement add/remove/edit build
 - Implement contact form with google captcha and lambda

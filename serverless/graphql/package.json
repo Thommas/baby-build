@@ -1,7 +1,8 @@
 {
   "name": "path-of-child",
   "scripts": {
-    "start": "./node_modules/.bin/ts-node ./lib/graphqli.ts",
+    "start": "serverless offline start",
+    "graphqli": "./node_modules/.bin/ts-node ./lib/graphqli.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "lint": "tslint -c tslint.json './src/**/*.ts'"
   },

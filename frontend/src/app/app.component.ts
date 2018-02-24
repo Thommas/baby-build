@@ -8,7 +8,7 @@
 
 import { Component, Inject, LOCALE_ID } from '@angular/core';
 
-import { AuthService, BrowserService } from './services';
+import { AuthService, BrowserService, ChildService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -28,13 +28,9 @@ export class AppComponent {
   constructor(
     @Inject(LOCALE_ID) private _locale: string,
     public authService: AuthService,
-    private browserService: BrowserService
+    private browserService: BrowserService,
+    public childService: ChildService
   ) {
-    // authService.handleAuthentication();
-  }
-
-  getChild() {
-    return localStorage.getItem('child');
   }
 
   /**

@@ -30,6 +30,7 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { ChildService } from '../../services';
 
 import {
   routing,
@@ -69,6 +70,9 @@ import {
     ChildDeleteComponent,
     ChildIndexComponent,
     ChildUpdateComponent
+  ],
+  providers: [
+    ChildService
   ]
 })
 export class ChildModule {

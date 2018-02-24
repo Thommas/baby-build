@@ -16,6 +16,17 @@ custom:
       inMemory: true
       migrate: true
       seed: true
+    seed:
+      test:
+        sources:
+          - table: build
+            sources: [./fixtures/build.json]
+          - table: child
+            sources: [./fixtures/child.json]
+          - table: user
+            sources: [./fixtures/user.json]
+          - table: whitelist
+            sources: [./fixtures/whitelist.json]
 
 package:
   exclude:

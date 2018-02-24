@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "firstname": "Leo",
+    "middlename": "Gerard Nobu",
+    "lastname": "Bullier",
+    "nickname": "Oji",
+    "birthdate": 1519493384000
+  },
+  {
+    "id": "2",
+    "firstname": "Misaki",
+    "middlename": "Martine Setsuko",
+    "lastname": "Bullier",
+    "nickname": "Hime",
+    "birthdate": 1519493384000
+  }
+]

@@ -37,7 +37,12 @@ import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
 import { WhitelistModule } from './components/whitelist/whitelist.module';
 import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
-import { AuthGuardService, AuthService, BrowserService } from './services';
+import {
+  AuthGuardService,
+  AuthService,
+  BrowserService,
+  ChildService
+} from './services';
 
 @NgModule({
   declarations: [
@@ -72,7 +77,8 @@ import { AuthGuardService, AuthService, BrowserService } from './services';
     appRoutingProviders,
     AuthGuardService,
     AuthService,
-    BrowserService
+    BrowserService,
+    ChildService
   ],
   bootstrap: [
     AppComponent

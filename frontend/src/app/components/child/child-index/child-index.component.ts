@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { ChildService } from '../../../services';
 
 const getChildren = gql`
   query GetChildren {
@@ -37,7 +38,11 @@ export class ChildIndexComponent implements OnInit {
   loading: boolean;
   children: any;
 
-  constructor(private router: Router, private apollo: Apollo) {}
+  constructor(
+    private router: Router,
+    private apollo: Apollo,
+    public childService: ChildService
+  ) {}
 
   ngOnInit() {
     this.getChildren();
@@ -55,7 +60,7 @@ export class ChildIndexComponent implements OnInit {
   }
 
   selectChild(child) {
-    localStorage.setItem('child', child);
+    this.childService.selectChild(child);
     this.router.navigate(['/']);
   }
 }
