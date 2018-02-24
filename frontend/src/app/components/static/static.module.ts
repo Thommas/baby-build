@@ -9,15 +9,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
+  MatChipsModule,
+  MatDialogModule,
   MatIconModule,
   MatFormFieldModule,
   MatInputModule,
   MatMenuModule,
   MatProgressBarModule,
   MatSidenavModule,
+  MatStepperModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
@@ -27,6 +31,7 @@ import {
   routing,
   BrandingComponent,
   ContactComponent,
+  ContactDialogComponent,
   KitchenComponent,
   TermsComponent
 } from './';
@@ -35,15 +40,20 @@ import {
   imports: [
     BrowserModule,
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     routing,
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
+    MatDialogModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatMenuModule,
     MatProgressBarModule,
     MatSidenavModule,
+    MatStepperModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule
@@ -51,8 +61,12 @@ import {
   declarations: [
     BrandingComponent,
     ContactComponent,
+    ContactDialogComponent,
     KitchenComponent,
     TermsComponent
+  ],
+  entryComponents: [
+    ContactDialogComponent
   ]
 })
 export class StaticModule{

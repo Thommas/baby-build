@@ -1,24 +1,24 @@
 /**
  * Path of child
  *
- * Component - Static - Contact
+ * Component - Static - Contact Dialog
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { ContactComponent } from './contact.component';
+import { ContactDialogComponent } from './contact-dialog.component';
 
-describe('ContactComponent', () => {
+describe('ContactDialogComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ContactComponent
+        ContactDialogComponent
       ],
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(ContactComponent);
+    const fixture = TestBed.createComponent(ContactDialogComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

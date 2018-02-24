@@ -3,6 +3,10 @@
 
 @include mat-core();
 
+$blue: #8CD9FF;
+$pink: #D194FF;
+$purple: #ABBAFF;
+
 $path-of-child-primary: mat-palette($path-of-child-primary);
 $path-of-child-accent:  mat-palette($path-of-child-accent);
 $path-of-child-warn:    mat-palette($mat-red);

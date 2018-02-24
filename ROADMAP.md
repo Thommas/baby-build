@@ -4,14 +4,26 @@ Roadmap
 Short term
 ----------
 
-- Finish customizing homepage pictures
-- Finish i18n
-- Improve kitchen sink
 - Improve auth0 login/register design
 - Auth0 register should create User entity in DynamoDB
 - Implement add/remove/edit build
 - Implement terms and privacy
 - Implement contact
+- Implement calendar for build
+- Implement xp and level to unlock calendar
+
+Mid term
+--------
+
+- Finish customizing homepage pictures
+
+Long term ideas
+---------------
+
+- Messaging system for child
+Santa claus or to report a problem like a confessional
+The child needs to believe the message won't be read by his parents
+
 
 Entities
 --------
@@ -110,6 +122,19 @@ Allow full access to internet with privacy
 Should be unlocked as a reward and time should increase progressively
 
 
+### Build a list of danger
+
+- Sending photo/personal information online
+- Online community
+- Food
+- Following stranger
+- Drug
+- Porno
+- Internet
+- Digital addiction
+- Online shaming/harassment
+
+
 Stack
 -----
 
@@ -139,6 +164,8 @@ https://www.reddit.com/r/Parenting/comments/7ta1mk/1314_yr_olds_how_do_you_handl
 https://www.reddit.com/r/Parenting/comments/64da9v/child_is_addicted_to_video_games/
 https://www.reddit.com/r/Parenting/comments/53vl3e/precious_moment_after_finishing_our_first_video/
 http://www.atlantico.fr/decryptage/protegezvosgosses-nikita-belluci-star-x-qui-alerte-parents-francais-inconscience-face-effarante-consommation-porno-enfants-et-3289001.html
+https://thenextweb.com/virtual-reality/2018/02/21/how-a-16-year-old-in-a-village-in-france-taught-the-world-to-build-vr-headsets-for-100/
+https://www.click2houston.com/news/investigates/danger-warning-about-popular-virtual-world-for-kids
 
 
 Storyboard
@@ -180,3 +207,33 @@ Similar apps
 
 https://www.choremonster.com
 https://www.classcraft.com
+
+
+Homepage
+--------
+
+6 ideas:
+- 3 year old Learn to count to ten
+- 4 year old Learn politeness
+- 5 year old Understand two languages
+- 6 year old Learn multiplication tables
+- 7 year old Learn to deal with strangers
+- 8 year old Do sport in a club
+
+Share ideas:
+- Other family members can help
+- Learn from experienced parents
+
+5 jobs:
+- Engineer
+- Doctor
+- Lawyer
+- Accountant
+- Manager
+
+5 countries:
+- USA
+- Australia
+- Singapore
+- Amsterdam
+- Seoul

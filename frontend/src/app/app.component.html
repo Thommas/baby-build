@@ -6,22 +6,22 @@
   <header class="container" fxLayout="row" fxLayoutAlign="space-between center">
     <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
     <div fxLayout="row" fxFlex="60" *ngIf="authService.isAuthenticated()">
-      <a href="javascript:;" [routerLink]="['build']">Build</a>
-      <a href="javascript:;" [routerLink]="['whitelist']">Whitelist</a>
+      <a href="javascript:;" [routerLink]="['build']" i18n>nav.build</a>
+      <a href="javascript:;" [routerLink]="['whitelist']" i18n>nav.whitelist</a>
       <a href="javascript:;" [routerLink]="['kitchen']">Kitchen</a>
     </div>
     <div>
-      <button mat-raised-button color="primary" [matMenuTriggerFor]="childrenMenu"
+      <button mat-button color="primary" [matMenuTriggerFor]="childrenMenu"
               *ngIf="authService.isAuthenticated()">
         selected child name
       </button>
-      <button mat-raised-button color="primary" (click)="authService.login()"
-              *ngIf="!authService.isAuthenticated()">
-        Login
+      <button mat-button color="primary" (click)="authService.login()"
+              *ngIf="!authService.isAuthenticated()" i18n>
+        nav.login
       </button>
-      <button mat-raised-button color="primary" (click)="authService.logout()"
-              *ngIf="authService.isAuthenticated()">
-        Logout
+      <button mat-button color="primary" (click)="authService.logout()"
+              *ngIf="authService.isAuthenticated()" i18n>
+        nav.logout
       </button>
     </div>
   </header>
@@ -32,22 +32,22 @@
 <footer fxLayout="row" fxFill fxLayoutAlign="space-around center">
   <div fxLayout="column" fxLayoutAlign="start start">
     <button mat-button class="locale-button" [matMenuTriggerFor]="localeMenu">
-       <span i18n>app.footer.locale</span>
+       <span i18n>footer.locale</span>
        <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
   </div>
   <div fxLayout="column" fxLayoutAlign="start start">
-    Terms & privacy
+    <a href="javascript:;" [routerLink]="['terms']" i18n>footer.terms</a>
   </div>
   <div fxLayout="column" fxLayoutAlign="start start">
     Social icons
   </div>
   <div fxLayout="column" fxLayoutAlign="start start">
-    Contact
+    <a href="javascript:;" [routerLink]="['contact']" i18n>footer.contact</a>
   </div>
 </footer>
 <mat-menu #childrenMenu="matMenu">
-  <button mat-menu-item [routerLink]="['/child']">Manage children</button>
+  <button mat-menu-item [routerLink]="['/child']" i18n>nav.manage_children</button>
 </mat-menu>
 <mat-menu #localeMenu="matMenu">
   <button mat-menu-item *ngFor="let locale of locales"

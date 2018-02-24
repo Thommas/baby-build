@@ -1,0 +1,23 @@
+<mat-horizontal-stepper #stepper="matHorizontalStepper">
+  <mat-step>
+    FORM EMAIL + MESSAGE
+    <div>
+      <button mat-button matStepperPrevious>Submit</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    ARE YOU A ROBOT ?
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperPrevious>Submit</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    CONFIRMATION
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperPrevious>Submit</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
