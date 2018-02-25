@@ -9,12 +9,12 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { WhitelistComponent } from './whitelist/whitelist.component';
+import { WhitelistIndexComponent } from './whitelist-index/whitelist-index.component';
 
 const routes: Routes = [
   {
     path: 'whitelist',
-    component: WhitelistComponent,
+    component: WhitelistIndexComponent,
     canActivate: [AuthGuardService]
   }
 ];

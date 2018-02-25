@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Child - Child Index
+ * Component - Child - Index
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

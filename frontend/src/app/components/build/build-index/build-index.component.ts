@@ -1,17 +1,59 @@
 /**
- * Path of child
+ * Path of build
  *
- * Component - Build - Build Parent
+ * Component - Build - Build Index
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component } from '@angular/core';
+import { clone } from 'lodash';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
+import { ChildService } from '../../../services';
+
+const getBuilds = gql`
+  query GetBuilds {
+    builds {
+      id
+      title
+    }
+  }
+`;
 
 @Component({
   selector: 'app-build-index-cmp',
   templateUrl: './build-index.component.html',
   styleUrls: ['./build-index.component.scss']
 })
-export class BuildIndexComponent {
+export class BuildIndexComponent implements OnInit {
+  loading: boolean;
+  builds: any;
+
+  constructor(
+    private router: Router,
+    private apollo: Apollo,
+    public childService: ChildService
+  ) {}
+
+  ngOnInit() {
+    this.getBuilds();
+  }
+
+  getBuilds() {
+    this.apollo.watchQuery<any>({
+      query: getBuilds
+    })
+      .valueChanges
+      .subscribe(({ data, loading }) => {
+        this.loading = loading;
+        this.builds = data.builds;
+      });
+  }
+
+  selectBuild(build) {
+    // this.childService.selectBuild(build);
+    this.router.navigate(['/']);
+  }
 }

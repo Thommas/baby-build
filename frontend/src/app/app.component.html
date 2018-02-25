@@ -8,6 +8,7 @@
     <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
       <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
       <div fxLayout="row" *ngIf="authService.isAuthenticated()">
+        <a href="javascript:;" [routerLink]="['child']" i18n>nav.family</a>
         <a href="javascript:;" [routerLink]="['build']" i18n>nav.build</a>
         <a href="javascript:;" [routerLink]="['whitelist']" i18n>nav.whitelist</a>
       </div>
@@ -26,10 +27,6 @@
       </div>
     </div>
     <div class="container" fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
-      <button mat-button color="primary" [matMenuTriggerFor]="childrenMenu"
-              *ngIf="authService.isAuthenticated() && childService.child">
-        {{ childService.child.nickname }}
-      </button>
       <button mat-button color="primary" (click)="authService.login()"
               *ngIf="!authService.isAuthenticated()" i18n>
         nav.login

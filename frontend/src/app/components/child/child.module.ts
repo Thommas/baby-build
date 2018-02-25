@@ -36,6 +36,7 @@ import {
   routing,
   ChildCreateComponent,
   ChildDeleteComponent,
+  ChildFormComponent,
   ChildIndexComponent,
   ChildUpdateComponent
 } from './';
@@ -68,6 +69,7 @@ import {
   declarations: [
     ChildCreateComponent,
     ChildDeleteComponent,
+    ChildFormComponent,
     ChildIndexComponent,
     ChildUpdateComponent
   ],

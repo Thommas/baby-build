@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - Build
+ * GraphQL - Types - Build
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -11,7 +11,6 @@ const Build = `
     id: String!
     title: String
     description: String
-    child: Child
   }
   type Query {
     builds: [Build]

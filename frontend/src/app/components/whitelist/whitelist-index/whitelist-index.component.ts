@@ -8,10 +8,18 @@
 
 import { Component } from '@angular/core';
 
+import { AuthService } from '../../../services';
+
 @Component({
   selector: 'app-whitelist-index-cmp',
   templateUrl: './whitelist-index.component.html',
   styleUrls: ['./whitelist-index.component.scss']
 })
 export class WhitelistIndexComponent {
+  categories: any = [
+    'activity',
+    'book',
+    'videogame',
+    'toy'
+  ]
 }

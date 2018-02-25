@@ -1,0 +1,27 @@
+<mat-toolbar>
+  <button mat-icon-button [routerLink]="['/build']">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    <span>Go back</span>
+  </button>
+</mat-toolbar>
+<form #childForm="ngForm" class="container">
+  <mat-card>
+    <mat-card-title fxLayout="row">
+      Add build information
+    </mat-card-title>
+    <mat-card-content fxLayout="row">
+      <div fxLayout="row" fxFlex="50" fxLayoutWrap>
+        <mat-form-field>
+          <input matInput placeholder="Build name"
+                 [(ngModel)]="build.name" name="name">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around  center">
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button type="submit" (click)="submit()" color="primary">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

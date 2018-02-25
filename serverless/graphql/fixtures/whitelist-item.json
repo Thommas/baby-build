@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "category": "activity",
+    "title": "Play chess",
+    "required_age": 7
+  },
+  {
+    "id": "2",
+    "category": "book",
+    "title": "Cinderella",
+    "required_age": 8
+  }
+]

@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Child - Child Delete
+ * Component - Child - Delete
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -18,7 +18,7 @@ describe('ChildDeleteComponent', () => {
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(ChildDeleteComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

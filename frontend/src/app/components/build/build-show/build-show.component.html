@@ -1,0 +1,23 @@
+<div class="container">
+  <mat-expansion-panel *ngFor="let year of [5, 10, 15, 20, 25]">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        Year {{ year }}
+      </mat-panel-description>
+      <mat-panel-description>
+        0 Main quest
+      </mat-panel-description>
+      <mat-panel-description>
+        0 Bonus quest
+      </mat-panel-description>
+      <mat-panel-description>
+        0 Hidden quest
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>
+      <button mat-button [routerLink]="['/quest/create']">
+        Add a quest
+      </button>
+    </div>
+  </mat-expansion-panel>
+</div>

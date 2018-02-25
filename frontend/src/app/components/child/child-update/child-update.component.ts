@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Child - Child Create
+ * Component - Child - Update
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -25,30 +25,6 @@ const getChild = gql`
       gender
       xp
       level
-    }
-  }
-`;
-
-const updateChildMutation = gql`
-  mutation UpdateChild(
-    $id: ID!
-    $firstname: String!
-    $middlename: String!
-    $lastname: String!
-    $nickname: String!
-    $birthdate: String!
-    $gender: String!
-  ) {
-    updateChild(
-      id: $id
-      firstname: $firstname
-      middlename: $middlename
-      lastname: $lastname
-      nickname: $nickname
-      birthdate: $birthdate
-      gender: $gender
-    ) {
-      id
     }
   }
 `;
@@ -85,18 +61,5 @@ export class ChildUpdateComponent implements OnInit {
           this.child.birthdate = moment(this.child.birthdate, 'x');
         });
     });
-  }
-
-  submit() {
-    let child = clone(this.child);
-    child.birthdate = child.birthdate.format('x');
-    this.apollo.mutate({
-      mutation: updateChildMutation,
-      variables: {
-        ...child
-      }
-    }).subscribe(
-      res => this.router.navigate(['/child'])
-    );
   }
 }

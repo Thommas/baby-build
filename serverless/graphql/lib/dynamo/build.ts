@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - DynamoDB
+ * GraphQL - DynamoDB - Build
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -18,7 +18,7 @@ export function getBuilds() {
       'id',
       'title',
       'description',
-      'child',
+      'child_id',
     ],
   };
 
@@ -39,7 +39,7 @@ export function getBuildById(id) {
 export function getBuildsByChild(childId) {
   const params = {
     TableName,
-    FilterExpression: 'child = :child_id',
+    FilterExpression: 'child_id = :child_id',
     ExpressionAttributeValues: { ':child_id': childId },
   };
 

@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Child - Child Delete
+ * Component - Child - Delete
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

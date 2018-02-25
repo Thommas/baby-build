@@ -1,0 +1,47 @@
+<form #childForm="ngForm">
+  <mat-card>
+    <mat-card-title fxLayout="row">
+      Add your child information
+    </mat-card-title>
+    <mat-card-content fxLayout="row">
+      <div fxLayout="row" fxFlex="50" fxLayoutWrap>
+        <mat-form-field>
+          <input matInput placeholder="First name"
+                 [(ngModel)]="child.firstname" name="firstname">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Middle names"
+                 [(ngModel)]="child.middlename" name="middlename">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last name"
+                 [(ngModel)]="child.lastname" name="lastname">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Nickname"
+                 [(ngModel)]="child.nickname" name="nickname">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Birthdate"
+                 [(ngModel)]="child.birthdate" name="birthdate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around  center">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <img src="https://www.shareicon.net/download/2016/06/25/786542_people.svg"/>
+          <span i18n>child_create.boy</span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <img src="https://www.shareicon.net/download/2016/06/25/786540_people.svg"/>
+          <span i18n>child_create.girl</span>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button type="submit" (click)="submit()" color="primary">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -23,10 +23,12 @@ custom:
             sources: [./fixtures/build.json]
           - table: child
             sources: [./fixtures/child.json]
+          - table: quest
+            sources: [./fixtures/quest.json]
           - table: user
             sources: [./fixtures/user.json]
-          - table: whitelist
-            sources: [./fixtures/whitelist.json]
+          - table: whitelist_item
+            sources: [./fixtures/whitelist-item.json]
 
 package:
   exclude:
@@ -63,6 +65,22 @@ functions:
 
 resources:
   Resources:
+    buildTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'build'
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
     childTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
@@ -79,7 +97,7 @@ resources:
         TableName: 'child'
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    buildTable:
+    questTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -92,6 +110,38 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'build'
+        TableName: 'quest'
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+    userTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'user'
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+    whitelistItemTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'whitelist_item'
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES

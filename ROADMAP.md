@@ -16,6 +16,7 @@ Short term
 Mid term
 --------
 
+- Add generic fields (createdAt, updatedAt) to all entities
 - Finish customizing homepage pictures
 
 
@@ -76,6 +77,7 @@ Same for video game with empty gameplay (Candy crush)
 
 - Main quest
 - Bonus quests
+- Hidden quests
 
 The goal is to encourage curiosity.
 
@@ -135,6 +137,11 @@ Should be a short message.
 
 Allow full access to internet with privacy
 Should be unlocked as a reward and time should increase progressively
+Permanent reward system with gauge
+
+8) Eat oishii food
+
+9) The child can ask for a reward
 
 
 ### Build a list of danger

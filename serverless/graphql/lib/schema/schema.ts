@@ -11,15 +11,33 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas';
 
 // Types
-import childType from './types/child';
 import buildType from './types/build';
+import childType from './types/child';
+import questType from './types/quest';
+import userType from './types/user';
+import whitelistItemType from './types/whitelist-item';
 
 // Resolvers
-import childResolver from './resolvers/child';
 import buildResolver from './resolvers/build';
+import childResolver from './resolvers/child';
+import questResolver from './resolvers/quest';
+import userResolver from './resolvers/user';
+import whitelistItemResolver from './resolvers/whitelist-item';
 
-const typeDefs = mergeTypes([childType, buildType]);
-const resolvers = mergeResolvers([childResolver, buildResolver]);
+const typeDefs = mergeTypes([
+  buildType,
+  childType,
+  questType,
+  userType,
+  whitelistItemType
+]);
+const resolvers = mergeResolvers([
+  buildResolver,
+  childResolver,
+  questResolver,
+  userResolver,
+  whitelistItemResolver
+]);
 
 const schema = makeExecutableSchema({
   typeDefs,

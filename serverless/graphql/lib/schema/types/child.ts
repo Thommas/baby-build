@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - Child
+ * GraphQL - Types - Child
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

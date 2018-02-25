@@ -8,15 +8,22 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
+  MatExpansionModule,
   MatButtonModule,
   MatCardModule,
-  MatExpansionModule,
+  MatChipsModule,
+  MatDialogModule,
   MatIconModule,
-  MatListModule,
+  MatDividerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatMenuModule,
   MatProgressBarModule,
   MatSidenavModule,
+  MatStepperModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
@@ -24,31 +31,38 @@ import {
 
 import {
   routing,
-  BuildComponent,
+  BuildCreateComponent,
   BuildIndexComponent,
-  BuildInstructionsComponent
+  BuildShowComponent
 } from './';
 
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
     FlexLayoutModule,
     routing,
+    MatExpansionModule,
     MatButtonModule,
     MatCardModule,
-    MatExpansionModule,
+    MatChipsModule,
+    MatDialogModule,
     MatIconModule,
-    MatListModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatMenuModule,
     MatProgressBarModule,
     MatSidenavModule,
+    MatStepperModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule
   ],
   declarations: [
-    BuildComponent,
+    BuildCreateComponent,
     BuildIndexComponent,
-    BuildInstructionsComponent
+    BuildShowComponent
   ]
 })
 export class BuildModule {

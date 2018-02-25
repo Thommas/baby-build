@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Build - Build
+ * Component - Build - Show
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -11,11 +11,11 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../services';
 
 @Component({
-  selector: 'app-build-cmp',
-  templateUrl: './build.component.html',
-  styleUrls: ['./build.component.scss']
+  selector: 'app-build-show-cmp',
+  templateUrl: './build-show.component.html',
+  styleUrls: ['./build-show.component.scss']
 })
-export class BuildComponent {
+export class BuildShowComponent {
   /**
    * Constructor
    */

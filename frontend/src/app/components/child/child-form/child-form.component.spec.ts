@@ -1,24 +1,24 @@
 /**
  * Path of child
  *
- * Component - Build - Build
+ * Component - Child - Form
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { BuildComponent } from './build.component';
+import { ChildFormComponent } from './child-form.component';
 
-describe('BuildComponent', () => {
+describe('ChildFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        ChildFormComponent
       ],
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(ChildFormComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

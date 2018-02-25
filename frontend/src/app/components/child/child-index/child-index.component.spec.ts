@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Child - Child Index
+ * Component - Child - Index
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -18,7 +18,7 @@ describe('ChildIndexComponent', () => {
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(ChildIndexComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

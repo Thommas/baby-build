@@ -9,12 +9,24 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { BuildComponent } from './build/build.component';
+import { BuildCreateComponent } from './build-create/build-create.component';
+import { BuildIndexComponent } from './build-index/build-index.component';
+import { BuildShowComponent } from './build-show/build-show.component';
 
 const routes: Routes = [
   {
+    path: 'build/create',
+    component: BuildCreateComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: 'build',
-    component: BuildComponent,
+    component: BuildIndexComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'build/:id',
+    component: BuildShowComponent,
     canActivate: [AuthGuardService]
   }
 ];

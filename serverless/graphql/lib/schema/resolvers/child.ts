@@ -1,13 +1,13 @@
 /**
  * Path of child
  *
- * GraphQL - Resolvers
+ * GraphQL - Resolvers - Child
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dbChild from '../../dynamo/child';
 import * as dbBuild from '../../dynamo/build';
+import * as dbChild from '../../dynamo/child';
 
 export default {
   Query: {

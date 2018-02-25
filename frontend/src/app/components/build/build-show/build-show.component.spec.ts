@@ -1,24 +1,24 @@
 /**
  * Path of child
  *
- * Component - Build - Build Parent
+ * Component - Build - Show
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { BuildInstructionsComponent } from './build-instructions.component';
+import { BuildShowComponent } from './build-show.component';
 
-describe('BuildInstructionsComponent', () => {
+describe('BuildShowComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BuildInstructionsComponent
+        BuildShowComponent
       ],
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(BuildShowComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

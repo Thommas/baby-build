@@ -1,1 +1,7 @@
-WHITELIST
+<div class="container">
+  <mat-tab-group [@.disabled]="true">
+    <mat-tab [label]="category" *ngFor="let category of categories">
+      <app-whitelist-list-cmp></app-whitelist-list-cmp>
+    </mat-tab>
+  </mat-tab-group>
+</div>

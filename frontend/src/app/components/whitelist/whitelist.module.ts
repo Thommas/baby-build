@@ -8,6 +8,7 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule,
@@ -24,14 +25,15 @@ import {
 
 import {
   routing,
-  WhitelistComponent,
+  WhitelistFormComponent,
   WhitelistIndexComponent,
-  WhitelistInstructionsComponent
+  WhitelistListComponent
 } from './';
 
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
     FlexLayoutModule,
     routing,
     MatButtonModule,
@@ -46,9 +48,9 @@ import {
     MatTooltipModule
   ],
   declarations: [
-    WhitelistComponent,
+    WhitelistFormComponent,
     WhitelistIndexComponent,
-    WhitelistInstructionsComponent
+    WhitelistListComponent
   ]
 })
 export class WhitelistModule {

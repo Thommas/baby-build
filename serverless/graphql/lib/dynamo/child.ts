@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - DynamoDB
+ * GraphQL - DynamoDB - Child
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

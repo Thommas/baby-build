@@ -1,12 +1,20 @@
-<mat-card>
-  <mat-card-title>Title</mat-card-title>
-  <mat-card-subtitle>Subtitle</mat-card-subtitle>
-</mat-card>
-<mat-card>
-  <mat-card-title>Title</mat-card-title>
-  <mat-card-subtitle>Subtitle</mat-card-subtitle>
-</mat-card>
-<mat-card>
-  <mat-card-title>Title</mat-card-title>
-  <mat-card-subtitle>Subtitle</mat-card-subtitle>
-</mat-card>
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h1>List of builds</h1>
+    <button mat-button [routerLink]="['/build/create']">
+      <mat-icon>add_circle</mat-icon>
+      Add a new build
+    </button>
+  </div>
+  <div fxLayout="column">
+    <mat-card *ngFor="let build of builds">
+      <mat-card-title>Leo</mat-card-title>
+      <mat-card-subtitle>Engineer</mat-card-subtitle>
+      <mat-card-actions>
+        <button mat-button [routerLink]="['/build/' + build.id]">
+          Select
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
