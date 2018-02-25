@@ -10,7 +10,6 @@ const Quest = `
   type Quest {
     id: String!
     title: String
-    build: Build
   }
   type Query {
     quests: [Quest]
@@ -19,6 +18,7 @@ const Quest = `
   type Mutation {
     createQuest(
       title: String!
+      build_id: String!
     ): Quest
     updateQuest(
       id: ID!

@@ -11,6 +11,7 @@ const Build = `
     id: String!
     title: String
     description: String
+    quests: [Quest]
   }
   type Query {
     builds: [Build]

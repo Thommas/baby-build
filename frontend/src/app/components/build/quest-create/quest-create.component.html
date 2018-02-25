@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <button mat-icon-button [routerLink]="['/build/' + buildId]">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+</mat-toolbar>
+<form #childForm="ngForm">
+  <mat-card>
+    <mat-card-title fxLayout="row">
+      Create a new quest
+    </mat-card-title>
+    <mat-card-content fxLayout="row">
+      <div fxLayout="row" fxFlex="50" fxLayoutWrap>
+        <mat-form-field>
+          <input matInput placeholder="Quest title"
+                 [(ngModel)]="quest.title" name="title">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button type="submit" (click)="submit()" color="primary">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

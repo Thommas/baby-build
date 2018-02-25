@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import uuid = require('uuid/v4');
+import nanoid = require('nanoid');
 import * as db from './dynamo';
 
 const TableName = 'user';
@@ -39,7 +39,7 @@ export function createUser(args) {
   const params = {
     TableName,
     Item: {
-      id: uuid(),
+      id: nanoid(12),
       xp: 0,
       level: 1,
       ...args

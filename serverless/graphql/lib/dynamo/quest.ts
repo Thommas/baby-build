@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import uuid = require('uuid/v4');
+import nanoid = require('nanoid');
 import * as db from './dynamo';
 
 const TableName = 'quest';
@@ -17,8 +17,7 @@ export function getQuests() {
     AttributesToGet: [
       'id',
       'title',
-      'description',
-      'build_id',
+      'description'
     ],
   };
 
@@ -50,10 +49,9 @@ export function createQuest(args) {
   const params = {
     TableName,
     Item: {
-      id: uuid(),
+      id: nanoid(12),
       title: args.title,
-      child: args.child,
-      description: args.description,
+      build_id: args.build_id
     },
   };
 

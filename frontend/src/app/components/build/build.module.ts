@@ -33,7 +33,8 @@ import {
   routing,
   BuildCreateComponent,
   BuildIndexComponent,
-  BuildShowComponent
+  BuildShowComponent,
+  QuestCreateComponent
 } from './';
 
 @NgModule({
@@ -62,7 +63,8 @@ import {
   declarations: [
     BuildCreateComponent,
     BuildIndexComponent,
-    BuildShowComponent
+    BuildShowComponent,
+    QuestCreateComponent
   ]
 })
 export class BuildModule {

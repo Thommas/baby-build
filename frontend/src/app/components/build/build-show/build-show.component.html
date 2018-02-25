@@ -1,23 +1,33 @@
+<mat-toolbar>
+  <button mat-icon-button [routerLink]="['/build']">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+</mat-toolbar>
 <div class="container">
-  <mat-expansion-panel *ngFor="let year of [5, 10, 15, 20, 25]">
-    <mat-expansion-panel-header>
-      <mat-panel-description>
-        Year {{ year }}
-      </mat-panel-description>
-      <mat-panel-description>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h1>{{ build.title }}</h1>
+    <button mat-button [routerLink]="['/build/' + build.id + '/quest/create']">
+      <mat-icon>add_circle</mat-icon>
+      Add a new quest
+    </button>
+  </div>
+</div>
+<div class="container" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutWrap>
+  <mat-card *ngFor="let year of [5, 10, 15, 20, 25]" fxFlex="30">
+    <mat-card-title>Year {{ year }}</mat-card-title>
+    <mat-card-content>
+      <div>
         0 Main quest
-      </mat-panel-description>
-      <mat-panel-description>
+      </div>
+      <div>
         0 Bonus quest
-      </mat-panel-description>
-      <mat-panel-description>
+      </div>
+      <div>
         0 Hidden quest
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div>
-      <button mat-button [routerLink]="['/quest/create']">
-        Add a quest
-      </button>
-    </div>
-  </mat-expansion-panel>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div *ngFor="let quest of build.quests">
+  <span>{{ quest.title }}</span>
 </div>

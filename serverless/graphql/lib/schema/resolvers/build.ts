@@ -7,6 +7,7 @@
  */
 
 import * as dbBuild from '../../dynamo/build';
+import * as dbQuest from '../../dynamo/quest';
 
 export default {
   Query: {
@@ -17,5 +18,8 @@ export default {
     createBuild: (_, args) => dbBuild.createBuild(args),
     updateBuild: (_, args) => dbBuild.updateBuild(args),
     deleteBuild: (_, args) => dbBuild.deleteBuild(args),
-  }
+  },
+  Build: {
+    quests: build => dbQuest.getQuestsByBuild(build.id),
+  },
 };
