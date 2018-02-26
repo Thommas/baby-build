@@ -1,4 +1,4 @@
-<app-whitelist-form-cmp></app-whitelist-form-cmp>
+<app-whitelist-form-cmp [category]="category"></app-whitelist-form-cmp>
 <div *ngFor="let whitelistItem of whitelistItems">
   <span>{{ whitelistItem.title }}</span>
   <span>{{ whitelistItem.category }}</span>

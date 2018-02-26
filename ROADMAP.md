@@ -4,9 +4,10 @@ Roadmap
 Short term
 ----------
 
+- Isolate apollo queries
 - Finish contact form with google captcha and lambda
-- Implement add/remove/edit build/whitelist
-- Refactor children index combined with build index
+- Implement add/remove/edit whitelist
+- Implement add/remove/edit quest
 - Design calendar for build
 - Secure lambda with auth0
 - Auth0 register should create User entity in DynamoDB
@@ -16,6 +17,7 @@ Short term
 Mid term
 --------
 
+- Add unit tests
 - Add generic fields (createdAt, updatedAt) to all entities
 - Finish customizing homepage pictures
 

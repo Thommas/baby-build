@@ -11,15 +11,11 @@ import * as db from './dynamo';
 
 const TableName = 'whitelist_item';
 
-export function getWhitelistItems() {
+export function getWhitelistItems(category) {
   const params = {
     TableName,
-    AttributesToGet: [
-      'id',
-      'category',
-      'title',
-      'required_age'
-    ],
+    FilterExpression: 'category = :category',
+    ExpressionAttributeValues: { ':category': category },
   };
 
   return db.scan(params);

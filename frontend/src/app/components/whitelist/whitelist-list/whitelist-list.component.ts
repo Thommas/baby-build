@@ -7,16 +7,15 @@
  */
 
 import { clone } from 'lodash';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
 const getWhitelistItems = gql`
-  query GetWhitelistItems {
-    whitelistItems {
+  query GetWhitelistItems($category: String!) {
+    whitelistItems(category: $category) {
       id
-      category
       title
       required_age
     }
@@ -29,6 +28,7 @@ const getWhitelistItems = gql`
   styleUrls: ['./whitelist-list.component.scss']
 })
 export class WhitelistListComponent implements OnInit {
+  @Input() category: string;
   loading: boolean;
   whitelistItems: any;
 
@@ -43,7 +43,10 @@ export class WhitelistListComponent implements OnInit {
 
   getWhitelistItems() {
     this.apollo.watchQuery<any>({
-      query: getWhitelistItems
+      query: getWhitelistItems,
+      variables: {
+        category: this.category
+      }
     })
       .valueChanges
       .subscribe(({ data, loading }) => {

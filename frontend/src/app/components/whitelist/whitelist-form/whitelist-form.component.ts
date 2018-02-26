@@ -7,7 +7,7 @@
  */
 
 import { clone } from 'lodash';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
@@ -46,12 +46,23 @@ const updateWhitelistItemMutation = gql`
   }
 `;
 
+const getWhitelistItems = gql`
+  query GetWhitelistItems($category: String!) {
+    whitelistItems(category: $category) {
+      id
+      title
+      required_age
+    }
+  }
+`;
+
 @Component({
   selector: 'app-whitelist-form-cmp',
   templateUrl: './whitelist-form.component.html',
   styleUrls: ['./whitelist-form.component.scss']
 })
 export class WhitelistFormComponent {
+  @Input() category: string;
   whitelistItem: any;
   loading: boolean;
 
@@ -61,12 +72,16 @@ export class WhitelistFormComponent {
 
   submit() {
     let whitelistItem = clone(this.whitelistItem);
-    whitelistItem.category = 'book';
+    whitelistItem.category = this.category;
     this.apollo.mutate({
       mutation: createWhitelistItemMutation,
       variables: {
         ...whitelistItem
-      }
+      },
+      refetchQueries: [{
+        query: getWhitelistItems,
+        variables: { category: this.category },
+      }],
     }).subscribe(
       res => {}
     );
