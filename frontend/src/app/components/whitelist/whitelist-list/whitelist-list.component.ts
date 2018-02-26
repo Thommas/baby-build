@@ -8,6 +8,7 @@
 
 import { clone } from 'lodash';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { GetWhitelistItems } from '../../../graphql';
@@ -18,8 +19,10 @@ import { GetWhitelistItems } from '../../../graphql';
   styleUrls: ['./whitelist-list.component.scss']
 })
 export class WhitelistListComponent implements OnInit {
+  displayedColumns = ['title', 'required_age'];
   @Input() category: string;
   loading: boolean;
+  dataSource: any;
   whitelistItems: any;
 
   constructor(
@@ -42,6 +45,15 @@ export class WhitelistListComponent implements OnInit {
       .subscribe(({ data, loading }) => {
         this.loading = loading;
         this.whitelistItems = data.whitelistItems;
+        console.log(this.whitelistItems);
+        this.dataSource = new MatTableDataSource<Element>(this.whitelistItems);
+        console.log(this.dataSource);
       });
   }
+}
+
+export interface Element {
+  id: number;
+  title: string;
+  required_age: number;
 }

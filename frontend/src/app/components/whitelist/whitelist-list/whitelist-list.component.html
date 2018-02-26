@@ -1,6 +1,13 @@
 <app-whitelist-form-cmp [category]="category"></app-whitelist-form-cmp>
-<div *ngFor="let whitelistItem of whitelistItems">
-  <span>{{ whitelistItem.title }}</span>
-  <span>{{ whitelistItem.category }}</span>
-  <span>{{ whitelistItem.required_age }}</span>
-</div>
+<mat-table #table [dataSource]="dataSource">
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="required_age">
+    <mat-header-cell *matHeaderCellDef> Required minimum age </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.required_age}} </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

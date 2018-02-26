@@ -1,11 +1,12 @@
 <form #whitelistItemForm="ngForm">
   <mat-form-field>
     <input matInput placeholder="Title"
-           [(ngModel)]="whitelistItem.title" name="title">
+           [(ngModel)]="whitelistItem.title" name="title" required>
   </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Minimum required age"
-           [(ngModel)]="whitelistItem.required_age" name="required_age">
+           type="number" min="1" max="25"
+           [(ngModel)]="whitelistItem.required_age" name="required_age" required>
   </mat-form-field>
   <button mat-button (click)="submit()">
     Submit
