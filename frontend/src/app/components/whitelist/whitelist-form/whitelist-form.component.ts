@@ -10,51 +10,11 @@ import { clone } from 'lodash';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-
-const createWhitelistItemMutation = gql`
-  mutation CreateWhitelistItem(
-    $title: String!
-    $category: String!
-    $required_age: Int!
-  ) {
-    createWhitelistItem(
-      title: $title
-      category: $category
-      required_age: $required_age
-    ) {
-      id
-    }
-  }
-`;
-
-const updateWhitelistItemMutation = gql`
-  mutation UpdateWhitelistItem(
-    $id: ID!
-    $title: String!
-    $category: String!
-    $required_age: Int!
-  ) {
-    updateWhitelistItem(
-      id: $id
-      title: $title
-      category: $category
-      required_age: $required_age
-    ) {
-      id
-    }
-  }
-`;
-
-const getWhitelistItems = gql`
-  query GetWhitelistItems($category: String!) {
-    whitelistItems(category: $category) {
-      id
-      title
-      required_age
-    }
-  }
-`;
+import {
+  CreateWhitelistItemMutation,
+  UpdateWhitelistItemMutation,
+  GetWhitelistItems
+} from '../../../graphql';
 
 @Component({
   selector: 'app-whitelist-form-cmp',
@@ -74,12 +34,12 @@ export class WhitelistFormComponent {
     let whitelistItem = clone(this.whitelistItem);
     whitelistItem.category = this.category;
     this.apollo.mutate({
-      mutation: createWhitelistItemMutation,
+      mutation: CreateWhitelistItemMutation,
       variables: {
         ...whitelistItem
       },
       refetchQueries: [{
-        query: getWhitelistItems,
+        query: GetWhitelistItems,
         variables: { category: this.category },
       }],
     }).subscribe(

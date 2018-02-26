@@ -4,7 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Isolate apollo queries
 - Finish contact form with google captcha and lambda
 - Implement add/remove/edit whitelist
 - Implement add/remove/edit quest

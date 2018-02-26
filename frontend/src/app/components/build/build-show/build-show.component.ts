@@ -10,21 +10,7 @@ import { clone } from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-
-const getBuild = gql`
-  query GetBuild($id: ID!) {
-    build(id: $id) {
-      id
-      title
-      description
-      quests {
-        id
-        title
-      }
-    }
-  }
-`;
+import { GetBuild } from '../../../graphql';
 
 @Component({
   selector: 'app-build-show-cmp',
@@ -46,7 +32,7 @@ export class BuildShowComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.apollo.watchQuery<any>({
-        query: getBuild,
+        query: GetBuild,
         variables: {
           id: params.id
         }

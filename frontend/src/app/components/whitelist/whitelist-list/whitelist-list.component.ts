@@ -10,17 +10,7 @@ import { clone } from 'lodash';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-
-const getWhitelistItems = gql`
-  query GetWhitelistItems($category: String!) {
-    whitelistItems(category: $category) {
-      id
-      title
-      required_age
-    }
-  }
-`;
+import { GetWhitelistItems } from '../../../graphql';
 
 @Component({
   selector: 'app-whitelist-list-cmp',
@@ -43,7 +33,7 @@ export class WhitelistListComponent implements OnInit {
 
   getWhitelistItems() {
     this.apollo.watchQuery<any>({
-      query: getWhitelistItems,
+      query: GetWhitelistItems,
       variables: {
         category: this.category
       }

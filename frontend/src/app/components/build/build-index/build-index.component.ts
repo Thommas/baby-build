@@ -10,17 +10,8 @@ import { clone } from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
+import { GetBuilds } from '../../../graphql';
 import { ChildService } from '../../../services';
-
-const getBuilds = gql`
-  query GetBuilds {
-    builds {
-      id
-      title
-    }
-  }
-`;
 
 @Component({
   selector: 'app-build-index-cmp',
@@ -43,7 +34,7 @@ export class BuildIndexComponent implements OnInit {
 
   getBuilds() {
     this.apollo.watchQuery<any>({
-      query: getBuilds
+      query: GetBuilds
     })
       .valueChanges
       .subscribe(({ data, loading }) => {

@@ -10,24 +10,8 @@ import { clone } from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
+import { GetChildren } from '../../../graphql';
 import { ChildService } from '../../../services';
-
-const getChildren = gql`
-  query GetChildren {
-    children {
-      id
-      firstname
-      middlename
-      lastname
-      nickname
-      birthdate
-      gender
-      xp
-      level
-    }
-  }
-`;
 
 @Component({
   selector: 'app-child-index-cmp',
@@ -50,7 +34,7 @@ export class ChildIndexComponent implements OnInit {
 
   getChildren() {
     this.apollo.watchQuery<any>({
-      query: getChildren
+      query: GetChildren
     })
       .valueChanges
       .subscribe(({ data, loading }) => {

@@ -9,19 +9,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-
-const deleteChildMutation = gql`
-  mutation DeleteChild(
-    $id: ID!
-  ) {
-    deleteChild(
-      id: $id
-    ) {
-      id
-    }
-  }
-`;
+import { DeleteChildMutation } from '../../../graphql';
 
 @Component({
   selector: 'app-child-delete-cmp',
@@ -48,7 +36,7 @@ export class ChildDeleteComponent implements OnInit {
 
   submit() {;
     this.apollo.mutate({
-      mutation: deleteChildMutation,
+      mutation: DeleteChildMutation,
       variables: {
         id: this.childId
       }

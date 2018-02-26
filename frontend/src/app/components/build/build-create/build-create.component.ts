@@ -10,19 +10,7 @@
  import { Component } from '@angular/core';
  import { Router } from '@angular/router';
  import { Apollo } from 'apollo-angular';
- import gql from 'graphql-tag';
-
- const createBuildMutation = gql`
-   mutation CreateBuild(
-     $name: String!
-   ) {
-     createChild(
-       name: $name
-     ) {
-       id
-     }
-   }
- `;
+ import { CreateBuildMutation } from '../../../graphql';
 
 @Component({
   selector: 'app-build-create-cmp',
@@ -45,7 +33,7 @@ export class BuildCreateComponent {
   submit() {
     let build = clone(this.build);
     this.apollo.mutate({
-      mutation: createBuildMutation,
+      mutation: CreateBuildMutation,
       variables: {
         ...build
       }

@@ -10,21 +10,7 @@ import { clone } from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-
-const createQuestMutation = gql`
-  mutation CreateQuest(
-    $title: String!
-    $build_id: String!
-  ) {
-    createQuest(
-      title: $title
-      build_id: $build_id
-    ) {
-      id
-    }
-  }
-`;
+import { CreateQuestMutation } from '../../../graphql';
 
 @Component({
   selector: 'app-quest-create-cmp',
@@ -54,7 +40,7 @@ export class QuestCreateComponent implements OnInit {
     let quest = clone(this.quest);
     quest.build_id = this.buildId;
     this.apollo.mutate({
-      mutation: createQuestMutation,
+      mutation: CreateQuestMutation,
       variables: {
         ...quest
       }

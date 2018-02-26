@@ -11,23 +11,7 @@ import { clone } from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-
-const getChild = gql`
-  query GetChild($id: ID!) {
-    child(id: $id) {
-      id
-      firstname
-      middlename
-      lastname
-      nickname
-      birthdate
-      gender
-      xp
-      level
-    }
-  }
-`;
+import { GetChild } from '../../../graphql';
 
 @Component({
   selector: 'app-child-update-cmp',
@@ -49,7 +33,7 @@ export class ChildUpdateComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.apollo.watchQuery<any>({
-        query: getChild,
+        query: GetChild,
         variables: {
           id: params.id
         }
