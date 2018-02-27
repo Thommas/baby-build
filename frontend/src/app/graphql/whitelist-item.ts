@@ -42,6 +42,18 @@ export const UpdateWhitelistItemMutation = gql`
   }
 `;
 
+export const DeleteWhitelistItem = gql`
+  mutation DeleteWhitelistItem(
+    $id: ID!
+  ) {
+    deleteWhitelistItem(
+      id: $id
+    ) {
+      id
+    }
+  }
+`;
+
 export const GetWhitelistItems = gql`
   query GetWhitelistItems($category: String!) {
     whitelistItems(category: $category) {

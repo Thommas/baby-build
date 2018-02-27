@@ -6,12 +6,12 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import swal from 'sweetalert2'
 import { clone } from 'lodash';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { GetWhitelistItems } from '../../../graphql';
+import { GetWhitelistItems, DeleteWhitelistItem } from '../../../graphql';
 
 @Component({
   selector: 'app-whitelist-list-cmp',
@@ -22,7 +22,6 @@ export class WhitelistListComponent implements OnInit {
   displayedColumns = ['title', 'required_age'];
   @Input() category: string;
   loading: boolean;
-  dataSource: any;
   whitelistItems: any;
 
   constructor(
@@ -45,13 +44,36 @@ export class WhitelistListComponent implements OnInit {
       .subscribe(({ data, loading }) => {
         this.loading = loading;
         this.whitelistItems = data.whitelistItems;
-        this.dataSource = new MatTableDataSource<Element>(this.whitelistItems);
       });
   }
-}
 
-export interface Element {
-  id: number;
-  title: string;
-  required_age: number;
+  deleteWhitelistItem(whitelistItem) {
+    swal({
+      title: 'whitelist.delete.title',
+      text: 'whitelist.delete.text',
+      type: 'warning',
+      reverseButtons: true,
+      showCancelButton: true,
+      allowOutsideClick: false,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then(() => {
+      this.confirmDeleteWhitelistItem(whitelistItem);
+    }).catch((reason) => {
+      // Nothing
+    });
+  }
+
+  confirmDeleteWhitelistItem(whitelistItem) {
+    this.apollo.mutate({
+      mutation: DeleteWhitelistItem,
+      variables: {
+        id: whitelistItem.id
+      },
+      refetchQueries: [{
+        query: GetWhitelistItems,
+        variables: { category: this.category },
+      }],
+    }).subscribe();
+  }
 }

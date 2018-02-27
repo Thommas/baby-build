@@ -1,13 +1,15 @@
 <app-whitelist-form-cmp [category]="category"></app-whitelist-form-cmp>
-<mat-table #table [dataSource]="dataSource">
-  <ng-container matColumnDef="title">
-    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="required_age">
-    <mat-header-cell *matHeaderCellDef> Required minimum age </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.required_age}} </mat-cell>
-  </ng-container>
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+<div class="header row" fxLayout="row" fxLayoutAlign="start center">
+  <div fxFlex="60" i18n>whitelist.list.header.title</div>
+  <div fxFlex="30" i18n>whitelist.list.header.required_age</div>
+  <div fxFlex="10" i18n></div>
+</div>
+<div class="row" *ngFor="let whitelistItem of whitelistItems" fxLayout="row" fxLayoutAlign="start center">
+  <div fxFlex="60">{{ whitelistItem.title }}</div>
+  <div fxFlex="30">{{ whitelistItem.required_age }}</div>
+  <div fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
+    <button class="delete" mat-icon-button color="warn" (click)="deleteWhitelistItem(whitelistItem)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

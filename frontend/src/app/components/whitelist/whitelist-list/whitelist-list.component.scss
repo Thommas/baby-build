@@ -1,0 +1,18 @@
+.header {
+  color: grey;
+  border-bottom: 1px solid #cccccc;
+}
+
+.row {
+  height: 40px;
+  border-bottom: 1px solid #cccccc;
+
+  button.delete {
+    display: none;
+  }
+  &:hover {
+    button.delete {
+      display: block;
+    }
+  }
+}

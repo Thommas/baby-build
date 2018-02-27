@@ -12,16 +12,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule,
-  MatCardModule,
-  MatIconModule,
   MatFormFieldModule,
-  MatTableModule,
+  MatIconModule,
   MatInputModule,
-  MatProgressBarModule,
-  MatSidenavModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule
+  MatTabsModule
 } from '@angular/material';
 
 import {
@@ -39,16 +33,10 @@ import {
     FlexLayoutModule,
     routing,
     MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatTableModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
-    MatProgressBarModule,
-    MatSidenavModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule
+    MatTabsModule
   ],
   declarations: [
     WhitelistFormComponent,

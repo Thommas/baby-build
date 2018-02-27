@@ -41,6 +41,7 @@
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "rxjs": "^5.5.6",
+    "sweetalert2": "^7.12.15",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
