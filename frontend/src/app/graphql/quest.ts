@@ -8,7 +8,7 @@
 
 import gql from 'graphql-tag';
 
-const CreateQuestMutation = gql`
+export const CreateQuestMutation = gql`
   mutation CreateQuest(
     $title: String!
     $build_id: String!

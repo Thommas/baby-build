@@ -11,6 +11,7 @@ const Build = `
     id: String!
     title: String
     description: String
+    child: Child
     quests: [Quest]
   }
   type Query {
@@ -21,6 +22,7 @@ const Build = `
     createBuild(
       title: String!
       description: String!
+      child_id: String!
     ): Build
     updateBuild(
       id: ID!

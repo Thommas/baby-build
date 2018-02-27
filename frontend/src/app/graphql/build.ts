@@ -13,16 +13,23 @@ export const GetBuilds = gql`
     builds {
       id
       title
+      child {
+        nickname
+      }
     }
   }
 `;
 
 export const CreateBuildMutation = gql`
   mutation CreateBuild(
-    $name: String!
+    $title: String!
+    $description: String!
+    $child_id: String!
   ) {
-    createChild(
-      name: $name
+    createBuild(
+      title: $title
+      description: $description
+      child_id: $child_id
     ) {
       id
     }

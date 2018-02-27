@@ -25,13 +25,12 @@ export class BuildCreateComponent {
    * Constructor
    */
   constructor(private router: Router, private apollo: Apollo) {
-    this.build = {
-      name: ''
-    };
+    this.build = {};
   }
 
   submit() {
     let build = clone(this.build);
+    build.child_id = 1;
     this.apollo.mutate({
       mutation: CreateBuildMutation,
       variables: {

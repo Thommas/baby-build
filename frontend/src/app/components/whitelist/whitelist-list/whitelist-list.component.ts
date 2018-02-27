@@ -45,9 +45,7 @@ export class WhitelistListComponent implements OnInit {
       .subscribe(({ data, loading }) => {
         this.loading = loading;
         this.whitelistItems = data.whitelistItems;
-        console.log(this.whitelistItems);
         this.dataSource = new MatTableDataSource<Element>(this.whitelistItems);
-        console.log(this.dataSource);
       });
   }
 }

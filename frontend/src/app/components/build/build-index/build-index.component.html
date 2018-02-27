@@ -8,8 +8,8 @@
   </div>
   <div fxLayout="column">
     <mat-card *ngFor="let build of builds">
-      <mat-card-title>Leo</mat-card-title>
-      <mat-card-subtitle>Engineer</mat-card-subtitle>
+      <mat-card-title>{{ build.title }}</mat-card-title>
+      <mat-card-subtitle>{{ build.child.nickname }}</mat-card-subtitle>
       <mat-card-actions>
         <button mat-button [routerLink]="['/build/' + build.id]">
           Select

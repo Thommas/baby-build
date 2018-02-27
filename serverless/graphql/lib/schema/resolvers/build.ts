@@ -7,6 +7,7 @@
  */
 
 import * as dbBuild from '../../dynamo/build';
+import * as dbChild from '../../dynamo/child';
 import * as dbQuest from '../../dynamo/quest';
 
 export default {
@@ -20,6 +21,7 @@ export default {
     deleteBuild: (_, args) => dbBuild.deleteBuild(args),
   },
   Build: {
+    child: build => dbChild.getChildById(build.child_id),
     quests: build => dbQuest.getQuestsByBuild(build.id),
   },
 };

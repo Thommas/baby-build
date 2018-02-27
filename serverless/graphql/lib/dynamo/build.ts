@@ -52,8 +52,8 @@ export function createBuild(args) {
     Item: {
       id: nanoid(12),
       title: args.title,
-      child: args.child,
       description: args.description,
+      child_id: args.child_id,
     },
   };
 

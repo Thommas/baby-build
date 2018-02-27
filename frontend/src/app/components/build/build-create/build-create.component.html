@@ -9,14 +9,28 @@
     <mat-card-title fxLayout="row">
       Add build information
     </mat-card-title>
+    <mat-divider></mat-divider>
     <mat-card-content fxLayout="row">
       <div fxLayout="row" fxFlex="50" fxLayoutWrap>
         <mat-form-field>
-          <input matInput placeholder="Build name"
-                 [(ngModel)]="build.name" name="name">
+          <input matInput placeholder="Build title"
+                 [(ngModel)]="build.title" name="title">
+        </mat-form-field>
+        <mat-form-field fxFill>
+         <textarea matInput
+                   placeholder="build.description" i18n-placeholder
+                   matTextareaAutosize
+                   matAutosizeMinRows="4"
+                   matAutosizeMaxRows="8"
+                   [(ngModel)]="build.description"
+                   name="description"></textarea>
         </mat-form-field>
       </div>
-      <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around  center">
+      <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <img src="https://www.shareicon.net/download/2016/06/25/786542_people.svg"/>
+          <span i18n>child_create.boy</span>
+        </div>
       </div>
     </mat-card-content>
     <mat-divider></mat-divider>

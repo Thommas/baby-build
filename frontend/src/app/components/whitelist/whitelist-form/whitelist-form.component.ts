@@ -7,7 +7,8 @@
  */
 
 import { clone } from 'lodash';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import {
@@ -22,7 +23,12 @@ import {
   styleUrls: ['./whitelist-form.component.scss']
 })
 export class WhitelistFormComponent {
+  @ViewChild('whitelistItemForm') whitelistItemForm: any;
   @Input() category: string;
+  requiredAgeControl: FormControl = new FormControl('', [
+    Validators.min(0),
+    Validators.max(25)
+  ])
   whitelistItem: any;
   loading: boolean;
 
@@ -31,6 +37,8 @@ export class WhitelistFormComponent {
   }
 
   submit() {
+    console.log('whitelistItemForm', this.whitelistItemForm.valid);
+    return;
     let whitelistItem = clone(this.whitelistItem);
     whitelistItem.category = this.category;
     this.apollo.mutate({
