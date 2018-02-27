@@ -20,6 +20,7 @@ import {
 
 import {
   routing,
+  WhitelistEditComponent,
   WhitelistFormComponent,
   WhitelistIndexComponent,
   WhitelistListComponent
@@ -39,9 +40,13 @@ import {
     MatTabsModule
   ],
   declarations: [
+    WhitelistEditComponent,
     WhitelistFormComponent,
     WhitelistIndexComponent,
     WhitelistListComponent
+  ],
+  entryComponents: [
+    WhitelistEditComponent
   ]
 })
 export class WhitelistModule {

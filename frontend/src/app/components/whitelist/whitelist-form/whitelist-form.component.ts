@@ -6,14 +6,13 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { clone } from 'lodash';
-import { Component, Input, ViewChild } from '@angular/core';
+import { clone, isEmpty } from 'lodash';
+import { Component, Input, ViewChild, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import {
   CreateWhitelistItemMutation,
-  UpdateWhitelistItemMutation,
   GetWhitelistItems
 } from '../../../graphql';
 
@@ -22,9 +21,10 @@ import {
   templateUrl: './whitelist-form.component.html',
   styleUrls: ['./whitelist-form.component.scss']
 })
-export class WhitelistFormComponent {
-  formGroup: FormGroup;
+export class WhitelistFormComponent implements OnChanges {
+  @Input() whitelistItem: any;
   @Input() category: string;
+  formGroup: FormGroup;
   whitelistItem: any;
   loading: boolean;
 
@@ -40,9 +40,23 @@ export class WhitelistFormComponent {
         Validators.max(25)
       ])
     });
+    this.formGroup.setValue({
+      title: '',
+      required_age: 12
+    });
+  }
+
+  ngOnChanges() {
+    if (!isEmpty(this.whitelistItem)) {
+      this.formGroup.setValue({
+        title: this.whitelistItem.title,
+        required_age: this.whitelistItem.required_age
+      });
+    }
   }
 
   submit() {
+    console.log('whitelistItem', this.whitelistItem)
     if (!this.formGroup.valid) {
       return;
     }

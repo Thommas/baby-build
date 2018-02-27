@@ -7,11 +7,11 @@
   height: 40px;
   border-bottom: 1px solid #cccccc;
 
-  button.delete {
+  button {
     display: none;
   }
   &:hover {
-    button.delete {
+    button {
       display: block;
     }
   }

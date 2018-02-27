@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="start center">
   <mat-form-field>
     <input matInput placeholder="Title"
            formControlName="title">
@@ -7,7 +7,7 @@
     <input matInput placeholder="Minimum required age"
            type="number" formControlName="required_age">
   </mat-form-field>
-  <button mat-button (click)="submit()">
+  <button mat-raised-button color="primary" (click)="submit()">
     Submit
   </button>
 </form>

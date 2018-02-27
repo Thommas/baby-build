@@ -8,6 +8,9 @@
   <div fxFlex="60">{{ whitelistItem.title }}</div>
   <div fxFlex="30">{{ whitelistItem.required_age }}</div>
   <div fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
+    <button class="edit" mat-icon-button color="primary" (click)="editWhitelistItem(whitelistItem)">
+      <mat-icon>mode_edit</mat-icon>
+    </button>
     <button class="delete" mat-icon-button color="warn" (click)="deleteWhitelistItem(whitelistItem)">
       <mat-icon>delete</mat-icon>
     </button>

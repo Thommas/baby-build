@@ -7,7 +7,7 @@
  */
 
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { ContactDialogComponent } from '../contact-dialog/contact-dialog.component';
 
 @Component({
@@ -16,19 +16,11 @@ import { ContactDialogComponent } from '../contact-dialog/contact-dialog.compone
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
-  animal: any;
-  name: any;
-
-  constructor(public dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {}
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(ContactDialogComponent, {
-      data: { name: this.name, animal: this.animal }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+    const dialogRef = this.dialog.open(ContactDialogComponent, {
+      data: {}
     });
   }
 }

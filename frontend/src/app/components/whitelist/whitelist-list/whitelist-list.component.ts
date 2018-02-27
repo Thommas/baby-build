@@ -10,8 +10,10 @@ import swal from 'sweetalert2'
 import { clone } from 'lodash';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import { GetWhitelistItems, DeleteWhitelistItem } from '../../../graphql';
+import { WhitelistEditComponent } from '../whitelist-edit/whitelist-edit.component'
 
 @Component({
   selector: 'app-whitelist-list-cmp',
@@ -26,7 +28,8 @@ export class WhitelistListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private apollo: Apollo
+    private apollo: Apollo,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -45,6 +48,12 @@ export class WhitelistListComponent implements OnInit {
         this.loading = loading;
         this.whitelistItems = data.whitelistItems;
       });
+  }
+
+  editWhitelistItem(whitelistItem) {
+    const dialogRef = this.dialog.open(WhitelistEditComponent, {
+      data: whitelistItem
+    });
   }
 
   deleteWhitelistItem(whitelistItem) {
