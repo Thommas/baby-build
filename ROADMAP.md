@@ -4,10 +4,15 @@ Roadmap
 Short term
 ----------
 
-- Finish contact form with google captcha and lambda
 - Implement add/remove/edit whitelist
 - Implement add/remove/edit quest
+- Implement select with pictures for child and build forms
 - Design calendar for build
+
+
+Start implementing gamification
+-------------------------------
+
 - Secure lambda with auth0
 - Auth0 register should create User entity in DynamoDB
 - Implement xp and level to unlock calendar
@@ -16,6 +21,7 @@ Short term
 Mid term
 --------
 
+- Finish contact form with google captcha and lambda
 - Add unit tests
 - Add generic fields (createdAt, updatedAt) to all entities
 - Finish customizing homepage pictures
@@ -178,6 +184,7 @@ Other
   They should know how to put limits.
   childs mimics parent behavior, it's important to show a good example.
 - In Japan they get money for high grades
+- Indicates when a feature is inspired from a videogame (Path of exile build, FF15 photos)
 
 
 Links

@@ -8,7 +8,7 @@
 
 import { clone } from 'lodash';
 import { Component, Input, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import {
@@ -23,23 +23,30 @@ import {
   styleUrls: ['./whitelist-form.component.scss']
 })
 export class WhitelistFormComponent {
-  @ViewChild('whitelistItemForm') whitelistItemForm: any;
+  formGroup: FormGroup;
   @Input() category: string;
-  requiredAgeControl: FormControl = new FormControl('', [
-    Validators.min(0),
-    Validators.max(25)
-  ])
   whitelistItem: any;
   loading: boolean;
 
   constructor(private router: Router, private apollo: Apollo) {
     this.whitelistItem = {};
+    this.formGroup = new FormGroup({
+      title: new FormControl('', [
+        Validators.required
+      ]),
+      required_age: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(25)
+      ])
+    });
   }
 
   submit() {
-    console.log('whitelistItemForm', this.whitelistItemForm.valid);
-    return;
-    let whitelistItem = clone(this.whitelistItem);
+    if (!this.formGroup.valid) {
+      return;
+    }
+    let whitelistItem = clone(this.formGroup.value);
     whitelistItem.category = this.category;
     this.apollo.mutate({
       mutation: CreateWhitelistItemMutation,
@@ -50,8 +57,6 @@ export class WhitelistFormComponent {
         query: GetWhitelistItems,
         variables: { category: this.category },
       }],
-    }).subscribe(
-      res => {}
-    );
+    }).subscribe();
   }
 }

@@ -16,5 +16,5 @@ Third party
 
 - AWS Lambda
 - AWS DynamoDB
-- Algolia
 - Auth0
+- Google reCaptcha
