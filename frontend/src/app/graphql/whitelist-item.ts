@@ -8,6 +8,16 @@
 
 import gql from 'graphql-tag';
 
+export const GetWhitelistItems = gql`
+  query GetWhitelistItems($category: String!) {
+    whitelistItems(category: $category) {
+      id
+      title
+      required_age
+    }
+  }
+`;
+
 export const CreateWhitelistItemMutation = gql`
   mutation CreateWhitelistItem(
     $title: String!
@@ -50,16 +60,6 @@ export const DeleteWhitelistItem = gql`
       id: $id
     ) {
       id
-    }
-  }
-`;
-
-export const GetWhitelistItems = gql`
-  query GetWhitelistItems($category: String!) {
-    whitelistItems(category: $category) {
-      id
-      title
-      required_age
     }
   }
 `;

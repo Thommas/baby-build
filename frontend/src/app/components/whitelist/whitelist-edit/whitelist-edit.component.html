@@ -1,1 +1,5 @@
-<app-whitelist-form-cmp [whitelistItem]="data"></app-whitelist-form-cmp>
+<app-whitelist-form-cmp
+  [whitelistItem]="data.whitelistItem"
+  [category]="data.category"
+  (success)="onSuccess($event)"
+></app-whitelist-form-cmp>

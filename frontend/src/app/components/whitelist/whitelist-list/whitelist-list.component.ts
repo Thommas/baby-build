@@ -52,7 +52,10 @@ export class WhitelistListComponent implements OnInit {
 
   editWhitelistItem(whitelistItem) {
     const dialogRef = this.dialog.open(WhitelistEditComponent, {
-      data: whitelistItem
+      data: {
+        whitelistItem: whitelistItem,
+        category: this.category
+      }
     });
   }
 

@@ -19,4 +19,8 @@ export class WhitelistEditComponent {
     public dialogRef: MatDialogRef<WhitelistEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
+  onSuccess() {
+    this.dialogRef.close();
+  }
 }

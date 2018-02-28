@@ -27,6 +27,7 @@ const WhitelistItem = `
       id: ID!
       title: String
       required_age: Int
+      category: String
     ): WhitelistItem
     deleteWhitelistItem(
       id: ID!
