@@ -23,7 +23,7 @@ import {
   styleUrls: ['./whitelist-form.component.scss']
 })
 export class WhitelistFormComponent implements OnChanges {
-  @Output('success') success: EventEmitter = new EventEmitter<any>();
+  @Output('success') success: EventEmitter<any> = new EventEmitter<any>();
   @Input() whitelistItem: any;
   @Input() category: string;
   formGroup: FormGroup;

@@ -1,47 +1,74 @@
-<mat-progress-bar
-  class="loading-bar"
-  color="accent"
-  mode="determinate">
-</mat-progress-bar>
-<mat-toolbar fxLayout="row" fxLayoutAlign="center center">
-  <header class="container" fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
-      <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
-      <div fxLayout="row" *ngIf="authService.isAuthenticated()">
-        <a href="javascript:;" [routerLink]="['child']" i18n>nav.family</a>
-        <a href="javascript:;" [routerLink]="['build']" i18n>nav.build</a>
-        <a href="javascript:;" [routerLink]="['whitelist']" i18n>nav.whitelist</a>
+<section class="app-content">
+  <mat-progress-bar
+    class="loading-bar"
+    color="accent"
+    mode="determinate">
+  </mat-progress-bar>
+  <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
+    <header class="container" fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
+        <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
+        <div fxLayout="row" *ngIf="authService.isAuthenticated()">
+          <a href="javascript:;" [routerLink]="['child']" i18n>nav.family</a>
+          <a href="javascript:;" [routerLink]="['build']" i18n>nav.build</a>
+          <a href="javascript:;" [routerLink]="['whitelist']" i18n>nav.whitelist</a>
+        </div>
       </div>
-    </div>
-    <div class="container" fxFlex="30" fxLayout="row" fxLayoutAlign="end center"
-         *ngIf="authService.isAuthenticated()">
-      <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
+      <div class="container" fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button color="primary" (click)="authService.login()"
+                *ngIf="!authService.isAuthenticated()" i18n>
+          nav.login
+        </button>
+        <button mat-button color="primary" (click)="authService.logout()"
+                *ngIf="authService.isAuthenticated()" i18n>
+          nav.logout
+        </button>
+      </div>
+    </header>
+  </mat-toolbar>
+  <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center" *ngIf="authService.isAuthenticated()">
+    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+        <img src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png" width="50" height="50"/>
+      </div>
+      <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">
         <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
-          <span>60/100</span>
+          <span>20/100</span>
           <span>Level 1</span>
         </div>
         <mat-progress-bar mode="determinate"
                           value="60"
-                          color="accent"
-                          *ngIf="authService.isAuthenticated()">
+                          color="primary">
         </mat-progress-bar>
       </div>
     </div>
-    <div class="container" fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
-      <button mat-button color="primary" (click)="authService.login()"
-              *ngIf="!authService.isAuthenticated()" i18n>
-        nav.login
-      </button>
-      <button mat-button color="primary" (click)="authService.logout()"
-              *ngIf="authService.isAuthenticated()" i18n>
-        nav.logout
-      </button>
+    <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
+      <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+        <span>40/100</span>
+        <span>Level 1</span>
+      </div>
+      <mat-progress-bar mode="determinate"
+                        value="60"
+                        color="accent"
+                        *ngIf="authService.isAuthenticated()">
+      </mat-progress-bar>
     </div>
-  </header>
-</mat-toolbar>
-<div class="app-content">
-  <router-outlet></router-outlet>
-</div>
+    <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
+      <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+        <span>60/100</span>
+        <span>Level 1</span>
+      </div>
+      <mat-progress-bar mode="determinate"
+                        value="60"
+                        color="warn"
+                        *ngIf="authService.isAuthenticated()">
+      </mat-progress-bar>
+    </div>
+  </mat-toolbar>
+  <div class="router-content">
+    <router-outlet></router-outlet>
+  </div>
+</section>
 <footer fxLayout="row" fxFill fxLayoutAlign="space-around center">
   <div fxLayout="column" fxLayoutAlign="start start">
     <button mat-button class="locale-button" [matMenuTriggerFor]="localeMenu">

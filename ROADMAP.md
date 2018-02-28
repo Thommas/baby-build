@@ -4,7 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Implement add/remove/edit whitelist
 - Implement add/remove/edit quest
 - Implement select with pictures for child and build forms
 - Design calendar for build
@@ -54,43 +53,35 @@ Entities
 ### User (parent)
 
 Login
-XP
-Level
 
 ### Child
 
-A child has a name, birthdate, xp and level, laziness gauge.
+A child has a name, gender and birthdate.
 
 ### Build
 
 A build is the following:
 - For each month a list of quests
-- Rewards unlock progressively based on month and child xp/level or attributes
-- Setting goals for each month and each year
+- Rewards unlock progressively based on month and child attributes
 
-### Month
+### Goal
 
-- Past will record stats and consolidate build
-- Present will present stuff to introduce to the child
-- Future will plan
-
-### Laziness
-
-Monitor each month the amount of laziness of your child.
-We want to prevent passively watching TV or youtube for instance.
-Same for video game with empty gameplay (Candy crush)
+Can create as many goal as we want for each month/year.
+The goal is a milestone to completing the full build.
 
 ### Quest
 
-- Main quest
-- Bonus quests
-- Hidden quests
-
+All quests must help follow the build goals while giving alternative opportunities.
 The goal is to encourage curiosity.
 
-Type of quest:
+Types:
+- Main: mandatory quest that the child should complete
+- Bonus: optional the child can skip it
+- Hidden: quest hidden to the child but that he might complete without knowing it
 
-1) 3 choices
+A quest should always have 3 choices.
+But we might have to define the choices later.
+We don't know in advance which sport club the child might be able to join.
 
 Examples:
 - At 6 year old pick a book (dinosaur, planets, flowers)
@@ -150,6 +141,21 @@ Permanent reward system with gauge
 
 9) The child can ask for a reward
 
+### Laziness
+
+Monitor each month the amount of laziness of your child.
+We want to prevent passively watching TV or youtube for instance.
+Same for video game with empty gameplay (Candy crush)
+
+### Gamification
+
+For the folllowing entities:
+- User
+- Child
+- Build
+
+Store xp/level.
+
 
 ### Build a list of danger
 
@@ -195,7 +201,7 @@ https://www.reddit.com/r/Parenting/comments/64da9v/child_is_addicted_to_video_ga
 https://www.reddit.com/r/Parenting/comments/53vl3e/precious_moment_after_finishing_our_first_video/
 http://www.atlantico.fr/decryptage/protegezvosgosses-nikita-belluci-star-x-qui-alerte-parents-francais-inconscience-face-effarante-consommation-porno-enfants-et-3289001.html
 https://thenextweb.com/virtual-reality/2018/02/21/how-a-16-year-old-in-a-village-in-france-taught-the-world-to-build-vr-headsets-for-100/
-https://www.click2houston.com/news/investigates/danger-warning-about-popular-virtual-world-for-kids
+https://www.click2houston.com/news/investigates/danger-warning-about-popular-virtual-world-for-childs
 
 
 Storyboard

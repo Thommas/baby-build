@@ -10,10 +10,11 @@
   flex-direction: column;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
+  overflow-x: hidden;
 }
 
 .app-content {
-  min-height: 500px;
+  min-height: 100vh;
 }
 
 mat-progress-bar.loading-bar {

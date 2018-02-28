@@ -18,7 +18,12 @@ import { AuthService } from '../../../services';
 export class WhitelistIndexComponent {
   categories: any = [
     'activity',
+    'sport',
     'book',
+    'movie',
+    'tvshow',
+    'anime',
+    'video',
     'videogame',
     'toy'
   ]

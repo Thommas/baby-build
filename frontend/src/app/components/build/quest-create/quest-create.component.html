@@ -3,19 +3,42 @@
     <mat-icon>keyboard_arrow_left</mat-icon>
   </button>
 </mat-toolbar>
-<form #childForm="ngForm">
+<form class="container" #childForm="ngForm">
   <mat-card>
     <mat-card-title fxLayout="row">
       Create a new quest
     </mat-card-title>
-    <mat-card-content fxLayout="row">
-      <div fxLayout="row" fxFlex="50" fxLayoutWrap>
-        <mat-form-field>
-          <input matInput placeholder="Quest title"
-                 [(ngModel)]="quest.title" name="title">
-        </mat-form-field>
+    <mat-card-content fxLayout="column">
+      <div fxLayout="row">
+        <div fxLayout="row" fxFlex="50" fxLayoutWrap>
+          <mat-form-field>
+            <input matInput placeholder="Quest title"
+                   [(ngModel)]="quest.title" name="title">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
+          TYPE OF QUEST HERE
+        </div>
       </div>
-      <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
+      <div>
+        <div fxLayout="row" fxFlex="30" fxLayoutWrap>
+          <mat-form-field>
+            <input matInput placeholder="First possibility"
+                   [(ngModel)]="quest.possibility1" name="title">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxFlex="30" fxLayoutWrap>
+          <mat-form-field>
+            <input matInput placeholder="Second possibility"
+                   [(ngModel)]="quest.possibility2" name="title">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxFlex="30" fxLayoutWrap>
+          <mat-form-field>
+            <input matInput placeholder="Third possibility"
+                   [(ngModel)]="quest.possibility3" name="title">
+          </mat-form-field>
+        </div>
       </div>
     </mat-card-content>
     <mat-divider></mat-divider>
