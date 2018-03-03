@@ -6,8 +6,13 @@
   -webkit-box-direction: normal;
   place-content: center space-around;
   align-items: center;
+  width: 100%;
+}
+
+.row {
+  margin: 30px;
 }
 
 mat-card {
-  min-height: 250px;
+  min-height: 330px;
 }

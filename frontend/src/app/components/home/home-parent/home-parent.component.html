@@ -1,26 +1,26 @@
-<div class="container">
+<mat-toolbar fxLayout="row" fxLayoutAlign="center center">
   <h2>How to use the platform?</h2>
-  <div fxLayout="row" fxLayoutAlign="space-around start">
-    <mat-card fxFlex="30" fxLayout="column">
-      <mat-card-title>Manage your family</mat-card-title>
-      <mat-card-content fxFlex="100">Start by adding your first child</mat-card-content>
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button [routerLink]="['/child']" color="primary">Get started</button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card fxFlex="30" fxLayout="column">
-      <mat-card-title>Manage builds</mat-card-title>
-      <mat-card-content fxFlex="100">For each child, create as many build as you want<br>Builds define your long term goal</mat-card-content>
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button [routerLink]="['/build']" color="primary">Manage builds</button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card fxFlex="30" fxLayout="column">
-      <mat-card-title>Whitelist</mat-card-title>
-      <mat-card-content fxFlex="100">The whitelist will define which contents you want your children to access</mat-card-content>
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button [routerLink]="['/whitelist']" color="primary">Access</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+</mat-toolbar>
+<div class="row" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-card fxFlex="30" fxLayout="column">
+    <mat-card-title>Whitelist</mat-card-title>
+    <mat-card-content fxFlex="100">The whitelist will define which contents you want your children to access</mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button [routerLink]="['/whitelist']" color="primary">Access</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card fxFlex="30" fxLayout="column">
+    <mat-card-title>Manage your family</mat-card-title>
+    <mat-card-content fxFlex="100">Start by adding your first child</mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button [routerLink]="['/child']" color="primary">Get started</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card fxFlex="30" fxLayout="column">
+    <mat-card-title>Manage builds</mat-card-title>
+    <mat-card-content fxFlex="100">For each child, create as many build as you want<br>Builds define your long term goal</mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button [routerLink]="['/build']" color="primary">Manage builds</button>
+    </mat-card-actions>
+  </mat-card>
 </div>

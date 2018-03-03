@@ -9,20 +9,19 @@
   <div fxLayout="column">
     <mat-card *ngFor="let child of children">
       <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
-        {{ child.nickname }}
-        <button mat-icon-button
-                [matMenuTriggerFor]="actionsMenu"
-                [matMenuTriggerData]="{child: child}">
-          <mat-icon>more_vert</mat-icon>
-        </button>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <img src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png" width="50" height="50"/>
+          {{ child.nickname }}
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <button class="edit" mat-icon-button color="primary" [routerLink]="['/child/update/' + child.id]">
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+          <button class="delete" mat-icon-button color="warn" [routerLink]="['/child/delete/' + child.id]">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </mat-card-title>
     </mat-card>
   </div>
 </div>
-<mat-menu #actionsMenu="matMenu">
-  <ng-template matMenuContent let-child="child">
-    <button mat-menu-item [routerLink]="['/child/update/' + child.id]">Edit</button>
-    <button mat-menu-item [routerLink]="['/child/delete/' + child.id]"
-            *ngIf="child.level === 1">Remove</button>
-  </ng-template>
-</mat-menu>
