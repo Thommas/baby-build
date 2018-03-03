@@ -2,12 +2,14 @@
 
 # environment variables
 /src/environments/environment.ts
+/src/environments/environment.prod.ts
 
 # compiled output
 /dist
 /dist-server
 /tmp
 /out-tsc
+/public
 
 # dependencies
 /node_modules

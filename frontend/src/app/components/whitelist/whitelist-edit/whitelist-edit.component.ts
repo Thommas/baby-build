@@ -20,7 +20,7 @@ export class WhitelistEditComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  onSuccess() {
+  onSuccess(data) {
     this.dialogRef.close();
   }
 }
