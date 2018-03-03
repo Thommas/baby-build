@@ -1,0 +1,22 @@
+<div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+  <img src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png" width="50" height="50"/>
+</div>
+<div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+    <span>60/100</span>
+    <span>Level 1</span>
+  </div>
+  <mat-progress-bar mode="determinate"
+                    value="60"
+                    color="warn"
+                    *ngIf="authService.isAuthenticated()">
+  </mat-progress-bar>
+</div>
+<button mat-icon-button [matMenuTriggerFor]="buildMenu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #buildMenu="matMenu">
+  <button mat-menu-item [routerLink]="['build']" i18n>
+    nav.build
+  </button>
+</mat-menu>

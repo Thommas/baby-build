@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  place-content: center space-around;
+  align-items: center;
+}

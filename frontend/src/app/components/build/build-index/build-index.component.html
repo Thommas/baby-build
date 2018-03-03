@@ -8,13 +8,21 @@
   </div>
   <div fxLayout="column">
     <mat-card *ngFor="let build of builds">
-      <mat-card-title>{{ build.title }}</mat-card-title>
-      <mat-card-subtitle>{{ build.child.nickname }}</mat-card-subtitle>
-      <mat-card-actions>
-        <button mat-button [routerLink]="['/build/' + build.id]">
-          Select
-        </button>
-      </mat-card-actions>
+      <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <img src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png" width="50" height="50"/>
+          {{ build.title }}
+          {{ build.child.nickname }}
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <button class="edit" mat-icon-button color="primary" [routerLink]="['/build/update/' + build.id]">
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+          <button class="delete" mat-icon-button color="warn" [routerLink]="['/build/delete/' + build.id]">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-title>
     </mat-card>
   </div>
 </div>

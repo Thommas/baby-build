@@ -32,6 +32,7 @@ import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { BuildModule } from './components/build/build.module';
 import { ChildModule } from './components/child/child.module';
+import { HeaderModule } from './components/header/header.module';
 import { HomeModule } from './components/home/home.module';
 import { ParentModule } from './components/parent/parent.module';
 import { SecurityModule } from './components/security/security.module';
@@ -68,6 +69,7 @@ import {
     MatTooltipModule,
     BuildModule,
     ChildModule,
+    HeaderModule,
     HomeModule,
     ParentModule,
     SecurityModule,
