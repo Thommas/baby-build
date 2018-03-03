@@ -7,7 +7,7 @@
  * - window
  * - document
  *
- * @author Thomas Bullier <thomas@cream-touch.com>
+ * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { Injectable } from '@angular/core';
