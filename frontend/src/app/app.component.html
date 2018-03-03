@@ -6,10 +6,10 @@
   </mat-progress-bar>
   <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
     <header class="container" fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
+      <div fxFlex="100" fxLayout="row" [fxLayoutAlign]="authService.isAuthenticated() ? 'center center' : 'start center'">
         <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
       </div>
-      <div fxFlex="100" *ngIf="!authService.isAuthenticated()">
+      <div fxFlex="100" *ngIf="!authService.isAuthenticated()" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button color="primary" (click)="authService.login()" i18n>
           nav.login
         </button>
@@ -38,8 +38,8 @@
         <button mat-menu-item [routerLink]="['whitelist']" i18n>
           nav.whitelist
         </button>
-        <button mat-menu-item (click)="authService.logout()" i18n>
-          nav.logout
+        <button mat-menu-item [routerLink]="['parent/edit']" i18n>
+          nav.profile
         </button>
       </mat-menu>
     </div>

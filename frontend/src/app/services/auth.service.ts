@@ -30,13 +30,13 @@ export class AuthService {
 
   public login() {
     this.lock.show();
-  };
+  }
 
   public isAuthenticated() {
     return localStorage.getItem('accessToken');
-  };
+  }
 
   public logout() {
     localStorage.removeItem('accessToken');
-  };
+  }
 }

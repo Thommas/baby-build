@@ -42,6 +42,7 @@ Deployment
 Bonus ideas
 -----------
 
+- Child could have a request list that would go into whitelist if approved by parent
 - Messaging system for child
 Santa claus or to report a problem like a confessional
 The child needs to believe the message won't be read by his parents
