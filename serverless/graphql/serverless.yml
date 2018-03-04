@@ -1,4 +1,4 @@
-service: graphql-api
+service: pathofchild-graphql
 
 plugins:
   - serverless-plugin-typescript
@@ -52,7 +52,10 @@ provider:
     AUTH0_CLIENT_ID: "${self:custom.secrets.AUTH0_CLIENT_ID}"
     AUTH0_JWKS_URI: "${self:custom.secrets.AUTH0_JWKS_URI}"
     AUTH0_JWKS_KID: "${self:custom.secrets.AUTH0_JWKS_KID}"
+
 functions:
+  customAuthorizer:
+    handler: lib/handler.auth
   graphql:
     handler: lib/handler.graphql
     events:
@@ -61,8 +64,6 @@ functions:
           method: post
           cors: true
           authorizer: customAuthorizer
-  customAuthorizer:
-    handler: lib/handler.auth
 
 resources:
   Resources:
