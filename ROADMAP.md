@@ -8,12 +8,6 @@ Short term
 - Implement add/remove/edit quest
 - Implement select with pictures for child and build forms
 - Design calendar for build
-
-
-Start implementing gamification
--------------------------------
-
-- Secure lambda with auth0
 - Auth0 register should create User entity in DynamoDB
 - Implement xp and level to unlock calendar
 

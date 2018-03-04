@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BrowserService } from './services';
 
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(public router: Router, private browserService: BrowserService, private elementRef: ElementRef) {}
+  constructor(public router: Router, private browserService: BrowserService) {}
 
   ngOnInit() {
     if (this.router.events) {
