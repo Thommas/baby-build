@@ -7,45 +7,39 @@
  */
 
 import { clone } from 'lodash';
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { CreateQuestMutation } from '../../../graphql';
+import { BuildService } from '../../../services';
 
 @Component({
   selector: 'app-quest-create-cmp',
   templateUrl: './quest-create.component.html',
   styleUrls: ['./quest-create.component.scss']
 })
-export class QuestCreateComponent implements OnInit {
+export class QuestCreateComponent {
   quest: any;
-  buildId: number;
   loading: boolean;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private apollo: Apollo
+    private apollo: Apollo,
+    private buildService: BuildService,
+    private router: Router
   ) {
     this.quest = {};
   }
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.buildId = params.id;
-    });
-  }
-
   submit() {
     let quest = clone(this.quest);
-    quest.build_id = this.buildId;
+    quest.build_id = this.buildService.build.id;
     this.apollo.mutate({
       mutation: CreateQuestMutation,
       variables: {
         ...quest
       }
     }).subscribe(
-      res => this.router.navigate(['/build/' + this.buildId])
+      res => this.router.navigate(['/build/' + this.buildService.build.id])
     );
   }
 }

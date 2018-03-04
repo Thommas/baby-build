@@ -7,6 +7,7 @@
  */
 /* tslint:disable:no-unused-variable */
 
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
@@ -25,6 +26,9 @@ describe('PageNotFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ],
       imports: [
         FlexLayoutModule,
         BrowserAnimationsModule

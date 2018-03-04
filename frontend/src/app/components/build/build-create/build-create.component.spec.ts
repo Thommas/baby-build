@@ -10,17 +10,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import {
-  MatCardModule,
-  MatDividerModule,
-  MatIconModule,
-  MatToolbarModule,
-  MatFormFieldModule,
-  MatInputModule
-} from '@angular/material';
 import { Apollo } from 'apollo-angular';
-import { BuildCreateComponent } from './build-create.component';
 import { ApolloStub, RouterStub } from '../../../services'
+import { BuildCreateComponent } from './build-create.component';
 
 describe('BuildCreateComponent', () => {
   beforeEach(async(() => {
@@ -29,13 +21,7 @@ describe('BuildCreateComponent', () => {
         NO_ERRORS_SCHEMA
       ],
       imports: [
-        FormsModule,
-        MatCardModule,
-        MatDividerModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        MatInputModule
+        FormsModule
       ],
       declarations: [
         BuildCreateComponent
