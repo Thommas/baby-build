@@ -9,29 +9,4 @@
     <router-outlet></router-outlet>
   </div>
 </section>
-<footer fxLayout="row" fxFill fxLayoutAlign="space-around center">
-  <div fxLayout="column" fxLayoutAlign="start start">
-    <button mat-button class="locale-button" [matMenuTriggerFor]="localeMenu">
-       <span i18n>footer.locale</span>
-       <mat-icon>keyboard_arrow_down</mat-icon>
-    </button>
-  </div>
-  <div fxLayout="column" fxLayoutAlign="start start">
-    <a href="javascript:;" [routerLink]="['terms']" i18n>footer.terms</a>
-  </div>
-  <div fxLayout="column" fxLayoutAlign="start start">
-    Social icons
-  </div>
-  <div fxLayout="column" fxLayoutAlign="start start">
-    <a href="javascript:;" [routerLink]="['contact']" i18n>footer.contact</a>
-  </div>
-</footer>
-<mat-menu #childrenMenu="matMenu">
-  <button mat-menu-item [routerLink]="['/child']" i18n>nav.manage_children</button>
-</mat-menu>
-<mat-menu #localeMenu="matMenu">
-  <button mat-menu-item *ngFor="let locale of locales"
-          (click)="switchLocale(locale.value)">
-    {{ locale.label }}
-  </button>
-</mat-menu>
+<app-footer-cmp></app-footer-cmp>

@@ -6,40 +6,29 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, Inject, LOCALE_ID } from '@angular/core';
-
-import { AuthService, BrowserService, ChildService } from './services';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { BrowserService } from './services';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  locales = [
-    { value: 'en', label: 'English'},
-    { value: 'fr', label: 'Français'},
-    { value: 'ja', label: '日本語'}
-  ];
-
+export class AppComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(
-    @Inject(LOCALE_ID) private _locale: string,
-    public authService: AuthService,
-    private browserService: BrowserService,
-    public childService: ChildService
-  ) {
-  }
+  constructor(public router: Router, private browserService: BrowserService, private elementRef: ElementRef) {}
 
-  /**
-   * Switch to selected locale
-   */
-  switchLocale(locale: any) {
-    const window = this.browserService.window;
-    if (window && window.location) {
-      window.location.href = '/' + locale + '/';
+  ngOnInit() {
+    if (this.router.events) {
+      this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+          return;
+        }
+        this.browserService.document.documentElement.scrollTop = 0;
+      });
     }
   }
 }

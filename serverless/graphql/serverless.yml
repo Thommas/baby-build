@@ -62,6 +62,9 @@ functions:
           path: graphql
           method: post
           cors: true
+          authorizer: customAuthorizer
+  customAuthorizer:
+    handler: lib/handler.auth
 
 resources:
   Resources:

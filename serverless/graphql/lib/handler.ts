@@ -10,9 +10,6 @@ import { graphqlLambda } from 'graphql-server-lambda';
 import schema from './schema/schema';
 import jwt from 'jsonwebtoken';
 
-const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID
-const AUTH0_CLIENT_SECRET = process.env.AUTH0_CLIENT_SECRET
-
 const generatePolicy = (principalId, effect, resource) => {
   const authResponse = {}
   authResponse.principalId = principalId
@@ -30,7 +27,6 @@ const generatePolicy = (principalId, effect, resource) => {
   return authResponse
 }
 
-// Reusable Authorizer function, set on `authorizer` field in serverless.yml
 exports.auth = (event, context, callback) => {
   console.log('event', event)
   if (!event.authorizationToken) {
@@ -45,10 +41,10 @@ exports.auth = (event, context, callback) => {
     return callback('Unauthorized')
   }
   const options = {
-    audience: AUTH0_CLIENT_ID,
+    audience: process.env.AUTH0_CLIENT_ID,
   }
   // decode base64 secret. ref: http://bit.ly/2hA6CrO
-  const secret = new Buffer.from(AUTH0_CLIENT_SECRET, 'base64')
+  const secret = new Buffer.from(process.env.AUTH0_CLIENT_SECRET, 'base64')
   try {
     jwt.verify(tokenValue, secret, options, (verifyError, decoded) => {
       if (verifyError) {
