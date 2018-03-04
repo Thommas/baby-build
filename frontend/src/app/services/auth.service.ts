@@ -24,7 +24,7 @@ export class AuthService {
       environment.auth0.options
     );
     this.lock.on("authenticated", (authResult: any) => {
-      localStorage.setItem("accessToken", authResult.accessToken);
+      localStorage.setItem("accessToken", authResult.idToken);
     });
   }
 
@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   public isAuthenticated() {
-    return localStorage.getItem('accessToken');
+    return localStorage.getItem('accessToken') ? true : false;
   }
 
   public logout() {

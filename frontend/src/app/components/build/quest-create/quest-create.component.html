@@ -10,7 +10,7 @@
     </mat-card-title>
     <mat-card-content fxLayout="column">
       <div fxLayout="row">
-        <div fxLayout="row" fxFlex="50" fxLayoutWrap>
+        <div fxLayout="row wrap" fxFlex="50">
           <mat-form-field>
             <input matInput placeholder="Quest title"
                    [(ngModel)]="quest.title" name="title">
@@ -21,19 +21,19 @@
         </div>
       </div>
       <div>
-        <div fxLayout="row" fxFlex="30" fxLayoutWrap>
+        <div fxLayout="row wrap" fxFlex="30">
           <mat-form-field>
             <input matInput placeholder="First possibility"
                    [(ngModel)]="quest.possibility1" name="title">
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxFlex="30" fxLayoutWrap>
+        <div fxLayout="row wrap" fxFlex="30">
           <mat-form-field>
             <input matInput placeholder="Second possibility"
                    [(ngModel)]="quest.possibility2" name="title">
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxFlex="30" fxLayoutWrap>
+        <div fxLayout="row wrap" fxFlex="30">
           <mat-form-field>
             <input matInput placeholder="Third possibility"
                    [(ngModel)]="quest.possibility3" name="title">

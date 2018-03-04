@@ -41,6 +41,7 @@ import { StaticModule } from './components/static/static.module';
 import { WhitelistModule } from './components/whitelist/whitelist.module';
 import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
 import {
+  ApolloService,
   AuthGuardService,
   AuthService,
   BrowserService,
@@ -81,6 +82,7 @@ import {
   ],
   providers: [
     appRoutingProviders,
+    ApolloService,
     AuthGuardService,
     AuthService,
     BrowserService,
@@ -91,13 +93,5 @@ import {
   ]
 })
 export class AppModule {
-  constructor(
-    apollo: Apollo,
-    httpLink: HttpLink
-  ) {
-    apollo.create({
-      link: httpLink.create({ uri: 'http://localhost:4001/graphql' }),
-      cache: new InMemoryCache()
-    });
-  }
+  constructor(apolloService: ApolloService) {}
 }

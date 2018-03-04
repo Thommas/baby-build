@@ -8,7 +8,13 @@
 
 import { graphqlLambda } from 'graphql-server-lambda';
 import schema from './schema/schema';
-import jwt from 'jsonwebtoken';
+import { verify } from 'jsonwebtoken';
+import * as jwks from 'jwks-rsa';
+
+const jwksClient = jwks({
+  strictSsl: true,
+  jwksUri: process.env.AUTH0_JWKS_URI
+});
 
 const generatePolicy = (principalId, effect, resource) => {
   const authResponse = {}
@@ -34,30 +40,34 @@ exports.auth = (event, context, callback) => {
   }
 
   const tokenParts = event.authorizationToken.split(' ')
-  const tokenValue = tokenParts[1]
-
-  if (!(tokenParts[0].toLowerCase() === 'bearer' && tokenValue)) {
-    // no auth token!
+  if (tokenParts.length !== 2) {
     return callback('Unauthorized')
   }
+
+  const bearerValue = tokenParts[0]
+  const tokenValue = tokenParts[1]
+  if (!(bearerValue.toLowerCase() === 'bearer' && tokenValue)) {
+    return callback('Unauthorized')
+  }
+
   const options = {
     audience: process.env.AUTH0_CLIENT_ID,
+    algorithms: ['RS256']
   }
-  // decode base64 secret. ref: http://bit.ly/2hA6CrO
-  const secret = new Buffer.from(process.env.AUTH0_CLIENT_SECRET, 'base64')
   try {
-    jwt.verify(tokenValue, secret, options, (verifyError, decoded) => {
-      if (verifyError) {
-        console.log('verifyError', verifyError)
-        // 401 Unauthorized
-        console.log(`Token invalid. ${verifyError}`)
-        return callback('Unauthorized')
-      }
-      // is custom authorizer function
-      console.log('valid from customAuthorizer', decoded)
-      return callback(null, generatePolicy(decoded.sub, 'Allow', event.methodArn))
+    return jwksClient.getSigningKey(process.env.AUTH0_JWKS_KID, (err, key) => {
+      const signingKey = key.publicKey || key.rsaPublicKey;
+      verify(tokenValue, signingKey, options, (verifyError, decoded) => {
+        if (verifyError) {
+          console.log('verifyError', verifyError)
+          console.log(`Token invalid. ${verifyError}`)
+          return callback('Unauthorized')
+        }
+        console.log('valid from customAuthorizer', decoded)
+        return callback(null, generatePolicy(decoded.sub, 'Allow', event.methodArn))
+      })
     })
-   } catch (err) {
+  } catch (err) {
     console.log('catch error. Invalid token', err)
     return callback('Unauthorized')
   }
