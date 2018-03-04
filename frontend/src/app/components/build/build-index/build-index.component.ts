@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { GetBuilds } from '../../../graphql';
-import { ChildService } from '../../../services';
+import { BuildService } from '../../../services';
 
 @Component({
   selector: 'app-build-index-cmp',
@@ -25,7 +25,7 @@ export class BuildIndexComponent implements OnInit {
   constructor(
     private router: Router,
     private apollo: Apollo,
-    public childService: ChildService
+    public buildService: BuildService
   ) {}
 
   ngOnInit() {
@@ -44,7 +44,6 @@ export class BuildIndexComponent implements OnInit {
   }
 
   selectBuild(build) {
-    // this.childService.selectBuild(build);
-    this.router.navigate(['/']);
+    this.buildService.setBuild(build);
   }
 }

@@ -10,13 +10,16 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ChildService {
-  child: any;
-
-  constructor() {
-    this.child = null;
+  public setChild(child) {
+    localStorage.setItem('pathofexile_selected_child', JSON.stringify(child));
   }
 
-  public selectChild(child) {
-    this.child = child;
-  };
+  public get isChild() {
+    return localStorage.getItem('pathofexile_selected_child') ? true : false;
+  }
+
+  public get child() {
+    const childInStorage = localStorage.getItem('pathofexile_selected_child');
+    return JSON.parse(childInStorage);
+  }
 }

@@ -10,13 +10,16 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class BuildService {
-  build: any;
-
-  constructor() {
-    this.build = null;
+  public setBuild(build) {
+    localStorage.setItem('pathofexile_selected_build', JSON.stringify(build));
   }
 
-  public selectBuild(build) {
-    this.build = build;
-  };
+  public get isBuild() {
+    return localStorage.getItem('pathofexile_selected_build') ? true : false;
+  }
+
+  public get build() {
+    const buildInStorage = localStorage.getItem('pathofexile_selected_build');
+    return JSON.parse(buildInStorage);
+  }
 }

@@ -44,7 +44,6 @@ export class ChildIndexComponent implements OnInit {
   }
 
   selectChild(child) {
-    this.childService.selectChild(child);
-    this.router.navigate(['/']);
+    this.childService.setChild(child);
   }
 }

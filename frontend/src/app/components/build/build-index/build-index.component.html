@@ -10,9 +10,10 @@
     <mat-card *ngFor="let build of builds">
       <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
-          <img src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png" width="50" height="50"/>
-          {{ build.title }}
-          {{ build.child.nickname }}
+          <a href="javascript:;" (click)="selectBuild(build)" fxLayout="row" fxLayoutAlign="start center">
+            <img src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png" width="50" height="50"/>
+            {{ build.title }}
+          </a>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <button class="edit" mat-icon-button color="primary" [routerLink]="['/build/update/' + build.id]">

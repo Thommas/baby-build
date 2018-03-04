@@ -28,6 +28,7 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
+import { BuildService } from '../../services';
 
 import {
   routing,
@@ -65,6 +66,9 @@ import {
     BuildIndexComponent,
     BuildShowComponent,
     QuestCreateComponent
+  ],
+  providers: [
+    BuildService
   ]
 })
 export class BuildModule {

@@ -10,8 +10,10 @@
     <mat-card *ngFor="let child of children">
       <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
-          <img src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png" width="50" height="50"/>
-          {{ child.nickname }}
+          <a href="javascript:;" (click)="selectChild(child)" fxLayout="row" fxLayoutAlign="start center">
+            <img src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png" width="50" height="50"/>
+            {{ child.nickname }}
+          </a>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <button class="edit" mat-icon-button color="primary" [routerLink]="['/child/update/' + child.id]">
