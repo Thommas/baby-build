@@ -29,13 +29,17 @@
         </mat-form-field>
       </div>
       <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
-        <div fxLayout="column" fxLayoutAlign="center center">
-          <img src="https://www.shareicon.net/download/2016/06/25/786542_people.svg"/>
-          <span i18n>child_create.boy</span>
+        <div class="gender gender-f" fxLayout="column" fxLayoutAlign="center center" [ngClass]="{'selected': child.gender === 'f'}">
+          <a href="javascript:;" (click)="child.gender = 'f'">
+            <img src="https://www.shareicon.net/download/2016/06/25/786540_people.svg"/>
+            <span i18n>child_create.girl</span>
+          </a>
         </div>
-        <div fxLayout="column" fxLayoutAlign="center center">
-          <img src="https://www.shareicon.net/download/2016/06/25/786540_people.svg"/>
-          <span i18n>child_create.girl</span>
+        <div class="gender gender-m" fxLayout="column" fxLayoutAlign="center center" [ngClass]="{'selected': child.gender === 'm'}">
+          <a href="javascript:;" (click)="child.gender = 'm'">
+            <img src="https://www.shareicon.net/download/2016/06/25/786542_people.svg"/>
+            <span i18n>child_create.boy</span>
+          </a>
         </div>
       </div>
     </mat-card-content>

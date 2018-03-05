@@ -1,3 +1,21 @@
 mat-form-field {
   margin-right: 20px;
 }
+
+.gender {
+  border-radius: 100%;
+  padding: 20px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.selected {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+  &.gender-f {
+    box-shadow: 0 0 50px pink;
+  }
+  &.gender-m {
+    box-shadow: 0 0 50px blue;
+  }
+}

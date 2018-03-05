@@ -24,10 +24,13 @@ export class ChildFormComponent {
   loading: boolean;
 
   constructor(private router: Router, private apollo: Apollo) {
-    this.child = {};
+    this.child = {
+      gender: 'f'
+    };
   }
 
   submit() {
+    // FIXME Form validation
     let child = clone(this.child);
     child.birthdate = child.birthdate.format('x');
     this.apollo.mutate({
