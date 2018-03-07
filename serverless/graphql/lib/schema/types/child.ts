@@ -15,8 +15,7 @@ const Child = `
     nickname: String
     birthdate: String
     gender: String
-    xp: Int
-    level: Int
+    gamification: Gamification
     builds: [Build]
   }
   type ChildContainer {

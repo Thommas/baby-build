@@ -9,8 +9,7 @@
 const User = `
   type User {
     id: String!
-    xp: Int
-    level: Int
+    gamification: Gamification
   }
   type Query {
     users: [User]
@@ -22,8 +21,6 @@ const User = `
     ): User
     updateUser(
       id: ID!
-      xp: Int
-      level: Int
     ): User
     deleteUser(
       id: ID!

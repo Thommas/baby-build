@@ -6,6 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import * as dbGamification from '../../dynamo/gamification';
 import * as dbUser from '../../dynamo/user';
 
 export default {
@@ -17,5 +18,8 @@ export default {
     createUser: (_, args) => dbUser.createUser(args),
     updateUser: (_, args) => dbUser.updateUser(args),
     deleteUser: (_, args) => dbUser.deleteUser(args),
+  },
+  User: {
+    gamification: user => dbGamification.getGamification('user', user.id),
   }
 };

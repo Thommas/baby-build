@@ -8,6 +8,7 @@
 
 import * as dbBuild from '../../dynamo/build';
 import * as dbChild from '../../dynamo/child';
+import * as dbGamification from '../../dynamo/gamification';
 
 export default {
   Query: {
@@ -20,6 +21,7 @@ export default {
     deleteChild: (_, args) => dbChild.deleteChild(args),
   },
   Child: {
+    gamification: child => dbGamification.getGamification('child', child.id),
     builds: child => dbBuild.getBuildsByChild(child.id),
   },
 };
