@@ -34,7 +34,7 @@ export class ChildDeleteComponent implements OnInit {
     });
   }
 
-  submit() {;
+  submit() {
     this.apollo.mutate({
       mutation: DeleteChildMutation,
       variables: {

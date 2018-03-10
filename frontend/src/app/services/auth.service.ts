@@ -23,8 +23,8 @@ export class AuthService {
       environment.auth0.domain,
       environment.auth0.options
     );
-    this.lock.on("authenticated", (authResult: any) => {
-      localStorage.setItem("accessToken", authResult.idToken);
+    this.lock.on('authenticated', (authResult: any) => {
+      localStorage.setItem('accessToken', authResult.idToken);
     });
   }
 

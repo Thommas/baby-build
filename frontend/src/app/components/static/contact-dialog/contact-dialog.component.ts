@@ -20,13 +20,12 @@ export class ContactDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ContactDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  )
-  {
+  ) {
     this.contact = {
       name: '',
       email: '',
       message: ''
-    }
+    };
   }
 
   submit() {

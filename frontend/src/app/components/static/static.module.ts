@@ -71,5 +71,5 @@ import {
     ContactDialogComponent
   ]
 })
-export class StaticModule{
+export class StaticModule {
 }

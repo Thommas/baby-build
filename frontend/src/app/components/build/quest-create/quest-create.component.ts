@@ -31,7 +31,7 @@ export class QuestCreateComponent {
   }
 
   submit() {
-    let quest = clone(this.quest);
+    const quest = clone(this.quest);
     quest.build_id = this.buildService.build.id;
     this.apollo.mutate({
       mutation: CreateQuestMutation,

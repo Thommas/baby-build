@@ -29,7 +29,7 @@ export class BuildCreateComponent {
   }
 
   submit() {
-    let build = clone(this.build);
+    const build = clone(this.build);
     build.child_id = 1;
     this.apollo.mutate({
       mutation: CreateBuildMutation,
