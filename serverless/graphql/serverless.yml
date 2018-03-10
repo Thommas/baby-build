@@ -7,6 +7,12 @@ plugins:
 
 custom:
   stage: ${opt:stage, self:provider.stage}
+  buildTable: ${self:service}-${self:custom.stage}-build
+  childTable: ${self:service}-${self:custom.stage}-child
+  gamificationTable: ${self:service}-${self:custom.stage}-gamification
+  questTable: ${self:service}-${self:custom.stage}-quest
+  userTable: ${self:service}-${self:custom.stage}-user
+  whitelistItemTable: ${self:service}-${self:custom.stage}-whitelist-item
   secrets: ${file(secrets.yml):${self:custom.stage}}
   serverless-offline:
     port: 4001
@@ -23,6 +29,8 @@ custom:
             sources: [./fixtures/build.json]
           - table: child
             sources: [./fixtures/child.json]
+          - table: gamification
+            sources: [./fixtures/gamification.json]
           - table: quest
             sources: [./fixtures/quest.json]
           - table: user
@@ -37,6 +45,7 @@ package:
 provider:
   name: aws
   runtime: nodejs6.10
+  stage: dev
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -49,9 +58,15 @@ provider:
         - dynamodb:DeleteItem
       Resource: arn:aws:dynamodb:eu-west-1:*:*
   environment:
-    AUTH0_CLIENT_ID: "${self:custom.secrets.AUTH0_CLIENT_ID}"
-    AUTH0_JWKS_URI: "${self:custom.secrets.AUTH0_JWKS_URI}"
-    AUTH0_JWKS_KID: "${self:custom.secrets.AUTH0_JWKS_KID}"
+    AUTH0_CLIENT_ID: ${self:custom.secrets.AUTH0_CLIENT_ID}
+    AUTH0_JWKS_URI: ${self:custom.secrets.AUTH0_JWKS_URI}
+    AUTH0_JWKS_KID: ${self:custom.secrets.AUTH0_JWKS_KID}
+    BUILD_TABLE: ${self:custom.buildTable}
+    CHILD_TABLE: ${self:custom.childTable}
+    GAMIFICATION_TABLE: ${self:custom.gamificationTable}
+    QUEST_TABLE: ${self:custom.questTable}
+    USER_TABLE: ${self:custom.userTable}
+    WHITELIST_ITEM_TABLE: ${self:custom.whitelistItemTable}
 
 functions:
   customAuthorizer:
@@ -80,7 +95,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'build'
+        TableName: ${self:custom.buildTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
     childTable:
@@ -96,7 +111,23 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'child'
+        TableName: ${self:custom.childTable}
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+    gamificationTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.gamificationTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
     questTable:
@@ -112,7 +143,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'quest'
+        TableName: ${self:custom.questTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
     userTable:
@@ -128,7 +159,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'user'
+        TableName: ${self:custom.userTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
     whitelistItemTable:
@@ -144,6 +175,6 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'whitelist_item'
+        TableName: ${self:custom.whitelistItemTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES

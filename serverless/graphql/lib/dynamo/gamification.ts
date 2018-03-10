@@ -9,7 +9,7 @@
 import nanoid = require('nanoid');
 import * as db from './dynamo';
 
-const TableName = 'gamification';
+const TableName = process.env.GAMIFICATION_TABLE;
 
 export function getGamification(entityType, entityId) {
   const params = {

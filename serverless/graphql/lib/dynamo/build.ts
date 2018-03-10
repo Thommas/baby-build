@@ -9,7 +9,7 @@
 import nanoid = require('nanoid');
 import * as db from './dynamo';
 
-const TableName = 'build';
+const TableName = process.env.BUILD_TABLE;
 
 export function getBuilds() {
   const params = {

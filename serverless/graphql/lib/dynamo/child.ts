@@ -9,7 +9,7 @@
 import nanoid = require('nanoid');
 import * as db from './dynamo';
 
-const TableName = 'child';
+const TableName = process.env.CHILD_TABLE;
 
 export function getChildren() {
   const params = {

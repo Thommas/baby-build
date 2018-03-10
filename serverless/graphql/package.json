@@ -1,10 +1,14 @@
 {
-  "name": "path-of-child",
+  "name": "pathofchild-graphql",
+  "version": "0.4.0",
+  "license": "MIT",
   "scripts": {
     "start": "serverless offline start",
     "graphqli": "./node_modules/.bin/ts-node ./lib/graphqli.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
-    "lint": "tslint -c tslint.json './src/**/*.ts'"
+    "lint": "tslint -c tslint.json './src/**/*.ts'",
+    "deploy:staging": "serverless deploy --stage staging",
+    "deploy:production": "serverless deploy --stage production"
   },
   "dependencies": {
     "aws-sdk": "^2.205.0",

@@ -9,7 +9,7 @@
 import nanoid = require('nanoid');
 import * as db from './dynamo';
 
-const TableName = 'whitelist_item';
+const TableName = process.env.WHITELIST_ITEM_TABLE;
 
 export function getWhitelistItems(category) {
   const params = {

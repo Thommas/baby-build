@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "entity_type": "user",
+    "entity_id": "1",
+    "xp": 111,
+    "level": 1
+  },
+  {
+    "id": "1",
+    "entity_type": "child",
+    "entity_id": "1",
+    "xp": 222,
+    "level": 2
+  },
+  {
+    "id": "3",
+    "entity_type": "build",
+    "entity_id": "1",
+    "xp": 333,
+    "level": 3
+  }
+]
