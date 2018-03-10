@@ -23,9 +23,6 @@
     <a href="javascript:;" [routerLink]="['contact']" i18n>footer.contact</a>
   </div>
 </footer>
-<mat-menu #childrenMenu="matMenu">
-  <button mat-menu-item [routerLink]="['/child']" i18n>nav.manage_children</button>
-</mat-menu>
 <mat-menu #localeMenu="matMenu">
   <button mat-menu-item *ngFor="let locale of locales"
           (click)="switchLocale(locale.value)">

@@ -1,28 +1,28 @@
 <form #childForm="ngForm">
   <mat-card>
-    <mat-card-title fxLayout="row">
-      Add your child information
+    <mat-card-title fxLayout="row" i18n>
+      child_form.title
     </mat-card-title>
     <mat-card-content fxLayout="row">
       <div fxLayout="row wrap" fxFlex="50">
         <mat-form-field>
-          <input matInput placeholder="First name"
+          <input matInput placeholder="child_form.first_name" i18n-placeholder
                  [(ngModel)]="child.firstname" name="firstname">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Middle names"
+          <input matInput placeholder="child_form.middle_names" i18n-placeholder
                  [(ngModel)]="child.middlename" name="middlename">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Last name"
+          <input matInput placeholder="child_form.last_name" i18n-placeholder
                  [(ngModel)]="child.lastname" name="lastname">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Nickname"
+          <input matInput placeholder="child_form.nickname" i18n-placeholder
                  [(ngModel)]="child.nickname" name="nickname">
         </mat-form-field>
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Birthdate"
+          <input matInput [matDatepicker]="picker" placeholder="child_form.birthdate" i18n-placeholder
                  [(ngModel)]="child.birthdate" name="birthdate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -32,20 +32,20 @@
         <div class="gender gender-f" fxLayout="column" fxLayoutAlign="center center" [ngClass]="{'selected': child.gender === 'f'}">
           <a href="javascript:;" (click)="child.gender = 'f'">
             <img src="https://www.shareicon.net/download/2016/06/25/786540_people.svg"/>
-            <span i18n>child_create.girl</span>
+            <span i18n>child_form.girl</span>
           </a>
         </div>
         <div class="gender gender-m" fxLayout="column" fxLayoutAlign="center center" [ngClass]="{'selected': child.gender === 'm'}">
           <a href="javascript:;" (click)="child.gender = 'm'">
             <img src="https://www.shareicon.net/download/2016/06/25/786542_people.svg"/>
-            <span i18n>child_create.boy</span>
+            <span i18n>child_form.boy</span>
           </a>
         </div>
       </div>
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-      <button mat-raised-button type="submit" (click)="submit()" color="primary">Submit</button>
+      <button mat-raised-button type="submit" (click)="submit()" color="primary" i18n>form.submit</button>
     </mat-card-actions>
   </mat-card>
 </form>

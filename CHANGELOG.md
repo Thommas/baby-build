@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] - 2018-03-10
+
+### Added
+- Setup deployment to AWS
+- Gamification to store xp/level for user/child/build
+
+### Refactored
+- Header
+- Footer
+
 ## [0.3.0] - 2018-02-27
 
 ### Added

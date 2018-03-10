@@ -9,8 +9,9 @@
     "start:ja": "ng serve --port 4200 --aot --locale ja --i18n-format xlf --i18n-file ./src/locale/messages.ja.xlf",
     "build:en": "LOCALE=en npm run build-locale",
     "build:ja": "LOCALE=ja npm run build-locale",
-    "build-locale": "ng build -vc=true --aot --prod --locale $LOCALE --i18n-format xlf --i18n-file ./src/locale/messages.$LOCALE.xlf --bh /$LOCALE/ --output-path dist/$LOCALE && rm -rf public/$LOCALE && mv dist/$LOCALE public/$LOCALE && rm -rf public/$LOCALE/assets && cp -r src/assets public/$LOCALE/assets",
-    "build": "rm -rf build && cp -r public build && npm run build:en && npm run build:ja",
+    "build-locale": "ng build --build-optimizer=false -vc=true --aot --prod --locale $LOCALE --i18n-format xlf --i18n-file ./src/locale/messages.$LOCALE.xlf --bh /$LOCALE/ --output-path build/$LOCALE && rm -rf build/$LOCALE/assets && rm -rf build/$LOCALE/3rdpartylicenses.txt && rm -rf build/$LOCALE/favicon.ico",
+    "build-prepare": "rm -rf build && cp -r public build && cp -r src/assets build/assets",
+    "build": "npm run build-prepare && npm run build:en && npm run build:ja",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -45,7 +46,7 @@
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "rxjs": "^5.5.6",
-    "sweetalert2": "^7.12.15",
+    "sweetalert2": "^7.15.1",
     "zone.js": "^0.8.20"
   },
   "devDependencies": {

@@ -24,7 +24,7 @@ export class QuestCreateComponent {
 
   constructor(
     private apollo: Apollo,
-    private buildService: BuildService,
+    public buildService: BuildService,
     private router: Router
   ) {
     this.quest = {};
