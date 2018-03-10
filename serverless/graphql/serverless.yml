@@ -25,17 +25,17 @@ custom:
     seed:
       test:
         sources:
-          - table: build
+          - table: ${self:custom.buildTable}
             sources: [./fixtures/build.json]
-          - table: child
+          - table: ${self:custom.childTable}
             sources: [./fixtures/child.json]
-          - table: gamification
+          - table: ${self:custom.gamificationTable}
             sources: [./fixtures/gamification.json]
-          - table: quest
+          - table: ${self:custom.questTable}
             sources: [./fixtures/quest.json]
-          - table: user
+          - table: ${self:custom.userTable}
             sources: [./fixtures/user.json]
-          - table: whitelist_item
+          - table: ${self:custom.whitelistItemTable}
             sources: [./fixtures/whitelist-item.json]
 
 package:
@@ -78,7 +78,7 @@ functions:
           path: graphql
           method: post
           cors: true
-          authorizer: customAuthorizer
+#          authorizer: customAuthorizer
 
 resources:
   Resources:

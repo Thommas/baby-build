@@ -3,15 +3,14 @@
        src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png"
        width="50" height="50"/>
 </div>
-<div fxFlex="80" fxLayout="column" fxLayoutAlign="center center" *ngIf="childService.isChild">
+<div fxFlex="80" fxLayout="column" fxLayoutAlign="center center" *ngIf="childService.isChild && childService.child.gamification">
   <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
-    <span>40/100</span>
-    <span>Level 1</span>
+    <span>{{ childService.child.gamification.level }}/XXX</span>
+    <span>Level {{ childService.child.gamification.xp }}</span>
   </div>
   <mat-progress-bar mode="determinate"
                     value="60"
-                    color="accent"
-                    *ngIf="authService.isAuthenticated()">
+                    color="accent">
   </mat-progress-bar>
 </div>
 <button mat-icon-button [matMenuTriggerFor]="childMenu">
