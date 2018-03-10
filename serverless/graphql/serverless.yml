@@ -45,6 +45,7 @@ package:
 provider:
   name: aws
   runtime: nodejs6.10
+  region: eu-west-2
   stage: dev
   iamRoleStatements:
     - Effect: Allow
@@ -78,7 +79,7 @@ functions:
           path: graphql
           method: post
           cors: true
-#          authorizer: customAuthorizer
+          authorizer: customAuthorizer
 
 resources:
   Resources:
