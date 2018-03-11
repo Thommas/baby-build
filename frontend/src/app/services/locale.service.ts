@@ -12,8 +12,8 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LocaleService {
-  static const LOCALE_KEY = 'pathofchild_frontend_locale';
-  static const LOCALES = [
+  private LOCALE_KEY = 'pathofchild_frontend_locale';
+  private LOCALES = [
     { value: 'en', label: 'English'},
     { value: 'fr', label: 'Français'},
     { value: 'ja', label: '日本語'}
@@ -25,12 +25,12 @@ export class LocaleService {
     let locale = 'en';
 
     const localStorage = this.browserService.localStorage;
-    if (localStorage && this.browserService.localStorage.getItem(ChildService.LOCALE_KEY)) {
-      locale = this.browserService.localStorage.getItem(ChildService.LOCALE_KEY);
+    if (localStorage && this.browserService.localStorage.getItem(this.LOCALE_KEY)) {
+      locale = this.browserService.localStorage.getItem(this.LOCALE_KEY);
     } else if (this.browserService.language) {
       locale = this.browserService.language;
     }
-    if (ChildService.LOCALES.map(locale => locale.value).indexOf(locale) === -1) {
+    if (this.LOCALES.map(locale => locale.value).indexOf(locale) === -1) {
       locale = 'en';
     }
 
@@ -40,7 +40,7 @@ export class LocaleService {
   public setLocale(newLocale) {
     const localStorage = this.browserService.localStorage;
     if (localStorage) {
-      this.browserService.localStorage.setItem(ChildService.LOCALE_KEY, newLocale);
+      this.browserService.localStorage.setItem(this.LOCALE_KEY, newLocale);
     }
 
     let subdomain = newLocale;
@@ -48,5 +48,9 @@ export class LocaleService {
       subdomain = 'www';
     }
     this.browserService.window.location.href = subdomain + '.' + environment.baseDomainUrl;
+  }
+
+  public get locales() {
+    return this.LOCALES;
   }
 }
