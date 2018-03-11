@@ -4,9 +4,7 @@
       <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
     </div>
     <div fxFlex="100" *ngIf="!authService.isAuthenticated()" fxLayout="row" fxLayoutAlign="end center">
-      <button mat-button color="primary" (click)="authService.login()" i18n>
-        nav.login
-      </button>
+      <button mat-button color="primary" (click)="authService.login()" i18n>nav.login</button>
     </div>
   </header>
 </mat-toolbar>
