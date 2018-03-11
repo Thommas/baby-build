@@ -17,8 +17,7 @@
 
 .hero {
   background-color: mat-color($path-of-child-primary);
-  background-image: url('/assets/img/bg-home.svg');
-  background-repeat: no-repeat;
+  background-repeat: repeat-x;
   background-size: cover;
   background-position: center center;
   width: 100%;
