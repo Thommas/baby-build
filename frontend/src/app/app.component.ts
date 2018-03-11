@@ -8,7 +8,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { BrowserService } from './services';
+import { BrowserService, LocaleService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -19,9 +19,15 @@ export class AppComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(public router: Router, private browserService: BrowserService) {}
+  constructor(
+    public router: Router,
+    private browserService: BrowserService,
+    private localeService: LocaleService
+  ) {}
 
   ngOnInit() {
+    this.localeService.detectLocale();
+
     if (this.router.events) {
       this.router.events.subscribe((evt) => {
         if (!(evt instanceof NavigationEnd)) {

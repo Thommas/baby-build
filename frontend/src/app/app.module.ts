@@ -45,7 +45,8 @@ import {
   AuthGuardService,
   AuthService,
   BrowserService,
-  ChildService
+  ChildService,
+  LocaleService
 } from './services';
 
 @NgModule({
@@ -86,7 +87,8 @@ import {
     AuthGuardService,
     AuthService,
     BrowserService,
-    ChildService
+    ChildService,
+    LocaleService
   ],
   bootstrap: [
     AppComponent

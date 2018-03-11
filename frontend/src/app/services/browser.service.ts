@@ -12,22 +12,45 @@
 
 import { Injectable } from '@angular/core';
 
-declare const window: any;
 declare const document: any;
+declare const localStorage: any;
+declare const navigator: any;
+declare const window: any;
 
 @Injectable()
 export class BrowserService {
-  /**
-   * Get browser window
-   */
-  get window(): any {
-    return window;
-  }
-
   /**
    * Get browser document
    */
   get document(): any {
     return document;
+  }
+
+  /**
+   * Get browser localStorage
+   */
+  get localStorage(): any {
+    return localStorage;
+  }
+
+  /**
+   * Get browser language
+   */
+  get language(): any {
+    if (navigator) {
+      if (navigator.browserLanguage) {
+        return navigator.browserLanguage.substring(0, 2);
+      } else if (navigator.language) {
+        return navigator.language.substring(0, 2);
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Get browser window
+   */
+  get window(): any {
+    return window;
   }
 }

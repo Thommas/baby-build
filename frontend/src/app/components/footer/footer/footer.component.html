@@ -24,8 +24,8 @@
   </div>
 </footer>
 <mat-menu #localeMenu="matMenu">
-  <button mat-menu-item *ngFor="let locale of locales"
-          (click)="switchLocale(locale.value)">
+  <button mat-menu-item *ngFor="let locale of localeService.LOCALES"
+          (click)="localeService.setLocale(locale.value)">
     {{ locale.label }}
   </button>
 </mat-menu>
