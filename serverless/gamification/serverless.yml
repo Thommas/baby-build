@@ -1,0 +1,53 @@
+service: pathofchild-gamification
+
+plugins:
+  - serverless-plugin-typescript
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  buildTable: ${self:service}-${self:custom.stage}-build
+  childTable: ${self:service}-${self:custom.stage}-child
+  gamificationTable: ${self:service}-${self:custom.stage}-gamification
+  questTable: ${self:service}-${self:custom.stage}-quest
+  userTable: ${self:service}-${self:custom.stage}-user
+  whitelistItemTable: ${self:service}-${self:custom.stage}-whitelist-item
+  secrets: ${file(secrets.yml):${self:custom.stage}}
+
+package:
+  exclude:
+    - secrets.yml
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: eu-west-2
+  stage: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: arn:aws:dynamodb:eu-west-2:*:*
+  environment:
+    BUILD_TABLE: ${self:custom.buildTable}
+    CHILD_TABLE: ${self:custom.childTable}
+    GAMIFICATION_TABLE: ${self:custom.gamificationTable}
+    QUEST_TABLE: ${self:custom.questTable}
+    USER_TABLE: ${self:custom.userTable}
+    WHITELIST_ITEM_TABLE: ${self:custom.whitelistItemTable}
+
+functions:
+  graphql:
+    handler: lib/handler.build
+    events:
+      - stream:
+          type: dynamodb
+          arn:
+            Fn::GetAtt:
+              - ${self:custom.buildTable}
+              - StreamArn
