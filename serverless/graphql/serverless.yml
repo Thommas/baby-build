@@ -57,7 +57,11 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: arn:aws:dynamodb:eu-west-2:*:*
+        - dynamodb:GetRecords
+        - dynamodb:GetShardIterator
+        - dynamodb:DescribeStream
+        - dynamodb:ListStreams
+      Resource: arn:aws:dynamodb:${self:provider.region}:*:*
   environment:
     AUTH0_CLIENT_ID: ${self:custom.secrets.AUTH0_CLIENT_ID}
     AUTH0_JWKS_URI: ${self:custom.secrets.AUTH0_JWKS_URI}
@@ -80,10 +84,19 @@ functions:
           method: post
           cors: true
           authorizer: customAuthorizer
+  build:
+    handler: lib/handler.build
+    events:
+      - stream:
+          type: dynamodb
+          arn:
+            Fn::GetAtt:
+              - BuildTable
+              - StreamArn
 
 resources:
   Resources:
-    buildTable:
+    BuildTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -99,7 +112,7 @@ resources:
         TableName: ${self:custom.buildTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    childTable:
+    ChildTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -115,7 +128,7 @@ resources:
         TableName: ${self:custom.childTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    gamificationTable:
+    GamificationTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -131,7 +144,7 @@ resources:
         TableName: ${self:custom.gamificationTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    questTable:
+    QuestTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -147,7 +160,7 @@ resources:
         TableName: ${self:custom.questTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    userTable:
+    UserTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -163,7 +176,7 @@ resources:
         TableName: ${self:custom.userTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    whitelistItemTable:
+    WhitelistItemTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -179,3 +192,40 @@ resources:
         TableName: ${self:custom.whitelistItemTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
+  Outputs:
+    BuildTableArn:
+      Description: The ARN for the Build Table
+      Value:
+        "Fn::GetAtt": [ BuildTable, Arn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:BuildTableArn
+    ChildTableArn:
+      Description: The ARN for the Child Table
+      Value:
+        "Fn::GetAtt": [ ChildTable, Arn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:ChildTableArn
+    GamificationTableArn:
+      Description: The ARN for the Gamification Table
+      Value:
+        "Fn::GetAtt": [ GamificationTable, Arn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:GamificationTableArn
+    QuestTableArn:
+      Description: The ARN for the Quest Table
+      Value:
+        "Fn::GetAtt": [ QuestTable, Arn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:QuestTableArn
+    UserTableArn:
+      Description: The ARN for the User Table
+      Value:
+        "Fn::GetAtt": [ UserTable, Arn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:UserTableArn
+    WhitelistItemTableArn:
+      Description: The ARN for the WhitelistItem Table
+      Value:
+        "Fn::GetAtt": [ WhitelistItemTable, Arn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:WhitelistItemTableArn
