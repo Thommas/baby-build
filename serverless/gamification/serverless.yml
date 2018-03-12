@@ -5,6 +5,7 @@ plugins:
 
 custom:
   stage: ${opt:stage, self:provider.stage}
+  buildTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.BuildTableStreamArn}
   secrets: ${file(secrets.yml):${self:custom.stage}}
 
 package:
@@ -16,7 +17,21 @@ provider:
   runtime: nodejs6.10
   region: eu-west-2
   stage: dev
-  role: arn:aws:iam::${self:custom.secrets.AWS_ACCOUNT_ID}:role/pathofchild-graphql-staging-${self:provider.region}-lambdaRole
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:GetRecords
+        - dynamodb:GetShardIterator
+        - dynamodb:DescribeStream
+        - dynamodb:ListStreams
+      Resource: arn:aws:dynamodb:${self:provider.region}:*:*
 
 functions:
   build:
@@ -24,5 +39,4 @@ functions:
     events:
       - stream:
           type: dynamodb
-          arn:
-            Fn::ImportValue: pathofchild-graphql:${self:custom.stage}:BuildTableArn
+          arn: ${self:custom.buildTableStreamArn}

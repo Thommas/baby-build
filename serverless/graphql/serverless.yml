@@ -84,15 +84,6 @@ functions:
           method: post
           cors: true
           authorizer: customAuthorizer
-  build:
-    handler: lib/handler.build
-    events:
-      - stream:
-          type: dynamodb
-          arn:
-            Fn::GetAtt:
-              - BuildTable
-              - StreamArn
 
 resources:
   Resources:
@@ -193,39 +184,39 @@ resources:
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
   Outputs:
-    BuildTableArn:
-      Description: The ARN for the Build Table
+    BuildTableStreamArn:
+      Description: The StreamArn for the Build Table
       Value:
-        "Fn::GetAtt": [ BuildTable, Arn ]
+        "Fn::GetAtt": [ BuildTable, StreamArn ]
       Export:
-        Name: ${self:service}:${self:custom.stage}:BuildTableArn
-    ChildTableArn:
-      Description: The ARN for the Child Table
+        Name: ${self:service}:${self:custom.stage}:BuildTableStreamArn
+    ChildTableStreamArn:
+      Description: The StreamArn for the Child Table
       Value:
-        "Fn::GetAtt": [ ChildTable, Arn ]
+        "Fn::GetAtt": [ ChildTable, StreamArn ]
       Export:
-        Name: ${self:service}:${self:custom.stage}:ChildTableArn
-    GamificationTableArn:
-      Description: The ARN for the Gamification Table
+        Name: ${self:service}:${self:custom.stage}:ChildTableStreamArn
+    GamificationTableStreamArn:
+      Description: The StreamArn for the Gamification Table
       Value:
-        "Fn::GetAtt": [ GamificationTable, Arn ]
+        "Fn::GetAtt": [ GamificationTable, StreamArn ]
       Export:
-        Name: ${self:service}:${self:custom.stage}:GamificationTableArn
-    QuestTableArn:
-      Description: The ARN for the Quest Table
+        Name: ${self:service}:${self:custom.stage}:GamificationTableStreamArn
+    QuestTableStreamArn:
+      Description: The StreamArn for the Quest Table
       Value:
-        "Fn::GetAtt": [ QuestTable, Arn ]
+        "Fn::GetAtt": [ QuestTable, StreamArn ]
       Export:
-        Name: ${self:service}:${self:custom.stage}:QuestTableArn
-    UserTableArn:
-      Description: The ARN for the User Table
+        Name: ${self:service}:${self:custom.stage}:QuestTableStreamArn
+    UserTableStreamArn:
+      Description: The StreamArn for the User Table
       Value:
-        "Fn::GetAtt": [ UserTable, Arn ]
+        "Fn::GetAtt": [ UserTable, StreamArn ]
       Export:
-        Name: ${self:service}:${self:custom.stage}:UserTableArn
-    WhitelistItemTableArn:
-      Description: The ARN for the WhitelistItem Table
+        Name: ${self:service}:${self:custom.stage}:UserTableStreamArn
+    WhitelistItemTableStreamArn:
+      Description: The StreamArn for the WhitelistItem Table
       Value:
-        "Fn::GetAtt": [ WhitelistItemTable, Arn ]
+        "Fn::GetAtt": [ WhitelistItemTable, StreamArn ]
       Export:
-        Name: ${self:service}:${self:custom.stage}:WhitelistItemTableArn
+        Name: ${self:service}:${self:custom.stage}:WhitelistItemTableStreamArn

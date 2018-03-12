@@ -4,43 +4,25 @@ Roadmap
 Short term
 ----------
 
-- Implement dynamic header based on data
-- Implement add/remove/edit quest
-- Implement select with pictures for child and build forms
-- Design calendar for build
-- Auth0 register should create User entity in DynamoDB
-- Implement xp and level to unlock calendar
-
-
-Mid term
---------
-
-- Finish contact form with google captcha and lambda
-- Add unit tests
-- Add generic fields (createdAt, updatedAt) to all entities
 - Finish customizing homepage pictures
+- Finish contact form with google captcha and lambda
+- Auth0 register should create User entity in DynamoDB
+- Store user_id, created_at and updated_at
+- Implement gamification handler to update xp/level
+- Improve dynamic header based on child, build, xp, level
+- Implement add/remove/edit quest
+- Design calendar for build
+- Implement xp and level to unlock calendar
+- Implement instructions on home based on xp/level
 
 
 Long term
 ---------
 
-- Implement giving access to a child to other family members
-
-
-Deployment
-----------
-
+- Add unit tests
 - Add icon for auth0
 - Implement terms and privacy
-
-
-Bonus ideas
------------
-
-- Child could have a request list that would go into whitelist if approved by parent
-- Messaging system for child
-Santa claus or to report a problem like a confessional
-The child needs to believe the message won't be read by his parents
+- Implement giving access to a child to other family members
 
 
 Entities
@@ -189,6 +171,15 @@ Other
 - Indicates when a feature is inspired from a videogame (Path of exile build, FF15 photos)
 
 
+Bonus ideas
+-----------
+
+- Child could have a request list that would go into whitelist if approved by parent
+- Messaging system for child
+Santa claus or to report a problem like a confessional
+The child needs to believe the message won't be read by his parents
+
+
 Links
 -----
 
@@ -210,65 +201,12 @@ Storyboard
 - List without any build > create a new build
 - Form to create a new build
 
-### Main interface
-
-1) Header
-
-- Logo
-- Selected child name, level and XP bar
-- Button to switch child/build
-- Link to settings
-
-2) Build
-
-Calendar per year or month
-- Future and present: Setup goal, create quests with rewards
-- Past: Upload picture select 1/2/3 quality, describe goal results
-
-Note: calendar per month will be unlocked later (display both Mxx and Y-m)
-
-3) Whitelist
-
-- Add/remove/edit entries
-- Dynamic categories ??
-- Dynamic additional metadata (like minimum age) ??
-
 
 Similar apps
 ------------
 
 https://www.choremonster.com
 https://www.classcraft.com
-
-
-Homepage
---------
-
-6 ideas:
-- 3 year old Learn to count to ten
-- 4 year old Learn politeness
-- 5 year old Understand two languages
-- 6 year old Learn multiplication tables
-- 7 year old Learn to deal with strangers
-- 8 year old Do sport in a club
-
-Share ideas:
-- Other family members can help
-- Learn from experienced parents
-
-5 jobs:
-- Engineer
-- Doctor
-- Lawyer
-- Accountant
-- Manager
-
-5 countries:
-- USA
-- Australia
-- Singapore
-- Amsterdam
-- Seoul
 
 
 Social network
