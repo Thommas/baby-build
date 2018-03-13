@@ -14,7 +14,7 @@ export default {
     whitelistItem: (_, args) => dbWhitelistItem.getWhitelistItemById(args.id),
   },
   Mutation: {
-    createWhitelistItem: (_, args) => dbWhitelistItem.createWhitelistItem(args),
+    createWhitelistItem: (_, args, context) => dbWhitelistItem.createWhitelistItem(args, context.user_id),
     updateWhitelistItem: (_, args) => dbWhitelistItem.updateWhitelistItem(args),
     deleteWhitelistItem: (_, args) => dbWhitelistItem.deleteWhitelistItem(args),
   }

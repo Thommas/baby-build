@@ -39,4 +39,12 @@ export class AuthService {
   public logout() {
     localStorage.removeItem('accessToken');
   }
+
+  public resumeAuth(hash) {
+    this.lock.resumeAuth(hash, (error, authResult) => {
+      if (error) {
+        console.log('error', error)
+      }
+    });
+  }
 }

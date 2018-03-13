@@ -32,11 +32,12 @@ export function getWhitelistItemById(id) {
   return db.get(params);
 }
 
-export function createWhitelistItem(args) {
+export function createWhitelistItem(args, userId) {
   const params = {
     TableName,
     Item: {
       id: nanoid(12),
+      user_id: userId,
       ...args
     },
   };
