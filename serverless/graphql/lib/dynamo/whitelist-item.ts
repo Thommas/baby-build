@@ -12,7 +12,6 @@ import * as db from './dynamo';
 const TableName = process.env.WHITELIST_ITEM_TABLE;
 
 export function getWhitelistItems(category, userId) {
-console.log('userID', userId)
   const params = {
     TableName,
     FilterExpression: 'user_id = :user_id AND category = :category',
@@ -40,6 +39,8 @@ export function createWhitelistItem(args, userId) {
     TableName,
     Item: {
       id: nanoid(12),
+      created_at: new Date(),
+      updated_at: new Date(),
       ...args,
       user_id: userId
     },

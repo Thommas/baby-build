@@ -50,6 +50,8 @@ export function createQuest(args) {
     TableName,
     Item: {
       id: nanoid(12),
+      created_at: new Date(),
+      updated_at: new Date(),
       title: args.title,
       build_id: args.build_id
     },

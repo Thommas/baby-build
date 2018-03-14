@@ -1,31 +1,27 @@
-<footer fxLayout="row" fxFill fxLayoutAlign="space-around center">
+<footer fxLayout="row" fxLayoutAlign="space-around start">
   <div fxLayout="column" fxLayoutAlign="start start">
-    <button mat-button class="locale-button" [matMenuTriggerFor]="localeMenu">
-       <span i18n>footer.locale</span>
-       <mat-icon>keyboard_arrow_down</mat-icon>
+    <button mat-button *ngFor="let locale of localeService.locales"
+            (click)="localeService.setLocale(locale.value)">
+      {{ locale.label }}
     </button>
   </div>
   <div fxLayout="column" fxLayoutAlign="start start">
-    <a href="javascript:;" [routerLink]="['terms']" i18n>footer.terms</a>
+    <button mat-button [routerLink]="['terms']" i18n>footer.terms</button>
+    <button mat-button [routerLink]="['branding']" i18n>footer.branding</button>
+    <button mat-button [routerLink]="['contact']" i18n>footer.contact</button>
   </div>
-  <div fxLayout="row" fxLayoutAlign="start start">
-    <button mat-icon-button>
+  <div fxLayout="column" fxLayoutAlign="start start">
+    <a href="https://reddit.com/r/pathofchild" fxLayout="row" fxLayoutAlign="start center">
       <img src="/assets/img/social/reddit-logo.svg" width="32" height="32" />
-    </button>
-    <button mat-icon-button>
+      <span>Reddit</span>
+    </a>
+    <a href="https://www.facebook.com/pathofchild" fxLayout="row" fxLayoutAlign="start center">
       <img src="/assets/img/social/facebook-logo.svg" width="32" height="32" />
-    </button>
-    <button mat-icon-button>
+      <span>Facebook</span>
+    </a>
+     <a href="https://www.twitter.com/@pathofchild" fxLayout="row" fxLayoutAlign="start center">
       <img src="/assets/img/social/twitter-logo.svg" width="32" height="32" />
-    </button>
-  </div>
-  <div fxLayout="column" fxLayoutAlign="start start">
-    <a href="javascript:;" [routerLink]="['contact']" i18n>footer.contact</a>
+      <span>Twitter</span>
+    </a>
   </div>
 </footer>
-<mat-menu #localeMenu="matMenu">
-  <button mat-menu-item *ngFor="let locale of localeService.locales"
-          (click)="localeService.setLocale(locale.value)">
-    {{ locale.label }}
-  </button>
-</mat-menu>

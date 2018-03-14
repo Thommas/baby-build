@@ -6,8 +6,6 @@ Short term
 
 - Finish customizing homepage pictures
 - Finish contact form with google captcha and lambda
-- Auth0 register should create User entity in DynamoDB
-- Store user_id, created_at and updated_at
 - Implement gamification handler to update xp/level
 - Improve dynamic header based on child, build, xp, level
 - Implement add/remove/edit quest
@@ -19,6 +17,7 @@ Short term
 Long term
 ---------
 
+- When updating User profile should create if not already exists
 - Add unit tests
 - Add icon for auth0
 - Implement terms and privacy

@@ -49,6 +49,8 @@ export function createBuild(args, userId) {
     TableName,
     Item: {
       id: nanoid(12),
+      created_at: new Date(),
+      updated_at: new Date(),
       title: args.title,
       description: args.description,
       child_id: args.child_id,

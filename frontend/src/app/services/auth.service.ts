@@ -32,12 +32,19 @@ export class AuthService {
     this.lock.show();
   }
 
+  public signUp() {
+    this.lock.show({
+      initialScreen: 'signUp'
+    });
+  }
+
   public isAuthenticated() {
     return localStorage.getItem('accessToken') ? true : false;
   }
 
   public logout() {
     localStorage.removeItem('accessToken');
+    this.router.navigate(['/']);
   }
 
   public resumeAuth(hash) {

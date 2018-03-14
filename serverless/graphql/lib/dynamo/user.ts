@@ -38,8 +38,8 @@ export function createUser(args) {
     TableName,
     Item: {
       id: nanoid(12),
-      xp: 0,
-      level: 1,
+      created_at: new Date(),
+      updated_at: new Date(),
       ...args
     },
   };
