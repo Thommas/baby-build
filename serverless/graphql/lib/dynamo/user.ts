@@ -15,9 +15,7 @@ export function getUsers() {
   const params = {
     TableName,
     AttributesToGet: [
-      'id',
-      'xp',
-      'level'
+      'id'
     ],
   };
 

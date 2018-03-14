@@ -11,28 +11,21 @@ import * as db from './dynamo';
 
 const TableName = process.env.CHILD_TABLE;
 
-export function getChildren() {
+export function getChildren(userId) {
   const params = {
     TableName,
-    AttributesToGet: [
-      'id',
-      'firstname',
-      'middlename',
-      'lastname',
-      'nickname',
-      'birthdate',
-      'gender',
-      'xp',
-      'level'
-    ],
+    FilterExpression: 'user_id = :user_id',
+    ExpressionAttributeValues: { ':user_id': userId }
   };
 
   return db.scan(params);
 }
 
-export function getChildById(id) {
+export function getChildById(id, userId) {
   const params = {
     TableName,
+    FilterExpression: 'user_id = :user_id',
+    ExpressionAttributeValues: { ':user_id': userId },
     Key: {
       id,
     },
@@ -41,14 +34,15 @@ export function getChildById(id) {
   return db.get(params);
 }
 
-export function createChild(args) {
+export function createChild(args, userId) {
   const params = {
     TableName,
     Item: {
       id: nanoid(12),
       xp: 0,
       level: 1,
-      ...args
+      ...args,
+      user_id: userId
     },
   };
 

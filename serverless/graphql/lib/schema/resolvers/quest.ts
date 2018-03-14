@@ -10,12 +10,12 @@ import * as dbQuest from '../../dynamo/quest';
 
 export default {
   Query: {
-    quests: () => dbQuest.getQuests(),
-    quest: (_, args) => dbQuest.getQuestById(args.id),
+    quests: (_, args, context) => dbQuest.getQuests(context.user_id),
+    quest: (_, args, context) => dbQuest.getQuestById(args.id, context.user_id),
   },
   Mutation: {
-    createQuest: (_, args) => dbQuest.createQuest(args),
-    updateQuest: (_, args) => dbQuest.updateQuest(args),
-    deleteQuest: (_, args) => dbQuest.deleteQuest(args),
+    createQuest: (_, args, context) => dbQuest.createQuest(args, context.user_id),
+    updateQuest: (_, args, context) => dbQuest.updateQuest(args, context.user_id),
+    deleteQuest: (_, args, context) => dbQuest.deleteQuest(args, context.user_id),
   }
 };

@@ -1,6 +1,7 @@
 [
   {
     "id": "1",
+    "user_id": "auth0|5a773beebfd2511753f2c9c0",
     "firstname": "Leo",
     "middlename": "Gerard Nobu",
     "lastname": "Bullier",
@@ -9,6 +10,7 @@
   },
   {
     "id": "2",
+    "user_id": "auth0|5a773beebfd2511753f2c9c0",
     "firstname": "Misaki",
     "middlename": "Martine Setsuko",
     "lastname": "Bullier",

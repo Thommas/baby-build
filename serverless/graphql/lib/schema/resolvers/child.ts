@@ -12,16 +12,16 @@ import * as dbGamification from '../../dynamo/gamification';
 
 export default {
   Query: {
-    children: () => dbChild.getChildren(),
-    child: (_, args) => dbChild.getChildById(args.id),
+    children: (_, args, context) => dbChild.getChildren(context.user_id),
+    child: (_, args, context) => dbChild.getChildById(args.id, context.user_id),
   },
   Mutation: {
-    createChild: (_, args) => dbChild.createChild(args),
-    updateChild: (_, args) => dbChild.updateChild(args),
-    deleteChild: (_, args) => dbChild.deleteChild(args),
+    createChild: (_, args, context) => dbChild.createChild(args, context.user_id),
+    updateChild: (_, args, context) => dbChild.updateChild(args, context.user_id),
+    deleteChild: (_, args, context) => dbChild.deleteChild(args, context.user_id),
   },
   Child: {
-    gamification: child => dbGamification.getGamification('child', child.id),
-    builds: child => dbBuild.getBuildsByChild(child.id),
+    gamification: (child, args, context) => dbGamification.getGamification('child', child.id, context.user_id),
+    builds: (child, args, context) => dbBuild.getBuildsByChild(child.id, context.user_id),
   },
 };

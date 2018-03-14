@@ -11,19 +11,22 @@ import * as db from './dynamo';
 
 const TableName = process.env.WHITELIST_ITEM_TABLE;
 
-export function getWhitelistItems(category) {
+export function getWhitelistItems(category, userId) {
+console.log('userID', userId)
   const params = {
     TableName,
-    FilterExpression: 'category = :category',
-    ExpressionAttributeValues: { ':category': category },
+    FilterExpression: 'user_id = :user_id AND category = :category',
+    ExpressionAttributeValues: { ':category': category, ':user_id': userId },
   };
 
   return db.scan(params);
 }
 
-export function getWhitelistItemById(id) {
+export function getWhitelistItemById(id, userId) {
   const params = {
     TableName,
+    FilterExpression: 'user_id = :user_id',
+    ExpressionAttributeValues: { ':user_id': userId },
     Key: {
       id,
     },
@@ -37,8 +40,8 @@ export function createWhitelistItem(args, userId) {
     TableName,
     Item: {
       id: nanoid(12),
-      user_id: userId,
-      ...args
+      ...args,
+      user_id: userId
     },
   };
 

@@ -1,12 +1,14 @@
 [
   {
     "id": "1",
+    "user_id": "auth0|5a773beebfd2511753f2c9c0",
     "category": "activity",
     "title": "Play chess",
     "required_age": 7
   },
   {
     "id": "2",
+    "user_id": "auth0|5a773beebfd2511753f2c9c0",
     "category": "book",
     "title": "Cinderella",
     "required_age": 8
