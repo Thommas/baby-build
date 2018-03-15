@@ -5,8 +5,9 @@
   "scripts": {
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "lint": "tslint -c tslint.json './src/**/*.ts'",
-    "deploy:staging": "serverless deploy --stage staging --force",
-    "deploy:production": "serverless deploy --stage production --force"
+    "deploy:dev": "serverless deploy --stage dev",
+    "deploy:staging": "serverless deploy --stage staging",
+    "deploy:production": "serverless deploy --stage production"
   },
   "dependencies": {
     "aws-sdk": "^2.205.0"

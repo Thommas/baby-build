@@ -6,6 +6,8 @@ plugins:
 custom:
   stage: ${opt:stage, self:provider.stage}
   buildTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.BuildTableStreamArn}
+  childTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.ChildTableStreamArn}
+  whitelistItemTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.WhitelistItemTableStreamArn}
   secrets: ${file(secrets.yml):${self:custom.stage}}
 
 package:
@@ -40,3 +42,15 @@ functions:
       - stream:
           type: dynamodb
           arn: ${self:custom.buildTableStreamArn}
+  child:
+    handler: lib/handler.child
+    events:
+      - stream:
+          type: dynamodb
+          arn: ${self:custom.childTableStreamArn}
+  whitelistItem:
+    handler: lib/handler.whitelistItem
+    events:
+      - stream:
+          type: dynamodb
+          arn: ${self:custom.whitelistItemTableStreamArn}
