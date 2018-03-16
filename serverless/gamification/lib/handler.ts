@@ -6,32 +6,18 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import { handleBuild } from './handlers/build'
+import { handleChild } from './handlers/child'
+import { handleWhitelistItem } from './handlers/whitelist-item'
+
 exports.build = (event, context, callback) => {
-  event.Records.forEach((record) => {
-    console.log('Stream record: ', JSON.stringify(record, null, 2));
-    if (record.eventName == 'INSERT') {
-      console.log('userId', record.dynamodb.NewImage.user_id.S)
-    }
-  });
-  callback(null, `Successfully processed ${event.Records.length} records.`);
+  handleBuild(event, context, callback)
 };
 
 exports.child = (event, context, callback) => {
-  event.Records.forEach((record) => {
-    console.log('Stream record: ', JSON.stringify(record, null, 2));
-    if (record.eventName == 'INSERT') {
-      console.log('userId', record.dynamodb.NewImage.user_id.S)
-    }
-  });
-  callback(null, `Successfully processed ${event.Records.length} records.`);
+  handleChild(event, context, callback)
 };
 
 exports.whitelistItem = (event, context, callback) => {
-  event.Records.forEach((record) => {
-    console.log('Stream record: ', JSON.stringify(record, null, 2));
-    if (record.eventName == 'INSERT') {
-      console.log('userId', record.dynamodb.NewImage.user_id.S)
-    }
-  });
-  callback(null, `Successfully processed ${event.Records.length} records.`);
+  handleWhitelistItem(event, context, callback)
 };

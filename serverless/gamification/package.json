@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
+    "test": "jasmine-ts \"lib/**/*.spec.ts\"",
     "lint": "tslint -c tslint.json './src/**/*.ts'",
     "deploy:dev": "serverless deploy --stage dev",
     "deploy:staging": "serverless deploy --stage staging",
@@ -13,7 +14,10 @@
     "aws-sdk": "^2.205.0"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.8.6",
     "@types/node": "^7.0.5",
+    "jasmine": "^3.1.0",
+    "jasmine-ts": "^0.2.1",
     "serverless-plugin-typescript": "^1.1.1",
     "ts-node": "^3.3.0",
     "tslint": "^5.5.0",

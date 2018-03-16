@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - DynamoDB - Gamification
+ * Gamification - Dynamo - Gamification
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -11,31 +11,20 @@ import * as db from './dynamo';
 
 const TableName = process.env.GAMIFICATION_TABLE;
 
-export function getGamification(entityType, entityId) {
-  const params = {
-    TableName,
-    Key: {
-      id: entityType + '-' + entityId
-    },
-  };
+export async function updateGamification(entityType, entityId, xp, level) {
+  const id = entityType + '-' + entityId;
 
-  return db.get(params);
-}
-
-export function updateGamification(args) {
-  const id = args.entity_type + '-' + args.entity_id;
-
-  const params = {
+  const getParams = {
     TableName,
     Key: {
       id
     },
   };
 
-  const existingItem = db.get(params);
+  const existingItem = await db.get(getParams);
 
   if (!existingItem) {
-    const params = {
+    const createParams = {
       TableName,
       Item: {
         id,
@@ -44,10 +33,10 @@ export function updateGamification(args) {
       },
     };
 
-    return db.createItem(params);
+    return db.createItem(createParams);
   }
 
-  const params = {
+  const updateParams = {
     TableName,
     Key: {
       id: existingItem.id,
@@ -57,12 +46,12 @@ export function updateGamification(args) {
       '#level': 'level',
     },
     ExpressionAttributeValues: {
-      ':xp': args.xp,
-      ':level': args.level,
+      ':xp': xp,
+      ':level': level,
     },
     UpdateExpression: 'SET xp = :xp, level = :level',
     ReturnValues: 'ALL_NEW',
   };
 
-  return db.updateItem(params, args);
+  return db.updateItem(updateParams, existingItem);
 }
