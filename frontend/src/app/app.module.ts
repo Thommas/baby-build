@@ -46,7 +46,9 @@ import {
   AuthService,
   BrowserService,
   ChildService,
-  LocaleService
+  DexieService,
+  LocaleService,
+  ProgressService
 } from './services';
 
 @NgModule({
@@ -88,7 +90,9 @@ import {
     AuthService,
     BrowserService,
     ChildService,
-    LocaleService
+    DexieService,
+    LocaleService,
+    ProgressService
   ],
   bootstrap: [
     AppComponent

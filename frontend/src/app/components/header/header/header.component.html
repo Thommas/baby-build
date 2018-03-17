@@ -1,14 +1,14 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
   <header class="container" fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="100" fxLayout="row" [fxLayoutAlign]="authService.isAuthenticated() ? 'center center' : 'start center'">
+    <div fxFlex="100" fxLayout="row" [fxLayoutAlign]="(authService.isAuthenticated | async) ? 'center center' : 'start center'">
       <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
     </div>
-    <div fxFlex="100" *ngIf="!authService.isAuthenticated()" fxLayout="row" fxLayoutAlign="end center">
+    <div fxFlex="100" *ngIf="!(authService.isAuthenticated | async)" fxLayout="row" fxLayoutAlign="end center">
       <button mat-button color="primary" (click)="authService.login()" i18n>nav.login</button>
     </div>
   </header>
 </mat-toolbar>
-<mat-toolbar fxLayout="row" fxLayoutAlign="space-around center" *ngIf="authService.isAuthenticated()">
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-around center" *ngIf="authService.isAuthenticated | async">
   <app-header-parent-cmp fxFlex="30" fxLayout="row" fxLayoutAlign="space-around center"></app-header-parent-cmp>
   <app-header-child-cmp fxFlex="30" fxLayout="row" fxLayoutAlign="space-around center"></app-header-child-cmp>
   <app-header-build-cmp fxFlex="30" fxLayout="row" fxLayoutAlign="space-around center"></app-header-build-cmp>

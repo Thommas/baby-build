@@ -8,7 +8,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { BrowserService, LocaleService } from './services';
+import { AuthService, BrowserService, LocaleService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +21,12 @@ export class AppComponent implements OnInit {
    */
   constructor(
     public router: Router,
+    private authService: AuthService,
     private browserService: BrowserService,
     private localeService: LocaleService
-  ) {}
+  ) {
+    authService.scheduleRenewal();
+  }
 
   ngOnInit() {
     this.localeService.detectLocale();

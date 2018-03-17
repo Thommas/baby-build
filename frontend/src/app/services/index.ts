@@ -6,5 +6,8 @@ export * from './browser.service.stub';
 export * from './browser.service';
 export * from './build.service';
 export * from './child.service';
+export * from './dexie.service';
 export * from './locale.service';
+export * from './progress.service.stub';
+export * from './progress.service';
 export * from './router.stub';
