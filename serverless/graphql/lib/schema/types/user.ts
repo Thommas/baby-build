@@ -14,6 +14,7 @@ const User = `
   type Query {
     users: [User]
     user(id: ID!): User
+    authUser: User
   }
   type Mutation {
     createUser(

@@ -32,7 +32,8 @@ export class DexieService {
    * Get item
    */
   getItem(key: string): Observable<any> {
-    return Observable.fromPromise(this.keyValuePairsTable.get(key)).map(item => item.value);
+    return Observable.fromPromise(this.keyValuePairsTable.get(key))
+      .map((item: any) => item ? item.value : null);
   }
 
   /**

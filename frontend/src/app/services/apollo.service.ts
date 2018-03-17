@@ -38,16 +38,15 @@ export class ApolloService {
   }
 
   get middlewareLinkInstance() {
-    const token = 'FIXME';
     return new ApolloLink((operation, forward) => {
-      console.log('operation', operation)
-      console.log('forward', forward)
-      operation.setContext({
-        headers: {
-          authorization: `Bearer ${token}`
-        }
-      });
-      return forward(operation);
+      return this.authService.token.mergeMap(token => {
+        operation.setContext({
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        });
+        return forward(operation);
+      })
     })
   }
 }

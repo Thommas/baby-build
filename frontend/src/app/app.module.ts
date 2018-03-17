@@ -48,6 +48,7 @@ import {
   ChildService,
   DexieService,
   LocaleService,
+  UserService,
   ProgressService
 } from './services';
 
@@ -92,6 +93,7 @@ import {
     ChildService,
     DexieService,
     LocaleService,
+    UserService,
     ProgressService
   ],
   bootstrap: [

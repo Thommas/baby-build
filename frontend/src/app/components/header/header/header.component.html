@@ -9,7 +9,7 @@
   </header>
 </mat-toolbar>
 <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center" *ngIf="authService.isAuthenticated | async">
-  <app-header-parent-cmp fxFlex="30" fxLayout="row" fxLayoutAlign="space-around center"></app-header-parent-cmp>
+  <app-header-user-cmp fxFlex="30" fxLayout="row" fxLayoutAlign="space-around center"></app-header-user-cmp>
   <app-header-child-cmp fxFlex="30" fxLayout="row" fxLayoutAlign="space-around center"></app-header-child-cmp>
   <app-header-build-cmp fxFlex="30" fxLayout="row" fxLayoutAlign="space-around center"></app-header-build-cmp>
 </mat-toolbar>

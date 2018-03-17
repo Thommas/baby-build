@@ -33,12 +33,14 @@ export class AuthService {
 
   lock: any;
   refreshSubscription: any;
+  private tokenObs: Observable<string>;
   private isAuthenticatedObs: Observable<boolean>;
 
   /**
    * Constructor
    */
   constructor(private router: Router, private dexieService: DexieService) {
+    this.tokenObs = null;
     this.isAuthenticatedObs = null;
     this.lock = new Auth0Lock(
       environment.auth0.clientID,
@@ -100,6 +102,16 @@ export class AuthService {
         this.setSession(authResult);
       }
     });
+  }
+
+  /**
+   * Return the current idToken
+   */
+  get token(): Observable<string> {
+    if (!this.tokenObs) {
+      this.tokenObs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_ID_TOKEN);
+    }
+    return this.tokenObs;
   }
 
   /**
