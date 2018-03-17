@@ -1,26 +1,30 @@
 <footer fxLayout="row" fxLayoutAlign="space-around start">
-  <div fxLayout="column" fxLayoutAlign="start start">
-    <button mat-button *ngFor="let locale of localeService.locales"
-            (click)="localeService.setLocale(locale.value)">
+  <div fxLayout="column" fxLayoutAlign="center start">
+    <h5 i18n>footer.locale</h5>
+    <a href="javascript:;"
+       *ngFor="let locale of localeService.locales"
+       (click)="localeService.setLocale(locale.value)">
       {{ locale.label }}
-    </button>
+    </a>
   </div>
-  <div fxLayout="column" fxLayoutAlign="start start">
-    <button mat-button [routerLink]="['terms']" i18n>footer.terms</button>
-    <button mat-button [routerLink]="['branding']" i18n>footer.branding</button>
-    <button mat-button [routerLink]="['contact']" i18n>footer.contact</button>
+  <div fxLayout="column" fxLayoutAlign="center start">
+    <h5 i18n>footer.company</h5>
+    <a href="javascript:;" [routerLink]="['terms']" i18n>footer.terms</a>
+    <a href="javascript:;" [routerLink]="['branding']" i18n>footer.branding</a>
+    <a href="javascript:;" [routerLink]="['contact']" i18n>footer.contact</a>
   </div>
-  <div fxLayout="column" fxLayoutAlign="start start">
+  <div fxLayout="column" fxLayoutAlign="center start">
+    <h5 i18n>footer.social</h5>
     <a href="https://reddit.com/r/pathofchild" fxLayout="row" fxLayoutAlign="start center">
-      <img src="/assets/img/social/reddit-logo.svg" width="32" height="32" />
+      <img src="/assets/img/social/reddit-logo.svg" width="24" height="24" />
       <span>Reddit</span>
     </a>
     <a href="https://www.facebook.com/pathofchild" fxLayout="row" fxLayoutAlign="start center">
-      <img src="/assets/img/social/facebook-logo.svg" width="32" height="32" />
+      <img src="/assets/img/social/facebook-logo.svg" width="24" height="24" />
       <span>Facebook</span>
     </a>
      <a href="https://www.twitter.com/@pathofchild" fxLayout="row" fxLayoutAlign="start center">
-      <img src="/assets/img/social/twitter-logo.svg" width="32" height="32" />
+      <img src="/assets/img/social/twitter-logo.svg" width="24" height="24" />
       <span>Twitter</span>
     </a>
   </div>
