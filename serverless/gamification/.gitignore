@@ -1,0 +1,5 @@
+/node_modules
+/secrets.yml
+/.build
+/.serverless
+/npm-debug.log

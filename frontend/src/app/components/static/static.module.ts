@@ -22,7 +22,6 @@ import {
   MatMenuModule,
   MatProgressBarModule,
   MatSidenavModule,
-  MatStepperModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
@@ -32,7 +31,6 @@ import {
   routing,
   BrandingComponent,
   ContactComponent,
-  ContactDialogComponent,
   KitchenComponent,
   TermsComponent
 } from './';
@@ -55,7 +53,6 @@ import {
     MatMenuModule,
     MatProgressBarModule,
     MatSidenavModule,
-    MatStepperModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule
@@ -63,13 +60,9 @@ import {
   declarations: [
     BrandingComponent,
     ContactComponent,
-    ContactDialogComponent,
     KitchenComponent,
     TermsComponent
-  ],
-  entryComponents: [
-    ContactDialogComponent
   ]
 })
-export class StaticModule{
+export class StaticModule {
 }

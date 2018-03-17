@@ -10,7 +10,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { ApolloStub, BuildService, RouterStub } from '../../../services'
+import { ApolloStub, BuildService, RouterStub } from '../../../services';
 import { BuildIndexComponent } from './build-index.component';
 
 describe('BuildIndexComponent', () => {

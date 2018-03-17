@@ -1,13 +1,12 @@
 <mat-toolbar>
-  <button mat-icon-button [routerLink]="['/build/' + buildId]">
+  <button mat-icon-button [routerLink]="['/build/' + buildService.build.id]">
     <mat-icon>keyboard_arrow_left</mat-icon>
+    <span i18n>global.go_back</span>
   </button>
 </mat-toolbar>
 <form class="container" #childForm="ngForm">
   <mat-card>
-    <mat-card-title fxLayout="row">
-      Create a new quest
-    </mat-card-title>
+    <mat-card-title fxLayout="row" i18n>quest_create.title</mat-card-title>
     <mat-card-content fxLayout="column">
       <div fxLayout="row">
         <div fxLayout="row wrap" fxFlex="50">
@@ -43,7 +42,7 @@
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-      <button mat-raised-button type="submit" (click)="submit()" color="primary">Submit</button>
+      <button mat-raised-button type="submit" (click)="submit()" color="primary" i18n>form.submit</button>
     </mat-card-actions>
   </mat-card>
 </form>

@@ -1,6 +1,7 @@
 <mat-toolbar>
   <button mat-icon-button [routerLink]="['/build']">
     <mat-icon>keyboard_arrow_left</mat-icon>
+    <span i18n>global.go_back</span>
   </button>
 </mat-toolbar>
 <div class="container">
@@ -8,7 +9,7 @@
     <h1>{{ build.title }}</h1>
     <button mat-button [routerLink]="['/build/' + build.id + '/quest/create']">
       <mat-icon>add_circle</mat-icon>
-      Add a new quest
+      <span i18n>build_show.quest_create</span>
     </button>
   </div>
 </div>

@@ -2,14 +2,15 @@
 
 # environment variables
 /src/environments/environment.ts
-/src/environments/environment.prod.ts
+/src/environments/environment.staging.ts
+/src/environments/environment.production.ts
 
 # compiled output
 /dist
 /dist-server
 /tmp
 /out-tsc
-/public
+/build
 
 # dependencies
 /node_modules

@@ -26,5 +26,5 @@ export class WhitelistIndexComponent {
     'video',
     'videogame',
     'toy'
-  ]
+  ];
 }

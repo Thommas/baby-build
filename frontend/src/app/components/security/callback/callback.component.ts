@@ -7,7 +7,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../../../services';
 
@@ -18,9 +18,14 @@ import { AuthService } from '../../../services';
 })
 export class CallbackComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.router.navigate(['/']);
+    this.route.fragment.subscribe(fragment => {
+      this.authService.resumeAuth(fragment);
+    });
   }
 }

@@ -9,28 +9,26 @@
 import nanoid = require('nanoid');
 import * as db from './dynamo';
 
-const TableName = 'gamification';
+const TableName = process.env.GAMIFICATION_TABLE;
 
 export function getGamification(entityType, entityId) {
   const params = {
     TableName,
     Key: {
-      id,
-      entity_type: entityType,
-      entity_id: entityId
+      id: entityType + '-' + entityId
     },
   };
 
-  return = db.get(params);
+  return db.get(params);
 }
 
 export function updateGamification(args) {
+  const id = args.entity_type + '-' + args.entity_id;
+
   const params = {
     TableName,
     Key: {
-      id,
-      entity_type: args.entity_type,
-      entity_id: args.entity_id
+      id
     },
   };
 
@@ -40,9 +38,7 @@ export function updateGamification(args) {
     const params = {
       TableName,
       Item: {
-        id: nanoid(12),
-        entity_type: args.entity_type,
-        entity_id: args.entity_id,
+        id,
         xp: 0,
         level: 1
       },

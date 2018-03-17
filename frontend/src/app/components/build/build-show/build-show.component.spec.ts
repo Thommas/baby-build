@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
-import { ApolloStub, RouterStub } from '../../../services'
+import { ApolloStub, RouterStub } from '../../../services';
 import { BuildShowComponent } from './build-show.component';
 
 describe('BuildShowComponent', () => {

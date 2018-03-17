@@ -16,22 +16,34 @@ const jwksClient = jwks({
   jwksUri: process.env.AUTH0_JWKS_URI
 });
 
-const generatePolicy = (principalId, effect, resource) => {
-  const authResponse = {}
-  authResponse.principalId = principalId
-  if (effect && resource) {
-    const policyDocument = {}
-    policyDocument.Version = '2012-10-17'
-    policyDocument.Statement = []
-    const statementOne = {}
-    statementOne.Action = 'execute-api:Invoke'
-    statementOne.Effect = effect
-    statementOne.Resource = resource
-    policyDocument.Statement[0] = statementOne
-    authResponse.policyDocument = policyDocument
-  }
-  return authResponse
-}
+/**
+ * Returns an IAM policy document for a given user and resource.
+ *
+ * @method buildIAMPolicy
+ * @param {String} userId - user id
+ * @param {String} effect  - Allow / Deny
+ * @param {String} resource - resource ARN
+ * @param {String} context - response context
+ * @returns {Object} policyDocument
+ */
+const buildIAMPolicy = (userId, effect, resource, context) => {
+  const policy = {
+    principalId: userId,
+    policyDocument: {
+      Version: '2012-10-17',
+      Statement: [
+        {
+          Action: 'execute-api:Invoke',
+          Effect: effect,
+          Resource: resource,
+        },
+      ],
+    },
+    context,
+  };
+
+  return policy;
+};
 
 exports.auth = (event, context, callback) => {
   console.log('event', event)
@@ -64,7 +76,11 @@ exports.auth = (event, context, callback) => {
           return callback('Unauthorized')
         }
         console.log('valid from customAuthorizer', decoded)
-        return callback(null, generatePolicy(decoded.sub, 'Allow', event.methodArn))
+        const userId = decoded.sub
+        const effect = 'Allow'
+        const resource = event.methodArn
+        const authorizerContext = { user_id: userId }
+        return callback(null, buildIAMPolicy(userId, effect, resource, authorizerContext))
       })
     })
   } catch (err) {
@@ -74,7 +90,11 @@ exports.auth = (event, context, callback) => {
 }
 
 exports.graphql = (event, context, callback) => {
+  console.log('userId', event.requestContext.authorizer.user_id);
+  const graphQLContext = { user_id: event.requestContext.authorizer.user_id };
+
   const callbackFilter = (error, output) => {
+    console.log('output', output)
     const outputWithHeader = Object.assign({}, output, {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -83,5 +103,5 @@ exports.graphql = (event, context, callback) => {
     callback(error, outputWithHeader);
   };
 
-  graphqlLambda({ schema })(event, context, callbackFilter);
+  graphqlLambda({ schema, context: graphQLContext })(event, context, callbackFilter);
 };

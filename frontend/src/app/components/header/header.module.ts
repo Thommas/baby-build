@@ -37,7 +37,7 @@ import {
   HeaderComponent,
   HeaderBuildComponent,
   HeaderChildComponent,
-  HeaderParentComponent
+  HeaderUserComponent
 } from './';
 
 @NgModule({
@@ -72,7 +72,7 @@ import {
     HeaderComponent,
     HeaderBuildComponent,
     HeaderChildComponent,
-    HeaderParentComponent
+    HeaderUserComponent
   ],
   providers: [
     AuthService

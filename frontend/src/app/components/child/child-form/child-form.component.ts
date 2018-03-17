@@ -31,7 +31,7 @@ export class ChildFormComponent {
 
   submit() {
     // FIXME Form validation
-    let child = clone(this.child);
+    const child = clone(this.child);
     child.birthdate = child.birthdate.format('x');
     this.apollo.mutate({
       mutation: CreateChildMutation,
