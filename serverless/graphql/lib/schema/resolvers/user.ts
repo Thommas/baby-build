@@ -11,13 +11,18 @@ import * as dbUser from '../../dynamo/user';
 
 export default {
   Query: {
-    users: () => dbUser.getUsers(),
-    user: (_, args) => dbUser.getUserById(args.id),
+    users: (_, args, context) => dbUser.getUsers(context.user_id),
+    user: (_, args, context) => dbUser.getUserById(args.id, context.user_id),
+    authUser: (_, args, context) => {
+      const user = dbUser.getUserById(context.user_id)
+      if (user) {
+        return user;
+      }
+      return dbUser.createUser(args, context.user_id)
+    }
   },
   Mutation: {
-    createUser: (_, args) => dbUser.createUser(args),
-    updateUser: (_, args) => dbUser.updateUser(args),
-    deleteUser: (_, args) => dbUser.deleteUser(args),
+    updateUser: (_, args, context) => dbUser.updateUser(args, context.user_id)
   },
   User: {
     gamification: user => dbGamification.getGamification('user', user.id),

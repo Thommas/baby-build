@@ -10,12 +10,12 @@ import * as dbWhitelistItem from '../../dynamo/whitelist-item';
 
 export default {
   Query: {
-    whitelistItems: (_, args) => dbWhitelistItem.getWhitelistItems(args.category),
-    whitelistItem: (_, args) => dbWhitelistItem.getWhitelistItemById(args.id),
+    whitelistItems: (_, args, context) => dbWhitelistItem.getWhitelistItems(args.category, context.user_id),
+    whitelistItem: (_, args, context) => dbWhitelistItem.getWhitelistItemById(args.id, context.user_id),
   },
   Mutation: {
-    createWhitelistItem: (_, args) => dbWhitelistItem.createWhitelistItem(args),
-    updateWhitelistItem: (_, args) => dbWhitelistItem.updateWhitelistItem(args),
-    deleteWhitelistItem: (_, args) => dbWhitelistItem.deleteWhitelistItem(args),
+    createWhitelistItem: (_, args, context) => dbWhitelistItem.createWhitelistItem(args, context.user_id),
+    updateWhitelistItem: (_, args, context) => dbWhitelistItem.updateWhitelistItem(args, context.user_id),
+    deleteWhitelistItem: (_, args, context) => dbWhitelistItem.deleteWhitelistItem(args, context.user_id),
   }
 };

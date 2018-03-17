@@ -64,7 +64,7 @@ export class WhitelistFormComponent implements OnChanges {
     if (!this.formGroup.valid) {
       return;
     }
-    let whitelistItem = clone(this.formGroup.value);
+    const whitelistItem = clone(this.formGroup.value);
     whitelistItem.category = this.category;
     this.apollo.mutate({
       mutation: whitelistItem.id ? UpdateWhitelistItemMutation : CreateWhitelistItemMutation,

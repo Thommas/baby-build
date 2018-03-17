@@ -1,34 +1,31 @@
-<footer fxLayout="row" fxFill fxLayoutAlign="space-around center">
-  <div fxLayout="column" fxLayoutAlign="start start">
-    <button mat-button class="locale-button" [matMenuTriggerFor]="localeMenu">
-       <span i18n>footer.locale</span>
-       <mat-icon>keyboard_arrow_down</mat-icon>
-    </button>
+<footer fxLayout="row" fxLayoutAlign="space-around start">
+  <div fxLayout="column" fxLayoutAlign="center start">
+    <h5 i18n>footer.locale</h5>
+    <a href="javascript:;"
+       *ngFor="let locale of localeService.locales"
+       (click)="localeService.setLocale(locale.value)">
+      {{ locale.label }}
+    </a>
   </div>
-  <div fxLayout="column" fxLayoutAlign="start start">
+  <div fxLayout="column" fxLayoutAlign="center start">
+    <h5 i18n>footer.company</h5>
     <a href="javascript:;" [routerLink]="['terms']" i18n>footer.terms</a>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="start start">
-    <button mat-icon-button>
-      <img src="/assets/img/social/reddit-logo.svg" width="32" height="32" />
-    </button>
-    <button mat-icon-button>
-      <img src="/assets/img/social/facebook-logo.svg" width="32" height="32" />
-    </button>
-    <button mat-icon-button>
-      <img src="/assets/img/social/twitter-logo.svg" width="32" height="32" />
-    </button>
-  </div>
-  <div fxLayout="column" fxLayoutAlign="start start">
+    <a href="javascript:;" [routerLink]="['branding']" i18n>footer.branding</a>
     <a href="javascript:;" [routerLink]="['contact']" i18n>footer.contact</a>
   </div>
+  <div fxLayout="column" fxLayoutAlign="center start">
+    <h5 i18n>footer.social</h5>
+    <a href="https://reddit.com/r/pathofchild" fxLayout="row" fxLayoutAlign="start center">
+      <img src="/assets/img/social/reddit-logo.svg" width="24" height="24" />
+      <span>Reddit</span>
+    </a>
+    <a href="https://www.facebook.com/pathofchild" fxLayout="row" fxLayoutAlign="start center">
+      <img src="/assets/img/social/facebook-logo.svg" width="24" height="24" />
+      <span>Facebook</span>
+    </a>
+     <a href="https://www.twitter.com/@pathofchild" fxLayout="row" fxLayoutAlign="start center">
+      <img src="/assets/img/social/twitter-logo.svg" width="24" height="24" />
+      <span>Twitter</span>
+    </a>
+  </div>
 </footer>
-<mat-menu #childrenMenu="matMenu">
-  <button mat-menu-item [routerLink]="['/child']" i18n>nav.manage_children</button>
-</mat-menu>
-<mat-menu #localeMenu="matMenu">
-  <button mat-menu-item *ngFor="let locale of locales"
-          (click)="switchLocale(locale.value)">
-    {{ locale.label }}
-  </button>
-</mat-menu>

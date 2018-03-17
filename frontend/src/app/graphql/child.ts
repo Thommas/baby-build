@@ -18,8 +18,10 @@ export const GetChild = gql`
       nickname
       birthdate
       gender
-      xp
-      level
+      gamification {
+        xp
+        level
+      }
     }
   }
 `;
@@ -34,8 +36,10 @@ export const GetChildren = gql`
       nickname
       birthdate
       gender
-      xp
-      level
+      gamification {
+        xp
+        level
+      }
     }
   }
 `;

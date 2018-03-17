@@ -7,6 +7,12 @@ plugins:
 
 custom:
   stage: ${opt:stage, self:provider.stage}
+  buildTable: ${self:service}-${self:custom.stage}-build
+  childTable: ${self:service}-${self:custom.stage}-child
+  gamificationTable: ${self:service}-${self:custom.stage}-gamification
+  questTable: ${self:service}-${self:custom.stage}-quest
+  userTable: ${self:service}-${self:custom.stage}-user
+  whitelistItemTable: ${self:service}-${self:custom.stage}-whitelist-item
   secrets: ${file(secrets.yml):${self:custom.stage}}
   serverless-offline:
     port: 4001
@@ -19,15 +25,17 @@ custom:
     seed:
       test:
         sources:
-          - table: build
+          - table: ${self:custom.buildTable}
             sources: [./fixtures/build.json]
-          - table: child
+          - table: ${self:custom.childTable}
             sources: [./fixtures/child.json]
-          - table: quest
+          - table: ${self:custom.gamificationTable}
+            sources: [./fixtures/gamification.json]
+          - table: ${self:custom.questTable}
             sources: [./fixtures/quest.json]
-          - table: user
+          - table: ${self:custom.userTable}
             sources: [./fixtures/user.json]
-          - table: whitelist_item
+          - table: ${self:custom.whitelistItemTable}
             sources: [./fixtures/whitelist-item.json]
 
 package:
@@ -37,6 +45,8 @@ package:
 provider:
   name: aws
   runtime: nodejs6.10
+  region: eu-west-2
+  stage: dev
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -47,11 +57,23 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: arn:aws:dynamodb:eu-west-1:*:*
+        - dynamodb:GetRecords
+        - dynamodb:GetShardIterator
+        - dynamodb:DescribeStream
+        - dynamodb:ListStreams
+      Resource: arn:aws:dynamodb:${self:provider.region}:*:*
   environment:
-    AUTH0_CLIENT_ID: "${self:custom.secrets.AUTH0_CLIENT_ID}"
-    AUTH0_JWKS_URI: "${self:custom.secrets.AUTH0_JWKS_URI}"
-    AUTH0_JWKS_KID: "${self:custom.secrets.AUTH0_JWKS_KID}"
+    DYNAMODB_REGION: ${self:custom.secrets.DYNAMODB_REGION}
+    DYNAMODB_ENDPOINT: ${self:custom.secrets.DYNAMODB_ENDPOINT}
+    AUTH0_CLIENT_ID: ${self:custom.secrets.AUTH0_CLIENT_ID}
+    AUTH0_JWKS_URI: ${self:custom.secrets.AUTH0_JWKS_URI}
+    AUTH0_JWKS_KID: ${self:custom.secrets.AUTH0_JWKS_KID}
+    BUILD_TABLE: ${self:custom.buildTable}
+    CHILD_TABLE: ${self:custom.childTable}
+    GAMIFICATION_TABLE: ${self:custom.gamificationTable}
+    QUEST_TABLE: ${self:custom.questTable}
+    USER_TABLE: ${self:custom.userTable}
+    WHITELIST_ITEM_TABLE: ${self:custom.whitelistItemTable}
 
 functions:
   customAuthorizer:
@@ -67,7 +89,7 @@ functions:
 
 resources:
   Resources:
-    buildTable:
+    BuildTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -80,10 +102,10 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'build'
+        TableName: ${self:custom.buildTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    childTable:
+    ChildTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -96,10 +118,10 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'child'
+        TableName: ${self:custom.childTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    questTable:
+    GamificationTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -112,10 +134,10 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'quest'
+        TableName: ${self:custom.gamificationTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    userTable:
+    QuestTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -128,10 +150,10 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'user'
+        TableName: ${self:custom.questTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    whitelistItemTable:
+    UserTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -144,6 +166,59 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'whitelist_item'
+        TableName: ${self:custom.userTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
+    WhitelistItemTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.whitelistItemTable}
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+  Outputs:
+    BuildTableStreamArn:
+      Description: The StreamArn for the Build Table
+      Value:
+        "Fn::GetAtt": [ BuildTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:BuildTableStreamArn
+    ChildTableStreamArn:
+      Description: The StreamArn for the Child Table
+      Value:
+        "Fn::GetAtt": [ ChildTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:ChildTableStreamArn
+    GamificationTableStreamArn:
+      Description: The StreamArn for the Gamification Table
+      Value:
+        "Fn::GetAtt": [ GamificationTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:GamificationTableStreamArn
+    QuestTableStreamArn:
+      Description: The StreamArn for the Quest Table
+      Value:
+        "Fn::GetAtt": [ QuestTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:QuestTableStreamArn
+    UserTableStreamArn:
+      Description: The StreamArn for the User Table
+      Value:
+        "Fn::GetAtt": [ UserTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:UserTableStreamArn
+    WhitelistItemTableStreamArn:
+      Description: The StreamArn for the WhitelistItem Table
+      Value:
+        "Fn::GetAtt": [ WhitelistItemTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:WhitelistItemTableStreamArn

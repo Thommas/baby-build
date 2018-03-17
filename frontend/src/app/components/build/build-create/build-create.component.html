@@ -1,41 +1,31 @@
 <mat-toolbar>
   <button mat-icon-button [routerLink]="['/build']">
     <mat-icon>keyboard_arrow_left</mat-icon>
-    <span>Go back</span>
+    <span i18n>global.go_back</span>
   </button>
 </mat-toolbar>
 <form #childForm="ngForm" class="container">
   <mat-card>
-    <mat-card-title fxLayout="row">
-      Add build information
-    </mat-card-title>
+    <mat-card-title fxLayout="row" i18n>build_create.title</mat-card-title>
     <mat-divider></mat-divider>
     <mat-card-content fxLayout="row">
-      <div fxLayout="row wrap" fxFlex="50">
-        <mat-form-field>
-          <input matInput placeholder="Build title"
-                 [(ngModel)]="build.title" name="title">
-        </mat-form-field>
-        <mat-form-field fxFill>
-         <textarea matInput
-                   placeholder="build.description" i18n-placeholder
-                   matTextareaAutosize
-                   matAutosizeMinRows="4"
-                   matAutosizeMaxRows="8"
-                   [(ngModel)]="build.description"
-                   name="description"></textarea>
-        </mat-form-field>
-      </div>
-      <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
-        <div fxLayout="column" fxLayoutAlign="center center">
-          <img src="https://www.shareicon.net/download/2016/06/25/786542_people.svg"/>
-          <span i18n>child_create.boy</span>
-        </div>
-      </div>
+      <mat-form-field>
+        <input matInput placeholder="build.title" i18n-placeholder
+               [(ngModel)]="build.title" name="title">
+      </mat-form-field>
+      <mat-form-field fxFill>
+       <textarea matInput
+                 placeholder="build.description" i18n-placeholder
+                 matTextareaAutosize
+                 matAutosizeMinRows="4"
+                 matAutosizeMaxRows="8"
+                 [(ngModel)]="build.description"
+                 name="description"></textarea>
+      </mat-form-field>
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-      <button mat-raised-button type="submit" (click)="submit()" color="primary">Submit</button>
+      <button mat-raised-button type="submit" (click)="submit()" color="primary" i18n>form.submit</button>
     </mat-card-actions>
   </mat-card>
 </form>

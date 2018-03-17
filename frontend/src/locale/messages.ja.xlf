@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="1c6dc811653170d16b1051eda5ee6c04fa4841fe" datatype="html">
         <source>shared.page_not_found.title</source>
-        <target>Page not found</target>
+        <target>ページが見つかりません</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/shared/page-not-found/page-not-found.component.ts</context>
           <context context-type="linenumber">1</context>
@@ -20,7 +20,7 @@
       </trans-unit>
       <trans-unit id="ec515efebab17ac56329c9610cd0fb0450145874" datatype="html">
         <source>shared.page_not_found.back</source>
-        <target>Go back to homepage</target>
+        <target>ホームに戻る</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/shared/page-not-found/page-not-found.component.ts</context>
           <context context-type="linenumber">11</context>
@@ -28,7 +28,7 @@
       </trans-unit>
       <trans-unit id="dd494d4432319ab19ce4e5ee1927db38dcd36770" datatype="html">
         <source>app.footer.locale</source>
-        <target>English</target>
+        <target>英語</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.ts</context>
           <context context-type="linenumber">35</context>
@@ -36,7 +36,7 @@
       </trans-unit>
       <trans-unit id="8632a90cb2d9a4f5b1b4486b24c6ebdccb950416" datatype="html">
         <source>home.title</source>
-        <target>Have fun planning your child's future</target>
+        <target>子供の将来設計を楽しう</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
           <context context-type="linenumber">3</context>
@@ -44,7 +44,7 @@
       </trans-unit>
       <trans-unit id="8661041ced3b3ced1b7b1a76f22ab22f18044f1a" datatype="html">
         <source>home.hero1</source>
-        <target>Organize education goals</target>
+        <target>教育ゴールを作る</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
           <context context-type="linenumber">6</context>
@@ -52,7 +52,7 @@
       </trans-unit>
       <trans-unit id="d7527e62aa3286845b3f9469f6caddd1d6931bee" datatype="html">
         <source>home.hero2</source>
-        <target>Prepare incentives and rewards</target>
+        <target>やる気UPにつながる物を準備する</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
           <context context-type="linenumber">10</context>
@@ -60,7 +60,7 @@
       </trans-unit>
       <trans-unit id="196e0b265e13b58ef2959bf2aeefeb95e07a59ac" datatype="html">
         <source>home.hero3</source>
-        <target>Share your ideas and learn new tips</target>
+        <target>教育アイディアを共有、役立つ情報を得る</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
           <context context-type="linenumber">14</context>
@@ -68,7 +68,7 @@
       </trans-unit>
       <trans-unit id="700e8cd41c752cf34677527d3ce4adba6702584a" datatype="html">
         <source>home.hero4</source>
-        <target>Enjoy imagining new possibilities</target>
+        <target>子供の可能性を引き出すことを楽しもう</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
           <context context-type="linenumber">18</context>
@@ -76,13 +76,13 @@
       </trans-unit>
       <trans-unit id="a1f335c82f7aee1cb41010ce84bd11144705e1a0" datatype="html">
         <source>home.story.idea</source>
-        <target><![CDATA[Each parent can tailor the platform to match their vision of education
+        <target><![CDATA[各教育概念に合わせてプラットフォームを調整
         <ul>
-          <li>Plan technology and digital contents that the child will get access to</li>
-          <li>Limited time investment and easy to use</li>
-          <li>Promote gender equity and allow specific culture, religion, belief, family traditions</li>
-          <li>Cherry pick a few quality photos every month</li>
-          <li>Write time capsule messages for your child to read in the future</li>
+          <li>子供がアクセスする技術やデジタルコンテンツの管理</li>
+          <li>短時間で簡単</li>
+          <li>男女平等、特定の文化、宗教、信仰、家族行事などを自然に培う</li>
+          <li>毎月数枚の写真を選んで保存</li>
+          <li>子供が将来に読むタイムカプセルメッセージの記入</li>
         </ul>]]></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
@@ -91,12 +91,12 @@
       </trans-unit>
       <trans-unit id="f3d24e1190b56ec68b92112597d5b5b7d2593967" datatype="html">
         <source>home.story.share</source>
-        <target><![CDATA[The platform will help share popular education tips
+        <target><![CDATA[よくある教育アドバイスの共有
         <ul>
-          <li>Other family members can also contribute</li>
-          <li>See statistics about recommended age to access digital contents</li>
-          <li>Share your ideas with the community</li>
-          <li>Read about how to best ensure your child's success</li>
+          <li>家族や友人も教育アイディアを共有</li>
+          <li>デジタルコンテンツを見る推奨年齢の統計の確認</li>
+          <li>貴方のアイディアをコミュニティに共有</li>
+          <li>子供の成功を確かにする方法を確認</li>
         </ul>]]></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
@@ -105,12 +105,12 @@
       </trans-unit>
       <trans-unit id="3f19ca2a6cd6f14c8d60b248b572aba8d839edb6" datatype="html">
         <source>home.story.path</source>
-        <target><![CDATA[Cultivate depth and curiosity instead of short interaction and waste of time
+        <target><![CDATA[子供の好奇心を養う
         <ul>
-          <li>Improve your child curiosity by giving interesting choices to explore</li>
-          <li>Give positive incentives for your child to try new things</li>
-          <li>Identify and prevent passivity like watching TV, youtube or playing bad quality games</li>
-          <li>Stay in control of what you give access to your child</li>
+          <li>様々な面白い選択を与えて子供の好奇心を醸成</li>
+          <li>新しいことをチャレンジするようやる気を与える</li>
+          <li>TVやYouTube、良くないゲームを防ぐ</li>
+          <li>子供に何を与えて、何を与えないか把握しておく</li>
         </ul>]]></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>

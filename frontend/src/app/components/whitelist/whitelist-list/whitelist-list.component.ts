@@ -6,14 +6,14 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 import { clone } from 'lodash';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import { GetWhitelistItems, DeleteWhitelistItem } from '../../../graphql';
-import { WhitelistEditComponent } from '../whitelist-edit/whitelist-edit.component'
+import { WhitelistEditComponent } from '../whitelist-edit/whitelist-edit.component';
 
 @Component({
   selector: 'app-whitelist-list-cmp',

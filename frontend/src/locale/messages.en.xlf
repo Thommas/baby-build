@@ -2,6 +2,38 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="70d23731a3d0665ecd858e227d14f9c53d619d90" datatype="html">
+        <source>footer.locale</source>
+        <target>Language</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/footer/footer/footer.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="428e4b8d0260eaa8bb061c8204396c53890c6a5d" datatype="html">
+        <source>footer.terms</source>
+        <target>Terms</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/footer/footer/footer.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="95def9ed7a71aaeb276157b02121753f23717524" datatype="html">
+        <source>footer.contact</source>
+        <target>Contact</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/footer/footer/footer.component.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="78e6d2a011c1338b7c2391a9c69812a4e9a4f08e" datatype="html">
+        <source>nav.login</source>
+        <target>Login</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/header/header/header.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1c6dc811653170d16b1051eda5ee6c04fa4841fe" datatype="html">
         <source>shared.page_not_found.title</source>
         <target>Page not found</target>
@@ -12,7 +44,7 @@
       </trans-unit>
       <trans-unit id="fb82cc663976a94294f26ca8dd45034a7cd363bc" datatype="html">
         <source>shared.page_not_found.description</source>
-        <target>404</target>
+        <target></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/shared/page-not-found/page-not-found.component.ts</context>
           <context context-type="linenumber">3</context>
@@ -20,18 +52,234 @@
       </trans-unit>
       <trans-unit id="ec515efebab17ac56329c9610cd0fb0450145874" datatype="html">
         <source>shared.page_not_found.back</source>
-        <target>Go back to homepage</target>
+        <target>Go back</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/shared/page-not-found/page-not-found.component.ts</context>
           <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="dd494d4432319ab19ce4e5ee1927db38dcd36770" datatype="html">
-        <source>app.footer.locale</source>
-        <target>English</target>
+      <trans-unit id="6dbe5d69c96ff8a2043c9166633f2713931d6476" datatype="html">
+        <source>global.go_back</source>
+        <target>Go back</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.ts</context>
+          <context context-type="sourcefile">app/components/build/build-create/build-create.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-show/build-show.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/quest-create/quest-create.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-create/child-create.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-delete/child-delete.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-update/child-update.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b52ba4420bfeff91705e037df70d6cdba870330" datatype="html">
+        <source>build_create.title</source>
+        <target>Create a new build</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-create/build-create.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="feb2866f62c68f41598741be77827080efabdf18" datatype="html">
+        <source>build.title</source>
+        <target>Title</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-create/build-create.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7c902e5c9b26bb6c590947734b27a0ac3bb65a15" datatype="html">
+        <source>build.description</source>
+        <target>Description</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-create/build-create.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1952881b18a79110c387c3016451e6d67027d2fb" datatype="html">
+        <source>form.submit</source>
+        <target>Submit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-create/build-create.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/quest-create/quest-create.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/whitelist/whitelist-form/whitelist-form.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="75dc3f28ed33af5a5e65b4627b65b021e7e0b606" datatype="html">
+        <source>build_index.title</source>
+        <target>List of builds</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-index/build-index.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="108043d7bf71464dad195911561137545dc5d3a0" datatype="html">
+        <source>build_show.quest_create</source>
+        <target>Create quest</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-show/build-show.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="434e5110f5f34354de153cbb189143eeac5ec5b5" datatype="html">
+        <source>quest_create.title</source>
+        <target>Create quest</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/quest-create/quest-create.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f0792aed43f583703a49c596ee76697ffcb8d4e7" datatype="html">
+        <source>child_delete.title</source>
+        <target>Remove a child</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-delete/child-delete.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3d3975051b72eb5915f937f0154447750470c14b" datatype="html">
+        <source>global.yes</source>
+        <target>Yes</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-delete/child-delete.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="852db2fede80cada31e4804dcf6d1bdb79da1631" datatype="html">
+        <source>child_form.title</source>
+        <target>Title</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="695209b7204d063378ccdc031a56d28626285393" datatype="html">
+        <source>child_form.first_name</source>
+        <target>First name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="30cdbc3d4cfad0cde7d84eb6f418b2022bc3266c" datatype="html">
+        <source>child_form.middle_names</source>
+        <target>Middle names</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a754329b85335f53ee39fe31c491cd289f97860" datatype="html">
+        <source>child_form.last_name</source>
+        <target>Last name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="71557fa41d2403083092a3881dccc6fb3f570784" datatype="html">
+        <source>child_form.nickname</source>
+        <target>Nickname</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="848be0afe804b252d12b04b608ae525c72a28eb4" datatype="html">
+        <source>child_form.birthdate</source>
+        <target>Birthdate</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7ff5de86a03317fa8e97f0be3a3e529c94a7b64" datatype="html">
+        <source>child_form.girl</source>
+        <target>Girl</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
           <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4495e3e0366b5b5d0d3ddaea4faf06f6d55bc721" datatype="html">
+        <source>child_form.boy</source>
+        <target>Boy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="423956296786635b506c70135f3e65f9df427248" datatype="html">
+        <source>child_index.title</source>
+        <target>List of children</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-index/child-index.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d0c028e2cdbfc31e9f395df5f7074dc5ff719c1e" datatype="html">
+        <source>child_index.child_create</source>
+        <target>Add child</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-index/child-index.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3f6e497b1f538d5628a80229f04b7e8f8fb66490" datatype="html">
+        <source>nav.build</source>
+        <target>Builds</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/header/header-build/header-build.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="036280b90d44df165ec9017d216b9c69f6c2b4b3" datatype="html">
+        <source>nav.child</source>
+        <target>Children</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/header/header-child/header-child.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7b16bdabcc99501b771e3edc61478b9652500b96" datatype="html">
+        <source>nav.whitelist</source>
+        <target>Whitelist</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/header/header-parent/header-parent.component.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="97cb1c2d2060255df00a3a3fa579e61604fe0cba" datatype="html">
+        <source>nav.profile</source>
+        <target>Profile</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/header/header-parent/header-parent.component.ts</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8632a90cb2d9a4f5b1b4486b24c6ebdccb950416" datatype="html">
@@ -72,6 +320,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
           <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0fa3d0f7faaa107369f95d8a89fd1eb641597765" datatype="html">
+        <source>home.signup</source>
+        <target>Sign up</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a1f335c82f7aee1cb41010ce84bd11144705e1a0" datatype="html">
@@ -139,6 +395,178 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
           <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f196f0ef68cd65b749bd23fa220384701e19b002" datatype="html">
+        <source>nav.logout</source>
+        <target>Logout</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/parent/parent-edit/parent-edit.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="69bbce6c96602b9c5c686c37bfc1b5f23baeff82" datatype="html">
+        <source>contact.step.information</source>
+        <target>Information</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact-dialog/contact-dialog.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a8a0066ae54e9af19ec2742bb2131dcdb0093cf7" datatype="html">
+        <source>contact.name</source>
+        <target>Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact-dialog/contact-dialog.component.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5d4a35967a9a115df4910b334b7ec0a1921e6a3d" datatype="html">
+        <source>contact.email</source>
+        <target>Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact-dialog/contact-dialog.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="adcc5c5ad32b76a486ac6d9b45daf140620352f4" datatype="html">
+        <source>contact.next</source>
+        <target>Next</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact-dialog/contact-dialog.component.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact-dialog/contact-dialog.component.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eab3f19fe2f13099ca4e4c4ff412e52c36fc3b84" datatype="html">
+        <source>contact.step.message</source>
+        <target>Message</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact-dialog/contact-dialog.component.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ebe5259f58b09941808555a944e703b8d0ad0b74" datatype="html">
+        <source>contact.message</source>
+        <target>Message</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact-dialog/contact-dialog.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="90b92b1283c6cec2d6cb1f3c6cc62469a3763395" datatype="html">
+        <source>contact.back</source>
+        <target>Go back</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact-dialog/contact-dialog.component.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2c4f6d9f538110574c5678eaee433c6d62a4c0b9" datatype="html">
+        <source>contact.step.confirmation</source>
+        <target>Confirmation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact-dialog/contact-dialog.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="08de84422b90a5d76bc9018900606d6e81e9ec6b" datatype="html">
+        <source>contact.submit</source>
+        <target>Submit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact-dialog/contact-dialog.component.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="047064c7dfec971704ba1439a8ca1ae454ba9fdc" datatype="html">
+        <source>contact.title</source>
+        <target></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bb455b3bfe39d9b58c25641bb7badd38c919c720" datatype="html">
+        <source>contact.description</source>
+        <target></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="afb69d25511f79e229661ea46b1856fa1b03c9fa" datatype="html">
+        <source>contact.twitter.title</source>
+        <target></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f162a76bc3ff81ac473e69eec0d0fb4adf6cdf83" datatype="html">
+        <source>contact.twitter.description</source>
+        <target></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cee0a83c6f26c57510910cfc677960770d6f8f1e" datatype="html">
+        <source>contact.reddit.title</source>
+        <target></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="457265172da1d85489bfe7f6900f23dc00f36379" datatype="html">
+        <source>contact.reddit.description</source>
+        <target></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f33cbfedde10a91df8ca14c499d7617a86e65b84" datatype="html">
+        <source>contact.open_dialog</source>
+        <target>Contact</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be612954d15aa02e8dec27c26185ed79efe1bdad" datatype="html">
+        <source>terms.tldr</source>
+        <target></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/terms/terms.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="435154a40ec8f72b206fdcf21f91628139314fd4" datatype="html">
+        <source>terms.contract</source>
+        <target></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/terms/terms.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2feb775bd9e1d01714a7545173ea322d40c537d5" datatype="html">
+        <source>whitelist.list.header.title</source>
+        <target>Title</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/whitelist/whitelist-list/whitelist-list.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="95bd8efb4b5af5e7c0129a7547fdff78dcfa8870" datatype="html">
+        <source>whitelist.list.header.required_age</source>
+        <target>Required age</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/whitelist/whitelist-list/whitelist-list.component.ts</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
     </body>

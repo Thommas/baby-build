@@ -11,7 +11,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
-import { ApolloStub, RouterStub } from '../../../services'
+import { ApolloStub, RouterStub } from '../../../services';
 import { BuildCreateComponent } from './build-create.component';
 
 describe('BuildCreateComponent', () => {

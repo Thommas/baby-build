@@ -6,9 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { ContactDialogComponent } from '../contact-dialog/contact-dialog.component';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-static-contact-cmp',
@@ -16,11 +14,18 @@ import { ContactDialogComponent } from '../contact-dialog/contact-dialog.compone
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
-  constructor(private dialog: MatDialog) {}
+  @ViewChild('contactForm') contactForm: any;
+  contact: any;
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ContactDialogComponent, {
-      data: {}
-    });
+  constructor() {
+    this.contact = {
+      name: '',
+      email: '',
+      message: ''
+    };
+  }
+
+  submit() {
+    console.log('submit form', this.contactForm.valid);
   }
 }
