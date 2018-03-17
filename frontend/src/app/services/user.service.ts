@@ -24,7 +24,7 @@ export class UserService {
     })
       .valueChanges
       .subscribe(({ data }) => {
-        if (data.authUser) {
+        if (data && data.authUser) {
           this.user = data.authUser;
         } else {
           this.user = {

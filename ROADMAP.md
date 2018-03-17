@@ -4,10 +4,13 @@ Roadmap
 Short term
 ----------
 
-- Finish customizing homepage pictures
 - Finish contact form with google captcha and lambda
 - Implement gamification handler to update xp/level
 - Improve dynamic header based on child, build, xp, level
+
+Mid term
+--------
+
 - Implement add/remove/edit quest
 - Design calendar for build
 - Implement xp and level to unlock calendar

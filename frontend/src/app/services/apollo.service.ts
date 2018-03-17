@@ -11,7 +11,6 @@ import { HttpHeaders } from '@angular/common/http';
 import { Apollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular-link-http';
 import { ApolloLink } from 'apollo-link';
-import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
@@ -39,13 +38,15 @@ export class ApolloService {
 
   get middlewareLinkInstance() {
     return new ApolloLink((operation, forward) => {
-      return this.authService.token.mergeMap(token => {
-        operation.setContext({
-          headers: {
-            authorization: `Bearer ${token}`
-          }
-        });
-        return forward(operation);
+      return Observable.fromPromise(new Promise((resolve) => {
+        resolve(this.authService.token.mergeMap(token => {
+          operation.setContext({
+            headers: {
+              authorization: `Bearer ${token}`
+            }
+          });
+          return forward(operation);
+        })))
       })
     })
   }
