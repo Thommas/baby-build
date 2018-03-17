@@ -23,7 +23,7 @@ export class LocaleService {
 
   public detectLocale() {
     let detectedLocale = this.browserService.language;
-    if (this.LOCALES.map(locale => locale.value).indexOf(locale) === -1) {
+    if (this.LOCALES.map(locale => locale.value).indexOf(detectedLocale) === -1) {
       detectedLocale = 'en';
     }
     if (detectedLocale !== 'en') {

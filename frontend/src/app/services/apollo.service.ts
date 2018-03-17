@@ -11,9 +11,11 @@ import { HttpHeaders } from '@angular/common/http';
 import { Apollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular-link-http';
 import { ApolloLink } from 'apollo-link';
+import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/toPromise';
 import { AuthService } from './auth.service';
 import { ProgressService } from './progress.service';
 import { environment } from '../../environments/environment';
@@ -46,15 +48,15 @@ export class ApolloService {
    * Get middlewareLink to inject token in context headers
    */
   get middlewareLinkInstance(): ApolloLink {
-    return new ApolloLink((operation, forward) => {
-      return this.authService.token.mergeMap(token => {
-        operation.setContext({
+    return setContext((_, { headers }) => {
+      return this.authService.token.map((token: string) => {
+        return {
           headers: {
+            ...headers,
             authorization: `Bearer ${token}`
           }
-        });
-        return forward(operation);
-      });
+        };
+      }).toPromise();
     });
   }
 }
