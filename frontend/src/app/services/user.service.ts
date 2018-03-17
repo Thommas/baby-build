@@ -33,7 +33,7 @@ export class UserService {
               xp: 0,
               level: 1
             }
-          }
+          };
         }
       });
   }

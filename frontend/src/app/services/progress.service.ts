@@ -7,7 +7,6 @@
  */
 
 import { EventEmitter } from '@angular/core';
-import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/timer';
@@ -39,14 +38,14 @@ export class ProgressService {
     this.count++;
     this.countChange.emit(this.count);
     return obs
-      .map((res) => { return this.handleProcessingResponse(res); })
-      .catch((error) => { return this.handleProcessingError(error); });
+      .map((res) => this.handleProcessingResponse(res))
+      .catch((error) => this.handleProcessingError(error));
   }
 
   /**
    * Handles observable response
    */
-  protected handleProcessingResponse(res: Response): any {
+  protected handleProcessingResponse(res: any): any {
     this.count--;
     if (this.count === 0) {
       this.stopTimer();

@@ -22,9 +22,10 @@ export class DexieService {
    */
   constructor() {
     this.db = new Dexie(environment.dexieDatabase);
-  	this.db.version(1).stores({
-  		keyvaluepairs: 'key, value, [key+value]'
-  	});
+    const schema = {
+      keyvaluepairs: 'key, value, [key+value]'
+    };
+    this.db.version(1).stores(schema);
     this.keyValuePairsTable = this.db.keyvaluepairs;
   }
 

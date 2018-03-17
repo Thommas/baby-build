@@ -20,6 +20,9 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ApolloService {
+  /**
+   * Constructor
+   */
   constructor(
     private apollo: Apollo,
     private httpLink: HttpLink,
@@ -32,22 +35,26 @@ export class ApolloService {
     });
   }
 
-  get httpLinkInstance() {
+  /**
+   * Get HttpLink with uri
+   */
+  get httpLinkInstance(): ApolloLink {
     return this.httpLink.create({ uri: environment.apollo.url });
   }
 
-  get middlewareLinkInstance() {
+  /**
+   * Get middlewareLink to inject token in context headers
+   */
+  get middlewareLinkInstance(): ApolloLink {
     return new ApolloLink((operation, forward) => {
-      return Observable.fromPromise(new Promise((resolve) => {
-        resolve(this.authService.token.mergeMap(token => {
-          operation.setContext({
-            headers: {
-              authorization: `Bearer ${token}`
-            }
-          });
-          return forward(operation);
-        })))
-      })
-    })
+      return this.authService.token.mergeMap(token => {
+        operation.setContext({
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        });
+        return forward(operation);
+      });
+    });
   }
 }

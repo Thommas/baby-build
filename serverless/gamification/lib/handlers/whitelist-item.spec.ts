@@ -11,7 +11,7 @@ import * as dynamoGamification from '../dynamo/gamification';
 
 describe('Handlers', function() {
   it('handleWhitelistItem', function() {
-    spyOn(dynamoGamification, 'updateGamification').and.returnValue(new Promise((resolve) =>
+    spyOn(dynamoGamification, 'addXp').and.returnValue(new Promise((resolve) =>
       resolve()
     ))
     const event = {

@@ -22,12 +22,12 @@ export class LocaleService {
   public constructor(private browserService: BrowserService) {}
 
   public detectLocale() {
-    let locale = this.browserService.language;
+    let detectedLocale = this.browserService.language;
     if (this.LOCALES.map(locale => locale.value).indexOf(locale) === -1) {
-      locale = 'en';
+      detectedLocale = 'en';
     }
-    if (locale !== 'en') {
-      this.setLocale(locale);
+    if (detectedLocale !== 'en') {
+      this.setLocale(detectedLocale);
     }
   }
 

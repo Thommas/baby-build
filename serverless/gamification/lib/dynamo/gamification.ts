@@ -8,10 +8,22 @@
 
 import nanoid = require('nanoid');
 import * as db from './dynamo';
+import { USER_LEVELS } from '../constants';
 
 const TableName = process.env.GAMIFICATION_TABLE;
 
-export async function updateGamification(entityType, entityId, xp, level) {
+export function getLevel(xp: number) {
+  let level = 1;
+  for (let xpRequired of USER_LEVELS) {
+    if (xp < xpRequired) {
+      return level;
+    }
+    level++;
+  }
+  return 99;
+}
+
+export async function addXp(entityType, entityId, xp) {
   const id = entityType + '-' + entityId;
 
   const getParams = {
@@ -36,6 +48,8 @@ export async function updateGamification(entityType, entityId, xp, level) {
     return db.createItem(createParams);
   }
 
+  const newXp = parseInt(existingItem.xp) + parseInt(xp);
+
   const updateParams = {
     TableName,
     Key: {
@@ -46,8 +60,8 @@ export async function updateGamification(entityType, entityId, xp, level) {
       '#level': 'level',
     },
     ExpressionAttributeValues: {
-      ':xp': xp,
-      ':level': level,
+      ':xp': newXp,
+      ':level': getLevel(newXp),
     },
     UpdateExpression: 'SET xp = :xp, level = :level',
     ReturnValues: 'ALL_NEW',

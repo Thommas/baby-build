@@ -29,6 +29,7 @@
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
+        "local": "environments/environment.local.ts",
         "staging": "environments/environment.staging.ts",
         "production": "environments/environment.production.ts"
       }

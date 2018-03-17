@@ -56,7 +56,7 @@ export class AuthService {
    * Store authentication results in local storage
    */
   setSession(authResult) {
-    console.log('authResult', authResult)
+    console.log('authResult', authResult);
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + Date.now());
 
     this.dexieService.setItem(AuthService.LOCAL_STORAGE_ACCESS_TOKEN, authResult.accessToken);
@@ -97,7 +97,7 @@ export class AuthService {
   resumeAuth(hash) {
     this.lock.resumeAuth(hash, (error, authResult) => {
       if (error) {
-        console.log('error', error)
+        console.log('error', error);
       } else if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
       }
@@ -121,7 +121,7 @@ export class AuthService {
     if (!this.isAuthenticatedObs) {
       this.isAuthenticatedObs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_EXPIRES_AT)
         .map((expiresAt: string) => {
-          return expiresAt && new Date().getTime() < parseInt(expiresAt);
+          return expiresAt && new Date().getTime() < parseInt(expiresAt, 10);
         });
     }
     return this.isAuthenticatedObs;
@@ -153,14 +153,14 @@ export class AuthService {
 
       const obs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_EXPIRES_AT);
       obs.map((expiresAt: string) => {
-        const source = Observable.timer(Math.max(1, parseInt(expiresAt) - Date.now()));
+        const source = Observable.timer(Math.max(1, parseInt(expiresAt, 10) - Date.now()));
         this.refreshSubscription = source.subscribe(() => {
           this.renewToken();
           console.log('schedule renewal');
           // this.scheduleRenewal();
         });
-      })
-    })
+      });
+    });
   }
 
   /**
