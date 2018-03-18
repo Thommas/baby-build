@@ -10,8 +10,11 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { AppComponent } from './app.component';
 import {
+  AngularticsService,
   AuthService,
   AuthServiceStub,
   BrowserService,
@@ -27,12 +30,15 @@ describe('AppComponent', () => {
         NO_ERRORS_SCHEMA
       ],
       imports: [
+        RouterTestingModule,
         MatProgressBarModule
       ],
       declarations: [
         AppComponent
       ],
       providers: [
+        AngularticsService,
+        { provide: Angulartics2GoogleAnalytics, useMock: Angulartics2GoogleAnalytics },
         { provide: AuthService, useClass: AuthServiceStub },
         { provide: BrowserService, useClass: BrowserServiceStub },
         LocaleService,

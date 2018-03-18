@@ -14,7 +14,7 @@ import { USER_LEVELS } from '../constants/gamification';
   pure: false
 })
 export class XpToLevelUpPipe implements PipeTransform {
-  public transform(xp: number): string {
+  public transform(xp: number): any {
     if (xp < USER_LEVELS[0]) {
       return USER_LEVELS[0];
     }

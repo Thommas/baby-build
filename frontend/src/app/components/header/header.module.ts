@@ -32,7 +32,7 @@ import {
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { AuthService } from '../../services';
-import { XpToLevelUpPipe } from '../../pipes';
+import { XpToLevelUpModule } from '../../pipes';
 
 import {
   HeaderComponent,
@@ -64,7 +64,8 @@ import {
     MatProgressBarModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    XpToLevelUpModule
   ],
   exports: [
     HeaderComponent
@@ -73,8 +74,7 @@ import {
     HeaderComponent,
     HeaderBuildComponent,
     HeaderChildComponent,
-    HeaderUserComponent,
-    XpToLevelUpPipe
+    HeaderUserComponent
   ],
   providers: [
     AuthService

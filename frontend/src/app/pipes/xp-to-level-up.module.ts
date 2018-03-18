@@ -8,7 +8,6 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { XpToLevelUpPipe } from './xp-to-level-up.pipe';
 
 @NgModule({
