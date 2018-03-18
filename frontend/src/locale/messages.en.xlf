@@ -332,13 +332,12 @@
       </trans-unit>
       <trans-unit id="a1f335c82f7aee1cb41010ce84bd11144705e1a0" datatype="html">
         <source>home.story.idea</source>
-        <target><![CDATA[Each parent can tailor the platform to match their vision of education
+        <target><![CDATA[Plan the education of your child
         <ul>
-          <li>Plan technology and digital contents that the child will get access to</li>
-          <li>Limited time investment and easy to use</li>
-          <li>Promote gender equity and allow specific culture, religion, belief, family traditions</li>
-          <li>Cherry pick a few quality photos every month</li>
-          <li>Write time capsule messages for your child to read in the future</li>
+          <li>Each parent can tailor the platform to match their vision of education</li>
+          <li>Stay in control of what you give access to your child</li>
+          <li>Improve your child curiosity by giving interesting choices to explore</li>
+          <li>Identify and prevent passivity like watching TV, youtube or playing bad quality games</li>
         </ul>]]></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
@@ -347,12 +346,12 @@
       </trans-unit>
       <trans-unit id="f3d24e1190b56ec68b92112597d5b5b7d2593967" datatype="html">
         <source>home.story.share</source>
-        <target><![CDATA[The platform will help share popular education tips
+        <target><![CDATA[Share popular education tips
         <ul>
-          <li>Other family members can also contribute</li>
+          <li>Read about how to best ensure your child's success</li>
           <li>See statistics about recommended age to access digital contents</li>
           <li>Share your ideas with the community</li>
-          <li>Read about how to best ensure your child's success</li>
+          <li>Other family members can also contribute</li>
         </ul>]]></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
@@ -361,12 +360,12 @@
       </trans-unit>
       <trans-unit id="3f19ca2a6cd6f14c8d60b248b572aba8d839edb6" datatype="html">
         <source>home.story.path</source>
-        <target><![CDATA[Cultivate depth and curiosity instead of short interaction and waste of time
+        <target><![CDATA[Imagine multiple paths
         <ul>
-          <li>Improve your child curiosity by giving interesting choices to explore</li>
+          <li>Build multiple paths for your child to explore</li>
           <li>Give positive incentives for your child to try new things</li>
-          <li>Identify and prevent passivity like watching TV, youtube or playing bad quality games</li>
-          <li>Stay in control of what you give access to your child</li>
+          <li>Write time capsule messages for your child to read in the future</li>
+          <li>Cherry pick a few quality photos every month</li>
         </ul>]]></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
