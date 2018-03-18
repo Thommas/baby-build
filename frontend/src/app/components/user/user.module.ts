@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Parent
+ * Component - User
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -34,7 +34,7 @@ import { AuthService } from '../../services';
 
 import {
   routing,
-  ParentEditComponent
+  UserEditComponent
 } from './';
 
 @NgModule({
@@ -63,11 +63,11 @@ import {
     MatTooltipModule
   ],
   declarations: [
-    ParentEditComponent
+    UserEditComponent
   ],
   providers: [
     AuthService
   ]
 })
-export class ParentModule {
+export class UserModule {
 }

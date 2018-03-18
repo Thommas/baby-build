@@ -9,7 +9,6 @@
 import swal from 'sweetalert2';
 import { clone } from 'lodash';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import { GetWhitelistItems, DeleteWhitelistItem } from '../../../graphql';
@@ -27,7 +26,6 @@ export class WhitelistListComponent implements OnInit {
   whitelistItems: any;
 
   constructor(
-    private router: Router,
     private apollo: Apollo,
     private dialog: MatDialog
   ) {}

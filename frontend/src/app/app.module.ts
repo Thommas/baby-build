@@ -27,6 +27,8 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
@@ -35,12 +37,13 @@ import { ChildModule } from './components/child/child.module';
 import { FooterModule } from './components/footer/footer.module';
 import { HeaderModule } from './components/header/header.module';
 import { HomeModule } from './components/home/home.module';
-import { ParentModule } from './components/parent/parent.module';
+import { UserModule } from './components/user/user.module';
 import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
 import { WhitelistModule } from './components/whitelist/whitelist.module';
 import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
 import {
+  AngularticsService,
   ApolloService,
   AuthGuardService,
   AuthService,
@@ -78,14 +81,16 @@ import {
     FooterModule,
     HeaderModule,
     HomeModule,
-    ParentModule,
+    UserModule,
     SecurityModule,
     StaticModule,
     WhitelistModule,
-    PageNotFoundModule
+    PageNotFoundModule,
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
   ],
   providers: [
     appRoutingProviders,
+    AngularticsService,
     ApolloService,
     AuthGuardService,
     AuthService,

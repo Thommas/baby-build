@@ -9,7 +9,6 @@
 import { clone, isEmpty } from 'lodash';
 import { Component, Input, ViewChild, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import {
   GetAuthUser,
@@ -30,7 +29,7 @@ export class WhitelistFormComponent implements OnChanges {
   formGroup: FormGroup;
   loading: boolean;
 
-  constructor(private router: Router, private apollo: Apollo) {
+  constructor(private apollo: Apollo) {
     this.whitelistItem = {};
     this.category = null;
     this.formGroup = new FormGroup({

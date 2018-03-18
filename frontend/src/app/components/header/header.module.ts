@@ -64,8 +64,7 @@ import {
     MatProgressBarModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatTooltipModule,
-    XpToLevelUpPipe
+    MatTooltipModule
   ],
   exports: [
     HeaderComponent
@@ -74,7 +73,8 @@ import {
     HeaderComponent,
     HeaderBuildComponent,
     HeaderChildComponent,
-    HeaderUserComponent
+    HeaderUserComponent,
+    XpToLevelUpPipe
   ],
   providers: [
     AuthService

@@ -1,3 +1,4 @@
+export * from './angulartics.service';
 export * from './apollo.service';
 export * from './apollo.stub';
 export * from './auth-guard.service';

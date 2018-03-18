@@ -8,6 +8,8 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
+import { MatMenuModule } from '@angular/material';
+import { BuildService } from '../../../services';
 import { HeaderBuildComponent } from './header-build.component';
 
 describe('HeaderBuildComponent', () => {
@@ -16,9 +18,15 @@ describe('HeaderBuildComponent', () => {
       schemas: [
         NO_ERRORS_SCHEMA
       ],
+      imports: [
+        MatMenuModule
+      ],
       declarations: [
         HeaderBuildComponent
       ],
+      providers: [
+        BuildService
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

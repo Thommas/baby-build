@@ -6,29 +6,14 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as moment from 'moment';
-import { clone } from 'lodash';
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService, BuildService } from '../../../services';
-import { Apollo } from 'apollo-angular';
-import { GetChild } from '../../../graphql';
+import { Component } from '@angular/core';
+import { BuildService } from '../../../services';
 
 @Component({
   selector: 'app-header-build-cmp',
   templateUrl: './header-build.component.html',
   styleUrls: ['./header-build.component.scss']
 })
-export class HeaderBuildComponent implements OnInit {
-  constructor(
-    public authService: AuthService,
-    public buildService: BuildService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private apollo: Apollo
-  ) {
-  }
-
-  ngOnInit() {
-  }
+export class HeaderBuildComponent {
+  constructor(public buildService: BuildService) {}
 }

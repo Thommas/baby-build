@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Parent
+ * Component - User
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,12 +9,12 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { ParentEditComponent } from './parent-edit/parent-edit.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 const routes: Routes = [
   {
-    path: 'parent/edit',
-    component: ParentEditComponent,
+    path: 'user/edit',
+    component: UserEditComponent,
     canActivate: [AuthGuardService]
   }
 ];

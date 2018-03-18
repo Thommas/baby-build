@@ -8,6 +8,7 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
+import { AuthService, AuthServiceStub } from '../../../services';
 import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
@@ -19,6 +20,9 @@ describe('HomeComponent', () => {
       declarations: [
         HomeComponent
       ],
+      providers: [
+        { provide: AuthService, useClass: AuthServiceStub }
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

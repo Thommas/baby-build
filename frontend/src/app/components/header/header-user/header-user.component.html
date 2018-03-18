@@ -2,13 +2,14 @@
   <img src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png" width="50" height="50"/>
 </div>
 <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center" *ngIf="userService.user && userService.user.gamification">
-  <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
-    <span>{{ userService.user.gamification.xp }}/{{ userService.user.gamification.xp|xpToLevelUp }}</span>
+  <div fxFill fxLayout="row" fxLayoutAlign="center center">
     <span>Level {{ userService.user.gamification.lvl }}</span>
   </div>
-  <mat-progress-bar mode="determinate"
-                    value="60"
-                    color="primary">
+  <mat-progress-bar
+    mode="determinate"
+    value="60"
+    color="primary"
+    [matTooltip]="userService.user.gamification.xp + ' / ' + (userService.user.gamification.xp|xpToLevelUp)">
   </mat-progress-bar>
 </div>
 <button mat-icon-button [matMenuTriggerFor]="parentMenu">
@@ -16,5 +17,5 @@
 </button>
 <mat-menu #parentMenu="matMenu">
   <button mat-menu-item [routerLink]="['whitelist']" i18n>nav.whitelist</button>
-  <button mat-menu-item [routerLink]="['parent/edit']" i18n>nav.profile</button>
+  <button mat-menu-item [routerLink]="['user/edit']" i18n>nav.profile</button>
 </mat-menu>

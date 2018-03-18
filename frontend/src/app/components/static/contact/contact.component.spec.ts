@@ -8,6 +8,7 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { ContactComponent } from './contact.component';
 
 describe('ContactComponent', () => {
@@ -16,11 +17,15 @@ describe('ContactComponent', () => {
       schemas: [
         NO_ERRORS_SCHEMA
       ],
+      imports: [
+        FormsModule
+      ],
       declarations: [
         ContactComponent
       ],
     }).compileComponents();
   }));
+
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(ContactComponent);
     const app = fixture.debugElement.componentInstance;

@@ -18,12 +18,12 @@ export class XpToLevelUpPipe implements PipeTransform {
     if (xp < USER_LEVELS[0]) {
       return USER_LEVELS[0];
     }
-    if (requiredXp > USER_LEVELS[USER_LEVELS.length - 1]) {
+    if (xp >= USER_LEVELS[USER_LEVELS.length - 1]) {
       return '';
     }
-    for (let [key, requiredXp] of USER_LEVELS) => {
-      if (xp >= requiredXp) {
-        return USER_LEVELS[key + 1];
+    for (let i = USER_LEVELS.length - 2; i >= 0; i--) {
+      if (xp >= USER_LEVELS[i]) {
+        return USER_LEVELS[i + 1];
       }
     }
     return '';

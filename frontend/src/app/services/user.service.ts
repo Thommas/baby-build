@@ -35,8 +35,7 @@ export class UserService {
 
   watchAuthUser() {
     return this.apollo.watchQuery<any>({
-      query: GetAuthUser,
-      options: { pollInterval: 5000 }
+      query: GetAuthUser
     })
       .valueChanges
       .subscribe(({ data }) => {

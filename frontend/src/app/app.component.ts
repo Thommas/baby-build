@@ -8,7 +8,13 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AuthService, BrowserService, LocaleService } from './services';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import {
+  AngularticsService,
+  AuthService,
+  BrowserService,
+  LocaleService
+} from './services';
 
 @Component({
   selector: 'app-root',
@@ -23,12 +29,17 @@ export class AppComponent implements OnInit {
     public router: Router,
     private authService: AuthService,
     private browserService: BrowserService,
-    private localeService: LocaleService
+    private localeService: LocaleService,
+    private angularticsService: AngularticsService,
+    private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
   ) {
     authService.scheduleRenewal();
   }
 
   ngOnInit() {
+    if (this.browserService.document) {
+      this.angularticsService.init(this.browserService.document.body);
+    }
     this.localeService.detectLocale();
 
     if (this.router.events) {

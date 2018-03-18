@@ -59,11 +59,27 @@ export class AuthService {
     console.log('authResult', authResult);
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + Date.now());
 
-    this.dexieService.setItem(AuthService.LOCAL_STORAGE_ACCESS_TOKEN, authResult.accessToken);
-    this.dexieService.setItem(AuthService.LOCAL_STORAGE_ID_TOKEN, authResult.idToken);
-    this.dexieService.setItem(AuthService.LOCAL_STORAGE_EXPIRES_AT, expiresAt);
+    const obs = [
+      this.dexieService.setItem(AuthService.LOCAL_STORAGE_ACCESS_TOKEN, authResult.accessToken),
+      this.dexieService.setItem(AuthService.LOCAL_STORAGE_ID_TOKEN, authResult.idToken),
+      this.dexieService.setItem(AuthService.LOCAL_STORAGE_EXPIRES_AT, expiresAt)
+    ];
+    return Observable.forkJoin(obs, () => {
+      // Nothing
+    }).subscribe(() => {
+      this.scheduleRenewal();
+      this.refreshIsAuthenticated();
+    });
+  }
 
-    this.scheduleRenewal();
+  /**
+   * Refresh isAuthenticated and redirect to home
+   */
+  refreshIsAuthenticated() {
+    this.isAuthenticatedObs = null;
+    this.isAuthenticated.take(1).subscribe(() => {
+      this.router.navigate(['']);
+    });
   }
 
   /**
@@ -86,9 +102,10 @@ export class AuthService {
    * Purge local storage and redirect to home
    */
   logout() {
-    this.dexieService.clearKeyValueStoreTable();
     this.unscheduleRenewal();
-    this.router.navigate(['/']);
+    this.dexieService.clearKeyValueStoreTable().subscribe(
+      () => this.refreshIsAuthenticated()
+    );
   }
 
   /**
