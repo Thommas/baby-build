@@ -9,10 +9,9 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { ChildCreateComponent } from './child-create/child-create.component';
 import { ChildDeleteComponent } from './child-delete/child-delete.component';
+import { ChildFormComponent } from './child-form/child-form.component';
 import { ChildIndexComponent } from './child-index/child-index.component';
-import { ChildUpdateComponent } from './child-update/child-update.component';
 
 const routes: Routes = [
   {
@@ -22,12 +21,12 @@ const routes: Routes = [
   },
   {
     path: 'child/create',
-    component: ChildCreateComponent,
+    component: ChildFormComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'child/update/:id',
-    component: ChildUpdateComponent,
+    component: ChildFormComponent,
     canActivate: [AuthGuardService]
   },
   {

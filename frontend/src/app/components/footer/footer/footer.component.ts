@@ -7,12 +7,7 @@
  */
 
 import { Component, Inject, LOCALE_ID } from '@angular/core';
-import {
-  AuthService,
-  BrowserService,
-  ChildService,
-  LocaleService
-} from '../../../services';
+import { LocaleService } from '../../../services';
 
 @Component({
   selector: 'app-footer-cmp',
@@ -25,9 +20,6 @@ export class FooterComponent {
    */
   constructor(
     @Inject(LOCALE_ID) private _locale: string,
-    public authService: AuthService,
-    private browserService: BrowserService,
-    public childService: ChildService,
     public localeService: LocaleService
   ) {}
 }

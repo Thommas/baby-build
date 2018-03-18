@@ -3,8 +3,8 @@
 </div>
 <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center" *ngIf="userService.user && userService.user.gamification">
   <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
-    <span>{{ userService.user.gamification.lvl }}/XXX</span>
-    <span>Level {{ userService.user.gamification.xp }}</span>
+    <span>{{ userService.user.gamification.xp }}/{{ userService.user.gamification.xp|xpToLevelUp }}</span>
+    <span>Level {{ userService.user.gamification.lvl }}</span>
   </div>
   <mat-progress-bar mode="determinate"
                     value="60"

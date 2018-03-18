@@ -1,3 +1,9 @@
+<mat-toolbar>
+  <button mat-icon-button [routerLink]="['/child']">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    <span i18n>global.go_back</span>
+  </button>
+</mat-toolbar>
 <form #childForm="ngForm">
   <mat-card>
     <mat-card-title fxLayout="row" i18n>child_form.title</mat-card-title>

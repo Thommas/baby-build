@@ -8,6 +8,9 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { Apollo } from 'apollo-angular';
+import { ApolloStub, ChildService, RouterStub } from '../../../services';
 import { ChildIndexComponent } from './child-index.component';
 
 describe('ChildIndexComponent', () => {
@@ -19,6 +22,11 @@ describe('ChildIndexComponent', () => {
       declarations: [
         ChildIndexComponent
       ],
+      providers: [
+        { provide: Apollo, useClass: ApolloStub },
+        ChildService,
+        { provide: Router, useClass: RouterStub }
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

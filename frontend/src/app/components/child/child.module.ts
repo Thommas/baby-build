@@ -34,11 +34,9 @@ import { ChildService } from '../../services';
 
 import {
   routing,
-  ChildCreateComponent,
   ChildDeleteComponent,
   ChildFormComponent,
-  ChildIndexComponent,
-  ChildUpdateComponent
+  ChildIndexComponent
 } from './';
 
 @NgModule({
@@ -67,11 +65,9 @@ import {
     MatTooltipModule
   ],
   declarations: [
-    ChildCreateComponent,
     ChildDeleteComponent,
     ChildFormComponent,
-    ChildIndexComponent,
-    ChildUpdateComponent
+    ChildIndexComponent
   ],
   providers: [
     ChildService

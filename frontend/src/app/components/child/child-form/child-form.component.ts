@@ -29,6 +29,8 @@ export class ChildFormComponent {
     };
   }
 
+  // FIXME Detect if childId in url for update
+
   submit() {
     // FIXME Form validation
     const child = clone(this.child);

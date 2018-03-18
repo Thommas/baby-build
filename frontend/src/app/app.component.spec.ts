@@ -11,7 +11,14 @@ import { TestBed, async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material';
 import { AppComponent } from './app.component';
-import { BrowserService, BrowserServiceStub, RouterStub } from './services';
+import {
+  AuthService,
+  AuthServiceStub,
+  BrowserService,
+  BrowserServiceStub,
+  LocaleService,
+  RouterStub
+} from './services';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -26,7 +33,9 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
+        { provide: AuthService, useClass: AuthServiceStub },
         { provide: BrowserService, useClass: BrowserServiceStub },
+        LocaleService,
         { provide: Router, useClass: RouterStub }
       ]
     }).compileComponents();

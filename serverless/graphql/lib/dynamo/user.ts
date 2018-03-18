@@ -61,3 +61,12 @@ export function updateUser(args) {
 
   return db.updateItem(params, args);
 }
+
+export function getUserByIdOrCreate(userId) {
+  return getUserById(userId).then((user) => {
+    if (user) {
+      return user;
+    }
+    return createUser(userId);
+  })
+}

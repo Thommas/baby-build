@@ -12,6 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import {
+  GetAuthUser,
   CreateWhitelistItemMutation,
   UpdateWhitelistItemMutation,
   GetWhitelistItems
@@ -71,10 +72,15 @@ export class WhitelistFormComponent implements OnChanges {
       variables: {
         ...whitelistItem
       },
-      refetchQueries: [{
-        query: GetWhitelistItems,
-        variables: { category: this.category },
-      }],
+      refetchQueries: [
+        {
+          query: GetAuthUser,
+        },
+        {
+          query: GetWhitelistItems,
+          variables: { category: this.category },
+        }
+      ],
     }).subscribe(
       res => this.success.emit({})
     );
