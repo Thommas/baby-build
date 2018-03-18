@@ -4,26 +4,30 @@ Roadmap
 Short term
 ----------
 
+- Fix login/logout redirects
+- Test renew token (replace timer by authGuard check)
+- Add icon for auth0
+- Implement terms and privacy
 - Finish contact form with google captcha and lambda
 - Implement gamification handler to update xp/level
 - Improve dynamic header based on child, build, xp, level
 
+
 Mid term
 --------
 
+- Implement instructions on home based on xp/level
 - Implement add/remove/edit quest
 - Design calendar for build
 - Implement xp and level to unlock calendar
-- Implement instructions on home based on xp/level
 
 
 Long term
 ---------
 
-- When updating User profile should create if not already exists
+- Build inspiration static page
+- Build roadmap static page
 - Add unit tests
-- Add icon for auth0
-- Implement terms and privacy
 - Implement giving access to a child to other family members
 
 

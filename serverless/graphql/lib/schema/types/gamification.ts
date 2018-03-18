@@ -10,7 +10,7 @@ const Gamification = `
   type Gamification {
     id: String!
     xp: Int!
-    level: Int!
+    lvl: Int!
   }
 `;
 export default Gamification;

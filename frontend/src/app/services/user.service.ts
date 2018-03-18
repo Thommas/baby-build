@@ -31,7 +31,7 @@ export class UserService {
             id: null,
             gamification: {
               xp: 0,
-              level: 1
+              lvl: 1
             }
           };
         }

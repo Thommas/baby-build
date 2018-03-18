@@ -14,7 +14,7 @@ export const GetAuthUser = gql`
       id
       gamification {
         xp
-        level
+        lvl
       }
     }
   }

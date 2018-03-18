@@ -5,7 +5,7 @@
 </div>
 <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center" *ngIf="childService.isChild && childService.child.gamification">
   <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
-    <span>{{ childService.child.gamification.level }}/XXX</span>
+    <span>{{ childService.child.gamification.lvl }}/XXX</span>
     <span>Level {{ childService.child.gamification.xp }}</span>
   </div>
   <mat-progress-bar mode="determinate"

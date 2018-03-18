@@ -20,7 +20,7 @@ export const GetChild = gql`
       gender
       gamification {
         xp
-        level
+        lvl
       }
     }
   }
@@ -38,7 +38,7 @@ export const GetChildren = gql`
       gender
       gamification {
         xp
-        level
+        lvl
       }
     }
   }

@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Improved
 - Gamification to update xp/level for user/child/build
 - Refresh token
+- Homepage design
 
 ## [0.4.0] - 2018-03-10
 

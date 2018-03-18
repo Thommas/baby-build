@@ -53,10 +53,9 @@ export function updateUser(args) {
       id: args.id,
     },
     ExpressionAttributeValues: {
-      ':xp': args.xp,
-      ':level': args.level
+      ':nickname': args.nickname
     },
-    UpdateExpression: `SET xp = :xp, level = :level`,
+    UpdateExpression: `SET nickname = :nickname`,
     ReturnValues: 'ALL_NEW',
   };
 

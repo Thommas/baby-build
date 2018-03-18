@@ -36,7 +36,7 @@ describe('Gamification', function() {
 
   it('addXp - Update', function() {
     spyOn(db, 'get').and.returnValue(new Promise((resolve) =>
-      resolve({ id: 42 })
+      resolve({ id: 42, xp: 0, lvl: 1 })
     ))
     spyOn(db, 'updateItem').and.returnValue(new Promise((resolve) =>
       resolve('mockData')
