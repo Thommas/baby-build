@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.0] - 2018-03-18
+
+### Improved
+- Gamification to update xp/level for user/child/build
+- Refresh token
+
 ## [0.4.0] - 2018-03-10
 
 ### Added
