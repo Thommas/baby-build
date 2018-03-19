@@ -4,13 +4,13 @@ Roadmap
 Short term
 ----------
 
-- Fix login/logout redirects
 - Test renew token (replace timer by authGuard check)
 - Add icon for auth0
 - Implement terms and privacy
 - Finish contact form with google captcha and lambda
-- Implement gamification handler to update xp/level
 - Improve dynamic header based on child, build, xp, level
+- Implement server side rendering
+- Improve SEO
 
 
 Mid term
@@ -20,6 +20,7 @@ Mid term
 - Implement add/remove/edit quest
 - Design calendar for build
 - Implement xp and level to unlock calendar
+- Improve gamification lambda
 
 
 Long term

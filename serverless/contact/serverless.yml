@@ -1,0 +1,36 @@
+service: pathofchild-contact
+
+plugins:
+  - serverless-plugin-typescript
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  secrets: ${file(secrets.yml):${self:custom.stage}}
+
+package:
+  exclude:
+    - secrets.yml
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: ${self:custom.secrets.AWS_REGION}
+  stage: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - SES:Publish
+  environment:
+    AWS_ACCESS_KEY_ID: ${self:custom.secrets.AWS_ACCESS_KEY_ID}
+    AWS_SECRET_ACCESS_KEY: ${self:custom.secrets.AWS_SECRET_ACCESS_KEY}
+    AWS_REGION: ${self:custom.secrets.AWS_REGION}
+    GOOGLE_RECAPTCHA_SECRET: ${self:custom.secrets.GOOGLE_RECAPTCHA_SECRET}
+
+functions:
+  contact:
+    handler: lib/handler.contact
+    events:
+      - http:
+          path: contact
+          method: post
+          cors: true
