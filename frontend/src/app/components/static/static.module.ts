@@ -34,6 +34,10 @@ import {
   KitchenComponent,
   TermsComponent
 } from './';
+import {
+  BrowserService,
+  GoogleRecaptchaService
+} from '../../services';
 
 @NgModule({
   imports: [
@@ -62,6 +66,10 @@ import {
     ContactComponent,
     KitchenComponent,
     TermsComponent
+  ],
+  providers: [
+    BrowserService,
+    GoogleRecaptchaService
   ]
 })
 export class StaticModule {

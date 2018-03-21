@@ -50,6 +50,7 @@ import {
   BrowserService,
   ChildService,
   DexieService,
+  GoogleRecaptchaService,
   LocaleService,
   UserService,
   ProgressService
@@ -97,6 +98,7 @@ import {
     BrowserService,
     ChildService,
     DexieService,
+    GoogleRecaptchaService,
     LocaleService,
     UserService,
     ProgressService

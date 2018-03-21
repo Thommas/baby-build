@@ -1,4 +1,4 @@
-<div class="container" fxLayout="row" fxLayoutAlign="center center">
+<div class="container" fxLayout="row">
   <div fxFlex fxLayout="column">
     <h1 i18n>contact.title</h1>
     <p i18n>contact.description</p>
@@ -18,31 +18,33 @@
     </div>
   </div>
   <div fxFlex fxLayout="column" fxLayoutAlign="center center">
-    <form #contactForm="ngForm">
+    <form [formGroup]="formGroup" *ngIf="googleRecaptchaService.siteKey">
       <mat-card>
+        <mat-card-title i18n>contact.title</mat-card-title>
         <mat-card-content fxLayout="column">
           <mat-form-field>
             <input matInput placeholder="contact.name" i18n-placeholder
-                   [(ngModel)]="contact.name" name="name" required>
+                   formControlName="name" required>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="contact.email" i18n-placeholder
-                   [(ngModel)]="contact.email" name="email" type="email" required>
+                   formControlName="email" type="email" required>
           </mat-form-field>
           <mat-form-field fxFill>
-           <textarea matInput
-                     placeholder="contact.message" i18n-placeholder
-                     matTextareaAutosize
-                     matAutosizeMinRows="10"
-                     matAutosizeMaxRows="20"
-                     [(ngModel)]="contact.message"
-                     name="message" required></textarea>
+            <textarea matInput
+                      placeholder="contact.message" i18n-placeholder
+                      matTextareaAutosize
+                      matAutosizeMinRows="10"
+                      matAutosizeMaxRows="20"
+                      formControlName="message" required></textarea>
           </mat-form-field>
-          <div #googleRecaptcha></div>
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <div class="g-recaptcha" [attr.data-sitekey]="googleRecaptchaService.siteKey"></div>
+          </div>
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-          <button mat-button (click)="submit()" i18n>contact.submit</button>
+          <button mat-raised-button (click)="submit()" i18n>contact.submit</button>
         </mat-card-actions>
       </mat-card>
     </form>
