@@ -18,7 +18,7 @@
     </div>
   </div>
   <div fxFlex fxLayout="column" fxLayoutAlign="center center">
-    <form [formGroup]="formGroup" *ngIf="googleRecaptchaService.siteKey">
+    <form [formGroup]="formGroup">
       <mat-card>
         <mat-card-title i18n>contact.title</mat-card-title>
         <mat-card-content fxLayout="column">
@@ -39,7 +39,7 @@
                       formControlName="message" required></textarea>
           </mat-form-field>
           <div fxLayout="column" fxLayoutAlign="center center">
-            <div class="g-recaptcha" [attr.data-sitekey]="googleRecaptchaService.siteKey"></div>
+            <div id="recaptcha-container"></div>
           </div>
         </mat-card-content>
         <mat-divider></mat-divider>

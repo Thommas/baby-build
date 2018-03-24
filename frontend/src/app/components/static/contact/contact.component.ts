@@ -7,7 +7,7 @@
  */
 
 import { clone } from 'lodash';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BrowserService, GoogleRecaptchaService } from '../../../services';
 
@@ -17,10 +17,12 @@ import { BrowserService, GoogleRecaptchaService } from '../../../services';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-  @ViewChild('contactForm') contactForm: any;
   @ViewChild('googleRecaptchaContainer') googleRecaptchaContainer: any;
+  formGroup: FormGroup;
+  recaptchaToken: string;
 
   constructor(
+    private elementRef: ElementRef,
     private browserService: BrowserService,
     public googleRecaptchaService: GoogleRecaptchaService
   ) {
@@ -41,12 +43,21 @@ export class ContactComponent implements OnInit {
       email: '',
       message: ''
     });
+    this.recaptchaToken = null;
   }
 
   ngOnInit() {
     if (this.browserService.document) {
-      this.googleRecaptchaService.init(this.browserService.document.body);
+      this.googleRecaptchaService.init(
+        this.browserService.document.body,
+        (token) => this.onGetRecaptchaToken(token)
+      );
     }
+  }
+
+  onGetRecaptchaToken(token: string) {
+    console.log('token', token);
+    this.recaptchaToken = token;
   }
 
   submit() {
@@ -55,5 +66,6 @@ export class ContactComponent implements OnInit {
     }
     const contact = clone(this.formGroup.value);
     console.log('contact', contact);
+    console.log('token', this.recaptchaToken);
   }
 }

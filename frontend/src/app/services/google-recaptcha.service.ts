@@ -7,23 +7,45 @@
  */
 
 import { Injectable } from '@angular/core';
+import { BrowserService } from './browser.service';
 import { environment } from '../../environments/environment';
 
 @Injectable()
 export class GoogleRecaptchaService {
+  callback: any;
+
+  /**
+   * Constructor
+   */
+  constructor(private browserService: BrowserService) {}
+
   /**
    * Initialize google reCaptcha with variables in environment
    */
-  init(body) {
+  init(body, callback) {
     if (!environment.googleRecaptchaSiteKey) {
       return;
     }
+    this.callback = callback;
+
+    this.browserService.window.recaptchaCallback = () => this.onRecaptchaLoaded();
+
     const scriptElement = document.createElement('script');
-    scriptElement.src = 'https://www.google.com/recaptcha/api.js';
+    scriptElement.type = 'text/javascript';
+    scriptElement.async = true;
+    scriptElement.defer = true;
+    scriptElement.src = 'https://www.google.com/recaptcha/api.js?render=explicit&onload=recaptchaCallback';
     body.appendChild(scriptElement);
   }
 
-  get siteKey() {
-    return environment.googleRecaptchaSiteKey;
+  /**
+   * When the script is loaded, render the captcha
+   */
+  onRecaptchaLoaded() {
+    const grecaptcha = this.browserService.window.grecaptcha;
+    grecaptcha.render('recaptcha-container', {
+      'sitekey': environment.googleRecaptchaSiteKey,
+      'callback': (response) => this.callback(response)
+    });
   }
 }
