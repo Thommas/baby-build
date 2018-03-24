@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private browserService: BrowserService,
     private localeService: LocaleService,
-    private progressService: ProgressService,
+    public progressService: ProgressService,
     private angularticsService: AngularticsService,
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
   ) {

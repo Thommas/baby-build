@@ -15,7 +15,7 @@
    viewBox="0 0 1024 250"
    xml:space="preserve"
    id="svg3928"
-   sodipodi:docname="path-of-child-logo-horizontal.svg"
+   sodipodi:docname="path-of-child-logo-horizontal-light.svg"
    width="1024"
    height="250"
    inkscape:version="0.92.3 (3ce5693, 2018-03-11)"><metadata
@@ -66,7 +66,7 @@
      showgrid="false"
      units="px"
      inkscape:zoom="0.5"
-     inkscape:cx="223.44531"
+     inkscape:cx="-110.55469"
      inkscape:cy="156.30786"
      inkscape:window-x="0"
      inkscape:window-y="34"
@@ -86,24 +86,25 @@
        height="68"
        x="813"
        y="573" /></flowRegion><flowPara
-     id="flowPara4633" /></flowRoot><path
-   d="m 448.60942,368.57025 c -1.06921,1.28158 -2.96914,2.02745 -4.73568,1.8222 -0.88654,-0.0833 -1.72355,-0.40974 -2.42035,-0.89589 -0.69038,-0.47386 -1.25149,-1.22206 -1.45153,-2.04912 -0.20162,-0.83257 -0.0892,-1.74723 0.32009,-2.55633 0.42117,-0.80399 1.10581,-1.49894 1.94905,-1.91758 0.83439,-0.4303 1.79089,-0.57956 2.65414,-0.4486 0.86315,0.13321 1.63056,0.54841 2.10932,1.14869 -1.28693,-0.90833 -3.10783,-0.87772 -4.38591,-0.0687 -1.29744,0.78888 -1.97765,2.28817 -1.63244,3.55757 0.0727,0.318 0.20847,0.61745 0.39089,0.88895 0.17976,0.27021 0.42579,0.49918 0.70074,0.72399 0.54401,0.43897 1.22352,0.72903 1.95576,0.88111 1.4734,0.2938 3.17768,-0.0866 4.54592,-1.08631 z"
+     id="flowPara4633" /></flowRoot>
+<path
+   d="m 449.40296,368.57025 c -1.06921,1.28158 -2.96914,2.02745 -4.73568,1.8222 -0.88654,-0.0833 -1.72355,-0.40974 -2.42035,-0.89589 -0.69038,-0.47386 -1.25149,-1.22206 -1.45153,-2.04912 -0.20162,-0.83257 -0.0892,-1.74723 0.32009,-2.55633 0.42117,-0.80399 1.10581,-1.49894 1.94905,-1.91758 0.83439,-0.4303 1.79089,-0.57956 2.65414,-0.4486 0.86315,0.13321 1.63056,0.54841 2.10932,1.14869 -1.28693,-0.90833 -3.10783,-0.87772 -4.38591,-0.0687 -1.29744,0.78888 -1.97765,2.28817 -1.63244,3.55757 0.0727,0.318 0.20847,0.61745 0.39089,0.88895 0.17976,0.27021 0.42579,0.49918 0.70074,0.72399 0.54401,0.43897 1.22352,0.72903 1.95576,0.88111 1.4734,0.2938 3.17768,-0.0866 4.54592,-1.08631 z"
    id="path3914-3"
    inkscape:connector-curvature="0"
    style="fill:#9cbbff;fill-opacity:1;stroke-width:0.41094798" /><path
-   d="m 440.44916,362.271 c 1.06921,-1.28158 2.96914,-2.02745 4.73507,-1.82218 0.88684,0.0835 1.72326,0.40947 2.42098,0.89531 0.69068,0.47412 1.25179,1.22233 1.45183,2.04938 0.20161,0.83258 0.0889,1.74696 -0.3198,2.55661 -0.42055,0.8034 -1.10581,1.49893 -1.94906,1.91757 -0.83376,0.42972 -1.79025,0.57899 -2.65382,0.44831 -0.86315,-0.1332 -1.63085,-0.54868 -2.10932,-1.14869 1.28694,0.90833 3.10754,0.87746 4.38683,0.0684 1.29653,-0.78857 1.97615,-2.2884 1.63122,-3.55752 -0.0727,-0.318 -0.20812,-0.61831 -0.39088,-0.88896 -0.18005,-0.27047 -0.42578,-0.49917 -0.70136,-0.7234 -0.54339,-0.43956 -1.22353,-0.72904 -1.95577,-0.88112 -1.47435,-0.29292 -3.178,0.0869 -4.54592,1.08632 z"
+   d="m 441.2427,362.271 c 1.06921,-1.28158 2.96914,-2.02745 4.73507,-1.82218 0.88684,0.0835 1.72326,0.40947 2.42098,0.89531 0.69068,0.47412 1.25179,1.22233 1.45183,2.04938 0.20161,0.83258 0.0889,1.74696 -0.3198,2.55661 -0.42055,0.8034 -1.10581,1.49893 -1.94906,1.91757 -0.83376,0.42972 -1.79025,0.57899 -2.65382,0.44831 -0.86315,-0.1332 -1.63085,-0.54868 -2.10932,-1.14869 1.28694,0.90833 3.10754,0.87746 4.38683,0.0684 1.29653,-0.78857 1.97615,-2.2884 1.63122,-3.55752 -0.0727,-0.318 -0.20812,-0.61831 -0.39088,-0.88896 -0.18005,-0.27047 -0.42578,-0.49917 -0.70136,-0.7234 -0.54339,-0.43956 -1.22353,-0.72904 -1.95577,-0.88112 -1.47435,-0.29292 -3.178,0.0869 -4.54592,1.08632 z"
    id="path3916-6"
    inkscape:connector-curvature="0"
    style="fill:#ffabff;fill-opacity:1;stroke-width:0.41094798" /><text
    xml:space="preserve"
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.04696798px;line-height:1.25;font-family:Sign;-inkscape-font-specification:Sign;letter-spacing:0px;word-spacing:0px;fill:#6545cc;fill-opacity:1;stroke:none;stroke-width:0.06138624;stroke-miterlimit:4;stroke-dasharray:none"
-   x="436.86896"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.04696798px;line-height:1.25;font-family:Sign;-inkscape-font-specification:Sign;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.06138624;stroke-miterlimit:4;stroke-dasharray:none;"
+   x="437.63583"
    y="379.96167"
    id="text3970-7"
    transform="scale(1.0347482,0.96641869)"><tspan
      sodipodi:role="line"
      id="tspan3968-5"
-     x="436.86896"
+     x="437.63583"
      y="379.96167"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sawasdee;-inkscape-font-specification:Sawasdee;fill:#6545cc;fill-opacity:1;stroke:none;stroke-width:0.06138624;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers">PATH OF CHILD</tspan></text>
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sawasdee;-inkscape-font-specification:Sawasdee;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.06138624;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers;">PATH OF CHILD</tspan></text>
 </g></g></svg>
