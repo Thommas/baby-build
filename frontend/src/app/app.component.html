@@ -2,7 +2,9 @@
   <mat-progress-bar
     class="loading-bar"
     color="accent"
-    mode="determinate">
+    mode="determinate"
+    [value]="progressService.progress"
+    [style.height]="progressService.progress === 0 ? '0' : '2px'">
   </mat-progress-bar>
   <app-header-cmp></app-header-cmp>
   <div class="router-content">

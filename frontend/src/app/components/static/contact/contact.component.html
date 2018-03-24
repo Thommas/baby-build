@@ -44,7 +44,10 @@
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-          <button mat-raised-button (click)="submit()" i18n>contact.submit</button>
+          <button mat-raised-button
+                  (click)="submit()"
+                  [disabled]="loading"
+                  i18n>contact.submit</button>
         </mat-card-actions>
       </mat-card>
     </form>

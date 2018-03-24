@@ -15,13 +15,22 @@ export async function handleContact(event, context, callback) {
     ? event.requestContext.identity.sourceIp : null;
 
   const tokenVerification = await verify(data.token, ip);
-  console.log('tokenVerification', tokenVerification);
+
   if (!tokenVerification) {
     return callback('Invalid token');
   }
 
-  sendEmail(data).then(data => {
-    callback(null, `Successfully received contact: ${data.MessageId}`);
+  return sendEmail(data).then(data => {
+    const response = {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin" : "*"
+      },
+      body: JSON.stringify({
+        message: 'success'
+      }),
+    };
+    callback(null, response);
   }).catch(err => {
     console.error(err, err.stack);
     callback(err);

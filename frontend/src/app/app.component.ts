@@ -13,6 +13,7 @@ import {
   AngularticsService,
   AuthService,
   BrowserService,
+  ProgressService,
   LocaleService
 } from './services';
 
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private browserService: BrowserService,
     private localeService: LocaleService,
+    private progressService: ProgressService,
     private angularticsService: AngularticsService,
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
   ) {

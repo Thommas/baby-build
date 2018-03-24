@@ -6,6 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import swal from 'sweetalert2';
 import { clone } from 'lodash';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -21,6 +22,7 @@ export class ContactComponent implements OnInit {
   @ViewChild('googleRecaptchaContainer') googleRecaptchaContainer: any;
   formGroup: FormGroup;
   recaptchaToken: string;
+  loading: boolean;
 
   constructor(
     private elementRef: ElementRef,
@@ -46,6 +48,7 @@ export class ContactComponent implements OnInit {
       message: ''
     });
     this.recaptchaToken = null;
+    this.loading = false;
   }
 
   ngOnInit() {
@@ -61,13 +64,25 @@ export class ContactComponent implements OnInit {
     if (!this.formGroup.valid || !this.recaptchaToken) {
       return;
     }
+    this.loading = true;
     const contact = clone(this.formGroup.value);
     contact.token = this.recaptchaToken;
-    console.log('environment.contactUrl', environment.contactUrl)
-    console.log('contact', contact)
     this.httpService.post(environment.contactUrl, contact).subscribe(
-      res => console.log('res', res),
-      err => console.log('err', err)
+      res => this.submitSuccess(),
+      err => this.submitFail()
     );
+  }
+
+  submitSuccess() {
+    this.loading = false;
+    swal({
+      title: 'contact.success.title',
+      text: 'contact.success.text',
+      type: 'success'
+    });
+  }
+
+  submitFail() {
+    this.loading = false;
   }
 }
