@@ -9,21 +9,18 @@
  */
 
 import fetch from 'node-fetch';
+import 'url-search-params-polyfill';
 
 const googleRecaptchaVerifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
 
-export function verify(token) {
-  const body = {
+export function verify(token, ip) {
+  const params = new URLSearchParams({
     secret: process.env.GOOGLE_RECAPTCHA_SECRET,
     response: token,
-    remoteip: event.requestContext.identity.sourceIp
-  };
+    remoteip: ip
+  });
 
-  return fetch(googleRecaptchaVerifyUrl, {
-  	method: 'POST',
-  	body:    JSON.stringify(body),
-  	headers: { 'Content-Type': 'application/json' },
-  })
+  return fetch(googleRecaptchaVerifyUrl, { method: 'POST', body: params })
   	.then(res => res.json())
   	.then(json => json.success);
 }

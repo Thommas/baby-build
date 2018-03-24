@@ -7,6 +7,7 @@
  */
 
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
@@ -62,6 +63,7 @@ import {
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,

@@ -9,11 +9,13 @@
 import { verify } from '../services/google-recaptcha';
 import { sendEmail } from '../services/ses';
 
-export function handleContact(event, context, callback) {
+export async function handleContact(event, context, callback) {
   const data = JSON.parse(event.body);
+  const ip = event.requestContext && event.requestContext.identity
+    ? event.requestContext.identity.sourceIp : null;
 
-  await tokenVerification = verify(data.token);
-
+  const tokenVerification = await verify(data.token, ip);
+  console.log('tokenVerification', tokenVerification);
   if (!tokenVerification) {
     return callback('Invalid token');
   }

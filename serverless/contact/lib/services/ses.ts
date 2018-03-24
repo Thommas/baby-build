@@ -8,18 +8,16 @@
 
 import * as aws from 'aws-sdk';
 
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION
+aws.config.update({
+  region: process.env.SES_REGION
 });
 
 export function sendEmail(data) {
-  const subjectText = 'subject';
-  const bodyText = 'bodyText';
-  const bodyHTML = 'bodyHTML';
+  const subjectText = `Contact from ${data.name} (${data.email})`;
+  const bodyText = data.message;
+  const bodyHTML = data.message;
 
-  const ses = new AWS.SES();
+  const ses = new aws.SES();
   const params = {
     Source: process.env.EMAIL,
     Destination: {

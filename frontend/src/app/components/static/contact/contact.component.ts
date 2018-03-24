@@ -9,7 +9,8 @@
 import { clone } from 'lodash';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BrowserService, GoogleRecaptchaService } from '../../../services';
+import { BrowserService, HttpService, GoogleRecaptchaService } from '../../../services';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-static-contact-cmp',
@@ -24,6 +25,7 @@ export class ContactComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private browserService: BrowserService,
+    private httpService: HttpService,
     public googleRecaptchaService: GoogleRecaptchaService
   ) {
     this.formGroup = new FormGroup({
@@ -60,7 +62,12 @@ export class ContactComponent implements OnInit {
       return;
     }
     const contact = clone(this.formGroup.value);
-    console.log('contact', contact);
-    console.log('token', this.recaptchaToken);
+    contact.token = this.recaptchaToken;
+    console.log('environment.contactUrl', environment.contactUrl)
+    console.log('contact', contact)
+    this.httpService.post(environment.contactUrl, contact).subscribe(
+      res => console.log('res', res),
+      err => console.log('err', err)
+    );
   }
 }

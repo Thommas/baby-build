@@ -2,10 +2,13 @@ service: pathofchild-contact
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-offline
 
 custom:
   stage: ${opt:stage, self:provider.stage}
   secrets: ${file(secrets.yml):${self:custom.stage}}
+  serverless-offline:
+    port: 4002
 
 package:
   exclude:
@@ -16,9 +19,15 @@ provider:
   runtime: nodejs6.10
   region: eu-west-2
   stage: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ses:SendEmail
+      Resource: arn:aws:ses:*
   environment:
     EMAIL: ${self:custom.secrets.EMAIL}
     GOOGLE_RECAPTCHA_SECRET: ${self:custom.secrets.GOOGLE_RECAPTCHA_SECRET}
+    SES_REGION: ${self:custom.secrets.SES_REGION}
 
 functions:
   contact:

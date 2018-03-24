@@ -36,6 +36,7 @@ import {
 } from './';
 import {
   BrowserService,
+  HttpService,
   GoogleRecaptchaService
 } from '../../services';
 
@@ -69,6 +70,7 @@ import {
   ],
   providers: [
     BrowserService,
+    HttpService,
     GoogleRecaptchaService
   ]
 })
