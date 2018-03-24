@@ -10,9 +10,6 @@ import { sendEmail } from './ses'
 
 describe('Services', function() {
   it('SES', function() {
-    const event = {}
-    const context = {}
-    const callback = () => {}
-    sendEmail(event, context, callback)
+    // sendEmail()
   });
 });

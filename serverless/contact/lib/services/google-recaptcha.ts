@@ -1,33 +1,29 @@
 /**
  * Path of child
  *
- * Contact - Services - Google ReCaptcha
+ * Contact - Services - Google reCaptcha
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
+ *
+ * @see https://developers.google.com/recaptcha/docs/verify
  */
 
-import * as googleRecaptcha from 'google-recaptcha';
+import fetch from 'node-fetch';
 
-export function verify(event) {
-  const captcha = new googleRecaptcha({
-    secret: process.env.GOOGLE_RECAPTCHA_SECRET
-  });
+const googleRecaptchaVerifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
 
-  let captchaResponse = event.body.captchaResponse;
-
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Captcha correct',
-      input: event,
-    }),
+export function verify(token) {
+  const body = {
+    secret: process.env.GOOGLE_RECAPTCHA_SECRET,
+    response: token,
+    remoteip: event.requestContext.identity.sourceIp
   };
 
-  captcha.verify({response: captchaResponse}, (error) => {
-    if (error) {
-      callback(error);
-    }
-
-    callback(null, response);
+  return fetch(googleRecaptchaVerifyUrl, {
+  	method: 'POST',
+  	body:    JSON.stringify(body),
+  	headers: { 'Content-Type': 'application/json' },
   })
+  	.then(res => res.json())
+  	.then(json => json.success);
 }

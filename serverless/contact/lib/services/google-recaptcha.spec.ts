@@ -1,16 +1,16 @@
 /**
  * Path of child
  *
- * Contact - Services - Google ReCaptcha
+ * Contact - Services - Google reCaptcha
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import fetch from 'node-fetch';
 import { verify } from './google-recaptcha'
 
 describe('Services', function() {
   it('Google ReCaptcha', function() {
-    const event = {}
-    verify(event)
+    // verify('token')
   });
 });

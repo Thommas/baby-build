@@ -50,18 +50,13 @@ export class ContactComponent implements OnInit {
     if (this.browserService.document) {
       this.googleRecaptchaService.init(
         this.browserService.document.body,
-        (token) => this.onGetRecaptchaToken(token)
+        token => this.recaptchaToken = token
       );
     }
   }
 
-  onGetRecaptchaToken(token: string) {
-    console.log('token', token);
-    this.recaptchaToken = token;
-  }
-
   submit() {
-    if (!this.formGroup.valid) {
+    if (!this.formGroup.valid || !this.recaptchaToken) {
       return;
     }
     const contact = clone(this.formGroup.value);

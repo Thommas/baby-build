@@ -14,16 +14,18 @@ AWS.config.update({
   region: process.env.AWS_REGION
 });
 
-export function sendEmail(event, context, callback) {
-  const subjectText = 'test';
-  const bodyText = 'test';
-  const bodyHTML = 'test';
+export function sendEmail(data) {
+  const subjectText = 'subject';
+  const bodyText = 'bodyText';
+  const bodyHTML = 'bodyHTML';
 
   const ses = new AWS.SES();
   const params = {
-    Source: "test@test.com",
+    Source: process.env.EMAIL,
     Destination: {
-      ToAddresses: [ "test@test.com" ]
+      ToAddresses: [
+        process.env.EMAIL
+      ]
     },
     Message: {
       Body: {
@@ -49,13 +51,5 @@ export function sendEmail(event, context, callback) {
     ]
   };
 
-  ses.sendEmail(params, function(err, data) {
-    if (err) {
-      console.log(err, err.stack);
-      callback(err);
-    } else {
-      console.log("Sent email");
-      callback(null, `Successfully received contact.`);
-    }
-  );
+  return ses.sendEmail(params).promise();
 }
