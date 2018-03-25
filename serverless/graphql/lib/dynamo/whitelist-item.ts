@@ -49,7 +49,7 @@ export function createWhitelistItem(args, userId) {
   return db.createItem(params);
 }
 
-export function updateWhitelistItem(args) {
+export function updateWhitelistItem(args, userId) {
   const params = {
     TableName,
     Key: {
@@ -69,7 +69,7 @@ export function updateWhitelistItem(args) {
   return db.updateItem(params, args);
 }
 
-export function deleteWhitelistItem(args) {
+export function deleteWhitelistItem(args, userId) {
   const params = {
     TableName,
     Key: {

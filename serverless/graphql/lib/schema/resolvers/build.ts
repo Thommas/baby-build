@@ -22,7 +22,7 @@ export default {
     deleteBuild: (_, args, context) => dbBuild.deleteBuild(args, context.user_id),
   },
   Build: {
-    gamification: (build, args, context) => dbGamification.getGamification('build', build.id, context.user_id),
+    gamification: (build, args, context) => dbGamification.getGamification('build', build.id),
     child: (build, args, context) => dbChild.getChildById(build.child_id, context.user_id),
     quests: (build, args, context) => dbQuest.getQuestsByBuild(build.id, context.user_id),
   },

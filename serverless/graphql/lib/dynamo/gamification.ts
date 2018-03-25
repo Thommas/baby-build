@@ -19,5 +19,14 @@ export function getGamification(entityType, entityId) {
     },
   };
 
-  return db.get(params);
+  return db.get(params).then(gamification => {
+    if (gamification) {
+      return gamification;
+    }
+    return {
+      id: entityType + '-' + entityId,
+      xp: 0,
+      lvl: 1
+    };
+  });
 }

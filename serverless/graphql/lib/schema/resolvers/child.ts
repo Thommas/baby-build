@@ -21,7 +21,7 @@ export default {
     deleteChild: (_, args, context) => dbChild.deleteChild(args, context.user_id),
   },
   Child: {
-    gamification: (child, args, context) => dbGamification.getGamification('child', child.id, context.user_id),
+    gamification: (child, args, context) => dbGamification.getGamification('child', child.id),
     builds: (child, args, context) => dbBuild.getBuildsByChild(child.id, context.user_id),
   },
 };

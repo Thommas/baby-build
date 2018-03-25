@@ -4,8 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Implement terms and privacy
-- Finish contact form with google captcha and lambda
 - Improve dynamic header based on child, build, xp, level
 - Improve SEO
 - Test renew token (replace timer by authGuard check)
@@ -213,12 +211,3 @@ Similar apps
 
 https://www.choremonster.com
 https://www.classcraft.com
-
-
-Social network
---------------
-
-- Open gmail account
-- Open subreddit /r/pathofchild
-- Open twitter account @pathofchild
-- Open discord channel

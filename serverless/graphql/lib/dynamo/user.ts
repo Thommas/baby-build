@@ -46,7 +46,7 @@ export function createUser(userId) {
   return db.createItem(params);
 }
 
-export function updateUser(args) {
+export function updateUser(args, userId) {
   const params = {
     TableName,
     Key: {

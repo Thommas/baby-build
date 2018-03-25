@@ -17,6 +17,7 @@ export class UserService {
   sub: any;
 
   constructor(private apollo: Apollo, private authService: AuthService) {
+    this.user = null;
     this.sub = null;
     authService.isAuthenticated.subscribe(
       (isAuthenticated) => this.setupWatchQuery(isAuthenticated)
@@ -25,10 +26,8 @@ export class UserService {
 
   setupWatchQuery(isAuthenticated) {
     if (isAuthenticated && !this.sub) {
-      console.log('SUB AUTH USER');
       this.sub = this.watchAuthUser();
     } else if (this.sub) {
-      console.log('UNSUB AUTH USER');
       this.sub.unsubscribe();
     }
   }
@@ -39,17 +38,8 @@ export class UserService {
     })
       .valueChanges
       .subscribe(({ data }) => {
-        console.log('GET AUTH USER', data);
         if (data && data.authUser) {
           this.user = data.authUser;
-        } else {
-          this.user = {
-            id: null,
-            gamification: {
-              xp: 0,
-              lvl: 1
-            }
-          };
         }
       });
   }

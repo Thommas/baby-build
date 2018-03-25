@@ -173,8 +173,6 @@ export class AuthService {
         const source = Observable.timer(Math.max(1, parseInt(expiresAt, 10) - Date.now()));
         this.refreshSubscription = source.subscribe(() => {
           this.renewToken();
-          console.log('schedule renewal');
-          // this.scheduleRenewal();
         });
       });
     });

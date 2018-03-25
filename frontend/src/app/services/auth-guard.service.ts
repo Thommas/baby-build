@@ -13,19 +13,27 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
   /**
    * Constructor
    */
-  constructor(protected router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   /**
    * Checks whether current user is logged or not.
    * Stores the current url to redirect user after login.
    */
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return true;
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.authService.isAuthenticated.map(
+      isAuthenticated => {
+        if (!isAuthenticated) {
+          this.router.navigate(['']);
+        }
+        return isAuthenticated;
+      }
+    );
   }
 }

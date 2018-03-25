@@ -38,6 +38,7 @@ import {
   HeaderComponent,
   HeaderBuildComponent,
   HeaderChildComponent,
+  HeaderLevelComponent,
   HeaderUserComponent
 } from './';
 
@@ -74,6 +75,7 @@ import {
     HeaderComponent,
     HeaderBuildComponent,
     HeaderChildComponent,
+    HeaderLevelComponent,
     HeaderUserComponent
   ],
   providers: [

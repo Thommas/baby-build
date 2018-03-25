@@ -49,7 +49,7 @@ export function createChild(args, userId) {
   return db.createItem(params);
 }
 
-export function updateChild(args) {
+export function updateChild(args, userId) {
   const params = {
     TableName,
     Key: {
@@ -75,7 +75,7 @@ export function updateChild(args) {
   return db.updateItem(params, args);
 }
 
-export function deleteChild(args) {
+export function deleteChild(args, userId) {
   const params = {
     TableName,
     Key: {

@@ -61,7 +61,7 @@ export function createBuild(args, userId) {
   return db.createItem(params);
 }
 
-export function updateBuild(args) {
+export function updateBuild(args, userId) {
   const params = {
     TableName,
     Key: {
@@ -82,7 +82,7 @@ export function updateBuild(args) {
   return db.updateItem(params, args);
 }
 
-export function deleteBuild(args) {
+export function deleteBuild(args, userId) {
   const params = {
     TableName,
     Key: {
