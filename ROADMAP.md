@@ -4,17 +4,10 @@ Roadmap
 Short term
 ----------
 
-- Improve dynamic header based on child, build, xp, level
 - Improve SEO
-- Test renew token (replace timer by authGuard check)
-
-
-Mid term
---------
-
 - Implement instructions on home based on xp/level
 - Implement add/remove/edit quest
-- Design calendar for build
+- Design quest calendar
 - Implement xp and level to unlock calendar
 - Improve gamification lambda
 - Implement giving access to a child to other family members
@@ -23,6 +16,7 @@ Mid term
 Long term
 ---------
 
+- Test renew token
 - Implement server side rendering
 - Build inspiration static page
 - Build roadmap static page

@@ -12,6 +12,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import { GetWhitelistItems, DeleteWhitelistItem } from '../../../graphql';
+import { BuildService } from '../../../services';
 import { WhitelistEditComponent } from '../whitelist-edit/whitelist-edit.component';
 
 @Component({
@@ -27,6 +28,7 @@ export class WhitelistListComponent implements OnInit {
 
   constructor(
     private apollo: Apollo,
+    private buildService: BuildService,
     private dialog: MatDialog
   ) {}
 
@@ -38,6 +40,7 @@ export class WhitelistListComponent implements OnInit {
     this.apollo.watchQuery<any>({
       query: GetWhitelistItems,
       variables: {
+        build_id: this.buildService.build.id,
         category: this.category
       }
     })
@@ -82,7 +85,10 @@ export class WhitelistListComponent implements OnInit {
       },
       refetchQueries: [{
         query: GetWhitelistItems,
-        variables: { category: this.category },
+        variables: {
+          build_id: this.buildService.build.id,
+          category: this.category
+        },
       }],
     }).subscribe();
   }

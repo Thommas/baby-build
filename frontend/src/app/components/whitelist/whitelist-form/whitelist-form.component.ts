@@ -16,6 +16,7 @@ import {
   UpdateWhitelistItemMutation,
   GetWhitelistItems
 } from '../../../graphql';
+import { BuildService } from '../../../services';
 
 @Component({
   selector: 'app-whitelist-form-cmp',
@@ -29,7 +30,7 @@ export class WhitelistFormComponent implements OnChanges {
   formGroup: FormGroup;
   loading: boolean;
 
-  constructor(private apollo: Apollo) {
+  constructor(private apollo: Apollo, private buildService: BuildService) {
     this.whitelistItem = {};
     this.category = null;
     this.formGroup = new FormGroup({
@@ -65,6 +66,7 @@ export class WhitelistFormComponent implements OnChanges {
       return;
     }
     const whitelistItem = clone(this.formGroup.value);
+    whitelistItem.build_id = this.buildService.build.id;
     whitelistItem.category = this.category;
     this.apollo.mutate({
       mutation: whitelistItem.id ? UpdateWhitelistItemMutation : CreateWhitelistItemMutation,
@@ -77,7 +79,10 @@ export class WhitelistFormComponent implements OnChanges {
         },
         {
           query: GetWhitelistItems,
-          variables: { category: this.category },
+          variables: {
+            build_id: this.buildService.build.id,
+            category: this.category
+          },
         }
       ],
     }).subscribe(

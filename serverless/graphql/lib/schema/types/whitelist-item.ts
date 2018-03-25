@@ -14,12 +14,12 @@ const WhitelistItem = `
     required_age: Int
   }
   type Query {
-    whitelistItems(category: String!): [WhitelistItem]
-    whitelistItem(id: ID!): WhitelistItem
+    whitelistItems(build_id: String!, category: String!): [WhitelistItem]
   }
   type Mutation {
     createWhitelistItem(
       title: String!
+      build_id: String!
       category: String!
       required_age: Int!
     ): WhitelistItem

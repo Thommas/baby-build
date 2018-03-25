@@ -4,6 +4,7 @@
     "created_at": 1521053029000,
     "updated_at": 1521053029000,
     "user_id": "auth0|5a773beebfd2511753f2c9c0",
+    "build_id": "1",
     "category": "activity",
     "title": "Play chess",
     "required_age": 7
@@ -13,6 +14,7 @@
     "created_at": 1521053029000,
     "updated_at": 1521053029000,
     "user_id": "auth0|5a773beebfd2511753f2c9c0",
+    "build_id": "1",
     "category": "book",
     "title": "Cinderella",
     "required_age": 8
