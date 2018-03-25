@@ -605,7 +605,7 @@ YOU HEREBY AGREE, AT YOUR EXPENSE, TO INDEMNIFY, DEFEND AND HOLD HARMLESS PATHOF
 <br>
 <p>Heavily inspired by <a href="https://stackshare.io/terms">https://stackshare.io/terms</a></p>
 <br>
-<p>Some pictures on Path of child are free license with attribution. Big thanks to <a href='https://www.freepik.com'>Freepik</a>.</p>
+<p>Some pictures and icons on Path of child are free license with attribution. Big thanks to <a href='https://www.freepik.com'>Freepik</a> and <a href="https://www.shareicon.net">Shareicon</a>.</p>
         ]]></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/components/static/terms/terms.component.ts</context>

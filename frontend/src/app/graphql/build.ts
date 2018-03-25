@@ -16,6 +16,10 @@ export const GetBuilds = gql`
       child {
         nickname
       }
+      gamification {
+        xp
+        lvl
+      }
     }
   }
 `;
@@ -45,6 +49,10 @@ export const GetBuild = gql`
       quests {
         id
         title
+      }
+      gamification {
+        xp
+        lvl
       }
     }
   }

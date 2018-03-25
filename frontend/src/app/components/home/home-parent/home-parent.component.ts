@@ -7,6 +7,7 @@
  */
 
 import { Component } from '@angular/core';
+import { BuildService, ChildService } from '../../../services';
 
 @Component({
   selector: 'app-home-parent-cmp',
@@ -14,4 +15,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-parent.component.scss']
 })
 export class HomeParentComponent {
+  constructor(
+    public buildService: BuildService,
+    public childService: ChildService
+  ) {}
 }

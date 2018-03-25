@@ -7,7 +7,7 @@
  */
 
 import { Component } from '@angular/core';
-import { BuildService } from '../../../services';
+import { BuildService, ChildService } from '../../../services';
 
 @Component({
   selector: 'app-header-build-cmp',
@@ -15,5 +15,8 @@ import { BuildService } from '../../../services';
   styleUrls: ['./header-build.component.scss']
 })
 export class HeaderBuildComponent {
-  constructor(public buildService: BuildService) {}
+  constructor(
+    public buildService: BuildService,
+    public childService: ChildService
+  ) {}
 }

@@ -3,7 +3,7 @@
 </div>
 <mat-progress-bar
   mode="determinate"
-  value="60"
+  [value]="gamification.xp / (gamification.xp|xpToLevelUp) * 100"
   color="primary"
   [matTooltip]="gamification.xp + ' / ' + (gamification.xp|xpToLevelUp)">
 </mat-progress-bar>
