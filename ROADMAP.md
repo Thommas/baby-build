@@ -4,13 +4,11 @@ Roadmap
 Short term
 ----------
 
-- Test renew token (replace timer by authGuard check)
-- Add icon for auth0
 - Implement terms and privacy
 - Finish contact form with google captcha and lambda
 - Improve dynamic header based on child, build, xp, level
-- Implement server side rendering
 - Improve SEO
+- Test renew token (replace timer by authGuard check)
 
 
 Mid term
@@ -21,15 +19,16 @@ Mid term
 - Design calendar for build
 - Implement xp and level to unlock calendar
 - Improve gamification lambda
+- Implement giving access to a child to other family members
 
 
 Long term
 ---------
 
+- Implement server side rendering
 - Build inspiration static page
 - Build roadmap static page
 - Add unit tests
-- Implement giving access to a child to other family members
 
 
 Entities
