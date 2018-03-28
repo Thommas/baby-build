@@ -20,7 +20,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/observable/throw';
-import Auth0Lock from 'auth0-lock';
+// import Auth0Lock from 'auth0-lock';
 import * as jwt from 'jsonwebtoken';
 import { DexieService } from './dexie.service';
 import { environment } from '../../environments/environment';
@@ -42,14 +42,14 @@ export class AuthService {
   constructor(private router: Router, private dexieService: DexieService) {
     this.tokenObs = null;
     this.isAuthenticatedObs = null;
-    this.lock = new Auth0Lock(
-      environment.auth0.clientID,
-      environment.auth0.domain,
-      environment.auth0.options
-    );
-    this.lock.on('authenticated', (authResult: any) => {
-      this.setSession(authResult);
-    });
+    // this.lock = new Auth0Lock(
+    //   environment.auth0.clientID,
+    //   environment.auth0.domain,
+    //   environment.auth0.options
+    // );
+    // this.lock.on('authenticated', (authResult: any) => {
+    //   this.setSession(authResult);
+    // });
   }
 
   /**

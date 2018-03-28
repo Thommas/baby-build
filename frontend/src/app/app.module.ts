@@ -6,6 +6,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule } from 'apollo-angular';
@@ -61,7 +63,7 @@ import {
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'path-of-child' }),
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,
@@ -108,5 +110,12 @@ import {
   ]
 })
 export class AppModule {
-  constructor(apolloService: ApolloService) {}
+  constructor(
+    apolloService: ApolloService,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(APP_ID) private appId: string) {
+    const platform = isPlatformBrowser(platformId) ?
+      'in the browser' : 'on the server';
+    console.log(`Running ${platform} with appId=${appId}`);
+  }
 }
