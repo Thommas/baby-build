@@ -10,5 +10,6 @@ export const ROUTES = [
   '/',
   '/terms',
   '/branding',
-  '/contact'
+  '/contact',
+  '/security/callback'
 ];

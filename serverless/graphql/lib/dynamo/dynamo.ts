@@ -10,7 +10,7 @@ import AWS = require('aws-sdk');
 import { DynamoDB } from 'aws-sdk';
 import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
 
-if (process.env.LOCAL_DYNAMODB_ENDPOINT) {
+if (process.env.LOCAL_DYNAMODB_ENDPOINT.length > 0) {
   const serviceConfigurationOptions: ServiceConfigurationOptions = {
     region: 'local',
     endpoint: process.env.LOCAL_DYNAMODB_ENDPOINT
