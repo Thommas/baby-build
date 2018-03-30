@@ -20,8 +20,8 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/observable/throw';
-// import Auth0Lock from 'auth0-lock';
 import * as jwt from 'jsonwebtoken';
+import { BrowserService } from './browser.service';
 import { DexieService } from './dexie.service';
 import { environment } from '../../environments/environment';
 
@@ -39,17 +39,46 @@ export class AuthService {
   /**
    * Constructor
    */
-  constructor(private router: Router, private dexieService: DexieService) {
+  constructor(
+    private router: Router,
+    private dexieService: DexieService,
+    private browserService: BrowserService
+  ) {
     this.tokenObs = null;
     this.isAuthenticatedObs = null;
-    // this.lock = new Auth0Lock(
-    //   environment.auth0.clientID,
-    //   environment.auth0.domain,
-    //   environment.auth0.options
-    // );
-    // this.lock.on('authenticated', (authResult: any) => {
-    //   this.setSession(authResult);
-    // });
+  }
+
+  /**
+   * Load auth0 lock dynamically to bypass SSR limitation on require crypto
+   */
+  init() {
+    if (!this.browserService.document) {
+      return;
+    }
+
+    const document = this.browserService.document;
+    const scriptElement = document.createElement('script');
+    scriptElement.type = 'text/javascript';
+    scriptElement.async = true;
+    scriptElement.defer = true;
+    scriptElement.onload = () => this.onAuth0LockLoaded();
+    scriptElement.src = 'https://cdn.auth0.com/js/lock/11.5.2/lock.min.js';
+    document.body.appendChild(scriptElement);
+  }
+
+  /**
+   * Once auth0 lock is loaded in the browser, initialize it
+   */
+  onAuth0LockLoaded() {
+    const Auth0Lock = this.browserService.window.Auth0Lock;
+    this.lock = new Auth0Lock(
+      environment.auth0.clientID,
+      environment.auth0.domain,
+      environment.auth0.options
+    );
+    this.lock.on('authenticated', (authResult: any) => {
+      this.setSession(authResult);
+    });
   }
 
   /**
@@ -86,6 +115,9 @@ export class AuthService {
    * Display login modal
    */
   login() {
+    if (!this.lock) {
+      return;
+    }
     this.lock.show();
   }
 
@@ -93,6 +125,9 @@ export class AuthService {
    * Display signUp modal
    */
   signUp() {
+    if (!this.lock) {
+      return;
+    }
     this.lock.show({
       initialScreen: 'signUp'
     });
@@ -112,6 +147,9 @@ export class AuthService {
    * Resume authentication process after redirect from auth0
    */
   resumeAuth(hash) {
+    if (!this.lock) {
+      return;
+    }
     this.lock.resumeAuth(hash, (error, authResult) => {
       if (error) {
         console.log('error', error);
@@ -148,6 +186,9 @@ export class AuthService {
    * Renew token
    */
   renewToken() {
+    if (!this.lock) {
+      return;
+    }
     this.lock.checkSession({}, (err, result) => {
       if (err) {
         console.log(`Could not get a new token (${err.error}: ${err.error_description}).`);

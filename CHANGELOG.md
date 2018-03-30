@@ -11,6 +11,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Contact form
 - Gamification header
 
+### Refactored
+- Whitelist is now part of a build
+
 ## [0.5.0] - 2018-03-18
 
 ### Added

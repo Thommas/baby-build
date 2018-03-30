@@ -39,17 +39,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.browserService.document) {
-      // this.angularticsService.init(this.browserService.document.body);
-    }
-    // this.localeService.detectLocale();
+    this.authService.init();
+    this.angularticsService.init();
+    this.localeService.init();
 
     if (this.router.events) {
       this.router.events.subscribe((evt) => {
         if (!(evt instanceof NavigationEnd)) {
           return;
         }
-        // this.browserService.document.documentElement.scrollTop = 0;
+        if (this.browserService.document) {
+          this.browserService.document.documentElement.scrollTop = 0;
+        }
       });
     }
   }

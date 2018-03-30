@@ -28,6 +28,9 @@ export class GoogleRecaptchaService {
     }
     this.callback = callback;
 
+    if (!this.browserService.window) {
+      return;
+    }
     this.browserService.window.recaptchaCallback = () => this.onRecaptchaLoaded();
 
     const scriptElement = document.createElement('script');

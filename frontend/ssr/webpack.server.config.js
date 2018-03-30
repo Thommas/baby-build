@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Webpack server configuration
+ * SSR - Webpack server configuration
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  *
@@ -14,17 +14,16 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     // This is our Express server for Dynamic universal
-    server: './server.ts',
+    server: './ssr/server.ts',
     // This is an example of Static prerendering (generative)
-    prerender: './prerender.ts'
+    prerender: './ssr/prerender.ts'
   },
   target: 'node',
   resolve: { extensions: ['.ts', '.js'] },
   // Make sure we include all node_modules etc
   externals: [/(node_modules|main\..*\.js)/,],
   output: {
-    // Puts the output at the root of the dist folder
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '../dist'),
     filename: '[name].js'
   },
   module: {
@@ -36,13 +35,13 @@ module.exports = {
     new webpack.ContextReplacementPlugin(
       // fixes WARNING Critical dependency: the request of a dependency is an expression
       /(.+)?angular(\\|\/)core(.+)?/,
-      path.join(__dirname, 'src'), // location of your src
+      path.join(__dirname, '../src'), // location of your src
       {} // a map of your routes
     ),
     new webpack.ContextReplacementPlugin(
       // fixes WARNING Critical dependency: the request of a dependency is an expression
       /(.+)?express(\\|\/)(.+)?/,
-      path.join(__dirname, 'src'),
+      path.join(__dirname, '../src'),
       {}
     )
   ]

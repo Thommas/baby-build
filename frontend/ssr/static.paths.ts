@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * List of routes for prerender
+ * SSR - List of routes for prerender
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

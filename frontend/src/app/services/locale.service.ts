@@ -21,7 +21,10 @@ export class LocaleService {
 
   public constructor(private browserService: BrowserService) {}
 
-  public detectLocale() {
+  public init() {
+    if (!this.browserService.language) {
+      return;
+    }
     let detectedLocale = this.browserService.language;
     if (this.LOCALES.map(locale => locale.value).indexOf(detectedLocale) === -1) {
       detectedLocale = 'en';
@@ -37,6 +40,9 @@ export class LocaleService {
       subdomain = '';
     } else {
       subdomain += '.';
+    }
+    if (!this.browserService.window) {
+      return;
     }
     const host = this.browserService.window.location.host;
     const localeHost = subdomain + environment.baseDomainUrl;
