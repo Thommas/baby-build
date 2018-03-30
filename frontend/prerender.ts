@@ -1,3 +1,11 @@
+/**
+ * Path of child
+ *
+ * Prerender
+ *
+ * @author Thomas Bullier <thomasbullier@gmail.com>
+ */
+
 // Load zone.js for the server.
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';

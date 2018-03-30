@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * App
+ * App - Module - Browser
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

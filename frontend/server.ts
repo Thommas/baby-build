@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * SSR
+ * Server
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  *
