@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService, SeoService } from '../../../services';
 
 @Component({
@@ -14,11 +14,13 @@ import { AuthService, SeoService } from '../../../services';
   templateUrl: './home-anonymous.component.html',
   styleUrls: ['./home-anonymous.component.scss']
 })
-export class HomeAnonymousComponent {
+export class HomeAnonymousComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private seoService: SeoService
-  ) {
-    this.seoService.setPage('home_anonymous');
+  ) {}
+
+  ngOnInit() {
+    this.seoService.setPage('home');
   }
 }

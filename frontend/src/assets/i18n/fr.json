@@ -1,9 +1,33 @@
 {
   "seo": {
-    "home_anonymous": {
+    "home": {
       "title": "Gamification platform for education | Path of child",
       "description": "Path of child is a gamification platform for planning the life and education of your children. You can have fun and share useful information with other family members and parents.",
       "og:image": "https://pathofchild.io/assets/img/hero.jpg",
+      "og:title": "Gamification platform for education",
+      "og:site_name": "Path of child",
+      "twitter:card": "twitter:card"
+    },
+    "terms": {
+      "title": "Terms of use of the platform | Path of child",
+      "description": "Feel free to join the fun. It's an experiment. This platform source code is open source on WTFPL license.",
+      "og:image": "https://pathofchild.io/assets/img/path-of-child-logo.jpg",
+      "og:title": "Gamification platform for education",
+      "og:site_name": "Path of child",
+      "twitter:card": "twitter:card"
+    },
+    "branding": {
+      "title": "Gamification platform for education | Path of child",
+      "description": "Path of child logos, branding, and assets",
+      "og:image": "https://pathofchild.io/assets/img/path-of-child-logo.jpg",
+      "og:title": "Gamification platform for education",
+      "og:site_name": "Path of child",
+      "twitter:card": "twitter:card"
+    },
+    "contact": {
+      "title": "Gamification platform for education | Path of child",
+      "description": "Contact us on reddit, facebook, twitter or directly here.",
+      "og:image": "https://pathofchild.io/assets/img/path-of-child-logo.jpg",
       "og:title": "Gamification platform for education",
       "og:site_name": "Path of child",
       "twitter:card": "twitter:card"

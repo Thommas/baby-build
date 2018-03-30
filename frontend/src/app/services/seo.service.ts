@@ -29,14 +29,24 @@ export class SeoService {
     this.translateService.get(`seo.${pageIdentifier}`).subscribe(
       meta => {
         this.titleService.setTitle(meta.title);
-        this.metaService.addTags([
-          { name: 'description', content: meta.description },
-          { name: 'og:image', content: meta['og:image'] },
-          { name: 'og:title', content: meta['og:title'] },
-          { name: 'og:site_name', content: meta['og:site_name'] },
-          { name: 'og:description', content: meta.description },
+        this.metaService.updateTag(
+          { name: 'description', content: meta.description }
+        );
+        this.metaService.updateTag(
+          { name: 'og:image', content: meta['og:image'] }
+        );
+        this.metaService.updateTag(
+          { name: 'og:title', content: meta['og:title'] }
+        );
+        this.metaService.updateTag(
+          { name: 'og:site_name', content: meta['og:site_name'] }
+        );
+        this.metaService.updateTag(
+          { name: 'og:description', content: meta.description }
+        );
+        this.metaService.updateTag(
           { name: 'twitter:card', content: meta['twitter:card'] }
-        ]);
+        );
       }
     );
     this.metaService.addTags([
