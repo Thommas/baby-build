@@ -7,7 +7,7 @@
  */
 
 import { Component } from '@angular/core';
-import { AuthService } from '../../../services';
+import { AuthService, SeoService } from '../../../services';
 
 @Component({
   selector: 'app-home-anonymous-cmp',
@@ -15,5 +15,10 @@ import { AuthService } from '../../../services';
   styleUrls: ['./home-anonymous.component.scss']
 })
 export class HomeAnonymousComponent {
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    private seoService: SeoService
+  ) {
+    this.seoService.setPage('home_anonymous');
+  }
 }

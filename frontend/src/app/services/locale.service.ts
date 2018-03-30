@@ -7,6 +7,7 @@
  */
 
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { BrowserService } from './browser.service';
 import { environment } from '../../environments/environment';
 
@@ -19,9 +20,14 @@ export class LocaleService {
     { value: 'ja', label: '日本語'}
   ];
 
-  public constructor(private browserService: BrowserService) {}
+  public constructor(
+    private browserService: BrowserService,
+    private translateService: TranslateService
+  ) {}
 
   public init() {
+    this.translateService.setDefaultLang('en');
+
     if (!this.browserService.language) {
       return;
     }
@@ -35,6 +41,8 @@ export class LocaleService {
   }
 
   public setLocale(newLocale) {
+    this.translateService.use(newLocale);
+
     let subdomain = newLocale;
     if (subdomain === 'en') {
       subdomain = '';

@@ -17,7 +17,6 @@ Long term
 ---------
 
 - Test renew token
-- Implement server side rendering
 - Build inspiration static page
 - Build roadmap static page
 - Add unit tests

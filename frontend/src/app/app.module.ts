@@ -6,10 +6,10 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ApolloModule } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { Apollo } from 'apollo-angular';
@@ -54,9 +54,14 @@ import {
   DexieService,
   GoogleRecaptchaService,
   LocaleService,
+  SeoService,
   UserService,
   ProgressService
 } from './services';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -67,6 +72,13 @@ import {
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
     RouterModule,
     routing,
     FlexLayoutModule,
@@ -102,6 +114,7 @@ import {
     DexieService,
     GoogleRecaptchaService,
     LocaleService,
+    SeoService,
     UserService,
     ProgressService
   ],
@@ -110,12 +123,5 @@ import {
   ]
 })
 export class AppModule {
-  constructor(
-    apolloService: ApolloService,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    @Inject(APP_ID) private appId: string) {
-    const platform = isPlatformBrowser(platformId) ?
-      'in the browser' : 'on the server';
-    console.log(`Running ${platform} with appId=${appId}`);
-  }
+  constructor(apolloService: ApolloService) {}
 }
