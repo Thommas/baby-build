@@ -4,7 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Improve SEO
 - Implement instructions on home based on xp/level
 - Implement add/remove/edit quest
 - Design quest calendar
