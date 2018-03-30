@@ -63,8 +63,7 @@ provider:
         - dynamodb:ListStreams
       Resource: arn:aws:dynamodb:${self:provider.region}:*:*
   environment:
-    DYNAMODB_REGION: ${self:custom.secrets.DYNAMODB_REGION}
-    DYNAMODB_ENDPOINT: ${self:custom.secrets.DYNAMODB_ENDPOINT}
+    LOCAL_DYNAMODB_ENDPOINT: ${self:custom.secrets.LOCAL_DYNAMODB_ENDPOINT}
     AUTH0_CLIENT_ID: ${self:custom.secrets.AUTH0_CLIENT_ID}
     AUTH0_JWKS_URI: ${self:custom.secrets.AUTH0_JWKS_URI}
     AUTH0_JWKS_KID: ${self:custom.secrets.AUTH0_JWKS_KID}

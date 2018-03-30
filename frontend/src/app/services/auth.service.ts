@@ -44,6 +44,8 @@ export class AuthService {
     private dexieService: DexieService,
     private browserService: BrowserService
   ) {
+    this.lock = null;
+    this.refreshSubscription = null;
     this.tokenObs = null;
     this.isAuthenticatedObs = null;
   }
