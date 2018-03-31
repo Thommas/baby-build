@@ -7,8 +7,9 @@
  */
 
 import { clone } from 'lodash';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import {
   CreateChildMutation,
@@ -22,8 +23,8 @@ import {
   templateUrl: './child-form.component.html',
   styleUrls: ['./child-form.component.scss']
 })
-export class ChildFormComponent {
-  child: any;
+export class ChildFormComponent implements OnInit {
+  formGroup: FormGroup;
   loading: boolean;
 
   constructor(
@@ -31,9 +32,24 @@ export class ChildFormComponent {
     private router: Router,
     private apollo: Apollo
   ) {
-    this.child = {
+    this.formGroup = new FormGroup({
+      id: new FormControl('', []),
+      firstname: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
+      middlenames: new FormControl('', [Validators.required]),
+      nickname: new FormControl('', [Validators.required]),
+      birthdate: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
+    });
+    this.formGroup.setValue({
+      id: null,
+      firstname: null,
+      lastname: null,
+      middlenames: null,
+      nickname: null,
+      birthdate: null,
       gender: 'f'
-    };
+    });
   }
 
   ngOnInit() {
@@ -53,15 +69,16 @@ export class ChildFormComponent {
         .valueChanges
         .subscribe(({ data, loading }) => {
           this.loading = loading;
-          this.child = data.child;
+          this.formGroup.setValue(data.child);
         });
     });
   }
 
   submit() {
-    // FIXME Form validation
-
-    const child = clone(this.child);
+    if (!this.formGroup.valid) {
+      return;
+    }
+    const child = clone(this.formGroup.value);
     child.birthdate = child.birthdate.format('x');
     this.apollo.mutate({
       mutation: child.id ? UpdateChildMutation : CreateChildMutation,

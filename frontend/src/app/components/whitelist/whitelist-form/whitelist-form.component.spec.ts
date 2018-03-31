@@ -10,7 +10,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
-import { ApolloStub } from '../../../services';
+import { ApolloStub, BuildService } from '../../../services';
 import { WhitelistFormComponent } from './whitelist-form.component';
 
 describe('WhitelistFormComponent', () => {
@@ -27,7 +27,8 @@ describe('WhitelistFormComponent', () => {
         WhitelistFormComponent
       ],
       providers: [
-        { provide: Apollo, useClass: ApolloStub }
+        { provide: Apollo, useClass: ApolloStub },
+        BuildService
       ]
     }).compileComponents();
   }));

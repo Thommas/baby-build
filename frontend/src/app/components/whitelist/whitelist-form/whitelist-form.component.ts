@@ -35,9 +35,7 @@ export class WhitelistFormComponent implements OnChanges {
     this.category = null;
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
-      title: new FormControl('', [
-        Validators.required
-      ]),
+      title: new FormControl('', [Validators.required]),
       required_age: new FormControl('', [
         Validators.required,
         Validators.min(0),

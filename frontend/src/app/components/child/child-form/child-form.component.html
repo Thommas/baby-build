@@ -4,43 +4,45 @@
     <span i18n>global.go_back</span>
   </button>
 </mat-toolbar>
-<form #childForm="ngForm" *ngIf="!loading">
+<form [formGroup]="formGroup" *ngIf="!loading">
   <mat-card>
     <mat-card-title fxLayout="row" i18n>child_form.title</mat-card-title>
     <mat-card-content fxLayout="row">
       <div fxLayout="row wrap" fxFlex="50">
         <mat-form-field>
-          <input matInput placeholder="child_form.first_name" i18n-placeholder
-                 [(ngModel)]="child.firstname" name="firstname">
+          <input matInput placeholder="child_form.firstname" i18n-placeholder
+                 formControlName="firstname">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="child_form.middle_names" i18n-placeholder
-                 [(ngModel)]="child.middlename" name="middlename">
+          <input matInput placeholder="child_form.middlenames" i18n-placeholder
+                 formControlName="middlenames">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="child_form.last_name" i18n-placeholder
-                 [(ngModel)]="child.lastname" name="lastname">
+          <input matInput placeholder="child_form.lastname" i18n-placeholder
+                 formControlName="lastname">
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="child_form.nickname" i18n-placeholder
-                 [(ngModel)]="child.nickname" name="nickname">
+                 formControlName="nickname">
         </mat-form-field>
         <mat-form-field>
           <input matInput [matDatepicker]="picker" placeholder="child_form.birthdate" i18n-placeholder
-                 [(ngModel)]="child.birthdate" name="birthdate">
+                 formControlName="birthdate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
       <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
-        <div class="gender gender-f" fxLayout="column" fxLayoutAlign="center center" [ngClass]="{'selected': child.gender === 'f'}">
-          <div class="option" (click)="child.gender = 'f'">
+        <div class="gender gender-f" fxLayout="column" fxLayoutAlign="center center"
+             [ngClass]="{'selected': formGroup.getValue().gender === 'f'}">
+          <div class="option" (click)="formGroup.setValue({gender: 'f'})">
             <img src="/assets/img/girl.svg"/>
             <div i18n>child_form.girl</div>
           </div>
         </div>
-        <div class="gender gender-m" fxLayout="column" fxLayoutAlign="center center" [ngClass]="{'selected': child.gender === 'm'}">
-          <div class="option" (click)="child.gender = 'm'">
+        <div class="gender gender-m" fxLayout="column" fxLayoutAlign="center center"
+             [ngClass]="{'selected': formGroup.getValue().gender === 'm'}">
+          <div class="option" (click)="formGroup.setValue({gender: 'm'})">
             <img src="/assets/img/boy.svg"/>
             <div i18n>child_form.boy</div>
           </div>

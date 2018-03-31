@@ -8,7 +8,16 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  BrowserService,
+  BrowserServiceStub,
+  GoogleRecaptchaService,
+  HttpService,
+  HttpServiceStub,
+  SeoService,
+  SeoServiceStub
+} from '../../../services';
 import { ContactComponent } from './contact.component';
 
 describe('ContactComponent', () => {
@@ -18,11 +27,18 @@ describe('ContactComponent', () => {
         NO_ERRORS_SCHEMA
       ],
       imports: [
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
       ],
       declarations: [
         ContactComponent
       ],
+      providers: [
+        { provide: BrowserService, useClass: BrowserServiceStub },
+        GoogleRecaptchaService,
+        { provide: HttpService, useClass: HttpServiceStub },
+        { provide: SeoService, useClass: SeoServiceStub }
+      ]
     }).compileComponents();
   }));
 
