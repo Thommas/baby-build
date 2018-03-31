@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * App
+ * App - Routing
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

@@ -9,6 +9,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { HeaderLevelComponent } from './header-level.component';
+import { XpToLevelUpPipe } from '../../../pipes';
 
 describe('HeaderLevelComponent', () => {
   beforeEach(async(() => {
@@ -17,7 +18,8 @@ describe('HeaderLevelComponent', () => {
         NO_ERRORS_SCHEMA
       ],
       declarations: [
-        HeaderLevelComponent
+        HeaderLevelComponent,
+        XpToLevelUpPipe
       ]
     }).compileComponents();
   }));

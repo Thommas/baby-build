@@ -13,7 +13,7 @@ export const GetChild = gql`
     child(id: $id) {
       id
       firstname
-      middlename
+      middlenames
       lastname
       nickname
       birthdate
@@ -31,7 +31,7 @@ export const GetChildren = gql`
     children {
       id
       firstname
-      middlename
+      middlenames
       lastname
       nickname
       birthdate
@@ -59,15 +59,15 @@ export const DeleteChildMutation = gql`
 export const CreateChildMutation = gql`
   mutation CreateChild(
     $firstname: String!
-    $middlename: String!
+    $middlenames: String!
     $lastname: String!
     $nickname: String!
     $birthdate: String!
-    $gender: Boolean!
+    $gender: String!
   ) {
     createChild(
       firstname: $firstname
-      middlename: $middlename
+      middlenames: $middlenames
       lastname: $lastname
       nickname: $nickname
       birthdate: $birthdate
@@ -82,16 +82,16 @@ export const UpdateChildMutation = gql`
   mutation UpdateChild(
     $id: ID!
     $firstname: String!
-    $middlename: String!
+    $middlenames: String!
     $lastname: String!
     $nickname: String!
     $birthdate: String!
-    $gender: Boolean!
+    $gender: String!
   ) {
     updateChild(
       id: $id
       firstname: $firstname
-      middlename: $middlename
+      middlenames: $middlenames
       lastname: $lastname
       nickname: $nickname
       birthdate: $birthdate

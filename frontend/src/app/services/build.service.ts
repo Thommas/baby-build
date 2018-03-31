@@ -14,10 +14,6 @@ export class BuildService {
     localStorage.setItem('pathofexile_selected_build', JSON.stringify(build));
   }
 
-  public get isBuild() {
-    return localStorage.getItem('pathofexile_selected_build') ? true : false;
-  }
-
   public get build() {
     const buildInStorage = localStorage.getItem('pathofexile_selected_build');
     return JSON.parse(buildInStorage);

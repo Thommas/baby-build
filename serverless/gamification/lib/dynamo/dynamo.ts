@@ -10,14 +10,6 @@ import AWS = require('aws-sdk');
 import { DynamoDB } from 'aws-sdk';
 import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
 
-if (process.env.DYNAMODB_REGION && process.env.DYNAMODB_ENDPOINT) {
-  const serviceConfigurationOptions: ServiceConfigurationOptions = {
-    region: process.env.DYNAMODB_REGION,
-    endpoint: process.env.DYNAMODB_ENDPOINT
-  };
-  AWS.config.update(serviceConfigurationOptions);
-}
-
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 export function scan(params): any {

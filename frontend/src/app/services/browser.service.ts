@@ -4,13 +4,16 @@
  * Service - Browser
  *
  * Provides global variables only accessible in a browser:
- * - window
  * - document
+ * - localStorage
+ * - locale
+ * - window
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 declare const document: any;
 declare const localStorage: any;
@@ -19,25 +22,36 @@ declare const window: any;
 
 @Injectable()
 export class BrowserService {
+  isBrowser: boolean;
+
+  /**
+   * Constructor
+   */
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
   /**
    * Get browser document
    */
   get document(): any {
-    return document;
+    return this.isBrowser ? document : null;
   }
 
   /**
    * Get browser localStorage
    */
   get localStorage(): any {
-    return localStorage;
+    return this.isBrowser ? localStorage : null;
   }
 
   /**
    * Get browser language
    */
   get language(): any {
-    if (navigator) {
+    if (this.isBrowser && navigator) {
       if (navigator.browserLanguage) {
         return navigator.browserLanguage.substring(0, 2);
       } else if (navigator.language) {
@@ -51,6 +65,6 @@ export class BrowserService {
    * Get browser window
    */
   get window(): any {
-    return window;
+    return this.isBrowser ? window : null;
   }
 }

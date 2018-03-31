@@ -1,5 +1,5 @@
 <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-  <img *ngIf="buildService.isBuild" [matTooltip]="buildService.build.title"
+  <img *ngIf="buildService.build" [matTooltip]="buildService.build.title"
        src="/assets/img/build.svg"
        width="50" height="50"/>
 </div>

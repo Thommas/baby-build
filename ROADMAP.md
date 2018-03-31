@@ -4,7 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Improve SEO
 - Implement instructions on home based on xp/level
 - Implement add/remove/edit quest
 - Design quest calendar
@@ -17,7 +16,6 @@ Long term
 ---------
 
 - Test renew token
-- Implement server side rendering
 - Build inspiration static page
 - Build roadmap static page
 - Add unit tests

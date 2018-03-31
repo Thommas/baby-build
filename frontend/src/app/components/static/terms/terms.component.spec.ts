@@ -8,6 +8,10 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
+import {
+  SeoService,
+  SeoServiceStub
+} from '../../../services';
 import { TermsComponent } from './terms.component';
 
 describe('TermsComponent', () => {
@@ -19,6 +23,9 @@ describe('TermsComponent', () => {
       declarations: [
         TermsComponent
       ],
+      providers: [
+        { provide: SeoService, useClass: SeoServiceStub }
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

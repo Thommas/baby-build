@@ -10,7 +10,12 @@ import swal from 'sweetalert2';
 import { clone } from 'lodash';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BrowserService, HttpService, GoogleRecaptchaService } from '../../../services';
+import {
+  BrowserService,
+  HttpService,
+  GoogleRecaptchaService,
+  SeoService
+} from '../../../services';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -28,7 +33,8 @@ export class ContactComponent implements OnInit {
     private elementRef: ElementRef,
     private browserService: BrowserService,
     private httpService: HttpService,
-    public googleRecaptchaService: GoogleRecaptchaService
+    public googleRecaptchaService: GoogleRecaptchaService,
+    private seoService: SeoService
   ) {
     this.formGroup = new FormGroup({
       name: new FormControl('', [
@@ -52,6 +58,7 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.seoService.setPage('contact');
     if (this.browserService.document) {
       this.googleRecaptchaService.init(
         this.browserService.document.body,

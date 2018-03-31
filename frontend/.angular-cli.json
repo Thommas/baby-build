@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "dist/browser",
       "assets": [
         "assets",
         "error.html"
@@ -30,6 +30,37 @@
         "dev": "environments/environment.ts",
         "local": "environments/environment.local.ts",
         "staging": "environments/environment.staging.ts",
+        "prod": "environments/environment.prod.ts",
+        "production": "environments/environment.production.ts"
+      }
+    },
+    {
+      "platform": "server",
+      "root": "src",
+      "outDir": "dist/server",
+      "assets": [
+        "assets",
+        "error.html"
+      ],
+      "index": "index.html",
+      "main": "main.server.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.server.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css",
+        "theme.scss"
+      ],
+      "scripts": [
+        "../node_modules/auth0-js/build/auth0.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "local": "environments/environment.local.ts",
+        "staging": "environments/environment.staging.ts",
+        "prod": "environments/environment.prod.ts",
         "production": "environments/environment.production.ts"
       }
     }

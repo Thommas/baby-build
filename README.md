@@ -24,3 +24,4 @@ Third party
 - AWS API Gateway
 - Auth0
 - Google reCaptcha
+- Google Analytics

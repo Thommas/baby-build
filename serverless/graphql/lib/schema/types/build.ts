@@ -16,7 +16,7 @@ const Build = `
     quests: [Quest]
   }
   type Query {
-    builds: [Build]
+    builds(child_id: String!): [Build]
     build(id: ID!): Build
   }
   type Mutation {

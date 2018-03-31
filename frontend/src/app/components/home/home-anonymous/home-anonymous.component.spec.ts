@@ -8,7 +8,12 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { AuthService, AuthServiceStub } from '../../../services';
+import {
+  AuthService,
+  AuthServiceStub,
+  SeoService,
+  SeoServiceStub
+} from '../../../services';
 import { HomeAnonymousComponent } from './home-anonymous.component';
 
 describe('HomeAnonymousComponent', () => {
@@ -21,7 +26,8 @@ describe('HomeAnonymousComponent', () => {
         HomeAnonymousComponent
       ],
       providers: [
-        { provide: AuthService, useClass: AuthServiceStub }
+        { provide: AuthService, useClass: AuthServiceStub },
+        { provide: SeoService, useClass: SeoServiceStub }
       ]
     }).compileComponents();
   }));

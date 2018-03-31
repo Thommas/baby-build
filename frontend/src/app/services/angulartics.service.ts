@@ -7,17 +7,24 @@
  */
 
 import { Injectable } from '@angular/core';
+import { BrowserService } from './browser.service';
 import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AngularticsService {
   /**
+   * Constructor
+   */
+  constructor(private browserService: BrowserService) {}
+
+  /**
    * Initialize google analytics with UA in environment
    */
-  init(body) {
-    if (!environment.googleAnalyticsId) {
+  init() {
+    if (!environment.googleAnalyticsId || !this.browserService.document) {
       return;
     }
+    const document = this.browserService.document;
     const scriptElement = document.createElement('script');
     scriptElement.type = 'text/javascript';
     const code = `(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -26,6 +33,6 @@ export class AngularticsService {
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     ga('create', '${environment.googleAnalyticsId}', 'auto');`;
     scriptElement.appendChild(document.createTextNode(code));
-    body.appendChild(scriptElement);
+    document.body.appendChild(scriptElement);
   }
 }
