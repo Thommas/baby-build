@@ -11,11 +11,11 @@ import * as db from './dynamo';
 
 const TableName = process.env.BUILD_TABLE;
 
-export function getBuilds(userId) {
+export function getBuilds(childId, userId) {
   const params = {
     TableName,
-    FilterExpression: 'user_id = :user_id',
-    ExpressionAttributeValues: { ':user_id': userId }
+    FilterExpression: 'user_id = :user_id AND child_id = :child_id',
+    ExpressionAttributeValues: { ':child_id': childId, ':user_id': userId },
   };
 
   return db.scan(params);
@@ -32,16 +32,6 @@ export function getBuildById(id, userId) {
   };
 
   return db.get(params);
-}
-
-export function getBuildsByChild(childId, userId) {
-  const params = {
-    TableName,
-    FilterExpression: 'user_id = :user_id AND child_id = :child_id',
-    ExpressionAttributeValues: { ':child_id': childId, ':user_id': userId },
-  };
-
-  return db.scan(params);
 }
 
 export function createBuild(args, userId) {

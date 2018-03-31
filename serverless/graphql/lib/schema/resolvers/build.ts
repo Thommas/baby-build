@@ -13,7 +13,7 @@ import * as dbQuest from '../../dynamo/quest';
 
 export default {
   Query: {
-    builds: (_, args, context) => dbBuild.getBuilds(context.user_id),
+    builds: (_, args, context) => dbBuild.getBuilds(args.child_id, context.user_id),
     build: (_, args, context) => dbBuild.getBuildById(args.id, context.user_id),
   },
   Mutation: {

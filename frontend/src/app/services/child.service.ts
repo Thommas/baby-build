@@ -7,15 +7,15 @@
  */
 
 import { Injectable } from '@angular/core';
+import { BuildService } from './build.service';
 
 @Injectable()
 export class ChildService {
-  public setChild(child) {
-    localStorage.setItem('pathofexile_selected_child', JSON.stringify(child));
-  }
+  constructor(private buildService: BuildService) {}
 
-  public get isChild() {
-    return localStorage.getItem('pathofexile_selected_child') ? true : false;
+  public setChild(child) {
+    this.buildService.setBuild(null);
+    localStorage.setItem('pathofexile_selected_child', JSON.stringify(child));
   }
 
   public get child() {

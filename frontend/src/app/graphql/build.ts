@@ -9,12 +9,27 @@
 import gql from 'graphql-tag';
 
 export const GetBuilds = gql`
-  query GetBuilds {
-    builds {
+  query GetBuilds($child_id: String!) {
+    builds(child_id: $child_id) {
       id
       title
-      child {
-        nickname
+      gamification {
+        xp
+        lvl
+      }
+    }
+  }
+`;
+
+export const GetBuild = gql`
+  query GetBuild($id: ID!) {
+    build(id: $id) {
+      id
+      title
+      description
+      quests {
+        id
+        title
       }
       gamification {
         xp
@@ -40,20 +55,20 @@ export const CreateBuildMutation = gql`
   }
 `;
 
-export const GetBuild = gql`
-  query GetBuild($id: ID!) {
-    build(id: $id) {
+export const UpdateBuildMutation = gql`
+  mutation UpdateBuild(
+    $id: ID!
+    $title: String!
+    $description: String!
+    $child_id: String!
+  ) {
+    createBuild(
+      id: $id
+      title: $title
+      description: $description
+      child_id: $child_id
+    ) {
       id
-      title
-      description
-      quests {
-        id
-        title
-      }
-      gamification {
-        xp
-        lvl
-      }
     }
   }
 `;

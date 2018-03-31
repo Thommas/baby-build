@@ -1,5 +1,5 @@
 <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-  <img *ngIf="childService.isChild" [matTooltip]="childService.child.nickname"
+  <img *ngIf="childService.child" [matTooltip]="childService.child.nickname"
        [src]="childService.child.gender === 'm' ? '/assets/img/boy.svg' : '/assets/img/girl.svg'"
        width="50" height="50"/>
 </div>
