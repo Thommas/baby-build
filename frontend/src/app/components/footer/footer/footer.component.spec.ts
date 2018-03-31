@@ -11,8 +11,8 @@ import { TestBed, async } from '@angular/core/testing';
 import {
   BrowserService,
   BrowserServiceStub,
-  LocaleService
-  LocaleServiceStub,
+  LocaleService,
+  LocaleServiceStub
 } from '../../../services';
 import { FooterComponent } from './footer.component';
 
