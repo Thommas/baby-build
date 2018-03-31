@@ -57,15 +57,11 @@ export function updateBuild(args, userId) {
     Key: {
       id: args.id,
     },
-    ExpressionAttributeNames: {
-      '#description': 'description',
-    },
     ExpressionAttributeValues: {
       ':title': args.title,
-      ':child': args.child,
       ':description': args.description,
     },
-    UpdateExpression: 'SET title = :title, child = :child, #description = :description',
+    UpdateExpression: 'SET title = :title, description = :description',
     ReturnValues: 'ALL_NEW',
   };
 

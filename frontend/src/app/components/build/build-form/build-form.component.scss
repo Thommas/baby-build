@@ -7,3 +7,10 @@
   place-content: center space-around;
   align-items: center;
 }
+
+form {
+  mat-card {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}

@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Build - Create
+ * Component - Build - Form
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { ApolloStub, RouterStub } from '../../../services';
-import { BuildCreateComponent } from './build-create.component';
+import { BuildFormComponent } from './build-form.component';
 
-describe('BuildCreateComponent', () => {
+describe('BuildFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
@@ -24,7 +24,7 @@ describe('BuildCreateComponent', () => {
         FormsModule
       ],
       declarations: [
-        BuildCreateComponent
+        BuildFormComponent
       ],
       providers: [
         { provide: Apollo, useClass: ApolloStub },
@@ -34,7 +34,7 @@ describe('BuildCreateComponent', () => {
   }));
 
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(BuildCreateComponent);
+    const fixture = TestBed.createComponent(BuildFormComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

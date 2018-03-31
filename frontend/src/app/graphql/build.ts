@@ -60,13 +60,11 @@ export const UpdateBuildMutation = gql`
     $id: ID!
     $title: String!
     $description: String!
-    $child_id: String!
   ) {
-    createBuild(
+    updateBuild(
       id: $id
       title: $title
       description: $description
-      child_id: $child_id
     ) {
       id
     }
