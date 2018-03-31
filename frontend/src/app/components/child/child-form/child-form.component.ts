@@ -8,10 +8,13 @@
 
 import { clone } from 'lodash';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import {
-  CreateChildMutation
+  CreateChildMutation,
+  GetChild,
+  GetChildren,
+  UpdateChildMutation
 } from '../../../graphql';
 
 @Component({
@@ -23,23 +26,51 @@ export class ChildFormComponent {
   child: any;
   loading: boolean;
 
-  constructor(private router: Router, private apollo: Apollo) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private apollo: Apollo
+  ) {
     this.child = {
       gender: 'f'
     };
   }
 
-  // FIXME Detect if childId in url for update
+  ngOnInit() {
+    this.loading = true;
+    this.route.params.subscribe(params => {
+      if (!params.id) {
+        this.loading = false;
+        return;
+      }
+
+      this.apollo.watchQuery<any>({
+        query: GetChild,
+        variables: {
+          id: params.id
+        }
+      })
+        .valueChanges
+        .subscribe(({ data, loading }) => {
+          this.loading = loading;
+          this.child = data.child;
+        });
+    });
+  }
 
   submit() {
     // FIXME Form validation
+
     const child = clone(this.child);
     child.birthdate = child.birthdate.format('x');
     this.apollo.mutate({
-      mutation: CreateChildMutation,
+      mutation: child.id ? UpdateChildMutation : CreateChildMutation,
       variables: {
         ...child
-      }
+      },
+      refetchQueries: [{
+        query: GetChildren
+      }]
     }).subscribe(
       res => this.router.navigate(['/child'])
     );

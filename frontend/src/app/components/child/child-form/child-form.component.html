@@ -4,7 +4,7 @@
     <span i18n>global.go_back</span>
   </button>
 </mat-toolbar>
-<form #childForm="ngForm">
+<form #childForm="ngForm" *ngIf="!loading">
   <mat-card>
     <mat-card-title fxLayout="row" i18n>child_form.title</mat-card-title>
     <mat-card-content fxLayout="row">
@@ -34,16 +34,16 @@
       </div>
       <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
         <div class="gender gender-f" fxLayout="column" fxLayoutAlign="center center" [ngClass]="{'selected': child.gender === 'f'}">
-          <a href="javascript:;" (click)="child.gender = 'f'">
-            <img src="https://www.shareicon.net/download/2016/06/25/786540_people.svg"/>
-            <span i18n>child_form.girl</span>
-          </a>
+          <div class="option" (click)="child.gender = 'f'">
+            <img src="/assets/img/girl.svg"/>
+            <div i18n>child_form.girl</div>
+          </div>
         </div>
         <div class="gender gender-m" fxLayout="column" fxLayoutAlign="center center" [ngClass]="{'selected': child.gender === 'm'}">
-          <a href="javascript:;" (click)="child.gender = 'm'">
-            <img src="https://www.shareicon.net/download/2016/06/25/786542_people.svg"/>
-            <span i18n>child_form.boy</span>
-          </a>
+          <div class="option" (click)="child.gender = 'm'">
+            <img src="/assets/img/boy.svg"/>
+            <div i18n>child_form.boy</div>
+          </div>
         </div>
       </div>
     </mat-card-content>

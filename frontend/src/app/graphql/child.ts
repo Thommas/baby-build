@@ -63,7 +63,7 @@ export const CreateChildMutation = gql`
     $lastname: String!
     $nickname: String!
     $birthdate: String!
-    $gender: Boolean!
+    $gender: String!
   ) {
     createChild(
       firstname: $firstname
@@ -86,7 +86,7 @@ export const UpdateChildMutation = gql`
     $lastname: String!
     $nickname: String!
     $birthdate: String!
-    $gender: Boolean!
+    $gender: String!
   ) {
     updateChild(
       id: $id
