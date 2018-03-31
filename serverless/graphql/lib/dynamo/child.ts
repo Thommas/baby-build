@@ -57,14 +57,14 @@ export function updateChild(args, userId) {
     },
     ExpressionAttributeValues: {
       ':firstname': args.firstname,
-      ':middlename': args.middlename,
+      ':middlenames': args.middlenames,
       ':lastname': args.lastname,
       ':nickname': args.nickname,
       ':birthdate': args.birthdate,
       ':gender': args.gender
     },
     UpdateExpression: `SET firstname = :firstname,
-    middlename = :middlename,
+    middlenames = :middlenames,
     lastname = :lastname,
     nickname = :nickname,
     birthdate = :birthdate,

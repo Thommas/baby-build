@@ -6,7 +6,7 @@
     "user_id": "auth0|5a773beebfd2511753f2c9c0",
     "gender": "m",
     "firstname": "Leo",
-    "middlename": "Gerard Nobu",
+    "middlenames": "Gerard Nobu",
     "lastname": "Bullier",
     "nickname": "Oji",
     "birthdate": 1519493384000
@@ -18,7 +18,7 @@
     "user_id": "auth0|5a773beebfd2511753f2c9c0",
     "gender": "f",
     "firstname": "Misaki",
-    "middlename": "Martine Setsuko",
+    "middlenames": "Martine Setsuko",
     "lastname": "Bullier",
     "nickname": "Hime",
     "birthdate": 1519493384000

@@ -6,6 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import * as moment from 'moment';
 import { clone } from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -35,8 +36,8 @@ export class ChildFormComponent implements OnInit {
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       firstname: new FormControl('', [Validators.required]),
-      lastname: new FormControl('', [Validators.required]),
       middlenames: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
       nickname: new FormControl('', [Validators.required]),
       birthdate: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
@@ -44,8 +45,8 @@ export class ChildFormComponent implements OnInit {
     this.formGroup.setValue({
       id: null,
       firstname: null,
-      lastname: null,
       middlenames: null,
+      lastname: null,
       nickname: null,
       birthdate: null,
       gender: 'f'
@@ -69,8 +70,22 @@ export class ChildFormComponent implements OnInit {
         .valueChanges
         .subscribe(({ data, loading }) => {
           this.loading = loading;
-          this.formGroup.setValue(data.child);
+          this.formGroup.setValue({
+            id: data.child.id,
+            firstname: data.child.firstname,
+            middlenames: data.child.middlenames,
+            lastname: data.child.lastname,
+            nickname: data.child.nickname,
+            birthdate: moment(data.child.birthdate, 'x'),
+            gender: data.child.gender
+          });
         });
+    });
+  }
+
+  setGender(newGender) {
+    this.formGroup.patchValue({
+      gender: newGender
     });
   }
 

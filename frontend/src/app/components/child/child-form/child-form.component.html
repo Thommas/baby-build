@@ -34,15 +34,15 @@
       </div>
       <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
         <div class="gender gender-f" fxLayout="column" fxLayoutAlign="center center"
-             [ngClass]="{'selected': formGroup.getValue().gender === 'f'}">
-          <div class="option" (click)="formGroup.setValue({gender: 'f'})">
+             [ngClass]="{'selected': formGroup.value.gender === 'f'}">
+          <div class="option" (click)="setGender('f')">
             <img src="/assets/img/girl.svg"/>
             <div i18n>child_form.girl</div>
           </div>
         </div>
         <div class="gender gender-m" fxLayout="column" fxLayoutAlign="center center"
-             [ngClass]="{'selected': formGroup.getValue().gender === 'm'}">
-          <div class="option" (click)="formGroup.setValue({gender: 'm'})">
+             [ngClass]="{'selected': formGroup.value.gender === 'm'}">
+          <div class="option" (click)="setGender('m')">
             <img src="/assets/img/boy.svg"/>
             <div i18n>child_form.boy</div>
           </div>

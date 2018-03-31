@@ -99,8 +99,8 @@ resources:
           - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
         TableName: ${self:custom.buildTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
@@ -115,8 +115,8 @@ resources:
           - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
         TableName: ${self:custom.childTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
@@ -131,8 +131,8 @@ resources:
           - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
         TableName: ${self:custom.gamificationTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
@@ -147,8 +147,8 @@ resources:
           - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
         TableName: ${self:custom.questTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
@@ -163,8 +163,8 @@ resources:
           - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
         TableName: ${self:custom.userTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
@@ -179,8 +179,8 @@ resources:
           - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
         TableName: ${self:custom.whitelistItemTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
