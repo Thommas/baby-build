@@ -11,7 +11,7 @@ import * as db from './dynamo';
 
 const TableName = process.env.QUEST_TABLE;
 
-export function getQuests() {
+export function getQuests(userId) {
   const params = {
     TableName,
     AttributesToGet: [
@@ -24,7 +24,7 @@ export function getQuests() {
   return db.scan(params);
 }
 
-export function getQuestById(id) {
+export function getQuestById(id, userId) {
   const params = {
     TableName,
     Key: {
@@ -35,7 +35,7 @@ export function getQuestById(id) {
   return db.get(params);
 }
 
-export function getQuestsByBuild(buildId) {
+export function getQuestsByBuild(buildId, userId) {
   const params = {
     TableName,
     FilterExpression: 'build_id = :build_id',
@@ -45,7 +45,7 @@ export function getQuestsByBuild(buildId) {
   return db.scan(params);
 }
 
-export function createQuest(args) {
+export function createQuest(args, userId) {
   const params = {
     TableName,
     Item: {
@@ -60,7 +60,7 @@ export function createQuest(args) {
   return db.createItem(params);
 }
 
-export function updateQuest(args) {
+export function updateQuest(args, userId) {
   const params = {
     TableName,
     Key: {
@@ -80,7 +80,7 @@ export function updateQuest(args) {
   return db.updateItem(params, args);
 }
 
-export function deleteQuest(args) {
+export function deleteQuest(args, userId) {
   const params = {
     TableName,
     Key: {

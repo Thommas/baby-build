@@ -9,30 +9,29 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { BuildCreateComponent } from './build-create/build-create.component';
+import { BuildFormComponent } from './build-form/build-form.component';
 import { BuildIndexComponent } from './build-index/build-index.component';
 import { BuildShowComponent } from './build-show/build-show.component';
-import { QuestCreateComponent } from './quest-create/quest-create.component';
 
 const routes: Routes = [
   {
     path: 'build/create',
-    component: BuildCreateComponent,
+    component: BuildFormComponent,
     canActivate: [AuthGuardService]
   },
   {
-    path: 'build',
-    component: BuildIndexComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'build/:id/quest/create',
-    component: QuestCreateComponent,
+    path: 'build/update/:id',
+    component: BuildFormComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'build/:id',
     component: BuildShowComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'build',
+    component: BuildIndexComponent,
     canActivate: [AuthGuardService]
   }
 ];

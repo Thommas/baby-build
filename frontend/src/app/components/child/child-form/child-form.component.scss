@@ -19,3 +19,21 @@ mat-form-field {
     box-shadow: 0 0 50px blue;
   }
 }
+
+form {
+  mat-card {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .gender .option {
+    cursor: pointer;
+
+    img {
+      width: 90px;
+    }
+    div {
+      text-align: center;
+    }
+  }
+}

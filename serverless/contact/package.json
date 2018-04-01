@@ -1,0 +1,35 @@
+{
+  "name": "pathofchild-contact",
+  "version": "0.6.0",
+  "license": "WTFPL",
+  "scripts": {
+    "start": "serverless offline start --stage local",
+    "start:dev": "serverless offline start --stage dev",
+    "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
+    "test": "jasmine-ts \"lib/**/*.spec.ts\"",
+    "e2e": "jasmine-ts \"e2e/**/*.spec.ts\"",
+    "lint": "tslint -c tslint.json './src/**/*.ts'",
+    "deploy:dev": "serverless deploy --stage dev",
+    "deploy:staging": "serverless deploy --stage staging",
+    "deploy:production": "serverless deploy --stage production"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.205.0",
+    "google-recaptcha": "^1.1.0",
+    "node-fetch": "^2.1.1",
+    "url-search-params-polyfill": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.8.6",
+    "@types/node": "^7.0.5",
+    "dotenv": "^5.0.1",
+    "jasmine": "^3.1.0",
+    "jasmine-ts": "^0.2.1",
+    "serverless-plugin-typescript": "^1.1.1",
+    "serverless-offline": "^3.15.3",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.5.0",
+    "tslint-config-standard": "^6.0.1",
+    "typescript": "^2.4.2"
+  }
+}

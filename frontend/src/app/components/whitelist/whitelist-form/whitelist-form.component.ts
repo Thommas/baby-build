@@ -9,13 +9,14 @@
 import { clone, isEmpty } from 'lodash';
 import { Component, Input, ViewChild, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import {
+  GetAuthUser,
   CreateWhitelistItemMutation,
   UpdateWhitelistItemMutation,
   GetWhitelistItems
 } from '../../../graphql';
+import { BuildService } from '../../../services';
 
 @Component({
   selector: 'app-whitelist-form-cmp',
@@ -29,14 +30,12 @@ export class WhitelistFormComponent implements OnChanges {
   formGroup: FormGroup;
   loading: boolean;
 
-  constructor(private router: Router, private apollo: Apollo) {
+  constructor(private apollo: Apollo, private buildService: BuildService) {
     this.whitelistItem = {};
     this.category = null;
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
-      title: new FormControl('', [
-        Validators.required
-      ]),
+      title: new FormControl('', [Validators.required]),
       required_age: new FormControl('', [
         Validators.required,
         Validators.min(0),
@@ -65,16 +64,25 @@ export class WhitelistFormComponent implements OnChanges {
       return;
     }
     const whitelistItem = clone(this.formGroup.value);
+    whitelistItem.build_id = this.buildService.build.id;
     whitelistItem.category = this.category;
     this.apollo.mutate({
       mutation: whitelistItem.id ? UpdateWhitelistItemMutation : CreateWhitelistItemMutation,
       variables: {
         ...whitelistItem
       },
-      refetchQueries: [{
-        query: GetWhitelistItems,
-        variables: { category: this.category },
-      }],
+      refetchQueries: [
+        {
+          query: GetAuthUser,
+        },
+        {
+          query: GetWhitelistItems,
+          variables: {
+            build_id: this.buildService.build.id,
+            category: this.category
+          },
+        }
+      ],
     }).subscribe(
       res => this.success.emit({})
     );

@@ -6,14 +6,21 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component } from '@angular/core';
-import { AuthService } from '../../../services';
+import { Component, OnInit } from '@angular/core';
+import { AuthService, SeoService } from '../../../services';
 
 @Component({
   selector: 'app-home-anonymous-cmp',
   templateUrl: './home-anonymous.component.html',
   styleUrls: ['./home-anonymous.component.scss']
 })
-export class HomeAnonymousComponent {
-  constructor(public authService: AuthService) {}
+export class HomeAnonymousComponent implements OnInit {
+  constructor(
+    public authService: AuthService,
+    private seoService: SeoService
+  ) {}
+
+  ngOnInit() {
+    this.seoService.setPage('home');
+  }
 }

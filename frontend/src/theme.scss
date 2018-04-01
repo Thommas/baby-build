@@ -1,11 +1,12 @@
-@import '~@angular/material/theming';
-@import 'palette';
+@import '../node_modules/@angular/material/_theming.scss';
+@import 'palette.scss';
 
 @include mat-core();
 
-$blue: #8CD9FF;
-$pink: #D194FF;
-$purple: #ABBAFF;
+$primary: #6545cc;
+$blue: #9cbbff;
+$pink: #ffabff;
+$grey: #f5f5f5;
 
 $path-of-child-primary: mat-palette($path-of-child-primary);
 $path-of-child-accent:  mat-palette($path-of-child-accent);
@@ -66,7 +67,7 @@ $path-of-child-theme:   mat-light-theme($path-of-child-primary, $path-of-child-a
   }
 
   .container {
-    width: 970px;
+    width: 1170px;
     padding: 10px;
   }
 }

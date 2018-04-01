@@ -9,6 +9,8 @@ Stack
 
 - Angular 5
 - Serverless framework
+- Apollo GraphQL
+- Dexie
 
 
 Third party
@@ -22,3 +24,4 @@ Third party
 - AWS API Gateway
 - Auth0
 - Google reCaptcha
+- Google Analytics

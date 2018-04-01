@@ -1,13 +1,15 @@
 /**
  * Path of child
  *
- * App
+ * App - Module - Browser
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ApolloModule } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { Apollo } from 'apollo-angular';
@@ -27,6 +29,8 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
@@ -35,32 +39,46 @@ import { ChildModule } from './components/child/child.module';
 import { FooterModule } from './components/footer/footer.module';
 import { HeaderModule } from './components/header/header.module';
 import { HomeModule } from './components/home/home.module';
-import { ParentModule } from './components/parent/parent.module';
+import { UserModule } from './components/user/user.module';
 import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
 import { WhitelistModule } from './components/whitelist/whitelist.module';
 import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
 import {
+  AngularticsService,
   ApolloService,
   AuthGuardService,
   AuthService,
   BrowserService,
   ChildService,
   DexieService,
+  GoogleRecaptchaService,
   LocaleService,
+  SeoService,
   UserService,
   ProgressService
 } from './services';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'path-of-child' }),
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
     RouterModule,
     routing,
     FlexLayoutModule,
@@ -78,21 +96,25 @@ import {
     FooterModule,
     HeaderModule,
     HomeModule,
-    ParentModule,
+    UserModule,
     SecurityModule,
     StaticModule,
     WhitelistModule,
-    PageNotFoundModule
+    PageNotFoundModule,
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
   ],
   providers: [
     appRoutingProviders,
+    AngularticsService,
     ApolloService,
     AuthGuardService,
     AuthService,
     BrowserService,
     ChildService,
     DexieService,
+    GoogleRecaptchaService,
     LocaleService,
+    SeoService,
     UserService,
     ProgressService
   ],

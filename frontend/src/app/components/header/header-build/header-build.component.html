@@ -1,21 +1,23 @@
 <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-  <img *ngIf="buildService.isBuild" [matTooltip]="buildService.build.title"
-       src="https://www.shareicon.net/download/2016/12/19/863781_favorites_512x512.png"
+  <img *ngIf="buildService.build" [matTooltip]="buildService.build.title"
+       src="/assets/img/build.svg"
        width="50" height="50"/>
 </div>
 <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">
-  <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
-    <span>60/100</span>
-    <span>Level 1</span>
-  </div>
-  <mat-progress-bar mode="determinate"
-                    value="60"
-                    color="warn">
-  </mat-progress-bar>
+  <span *ngIf="!buildService.build">NO BUILD SELECTED</span>
+  <app-header-level-cmp
+    *ngIf="buildService.build"
+    [gamification]="buildService.build.gamification">
+  </app-header-level-cmp>
 </div>
-<button mat-icon-button [matMenuTriggerFor]="buildMenu">
+<button *ngIf="childService.child"
+        mat-icon-button [matMenuTriggerFor]="buildMenu">
   <mat-icon>more_vert</mat-icon>
 </button>
 <mat-menu #buildMenu="matMenu">
   <button mat-menu-item [routerLink]="['build']" i18n>nav.build</button>
+  <button *ngIf="buildService.build"
+          mat-menu-item [routerLink]="['whitelist']" i18n>nav.whitelist</button>
+  <button *ngIf="buildService.build"
+          mat-menu-item [routerLink]="['quest']" i18n>nav.quest</button>
 </mat-menu>

@@ -46,19 +46,27 @@ export function createUser(userId) {
   return db.createItem(params);
 }
 
-export function updateUser(args) {
+export function updateUser(args, userId) {
   const params = {
     TableName,
     Key: {
       id: args.id,
     },
     ExpressionAttributeValues: {
-      ':xp': args.xp,
-      ':level': args.level
+      ':nickname': args.nickname
     },
-    UpdateExpression: `SET xp = :xp, level = :level`,
+    UpdateExpression: `SET nickname = :nickname`,
     ReturnValues: 'ALL_NEW',
   };
 
   return db.updateItem(params, args);
+}
+
+export function getUserByIdOrCreate(userId) {
+  return getUserById(userId).then((user) => {
+    if (user) {
+      return user;
+    }
+    return createUser(userId);
+  })
 }

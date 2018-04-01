@@ -11,11 +11,11 @@ import * as db from './dynamo';
 
 const TableName = process.env.BUILD_TABLE;
 
-export function getBuilds(userId) {
+export function getBuilds(childId, userId) {
   const params = {
     TableName,
-    FilterExpression: 'user_id = :user_id',
-    ExpressionAttributeValues: { ':user_id': userId }
+    FilterExpression: 'user_id = :user_id AND child_id = :child_id',
+    ExpressionAttributeValues: { ':child_id': childId, ':user_id': userId },
   };
 
   return db.scan(params);
@@ -32,16 +32,6 @@ export function getBuildById(id, userId) {
   };
 
   return db.get(params);
-}
-
-export function getBuildsByChild(childId, userId) {
-  const params = {
-    TableName,
-    FilterExpression: 'user_id = :user_id AND child_id = :child_id',
-    ExpressionAttributeValues: { ':child_id': childId, ':user_id': userId },
-  };
-
-  return db.scan(params);
 }
 
 export function createBuild(args, userId) {
@@ -61,28 +51,24 @@ export function createBuild(args, userId) {
   return db.createItem(params);
 }
 
-export function updateBuild(args) {
+export function updateBuild(args, userId) {
   const params = {
     TableName,
     Key: {
       id: args.id,
     },
-    ExpressionAttributeNames: {
-      '#description': 'description',
-    },
     ExpressionAttributeValues: {
       ':title': args.title,
-      ':child': args.child,
       ':description': args.description,
     },
-    UpdateExpression: 'SET title = :title, child = :child, #description = :description',
+    UpdateExpression: 'SET title = :title, description = :description',
     ReturnValues: 'ALL_NEW',
   };
 
   return db.updateItem(params, args);
 }
 
-export function deleteBuild(args) {
+export function deleteBuild(args, userId) {
   const params = {
     TableName,
     Key: {

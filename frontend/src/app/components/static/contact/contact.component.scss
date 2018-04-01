@@ -11,3 +11,11 @@
 form {
   width: 100%;
 }
+
+mat-card {
+  background: whitesmoke;
+
+  mat-card-content {
+    border-top: 1px solid #e1e1e1;
+  }
+}

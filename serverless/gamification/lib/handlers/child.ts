@@ -12,7 +12,7 @@ export function handleChild(event, context, callback) {
   event.Records.forEach((record) => {
     if (record.eventName == 'INSERT') {
       const userId = record.dynamodb.NewImage.user_id.S
-      addXp('user', userId, 100)
+      addXp('user', userId, 50)
     }
   });
   callback(null, `Successfully processed ${event.Records.length} records.`);

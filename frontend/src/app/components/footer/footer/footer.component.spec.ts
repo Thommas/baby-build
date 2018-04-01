@@ -8,6 +8,12 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
+import {
+  BrowserService,
+  BrowserServiceStub,
+  LocaleService,
+  LocaleServiceStub
+} from '../../../services';
 import { FooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {
@@ -19,6 +25,10 @@ describe('FooterComponent', () => {
       declarations: [
         FooterComponent
       ],
+      providers: [
+        { provide: BrowserService, useClass: BrowserServiceStub },
+        { provide: LocaleService, useClass: LocaleServiceStub }
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

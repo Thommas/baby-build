@@ -11,27 +11,18 @@ import * as db from './dynamo';
 
 const TableName = process.env.WHITELIST_ITEM_TABLE;
 
-export function getWhitelistItems(category, userId) {
+export function getWhitelistItems(buildId, category, userId) {
   const params = {
     TableName,
-    FilterExpression: 'user_id = :user_id AND category = :category',
-    ExpressionAttributeValues: { ':category': category, ':user_id': userId },
-  };
-
-  return db.scan(params);
-}
-
-export function getWhitelistItemById(id, userId) {
-  const params = {
-    TableName,
-    FilterExpression: 'user_id = :user_id',
-    ExpressionAttributeValues: { ':user_id': userId },
-    Key: {
-      id,
+    FilterExpression: 'build_id = :build_id AND user_id = :user_id AND category = :category',
+    ExpressionAttributeValues: {
+      ':build_id': buildId,
+      ':category': category,
+      ':user_id': userId
     },
   };
 
-  return db.get(params);
+  return db.scan(params);
 }
 
 export function createWhitelistItem(args, userId) {
@@ -41,6 +32,7 @@ export function createWhitelistItem(args, userId) {
       id: nanoid(12),
       created_at: new Date().getTime(),
       updated_at: new Date().getTime(),
+      build_id: args.build_id,
       ...args,
       user_id: userId
     },
@@ -49,7 +41,7 @@ export function createWhitelistItem(args, userId) {
   return db.createItem(params);
 }
 
-export function updateWhitelistItem(args) {
+export function updateWhitelistItem(args, userId) {
   const params = {
     TableName,
     Key: {
@@ -69,7 +61,7 @@ export function updateWhitelistItem(args) {
   return db.updateItem(params, args);
 }
 
-export function deleteWhitelistItem(args) {
+export function deleteWhitelistItem(args, userId) {
   const params = {
     TableName,
     Key: {

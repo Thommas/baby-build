@@ -10,7 +10,7 @@ const Child = `
   type Child {
     id: String!
     firstname: String
-    middlename: String
+    middlenames: String
     lastname: String
     nickname: String
     birthdate: String
@@ -32,7 +32,7 @@ const Child = `
   type Mutation {
     createChild(
       firstname: String!
-      middlename: String!
+      middlenames: String!
       lastname: String!
       nickname: String!
       birthdate: String!
@@ -41,7 +41,7 @@ const Child = `
     updateChild(
       id: ID!
       firstname: String
-      middlename: String
+      middlenames: String
       lastname: String
       nickname: String
       birthdate: String

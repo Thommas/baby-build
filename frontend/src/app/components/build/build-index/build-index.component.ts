@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { GetBuilds } from '../../../graphql';
-import { BuildService } from '../../../services';
+import { BuildService, ChildService } from '../../../services';
 
 @Component({
   selector: 'app-build-index-cmp',
@@ -25,16 +25,22 @@ export class BuildIndexComponent implements OnInit {
   constructor(
     private router: Router,
     private apollo: Apollo,
+    public childService: ChildService,
     public buildService: BuildService
   ) {}
 
   ngOnInit() {
-    this.getBuilds();
+    if (this.childService.child) {
+      this.getBuilds();
+    }
   }
 
   getBuilds() {
     this.apollo.watchQuery<any>({
-      query: GetBuilds
+      query: GetBuilds,
+      variables: {
+        child_id: this.childService.child.id
+      }
     })
       .valueChanges
       .subscribe(({ data, loading }) => {

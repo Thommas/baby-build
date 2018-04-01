@@ -4,79 +4,38 @@ Roadmap
 Short term
 ----------
 
-- Finish contact form with google captcha and lambda
-- Implement gamification handler to update xp/level
-- Improve dynamic header based on child, build, xp, level
+- Design Calendar
+- Manage Rewards
+- Manage Goal
+- Manage Quest
 
 Mid term
 --------
 
-- Implement add/remove/edit quest
-- Design calendar for build
-- Implement xp and level to unlock calendar
+- Add more tooltips on UX
 - Implement instructions on home based on xp/level
-
+- Implement xp and level to unlock calendar
+- Improve gamification lambda
+- Implement giving access to a child to other family members
 
 Long term
 ---------
 
-- When updating User profile should create if not already exists
+- Test renew token
+- Build inspiration static page
+- Build roadmap static page
 - Add unit tests
-- Add icon for auth0
-- Implement terms and privacy
-- Implement giving access to a child to other family members
+- Make a list of what this platform should not be used for (aka everything that did not work)
 
 
 Entities
 --------
 
-### User (parent)
+### Rewards
 
-Login
+Need to create a list of small and big rewards.
 
-### Child
-
-A child has a name, gender and birthdate.
-
-### Build
-
-A build is the following:
-- For each month a list of quests
-- Rewards unlock progressively based on month and child attributes
-
-### Goal
-
-Can create as many goal as we want for each month/year.
-The goal is a milestone to completing the full build.
-
-### Quest
-
-All quests must help follow the build goals while giving alternative opportunities.
-The goal is to encourage curiosity.
-
-Types:
-- Main: mandatory quest that the child should complete
-- Bonus: optional the child can skip it
-- Hidden: quest hidden to the child but that he might complete without knowing it
-
-A quest should always have 3 choices.
-But we might have to define the choices later.
-We don't know in advance which sport club the child might be able to join.
-
-Examples:
-- At 6 year old pick a book (dinosaur, planets, flowers)
-- At 9 year old pick a sport and register to local club (basket, tennis, soccer)
-- At 12 year old pick an instrument (piano, guitar, other)
-
-Finishing quest grants XP.
-
-When the child level up, the parent can give points to primary and secondary attributes.
-Primary and secondary attributes to be defined.
-
-https://en.wikipedia.org/wiki/Attribute_(role-playing_games)
-https://www.16personalities.com/articles/our-theory
-
-### Reward
+Rewards types:
 
 1) Activity
 
@@ -121,23 +80,54 @@ Permanent reward system with gauge
 
 9) The child can ask for a reward
 
+### Build
+
+A build is the following:
+- Goals > big rewards
+- Quests > small rewards
+
+### Goal
+
+Can create as many goal as we want for each month/year.
+The goal is a milestone to completing the full build.
+
+### Quest
+
+All quests must help follow the build goals while giving alternative opportunities.
+Quests are designed to encourage curiosity.
+
+Types:
+- Main: mandatory quest that the child should complete
+- Bonus: optional the child can skip it
+- Hidden: quest hidden to the child but that he might complete without knowing it
+
+A quest should always have 3 choices.
+But we might have to define the choices later.
+We don't know in advance which sport club the child might be able to join.
+If empty, choices will be defined when quest is activated.
+
+Examples:
+- At 6 year old pick a book (dinosaur, planets, flowers)
+- At 9 year old pick a sport and register to local club (basket, tennis, soccer)
+- At 12 year old pick an instrument (piano, guitar, other)
+
+### Child
+
+Finishing quest and reaching goals grant XP.
+
+When the child level up, the parent can give points to primary and secondary attributes.
+Primary and secondary attributes to be defined.
+
+https://en.wikipedia.org/wiki/Attribute_(role-playing_games)
+https://www.16personalities.com/articles/our-theory
+
 ### Laziness
 
 Monitor each month the amount of laziness of your child.
 We want to prevent passively watching TV or youtube for instance.
-Same for video game with empty gameplay (Candy crush)
+Same for video game with empty gameplay (Candy crush).
 
-### Gamification
-
-For the folllowing entities:
-- User
-- Child
-- Build
-
-Store xp/level.
-
-
-### Build a list of danger
+### Build a list of danger in a safety build
 
 - Sending photo/personal information online
 - Online community
@@ -148,38 +138,6 @@ Store xp/level.
 - Internet
 - Digital addiction
 - Online shaming/harassment
-
-
-Stack
------
-
-- Test many visualization libraries
-- Need unique identifier for youtube video/book/anime/tv show/movie/video game/boardgame
-
-
-Other
------
-
-- Thema for each year ?
-- Primary and secondary stats +1 per year
-- Parent also level up for every interaction with the platform
-- Allow other family member to input data
-- Make a list of what this platform should not be used for
-- Lots of stories of parents who let their child play 10 hours per day.
-  We have a whole generation of parents who have no idea what hardcore gaming is.
-  They should know how to put limits.
-  childs mimics parent behavior, it's important to show a good example.
-- In Japan they get money for high grades
-- Indicates when a feature is inspired from a videogame (Path of exile build, FF15 photos)
-
-
-Bonus ideas
------------
-
-- Child could have a request list that would go into whitelist if approved by parent
-- Messaging system for child
-Santa claus or to report a problem like a confessional
-The child needs to believe the message won't be read by his parents
 
 
 Links
@@ -193,28 +151,9 @@ https://thenextweb.com/virtual-reality/2018/02/21/how-a-16-year-old-in-a-village
 https://www.click2houston.com/news/investigates/danger-warning-about-popular-virtual-world-for-childs
 
 
-Storyboard
-----------
-
-- Register to the website
-- List without any child > create a new child
-- Form to create a new child
-- Select a child
-- List without any build > create a new build
-- Form to create a new build
-
-
 Similar apps
 ------------
 
 https://www.choremonster.com
 https://www.classcraft.com
-
-
-Social network
---------------
-
-- Open gmail account
-- Open subreddit /r/pathofchild
-- Open twitter account @pathofchild
-- Open discord channel
+#edtech #familytech

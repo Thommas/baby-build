@@ -49,7 +49,7 @@ export function createChild(args, userId) {
   return db.createItem(params);
 }
 
-export function updateChild(args) {
+export function updateChild(args, userId) {
   const params = {
     TableName,
     Key: {
@@ -57,14 +57,14 @@ export function updateChild(args) {
     },
     ExpressionAttributeValues: {
       ':firstname': args.firstname,
-      ':middlename': args.middlename,
+      ':middlenames': args.middlenames,
       ':lastname': args.lastname,
       ':nickname': args.nickname,
       ':birthdate': args.birthdate,
       ':gender': args.gender
     },
     UpdateExpression: `SET firstname = :firstname,
-    middlename = :middlename,
+    middlenames = :middlenames,
     lastname = :lastname,
     nickname = :nickname,
     birthdate = :birthdate,
@@ -75,7 +75,7 @@ export function updateChild(args) {
   return db.updateItem(params, args);
 }
 
-export function deleteChild(args) {
+export function deleteChild(args, userId) {
   const params = {
     TableName,
     Key: {

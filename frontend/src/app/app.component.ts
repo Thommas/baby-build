@@ -8,7 +8,14 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AuthService, BrowserService, LocaleService } from './services';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import {
+  AngularticsService,
+  AuthService,
+  BrowserService,
+  ProgressService,
+  LocaleService
+} from './services';
 
 @Component({
   selector: 'app-root',
@@ -23,20 +30,27 @@ export class AppComponent implements OnInit {
     public router: Router,
     private authService: AuthService,
     private browserService: BrowserService,
-    private localeService: LocaleService
+    private localeService: LocaleService,
+    public progressService: ProgressService,
+    private angularticsService: AngularticsService,
+    private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
   ) {
     authService.scheduleRenewal();
   }
 
   ngOnInit() {
-    this.localeService.detectLocale();
+    this.authService.init();
+    this.angularticsService.init();
+    this.localeService.init();
 
     if (this.router.events) {
       this.router.events.subscribe((evt) => {
         if (!(evt instanceof NavigationEnd)) {
           return;
         }
-        this.browserService.document.documentElement.scrollTop = 0;
+        if (this.browserService.document) {
+          this.browserService.document.documentElement.scrollTop = 0;
+        }
       });
     }
   }

@@ -7,6 +7,7 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   buildTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.BuildTableStreamArn}
   childTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.ChildTableStreamArn}
+  gamificationTable: pathofchild-graphql-${self:custom.stage}-gamification
   whitelistItemTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.WhitelistItemTableStreamArn}
   secrets: ${file(secrets.yml):${self:custom.stage}}
 
@@ -34,6 +35,8 @@ provider:
         - dynamodb:DescribeStream
         - dynamodb:ListStreams
       Resource: arn:aws:dynamodb:${self:provider.region}:*:*
+  environment:
+      GAMIFICATION_TABLE: ${self:custom.gamificationTable}
 
 functions:
   build:

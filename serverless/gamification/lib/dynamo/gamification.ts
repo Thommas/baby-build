@@ -6,19 +6,18 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import nanoid = require('nanoid');
 import * as db from './dynamo';
 import { USER_LEVELS } from '../constants';
 
 const TableName = process.env.GAMIFICATION_TABLE;
 
 export function getLevel(xp: number) {
-  let level = 1;
+  let lvl = 1;
   for (let xpRequired of USER_LEVELS) {
     if (xp < xpRequired) {
-      return level;
+      return lvl;
     }
-    level++;
+    lvl++;
   }
   return 99;
 }
@@ -40,32 +39,33 @@ export async function addXp(entityType, entityId, xp) {
       TableName,
       Item: {
         id,
-        xp: 0,
-        level: 1
+        xp: xp,
+        lvl: getLevel(xp)
       },
     };
 
     return db.createItem(createParams);
   }
 
-  const newXp = parseInt(existingItem.xp) + parseInt(xp);
+  const newXp = parseInt(existingItem.xp, 10) + xp;
+  const newLevel = getLevel(newXp);
+  const args = {
+    xp: newXp,
+    lvl: newLevel
+  };
 
   const updateParams = {
     TableName,
     Key: {
       id: existingItem.id,
     },
-    ExpressionAttributeNames: {
-      '#xp': 'xp',
-      '#level': 'level',
-    },
     ExpressionAttributeValues: {
-      ':xp': newXp,
-      ':level': getLevel(newXp),
+      ':xp': args.xp,
+      ':lvl': args.lvl,
     },
-    UpdateExpression: 'SET xp = :xp, level = :level',
+    UpdateExpression: 'SET xp = :xp, lvl = :lvl',
     ReturnValues: 'ALL_NEW',
   };
 
-  return db.updateItem(updateParams, existingItem);
+  return db.updateItem(updateParams, args);
 }

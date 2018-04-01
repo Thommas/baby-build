@@ -2,6 +2,31 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0] - 2018-03-30
+
+### Added
+- Prerender for SEO
+- Dynamic title and meta
+- Sitemap
+
+### Improved
+- Contact form
+- Gamification header
+
+### Refactored
+- Whitelist is now part of a build
+
+## [0.5.0] - 2018-03-18
+
+### Added
+- Google Analytics
+
+### Improved
+- Login/Logout refresh and redirect
+- Gamification to update xp/level for user/child/build
+- Refresh token
+- Homepage design
+
 ## [0.4.0] - 2018-03-10
 
 ### Added

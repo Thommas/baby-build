@@ -10,8 +10,22 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateService } from '@ngx-translate/core';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { AppComponent } from './app.component';
-import { BrowserService, BrowserServiceStub, RouterStub } from './services';
+import {
+  AngularticsService,
+  AuthService,
+  AuthServiceStub,
+  BrowserService,
+  BrowserServiceStub,
+  LocaleService,
+  LocaleServiceStub,
+  ProgressService,
+  ProgressServiceStub,
+  RouterStub
+} from './services';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -20,13 +34,19 @@ describe('AppComponent', () => {
         NO_ERRORS_SCHEMA
       ],
       imports: [
+        RouterTestingModule,
         MatProgressBarModule
       ],
       declarations: [
         AppComponent
       ],
       providers: [
+        AngularticsService,
+        { provide: Angulartics2GoogleAnalytics, useMock: Angulartics2GoogleAnalytics },
+        { provide: AuthService, useClass: AuthServiceStub },
         { provide: BrowserService, useClass: BrowserServiceStub },
+        { provide: LocaleService, useClass: LocaleServiceStub },
+        { provide: ProgressService, useClass: ProgressServiceStub },
         { provide: Router, useClass: RouterStub }
       ]
     }).compileComponents();

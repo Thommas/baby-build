@@ -2,16 +2,16 @@
   {
     "id": "user-auth0|5a773beebfd2511753f2c9c0",
     "xp": 111,
-    "level": 1
+    "lvl": 1
   },
   {
     "id": "child-1",
     "xp": 222,
-    "level": 2
+    "lvl": 2
   },
   {
     "id": "build-1",
     "xp": 333,
-    "level": 3
+    "lvl": 3
   }
 ]

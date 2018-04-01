@@ -68,8 +68,8 @@ exports.auth = (event, context, callback) => {
   }
   try {
     return jwksClient.getSigningKey(process.env.AUTH0_JWKS_KID, (err, key) => {
-      const signingKey = key.publicKey || key.rsaPublicKey;
-      verify(tokenValue, signingKey, options, (verifyError, decoded) => {
+      const signingKey = key.publicKey || key.rsaPublicKey || '';
+      verify(tokenValue, signingKey, options, (verifyError: any, decoded: any) => {
         if (verifyError) {
           console.log('verifyError', verifyError)
           console.log(`Token invalid. ${verifyError}`)
