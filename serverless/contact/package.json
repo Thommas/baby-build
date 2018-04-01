@@ -1,7 +1,7 @@
 {
   "name": "pathofchild-contact",
-  "version": "0.4.0",
-  "license": "MIT",
+  "version": "0.6.0",
+  "license": "WTFPL",
   "scripts": {
     "start": "serverless offline start --stage local",
     "start:dev": "serverless offline start --stage dev",

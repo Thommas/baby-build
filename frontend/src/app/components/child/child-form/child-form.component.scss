@@ -28,5 +28,12 @@ form {
 
   .gender .option {
     cursor: pointer;
+
+    img {
+      width: 90px;
+    }
+    div {
+      text-align: center;
+    }
   }
 }

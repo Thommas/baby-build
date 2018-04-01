@@ -1,7 +1,7 @@
 {
   "name": "pathofchild-frontend",
   "version": "0.6.0",
-  "license": "MIT",
+  "license": "WTFPL",
   "scripts": {
     "ng": "ng",
     "start": "BUILD_ENVIRONMENT=local npm run start:env",
