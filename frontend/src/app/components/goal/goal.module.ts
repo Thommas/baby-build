@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Whitelist - Module
+ * Component - Goal - Module
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -14,13 +14,13 @@ import {
   MatButtonModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule
+  MatInputModule,
+  MatTabsModule
 } from '@angular/material';
 
 import {
-  WhitelistEditComponent,
-  WhitelistFormComponent,
-  WhitelistIndexComponent
+  GoalFormComponent,
+  GoalIndexComponent
 } from './';
 
 @NgModule({
@@ -32,21 +32,17 @@ import {
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule
   ],
   exports: [
-    WhitelistEditComponent,
-    WhitelistFormComponent,
-    WhitelistIndexComponent
+    GoalFormComponent,
+    GoalIndexComponent
   ],
   declarations: [
-    WhitelistEditComponent,
-    WhitelistFormComponent,
-    WhitelistIndexComponent
-  ],
-  entryComponents: [
-    WhitelistEditComponent
+    GoalFormComponent,
+    GoalIndexComponent
   ]
 })
-export class WhitelistModule {
+export class GoalModule {
 }

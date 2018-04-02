@@ -1,29 +1,30 @@
 /**
  * Path of child
  *
- * Component - Whitelist - List
+ * Component - Goal - Form
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { ApolloStub, BuildService } from '../../../services';
-import { WhitelistListComponent } from './whitelist-list.component';
+import { GoalFormComponent } from './goal-form.component';
 
-describe('WhitelistListComponent', () => {
+describe('GoalFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
         NO_ERRORS_SCHEMA
       ],
       imports: [
-        MatDialogModule
+        FormsModule,
+        ReactiveFormsModule
       ],
       declarations: [
-        WhitelistListComponent
+        GoalFormComponent
       ],
       providers: [
         { provide: Apollo, useClass: ApolloStub },
@@ -31,9 +32,8 @@ describe('WhitelistListComponent', () => {
       ]
     }).compileComponents();
   }));
-
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(WhitelistListComponent);
+    const fixture = TestBed.createComponent(GoalFormComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

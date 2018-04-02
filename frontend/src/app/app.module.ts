@@ -43,7 +43,6 @@ import { HomeModule } from './components/home/home.module';
 import { UserModule } from './components/user/user.module';
 import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
-import { WhitelistModule } from './components/whitelist/whitelist.module';
 import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
 import {
   AngularticsService,
@@ -101,7 +100,6 @@ export function createTranslateLoader(http: HttpClient) {
     UserModule,
     SecurityModule,
     StaticModule,
-    WhitelistModule,
     PageNotFoundModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
   ],

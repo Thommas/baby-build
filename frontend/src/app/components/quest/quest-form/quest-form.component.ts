@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Quest - Create
+ * Component - Quest - Form
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -14,11 +14,11 @@ import { CreateQuestMutation } from '../../../graphql';
 import { BuildService } from '../../../services';
 
 @Component({
-  selector: 'app-quest-create-cmp',
-  templateUrl: './quest-create.component.html',
-  styleUrls: ['./quest-create.component.scss']
+  selector: 'app-quest-form-cmp',
+  templateUrl: './quest-form.component.html',
+  styleUrls: ['./quest-form.component.scss']
 })
-export class QuestCreateComponent {
+export class QuestFormComponent {
   quest: any;
   loading: boolean;
 

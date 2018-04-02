@@ -8,6 +8,21 @@
   align-items: center;
 }
 
-mat-tab-group {
-  max-width: 100vw;
+.header {
+  color: grey;
+  border-bottom: 1px solid #cccccc;
+}
+
+.row {
+  height: 40px;
+  border-bottom: 1px solid #cccccc;
+
+  button {
+    display: none;
+  }
+  &:hover {
+    button {
+      display: block;
+    }
+  }
 }

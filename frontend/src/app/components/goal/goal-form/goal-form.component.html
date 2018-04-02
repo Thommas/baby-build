@@ -4,9 +4,8 @@
            formControlName="title">
   </mat-form-field>
   <mat-form-field>
-    <select matInput placeholder="Category" formControlName="category_id">
-      <option value="1"></option>
-    </select>
+    <input matInput placeholder="Minimum required age"
+           type="number" formControlName="required_age">
   </mat-form-field>
   <button mat-raised-button color="primary" (click)="submit()" i18n>form.submit</button>
 </form>

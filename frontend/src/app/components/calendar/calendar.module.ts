@@ -12,17 +12,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule,
+  MatChipsModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatTooltipModule,
+  MatToolbarModule,
   MatTabsModule
 } from '@angular/material';
 
 import {
   routing,
   CalendarIndexComponent,
-  CalendarListComponent
+  CalendarListComponent,
+  CalendarShowComponent
 } from './';
+import { GoalModule } from '../goal/goal.module';
+import { QuestModule } from '../quest/quest.module';
+import { WhitelistModule } from '../whitelist/whitelist.module';
 
 @NgModule({
   imports: [
@@ -32,14 +39,21 @@ import {
     FlexLayoutModule,
     routing,
     MatButtonModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatTabsModule
+    MatTooltipModule,
+    MatToolbarModule,
+    MatTabsModule,
+    GoalModule,
+    QuestModule,
+    WhitelistModule
   ],
   declarations: [
     CalendarIndexComponent,
-    CalendarListComponent
+    CalendarListComponent,
+    CalendarShowComponent
   ]
 })
 export class CalendarModule {

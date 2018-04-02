@@ -1,5 +1,18 @@
-<mat-tab-group [@.disabled]="true">
-  <mat-tab [label]="category" *ngFor="let category of categories">
-    <app-whitelist-list-cmp [category]="category"></app-whitelist-list-cmp>
-  </mat-tab>
-</mat-tab-group>
+<div class="container">
+  <app-whitelist-form-cmp></app-whitelist-form-cmp>
+  <div class="header row" fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="60" i18n>whitelist.list.header.title</div>
+    <div fxFlex="10"></div>
+  </div>
+  <div class="row" *ngFor="let whitelistItem of whitelistItems" fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="60">{{ whitelistItem.title }}</div>
+    <div fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
+      <button class="edit" mat-icon-button color="primary" (click)="editWhitelistItem(whitelistItem)">
+        <mat-icon>mode_edit</mat-icon>
+      </button>
+      <button class="delete" mat-icon-button color="warn" (click)="deleteWhitelistItem(whitelistItem)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,41 +1,39 @@
 /**
  * Path of child
  *
- * Component - Build - Quest Create
+ * Component - Calendar - Show
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material';
 import { Apollo } from 'apollo-angular';
-import { ApolloStub, BuildService, RouterStub } from '../../../services';
-import { QuestCreateComponent } from './quest-create.component';
+import { ApolloStub, BuildService } from '../../../services';
+import { CalendarShowComponent } from './calendar-show.component';
 
-describe('QuestCreateComponent', () => {
+describe('CalendarShowComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
         NO_ERRORS_SCHEMA
       ],
       imports: [
-        FormsModule
+        MatDialogModule
       ],
       declarations: [
-        QuestCreateComponent
+        CalendarShowComponent
       ],
       providers: [
         { provide: Apollo, useClass: ApolloStub },
-        BuildService,
-        { provide: Router, useClass: RouterStub }
+        BuildService
       ]
     }).compileComponents();
   }));
 
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(QuestCreateComponent);
+    const fixture = TestBed.createComponent(CalendarShowComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

@@ -16,7 +16,7 @@ import { AuthService, BuildService, ChildService } from '../../../services';
 })
 export class HeaderComponent {
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
     public buildService: BuildService,
     public childService: ChildService
   ) {}

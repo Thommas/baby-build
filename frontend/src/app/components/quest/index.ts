@@ -1,2 +1,2 @@
-export * from './quest.routing';
-export * from './quest-create/quest-create.component';
+export * from './quest-form/quest-form.component';
+export * from './quest-index/quest-index.component';

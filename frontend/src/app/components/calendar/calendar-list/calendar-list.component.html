@@ -1,5 +1,24 @@
 <div class="container">
-  <div *ngFor="let year of years">
-    {{ year }}
+  <div class="row"
+       *ngFor="let year of years"
+       fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="20">{{ year }} year old</div>
+    <div fxFlex="50" fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <img src="/assets/img/goal.svg" matTooltip="global.goal" i18n-matTooltip/>
+        <span>0</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <img src="/assets/img/quest.svg" matTooltip="global.quest" i18n-matTooltip/>
+        <span>0</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <img src="/assets/img/whitelist.svg" matTooltip="global.whitelist" i18n-matTooltip/>
+        <span>0</span>
+      </div>
+    </div>
+    <div fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button color="primary" [routerLink]="['/calendar/' + year]">Manage</button>
+    </div>
   </div>
 </div>

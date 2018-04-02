@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Quest - Module
+ * Component - Quest - Module
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -24,8 +24,8 @@ import {
 import { BuildService } from '../../services';
 
 import {
-  routing,
-  QuestCreateComponent
+  QuestFormComponent,
+  QuestIndexComponent
 } from './';
 
 @NgModule({
@@ -34,7 +34,6 @@ import {
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    routing,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -45,8 +44,13 @@ import {
     MatToolbarModule,
     MatTooltipModule
   ],
+  exports: [
+    QuestFormComponent,
+    QuestIndexComponent
+  ],
   declarations: [
-    QuestCreateComponent
+    QuestFormComponent,
+    QuestIndexComponent
   ],
   providers: [
     BuildService

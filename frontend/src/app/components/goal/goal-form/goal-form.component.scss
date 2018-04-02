@@ -8,21 +8,11 @@
   align-items: center;
 }
 
-.header {
-  color: grey;
-  border-bottom: 1px solid #cccccc;
-}
+form {
+  width: 100%;
+  min-height: 100px;
 
-.row {
-  height: 40px;
-  border-bottom: 1px solid #cccccc;
-
-  button {
-    display: none;
-  }
-  &:hover {
-    button {
-      display: block;
-    }
+  mat-form-field {
+    margin-right: 15px;
   }
 }
