@@ -3,20 +3,18 @@
     "id": "1",
     "created_at": 1521053029000,
     "updated_at": 1521053029000,
-    "user_id": "auth0|5a773beebfd2511753f2c9c0",
+    "title": "Maths level 1",
+    "description": "Learn to count to ten",
     "build_id": "1",
-    "category": "activity",
-    "title": "Play chess",
     "year": 1
   },
   {
     "id": "2",
     "created_at": 1521053029000,
     "updated_at": 1521053029000,
-    "user_id": "auth0|5a773beebfd2511753f2c9c0",
+    "title": "Maths level 2",
+    "description": "Multiplication tables",
     "build_id": "1",
-    "category": "book",
-    "title": "Cinderella",
     "year": 2
   }
 ]

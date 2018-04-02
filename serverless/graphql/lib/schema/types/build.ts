@@ -11,9 +11,7 @@ const Build = `
     id: String!
     title: String
     description: String
-    child: Child
     gamification: Gamification
-    quests: [Quest]
   }
   type Query {
     builds(child_id: String!): [Build]

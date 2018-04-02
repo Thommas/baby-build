@@ -29,6 +29,17 @@ export class WhitelistFormComponent implements OnChanges {
   year: number;
   formGroup: FormGroup;
   loading: boolean;
+  categories: any = [
+    'activity',
+    'sport',
+    'book',
+    'movie',
+    'tvshow',
+    'anime',
+    'video',
+    'videogame',
+    'toy'
+  ];
 
   constructor(private apollo: Apollo, private buildService: BuildService) {
     this.whitelistItem = {};

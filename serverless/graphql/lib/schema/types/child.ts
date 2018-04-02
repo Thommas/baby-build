@@ -16,14 +16,6 @@ const Child = `
     birthdate: String
     gender: String
     gamification: Gamification
-    builds: [Build]
-  }
-  type ChildContainer {
-    edges: [ChildEdge]
-  }
-  type ChildEdge {
-    cursor: String!
-    node: Child
   }
   type Query {
     children: [Child]

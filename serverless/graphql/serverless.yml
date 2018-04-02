@@ -10,6 +10,7 @@ custom:
   buildTable: ${self:service}-${self:custom.stage}-build
   childTable: ${self:service}-${self:custom.stage}-child
   gamificationTable: ${self:service}-${self:custom.stage}-gamification
+  goalTable: ${self:service}-${self:custom.stage}-goal
   questTable: ${self:service}-${self:custom.stage}-quest
   userTable: ${self:service}-${self:custom.stage}-user
   whitelistItemTable: ${self:service}-${self:custom.stage}-whitelist-item
@@ -31,6 +32,8 @@ custom:
             sources: [./fixtures/child.json]
           - table: ${self:custom.gamificationTable}
             sources: [./fixtures/gamification.json]
+          - table: ${self:custom.goalTable}
+            sources: [./fixtures/goal.json]
           - table: ${self:custom.questTable}
             sources: [./fixtures/quest.json]
           - table: ${self:custom.userTable}
@@ -70,6 +73,7 @@ provider:
     BUILD_TABLE: ${self:custom.buildTable}
     CHILD_TABLE: ${self:custom.childTable}
     GAMIFICATION_TABLE: ${self:custom.gamificationTable}
+    GOAL_TABLE: ${self:custom.goalTable}
     QUEST_TABLE: ${self:custom.questTable}
     USER_TABLE: ${self:custom.userTable}
     WHITELIST_ITEM_TABLE: ${self:custom.whitelistItemTable}
@@ -134,6 +138,22 @@ resources:
           ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
           WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
         TableName: ${self:custom.gamificationTable}
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+    GoalTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
+        TableName: ${self:custom.goalTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
     QuestTable:
@@ -203,6 +223,12 @@ resources:
         "Fn::GetAtt": [ GamificationTable, StreamArn ]
       Export:
         Name: ${self:service}:${self:custom.stage}:GamificationTableStreamArn
+    GoalTableStreamArn:
+      Description: The StreamArn for the Goal Table
+      Value:
+        "Fn::GetAtt": [ GoalTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:GoalTableStreamArn
     QuestTableStreamArn:
       Description: The StreamArn for the Quest Table
       Value:

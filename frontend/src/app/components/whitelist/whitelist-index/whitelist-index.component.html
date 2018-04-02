@@ -1,12 +1,14 @@
 <div class="container">
   <app-whitelist-form-cmp></app-whitelist-form-cmp>
   <div class="header row" fxLayout="row" fxLayoutAlign="start center">
-    <div fxFlex="60" i18n>whitelist.list.header.title</div>
-    <div fxFlex="10"></div>
+    <div fxFlex="40" i18n>whitelist.list.header.title</div>
+    <div fxFlex="40" i18n>whitelist.list.header.category</div>
+    <div fxFlex="20"></div>
   </div>
   <div class="row" *ngFor="let whitelistItem of whitelistItems" fxLayout="row" fxLayoutAlign="start center">
-    <div fxFlex="60">{{ whitelistItem.title }}</div>
-    <div fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="40">{{ whitelistItem.title }}</div>
+    <div fxFlex="40">{{ whitelistItem.category }}</div>
+    <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
       <button class="edit" mat-icon-button color="primary" (click)="editWhitelistItem(whitelistItem)">
         <mat-icon>mode_edit</mat-icon>
       </button>

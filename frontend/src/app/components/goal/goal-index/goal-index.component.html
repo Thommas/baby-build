@@ -1,1 +1,18 @@
-LIST OF GOAL HERE
+<div class="container">
+  <app-goal-form-cmp></app-goal-form-cmp>
+  <div class="header row" fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="40" i18n>goal.list.header.title</div>
+    <div fxFlex="20"></div>
+  </div>
+  <div class="row" *ngFor="let goal of goals" fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="40">{{ goal.title }}</div>
+    <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+      <button class="edit" mat-icon-button color="primary">
+        <mat-icon>mode_edit</mat-icon>
+      </button>
+      <button class="delete" mat-icon-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

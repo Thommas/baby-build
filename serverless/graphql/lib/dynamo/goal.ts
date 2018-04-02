@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - DynamoDB - Whitelist Item
+ * GraphQL - DynamoDB - Goal
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,9 +9,9 @@
 import nanoid = require('nanoid');
 import * as db from './dynamo';
 
-const TableName = process.env.WHITELIST_ITEM_TABLE;
+const TableName = process.env.GOAL_TABLE;
 
-export function getWhitelistItems(buildId, year, userId) {
+export function getGoals(buildId, year, userId) {
   const params = {
     TableName,
     FilterExpression: 'build_id = :build_id AND year = :year AND user_id = :user_id',
@@ -25,39 +25,42 @@ export function getWhitelistItems(buildId, year, userId) {
   return db.scan(params);
 }
 
-export function createWhitelistItem(args, userId) {
+export function createGoal(args, userId) {
   const params = {
     TableName,
     Item: {
       id: nanoid(12),
       created_at: new Date().getTime(),
       updated_at: new Date().getTime(),
-      ...args,
-      user_id: userId
+      title: args.title,
+      build_id: args.build_id
     },
   };
 
   return db.createItem(params);
 }
 
-export function updateWhitelistItem(args, userId) {
+export function updateGoal(args, userId) {
   const params = {
     TableName,
     Key: {
       id: args.id,
     },
+    ExpressionAttributeNames: {
+      '#description': 'description',
+    },
     ExpressionAttributeValues: {
       ':title': args.title,
-      ':category': args.category
+      ':description': args.description,
     },
-    UpdateExpression: `SET title = :title, category = :category`,
+    UpdateExpression: 'SET title = :title, #description = :description',
     ReturnValues: 'ALL_NEW',
   };
 
   return db.updateItem(params, args);
 }
 
-export function deleteWhitelistItem(args, userId) {
+export function deleteGoal(args, userId) {
   const params = {
     TableName,
     Key: {

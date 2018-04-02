@@ -14,7 +14,8 @@ import {
   MatButtonModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule
+  MatInputModule,
+  MatSelectModule
 } from '@angular/material';
 
 import {
@@ -32,7 +33,8 @@ import {
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [
     WhitelistEditComponent,

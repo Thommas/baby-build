@@ -9,11 +9,11 @@
 import gql from 'graphql-tag';
 
 export const GetWhitelistItems = gql`
-  query GetWhitelistItems($build_id: String!, $category: String!) {
-    whitelistItems(build_id: $build_id, category: $category) {
+  query GetWhitelistItems($build_id: String!, $year: Int!) {
+    whitelistItems(build_id: $build_id, year: $year) {
       id
       title
-      required_age
+      category
     }
   }
 `;
@@ -23,7 +23,7 @@ export const CreateWhitelistItemMutation = gql`
     $title: String!
     $build_id: String!
     $category: String!
-    $required_age: Int!
+    $year: Int!
   ) {
     createWhitelistItem(
       title: $title
@@ -41,7 +41,7 @@ export const UpdateWhitelistItemMutation = gql`
     $id: ID!
     $title: String!
     $category: String!
-    $required_age: Int!
+    $year: Int!
   ) {
     updateWhitelistItem(
       id: $id

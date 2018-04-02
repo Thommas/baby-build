@@ -1,35 +1,35 @@
 /**
  * Path of child
  *
- * GraphQL - Types - Quest
+ * GraphQL - Types - Goal
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-const Quest = `
-  type Quest {
+const Goal = `
+  type Goal {
     id: String!
     title: String
     description: String
   }
   type Query {
-    quests(build_id: String!, year: Int!): [Quest]
+    goals(build_id: String!, year: Int!): [Goal]
   }
   type Mutation {
-    createQuest(
+    createGoal(
       title: String!
       description: String!
       build_id: String!
       year: Int!
-    ): Quest
-    updateQuest(
+    ): Goal
+    updateGoal(
       id: ID!
       title: String!
       description: String!
-    ): Quest
-    deleteQuest(
+    ): Goal
+    deleteGoal(
       id: ID!
-    ): Quest
+    ): Goal
   }
 `;
-export default Quest;
+export default Goal;

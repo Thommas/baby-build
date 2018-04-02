@@ -22,6 +22,5 @@ export default {
   },
   Child: {
     gamification: (child, args, context) => dbGamification.getGamification('child', child.id),
-    builds: (child, args, context) => dbBuild.getBuildsByChild(child.id, context.user_id),
   },
 };

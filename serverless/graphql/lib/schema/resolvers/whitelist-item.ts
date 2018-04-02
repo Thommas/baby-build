@@ -10,7 +10,7 @@ import * as dbWhitelistItem from '../../dynamo/whitelist-item';
 
 export default {
   Query: {
-    whitelistItems: (_, args, context) => dbWhitelistItem.getWhitelistItems(args.build_id, args.category, context.user_id),
+    whitelistItems: (_, args, context) => dbWhitelistItem.getWhitelistItems(args.build_id, args.year, context.user_id),
   },
   Mutation: {
     createWhitelistItem: (_, args, context) => dbWhitelistItem.createWhitelistItem(args, context.user_id),

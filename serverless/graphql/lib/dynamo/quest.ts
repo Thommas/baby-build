@@ -11,35 +11,15 @@ import * as db from './dynamo';
 
 const TableName = process.env.QUEST_TABLE;
 
-export function getQuests(userId) {
+export function getQuests(buildId, year, userId) {
   const params = {
     TableName,
-    AttributesToGet: [
-      'id',
-      'title',
-      'description'
-    ],
-  };
-
-  return db.scan(params);
-}
-
-export function getQuestById(id, userId) {
-  const params = {
-    TableName,
-    Key: {
-      id,
+    FilterExpression: 'build_id = :build_id AND year = :year AND user_id = :user_id',
+    ExpressionAttributeValues: {
+      ':build_id': buildId,
+      ':year': year,
+      ':user_id': userId
     },
-  };
-
-  return db.get(params);
-}
-
-export function getQuestsByBuild(buildId, userId) {
-  const params = {
-    TableName,
-    FilterExpression: 'build_id = :build_id',
-    ExpressionAttributeValues: { ':build_id': buildId },
   };
 
   return db.scan(params);

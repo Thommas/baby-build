@@ -4,9 +4,11 @@
            formControlName="title">
   </mat-form-field>
   <mat-form-field>
-    <select matInput placeholder="Category" formControlName="category_id">
-      <option value="1"></option>
-    </select>
+    <mat-select placeholder="Category" formControlName="category_id">
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <button mat-raised-button color="primary" (click)="submit()" i18n>form.submit</button>
 </form>

@@ -4,30 +4,33 @@ Roadmap
 Short term
 ----------
 
-- Design Calendar
 - Manage Rewards
 - Manage Goal
 - Manage Quest
+- Fix renew token
 
 Mid term
 --------
 
+- Implement security checks in graphql lambda
+- Implement giving access to a child and its builds to other family members
 - Add more tooltips on UX
-- Implement instructions on home based on xp/level
-- Implement xp and level to unlock calendar
+- Refactor instructions on home based on conditions
 - Improve gamification lambda
-- Implement giving access to a child to other family members
+- Make unlockable items a core gamification component (calendar, categories, type of quests)
 
 Long term
 ---------
 
-- Test renew token
 - Build inspiration static page
 - Build roadmap static page
 - Add unit tests
 - Make a list of what this platform should not be used for (aka everything that did not work)
 - Badges
 - Leaderboards
+- Saas
+- Invitations
+- Notifications
 
 
 Entities

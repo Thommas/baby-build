@@ -21,21 +21,9 @@ import { WhitelistEditComponent } from '../whitelist-edit/whitelist-edit.compone
   styleUrls: ['./whitelist-index.component.scss']
 })
 export class WhitelistIndexComponent implements OnInit {
-  displayedColumns = ['title', 'required_age'];
   loading: boolean;
   whitelistItems: any;
   year: number;
-  categories: any = [
-    'activity',
-    'sport',
-    'book',
-    'movie',
-    'tvshow',
-    'anime',
-    'video',
-    'videogame',
-    'toy'
-  ];
 
   constructor(
     private apollo: Apollo,
@@ -44,7 +32,7 @@ export class WhitelistIndexComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.year = null;
+    this.year = 1;
     this.getWhitelistItems();
   }
 
@@ -99,7 +87,7 @@ export class WhitelistIndexComponent implements OnInit {
         query: GetWhitelistItems,
         variables: {
           build_id: this.buildService.build.id,
-          category: this.category
+          year: this.year
         },
       }],
     }).subscribe();
