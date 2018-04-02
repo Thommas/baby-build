@@ -1,34 +1,32 @@
-<mat-toolbar>
-  <button mat-icon-button [routerLink]="['/build']">
-    <mat-icon>keyboard_arrow_left</mat-icon>
-    <span i18n>global.go_back</span>
-  </button>
+<mat-toolbar fxLayout="row" fxLayoutAlign="center center">
+  <h1>{{ build.title }}</h1>
 </mat-toolbar>
-<div class="container">
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <h1>{{ build.title }}</h1>
-    <button mat-button [routerLink]="['/build/' + build.id + '/quest/create']">
-      <mat-icon>add_circle</mat-icon>
-      <span i18n>build_show.quest_create</span>
-    </button>
-  </div>
-</div>
-<div class="container" fxLayout="row wrap" fxLayoutAlign="space-between center">
-  <mat-card *ngFor="let year of [5, 10, 15, 20, 25]" fxFlex="30">
-    <mat-card-title>Year {{ year }}</mat-card-title>
-    <mat-card-content>
-      <div>
-        0 Main quest
-      </div>
-      <div>
-        0 Bonus quest
-      </div>
-      <div>
-        0 Hidden quest
-      </div>
-    </mat-card-content>
+<div class="row" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-card fxFlex="30" fxLayout="column">
+    <mat-card-header>
+      <img mat-card-avatar src="/assets/img/goal.svg"/>
+      <mat-card-title>Goals</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <h3>0 goal</h3>
+    </mat-card-actions>
   </mat-card>
-</div>
-<div *ngFor="let quest of build.quests">
-  <span>{{ quest.title }}</span>
+  <mat-card fxFlex="30" fxLayout="column">
+    <mat-card-header>
+      <img mat-card-avatar src="/assets/img/quest.svg"/>
+      <mat-card-title>Quests</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <h3>0 quest</h3>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card fxFlex="30" fxLayout="column">
+    <mat-card-header>
+      <img mat-card-avatar src="/assets/img/whitelist.svg"/>
+      <mat-card-title>Whitelist</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <h3>0 item</h3>
+    </mat-card-actions>
+  </mat-card>
 </div>

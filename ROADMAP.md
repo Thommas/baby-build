@@ -26,6 +26,8 @@ Long term
 - Build roadmap static page
 - Add unit tests
 - Make a list of what this platform should not be used for (aka everything that did not work)
+- Badges
+- Leaderboards
 
 
 Entities

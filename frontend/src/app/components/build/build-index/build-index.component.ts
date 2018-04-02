@@ -51,5 +51,6 @@ export class BuildIndexComponent implements OnInit {
 
   selectBuild(build) {
     this.buildService.setBuild(build);
+    this.router.navigate(['build/' + build.id]);
   }
 }

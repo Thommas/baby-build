@@ -28,6 +28,7 @@ export class UserService {
     if (isAuthenticated && !this.sub) {
       this.sub = this.watchAuthUser();
     } else if (this.sub) {
+      this.user = null;
       this.sub.unsubscribe();
     }
   }

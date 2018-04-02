@@ -10,4 +10,13 @@
 
 mat-card {
   margin-bottom: 15px;
+
+  mat-card-title {
+    font-size: 22px;
+    margin-top: 5px;
+  }
+}
+
+.row {
+  width: 100%;
 }
