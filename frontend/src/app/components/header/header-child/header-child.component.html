@@ -10,9 +10,3 @@
     [gamification]="childService.child.gamification">
   </app-header-level-cmp>
 </div>
-<button mat-icon-button [matMenuTriggerFor]="childMenu">
-  <mat-icon>more_vert</mat-icon>
-</button>
-<mat-menu #childMenu="matMenu">
-  <button mat-menu-item [routerLink]="['child']" i18n>nav.child</button>
-</mat-menu>

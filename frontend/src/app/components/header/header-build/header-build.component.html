@@ -1,7 +1,8 @@
 <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
   <img *ngIf="buildService.build" [matTooltip]="buildService.build.title"
        src="/assets/img/build.svg"
-       width="50" height="50"/>
+       width="50" height="50"
+       [routerLink]="['build/overview']"/>
 </div>
 <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">
   <span *ngIf="!buildService.build">NO BUILD SELECTED</span>
@@ -10,14 +11,3 @@
     [gamification]="buildService.build.gamification">
   </app-header-level-cmp>
 </div>
-<button *ngIf="childService.child"
-        mat-icon-button [matMenuTriggerFor]="buildMenu">
-  <mat-icon>more_vert</mat-icon>
-</button>
-<mat-menu #buildMenu="matMenu">
-  <button mat-menu-item [routerLink]="['build']" i18n>nav.build</button>
-  <button *ngIf="buildService.build"
-          mat-menu-item [routerLink]="['whitelist']" i18n>nav.whitelist</button>
-  <button *ngIf="buildService.build"
-          mat-menu-item [routerLink]="['quest']" i18n>nav.quest</button>
-</mat-menu>

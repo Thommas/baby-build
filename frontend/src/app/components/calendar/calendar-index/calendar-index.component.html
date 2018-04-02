@@ -1,0 +1,5 @@
+<mat-tab-group [@.disabled]="true">
+  <mat-tab [label]="era.label" *ngFor="let era of eras">
+    <app-calendar-list-cmp [years]="era.years"></app-calendar-list-cmp>
+  </mat-tab>
+</mat-tab-group>

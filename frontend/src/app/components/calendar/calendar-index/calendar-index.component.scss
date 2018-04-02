@@ -4,11 +4,10 @@
   flex-direction: column;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  place-content: center space-between;
+  place-content: center space-around;
   align-items: center;
-  width: 100%;
 }
 
-img {
-  cursor: pointer;
+mat-tab-group {
+  max-width: 100vw;
 }

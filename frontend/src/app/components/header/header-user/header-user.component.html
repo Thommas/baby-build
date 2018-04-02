@@ -10,9 +10,3 @@
     [gamification]="userService.user.gamification">
   </app-header-level-cmp>
 </div>
-<button mat-icon-button [matMenuTriggerFor]="parentMenu">
-  <mat-icon>more_vert</mat-icon>
-</button>
-<mat-menu #parentMenu="matMenu">
-  <button mat-menu-item [routerLink]="['user/edit']" i18n>nav.profile</button>
-</mat-menu>

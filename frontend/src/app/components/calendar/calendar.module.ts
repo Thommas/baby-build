@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Whitelist - Module
+ * Component - Calendar - Module
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -20,10 +20,8 @@ import {
 
 import {
   routing,
-  WhitelistEditComponent,
-  WhitelistFormComponent,
-  WhitelistIndexComponent,
-  WhitelistListComponent
+  CalendarIndexComponent,
+  CalendarListComponent
 } from './';
 
 @NgModule({
@@ -40,14 +38,9 @@ import {
     MatTabsModule
   ],
   declarations: [
-    WhitelistEditComponent,
-    WhitelistFormComponent,
-    WhitelistIndexComponent,
-    WhitelistListComponent
-  ],
-  entryComponents: [
-    WhitelistEditComponent
+    CalendarIndexComponent,
+    CalendarListComponent
   ]
 })
-export class WhitelistModule {
+export class CalendarModule {
 }

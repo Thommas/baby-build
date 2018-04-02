@@ -8,8 +8,6 @@
 
 import { Component } from '@angular/core';
 
-import { AuthService } from '../../../services';
-
 @Component({
   selector: 'app-whitelist-index-cmp',
   templateUrl: './whitelist-index.component.html',

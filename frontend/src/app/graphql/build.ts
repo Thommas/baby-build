@@ -13,6 +13,7 @@ export const GetBuilds = gql`
     builds(child_id: $child_id) {
       id
       title
+      description
       gamification {
         xp
         lvl

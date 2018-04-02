@@ -1,6 +1,9 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
-  <h1>{{ build.title }}</h1>
+  <h1>{{ buildService.build.title }}</h1>
 </mat-toolbar>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <h5>{{ buildService.build.description }}</h5>
+</div>
 <div class="row" fxLayout="row" fxLayoutAlign="space-around center">
   <mat-card fxFlex="30" fxLayout="column">
     <mat-card-header>
@@ -29,4 +32,7 @@
       <h3>0 item</h3>
     </mat-card-actions>
   </mat-card>
+</div>
+<div class="row" fxLayout="row" fxLayoutAlign="space-around center">
+  <button mat-raised-button color="primary" [routerLink]="['/calendar']">Go to calendar</button>
 </div>

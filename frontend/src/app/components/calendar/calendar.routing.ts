@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Whitelist - Routing
+ * Component - Calendar - Routing
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,12 +9,12 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { WhitelistIndexComponent } from './whitelist-index/whitelist-index.component';
+import { CalendarIndexComponent } from './calendar-index/calendar-index.component';
 
 const routes: Routes = [
   {
-    path: 'whitelist',
-    component: WhitelistIndexComponent,
+    path: 'calendar',
+    component: CalendarIndexComponent,
     canActivate: [AuthGuardService]
   }
 ];

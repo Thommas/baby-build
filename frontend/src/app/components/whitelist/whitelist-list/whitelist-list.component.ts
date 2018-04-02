@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Whitelist - Index
+ * Component - Whitelist - List
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
