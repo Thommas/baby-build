@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Calendar - Routing
+ * Component - Goal - Routing
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,18 +9,17 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { CalendarIndexComponent } from './calendar-index/calendar-index.component';
-import { CalendarShowComponent } from './calendar-show/calendar-show.component';
+import { GoalFormComponent } from './goal-form/goal-form.component';
 
 const routes: Routes = [
   {
-    path: 'calendar/show',
-    component: CalendarShowComponent,
+    path: 'goal/update/:id',
+    component: GoalFormComponent,
     canActivate: [AuthGuardService]
   },
   {
-    path: 'calendar',
-    component: CalendarIndexComponent,
+    path: 'goal/create',
+    component: GoalFormComponent,
     canActivate: [AuthGuardService]
   }
 ];

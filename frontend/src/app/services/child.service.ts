@@ -15,11 +15,11 @@ export class ChildService {
 
   public setChild(child) {
     this.buildService.setBuild(null);
-    localStorage.setItem('pathofexile_selected_child', JSON.stringify(child));
+    localStorage.setItem('path_of_child_selected_child', JSON.stringify(child));
   }
 
   public get child() {
-    const childInStorage = localStorage.getItem('pathofexile_selected_child');
+    const childInStorage = localStorage.getItem('path_of_child_selected_child');
     return JSON.parse(childInStorage);
   }
 }

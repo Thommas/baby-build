@@ -7,6 +7,7 @@
  */
 
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { BuildService } from '../../../services';
 
@@ -21,10 +22,16 @@ export class CalendarListComponent implements OnInit {
 
   constructor(
     private apollo: Apollo,
-    private buildService: BuildService
+    private buildService: BuildService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     // FIXME
+  }
+
+  selectYear(year: number) {
+    this.buildService.setYear(year);
+    this.router.navigate(['/calendar/show']);
   }
 }

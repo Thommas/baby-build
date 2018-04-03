@@ -6,4 +6,18 @@
   -webkit-box-direction: normal;
   place-content: center space-around;
   align-items: center;
+  width: 100%;
+}
+
+.row {
+  height: 80px;
+  width: 100%;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+  span {
+    margin-left: 10px;
+  }
 }

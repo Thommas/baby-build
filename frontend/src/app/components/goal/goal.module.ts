@@ -12,27 +12,35 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule,
+  MatCardModule,
+  MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatToolbarModule,
   MatTabsModule
 } from '@angular/material';
 
 import {
+  routing,
   GoalFormComponent,
   GoalIndexComponent
 } from './';
 
 @NgModule({
   imports: [
+    routing,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatToolbarModule,
     MatTabsModule
   ],
   exports: [

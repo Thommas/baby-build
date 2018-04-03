@@ -1,11 +1,30 @@
-<form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="start center">
-  <mat-form-field>
-    <input matInput placeholder="Title"
-           formControlName="title">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Minimum required age"
-           type="number" formControlName="required_age">
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="submit()" i18n>form.submit</button>
+<form class="container" [formGroup]="formGroup" *ngIf="!loading">
+  <mat-card>
+    <mat-card-title fxLayout="row" i18n>goal_form.title</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content fxLayout="row">
+      <div fxLayout="column" fxFlex="50">
+        <h3>goal_form.instruction.title</h3>
+        <p>goal_form.instruction.description</p>
+      </div>
+      <div fxLayout="column" fxFlex="50">
+        <mat-form-field>
+          <input matInput placeholder="goal_form.title" i18n-placeholder
+                 formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput
+                    placeholder="goal_form.description" i18n-placeholder
+                    matTextareaAutosize
+                    matAutosizeMinRows="5"
+                    matAutosizeMaxRows="20"
+                    formControlName="description" required></textarea>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button type="submit" (click)="submit()" color="primary" i18n>form.submit</button>
+    </mat-card-actions>
+  </mat-card>
 </form>

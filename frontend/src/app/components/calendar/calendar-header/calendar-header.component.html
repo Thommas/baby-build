@@ -1,0 +1,33 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="center center">
+  <div class="row container" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="20">
+      <button mat-icon-button [routerLink]="[goBackRoute]">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        <span i18n>global.go_back</span>
+      </button>
+    </div>
+    <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+      <h3>{{ buildService.year }} year old</h3>
+    </div>
+    <div fxFlex="50" fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-button (click)="selectTab('goal')">
+          <img src="/assets/img/goal.svg" matTooltip="global.goal" i18n-matTooltip/>
+          <span>0</span>
+        </button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-button (click)="selectTab('quest')">
+          <img src="/assets/img/quest.svg" matTooltip="global.quest" i18n-matTooltip/>
+          <span>0</span>
+        </button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-button (click)="selectTab('whitelist')">
+          <img src="/assets/img/whitelist.svg" matTooltip="global.whitelist" i18n-matTooltip/>
+          <span>0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
