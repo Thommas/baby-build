@@ -7,7 +7,6 @@
  */
 
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import { GetGoals } from '../../../graphql';
 import { BuildService } from '../../../services';
@@ -20,17 +19,16 @@ import { BuildService } from '../../../services';
 export class GoalIndexComponent {
   loading: boolean;
   goals: any;
-  year: number;
 
   constructor(
     private apollo: Apollo,
-    private buildService: BuildService,
-    private dialog: MatDialog
+    private buildService: BuildService
   ) {}
 
   ngOnInit() {
-    this.year = 1;
-    this.getGoals();
+    if (this.buildService.build && this.buildService.childYear) {
+      this.getGoals();
+    }
   }
 
   getGoals() {
@@ -38,7 +36,7 @@ export class GoalIndexComponent {
       query: GetGoals,
       variables: {
         build_id: this.buildService.build.id,
-        year: this.year
+        child_year: this.buildService.childYear
       }
     })
       .valueChanges

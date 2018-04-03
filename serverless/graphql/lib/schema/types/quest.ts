@@ -13,14 +13,14 @@ const Quest = `
     description: String
   }
   type Query {
-    quests(build_id: String!, year: Int!): [Quest]
+    quests(build_id: String!, child_year: Int!): [Quest]
   }
   type Mutation {
     createQuest(
       title: String!
       description: String!
       build_id: String!
-      year: Int!
+      child_year: Int!
     ): Quest
     updateQuest(
       id: ID!

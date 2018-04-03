@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row"
-       *ngFor="let year of years"
+       *ngFor="let childYear of childYears"
        fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxFlex="20">{{ year }} year old</div>
+    <div fxFlex="20">{{ childYear }} year old</div>
     <div fxFlex="50" fxLayout="row" fxLayoutAlign="space-around center">
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <img src="/assets/img/goal.svg" matTooltip="global.goal" i18n-matTooltip/>
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
-      <button mat-button color="primary" (click)="selectYear(year)">Manage</button>
+      <button mat-button color="primary" (click)="selectYear(childYear)">Manage</button>
     </div>
   </div>
 </div>

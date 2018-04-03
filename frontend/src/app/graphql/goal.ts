@@ -9,8 +9,8 @@
 import gql from 'graphql-tag';
 
 export const GetGoals = gql`
-  query GetGoals($build_id: String!, $year: Int!) {
-    goals(build_id: $build_id, year: $year) {
+  query GetGoals($build_id: String!, $child_year: Int!) {
+    goals(build_id: $build_id, child_year: $child_year) {
       id
       title
       description
@@ -23,13 +23,13 @@ export const CreateGoalMutation = gql`
     $title: String!
     $description: String!
     $build_id: String!
-    $year: Int!
+    $child_year: Int!
   ) {
     createQuest(
       title: $title
       description: $description
       build_id: $build_id
-      year: $year
+      child_year: $child_year
     ) {
       id
     }

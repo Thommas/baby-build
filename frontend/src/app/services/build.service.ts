@@ -19,14 +19,14 @@ export class BuildService {
     return JSON.parse(buildInStorage);
   }
 
-  public setYear(year: number) {
-    localStorage.setItem('path_of_child_selected_year', year.toString());
+  public setChildYear(childYear: number) {
+    localStorage.setItem('path_of_child_selected_child_year', childYear.toString());
   }
 
-  public get year(): number {
-    const year = localStorage.getItem('path_of_child_selected_year');
-    if (year) {
-      return parseInt(year, 10);
+  public get childYear(): number {
+    const childYear = localStorage.getItem('path_of_child_selected_child_year');
+    if (childYear) {
+      return parseInt(childYear, 10);
     }
     return null;
   }

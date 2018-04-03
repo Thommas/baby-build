@@ -26,26 +26,20 @@ import { BuildService } from '../../../services';
 export class GoalFormComponent implements OnChanges {
   @Output('success') success: EventEmitter<any> = new EventEmitter<any>();
   @Input() goal: any;
-  @Input() year: number;
   formGroup: FormGroup;
   loading: boolean;
 
-  constructor(private apollo: Apollo, private buildService: BuildService) {
+  constructor(private apollo: Apollo, public buildService: BuildService) {
     this.goal = {};
-    this.year = null;
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       title: new FormControl('', [Validators.required]),
-      required_age: new FormControl('', [
-        Validators.required,
-        Validators.min(0),
-        Validators.max(25)
-      ])
+      description: new FormControl('', [Validators.required])
     });
     this.formGroup.setValue({
       id: null,
       title: '',
-      required_age: 12
+      description: ''
     });
   }
 
@@ -54,7 +48,7 @@ export class GoalFormComponent implements OnChanges {
       this.formGroup.setValue({
         id: this.goal.id,
         title: this.goal.title,
-        required_age: this.goal.required_age
+        description: this.goal.description
       });
     }
   }
@@ -65,7 +59,7 @@ export class GoalFormComponent implements OnChanges {
     }
     const goal = clone(this.formGroup.value);
     goal.build_id = this.buildService.build.id;
-    goal.year = this.year;
+    goal.child_year = this.buildService.childYear;
     this.apollo.mutate({
       mutation: goal.id ? UpdateGoalMutation : CreateGoalMutation,
       variables: {
@@ -79,7 +73,7 @@ export class GoalFormComponent implements OnChanges {
           query: GetGoals,
           variables: {
             build_id: this.buildService.build.id,
-            year: this.year
+            child_year: this.buildService.childYear
           },
         }
       ],

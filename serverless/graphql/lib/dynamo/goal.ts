@@ -11,13 +11,13 @@ import * as db from './dynamo';
 
 const TableName = process.env.GOAL_TABLE;
 
-export function getGoals(buildId, year, userId) {
+export function getGoals(buildId, child_year, userId) {
   const params = {
     TableName,
-    FilterExpression: 'build_id = :build_id AND year = :year AND user_id = :user_id',
+    FilterExpression: 'build_id = :build_id AND child_year = :child_year AND user_id = :user_id',
     ExpressionAttributeValues: {
       ':build_id': buildId,
-      ':year': year,
+      ':child_year': child_year,
       ':user_id': userId
     },
   };
@@ -46,14 +46,11 @@ export function updateGoal(args, userId) {
     Key: {
       id: args.id,
     },
-    ExpressionAttributeNames: {
-      '#description': 'description',
-    },
     ExpressionAttributeValues: {
       ':title': args.title,
       ':description': args.description,
     },
-    UpdateExpression: 'SET title = :title, #description = :description',
+    UpdateExpression: 'SET title = :title, description = :description',
     ReturnValues: 'ALL_NEW',
   };
 

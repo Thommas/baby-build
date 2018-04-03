@@ -1,3 +1,17 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="center center">
+  <div class="row container" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="20">
+      <button mat-icon-button [routerLink]="['/calendar/show']">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        <span i18n>global.go_back</span>
+      </button>
+    </div>
+    <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+      <h3>{{ buildService.childYear }} year old</h3>
+    </div>
+    <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center"></div>
+  </div>
+</mat-toolbar>
 <form class="container" [formGroup]="formGroup" *ngIf="!loading">
   <mat-card>
     <mat-card-title fxLayout="row" i18n>goal_form.title</mat-card-title>

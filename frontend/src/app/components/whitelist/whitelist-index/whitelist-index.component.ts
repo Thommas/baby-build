@@ -23,7 +23,7 @@ import { WhitelistEditComponent } from '../whitelist-edit/whitelist-edit.compone
 export class WhitelistIndexComponent implements OnInit {
   loading: boolean;
   whitelistItems: any;
-  year: number;
+  child_year: number;
 
   constructor(
     private apollo: Apollo,
@@ -32,7 +32,7 @@ export class WhitelistIndexComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.year = 1;
+    this.child_year = 1;
     this.getWhitelistItems();
   }
 
@@ -41,7 +41,7 @@ export class WhitelistIndexComponent implements OnInit {
       query: GetWhitelistItems,
       variables: {
         build_id: this.buildService.build.id,
-        year: this.year
+        child_year: this.child_year
       }
     })
       .valueChanges
@@ -55,7 +55,7 @@ export class WhitelistIndexComponent implements OnInit {
     const dialogRef = this.dialog.open(WhitelistEditComponent, {
       data: {
         whitelistItem: whitelistItem,
-        year: this.year
+        child_year: this.child_year
       }
     });
   }
@@ -87,7 +87,7 @@ export class WhitelistIndexComponent implements OnInit {
         query: GetWhitelistItems,
         variables: {
           build_id: this.buildService.build.id,
-          year: this.year
+          child_year: this.child_year
         },
       }],
     }).subscribe();

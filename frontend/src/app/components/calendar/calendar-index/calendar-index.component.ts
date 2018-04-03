@@ -17,23 +17,23 @@ export class CalendarIndexComponent {
   eras: any = [
     {
       label: 'calendar.list.baby',
-      years: [1, 2, 3, 4, 5]
+      childYears: [1, 2, 3, 4, 5]
     },
     {
       label: 'calendar.list.young_child',
-      years: [6, 7, 8, 9, 10]
+      childYears: [6, 7, 8, 9, 10]
     },
     {
       label: 'calendar.list.child',
-      years: [11, 12, 13, 14, 15]
+      childYears: [11, 12, 13, 14, 15]
     },
     {
       label: 'calendar.list.teenager',
-      years: [16, 17, 18, 19, 20]
+      childYears: [16, 17, 18, 19, 20]
     },
     {
       label: 'calendar.list.young_adult',
-      years: [21, 22, 23, 24, 25]
+      childYears: [21, 22, 23, 24, 25]
     }
   ];
 }

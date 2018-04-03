@@ -17,7 +17,7 @@ import { BuildService } from '../../../services';
   styleUrls: ['./calendar-list.component.scss']
 })
 export class CalendarListComponent implements OnInit {
-  @Input() years: Array<number>;
+  @Input() childYears: Array<number>;
   loading: boolean;
 
   constructor(
@@ -30,8 +30,8 @@ export class CalendarListComponent implements OnInit {
     // FIXME
   }
 
-  selectYear(year: number) {
-    this.buildService.setYear(year);
+  selectYear(childYear: number) {
+    this.buildService.setChildYear(childYear);
     this.router.navigate(['/calendar/show']);
   }
 }

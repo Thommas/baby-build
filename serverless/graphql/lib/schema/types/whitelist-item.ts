@@ -11,17 +11,17 @@ const WhitelistItem = `
     id: String!
     title: String
     category: String
-    year: Int
+    child_year: Int
   }
   type Query {
-    whitelistItems(build_id: String!, year: Int!): [WhitelistItem]
+    whitelistItems(build_id: String!, child_year: Int!): [WhitelistItem]
   }
   type Mutation {
     createWhitelistItem(
       title: String!
       build_id: String!
       category: String!
-      year: Int!
+      child_year: Int!
     ): WhitelistItem
     updateWhitelistItem(
       id: ID!

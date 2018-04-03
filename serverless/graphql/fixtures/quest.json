@@ -10,7 +10,7 @@
     "option3": "Play chess",
     "description": "Learn to count to ten",
     "build_id": "1",
-    "year": 1
+    "child_year": 1
   },
   {
     "id": "2",
@@ -23,6 +23,6 @@
     "option3": "Activity X",
     "description": "Multiplication tables",
     "build_id": "1",
-    "year": 2
+    "child_year": 2
   }
 ]

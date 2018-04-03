@@ -6,7 +6,7 @@
     "title": "Maths level 1",
     "description": "Learn to count to ten",
     "build_id": "1",
-    "year": 1
+    "child_year": 1
   },
   {
     "id": "2",
@@ -15,6 +15,6 @@
     "title": "Maths level 2",
     "description": "Multiplication tables",
     "build_id": "1",
-    "year": 2
+    "child_year": 2
   }
 ]

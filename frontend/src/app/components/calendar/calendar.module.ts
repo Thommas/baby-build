@@ -23,7 +23,6 @@ import {
 
 import {
   routing,
-  CalendarHeaderComponent,
   CalendarIndexComponent,
   CalendarListComponent,
   CalendarShowComponent
@@ -51,11 +50,7 @@ import { WhitelistModule } from '../whitelist/whitelist.module';
     QuestModule,
     WhitelistModule
   ],
-  exports: [
-    CalendarHeaderComponent
-  ],
   declarations: [
-    CalendarHeaderComponent,
     CalendarIndexComponent,
     CalendarListComponent,
     CalendarShowComponent

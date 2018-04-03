@@ -26,7 +26,7 @@ import { BuildService } from '../../../services';
 export class WhitelistFormComponent implements OnChanges {
   @Output('success') success: EventEmitter<any> = new EventEmitter<any>();
   @Input() whitelistItem: any;
-  year: number;
+  child_year: number;
   formGroup: FormGroup;
   loading: boolean;
   categories: any = [
@@ -43,7 +43,7 @@ export class WhitelistFormComponent implements OnChanges {
 
   constructor(private apollo: Apollo, private buildService: BuildService) {
     this.whitelistItem = {};
-    this.year = null;
+    this.child_year = null;
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       title: new FormControl('', [Validators.required]),
@@ -82,7 +82,7 @@ export class WhitelistFormComponent implements OnChanges {
           query: GetWhitelistItems,
           variables: {
             build_id: this.buildService.build.id,
-            year: this.year
+            child_year: this.child_year
           },
         }
       ],

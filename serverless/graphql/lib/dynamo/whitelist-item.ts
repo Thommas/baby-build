@@ -11,13 +11,13 @@ import * as db from './dynamo';
 
 const TableName = process.env.WHITELIST_ITEM_TABLE;
 
-export function getWhitelistItems(buildId, year, userId) {
+export function getWhitelistItems(buildId, child_year, userId) {
   const params = {
     TableName,
-    FilterExpression: 'build_id = :build_id AND year = :year AND user_id = :user_id',
+    FilterExpression: 'build_id = :build_id AND child_year = :child_year AND user_id = :user_id',
     ExpressionAttributeValues: {
       ':build_id': buildId,
-      ':year': year,
+      ':child_year': child_year,
       ':user_id': userId
     },
   };

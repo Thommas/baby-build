@@ -7,7 +7,7 @@
     "build_id": "1",
     "category": "activity",
     "title": "Play chess",
-    "year": 1
+    "child_year": 1
   },
   {
     "id": "2",
@@ -17,6 +17,6 @@
     "build_id": "1",
     "category": "book",
     "title": "Cinderella",
-    "year": 2
+    "child_year": 2
   }
 ]
