@@ -6,14 +6,16 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { clone, isEmpty } from 'lodash';
-import { Component, Input, ViewChild, OnChanges, Output, EventEmitter } from '@angular/core';
+import { clone } from 'lodash';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import {
   GetAuthUser,
   CreateGoalMutation,
   UpdateGoalMutation,
+  GetGoal,
   GetGoals
 } from '../../../graphql';
 import { BuildService } from '../../../services';
@@ -23,13 +25,16 @@ import { BuildService } from '../../../services';
   templateUrl: './goal-form.component.html',
   styleUrls: ['./goal-form.component.scss']
 })
-export class GoalFormComponent implements OnChanges {
-  @Output('success') success: EventEmitter<any> = new EventEmitter<any>();
-  @Input() goal: any;
+export class GoalFormComponent implements OnInit {
   formGroup: FormGroup;
   loading: boolean;
 
-  constructor(private apollo: Apollo, public buildService: BuildService) {
+  constructor(,
+    private route: ActivatedRoute,
+    private apollo: Apollo,
+    public buildService: BuildService,
+    private router: Router
+  ) {
     this.goal = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
@@ -43,14 +48,30 @@ export class GoalFormComponent implements OnChanges {
     });
   }
 
-  ngOnChanges() {
-    if (!isEmpty(this.goal)) {
-      this.formGroup.setValue({
-        id: this.goal.id,
-        title: this.goal.title,
-        description: this.goal.description
-      });
-    }
+  ngOnInit() {
+    this.loading = true;
+    this.route.params.subscribe(params => {
+      if (!params.id) {
+        this.loading = false;
+        return;
+      }
+
+      this.apollo.watchQuery<any>({
+        query: GetGoal,
+        variables: {
+          id: params.id
+        }
+      })
+        .valueChanges
+        .subscribe(({ data, loading }) => {
+          this.loading = loading;
+          this.formGroup.setValue({
+            id: data.goal.id,
+            title: data.goal.title,
+            description: data.goal.description
+          });
+        });
+    });
   }
 
   submit() {
@@ -78,7 +99,7 @@ export class GoalFormComponent implements OnChanges {
         }
       ],
     }).subscribe(
-      res => this.success.emit({})
+      res => this.router.navigate(['/calendar/show'])
     );
   }
 }

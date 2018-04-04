@@ -11,6 +11,7 @@ import * as dbGoal from '../../dynamo/goal';
 export default {
   Query: {
     goals: (_, args, context) => dbGoal.getGoals(args.build_id, args.child_year, context.user_id),
+    goal: (_, args, context) => dbGoal.getGoal(args.id, context.user_id),
   },
   Mutation: {
     createGoal: (_, args, context) => dbGoal.createGoal(args, context.user_id),

@@ -25,6 +25,19 @@ export function getGoals(buildId, child_year, userId) {
   return db.scan(params);
 }
 
+export function getGoal(id, userId) {
+  const params = {
+    TableName,
+    FilterExpression: 'user_id = :user_id',
+    ExpressionAttributeValues: { ':user_id': userId },
+    Key: {
+      id,
+    },
+  };
+
+  return db.get(params);
+}
+
 export function createGoal(args, userId) {
   const params = {
     TableName,
@@ -32,8 +45,8 @@ export function createGoal(args, userId) {
       id: nanoid(12),
       created_at: new Date().getTime(),
       updated_at: new Date().getTime(),
-      title: args.title,
-      build_id: args.build_id
+      user_id: userId,
+      ...args
     },
   };
 

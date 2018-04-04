@@ -14,6 +14,7 @@ const Goal = `
   }
   type Query {
     goals(build_id: String!, child_year: Int!): [Goal]
+    goal(id: String!): Goal
   }
   type Mutation {
     createGoal(

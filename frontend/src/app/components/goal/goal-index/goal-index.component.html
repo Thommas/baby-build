@@ -13,7 +13,7 @@
   <div class="row" *ngFor="let goal of goals" fxLayout="row" fxLayoutAlign="start center">
     <div fxFlex="40">{{ goal.title }}</div>
     <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-      <button class="edit" mat-icon-button color="primary">
+      <button class="edit" mat-icon-button color="primary" [routerLink]="['/goal/update/' + goal.id]">
         <mat-icon>mode_edit</mat-icon>
       </button>
       <button class="delete" mat-icon-button color="warn">

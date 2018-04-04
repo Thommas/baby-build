@@ -18,6 +18,16 @@ export const GetGoals = gql`
   }
 `;
 
+export const GetGoal = gql`
+  query GetGoal($id: String!) {
+    goal(id: $id) {
+      id
+      title
+      description
+    }
+  }
+`;
+
 export const CreateGoalMutation = gql`
   mutation CreateGoal(
     $title: String!
@@ -25,7 +35,7 @@ export const CreateGoalMutation = gql`
     $build_id: String!
     $child_year: Int!
   ) {
-    createQuest(
+    createGoal(
       title: $title
       description: $description
       build_id: $build_id
@@ -42,7 +52,7 @@ export const UpdateGoalMutation = gql`
     $title: String!
     $description: String!
   ) {
-    updateWhitelistItem(
+    updateGoal(
       id: $id
       title: $title
       description: $description
