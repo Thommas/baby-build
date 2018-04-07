@@ -29,13 +29,12 @@ export class GoalFormComponent implements OnInit {
   formGroup: FormGroup;
   loading: boolean;
 
-  constructor(,
+  constructor(
     private route: ActivatedRoute,
     private apollo: Apollo,
     public buildService: BuildService,
     private router: Router
   ) {
-    this.goal = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       title: new FormControl('', [Validators.required]),

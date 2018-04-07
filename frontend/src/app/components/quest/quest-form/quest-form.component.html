@@ -1,4 +1,18 @@
-<form class="container" #childForm="ngForm">
+<mat-toolbar fxLayout="row" fxLayoutAlign="center center">
+  <div class="row container" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="20">
+      <button mat-icon-button [routerLink]="['/calendar/show']">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        <span i18n>global.go_back</span>
+      </button>
+    </div>
+    <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+      <h3>{{ buildService.childYear }} year old</h3>
+    </div>
+    <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center"></div>
+  </div>
+</mat-toolbar>
+<form class="container" [formGroup]="formGroup">
   <mat-card>
     <mat-card-title fxLayout="row" i18n>quest_create.title</mat-card-title>
     <mat-card-content fxLayout="column">
@@ -6,30 +20,50 @@
         <div fxLayout="row wrap" fxFlex="50">
           <mat-form-field>
             <input matInput placeholder="Quest title"
-                   [(ngModel)]="quest.title" name="title">
+                   formControlName="title">
           </mat-form-field>
         </div>
         <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
-          TYPE OF QUEST HERE
+          <div class="type" fxLayout="column" fxLayoutAlign="center center"
+               [ngClass]="{'selected': formGroup.value.type === 'main'}">
+            <div class="option" (click)="setQuestType('main')">
+              <img src="/assets/img/quest-main.svg"/>
+              <div i18n>quest_form.quest.main</div>
+            </div>
+          </div>
+          <div class="type" fxLayout="column" fxLayoutAlign="center center"
+               [ngClass]="{'selected': formGroup.value.type === 'bonus'}">
+            <div class="option" (click)="setQuestType('bonus')">
+              <img src="/assets/img/quest-bonus.svg"/>
+              <div i18n>quest_form.quest.bonus</div>
+            </div>
+          </div>
+          <div class="type" fxLayout="column" fxLayoutAlign="center center"
+               [ngClass]="{'selected': formGroup.value.type === 'hidden'}">
+            <div class="option" (click)="setQuestType('hidden')">
+              <img src="/assets/img/quest-hidden.svg"/>
+              <div i18n>quest_form.quest.hidden</div>
+            </div>
+          </div>
         </div>
       </div>
       <div>
         <div fxLayout="row wrap" fxFlex="30">
           <mat-form-field>
             <input matInput placeholder="First possibility"
-                   [(ngModel)]="quest.possibility1" name="title">
+                   formControlName="option1">
           </mat-form-field>
         </div>
         <div fxLayout="row wrap" fxFlex="30">
           <mat-form-field>
             <input matInput placeholder="Second possibility"
-                   [(ngModel)]="quest.possibility2" name="title">
+                   formControlName="option2">
           </mat-form-field>
         </div>
         <div fxLayout="row wrap" fxFlex="30">
           <mat-form-field>
             <input matInput placeholder="Third possibility"
-                   [(ngModel)]="quest.possibility3" name="title">
+                   formControlName="option3">
           </mat-form-field>
         </div>
       </div>

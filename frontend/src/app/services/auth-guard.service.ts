@@ -30,6 +30,9 @@ export class AuthGuardService implements CanActivate {
     return this.authService.isAuthenticated.map(
       isAuthenticated => {
         if (!isAuthenticated) {
+          if (route.url.length === 0) {
+            return true;
+          }
           this.router.navigate(['']);
         }
         return isAuthenticated;

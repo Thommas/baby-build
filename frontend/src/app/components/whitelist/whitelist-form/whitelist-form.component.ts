@@ -47,10 +47,12 @@ export class WhitelistFormComponent implements OnChanges {
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       title: new FormControl('', [Validators.required]),
+      category: new FormControl('', [Validators.required]),
     });
     this.formGroup.setValue({
       id: null,
-      title: ''
+      title: '',
+      category: 'activity'
     });
   }
 
@@ -58,7 +60,8 @@ export class WhitelistFormComponent implements OnChanges {
     if (!isEmpty(this.whitelistItem)) {
       this.formGroup.setValue({
         id: this.whitelistItem.id,
-        title: this.whitelistItem.title
+        title: this.whitelistItem.title,
+        category: this.whitelistItem.category
       });
     }
   }
@@ -69,6 +72,7 @@ export class WhitelistFormComponent implements OnChanges {
     }
     const whitelistItem = clone(this.formGroup.value);
     whitelistItem.build_id = this.buildService.build.id;
+    whitelistItem.child_year = this.buildService.childYear;
     this.apollo.mutate({
       mutation: whitelistItem.id ? UpdateWhitelistItemMutation : CreateWhitelistItemMutation,
       variables: {
@@ -82,7 +86,7 @@ export class WhitelistFormComponent implements OnChanges {
           query: GetWhitelistItems,
           variables: {
             build_id: this.buildService.build.id,
-            child_year: this.child_year
+            child_year: this.buildService.childYear
           },
         }
       ],

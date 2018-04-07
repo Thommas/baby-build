@@ -34,9 +34,7 @@ export class AppComponent implements OnInit {
     public progressService: ProgressService,
     private angularticsService: AngularticsService,
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
-  ) {
-    authService.scheduleRenewal();
-  }
+  ) {}
 
   ngOnInit() {
     this.authService.init();

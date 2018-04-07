@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Home
+ * Component - Quest - Routing
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,12 +9,17 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { HomeComponent } from './home/home.component';
+import { QuestFormComponent } from './quest-form/quest-form.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
+    path: 'quest/update/:id',
+    component: QuestFormComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'quest/create',
+    component: QuestFormComponent,
     canActivate: [AuthGuardService]
   }
 ];

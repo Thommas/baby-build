@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.7.0] - 2018-04-??
+
+### Added
+- Goal
+- Quest
+
+### Fixed
+- Renew token
+
 ## [0.6.0] - 2018-03-30
 
 ### Added

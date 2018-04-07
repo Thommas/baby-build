@@ -1,5 +1,11 @@
 <div class="container">
-  <app-quest-form-cmp></app-quest-form-cmp>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h1 i18n>quest_index.title</h1>
+    <button mat-button [routerLink]="['/quest/create']">
+      <mat-icon>add_circle</mat-icon>
+      <span i18n>quest_index.quest_create</span>
+    </button>
+  </div>
   <div class="header row" fxLayout="row" fxLayoutAlign="start center">
     <div fxFlex="40" i18n>quest.list.header.title</div>
     <div fxFlex="20"></div>

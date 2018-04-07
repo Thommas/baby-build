@@ -1,3 +1,5 @@
+@import '../../../../theme.scss';
+
 :host {
   display: flex;
   box-sizing: border-box;
@@ -6,4 +8,41 @@
   -webkit-box-direction: normal;
   place-content: center space-around;
   align-items: center;
+}
+
+form {
+  mat-card {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  mat-form-field {
+    margin-right: 20px;
+  }
+
+  .type {
+    border-radius: 100%;
+    padding: 20px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
+
+  .selected {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    &.type {
+      box-shadow: 0 0 50px $primary;
+    }
+  }
+
+  .type .option {
+    cursor: pointer;
+
+    img {
+      width: 90px;
+    }
+    div {
+      text-align: center;
+    }
+  }
 }

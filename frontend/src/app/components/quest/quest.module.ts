@@ -24,12 +24,14 @@ import {
 import { BuildService } from '../../services';
 
 import {
+  routing,
   QuestFormComponent,
   QuestIndexComponent
 } from './';
 
 @NgModule({
   imports: [
+    routing,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

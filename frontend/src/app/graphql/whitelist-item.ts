@@ -21,15 +21,15 @@ export const GetWhitelistItems = gql`
 export const CreateWhitelistItemMutation = gql`
   mutation CreateWhitelistItem(
     $title: String!
-    $build_id: String!
     $category: String!
+    $build_id: String!
     $child_year: Int!
   ) {
     createWhitelistItem(
       title: $title
-      build_id: $build_id
       category: $category
-      required_age: $required_age
+      build_id: $build_id
+      child_year: $child_year
     ) {
       id
     }
@@ -41,13 +41,11 @@ export const UpdateWhitelistItemMutation = gql`
     $id: ID!
     $title: String!
     $category: String!
-    $child_year: Int!
   ) {
     updateWhitelistItem(
       id: $id
       title: $title
       category: $category
-      required_age: $required_age
     ) {
       id
     }

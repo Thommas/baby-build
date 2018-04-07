@@ -4,7 +4,7 @@
            formControlName="title">
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Category" formControlName="category_id">
+    <mat-select placeholder="Category" formControlName="category">
       <mat-option *ngFor="let category of categories" [value]="category">
         {{ category }}
       </mat-option>

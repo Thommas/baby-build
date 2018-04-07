@@ -31,10 +31,11 @@ export class AuthService {
   static LOCAL_STORAGE_ID_TOKEN = 'id_token';
   static LOCAL_STORAGE_EXPIRES_AT = 'expires_at';
 
-  lock: any;
-  refreshSubscription: any;
+  private _lock: any;
+  private refreshSubscription: any;
   private tokenObs: Observable<string>;
   private isAuthenticatedObs: Observable<boolean>;
+  private renewTokenInnerSubscriber: any;
 
   /**
    * Constructor
@@ -44,50 +45,73 @@ export class AuthService {
     private dexieService: DexieService,
     private browserService: BrowserService
   ) {
-    this.lock = null;
+    this._lock = null;
     this.refreshSubscription = null;
     this.tokenObs = null;
     this.isAuthenticatedObs = null;
+    this.renewTokenInnerSubscriber = null;
   }
 
   /**
    * Load auth0 lock dynamically to bypass SSR limitation on require crypto
    */
   init() {
-    if (!this.browserService.document) {
-      return;
+    this.lock.subscribe();
+  }
+
+  /**
+   * Returns an instance of auth0 lock
+   */
+  get lock(): Observable<any> {
+    if (this._lock) {
+      return Observable.of(this._lock);
     }
 
-    const document = this.browserService.document;
-    const scriptElement = document.createElement('script');
-    scriptElement.type = 'text/javascript';
-    scriptElement.async = true;
-    scriptElement.defer = true;
-    scriptElement.onload = () => this.onAuth0LockLoaded();
-    scriptElement.src = 'https://cdn.auth0.com/js/lock/11.5.2/lock.min.js';
-    document.body.appendChild(scriptElement);
+    if (!this.browserService.document) {
+      return Observable.of(null);
+    }
+
+    return Observable.create(obs => {
+      const document = this.browserService.document;
+      const scriptElement = document.createElement('script');
+      scriptElement.type = 'text/javascript';
+      scriptElement.async = true;
+      scriptElement.defer = true;
+      scriptElement.onload = () => this.onAuth0LockLoaded(obs);
+      scriptElement.src = 'https://cdn.auth0.com/js/lock/11.5.2/lock.min.js';
+      document.body.appendChild(scriptElement);
+    });
   }
 
   /**
    * Once auth0 lock is loaded in the browser, initialize it
    */
-  onAuth0LockLoaded() {
+  onAuth0LockLoaded(obs: any) {
+    if (this._lock) {
+      obs.next(this._lock);
+      return obs;
+    }
+
     const Auth0Lock = this.browserService.window.Auth0Lock;
-    this.lock = new Auth0Lock(
+    this._lock = new Auth0Lock(
       environment.auth0.clientID,
       environment.auth0.domain,
       environment.auth0.options
     );
-    this.lock.on('authenticated', (authResult: any) => {
-      this.setSession(authResult);
+    this._lock.on('authenticated', (authResult: any) => {
+      this.setSession(authResult).subscribe(() => {
+        this.refreshIsAuthenticated();
+      });
     });
+
+    obs.next(this._lock);
+    return obs;
   }
 
   /**
    * Store authentication results in local storage
    */
-  setSession(authResult) {
-    console.log('authResult', authResult);
+  setSession(authResult): Observable<any> {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + Date.now());
 
     const obs = [
@@ -97,9 +121,6 @@ export class AuthService {
     ];
     return Observable.forkJoin(obs, () => {
       // Nothing
-    }).subscribe(() => {
-      this.scheduleRenewal();
-      this.refreshIsAuthenticated();
     });
   }
 
@@ -117,21 +138,23 @@ export class AuthService {
    * Display login modal
    */
   login() {
-    if (!this.lock) {
-      return;
-    }
-    this.lock.show();
+    this.lock.subscribe(lock => {
+      if (lock) {
+        lock.show()
+      }
+    });
   }
 
   /**
    * Display signUp modal
    */
   signUp() {
-    if (!this.lock) {
-      return;
-    }
-    this.lock.show({
-      initialScreen: 'signUp'
+    this.lock.subscribe(lock => {
+      if (lock) {
+        lock.show({
+          initialScreen: 'signUp'
+        })
+      }
     });
   }
 
@@ -139,7 +162,6 @@ export class AuthService {
    * Purge local storage and redirect to home
    */
   logout() {
-    this.unscheduleRenewal();
     this.dexieService.clearKeyValueStoreTable().subscribe(
       () => this.refreshIsAuthenticated()
     );
@@ -149,14 +171,15 @@ export class AuthService {
    * Resume authentication process after redirect from auth0
    */
   resumeAuth(hash) {
-    if (!this.lock) {
-      return;
-    }
-    this.lock.resumeAuth(hash, (error, authResult) => {
-      if (error) {
-        console.log('error', error);
-      } else if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
+    this.lock.subscribe(lock => {
+      if (lock) {
+        lock.resumeAuth(hash, (error, authResult) => {
+          if (error) {
+            console.log('error', error);
+          } else if (authResult && authResult.accessToken && authResult.idToken) {
+            this.setSession(authResult);
+          }
+        });
       }
     });
   }
@@ -177,8 +200,12 @@ export class AuthService {
   get isAuthenticated(): Observable<boolean> {
     if (!this.isAuthenticatedObs) {
       this.isAuthenticatedObs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_EXPIRES_AT)
-        .map((expiresAt: string) => {
-          return expiresAt && new Date().getTime() < parseInt(expiresAt, 10);
+        .mergeMap((expiresAt: string) => {
+          const isAuthenticated = expiresAt && new Date().getTime() < parseInt(expiresAt, 10);
+          if (isAuthenticated) {
+            return Observable.of(true);
+          }
+          return this.renewToken();
         });
     }
     return this.isAuthenticatedObs;
@@ -187,46 +214,28 @@ export class AuthService {
   /**
    * Renew token
    */
-  renewToken() {
-    if (!this.lock) {
-      return;
-    }
-    this.lock.checkSession({}, (err, result) => {
-      if (err) {
-        console.log(`Could not get a new token (${err.error}: ${err.error_description}).`);
-      } else {
-        console.log(`Successfully renewed auth!`);
-        this.setSession(result);
+  renewToken(): Observable<boolean> {
+    this.renewTokenInnerSubscriber = null;
+    return this.lock.mergeMap(lock => {
+      if (!lock) {
+        return Observable.of(false);
       }
-    });
-  }
-
-  /**
-   * Schedule token renewal
-   */
-  scheduleRenewal(): void {
-    this.isAuthenticated.map(isAuthenticated => {
-      if (!isAuthenticated) {
-        return;
-      }
-      this.unscheduleRenewal();
-
-      const obs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_EXPIRES_AT);
-      obs.map((expiresAt: string) => {
-        const source = Observable.timer(Math.max(1, parseInt(expiresAt, 10) - Date.now()));
-        this.refreshSubscription = source.subscribe(() => {
-          this.renewToken();
+      return Observable.create(obs => {
+        if (this.renewTokenInnerSubscriber) {
+          return;
+        }
+        this.renewTokenInnerSubscriber = obs;
+        lock.checkSession({}, (err, result) => {
+          if (err) {
+            obs.error(`Could not get a new token (${err.error}: ${err.error_description}).`);
+          } else {
+            console.log(`Successfully renewed auth!`);
+            obs.next(true);
+            obs.complete();
+            this.setSession(result).subscribe();
+          }
         });
       });
     });
-  }
-
-  /**
-   * Unschedule token renewal
-   */
-  unscheduleRenewal() {
-    if (this.refreshSubscription) {
-      this.refreshSubscription.unsubscribe();
-    }
   }
 }

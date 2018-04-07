@@ -11,7 +11,6 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthServiceStub {
-  scheduleRenewal(): void {}
   get isAuthenticated(): Observable<boolean> {
     return Observable.of(true);
   }
