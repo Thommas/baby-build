@@ -17,55 +17,69 @@
     <mat-card-title fxLayout="row" i18n>quest_create.title</mat-card-title>
     <mat-card-content fxLayout="column">
       <div fxLayout="row">
-        <div fxLayout="row wrap" fxFlex="50">
+        <div fxLayout="column" fxFlex="50">
           <mat-form-field>
             <input matInput placeholder="Quest title"
                    formControlName="title">
           </mat-form-field>
+          <mat-form-field>
+            <textarea matInput
+                      placeholder="quest.description" i18n-placeholder
+                      matTextareaAutosize
+                      matAutosizeMinRows="4"
+                      matAutosizeMaxRows="4"
+                      formControlName="description"></textarea>
+          </mat-form-field>
         </div>
-        <div fxLayout="row" fxFlex="50" fxLayoutAlign="space-around center">
+        <div fxLayout="row" fxLayoutAlign="space-around stretch">
           <div class="type" fxLayout="column" fxLayoutAlign="center center"
                [ngClass]="{'selected': formGroup.value.type === 'main'}">
-            <div class="option" (click)="setQuestType('main')">
+            <div class="option" (click)="setQuestType('main')" fxLayout="column" fxLayoutAlign="center center">
               <img src="/assets/img/quest-main.svg"/>
               <div i18n>quest_form.quest.main</div>
             </div>
           </div>
           <div class="type" fxLayout="column" fxLayoutAlign="center center"
                [ngClass]="{'selected': formGroup.value.type === 'bonus'}">
-            <div class="option" (click)="setQuestType('bonus')">
+            <div class="option" (click)="setQuestType('bonus')" fxLayout="column" fxLayoutAlign="center center">
               <img src="/assets/img/quest-bonus.svg"/>
               <div i18n>quest_form.quest.bonus</div>
             </div>
           </div>
           <div class="type" fxLayout="column" fxLayoutAlign="center center"
                [ngClass]="{'selected': formGroup.value.type === 'hidden'}">
-            <div class="option" (click)="setQuestType('hidden')">
+            <div class="option" (click)="setQuestType('hidden')" fxLayout="column" fxLayoutAlign="center center">
               <img src="/assets/img/quest-hidden.svg"/>
               <div i18n>quest_form.quest.hidden</div>
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <div fxLayout="row wrap" fxFlex="30">
-          <mat-form-field>
-            <input matInput placeholder="First possibility"
-                   formControlName="option1">
-          </mat-form-field>
-        </div>
-        <div fxLayout="row wrap" fxFlex="30">
-          <mat-form-field>
-            <input matInput placeholder="Second possibility"
-                   formControlName="option2">
-          </mat-form-field>
-        </div>
-        <div fxLayout="row wrap" fxFlex="30">
-          <mat-form-field>
-            <input matInput placeholder="Third possibility"
-                   formControlName="option3">
-          </mat-form-field>
-        </div>
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field>
+          <textarea matInput
+                    placeholder="quest.option1" i18n-placeholder
+                    matTextareaAutosize
+                    matAutosizeMinRows="4"
+                    matAutosizeMaxRows="8"
+                    formControlName="option1"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput
+                    placeholder="quest.option2" i18n-placeholder
+                    matTextareaAutosize
+                    matAutosizeMinRows="4"
+                    matAutosizeMaxRows="8"
+                    formControlName="option2"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput
+                    placeholder="quest.option3" i18n-placeholder
+                    matTextareaAutosize
+                    matAutosizeMinRows="4"
+                    matAutosizeMaxRows="8"
+                    formControlName="option3"></textarea>
+        </mat-form-field>
       </div>
     </mat-card-content>
     <mat-divider></mat-divider>

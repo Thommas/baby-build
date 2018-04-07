@@ -30,16 +30,13 @@ form {
   .selected {
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
-    &.type {
-      box-shadow: 0 0 50px $primary;
-    }
   }
 
   .type .option {
     cursor: pointer;
 
     img {
-      width: 90px;
+      width: 60px;
     }
     div {
       text-align: center;

@@ -38,9 +38,9 @@ export class QuestFormComponent implements OnInit {
       id: new FormControl('', []),
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      option1: new FormControl('', [Validators.required]),
-      option2: new FormControl('', [Validators.required]),
-      option3: new FormControl('', [Validators.required]),
+      option1: new FormControl('', []),
+      option2: new FormControl('', []),
+      option3: new FormControl('', []),
       type: new FormControl('', [Validators.required]),
     });
     this.formGroup.setValue({
