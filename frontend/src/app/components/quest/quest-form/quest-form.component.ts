@@ -36,21 +36,21 @@ export class QuestFormComponent implements OnInit {
   ) {
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
+      quest_type: new FormControl('', [Validators.required]),
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       option1: new FormControl('', []),
       option2: new FormControl('', []),
-      option3: new FormControl('', []),
-      type: new FormControl('', [Validators.required]),
+      option3: new FormControl('', [])
     });
     this.formGroup.setValue({
       id: null,
+      quest_type: 'main',
       title: null,
       description: null,
       option1: null,
       option2: null,
-      option3: null,
-      type: 'main'
+      option3: null
     });
   }
 
@@ -73,20 +73,20 @@ export class QuestFormComponent implements OnInit {
           this.loading = loading;
           this.formGroup.setValue({
             id: data.quest.id,
+            quest_type: data.quest.quest_type,
             title: data.quest.title,
             description: data.quest.description,
             option1: data.quest.option1,
             option2: data.quest.option2,
-            option3: data.quest.option3,
-            type: data.quest.type
+            option3: data.quest.option3
           });
         });
     });
   }
 
-  setQuestType(newType: string) {
+  setQuestType(newQuestType: string) {
     this.formGroup.patchValue({
-      type: newType
+      quest_type: newQuestType
     });
   }
 
@@ -94,11 +94,13 @@ export class QuestFormComponent implements OnInit {
     if (!this.formGroup.valid) {
       return;
     }
-    const child = clone(this.formGroup.value);
+    const quest = clone(this.formGroup.value);
+    quest.build_id = this.buildService.build.id;
+    quest.child_year = this.buildService.childYear;
     this.apollo.mutate({
-      mutation: child.id ? UpdateQuestMutation : CreateQuestMutation,
+      mutation: quest.id ? UpdateQuestMutation : CreateQuestMutation,
       variables: {
-        ...child
+        ...quest
       }
     }).subscribe(
       res => this.router.navigate(['/calendar/show'])

@@ -4,16 +4,15 @@ Roadmap
 Short term
 ----------
 
-- Manage Goal
-- Manage Quest
-- Manage Whitelist Items
-- Manage Rewards
+- Improve calendar show with routing
+- Improve goal and quest index
 - Implement count
 
 Mid term
 --------
 
-- Implement achievement based on count
+- Implement Rewards
+- Implement Achievements based on count
 - Implement security checks in graphql lambda
 - Implement giving access to a child and its builds to other family members
 - Add more tooltips on UX

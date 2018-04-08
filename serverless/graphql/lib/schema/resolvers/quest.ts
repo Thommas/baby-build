@@ -11,6 +11,7 @@ import * as dbQuest from '../../dynamo/quest';
 export default {
   Query: {
     quests: (_, args, context) => dbQuest.getQuests(args.build_id, args.child_year, context.user_id),
+    quest: (_, args, context) => dbQuest.getQuest(args.id, context.user_id),
   },
   Mutation: {
     createQuest: (_, args, context) => dbQuest.createQuest(args, context.user_id),

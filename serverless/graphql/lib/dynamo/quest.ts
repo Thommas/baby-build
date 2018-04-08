@@ -25,6 +25,19 @@ export function getQuests(buildId, child_year, userId) {
   return db.scan(params);
 }
 
+export function getQuest(id, userId) {
+  const params = {
+    TableName,
+    FilterExpression: 'user_id = :user_id',
+    ExpressionAttributeValues: { ':user_id': userId },
+    Key: {
+      id,
+    },
+  };
+
+  return db.get(params);
+}
+
 export function createQuest(args, userId) {
   const params = {
     TableName,
@@ -32,8 +45,8 @@ export function createQuest(args, userId) {
       id: nanoid(12),
       created_at: new Date().getTime(),
       updated_at: new Date().getTime(),
-      title: args.title,
-      build_id: args.build_id
+      user_id: userId,
+      ...args
     },
   };
 
@@ -46,14 +59,20 @@ export function updateQuest(args, userId) {
     Key: {
       id: args.id,
     },
-    ExpressionAttributeNames: {
-      '#description': 'description',
-    },
     ExpressionAttributeValues: {
       ':title': args.title,
       ':description': args.description,
+      ':option1': args.option1,
+      ':option2': args.option2,
+      ':option3': args.option3,
+      ':quest_type': args.quest_type,
     },
-    UpdateExpression: 'SET title = :title, #description = :description',
+    UpdateExpression: `SET title = :title,
+      description = :description,
+      option1 = :option1,
+      option2 = :option2,
+      option3 = :option3,
+      quest_type = :quest_type`,
     ReturnValues: 'ALL_NEW',
   };
 

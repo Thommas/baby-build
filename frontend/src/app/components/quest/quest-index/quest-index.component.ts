@@ -20,7 +20,6 @@ import { BuildService } from '../../../services';
 export class QuestIndexComponent {
   loading: boolean;
   quests: any;
-  child_year: number;
 
   constructor(
     private apollo: Apollo,
@@ -29,7 +28,6 @@ export class QuestIndexComponent {
   ) {}
 
   ngOnInit() {
-    this.child_year = 1;
     this.getQuests();
   }
 
@@ -38,7 +36,7 @@ export class QuestIndexComponent {
       query: GetQuests,
       variables: {
         build_id: this.buildService.build.id,
-        child_year: this.child_year
+        child_year: this.buildService.childYear
       }
     })
       .valueChanges

@@ -33,21 +33,21 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="space-around stretch">
           <div class="type" fxLayout="column" fxLayoutAlign="center center"
-               [ngClass]="{'selected': formGroup.value.type === 'main'}">
+               [ngClass]="{'selected': formGroup.value.quest_type === 'main'}">
             <div class="option" (click)="setQuestType('main')" fxLayout="column" fxLayoutAlign="center center">
               <img src="/assets/img/quest-main.svg"/>
               <div i18n>quest_form.quest.main</div>
             </div>
           </div>
           <div class="type" fxLayout="column" fxLayoutAlign="center center"
-               [ngClass]="{'selected': formGroup.value.type === 'bonus'}">
+               [ngClass]="{'selected': formGroup.value.quest_type === 'bonus'}">
             <div class="option" (click)="setQuestType('bonus')" fxLayout="column" fxLayoutAlign="center center">
               <img src="/assets/img/quest-bonus.svg"/>
               <div i18n>quest_form.quest.bonus</div>
             </div>
           </div>
           <div class="type" fxLayout="column" fxLayoutAlign="center center"
-               [ngClass]="{'selected': formGroup.value.type === 'hidden'}">
+               [ngClass]="{'selected': formGroup.value.quest_type === 'hidden'}">
             <div class="option" (click)="setQuestType('hidden')" fxLayout="column" fxLayoutAlign="center center">
               <img src="/assets/img/quest-hidden.svg"/>
               <div i18n>quest_form.quest.hidden</div>
@@ -61,7 +61,7 @@
                     placeholder="quest.option1" i18n-placeholder
                     matTextareaAutosize
                     matAutosizeMinRows="4"
-                    matAutosizeMaxRows="8"
+                    matAutosizeMaxRows="4"
                     formControlName="option1"></textarea>
         </mat-form-field>
         <mat-form-field>
@@ -69,7 +69,7 @@
                     placeholder="quest.option2" i18n-placeholder
                     matTextareaAutosize
                     matAutosizeMinRows="4"
-                    matAutosizeMaxRows="8"
+                    matAutosizeMaxRows="4"
                     formControlName="option2"></textarea>
         </mat-form-field>
         <mat-form-field>
@@ -77,7 +77,7 @@
                     placeholder="quest.option3" i18n-placeholder
                     matTextareaAutosize
                     matAutosizeMinRows="4"
-                    matAutosizeMaxRows="8"
+                    matAutosizeMaxRows="4"
                     formControlName="option3"></textarea>
         </mat-form-field>
       </div>
