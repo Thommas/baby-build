@@ -103,7 +103,7 @@ export class QuestFormComponent implements OnInit {
         ...quest
       }
     }).subscribe(
-      res => this.router.navigate(['/calendar/year/goal'])
+      res => this.router.navigate([`/calendar/era/${this.buildService.era}`])
     );
   }
 }

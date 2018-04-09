@@ -1,5 +1,5 @@
 <mat-tab-group #tab (selectedTabChange)="selectedTabChange($event)" [@.disabled]="true">
-  <mat-tab [label]="era.label" *ngFor="let era of eras">
+  <mat-tab [label]="era.label" *ngFor="let era of buildService.eras">
     <app-calendar-list-cmp [era]="era"></app-calendar-list-cmp>
   </mat-tab>
 </mat-tab-group>

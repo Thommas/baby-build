@@ -1,7 +1,7 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
   <div class="row container" fxLayout="row" fxLayoutAlign="space-between center">
     <div fxFlex="20">
-      <button mat-icon-button [routerLink]="['/calendar/quest']">
+      <button mat-icon-button [routerLink]="['/calendar/era/' + buildService.era + '/quest']">
         <mat-icon>keyboard_arrow_left</mat-icon>
         <span i18n>global.go_back</span>
       </button>

@@ -28,6 +28,6 @@ export class CalendarListComponent {
 
   selectYear(childYear: number) {
     this.buildService.setChildYear(childYear);
-    this.router.navigate([`/calendar/era/${this.era.id}/goal`]);
+    this.router.navigate([`/calendar/era/${this.era['id']}/goal`]);
   }
 }

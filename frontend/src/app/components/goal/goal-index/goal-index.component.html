@@ -6,19 +6,18 @@
       <span i18n>goal_index.goal_create</span>
     </button>
   </div>
-  <div class="header row" fxLayout="row" fxLayoutAlign="start center">
-    <div fxFlex="40" i18n>goal.list.header.title</div>
-    <div fxFlex="20"></div>
-  </div>
   <div class="row" *ngFor="let goal of goals" fxLayout="row" fxLayoutAlign="start center">
-    <div fxFlex="40">{{ goal.title }}</div>
-    <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-      <button class="edit" mat-icon-button color="primary" [routerLink]="['/goal/update/' + goal.id]">
-        <mat-icon>mode_edit</mat-icon>
-      </button>
-      <button class="delete" mat-icon-button color="warn">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+    <mat-card fxLayout="column">
+      <mat-card-title>{{ goal.title }}</mat-card-title>
+      <mat-card-content>{{ goal.description }}</mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+        <button class="edit" mat-icon-button color="primary" [routerLink]="['/goal/update/' + goal.id]">
+          <mat-icon>mode_edit</mat-icon>
+        </button>
+        <button class="delete" mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>
