@@ -4,7 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Improve calendar show with routing
 - Improve goal and quest index
 - Implement count
 

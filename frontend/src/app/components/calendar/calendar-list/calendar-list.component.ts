@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { BuildService } from '../../../services';
@@ -16,8 +16,8 @@ import { BuildService } from '../../../services';
   templateUrl: './calendar-list.component.html',
   styleUrls: ['./calendar-list.component.scss']
 })
-export class CalendarListComponent implements OnInit {
-  @Input() childYears: Array<number>;
+export class CalendarListComponent {
+  @Input() era: Array<any>;
   loading: boolean;
 
   constructor(
@@ -26,12 +26,8 @@ export class CalendarListComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    // FIXME
-  }
-
   selectYear(childYear: number) {
     this.buildService.setChildYear(childYear);
-    this.router.navigate(['/calendar/show']);
+    this.router.navigate([`/calendar/era/${this.era.id}/goal`]);
   }
 }

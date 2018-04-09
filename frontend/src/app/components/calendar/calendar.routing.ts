@@ -14,12 +14,12 @@ import { CalendarShowComponent } from './calendar-show/calendar-show.component';
 
 const routes: Routes = [
   {
-    path: 'calendar/show',
+    path: 'calendar/era/:era/:tab',
     component: CalendarShowComponent,
     canActivate: [AuthGuardService]
   },
   {
-    path: 'calendar',
+    path: 'calendar/era/:tab',
     component: CalendarIndexComponent,
     canActivate: [AuthGuardService]
   }

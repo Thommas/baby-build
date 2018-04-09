@@ -98,7 +98,7 @@ export class GoalFormComponent implements OnInit {
         }
       ],
     }).subscribe(
-      res => this.router.navigate(['/calendar/show'])
+      res => this.router.navigate(['/calendar/year/goal'])
     );
   }
 }

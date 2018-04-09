@@ -29,6 +29,6 @@ export class BuildShowComponent {
   ) {}
 
   goToCalendar() {
-    this.router.navigate(['calendar']);
+    this.router.navigate(['calendar/era/baby']);
   }
 }
