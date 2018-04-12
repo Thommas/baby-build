@@ -12,6 +12,7 @@ custom:
   gamificationTable: ${self:service}-${self:custom.stage}-gamification
   goalTable: ${self:service}-${self:custom.stage}-goal
   questTable: ${self:service}-${self:custom.stage}-quest
+  rewardTable: ${self:service}-${self:custom.stage}-reward
   userTable: ${self:service}-${self:custom.stage}-user
   whitelistItemTable: ${self:service}-${self:custom.stage}-whitelist-item
   secrets: ${file(secrets.yml):${self:custom.stage}}
@@ -36,6 +37,8 @@ custom:
             sources: [./fixtures/goal.json]
           - table: ${self:custom.questTable}
             sources: [./fixtures/quest.json]
+          - table: ${self:custom.rewardTable}
+            sources: [./fixtures/reward.json]
           - table: ${self:custom.userTable}
             sources: [./fixtures/user.json]
           - table: ${self:custom.whitelistItemTable}
@@ -75,6 +78,7 @@ provider:
     GAMIFICATION_TABLE: ${self:custom.gamificationTable}
     GOAL_TABLE: ${self:custom.goalTable}
     QUEST_TABLE: ${self:custom.questTable}
+    REWARD_TABLE: ${self:custom.rewardTable}
     USER_TABLE: ${self:custom.userTable}
     WHITELIST_ITEM_TABLE: ${self:custom.whitelistItemTable}
 
@@ -172,6 +176,22 @@ resources:
         TableName: ${self:custom.questTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
+    RewardTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
+        TableName: ${self:custom.rewardTable}
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
     UserTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
@@ -235,6 +255,12 @@ resources:
         "Fn::GetAtt": [ QuestTable, StreamArn ]
       Export:
         Name: ${self:service}:${self:custom.stage}:QuestTableStreamArn
+    RewardTableStreamArn:
+      Description: The StreamArn for the Reward Table
+      Value:
+        "Fn::GetAtt": [ RewardTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:RewardTableStreamArn
     UserTableStreamArn:
       Description: The StreamArn for the User Table
       Value:

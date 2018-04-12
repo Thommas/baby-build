@@ -16,6 +16,7 @@ import childType from './types/child';
 import gamificationType from './types/gamification';
 import goalType from './types/goal';
 import questType from './types/quest';
+import rewardType from './types/reward';
 import userType from './types/user';
 import whitelistItemType from './types/whitelist-item';
 
@@ -25,6 +26,7 @@ import childResolver from './resolvers/child';
 import gamificationResolver from './resolvers/gamification';
 import goalResolver from './resolvers/goal';
 import questResolver from './resolvers/quest';
+import rewardResolver from './resolvers/reward';
 import userResolver from './resolvers/user';
 import whitelistItemResolver from './resolvers/whitelist-item';
 
@@ -34,6 +36,7 @@ const typeDefs = mergeTypes([
   gamificationType,
   goalType,
   questType,
+  rewardType,
   userType,
   whitelistItemType
 ]);
@@ -43,6 +46,7 @@ const resolvers = mergeResolvers([
   gamificationResolver,
   goalResolver,
   questResolver,
+  rewardResolver,
   userResolver,
   whitelistItemResolver
 ]);
