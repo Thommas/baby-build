@@ -6,11 +6,11 @@ Short term
 
 - Improve goal and quest index
 - Implement count
+- Implement Rewards
 
 Mid term
 --------
 
-- Implement Rewards
 - Implement Achievements based on count
 - Implement security checks in graphql lambda
 - Implement giving access to a child and its builds to other family members

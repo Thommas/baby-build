@@ -12,6 +12,9 @@ const Build = `
     title: String
     description: String
     gamification: Gamification
+    goal_count: Int
+    quest_count: Int
+    favorite_count: Int
   }
   type Query {
     builds(child_id: String!): [Build]

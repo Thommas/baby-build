@@ -3,14 +3,12 @@
   "version": "0.6.0",
   "license": "WTFPL",
   "scripts": {
-    "start": "serverless offline start --stage local",
-    "start:dev": "serverless offline start --stage dev",
+    "start": "serverless offline start --stage dev",
     "graphqli": "./node_modules/.bin/ts-node ./lib/graphqli.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "lint": "tslint -c tslint.json './src/**/*.ts'",
     "test": "jasmine-ts \"lib/**/*.spec.ts\"",
     "e2e": "jasmine-ts \"e2e/**/*.spec.ts\"",
-    "deploy:dev": "serverless deploy --stage dev",
     "deploy:staging": "serverless deploy --stage staging",
     "deploy:production": "serverless deploy --stage production"
   },
