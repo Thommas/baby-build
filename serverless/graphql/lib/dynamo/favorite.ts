@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - DynamoDB - Whitelist Item
+ * GraphQL - DynamoDB - Favorite
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -11,7 +11,7 @@ import * as db from './dynamo';
 
 const TableName = process.env.WHITELIST_ITEM_TABLE;
 
-export function getWhitelistItems(buildId, child_year, userId) {
+export function getFavorites(buildId, child_year, userId) {
   const params = {
     TableName,
     FilterExpression: 'build_id = :build_id AND child_year = :child_year AND user_id = :user_id',
@@ -25,7 +25,7 @@ export function getWhitelistItems(buildId, child_year, userId) {
   return db.scan(params);
 }
 
-export function createWhitelistItem(args, userId) {
+export function createFavorite(args, userId) {
   const params = {
     TableName,
     Item: {
@@ -40,7 +40,7 @@ export function createWhitelistItem(args, userId) {
   return db.createItem(params);
 }
 
-export function updateWhitelistItem(args, userId) {
+export function updateFavorite(args, userId) {
   const params = {
     TableName,
     Key: {
@@ -57,7 +57,7 @@ export function updateWhitelistItem(args, userId) {
   return db.updateItem(params, args);
 }
 
-export function deleteWhitelistItem(args, userId) {
+export function deleteFavorite(args, userId) {
   const params = {
     TableName,
     Key: {

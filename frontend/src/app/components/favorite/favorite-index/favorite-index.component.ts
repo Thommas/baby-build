@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Whitelist - Index
+ * Component - Favorite - Index
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -11,18 +11,18 @@ import { clone } from 'lodash';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
-import { GetWhitelistItems, DeleteWhitelistItem } from '../../../graphql';
+import { GetFavorites, DeleteFavorite } from '../../../graphql';
 import { BuildService } from '../../../services';
-import { WhitelistEditComponent } from '../whitelist-edit/whitelist-edit.component';
+import { FavoriteEditComponent } from '../favorite-edit/favorite-edit.component';
 
 @Component({
-  selector: 'app-whitelist-index-cmp',
-  templateUrl: './whitelist-index.component.html',
-  styleUrls: ['./whitelist-index.component.scss']
+  selector: 'app-favorite-index-cmp',
+  templateUrl: './favorite-index.component.html',
+  styleUrls: ['./favorite-index.component.scss']
 })
-export class WhitelistIndexComponent implements OnInit {
+export class FavoriteIndexComponent implements OnInit {
   loading: boolean;
-  whitelistItems: any;
+  favorites: any;
   child_year: number;
 
   constructor(
@@ -33,12 +33,12 @@ export class WhitelistIndexComponent implements OnInit {
 
   ngOnInit() {
     this.child_year = 1;
-    this.getWhitelistItems();
+    this.getFavorites();
   }
 
-  getWhitelistItems() {
+  getFavorites() {
     this.apollo.watchQuery<any>({
-      query: GetWhitelistItems,
+      query: GetFavorites,
       variables: {
         build_id: this.buildService.build.id,
         child_year: this.child_year
@@ -47,23 +47,23 @@ export class WhitelistIndexComponent implements OnInit {
       .valueChanges
       .subscribe(({ data, loading }) => {
         this.loading = loading;
-        this.whitelistItems = data.whitelistItems;
+        this.favorites = data.favorites;
       });
   }
 
-  editWhitelistItem(whitelistItem) {
-    const dialogRef = this.dialog.open(WhitelistEditComponent, {
+  editFavorite(favorite) {
+    const dialogRef = this.dialog.open(FavoriteEditComponent, {
       data: {
-        whitelistItem: whitelistItem,
+        favorite: favorite,
         child_year: this.child_year
       }
     });
   }
 
-  deleteWhitelistItem(whitelistItem) {
+  deleteFavorite(favorite) {
     swal({
-      title: 'whitelist.delete.title',
-      text: 'whitelist.delete.text',
+      title: 'favorite.delete.title',
+      text: 'favorite.delete.text',
       type: 'warning',
       reverseButtons: true,
       showCancelButton: true,
@@ -71,20 +71,20 @@ export class WhitelistIndexComponent implements OnInit {
       confirmButtonText: 'Yes',
       cancelButtonText: 'No'
     }).then(() => {
-      this.confirmDeleteWhitelistItem(whitelistItem);
+      this.confirmDeleteFavorite(favorite);
     }).catch((reason) => {
       // Nothing
     });
   }
 
-  confirmDeleteWhitelistItem(whitelistItem) {
+  confirmDeleteFavorite(favorite) {
     this.apollo.mutate({
-      mutation: DeleteWhitelistItem,
+      mutation: DeleteFavorite,
       variables: {
-        id: whitelistItem.id
+        id: favorite.id
       },
       refetchQueries: [{
-        query: GetWhitelistItems,
+        query: GetFavorites,
         variables: {
           build_id: this.buildService.build.id,
           child_year: this.child_year

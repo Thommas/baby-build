@@ -23,8 +23,14 @@
         </button>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <button mat-button (click)="selectTab('whitelist')">
-          <img src="/assets/img/whitelist.svg" matTooltip="global.whitelist" i18n-matTooltip/>
+        <button mat-button (click)="selectTab('favorite')">
+          <img src="/assets/img/favorite.svg" matTooltip="global.favorite" i18n-matTooltip/>
+          <span>0</span>
+        </button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-button (click)="selectTab('reward')">
+          <img src="/assets/img/reward.svg" matTooltip="global.reward" i18n-matTooltip/>
           <span>0</span>
         </button>
       </div>
@@ -33,4 +39,5 @@
 </mat-toolbar>
 <app-goal-index-cmp *ngIf="selectedTab === 'goal'"></app-goal-index-cmp>
 <app-quest-index-cmp *ngIf="selectedTab === 'quest'"></app-quest-index-cmp>
-<app-whitelist-index-cmp *ngIf="selectedTab === 'whitelist'"></app-whitelist-index-cmp>
+<app-favorite-index-cmp *ngIf="selectedTab === 'favorite'"></app-favorite-index-cmp>
+<app-reward-index-cmp *ngIf="selectedTab === 'reward'"></app-reward-index-cmp>

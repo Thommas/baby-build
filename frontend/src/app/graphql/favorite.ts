@@ -1,16 +1,16 @@
 /**
  * Path of child
  *
- * GraphQL - WhitelistItem
+ * GraphQL - Favorite
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import gql from 'graphql-tag';
 
-export const GetWhitelistItems = gql`
-  query GetWhitelistItems($build_id: String!, $child_year: Int!) {
-    whitelistItems(build_id: $build_id, child_year: $child_year) {
+export const GetFavorites = gql`
+  query GetFavorites($build_id: String!, $child_year: Int!) {
+    favorites(build_id: $build_id, child_year: $child_year) {
       id
       title
       category
@@ -18,14 +18,14 @@ export const GetWhitelistItems = gql`
   }
 `;
 
-export const CreateWhitelistItemMutation = gql`
-  mutation CreateWhitelistItem(
+export const CreateFavoriteMutation = gql`
+  mutation CreateFavorite(
     $title: String!
     $category: String!
     $build_id: String!
     $child_year: Int!
   ) {
-    createWhitelistItem(
+    createFavorite(
       title: $title
       category: $category
       build_id: $build_id
@@ -36,13 +36,13 @@ export const CreateWhitelistItemMutation = gql`
   }
 `;
 
-export const UpdateWhitelistItemMutation = gql`
-  mutation UpdateWhitelistItem(
+export const UpdateFavoriteMutation = gql`
+  mutation UpdateFavorite(
     $id: ID!
     $title: String!
     $category: String!
   ) {
-    updateWhitelistItem(
+    updateFavorite(
       id: $id
       title: $title
       category: $category
@@ -52,11 +52,11 @@ export const UpdateWhitelistItemMutation = gql`
   }
 `;
 
-export const DeleteWhitelistItem = gql`
-  mutation DeleteWhitelistItem(
+export const DeleteFavorite = gql`
+  mutation DeleteFavorite(
     $id: ID!
   ) {
-    deleteWhitelistItem(
+    deleteFavorite(
       id: $id
     ) {
       id

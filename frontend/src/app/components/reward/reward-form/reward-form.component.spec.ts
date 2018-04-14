@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Whitelist - Form
+ * Component - Reward - Form
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -11,9 +11,9 @@ import { TestBed, async } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { ApolloStub, BuildService } from '../../../services';
-import { WhitelistFormComponent } from './whitelist-form.component';
+import { RewardFormComponent } from './reward-form.component';
 
-describe('WhitelistFormComponent', () => {
+describe('RewardFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
@@ -24,7 +24,7 @@ describe('WhitelistFormComponent', () => {
         ReactiveFormsModule
       ],
       declarations: [
-        WhitelistFormComponent
+        RewardFormComponent
       ],
       providers: [
         { provide: Apollo, useClass: ApolloStub },
@@ -33,7 +33,7 @@ describe('WhitelistFormComponent', () => {
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(WhitelistFormComponent);
+    const fixture = TestBed.createComponent(RewardFormComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

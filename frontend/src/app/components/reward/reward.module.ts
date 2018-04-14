@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Calendar - Module
+ * Component - Reward - Module
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -12,51 +12,45 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule,
-  MatChipsModule,
+  MatCardModule,
+  MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatTooltipModule,
   MatToolbarModule,
   MatTabsModule
 } from '@angular/material';
 
 import {
   routing,
-  CalendarIndexComponent,
-  CalendarListComponent,
-  CalendarShowComponent
+  RewardFormComponent,
+  RewardIndexComponent
 } from './';
-import { GoalModule } from '../goal/goal.module';
-import { QuestModule } from '../quest/quest.module';
-import { RewardModule } from '../reward/reward.module';
-import { FavoriteModule } from '../favorite/favorite.module';
 
 @NgModule({
   imports: [
+    routing,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    routing,
     MatButtonModule,
-    MatChipsModule,
+    MatCardModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatTooltipModule,
     MatToolbarModule,
-    MatTabsModule,
-    GoalModule,
-    QuestModule,
-    RewardModule,
-    FavoriteModule
+    MatTabsModule
+  ],
+  exports: [
+    RewardFormComponent,
+    RewardIndexComponent
   ],
   declarations: [
-    CalendarIndexComponent,
-    CalendarListComponent,
-    CalendarShowComponent
+    RewardFormComponent,
+    RewardIndexComponent
   ]
 })
-export class CalendarModule {
+export class RewardModule {
 }

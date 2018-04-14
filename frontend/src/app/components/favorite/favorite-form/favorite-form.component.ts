@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Whitelist - Form
+ * Component - Favorite - Form
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -12,20 +12,20 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import {
   GetAuthUser,
-  CreateWhitelistItemMutation,
-  UpdateWhitelistItemMutation,
-  GetWhitelistItems
+  CreateFavoriteMutation,
+  UpdateFavoriteMutation,
+  GetFavorites
 } from '../../../graphql';
 import { BuildService } from '../../../services';
 
 @Component({
-  selector: 'app-whitelist-form-cmp',
-  templateUrl: './whitelist-form.component.html',
-  styleUrls: ['./whitelist-form.component.scss']
+  selector: 'app-favorite-form-cmp',
+  templateUrl: './favorite-form.component.html',
+  styleUrls: ['./favorite-form.component.scss']
 })
-export class WhitelistFormComponent implements OnChanges {
+export class FavoriteFormComponent implements OnChanges {
   @Output('success') success: EventEmitter<any> = new EventEmitter<any>();
-  @Input() whitelistItem: any;
+  @Input() favorite: any;
   child_year: number;
   formGroup: FormGroup;
   loading: boolean;
@@ -42,7 +42,7 @@ export class WhitelistFormComponent implements OnChanges {
   ];
 
   constructor(private apollo: Apollo, private buildService: BuildService) {
-    this.whitelistItem = {};
+    this.favorite = {};
     this.child_year = null;
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
@@ -57,11 +57,11 @@ export class WhitelistFormComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    if (!isEmpty(this.whitelistItem)) {
+    if (!isEmpty(this.favorite)) {
       this.formGroup.setValue({
-        id: this.whitelistItem.id,
-        title: this.whitelistItem.title,
-        category: this.whitelistItem.category
+        id: this.favorite.id,
+        title: this.favorite.title,
+        category: this.favorite.category
       });
     }
   }
@@ -70,20 +70,20 @@ export class WhitelistFormComponent implements OnChanges {
     if (!this.formGroup.valid) {
       return;
     }
-    const whitelistItem = clone(this.formGroup.value);
-    whitelistItem.build_id = this.buildService.build.id;
-    whitelistItem.child_year = this.buildService.childYear;
+    const favorite = clone(this.formGroup.value);
+    favorite.build_id = this.buildService.build.id;
+    favorite.child_year = this.buildService.childYear;
     this.apollo.mutate({
-      mutation: whitelistItem.id ? UpdateWhitelistItemMutation : CreateWhitelistItemMutation,
+      mutation: favorite.id ? UpdateFavoriteMutation : CreateFavoriteMutation,
       variables: {
-        ...whitelistItem
+        ...favorite
       },
       refetchQueries: [
         {
           query: GetAuthUser,
         },
         {
-          query: GetWhitelistItems,
+          query: GetFavorites,
           variables: {
             build_id: this.buildService.build.id,
             child_year: this.buildService.childYear

@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Whitelist - Module
+ * Component - Favorite - Module
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -19,9 +19,9 @@ import {
 } from '@angular/material';
 
 import {
-  WhitelistEditComponent,
-  WhitelistFormComponent,
-  WhitelistIndexComponent
+  FavoriteEditComponent,
+  FavoriteFormComponent,
+  FavoriteIndexComponent
 } from './';
 
 @NgModule({
@@ -37,18 +37,18 @@ import {
     MatSelectModule
   ],
   exports: [
-    WhitelistEditComponent,
-    WhitelistFormComponent,
-    WhitelistIndexComponent
+    FavoriteEditComponent,
+    FavoriteFormComponent,
+    FavoriteIndexComponent
   ],
   declarations: [
-    WhitelistEditComponent,
-    WhitelistFormComponent,
-    WhitelistIndexComponent
+    FavoriteEditComponent,
+    FavoriteFormComponent,
+    FavoriteIndexComponent
   ],
   entryComponents: [
-    WhitelistEditComponent
+    FavoriteEditComponent
   ]
 })
-export class WhitelistModule {
+export class FavoriteModule {
 }

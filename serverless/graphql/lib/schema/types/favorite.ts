@@ -1,36 +1,36 @@
 /**
  * Path of child
  *
- * GraphQL - Types - Whitelist Item
+ * GraphQL - Types - Favorite
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-const WhitelistItem = `
-  type WhitelistItem {
+const Favorite = `
+  type Favorite {
     id: String!
     title: String
     category: String
     child_year: Int
   }
   type Query {
-    whitelistItems(build_id: String!, child_year: Int!): [WhitelistItem]
+    favorites(build_id: String!, child_year: Int!): [Favorite]
   }
   type Mutation {
-    createWhitelistItem(
+    createFavorite(
       title: String!
       build_id: String!
       category: String!
       child_year: Int!
-    ): WhitelistItem
-    updateWhitelistItem(
+    ): Favorite
+    updateFavorite(
       id: ID!
       title: String
       category: String
-    ): WhitelistItem
-    deleteWhitelistItem(
+    ): Favorite
+    deleteFavorite(
       id: ID!
-    ): WhitelistItem
+    ): Favorite
   }
 `;
-export default WhitelistItem;
+export default Favorite;

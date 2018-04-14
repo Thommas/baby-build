@@ -9,12 +9,12 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   buildTable: ${self:service}-${self:custom.stage}-build
   childTable: ${self:service}-${self:custom.stage}-child
+  favoriteTable: ${self:service}-${self:custom.stage}-favorite
   gamificationTable: ${self:service}-${self:custom.stage}-gamification
   goalTable: ${self:service}-${self:custom.stage}-goal
   questTable: ${self:service}-${self:custom.stage}-quest
   rewardTable: ${self:service}-${self:custom.stage}-reward
   userTable: ${self:service}-${self:custom.stage}-user
-  whitelistItemTable: ${self:service}-${self:custom.stage}-whitelist-item
   secrets: ${file(secrets.yml):${self:custom.stage}}
   serverless-offline:
     port: 4001
@@ -31,6 +31,8 @@ custom:
             sources: [./fixtures/build.json]
           - table: ${self:custom.childTable}
             sources: [./fixtures/child.json]
+          - table: ${self:custom.favoriteTable}
+            sources: [./fixtures/favorite.json]
           - table: ${self:custom.gamificationTable}
             sources: [./fixtures/gamification.json]
           - table: ${self:custom.goalTable}
@@ -41,8 +43,6 @@ custom:
             sources: [./fixtures/reward.json]
           - table: ${self:custom.userTable}
             sources: [./fixtures/user.json]
-          - table: ${self:custom.whitelistItemTable}
-            sources: [./fixtures/whitelist-item.json]
 
 package:
   exclude:
@@ -75,12 +75,12 @@ provider:
     AUTH0_JWKS_KID: ${self:custom.secrets.AUTH0_JWKS_KID}
     BUILD_TABLE: ${self:custom.buildTable}
     CHILD_TABLE: ${self:custom.childTable}
+    FAVORITE_TABLE: ${self:custom.favoriteTable}
     GAMIFICATION_TABLE: ${self:custom.gamificationTable}
     GOAL_TABLE: ${self:custom.goalTable}
     QUEST_TABLE: ${self:custom.questTable}
     REWARD_TABLE: ${self:custom.rewardTable}
     USER_TABLE: ${self:custom.userTable}
-    WHITELIST_ITEM_TABLE: ${self:custom.whitelistItemTable}
 
 functions:
   customAuthorizer:
@@ -126,6 +126,22 @@ resources:
           ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
           WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
         TableName: ${self:custom.childTable}
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+    FavoriteTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
+        TableName: ${self:custom.favoriteTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
     GamificationTable:
@@ -208,22 +224,6 @@ resources:
         TableName: ${self:custom.userTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    WhitelistItemTable:
-      Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
-          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.whitelistItemTable}
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
   Outputs:
     BuildTableStreamArn:
       Description: The StreamArn for the Build Table
@@ -237,6 +237,12 @@ resources:
         "Fn::GetAtt": [ ChildTable, StreamArn ]
       Export:
         Name: ${self:service}:${self:custom.stage}:ChildTableStreamArn
+    FavoriteTableStreamArn:
+      Description: The StreamArn for the Favorite Table
+      Value:
+        "Fn::GetAtt": [ FavoriteTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:FavoriteTableStreamArn
     GamificationTableStreamArn:
       Description: The StreamArn for the Gamification Table
       Value:
@@ -267,9 +273,3 @@ resources:
         "Fn::GetAtt": [ UserTable, StreamArn ]
       Export:
         Name: ${self:service}:${self:custom.stage}:UserTableStreamArn
-    WhitelistItemTableStreamArn:
-      Description: The StreamArn for the WhitelistItem Table
-      Value:
-        "Fn::GetAtt": [ WhitelistItemTable, StreamArn ]
-      Export:
-        Name: ${self:service}:${self:custom.stage}:WhitelistItemTableStreamArn
