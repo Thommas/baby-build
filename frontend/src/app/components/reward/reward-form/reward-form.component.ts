@@ -98,7 +98,7 @@ export class RewardFormComponent implements OnInit {
         }
       ],
     }).subscribe(
-      res => this.router.navigate([`/calendar/era/${this.buildService.era}`])
+      res => this.router.navigate([`/calendar/era/${this.buildService.era}/reward`])
     );
   }
 }

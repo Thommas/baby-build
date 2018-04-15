@@ -30,13 +30,23 @@ export class AuthGuardService implements CanActivate {
     return this.authService.isAuthenticated.map(
       isAuthenticated => {
         if (!isAuthenticated) {
-          if (route.url.length === 0) {
-            return true;
-          }
-          this.router.navigate(['']);
+          return this.authenticationFailed(route);
         }
-        return isAuthenticated;
+        return true;
       }
-    );
+    ).catch(e => {
+      return Observable.of(this.authenticationFailed(route));
+    });
+  }
+
+  /**
+   * If user is on the home screen, bypass auth guard
+   */
+  authenticationFailed(route: ActivatedRouteSnapshot): boolean {
+    if (route.url.length === 0) {
+      return true;
+    }
+    this.router.navigate(['']);
+    return false;
   }
 }

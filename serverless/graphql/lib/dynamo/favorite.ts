@@ -9,7 +9,7 @@
 import nanoid = require('nanoid');
 import * as db from './dynamo';
 
-const TableName = process.env.WHITELIST_ITEM_TABLE;
+const TableName = process.env.FAVORITE_TABLE;
 
 export function getFavorites(buildId, child_year, userId) {
   const params = {

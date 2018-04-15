@@ -56,7 +56,10 @@ export class AuthService {
    * Load auth0 lock dynamically to bypass SSR limitation on require crypto
    */
   init() {
-    this.lock.subscribe();
+    this.lock.subscribe(
+      () => {},
+      (e) => {}
+    );
   }
 
   /**

@@ -5,7 +5,7 @@
     "updated_at": 1521053029000,
     "user_id": "auth0|5a773beebfd2511753f2c9c0",
     "title": "Candy",
-    "description": "",
+    "description": "Haribo",
     "build_id": "1",
     "child_year": 1
   },
@@ -15,7 +15,7 @@
     "updated_at": 1521053029000,
     "user_id": "auth0|5a773beebfd2511753f2c9c0",
     "title": "Chocolate",
-    "description": "",
+    "description": "Lindt",
     "build_id": "1",
     "child_year": 2
   }
