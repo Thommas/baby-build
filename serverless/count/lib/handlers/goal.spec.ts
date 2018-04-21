@@ -6,10 +6,14 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { handleGoal } from './favorite'
+import * as db from '../dynamo/count';
+import { handleGoal } from './goal'
 
 describe('Handlers', function() {
   it('handleGoal', function() {
+    spyOn(db, 'incrementCount').and.returnValue(new Promise((resolve) =>
+      resolve()
+    ))
     const event = {
       Records: [
         {
@@ -18,6 +22,12 @@ describe('Handlers', function() {
             NewImage: {
               user_id: {
                 S: 'test-user-id'
+              },
+              build_id: {
+                S: 'test-build-id'
+              },
+              child_year: {
+                N: 2
               }
             }
           }

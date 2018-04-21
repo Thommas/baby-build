@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { handleQuest } from './favorite'
+import { handleQuest } from './quest'
 
 describe('Handlers', function() {
   it('handleQuest', function() {

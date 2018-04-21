@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { handleReward } from './favorite'
+import { handleReward } from './reward'
 
 describe('Handlers', function() {
   it('handleReward', function() {
