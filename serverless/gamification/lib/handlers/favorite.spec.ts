@@ -1,16 +1,16 @@
 /**
  * Path of child
  *
- * Gamification - Handlers - Build
+ * Gamification - Handlers - Favorite
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { handleWhitelistItem } from './whitelist-item'
+import { handleFavorite } from './favorite'
 import * as dynamoGamification from '../dynamo/gamification';
 
 describe('Handlers', function() {
-  it('handleWhitelistItem', function() {
+  it('handleFavorite', function() {
     spyOn(dynamoGamification, 'addXp').and.returnValue(new Promise((resolve) =>
       resolve()
     ))
@@ -30,6 +30,6 @@ describe('Handlers', function() {
     }
     const context = {}
     const callback = () => {}
-    handleWhitelistItem(event, context, callback)
+    handleFavorite(event, context, callback)
   });
 });

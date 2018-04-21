@@ -1,14 +1,14 @@
 /**
  * Path of child
  *
- * Gamification - Handlers - Build
+ * Gamification - Handlers - Favorite
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { addXp } from '../dynamo/gamification';
 
-export function handleWhitelistItem(event, context, callback) {
+export function handleFavorite(event, context, callback) {
   event.Records.forEach((record) => {
     if (record.eventName == 'INSERT') {
       const userId = record.dynamodb.NewImage.user_id.S

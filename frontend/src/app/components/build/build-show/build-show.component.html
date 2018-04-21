@@ -11,7 +11,7 @@
       <mat-card-title>Goals</mat-card-title>
     </mat-card-header>
     <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-      <h3>0 goal</h3>
+      <h3>{{ buildService.build.goal_count ? buildService.build.goal_count : '0' }} goal</h3>
     </mat-card-actions>
   </mat-card>
   <mat-card fxFlex="30" fxLayout="column">

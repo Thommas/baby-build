@@ -16,6 +16,7 @@ const Child = `
     birthdate: String
     gender: String
     gamification: Gamification
+    goal_count: Int
   }
   type Query {
     children: [Child]

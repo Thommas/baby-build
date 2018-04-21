@@ -10,7 +10,7 @@ import * as db from './dynamo';
 
 export async function incrementCount(tableName, id, field): Promise<any> {
   const getParams: any = {
-    tableName,
+    TableName: tableName,
     Key: {
       id
     },
@@ -23,12 +23,12 @@ export async function incrementCount(tableName, id, field): Promise<any> {
   };
 
   const updateParams: any = {
-    tableName,
+    TableName: tableName,
     Key: {
       id: existingItem.id,
     },
     ExpressionAttributeValues: {
-      [`:${field}`]: args.field,
+      [`:${field}`]: args[field],
     },
     UpdateExpression: `SET ${field} = :${field}`,
     ReturnValues: 'ALL_NEW',

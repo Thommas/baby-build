@@ -14,6 +14,7 @@ export const GetBuilds = gql`
       id
       title
       description
+      goal_count
       gamification {
         xp
         lvl
@@ -28,10 +29,7 @@ export const GetBuild = gql`
       id
       title
       description
-      quests {
-        id
-        title
-      }
+      goal_count
       gamification {
         xp
         lvl

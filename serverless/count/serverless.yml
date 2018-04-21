@@ -5,10 +5,12 @@ plugins:
 
 custom:
   stage: ${opt:stage, self:provider.stage}
+  buildTable: pathofchild-graphql-${self:custom.stage}-build
+  userTable: pathofchild-graphql-${self:custom.stage}-user
   buildTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.BuildTableStreamArn}
   childTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.ChildTableStreamArn}
-  gamificationTable: pathofchild-graphql-${self:custom.stage}-gamification
-  whitelistItemTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.WhitelistItemTableStreamArn}
+  favoriteTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.FavoriteTableStreamArn}
+  goalTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.GoalTableStreamArn}
   secrets: ${file(secrets.yml):${self:custom.stage}}
 
 package:
@@ -36,7 +38,8 @@ provider:
         - dynamodb:ListStreams
       Resource: arn:aws:dynamodb:${self:provider.region}:*:*
   environment:
-      GAMIFICATION_TABLE: ${self:custom.gamificationTable}
+      BUILD_TABLE: ${self:custom.buildTable}
+      USER_TABLE: ${self:custom.userTable}
 
 functions:
   build:
@@ -51,9 +54,15 @@ functions:
       - stream:
           type: dynamodb
           arn: ${self:custom.childTableStreamArn}
-  whitelistItem:
-    handler: lib/handler.whitelistItem
+  favorite:
+    handler: lib/handler.favorite
     events:
       - stream:
           type: dynamodb
-          arn: ${self:custom.whitelistItemTableStreamArn}
+          arn: ${self:custom.favoriteTableStreamArn}
+  goal:
+    handler: lib/handler.goal
+    events:
+      - stream:
+          type: dynamodb
+          arn: ${self:custom.goalTableStreamArn}
