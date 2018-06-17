@@ -6,9 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dbBuild from '../../dynamo/build';
 import * as dbChild from '../../dynamo/child';
-import * as dbGamification from '../../dynamo/gamification';
 
 export default {
   Query: {
@@ -19,8 +17,5 @@ export default {
     createChild: (_, args, context) => dbChild.createChild(args, context.user_id),
     updateChild: (_, args, context) => dbChild.updateChild(args, context.user_id),
     deleteChild: (_, args, context) => dbChild.deleteChild(args, context.user_id),
-  },
-  Child: {
-    gamification: (child, args, context) => dbGamification.getGamification('child', child.id),
-  },
+  }
 };

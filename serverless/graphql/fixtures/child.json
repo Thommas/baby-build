@@ -3,24 +3,28 @@
     "id": "1",
     "created_at": 1521053029000,
     "updated_at": 1521053029000,
+    "born_at": 1519493384000,
     "user_id": "auth0|5a773beebfd2511753f2c9c0",
     "gender": "m",
     "firstname": "Leo",
     "middlenames": "Gerard Nobu",
     "lastname": "Bullier",
     "nickname": "Oji",
-    "birthdate": 1519493384000
+    "xp": 111,
+    "lvl": 1
   },
   {
     "id": "2",
     "created_at": 1521053029000,
     "updated_at": 1521053029000,
+    "born_at": 1519493384000,
     "user_id": "auth0|5a773beebfd2511753f2c9c0",
     "gender": "f",
     "firstname": "Misaki",
     "middlenames": "Martine Setsuko",
     "lastname": "Bullier",
     "nickname": "Hime",
-    "birthdate": 1519493384000
+    "xp": 111,
+    "lvl": 1
   }
 ]

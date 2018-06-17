@@ -7,13 +7,8 @@ plugins:
 
 custom:
   stage: ${opt:stage, self:provider.stage}
-  buildTable: ${self:service}-${self:custom.stage}-build
   childTable: ${self:service}-${self:custom.stage}-child
-  favoriteTable: ${self:service}-${self:custom.stage}-favorite
-  gamificationTable: ${self:service}-${self:custom.stage}-gamification
-  goalTable: ${self:service}-${self:custom.stage}-goal
-  questTable: ${self:service}-${self:custom.stage}-quest
-  rewardTable: ${self:service}-${self:custom.stage}-reward
+  taskTable: ${self:service}-${self:custom.stage}-task
   userTable: ${self:service}-${self:custom.stage}-user
   secrets: ${file(secrets.yml):${self:custom.stage}}
   serverless-offline:
@@ -27,20 +22,10 @@ custom:
     seed:
       test:
         sources:
-          - table: ${self:custom.buildTable}
-            sources: [./fixtures/build.json]
           - table: ${self:custom.childTable}
             sources: [./fixtures/child.json]
-          - table: ${self:custom.favoriteTable}
-            sources: [./fixtures/favorite.json]
-          - table: ${self:custom.gamificationTable}
-            sources: [./fixtures/gamification.json]
-          - table: ${self:custom.goalTable}
-            sources: [./fixtures/goal.json]
-          - table: ${self:custom.questTable}
-            sources: [./fixtures/quest.json]
-          - table: ${self:custom.rewardTable}
-            sources: [./fixtures/reward.json]
+          - table: ${self:custom.taskTable}
+            sources: [./fixtures/task.json]
           - table: ${self:custom.userTable}
             sources: [./fixtures/user.json]
 
@@ -73,13 +58,8 @@ provider:
     AUTH0_CLIENT_ID: ${self:custom.secrets.AUTH0_CLIENT_ID}
     AUTH0_JWKS_URI: ${self:custom.secrets.AUTH0_JWKS_URI}
     AUTH0_JWKS_KID: ${self:custom.secrets.AUTH0_JWKS_KID}
-    BUILD_TABLE: ${self:custom.buildTable}
     CHILD_TABLE: ${self:custom.childTable}
-    FAVORITE_TABLE: ${self:custom.favoriteTable}
-    GAMIFICATION_TABLE: ${self:custom.gamificationTable}
-    GOAL_TABLE: ${self:custom.goalTable}
-    QUEST_TABLE: ${self:custom.questTable}
-    REWARD_TABLE: ${self:custom.rewardTable}
+    TASK_TABLE: ${self:custom.taskTable}
     USER_TABLE: ${self:custom.userTable}
 
 functions:
@@ -96,22 +76,6 @@ functions:
 
 resources:
   Resources:
-    BuildTable:
-      Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
-          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.buildTable}
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
     ChildTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
@@ -128,7 +92,7 @@ resources:
         TableName: ${self:custom.childTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    FavoriteTable:
+    TaskTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -141,71 +105,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
           WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.favoriteTable}
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
-    GamificationTable:
-      Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
-          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.gamificationTable}
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
-    GoalTable:
-      Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
-          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.goalTable}
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
-    QuestTable:
-      Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
-          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.questTable}
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
-    RewardTable:
-      Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
-          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.rewardTable}
+        TableName: ${self:custom.taskTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
     UserTable:
@@ -225,48 +125,18 @@ resources:
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
   Outputs:
-    BuildTableStreamArn:
-      Description: The StreamArn for the Build Table
-      Value:
-        "Fn::GetAtt": [ BuildTable, StreamArn ]
-      Export:
-        Name: ${self:service}:${self:custom.stage}:BuildTableStreamArn
     ChildTableStreamArn:
       Description: The StreamArn for the Child Table
       Value:
         "Fn::GetAtt": [ ChildTable, StreamArn ]
       Export:
         Name: ${self:service}:${self:custom.stage}:ChildTableStreamArn
-    FavoriteTableStreamArn:
-      Description: The StreamArn for the Favorite Table
+    TaskTableStreamArn:
+      Description: The StreamArn for the Task Table
       Value:
-        "Fn::GetAtt": [ FavoriteTable, StreamArn ]
+        "Fn::GetAtt": [ TaskTable, StreamArn ]
       Export:
-        Name: ${self:service}:${self:custom.stage}:FavoriteTableStreamArn
-    GamificationTableStreamArn:
-      Description: The StreamArn for the Gamification Table
-      Value:
-        "Fn::GetAtt": [ GamificationTable, StreamArn ]
-      Export:
-        Name: ${self:service}:${self:custom.stage}:GamificationTableStreamArn
-    GoalTableStreamArn:
-      Description: The StreamArn for the Goal Table
-      Value:
-        "Fn::GetAtt": [ GoalTable, StreamArn ]
-      Export:
-        Name: ${self:service}:${self:custom.stage}:GoalTableStreamArn
-    QuestTableStreamArn:
-      Description: The StreamArn for the Quest Table
-      Value:
-        "Fn::GetAtt": [ QuestTable, StreamArn ]
-      Export:
-        Name: ${self:service}:${self:custom.stage}:QuestTableStreamArn
-    RewardTableStreamArn:
-      Description: The StreamArn for the Reward Table
-      Value:
-        "Fn::GetAtt": [ RewardTable, StreamArn ]
-      Export:
-        Name: ${self:service}:${self:custom.stage}:RewardTableStreamArn
+        Name: ${self:service}:${self:custom.stage}:TaskTableStreamArn
     UserTableStreamArn:
       Description: The StreamArn for the User Table
       Value:

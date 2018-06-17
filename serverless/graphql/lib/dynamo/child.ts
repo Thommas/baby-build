@@ -41,6 +41,8 @@ export function createChild(args, userId) {
       id: nanoid(12),
       created_at: new Date().getTime(),
       updated_at: new Date().getTime(),
+      xp: 0,
+      lvl: 1,
       ...args,
       user_id: userId
     },

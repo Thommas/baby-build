@@ -4,24 +4,25 @@ Roadmap
 Short term
 ----------
 
-- Improve goal and quest index
-- Implement count
-- Implement Rewards
-
-Mid term
---------
-
-- Implement Achievements based on count
-- Implement security checks in graphql lambda
-- Implement giving access to a child and its builds to other family members
-- Add more tooltips on UX
-- Refactor instructions on home based on conditions
-- Improve gamification lambda
-- Make unlockable items a core gamification component (calendar, categories, type of quests)
+- Remove build entity
+- Refactor with only one single view
+- Refactor quest/goal/reward/favorite as Task + type
+- Refactor gamification inside User/Child
+- Design task can have icon
+- Design task type "discovery"
+- Design task type "reward"
+- Design task type "skill"
 
 Long term
 ---------
 
+- Implement tech tree view for skills
+- Design task type "quest"
+- Implement Achievements based on count
+- Implement security checks in graphql lambda
+- Implement giving access to a child and its builds to other family members
+- Improve gamification lambda
+- Make unlockable items a core gamification component (calendar, categories, type of quests)
 - Build inspiration static page
 - Build roadmap static page
 - Add unit tests
@@ -37,8 +38,6 @@ Entities
 --------
 
 ### Rewards
-
-Need to create a list of small and big rewards.
 
 Rewards types:
 
@@ -84,12 +83,6 @@ Permanent reward system with gauge
 8) Eat oishii food
 
 9) The child can ask for a reward
-
-### Build
-
-A build is the following:
-- Goals > big rewards
-- Quests > small rewards
 
 ### Goal
 

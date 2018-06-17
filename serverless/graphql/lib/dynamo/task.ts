@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - DynamoDB - Favorite
+ * GraphQL - DynamoDB - Task
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,15 +9,14 @@
 import nanoid = require('nanoid');
 import * as db from './dynamo';
 
-const TableName = process.env.FAVORITE_TABLE;
+const TableName = process.env.TASK_TABLE;
 
-export function getFavorites(buildId, child_year, userId) {
+export function getTasks(childId, userId) {
   const params = {
     TableName,
-    FilterExpression: 'build_id = :build_id AND child_year = :child_year AND user_id = :user_id',
+    FilterExpression: 'child_id = :child_id AND user_id = :user_id',
     ExpressionAttributeValues: {
-      ':build_id': buildId,
-      ':child_year': child_year,
+      ':child_id': childId,
       ':user_id': userId
     },
   };
@@ -25,13 +24,14 @@ export function getFavorites(buildId, child_year, userId) {
   return db.scan(params);
 }
 
-export function createFavorite(args, userId) {
+export function createTask(args, userId) {
   const params = {
     TableName,
     Item: {
       id: nanoid(12),
       created_at: new Date().getTime(),
       updated_at: new Date().getTime(),
+      type: 'default',
       ...args,
       user_id: userId
     },
@@ -40,24 +40,24 @@ export function createFavorite(args, userId) {
   return db.createItem(params);
 }
 
-export function updateFavorite(args, userId) {
+export function updateTask(args, userId) {
   const params = {
     TableName,
     Key: {
       id: args.id,
     },
     ExpressionAttributeValues: {
-      ':title': args.title,
-      ':category': args.category
+      ':name': args.name,
+      ':description': args.description
     },
-    UpdateExpression: `SET title = :title, category = :category`,
+    UpdateExpression: `SET name = :name, description = :description`,
     ReturnValues: 'ALL_NEW',
   };
 
   return db.updateItem(params, args);
 }
 
-export function deleteFavorite(args, userId) {
+export function deleteTask(args, userId) {
   const params = {
     TableName,
     Key: {

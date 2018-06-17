@@ -40,6 +40,8 @@ export function createUser(userId) {
       id: userId,
       created_at: new Date().getTime(),
       updated_at: new Date().getTime(),
+      xp: 0,
+      lvl: 1
     },
   };
 
