@@ -204,8 +204,10 @@ export class AuthService {
     if (!this.isAuthenticatedObs) {
       this.isAuthenticatedObs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_EXPIRES_AT)
         .mergeMap((expiresAt: string) => {
-          const isAuthenticated = expiresAt && new Date().getTime() < parseInt(expiresAt, 10);
-          if (isAuthenticated) {
+          if (!expiresAt) {
+            return Observable.of(false);
+          }
+          if (new Date().getTime() < parseInt(expiresAt, 10)) {
             return Observable.of(true);
           }
           return this.renewToken();
