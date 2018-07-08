@@ -1,5 +1,5 @@
 /**
- * Path of child
+ * Path of build
  *
  * GraphQL - Resolvers - User
  *

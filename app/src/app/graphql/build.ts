@@ -15,10 +15,8 @@ export const GetBuilds = gql`
       title
       description
       goal_count
-      gamification {
-        xp
-        lvl
-      }
+      xp
+      lvl
     }
   }
 `;
@@ -30,10 +28,8 @@ export const GetBuild = gql`
       title
       description
       goal_count
-      gamification {
-        xp
-        lvl
-      }
+      xp
+      lvl
     }
   }
 `;
@@ -42,12 +38,10 @@ export const CreateBuildMutation = gql`
   mutation CreateBuild(
     $title: String!
     $description: String!
-    $child_id: String!
   ) {
     createBuild(
       title: $title
       description: $description
-      child_id: $child_id
     ) {
       id
     }

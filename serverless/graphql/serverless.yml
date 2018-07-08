@@ -1,4 +1,4 @@
-service: pathofchild-graphql
+service: pathofbuild-graphql
 
 plugins:
   - serverless-plugin-typescript
@@ -7,7 +7,7 @@ plugins:
 
 custom:
   stage: ${opt:stage, self:provider.stage}
-  childTable: ${self:service}-${self:custom.stage}-child
+  buildTable: ${self:service}-${self:custom.stage}-build
   taskTable: ${self:service}-${self:custom.stage}-task
   userTable: ${self:service}-${self:custom.stage}-user
   secrets: ${file(secrets.yml):${self:custom.stage}}
@@ -22,8 +22,8 @@ custom:
     seed:
       test:
         sources:
-          - table: ${self:custom.childTable}
-            sources: [./fixtures/child.json]
+          - table: ${self:custom.buildTable}
+            sources: [./fixtures/build.json]
           - table: ${self:custom.taskTable}
             sources: [./fixtures/task.json]
           - table: ${self:custom.userTable}
@@ -58,7 +58,7 @@ provider:
     AUTH0_CLIENT_ID: ${self:custom.secrets.AUTH0_CLIENT_ID}
     AUTH0_JWKS_URI: ${self:custom.secrets.AUTH0_JWKS_URI}
     AUTH0_JWKS_KID: ${self:custom.secrets.AUTH0_JWKS_KID}
-    CHILD_TABLE: ${self:custom.childTable}
+    BUILD_TABLE: ${self:custom.buildTable}
     TASK_TABLE: ${self:custom.taskTable}
     USER_TABLE: ${self:custom.userTable}
 
@@ -76,7 +76,7 @@ functions:
 
 resources:
   Resources:
-    ChildTable:
+    BuildTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -89,7 +89,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
           WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.childTable}
+        TableName: ${self:custom.buildTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
     TaskTable:
@@ -125,12 +125,12 @@ resources:
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
   Outputs:
-    ChildTableStreamArn:
-      Description: The StreamArn for the Child Table
+    BuildTableStreamArn:
+      Description: The StreamArn for the Build Table
       Value:
-        "Fn::GetAtt": [ ChildTable, StreamArn ]
+        "Fn::GetAtt": [ BuildTable, StreamArn ]
       Export:
-        Name: ${self:service}:${self:custom.stage}:ChildTableStreamArn
+        Name: ${self:service}:${self:custom.stage}:BuildTableStreamArn
     TaskTableStreamArn:
       Description: The StreamArn for the Task Table
       Value:

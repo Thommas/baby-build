@@ -1,5 +1,5 @@
 /**
- * Path of child
+ * Path of build
  *
  * GraphQL - Types - User
  *
@@ -9,7 +9,9 @@
 const User = `
   type User {
     id: String!
-    gamification: Gamification
+    current_build_id: String
+    xp: Int!
+    lvl: Int!
   }
   type Query {
     users: [User]

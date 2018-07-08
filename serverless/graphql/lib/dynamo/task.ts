@@ -1,5 +1,5 @@
 /**
- * Path of child
+ * Path of build
  *
  * GraphQL - DynamoDB - Task
  *
@@ -11,12 +11,12 @@ import * as db from './dynamo';
 
 const TableName = process.env.TASK_TABLE;
 
-export function getTasks(childId, userId) {
+export function getTasks(buildId, userId) {
   const params = {
     TableName,
-    FilterExpression: 'child_id = :child_id AND user_id = :user_id',
+    FilterExpression: 'build_id = :build_id AND user_id = :user_id',
     ExpressionAttributeValues: {
-      ':child_id': childId,
+      ':build_id': buildId,
       ':user_id': userId
     },
   };

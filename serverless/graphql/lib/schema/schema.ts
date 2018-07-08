@@ -1,5 +1,5 @@
 /**
- * Path of child
+ * Path of build
  *
  * GraphQL - Root Schema
  *
@@ -11,22 +11,22 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas';
 
 // Types
-import childType from './types/child';
+import buildType from './types/build';
 import taskType from './types/task';
 import userType from './types/user';
 
 // Resolvers
-import childResolver from './resolvers/child';
+import buildResolver from './resolvers/build';
 import taskResolver from './resolvers/task';
 import userResolver from './resolvers/user';
 
 const typeDefs = mergeTypes([
-  childType,
+  buildType,
   taskType,
   userType
 ]);
 const resolvers = mergeResolvers([
-  childResolver,
+  buildResolver,
   taskResolver,
   userResolver
 ]);

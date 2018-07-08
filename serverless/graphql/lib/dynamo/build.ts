@@ -1,7 +1,7 @@
 /**
- * Path of child
+ * Path of build
  *
- * GraphQL - DynamoDB - Child
+ * GraphQL - DynamoDB - Build
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,9 +9,9 @@
 import nanoid = require('nanoid');
 import * as db from './dynamo';
 
-const TableName = process.env.CHILD_TABLE;
+const TableName = process.env.BUILD_TABLE;
 
-export function getChildren(userId) {
+export function getBuilds(userId) {
   const params = {
     TableName,
     FilterExpression: 'user_id = :user_id',
@@ -21,7 +21,7 @@ export function getChildren(userId) {
   return db.scan(params);
 }
 
-export function getChildById(id, userId) {
+export function getBuildById(id, userId) {
   const params = {
     TableName,
     FilterExpression: 'user_id = :user_id',
@@ -34,7 +34,7 @@ export function getChildById(id, userId) {
   return db.get(params);
 }
 
-export function createChild(args, userId) {
+export function createBuild(args, userId) {
   const params = {
     TableName,
     Item: {
@@ -51,33 +51,24 @@ export function createChild(args, userId) {
   return db.createItem(params);
 }
 
-export function updateChild(args, userId) {
+export function updateBuild(args, userId) {
   const params = {
     TableName,
     Key: {
       id: args.id,
     },
     ExpressionAttributeValues: {
-      ':firstname': args.firstname,
-      ':middlenames': args.middlenames,
-      ':lastname': args.lastname,
-      ':nickname': args.nickname,
-      ':birthdate': args.birthdate,
-      ':gender': args.gender
+      ':title': args.title,
+      ':description': args.description
     },
-    UpdateExpression: `SET firstname = :firstname,
-    middlenames = :middlenames,
-    lastname = :lastname,
-    nickname = :nickname,
-    birthdate = :birthdate,
-    gender = :gender`,
+    UpdateExpression: `SET title = :title, description = :description`,
     ReturnValues: 'ALL_NEW',
   };
 
   return db.updateItem(params, args);
 }
 
-export function deleteChild(args, userId) {
+export function deleteBuild(args, userId) {
   const params = {
     TableName,
     Key: {

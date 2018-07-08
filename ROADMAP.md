@@ -4,6 +4,7 @@ Roadmap
 Short term
 ----------
 
+- Need to make user homepage his current build or build form if not already defined
 - Refactor with only one single view
 - Refactor quest/goal/reward/favorite as Task + type
 - Refactor gamification inside User/Child

@@ -7,41 +7,48 @@
  */
 
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/of';
 import { AuthService } from './auth.service';
 import { GetAuthUser } from '../graphql';
 
 @Injectable()
 export class UserService {
-  user: any;
-  sub: any;
+  private userObs: any;
 
-  constructor(private apollo: Apollo, private authService: AuthService) {
-    this.user = null;
-    this.sub = null;
-    authService.isAuthenticated.subscribe(
-      (isAuthenticated) => this.setupWatchQuery(isAuthenticated)
-    );
+  constructor(
+    private apollo: Apollo,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.userObs = null;
   }
 
-  setupWatchQuery(isAuthenticated) {
-    if (isAuthenticated && !this.sub) {
-      this.sub = this.watchAuthUser();
-    } else if (this.sub) {
-      this.user = null;
-      this.sub.unsubscribe();
-    }
-  }
-
-  watchAuthUser() {
-    return this.apollo.watchQuery<any>({
-      query: GetAuthUser
-    })
-      .valueChanges
-      .subscribe(({ data }) => {
-        if (data && data.authUser) {
-          this.user = data.authUser;
+  get user() {
+    if (!this.userObs) {
+      this.userObs = this.authService.isAuthenticated.mergeMap(isAuthenticated => {
+        if (!isAuthenticated) {
+          return Observable.of(null);
         }
+        return this.apollo.watchQuery<any>({
+          query: GetAuthUser
+        }).valueChanges;
       });
+    }
+    return this.userObs;
+  }
+
+  init() {
+    this.user.subscribe((response) => {
+      const authUser = response.data.authUser;
+      if (authUser.current_build_id) {
+        this.router.navigate([`${authUser.current_build_id}/task`]);
+      } else {
+        this.router.navigate([`build/create`]);
+      }
+    });
   }
 }

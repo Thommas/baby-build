@@ -1,5 +1,5 @@
 /**
- * Path of child
+ * Path of build
  *
  * GraphQL - Types - Task
  *
@@ -9,17 +9,17 @@
 const Task = `
   type Task {
     id: String!
-    child_id: String!
+    build_id: String!
     name: String!
     description: String!
     type: String!
   }
   type Query {
-    favorites(build_id: String!, child_year: Int!): [Task]
+    tasks(build_id: String!): [Task]
   }
   type Mutation {
     createTask(
-      child_id: String!
+      build_id: String!
       name: String!
       description: String!
     ): Task

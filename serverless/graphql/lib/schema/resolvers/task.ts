@@ -1,5 +1,5 @@
 /**
- * Path of child
+ * Path of build
  *
  * GraphQL - Resolvers - Task
  *
@@ -10,7 +10,7 @@ import * as dbTask from '../../dynamo/task';
 
 export default {
   Query: {
-    tasks: (_, args, context) => dbTask.getTasks(args.child_id, context.user_id),
+    tasks: (_, args, context) => dbTask.getTasks(args.build_id, context.user_id),
   },
   Mutation: {
     createTask: (_, args, context) => dbTask.createTask(args, context.user_id),

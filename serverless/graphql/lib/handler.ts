@@ -1,5 +1,5 @@
 /**
- * Path of child
+ * Path of build
  *
  * GraphQL - Handler
  *
@@ -10,11 +10,6 @@ import { graphqlLambda } from 'graphql-server-lambda';
 import schema from './schema/schema';
 import { verify } from 'jsonwebtoken';
 import * as jwks from 'jwks-rsa';
-
-const jwksClient = jwks({
-  strictSsl: true,
-  jwksUri: process.env.AUTH0_JWKS_URI
-});
 
 /**
  * Returns an IAM policy document for a given user and resource.
@@ -46,6 +41,7 @@ const buildIAMPolicy = (userId, effect, resource, context) => {
 };
 
 exports.auth = (event, context, callback) => {
+  console.log('process.env', process.env)
   console.log('event', event)
   if (!event.authorizationToken) {
     return callback('Unauthorized')
@@ -67,6 +63,11 @@ exports.auth = (event, context, callback) => {
     algorithms: ['RS256']
   }
   try {
+    const jwksClient = jwks({
+      strictSsl: true,
+      cache: true,
+      jwksUri: process.env.AUTH0_JWKS_URI
+    });
     return jwksClient.getSigningKey(process.env.AUTH0_JWKS_KID, (err, key) => {
       const signingKey = key.publicKey || key.rsaPublicKey || '';
       verify(tokenValue, signingKey, options, (verifyError: any, decoded: any) => {

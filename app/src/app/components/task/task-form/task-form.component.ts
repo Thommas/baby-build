@@ -26,7 +26,6 @@ import { BuildService } from '../../../services';
 export class TaskFormComponent implements OnChanges {
   @Output('success') success: EventEmitter<any> = new EventEmitter<any>();
   @Input() task: any;
-  child_year: number;
   formGroup: FormGroup;
   loading: boolean;
   categories: any = [
@@ -43,7 +42,6 @@ export class TaskFormComponent implements OnChanges {
 
   constructor(private apollo: Apollo, private buildService: BuildService) {
     this.task = {};
-    this.child_year = null;
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       title: new FormControl('', [Validators.required]),
@@ -77,19 +75,7 @@ export class TaskFormComponent implements OnChanges {
       mutation: task.id ? UpdateTaskMutation : CreateTaskMutation,
       variables: {
         ...task
-      },
-      refetchQueries: [
-        {
-          query: GetAuthUser,
-        },
-        {
-          query: GetTasks,
-          variables: {
-            build_id: this.buildService.build.id,
-            child_year: this.buildService.childYear
-          },
-        }
-      ],
+      }
     }).subscribe(
       res => this.success.emit({})
     );

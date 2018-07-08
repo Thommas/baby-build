@@ -12,10 +12,9 @@ export const GetAuthUser = gql`
   query GetAuthUser {
     authUser {
       id
-      gamification {
-        xp
-        lvl
-      }
+      current_build_id
+      xp
+      lvl
     }
   }
 `;

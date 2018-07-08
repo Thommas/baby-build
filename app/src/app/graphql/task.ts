@@ -9,8 +9,8 @@
 import gql from 'graphql-tag';
 
 export const GetTasks = gql`
-  query GetTasks($build_id: String!, $child_year: Int!) {
-    tasks(build_id: $build_id, child_year: $child_year) {
+  query GetTasks($build_id: String!) {
+    tasks(build_id: $build_id) {
       id
       title
       category

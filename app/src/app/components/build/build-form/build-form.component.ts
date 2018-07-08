@@ -76,32 +76,14 @@ export class BuildFormComponent implements OnInit {
   }
 
   submit() {
-    if (!this.childService.child) {
-      return;
-    }
     const build = clone(this.formGroup.value);
-    build.child_id = this.childService.child.id;
     this.apollo.mutate({
       mutation: build.id ? UpdateBuildMutation : CreateBuildMutation,
       variables: {
         ...build
-      },
-      refetchQueries: [
-        {
-          query: GetBuild,
-          variables: {
-            id: build.id,
-          }
-        },
-        {
-          query: GetBuilds,
-          variables: {
-            child_id: this.childService.child.id,
-          }
-        }
-      ]
+      }
     }).subscribe(
-      res => this.router.navigate(['/build'])
+      res => this.router.navigate([`${res.data.createBuild.id}/task`])
     );
   }
 }

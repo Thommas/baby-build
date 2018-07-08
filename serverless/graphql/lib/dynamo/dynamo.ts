@@ -1,5 +1,5 @@
 /**
- * Path of child
+ * Path of build
  *
  * GraphQL - DynamoDB
  *
@@ -12,7 +12,7 @@ import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
 
 if (process.env.LOCAL_DYNAMODB_ENDPOINT.length > 0) {
   const serviceConfigurationOptions: ServiceConfigurationOptions = {
-    region: 'local',
+    region: 'localhost',
     endpoint: process.env.LOCAL_DYNAMODB_ENDPOINT
   };
   AWS.config.update(serviceConfigurationOptions);
