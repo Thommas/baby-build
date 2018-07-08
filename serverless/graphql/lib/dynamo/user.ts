@@ -55,9 +55,9 @@ export function updateUser(args, userId) {
       id: args.id,
     },
     ExpressionAttributeValues: {
-      ':nickname': args.nickname
+      ':current_build_id': args.current_build_id
     },
-    UpdateExpression: `SET nickname = :nickname`,
+    UpdateExpression: `SET current_build_id = :current_build_id`,
     ReturnValues: 'ALL_NEW',
   };
 

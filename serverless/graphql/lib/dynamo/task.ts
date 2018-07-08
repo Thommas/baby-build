@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import nanoid = require('nanoid');
+import generate = require('nanoid/generate');
 import * as db from './dynamo';
 
 const TableName = process.env.TASK_TABLE;
@@ -28,7 +28,7 @@ export function createTask(args, userId) {
   const params = {
     TableName,
     Item: {
-      id: nanoid(12),
+      id: generate('0123456789', 20),
       created_at: new Date().getTime(),
       updated_at: new Date().getTime(),
       type: 'default',

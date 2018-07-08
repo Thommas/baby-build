@@ -9,12 +9,11 @@
 import gql from 'graphql-tag';
 
 export const GetBuilds = gql`
-  query GetBuilds($child_id: String!) {
-    builds(child_id: $child_id) {
+  query GetBuilds($user_id: String!) {
+    builds(user_id: $user_id) {
       id
-      title
+      name
       description
-      goal_count
       xp
       lvl
     }
@@ -25,9 +24,8 @@ export const GetBuild = gql`
   query GetBuild($id: ID!) {
     build(id: $id) {
       id
-      title
+      name
       description
-      goal_count
       xp
       lvl
     }
@@ -36,11 +34,11 @@ export const GetBuild = gql`
 
 export const CreateBuildMutation = gql`
   mutation CreateBuild(
-    $title: String!
+    $name: String!
     $description: String!
   ) {
     createBuild(
-      title: $title
+      name: $name
       description: $description
     ) {
       id
@@ -51,12 +49,12 @@ export const CreateBuildMutation = gql`
 export const UpdateBuildMutation = gql`
   mutation UpdateBuild(
     $id: ID!
-    $title: String!
+    $name: String!
     $description: String!
   ) {
     updateBuild(
       id: $id
-      title: $title
+      name: $name
       description: $description
     ) {
       id

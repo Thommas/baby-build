@@ -39,12 +39,12 @@ export class BuildFormComponent implements OnInit {
   ) {
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
-      title: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required])
     });
     this.formGroup.setValue({
       id: null,
-      title: null,
+      name: null,
       description: null
     });
   }
@@ -68,7 +68,7 @@ export class BuildFormComponent implements OnInit {
           this.loading = loading;
           this.formGroup.setValue({
             id: data.build.id,
-            title: data.build.title,
+            name: data.build.name,
             description: data.build.description
           });
         });

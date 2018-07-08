@@ -12,8 +12,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
-import { GetTasks, DeleteTask } from '../../../graphql';
+import { GetTasks, GetBuild } from '../../../graphql';
 import { BuildService } from '../../../services';
+import { UserService } from '../../../services';
 
 @Component({
   selector: 'app-task-index-cmp',
@@ -29,13 +30,32 @@ export class TaskIndexComponent implements OnInit {
     private router: Router,
     private apollo: Apollo,
     private buildService: BuildService,
+    private userService: UserService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.getTasks(params.build_id);
+      this.getBuild(params.build_id);
     });
+  }
+
+  getBuild(buildId: string) {
+    this.loading = true;
+    this.apollo.watchQuery<any>({
+      query: GetBuild,
+      variables: {
+        id: buildId
+      }
+    })
+      .valueChanges
+      .subscribe(
+        ({ data, loading }) => {
+          this.userService.setCurrentBuildId(buildId);
+          this.getTasks(buildId);
+        },
+        (e) => console.log(['/page-not-found'])
+      )
   }
 
   getTasks(buildId: string) {
@@ -52,7 +72,7 @@ export class TaskIndexComponent implements OnInit {
           this.loading = loading;
           this.tasks = data.tasks;
         },
-        (e) => this.router.navigate(['/page-not-found'])
+        (e) => console.log('error while loading tasks', e)
       )
   }
 }

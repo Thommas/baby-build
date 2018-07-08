@@ -12,24 +12,21 @@ export const GetTasks = gql`
   query GetTasks($build_id: String!) {
     tasks(build_id: $build_id) {
       id
-      title
-      category
+      name
+      description
     }
   }
 `;
 
 export const CreateTaskMutation = gql`
   mutation CreateTask(
-    $title: String!
-    $category: String!
+    $name: String!
+    $description: String
     $build_id: String!
-    $child_year: Int!
   ) {
     createTask(
-      title: $title
-      category: $category
+      name: $name
       build_id: $build_id
-      child_year: $child_year
     ) {
       id
     }
@@ -39,13 +36,12 @@ export const CreateTaskMutation = gql`
 export const UpdateTaskMutation = gql`
   mutation UpdateTask(
     $id: ID!
-    $title: String!
-    $category: String!
+    $name: String!
+    $description: String
   ) {
     updateTask(
       id: $id
-      title: $title
-      category: $category
+      name: $name
     ) {
       id
     }

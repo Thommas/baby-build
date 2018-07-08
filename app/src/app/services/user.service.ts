@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/of';
 import { AuthService } from './auth.service';
-import { GetAuthUser } from '../graphql';
+import { GetAuthUser, UpdateUserMutation } from '../graphql';
 
 @Injectable()
 export class UserService {
@@ -50,5 +50,18 @@ export class UserService {
         this.router.navigate([`build/create`]);
       }
     });
+  }
+
+  setCurrentBuildId(buildId: string) {
+    this.user.mergeMap((response) => {
+      const authUser = response.data.authUser;
+      return this.apollo.mutate({
+        mutation: UpdateUserMutation,
+        variables: {
+          id: authUser.id,
+          current_build_id: buildId
+        }
+      })
+    }).subscribe();
   }
 }

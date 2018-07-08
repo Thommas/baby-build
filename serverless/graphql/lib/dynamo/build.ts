@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import nanoid = require('nanoid');
+import generate = require('nanoid/generate');
 import * as db from './dynamo';
 
 const TableName = process.env.BUILD_TABLE;
@@ -38,7 +38,7 @@ export function createBuild(args, userId) {
   const params = {
     TableName,
     Item: {
-      id: nanoid(12),
+      id: generate('0123456789', 20),
       created_at: new Date().getTime(),
       updated_at: new Date().getTime(),
       xp: 0,
@@ -58,10 +58,10 @@ export function updateBuild(args, userId) {
       id: args.id,
     },
     ExpressionAttributeValues: {
-      ':title': args.title,
+      ':name': args.name,
       ':description': args.description
     },
-    UpdateExpression: `SET title = :title, description = :description`,
+    UpdateExpression: `SET name = :name, description = :description`,
     ReturnValues: 'ALL_NEW',
   };
 

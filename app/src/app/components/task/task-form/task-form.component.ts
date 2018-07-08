@@ -44,12 +44,12 @@ export class TaskFormComponent implements OnChanges {
     this.task = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
-      title: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
     });
     this.formGroup.setValue({
       id: null,
-      title: '',
+      name: '',
       category: 'activity'
     });
   }
@@ -58,7 +58,7 @@ export class TaskFormComponent implements OnChanges {
     if (!isEmpty(this.task)) {
       this.formGroup.setValue({
         id: this.task.id,
-        title: this.task.title,
+        name: this.task.name,
         category: this.task.category
       });
     }
@@ -70,7 +70,6 @@ export class TaskFormComponent implements OnChanges {
     }
     const task = clone(this.formGroup.value);
     task.build_id = this.buildService.build.id;
-    task.child_year = this.buildService.childYear;
     this.apollo.mutate({
       mutation: task.id ? UpdateTaskMutation : CreateTaskMutation,
       variables: {

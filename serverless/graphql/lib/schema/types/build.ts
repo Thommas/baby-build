@@ -9,7 +9,7 @@
 const Build = `
   type Build {
     id: String!
-    title: String!
+    name: String!
     description: String
     xp: Int!
     lvl: Int!
@@ -21,11 +21,11 @@ const Build = `
   }
   type Mutation {
     createBuild(
-      title: String!
+      name: String!
       description: String
     ): Build
     updateBuild(
-      title: String!
+      name: String!
       description: String
     ): Build
     deleteBuild(

@@ -18,3 +18,17 @@ export const GetAuthUser = gql`
     }
   }
 `;
+
+export const UpdateUserMutation = gql`
+  mutation UpdateUser(
+    $id: ID!
+    $current_build_id: String
+  ) {
+    updateUser(
+      id: $id
+      current_build_id: $current_build_id
+    ) {
+      id
+    }
+  }
+`;

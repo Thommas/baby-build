@@ -24,6 +24,7 @@ const User = `
     ): User
     updateUser(
       id: ID!
+      current_build_id: String
     ): User
     deleteUser(
       id: ID!
