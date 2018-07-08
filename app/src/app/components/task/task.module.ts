@@ -19,9 +19,10 @@ import {
 } from '@angular/material';
 
 import {
-  TaskEditComponent,
   TaskFormComponent,
-  TaskIndexComponent
+  TaskIndexComponent,
+  TaskShowComponent,
+  routing
 } from './';
 
 @NgModule({
@@ -34,20 +35,17 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    routing
   ],
   exports: [
-    TaskEditComponent,
-    TaskFormComponent,
-    TaskIndexComponent
+    TaskIndexComponent,
+    TaskShowComponent
   ],
   declarations: [
-    TaskEditComponent,
     TaskFormComponent,
-    TaskIndexComponent
-  ],
-  entryComponents: [
-    TaskEditComponent
+    TaskIndexComponent,
+    TaskShowComponent
   ]
 })
 export class TaskModule {

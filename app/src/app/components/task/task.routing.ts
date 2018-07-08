@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Home
+ * Component - User
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,12 +9,12 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { HomeComponent } from './home/home.component';
+import { TaskIndexComponent } from './task-index/task-index.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
+    path: ':build_id/task',
+    component: TaskIndexComponent,
     canActivate: [AuthGuardService]
   }
 ];

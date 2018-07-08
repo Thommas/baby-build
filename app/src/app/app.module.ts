@@ -37,7 +37,7 @@ import { AppComponent } from './app.component';
 import { BuildModule } from './components/build/build.module';
 import { ChildModule } from './components/child/child.module';
 import { HeaderModule } from './components/header/header.module';
-import { HomeModule } from './components/home/home.module';
+import { TaskModule } from './components/task/task.module';
 import { UserModule } from './components/user/user.module';
 import { SecurityModule } from './components/security/security.module';
 import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
@@ -91,7 +91,7 @@ export function createTranslateLoader(http: HttpClient) {
     BuildModule,
     ChildModule,
     HeaderModule,
-    HomeModule,
+    TaskModule,
     UserModule,
     SecurityModule,
     PageNotFoundModule,

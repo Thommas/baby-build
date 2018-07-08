@@ -9,11 +9,11 @@
 import swal from 'sweetalert2';
 import { clone } from 'lodash';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import { GetTasks, DeleteTask } from '../../../graphql';
 import { BuildService } from '../../../services';
-import { TaskEditComponent } from '../task-edit/task-edit.component';
 
 @Component({
   selector: 'app-task-index-cmp',
@@ -23,73 +23,36 @@ import { TaskEditComponent } from '../task-edit/task-edit.component';
 export class TaskIndexComponent implements OnInit {
   loading: boolean;
   tasks: any;
-  child_year: number;
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private apollo: Apollo,
     private buildService: BuildService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.child_year = 1;
-    this.getTasks();
+    this.route.params.subscribe(params => {
+      this.getTasks(params.build_id);
+    });
   }
 
-  getTasks() {
+  getTasks(buildId: string) {
+    this.loading = true;
     this.apollo.watchQuery<any>({
       query: GetTasks,
       variables: {
-        build_id: this.buildService.build.id,
-        child_year: this.child_year
+        build_id: buildId
       }
     })
       .valueChanges
-      .subscribe(({ data, loading }) => {
-        this.loading = loading;
-        this.tasks = data.tasks;
-      });
-  }
-
-  editTask(task) {
-    const dialogRef = this.dialog.open(TaskEditComponent, {
-      data: {
-        task: task,
-        child_year: this.child_year
-      }
-    });
-  }
-
-  deleteTask(task) {
-    swal({
-      title: 'task.delete.title',
-      text: 'task.delete.text',
-      type: 'warning',
-      reverseButtons: true,
-      showCancelButton: true,
-      allowOutsideClick: false,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No'
-    }).then(() => {
-      this.confirmDeleteTask(task);
-    }).catch((reason) => {
-      // Nothing
-    });
-  }
-
-  confirmDeleteTask(task) {
-    this.apollo.mutate({
-      mutation: DeleteTask,
-      variables: {
-        id: task.id
-      },
-      refetchQueries: [{
-        query: GetTasks,
-        variables: {
-          build_id: this.buildService.build.id,
-          child_year: this.child_year
+      .subscribe(
+        ({ data, loading }) => {
+          this.loading = loading;
+          this.tasks = data.tasks;
         },
-      }],
-    }).subscribe();
+        (e) => this.router.navigate(['/page-not-found'])
+      )
   }
 }
