@@ -7,7 +7,7 @@
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ProgressService } from './progress.service';
 
 describe('ProgressService', () => {

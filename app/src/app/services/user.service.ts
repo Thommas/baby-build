@@ -9,9 +9,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/observable/of';
+import { Observable, of as observableOf } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { GetAuthUser, UpdateUserMutation } from '../graphql';
 
@@ -29,14 +28,14 @@ export class UserService {
 
   get user() {
     if (!this.userObs) {
-      this.userObs = this.authService.isAuthenticated.mergeMap(isAuthenticated => {
+      this.userObs = this.authService.isAuthenticated.pipe(flatMap(isAuthenticated => {
         if (!isAuthenticated) {
-          return Observable.of(null);
+          return observableOf(null);
         }
         return this.apollo.watchQuery<any>({
           query: GetAuthUser
         }).valueChanges;
-      });
+      }));
     }
     return this.userObs;
   }
@@ -53,7 +52,7 @@ export class UserService {
   }
 
   setCurrentBuildId(buildId: string) {
-    this.user.mergeMap((response) => {
+    this.user.pipe(flatMap((response: any) => {
       const authUser = response.data.authUser;
       return this.apollo.mutate({
         mutation: UpdateUserMutation,
@@ -62,6 +61,6 @@ export class UserService {
           current_build_id: buildId
         }
       })
-    }).subscribe();
+    })).subscribe();
   }
 }

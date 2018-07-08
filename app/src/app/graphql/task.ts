@@ -20,12 +20,9 @@ export const GetTasks = gql`
 
 export const CreateTaskMutation = gql`
   mutation CreateTask(
-    $name: String!
-    $description: String
     $build_id: String!
   ) {
     createTask(
-      name: $name
       build_id: $build_id
     ) {
       id
@@ -36,12 +33,13 @@ export const CreateTaskMutation = gql`
 export const UpdateTaskMutation = gql`
   mutation UpdateTask(
     $id: ID!
-    $name: String!
+    $name: String
     $description: String
   ) {
     updateTask(
       id: $id
       name: $name
+      description: $description
     ) {
       id
     }

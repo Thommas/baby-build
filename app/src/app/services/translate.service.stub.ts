@@ -7,11 +7,11 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { of as observableOf } from 'rxjs';
 
 @Injectable()
 export class TranslateServiceStub {
   public get() {
-    return Observable.of({});
+    return observableOf({});
   }
 }

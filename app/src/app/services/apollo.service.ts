@@ -13,9 +13,8 @@ import { HttpLink } from 'apollo-angular-link-http';
 import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { ProgressService } from './progress.service';
 import { environment } from '../../environments/environment';
@@ -49,14 +48,14 @@ export class ApolloService {
    */
   get middlewareLinkInstance(): ApolloLink {
     return setContext((_, { headers }) => {
-      return this.authService.token.map((token: string) => {
+      return this.authService.token.pipe(map((token: string) => {
         return {
           headers: {
             ...headers,
             authorization: `Bearer ${token}`
           }
         };
-      }).toPromise();
+      })).toPromise();
     });
   }
 }

@@ -12,7 +12,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
-import { GetTasks, GetBuild } from '../../../graphql';
+import { GetTasks, GetBuild, CreateTaskMutation } from '../../../graphql';
 import { BuildService } from '../../../services';
 import { UserService } from '../../../services';
 
@@ -24,6 +24,7 @@ import { UserService } from '../../../services';
 export class TaskIndexComponent implements OnInit {
   loading: boolean;
   tasks: any;
+  buildId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,38 +33,41 @@ export class TaskIndexComponent implements OnInit {
     private buildService: BuildService,
     private userService: UserService,
     private dialog: MatDialog
-  ) {}
+  ) {
+    this.buildId = null;
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.getBuild(params.build_id);
+      this.buildId = params.build_id;
+      this.getBuild();
     });
   }
 
-  getBuild(buildId: string) {
+  getBuild() {
     this.loading = true;
     this.apollo.watchQuery<any>({
       query: GetBuild,
       variables: {
-        id: buildId
+        id: this.buildId
       }
     })
       .valueChanges
       .subscribe(
         ({ data, loading }) => {
-          this.userService.setCurrentBuildId(buildId);
-          this.getTasks(buildId);
+          this.userService.setCurrentBuildId(this.buildId);
+          this.getTasks();
         },
         (e) => console.log(['/page-not-found'])
       )
   }
 
-  getTasks(buildId: string) {
+  getTasks() {
     this.loading = true;
     this.apollo.watchQuery<any>({
       query: GetTasks,
       variables: {
-        build_id: buildId
+        build_id: this.buildId
       }
     })
       .valueChanges
@@ -74,5 +78,24 @@ export class TaskIndexComponent implements OnInit {
         },
         (e) => console.log('error while loading tasks', e)
       )
+  }
+
+  addTask() {
+    if (!this.buildId) {
+      return;
+    }
+    const task = {
+      build_id: this.buildId
+    };
+    this.apollo.mutate({
+      mutation: CreateTaskMutation,
+      variables: {
+        build_id: this.buildId
+      }
+    }).subscribe();
+  }
+
+  addSection() {
+
   }
 }

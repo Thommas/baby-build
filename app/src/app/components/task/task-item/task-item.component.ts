@@ -19,38 +19,24 @@ import {
 import { BuildService } from '../../../services';
 
 @Component({
-  selector: 'app-task-form-cmp',
-  templateUrl: './task-form.component.html',
-  styleUrls: ['./task-form.component.scss']
+  selector: 'app-task-item-cmp',
+  templateUrl: './task-item.component.html',
+  styleUrls: ['./task-item.component.scss']
 })
-export class TaskFormComponent implements OnChanges {
-  @Output('success') success: EventEmitter<any> = new EventEmitter<any>();
+export class TaskItemComponent implements OnChanges {
   @Input() task: any;
   formGroup: FormGroup;
   loading: boolean;
-  categories: any = [
-    'activity',
-    'sport',
-    'book',
-    'movie',
-    'tvshow',
-    'anime',
-    'video',
-    'videogame',
-    'toy'
-  ];
 
   constructor(private apollo: Apollo, private buildService: BuildService) {
     this.task = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
-      name: new FormControl('', [Validators.required]),
-      category: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required])
     });
     this.formGroup.setValue({
       id: null,
-      name: '',
-      category: 'activity'
+      name: ''
     });
   }
 
@@ -58,8 +44,7 @@ export class TaskFormComponent implements OnChanges {
     if (!isEmpty(this.task)) {
       this.formGroup.setValue({
         id: this.task.id,
-        name: this.task.name,
-        category: this.task.category
+        name: this.task.name
       });
     }
   }
@@ -69,14 +54,11 @@ export class TaskFormComponent implements OnChanges {
       return;
     }
     const task = clone(this.formGroup.value);
-    task.build_id = this.buildService.build.id;
     this.apollo.mutate({
       mutation: task.id ? UpdateTaskMutation : CreateTaskMutation,
       variables: {
         ...task
       }
-    }).subscribe(
-      res => this.success.emit({})
-    );
+    }).subscribe();
   }
 }

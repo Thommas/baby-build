@@ -11,8 +11,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
+import { Observable, from } from 'rxjs';
 import { ApolloStub, RouterStub } from '../../../services';
 import { ChildFormComponent } from './child-form.component';
 

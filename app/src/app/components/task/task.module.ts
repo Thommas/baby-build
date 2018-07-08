@@ -19,7 +19,7 @@ import {
 } from '@angular/material';
 
 import {
-  TaskFormComponent,
+  TaskItemComponent,
   TaskIndexComponent,
   TaskShowComponent,
   routing
@@ -43,7 +43,7 @@ import {
     TaskShowComponent
   ],
   declarations: [
-    TaskFormComponent,
+    TaskItemComponent,
     TaskIndexComponent,
     TaskShowComponent
   ]

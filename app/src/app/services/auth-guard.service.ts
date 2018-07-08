@@ -10,9 +10,8 @@
 
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Observable, of as observableOf } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable()
@@ -27,16 +26,17 @@ export class AuthGuardService implements CanActivate {
    * Stores the current url to redirect user after login.
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.authService.isAuthenticated.map(
-      isAuthenticated => {
+    return this.authService.isAuthenticated.pipe(
+      map(isAuthenticated => {
         if (!isAuthenticated) {
           return this.authenticationFailed(route);
         }
         return true;
-      }
-    ).catch(e => {
-      return Observable.of(this.authenticationFailed(route));
-    });
+      }),
+      catchError(e => {
+        return observableOf(this.authenticationFailed(route));
+      })
+    );
   }
 
   /**

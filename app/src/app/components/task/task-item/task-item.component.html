@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+  <div>ICON</div>
+  <div>COMPLETE BUTTON</div>
+  <div>
+    <form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field>
+        <input matInput placeholder="Write a task name"
+               formControlName="name">
+      </mat-form-field>
+    </form>
+  </div>
+</div>

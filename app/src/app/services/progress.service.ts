@@ -7,13 +7,8 @@
  */
 
 import { EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/observable/timer';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Observable, Subscription, timer } from 'rxjs';
+import { catchError, map, take } from 'rxjs/operators';
 
 export class ProgressService {
   countChange: EventEmitter<number>;
@@ -37,9 +32,10 @@ export class ProgressService {
     }
     this.count++;
     this.countChange.emit(this.count);
-    return obs
-      .map((res) => this.handleProcessingResponse(res))
-      .catch((error) => this.handleProcessingError(error));
+    return obs.pipe(
+      map((res) => this.handleProcessingResponse(res)),
+      catchError((error) => this.handleProcessingError(error))
+    );
   }
 
   /**
@@ -70,7 +66,7 @@ export class ProgressService {
    * Setup a timer to increment progress
    */
   protected startTimer() {
-    this.timer = Observable.timer(100, 100).take(100);
+    this.timer = timer(100, 100).pipe(take(100));
     this.timerSubscription = this.timer.subscribe(
       x => {
         this.incrementProgress();

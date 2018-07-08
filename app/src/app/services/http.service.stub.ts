@@ -7,11 +7,11 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of as observableOf } from 'rxjs';
 
 @Injectable()
 export class HttpServiceStub {
   post(url: string, body: any): Observable<any> {
-    return Observable.of(true);
+    return observableOf(true);
   }
 }

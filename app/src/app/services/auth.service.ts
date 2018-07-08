@@ -11,15 +11,8 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/observable/forkJoin';
-import 'rxjs/add/observable/throw';
+import { Observable, of as observableOf, from, forkJoin } from 'rxjs';
+import { map, flatMap, take } from 'rxjs/operators';
 import * as jwt from 'jsonwebtoken';
 import { BrowserService } from './browser.service';
 import { DexieService } from './dexie.service';
@@ -67,11 +60,11 @@ export class AuthService {
    */
   get lock(): Observable<any> {
     if (this._lock) {
-      return Observable.of(this._lock);
+      return observableOf(this._lock);
     }
 
     if (!this.browserService.document) {
-      return Observable.of(null);
+      return observableOf(null);
     }
 
     return Observable.create(obs => {
@@ -122,7 +115,7 @@ export class AuthService {
       this.dexieService.setItem(AuthService.LOCAL_STORAGE_ID_TOKEN, authResult.idToken),
       this.dexieService.setItem(AuthService.LOCAL_STORAGE_EXPIRES_AT, expiresAt)
     ];
-    return Observable.forkJoin(obs, () => {
+    return forkJoin(obs, () => {
       // Nothing
     });
   }
@@ -132,7 +125,7 @@ export class AuthService {
    */
   refreshIsAuthenticated() {
     this.isAuthenticatedObs = null;
-    this.isAuthenticated.take(1).subscribe(() => {
+    this.isAuthenticated.pipe(take(1)).subscribe(() => {
       this.router.navigate(['']);
     });
   }
@@ -203,15 +196,15 @@ export class AuthService {
   get isAuthenticated(): Observable<boolean> {
     if (!this.isAuthenticatedObs) {
       this.isAuthenticatedObs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_EXPIRES_AT)
-        .mergeMap((expiresAt: string) => {
+        .pipe(flatMap((expiresAt: string) => {
           if (!expiresAt) {
-            return Observable.of(false);
+            return observableOf(false);
           }
           if (new Date().getTime() < parseInt(expiresAt, 10)) {
-            return Observable.of(true);
+            return observableOf(true);
           }
           return this.renewToken();
-        });
+        }));
     }
     return this.isAuthenticatedObs;
   }
@@ -221,9 +214,9 @@ export class AuthService {
    */
   renewToken(): Observable<boolean> {
     this.renewTokenInnerSubscriber = null;
-    return this.lock.mergeMap(lock => {
+    return this.lock.pipe(flatMap(lock => {
       if (!lock) {
-        return Observable.of(false);
+        return observableOf(false);
       }
       return Observable.create(obs => {
         if (this.renewTokenInnerSubscriber) {
@@ -241,6 +234,6 @@ export class AuthService {
           }
         });
       });
-    });
+    }));
   }
 }

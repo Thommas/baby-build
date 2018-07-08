@@ -11,9 +11,9 @@ import { TestBed, async } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { ApolloStub, BuildService } from '../../../services';
-import { TaskFormComponent } from './task-form.component';
+import { TaskItemComponent } from './task-item.component';
 
-describe('TaskFormComponent', () => {
+describe('TaskItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
@@ -24,7 +24,7 @@ describe('TaskFormComponent', () => {
         ReactiveFormsModule
       ],
       declarations: [
-        TaskFormComponent
+        TaskItemComponent
       ],
       providers: [
         { provide: Apollo, useClass: ApolloStub },
@@ -33,7 +33,7 @@ describe('TaskFormComponent', () => {
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(TaskFormComponent);
+    const fixture = TestBed.createComponent(TaskItemComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

@@ -7,7 +7,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of as observableOf } from 'rxjs';
 
 @Injectable()
 export class ApolloStub {
@@ -16,7 +16,7 @@ export class ApolloStub {
   }
   watchQuery() {
     return {
-      valueChanges: Observable.of(true)
+      valueChanges: observableOf(true)
     };
   }
 }

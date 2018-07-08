@@ -10,8 +10,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
+import { Observable, from } from 'rxjs';
 import { ApolloStub, RouterStub } from '../../../services';
 import { BuildShowComponent } from './build-show.component';
 

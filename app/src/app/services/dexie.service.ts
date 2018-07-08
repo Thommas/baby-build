@@ -8,9 +8,8 @@
 
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/observable/of';
+import { Observable, of as observableOf, from } from 'rxjs';
+import { map } from 'rxjs/operators';
 import Dexie from 'dexie';
 import { environment } from '../../environments/environment';
 
@@ -41,10 +40,10 @@ export class DexieService {
    */
   getItem(key: string): Observable<any> {
     if (this.db) {
-      return Observable.fromPromise(this.keyValuePairsTable.get(key))
-        .map((item: any) => item ? item.value : null);
+      return from(this.keyValuePairsTable.get(key))
+        .pipe(map((item: any) => item ? item.value : null));
     }
-    return Observable.of(false);
+    return observableOf(false);
   }
 
   /**
@@ -52,9 +51,9 @@ export class DexieService {
    */
   setItem(key: string, value: string): Observable<any> {
     if (this.db) {
-      return Observable.fromPromise(this.keyValuePairsTable.put({ key, value }));
+      return from(this.keyValuePairsTable.put({ key, value }));
     }
-    return Observable.of(false);
+    return observableOf(false);
   }
 
   /**
@@ -62,8 +61,8 @@ export class DexieService {
    */
   clearKeyValueStoreTable(): Observable<any> {
     if (this.db) {
-      return Observable.fromPromise(this.keyValuePairsTable.clear());
+      return from(this.keyValuePairsTable.clear());
     }
-    return Observable.of(false);
+    return observableOf(false);
   }
 }
