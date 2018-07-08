@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApolloModule } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { Apollo } from 'apollo-angular';
@@ -22,7 +23,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDividerModule,
   MatIconModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatInputModule,
   MatMenuModule,
   MatProgressBarModule,
   MatSidenavModule,
@@ -34,11 +39,15 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
-import { FooterModule } from './components/footer/footer.module';
-import { HeaderModule } from './components/header/header.module';
-import { HomeModule } from './components/home/home.module';
-import { StaticModule } from './components/static/static.module';
-import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
+import {
+  BrandingComponent,
+  ContactComponent,
+  FooterComponent,
+  HeaderComponent,
+  HomeComponent,
+  TermsComponent,
+  PageNotFoundComponent
+} from './components';
 import {
   AngularticsService,
   BrowserService,
@@ -54,7 +63,14 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BrandingComponent,
+    ContactComponent,
+    FooterComponent,
+    HeaderComponent,
+    HomeComponent,
+    TermsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'path-of-child' }),
@@ -69,22 +85,23 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     routing,
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
+    MatDividerModule,
     MatIconModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatInputModule,
     MatMenuModule,
     MatProgressBarModule,
     MatSidenavModule,
     MatToolbarModule,
     MatTooltipModule,
-    FooterModule,
-    HeaderModule,
-    HomeModule,
-    StaticModule,
-    PageNotFoundModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
   ],
   providers: [

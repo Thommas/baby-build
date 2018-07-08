@@ -1,14 +1,14 @@
 /**
  * Path of child
  *
- * Component - Static - Branding
+ * Component - Branding
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SeoService } from '../../../services';
+import { SeoService } from '../../services';
 
 @Component({
   selector: 'app-static-branding',

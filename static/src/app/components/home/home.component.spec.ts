@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Home - Home Parent
+ * Component - Home
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,21 +9,19 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import {
-  AuthService,
-  AuthServiceStub,
   SeoService,
   SeoServiceStub
-} from '../../../services';
-import { HomeAnonymousComponent } from './home-anonymous.component';
+} from '../../services';
+import { HomeComponent } from './home.component';
 
-describe('HomeAnonymousComponent', () => {
+describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
         NO_ERRORS_SCHEMA
       ],
       declarations: [
-        HomeAnonymousComponent
+        HomeComponent
       ],
       providers: [
         { provide: AuthService, useClass: AuthServiceStub },
@@ -33,7 +31,7 @@ describe('HomeAnonymousComponent', () => {
   }));
 
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(HomeAnonymousComponent);
+    const fixture = TestBed.createComponent(HomeComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

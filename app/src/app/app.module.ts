@@ -35,14 +35,11 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { BuildModule } from './components/build/build.module';
-import { CalendarModule } from './components/calendar/calendar.module';
 import { ChildModule } from './components/child/child.module';
-import { FooterModule } from './components/footer/footer.module';
 import { HeaderModule } from './components/header/header.module';
 import { HomeModule } from './components/home/home.module';
 import { UserModule } from './components/user/user.module';
 import { SecurityModule } from './components/security/security.module';
-import { StaticModule } from './components/static/static.module';
 import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
 import {
   AngularticsService,
@@ -92,14 +89,11 @@ export function createTranslateLoader(http: HttpClient) {
     MatToolbarModule,
     MatTooltipModule,
     BuildModule,
-    CalendarModule,
     ChildModule,
-    FooterModule,
     HeaderModule,
     HomeModule,
     UserModule,
     SecurityModule,
-    StaticModule,
     PageNotFoundModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
   ],

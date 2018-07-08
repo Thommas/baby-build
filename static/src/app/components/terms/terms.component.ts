@@ -1,13 +1,13 @@
 /**
  * Path of child
  *
- * Component - Static - Terms
+ * Component - Terms
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { Component, OnInit } from '@angular/core';
-import { SeoService } from '../../../services';
+import { SeoService } from '../../services';
 
 @Component({
   selector: 'app-static-terms-cmp',

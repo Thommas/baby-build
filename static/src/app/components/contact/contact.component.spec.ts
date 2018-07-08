@@ -17,7 +17,7 @@ import {
   HttpServiceStub,
   SeoService,
   SeoServiceStub
-} from '../../../services';
+} from '../../services';
 import { ContactComponent } from './contact.component';
 
 describe('ContactComponent', () => {

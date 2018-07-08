@@ -11,12 +11,16 @@ import { Routes, RouterModule } from '@angular/router';
 import {
   BrandingComponent,
   ContactComponent,
-  KitchenComponent,
+  HomeComponent,
   TermsComponent,
   PageNotFoundComponent
 } from './components';
 
 const appRoutes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'branding',
     component: BrandingComponent
@@ -24,10 +28,6 @@ const appRoutes: Routes = [
   {
     path: 'contact',
     component: ContactComponent
-  },
-  {
-    path: 'kitchen',
-    component: KitchenComponent
   },
   {
     path: 'terms',

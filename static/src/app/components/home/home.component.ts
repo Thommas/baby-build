@@ -1,22 +1,21 @@
 /**
  * Path of child
  *
- * Component - Home - Home Parent
+ * Component - Home
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthService, SeoService } from '../../../services';
+import { SeoService } from '../../services';
 
 @Component({
-  selector: 'app-home-anonymous-cmp',
-  templateUrl: './home-anonymous.component.html',
-  styleUrls: ['./home-anonymous.component.scss']
+  selector: 'app-home-cmp',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class HomeAnonymousComponent implements OnInit {
+export class HomeComponent implements OnInit {
   constructor(
-    public authService: AuthService,
     private seoService: SeoService
   ) {}
 

@@ -7,7 +7,7 @@
  */
 
 import { Component, Inject, LOCALE_ID } from '@angular/core';
-import { LocaleService } from '../../../services';
+import { LocaleService } from '../../services';
 
 @Component({
   selector: 'app-footer-cmp',

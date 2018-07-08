@@ -13,7 +13,7 @@ import {
   BrowserServiceStub,
   LocaleService,
   LocaleServiceStub
-} from '../../../services';
+} from '../../services';
 import { FooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {

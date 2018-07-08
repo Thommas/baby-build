@@ -8,7 +8,6 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { AuthService, AuthServiceStub } from '../../../services';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -21,7 +20,6 @@ describe('HeaderComponent', () => {
         HeaderComponent
       ],
       providers: [
-        { provide: AuthService, useClass: AuthServiceStub }
       ]
     }).compileComponents();
   }));

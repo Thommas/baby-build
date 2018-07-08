@@ -31,9 +31,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import {
   routing,
-  HomeComponent,
-  HomeAnonymousComponent,
-  HomeParentComponent
+  HomeComponent
 } from './';
 
 @NgModule({
@@ -60,9 +58,7 @@ import {
     MatTooltipModule
   ],
   declarations: [
-    HomeComponent,
-    HomeAnonymousComponent,
-    HomeParentComponent
+    HomeComponent
   ]
 })
 export class HomeModule {

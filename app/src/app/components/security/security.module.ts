@@ -14,7 +14,8 @@ import { AuthService } from '../../services';
 
 import {
   routing,
-  CallbackComponent
+  CallbackComponent,
+  LoginComponent
 } from './';
 
 @NgModule({
@@ -24,7 +25,8 @@ import {
     routing
   ],
   declarations: [
-    CallbackComponent
+    CallbackComponent,
+    LoginComponent
   ],
   providers: [
     AuthService

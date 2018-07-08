@@ -11,9 +11,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import {
   AngularticsService,
-  AuthService,
   BrowserService,
-  ProgressService,
   LocaleService
 } from './services';
 
@@ -28,16 +26,13 @@ export class AppComponent implements OnInit {
    */
   constructor(
     public router: Router,
-    private authService: AuthService,
     private browserService: BrowserService,
     private localeService: LocaleService,
-    public progressService: ProgressService,
     private angularticsService: AngularticsService,
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
   ) {}
 
   ngOnInit() {
-    this.authService.init();
     this.angularticsService.init();
     this.localeService.init();
 

@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Shared - Page Not Found
+ * Component - Page Not Found
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

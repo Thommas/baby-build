@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Static - Contact
+ * Component - Contact
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -15,8 +15,8 @@ import {
   HttpService,
   GoogleRecaptchaService,
   SeoService
-} from '../../../services';
-import { environment } from '../../../../environments/environment';
+} from '../../services';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-static-contact-cmp',

@@ -2,10 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.0.0] - 2018-06-17
+## [1.0.0] - 2018-07-08
 
 ### Refactor
-- Task
+- Separated static and app
+- Task instead of Goal/Quest/Favorite
 - Gamification into User/Child
 
 ## [0.7.0] - 2018-04-21

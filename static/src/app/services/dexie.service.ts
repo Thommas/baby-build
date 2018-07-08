@@ -11,6 +11,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
 import Dexie from 'dexie';
 import { environment } from '../../environments/environment';
 

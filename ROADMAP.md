@@ -4,19 +4,16 @@ Roadmap
 Short term
 ----------
 
-- Remove build entity
 - Refactor with only one single view
 - Refactor quest/goal/reward/favorite as Task + type
 - Refactor gamification inside User/Child
-- Design task can have icon
-- Design task type "discovery"
-- Design task type "reward"
-- Design task type "skill"
 
 Long term
 ---------
 
 - Implement tech tree view for skills
+- Design skill can have icon
+- Design reward into task
 - Design task type "quest"
 - Implement Achievements based on count
 - Implement security checks in graphql lambda

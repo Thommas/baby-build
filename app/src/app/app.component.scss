@@ -14,7 +14,8 @@
 }
 
 .app-content {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 mat-progress-bar.loading-bar {

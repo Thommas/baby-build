@@ -6,9 +6,8 @@
     [value]="progressService.progress"
     [style.height]="progressService.progress === 0 ? '0' : '2px'">
   </mat-progress-bar>
-  <app-header-cmp></app-header-cmp>
+  <app-header-cmp *ngIf="authService.isAuthenticated | async"></app-header-cmp>
   <div class="router-content">
     <router-outlet></router-outlet>
   </div>
 </section>
-<app-footer-cmp></app-footer-cmp>

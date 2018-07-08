@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Static - Terms
+ * Component - Terms
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -11,7 +11,7 @@ import { TestBed, async } from '@angular/core/testing';
 import {
   SeoService,
   SeoServiceStub
-} from '../../../services';
+} from '../../services';
 import { TermsComponent } from './terms.component';
 
 describe('TermsComponent', () => {
