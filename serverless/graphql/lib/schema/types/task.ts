@@ -9,7 +9,7 @@
 const Task = `
   type Task {
     id: String!
-    name: String
+    label: String
     description: String
     build_id: String!
   }
@@ -22,7 +22,7 @@ const Task = `
     ): Task
     updateTask(
       id: ID!
-      name: String
+      label: String
       description: String
     ): Task
     deleteTask(

@@ -4,8 +4,10 @@
   <div>
     <form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field>
-        <input matInput placeholder="Write a task name"
-               formControlName="name">
+        <input #inputElement
+               matInput
+               placeholder="Write a task name"
+               formControlName="label">
       </mat-form-field>
     </form>
   </div>

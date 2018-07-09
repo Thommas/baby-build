@@ -1,10 +1,16 @@
-<div class="header">
-  <button mat-button (click)="addTask()" i18n>task_index.add_task</button>
-  <button mat-button (click)="addSection()" i18n>task_index.add_section</button>
-</div>
 <div class="container" fxLayout="column" fxLayoutAlign="start center">
-  <app-task-item-cmp
-    *ngFor="let task of tasks"
-    [task]="task"
-  ></app-task-item-cmp>
+  <div class="header">
+    <button mat-button (click)="addTask()" i18n>task_index.add_task</button>
+    <button mat-button (click)="addSection()" i18n>task_index.add_section</button>
+  </div>
+  <div class="container" fxLayout="column" fxLayoutAlign="start center">
+    <app-task-item-cmp
+      *ngFor="let task of tasks"
+      [task]="task"
+    ></app-task-item-cmp>
+  </div>
+</div>
+<div class="container" fxLayout="column" fxLayoutAlign="start center"
+     *ngIf="selectedTask">
+  <app-task-show-cmp></app-task-show-cmp>
 </div>

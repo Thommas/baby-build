@@ -41,8 +41,6 @@ const buildIAMPolicy = (userId, effect, resource, context) => {
 };
 
 exports.auth = (event, context, callback) => {
-  console.log('process.env', process.env)
-  console.log('event', event)
   if (!event.authorizationToken) {
     return callback('Unauthorized')
   }

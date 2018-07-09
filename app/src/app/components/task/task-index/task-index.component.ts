@@ -25,6 +25,7 @@ export class TaskIndexComponent implements OnInit {
   loading: boolean;
   tasks: any;
   buildId: string;
+  selectedTask: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +36,7 @@ export class TaskIndexComponent implements OnInit {
     private dialog: MatDialog
   ) {
     this.buildId = null;
+    this.selectedTask = null;
   }
 
   ngOnInit() {
@@ -91,7 +93,13 @@ export class TaskIndexComponent implements OnInit {
       mutation: CreateTaskMutation,
       variables: {
         build_id: this.buildId
-      }
+      },
+      refetchQueries: [{
+        query: GetTasks,
+        variables: {
+          build_id: this.buildId
+        }
+      }]
     }).subscribe();
   }
 

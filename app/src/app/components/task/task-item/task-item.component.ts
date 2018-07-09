@@ -9,6 +9,8 @@
 import { clone, isEmpty } from 'lodash';
 import { Component, Input, ViewChild, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { fromEvent } from 'rxjs';
+import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
   GetAuthUser,
@@ -25,6 +27,7 @@ import { BuildService } from '../../../services';
 })
 export class TaskItemComponent implements OnChanges {
   @Input() task: any;
+  @ViewChild('inputElement') inputElement: any;
   formGroup: FormGroup;
   loading: boolean;
 
@@ -32,32 +35,40 @@ export class TaskItemComponent implements OnChanges {
     this.task = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
-      name: new FormControl('', [Validators.required])
+      label: new FormControl('', [Validators.required])
     });
     this.formGroup.setValue({
       id: null,
-      name: ''
+      label: ''
     });
+  }
+
+  ngOnInit() {
+    fromEvent(this.inputElement.nativeElement, 'input').pipe(
+      map((e: KeyboardEvent) => e.target.value),
+      debounceTime(800),
+      distinctUntilChanged(),
+    ).subscribe(data => this.save(data));
   }
 
   ngOnChanges() {
     if (!isEmpty(this.task)) {
       this.formGroup.setValue({
         id: this.task.id,
-        name: this.task.name
+        label: this.task.label
       });
     }
   }
 
-  submit() {
+  save(label: string) {
     if (!this.formGroup.valid) {
       return;
     }
-    const task = clone(this.formGroup.value);
     this.apollo.mutate({
-      mutation: task.id ? UpdateTaskMutation : CreateTaskMutation,
+      mutation: this.task.id ? UpdateTaskMutation : CreateTaskMutation,
       variables: {
-        ...task
+        id: this.task.id ? this.task.id : undefined,
+        label: label
       }
     }).subscribe();
   }

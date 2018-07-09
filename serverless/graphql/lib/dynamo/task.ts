@@ -8,8 +8,34 @@
 
 import generate = require('nanoid/generate');
 import * as db from './dynamo';
+import * as dynamoose from 'dynamoose';
+
+declare var process : {
+  env: {
+    TASK_TABLE: string,
+    LOCAL_DYNAMODB_ENDPOINT: string
+  }
+}
 
 const TableName = process.env.TASK_TABLE;
+
+dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
+
+var Schema = dynamoose.Schema;
+
+var TaskSchema = new Schema({
+  id: {
+    type: String,
+  },
+  label: {
+    type: String,
+  },
+  description: {
+    type: String,
+  }
+});
+
+const Task = dynamoose.model(TableName, TaskSchema);
 
 export function getTasks(buildId, userId) {
   const params = {
@@ -41,20 +67,23 @@ export function createTask(args, userId) {
 }
 
 export function updateTask(args, userId) {
-  const params = {
-    TableName,
-    Key: {
-      id: args.id,
-    },
-    ExpressionAttributeValues: {
-      ':name': args.name,
-      ':description': args.description
-    },
-    UpdateExpression: `SET name = :name, description = :description`,
-    ReturnValues: 'ALL_NEW',
-  };
-
-  return db.updateItem(params, args);
+  return Task.get(args.id)
+    .then((task: any) => {
+      if (!task) {
+        throw new Error('Task not found');
+      }
+      if (args.name) {
+        task.name = args.name;
+      }
+      console.log('SAAAAVE');
+      return task.save();
+    })
+    .then(() => {
+      console.log('SAAAAVED');
+    })
+    .catch((e) => {
+      console.log('ERROR', e)
+    });
 }
 
 export function deleteTask(args, userId) {
