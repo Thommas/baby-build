@@ -4,11 +4,10 @@
   flex-direction: column;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  place-content: center center;
-  align-items: center;
+  place-content: stretch center;
   flex-direction: row;
-  height: 100%;
   padding-top: 20px;
+  flex: 1;
 }
 
 .header {
@@ -37,7 +36,6 @@
 .left-card {
   min-width: 405px;
   max-width: 1000px;
-  height: 100%;
   padding: 0;
 
   .mat-card-content {
@@ -49,7 +47,6 @@
   margin-left: 15px;
   min-width: 0px;
   max-width: 675px;
-  height: 100%;
   padding: 0;
 
   .mat-card-content {

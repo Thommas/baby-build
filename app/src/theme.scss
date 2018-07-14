@@ -61,6 +61,10 @@ $path-of-child-theme:   mat-light-theme($path-of-child-primary, $path-of-child-a
     height: 60px;
   }
 
+  mat-card-content {
+    height: 100%;
+  }
+
   mat-card-actions {
     height: 80px;
   }

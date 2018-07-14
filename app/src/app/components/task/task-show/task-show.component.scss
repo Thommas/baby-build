@@ -1,11 +1,5 @@
 :host {
-  display: flex;
-  box-sizing: border-box;
-  flex-direction: column;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  place-content: center space-around;
-  width: 100%;
+  padding: 0px 20px;
 }
 
 .mat-form-field input {
@@ -29,4 +23,13 @@ textarea {
 .mat-form-field input:hover,
 textarea:hover {
   border: 1px solid #d5dce0;
+}
+
+.description-container {
+  padding: 10px 0px;
+}
+
+.comment-form-container {
+  height: 107px;
+  padding: 10px 30px;
 }

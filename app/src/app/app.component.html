@@ -1,4 +1,4 @@
-<section class="app-content">
+<section class="app-content" fxLayout="column" fxLayoutAlign="start stretch">
   <mat-progress-bar
     class="loading-bar"
     color="accent"
@@ -7,7 +7,7 @@
     [style.height]="progressService.progress === 0 ? '0' : '2px'">
   </mat-progress-bar>
   <app-header-cmp *ngIf="authService.isAuthenticated | async"></app-header-cmp>
-  <div class="router-content">
+  <div class="router-content" fxFlex fxLayout="column">
     <router-outlet></router-outlet>
   </div>
 </section>

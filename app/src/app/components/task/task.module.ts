@@ -13,6 +13,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -34,6 +35,7 @@ import {
     FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
