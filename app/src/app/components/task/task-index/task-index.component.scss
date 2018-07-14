@@ -7,11 +7,17 @@
   place-content: center space-around;
   align-items: center;
   flex-direction: row;
+  height: 100%;
+  padding-top: 20px;
 }
 
 .header {
   color: grey;
   border-bottom: 1px solid #cccccc;
+
+  .mat-raised-button {
+    margin: 10px;
+  }
 }
 
 .row {
@@ -25,5 +31,27 @@
     button {
       display: block;
     }
+  }
+}
+
+.left-card {
+  min-width: 405px;
+  max-width: 1000px;
+  height: 100%;
+  padding: 0;
+
+  .mat-card-content {
+    padding: 10px;
+  }
+}
+
+.right-card {
+  min-width: 0px;
+  max-width: 675px;
+  height: 100%;
+  padding: 0;
+
+  .mat-card-content {
+    padding: 10px;
   }
 }

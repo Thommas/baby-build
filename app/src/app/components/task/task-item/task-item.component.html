@@ -1,12 +1,13 @@
 <div fxLayout="row" fxLayoutAlign="start center">
-  <div>ICON</div>
-  <div>COMPLETE BUTTON</div>
+  <button mat-mini-fab class="done">
+    <mat-icon>done</mat-icon>
+  </button>
   <div>
     <form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field>
         <input #inputElement
                matInput
-               placeholder="Write a task name"
+               [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write a task name'"
                formControlName="label">
       </mat-form-field>
     </form>

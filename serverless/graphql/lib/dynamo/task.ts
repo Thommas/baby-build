@@ -75,6 +75,9 @@ export function updateTask(args, userId) {
       if (args.label) {
         task.label = args.label;
       }
+      if (args.description) {
+        task.description = args.description;
+      }
       return task.save();
     });
 }

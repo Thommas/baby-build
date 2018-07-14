@@ -106,4 +106,8 @@ export class TaskIndexComponent implements OnInit {
   addSection() {
 
   }
+
+  selectTask(task) {
+    this.selectedTask = task;
+  }
 }

@@ -14,6 +14,7 @@ export const GetTasks = gql`
       id
       label
       description
+      buildId
     }
   }
 `;

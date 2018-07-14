@@ -7,13 +7,12 @@
  */
 
 import { clone, isEmpty } from 'lodash';
-import { Component, Input, ViewChild, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
-  GetAuthUser,
   CreateTaskMutation,
   UpdateTaskMutation,
   GetTasks

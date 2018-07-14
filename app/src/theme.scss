@@ -38,9 +38,6 @@ $path-of-child-theme:   mat-light-theme($path-of-child-primary, $path-of-child-a
     min-height: 68px;
     border-bottom: 1px solid #e1e1e1;
 
-    .container {
-      width: 1170px;
-    }
     a {
       margin-right: 20px;
       color: #1a1a1a;
@@ -64,11 +61,6 @@ $path-of-child-theme:   mat-light-theme($path-of-child-primary, $path-of-child-a
 
   mat-dialog-container {
     height: 80vh;
-  }
-
-  .container {
-    width: 1170px;
-    padding: 10px;
   }
 }
 

@@ -1,1 +1,14 @@
-Task show here
+<div>
+  <form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field>
+      <textarea
+        #inputElement
+        matInput
+        [placeholder]="this.formGroup.get('description').value && this.formGroup.get('description').value.length !== 0 ? '' : 'Description'"
+        formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div>
+  LOG LIST HERE
+</div>
