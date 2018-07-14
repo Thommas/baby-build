@@ -78,7 +78,7 @@ exports.auth = (event, context, callback) => {
         const userId = decoded.sub
         const effect = 'Allow'
         const resource = event.methodArn
-        const authorizerContext = { user_id: userId }
+        const authorizerContext = { userId: userId }
         return callback(null, buildIAMPolicy(userId, effect, resource, authorizerContext))
       })
     })
@@ -89,8 +89,8 @@ exports.auth = (event, context, callback) => {
 }
 
 exports.graphql = (event, context, callback) => {
-  console.log('userId', event.requestContext.authorizer.user_id);
-  const graphQLContext = { user_id: event.requestContext.authorizer.user_id };
+  console.log('userId', event.requestContext.authorizer.userId);
+  const graphQLContext = { userId: event.requestContext.authorizer.userId };
 
   const callbackFilter = (error, output) => {
     console.log('output', output)

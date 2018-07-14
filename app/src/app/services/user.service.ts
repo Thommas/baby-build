@@ -43,8 +43,8 @@ export class UserService {
   init() {
     this.user.subscribe((response) => {
       const authUser = response.data.authUser;
-      if (authUser.current_build_id) {
-        this.router.navigate([`${authUser.current_build_id}/task`]);
+      if (authUser.currentBuildId) {
+        this.router.navigate([`${authUser.currentBuildId}/task`]);
       } else {
         this.router.navigate([`build/create`]);
       }
@@ -58,7 +58,7 @@ export class UserService {
         mutation: UpdateUserMutation,
         variables: {
           id: authUser.id,
-          current_build_id: buildId
+          currentBuildId: buildId
         }
       })
     })).subscribe();

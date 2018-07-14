@@ -32,38 +32,38 @@ var TaskSchema = new Schema({
   },
   description: {
     type: String,
-  }
+  },
+  buildId: {
+    type: String,
+  },
+  userId: {
+    type: String,
+  },
+  type: {
+    type: String,
+  },
+}, {
+  timestamps: true
 });
 
 const Task = dynamoose.model(TableName, TaskSchema);
 
 export function getTasks(buildId, userId) {
   const params = {
-    TableName,
-    FilterExpression: 'build_id = :build_id AND user_id = :user_id',
-    ExpressionAttributeValues: {
-      ':build_id': buildId,
-      ':user_id': userId
-    },
+    buildId: {eq: buildId},
+    userId: {eq: userId}
   };
-
-  return db.scan(params);
+  return Task.scan(params).exec();
 }
 
 export function createTask(args, userId) {
-  const params = {
-    TableName,
-    Item: {
-      id: generate('0123456789', 20),
-      created_at: new Date().getTime(),
-      updated_at: new Date().getTime(),
-      type: 'default',
-      ...args,
-      user_id: userId
-    },
-  };
-
-  return db.createItem(params);
+  const task = new Task({
+    id: generate('0123456789', 20),
+    type: 'default',
+    userId: userId,
+    ...args
+  });
+  return task.save();
 }
 
 export function updateTask(args, userId) {
@@ -72,17 +72,10 @@ export function updateTask(args, userId) {
       if (!task) {
         throw new Error('Task not found');
       }
-      if (args.name) {
-        task.name = args.name;
+      if (args.label) {
+        task.label = args.label;
       }
-      console.log('SAAAAVE');
       return task.save();
-    })
-    .then(() => {
-      console.log('SAAAAVED');
-    })
-    .catch((e) => {
-      console.log('ERROR', e)
     });
 }
 

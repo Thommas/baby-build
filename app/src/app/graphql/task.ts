@@ -9,8 +9,8 @@
 import gql from 'graphql-tag';
 
 export const GetTasks = gql`
-  query GetTasks($build_id: String!) {
-    tasks(build_id: $build_id) {
+  query GetTasks($buildId: String!) {
+    tasks(buildId: $buildId) {
       id
       label
       description
@@ -20,10 +20,10 @@ export const GetTasks = gql`
 
 export const CreateTaskMutation = gql`
   mutation CreateTask(
-    $build_id: String!
+    $buildId: String!
   ) {
     createTask(
-      build_id: $build_id
+      buildId: $buildId
     ) {
       id
     }

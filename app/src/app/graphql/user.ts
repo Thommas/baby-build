@@ -12,7 +12,7 @@ export const GetAuthUser = gql`
   query GetAuthUser {
     authUser {
       id
-      current_build_id
+      currentBuildId
       xp
       lvl
     }
@@ -22,11 +22,11 @@ export const GetAuthUser = gql`
 export const UpdateUserMutation = gql`
   mutation UpdateUser(
     $id: ID!
-    $current_build_id: String
+    $currentBuildId: String
   ) {
     updateUser(
       id: $id
-      current_build_id: $current_build_id
+      currentBuildId: $currentBuildId
     ) {
       id
     }

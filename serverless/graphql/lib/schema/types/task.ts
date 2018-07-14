@@ -11,14 +11,16 @@ const Task = `
     id: String!
     label: String
     description: String
-    build_id: String!
+    type: String
+    userId: String!
+    buildId: String!
   }
   type Query {
-    tasks(build_id: String!): [Task]
+    tasks(buildId: String!): [Task]
   }
   type Mutation {
     createTask(
-      build_id: String!
+      buildId: String!
     ): Task
     updateTask(
       id: ID!

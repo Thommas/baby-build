@@ -10,12 +10,12 @@ import * as dbBuild from '../../dynamo/build';
 
 export default {
   Query: {
-    builds: (_, args, context) => dbBuild.getBuilds(context.user_id),
-    build: (_, args, context) => dbBuild.getBuildById(args.id, context.user_id),
+    builds: (_, args, context) => dbBuild.getBuilds(context.userId),
+    build: (_, args, context) => dbBuild.getBuildById(args.id, context.userId),
   },
   Mutation: {
-    createBuild: (_, args, context) => dbBuild.createBuild(args, context.user_id),
-    updateBuild: (_, args, context) => dbBuild.updateBuild(args, context.user_id),
-    deleteBuild: (_, args, context) => dbBuild.deleteBuild(args, context.user_id),
+    createBuild: (_, args, context) => dbBuild.createBuild(args, context.userId),
+    updateBuild: (_, args, context) => dbBuild.updateBuild(args, context.userId),
+    deleteBuild: (_, args, context) => dbBuild.deleteBuild(args, context.userId),
   }
 };

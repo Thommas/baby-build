@@ -7,11 +7,31 @@
  */
 
 require('dotenv').config();
-import { updateTask } from '../lib/dynamo/task'
+import {
+	getTasks,
+	createTask,
+	updateTask
+} from '../lib/dynamo/task'
 
 describe('Task', () => {
+  it('getTasks', (done) => {
+    getTasks('build-id-test', 'user-id-test').then((data: any) => {
+      done();
+    })
+  });
+
+  it('createTask', (done) => {
+  	const args = {
+  		label: 'test-label',
+  		description: 'test-description'
+  	};
+    createTask(args, 'user-id-test').then((data: any) => {
+      done();
+    })
+  });
+
   it('updateTask', (done) => {
-    updateTask({ id: '1' }, 'user-id').then((data: any) => {
+    updateTask({ id: 'test-id-test' }, 'user-id-test').then((data: any) => {
       done();
     })
   });

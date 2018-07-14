@@ -13,7 +13,7 @@ import { TaskIndexComponent } from './task-index/task-index.component';
 
 const routes: Routes = [
   {
-    path: ':build_id/task',
+    path: ':buildId/task',
     component: TaskIndexComponent,
     canActivate: [AuthGuardService]
   }

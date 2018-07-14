@@ -41,7 +41,7 @@ export class TaskIndexComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.buildId = params.build_id;
+      this.buildId = params.buildId;
       this.getBuild();
     });
   }
@@ -69,7 +69,7 @@ export class TaskIndexComponent implements OnInit {
     this.apollo.watchQuery<any>({
       query: GetTasks,
       variables: {
-        build_id: this.buildId
+        buildId: this.buildId
       }
     })
       .valueChanges
@@ -87,17 +87,17 @@ export class TaskIndexComponent implements OnInit {
       return;
     }
     const task = {
-      build_id: this.buildId
+      buildId: this.buildId
     };
     this.apollo.mutate({
       mutation: CreateTaskMutation,
       variables: {
-        build_id: this.buildId
+        buildId: this.buildId
       },
       refetchQueries: [{
         query: GetTasks,
         variables: {
-          build_id: this.buildId
+          buildId: this.buildId
         }
       }]
     }).subscribe();

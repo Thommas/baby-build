@@ -45,7 +45,7 @@ export class TaskItemComponent implements OnChanges {
 
   ngOnInit() {
     fromEvent(this.inputElement.nativeElement, 'input').pipe(
-      map((e: KeyboardEvent) => e.target.value),
+      map((e: { target: HTMLInputElement }) => e.target.value),
       debounceTime(800),
       distinctUntilChanged(),
     ).subscribe(data => this.save(data));

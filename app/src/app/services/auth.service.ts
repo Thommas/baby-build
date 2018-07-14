@@ -225,6 +225,7 @@ export class AuthService {
         this.renewTokenInnerSubscriber = obs;
         lock.checkSession({}, (err, result) => {
           if (err) {
+            this.router.navigate(['/security/login']);
             obs.error(`Could not get a new token (${err.error}: ${err.error_description}).`);
           } else {
             console.log(`Successfully renewed auth!`);

@@ -9,7 +9,7 @@
 const User = `
   type User {
     id: String!
-    current_build_id: String
+    currentBuildId: String
     xp: Int!
     lvl: Int!
   }
@@ -24,7 +24,7 @@ const User = `
     ): User
     updateUser(
       id: ID!
-      current_build_id: String
+      currentBuildId: String
     ): User
     deleteUser(
       id: ID!

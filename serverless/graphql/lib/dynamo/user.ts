@@ -38,8 +38,8 @@ export function createUser(userId) {
     TableName,
     Item: {
       id: userId,
-      created_at: new Date().getTime(),
-      updated_at: new Date().getTime(),
+      createdAt: new Date().getTime(),
+      updatedAt: new Date().getTime(),
       xp: 0,
       lvl: 1
     },
@@ -55,9 +55,9 @@ export function updateUser(args, userId) {
       id: args.id,
     },
     ExpressionAttributeValues: {
-      ':current_build_id': args.current_build_id
+      ':currentBuildId': args.currentBuildId
     },
-    UpdateExpression: `SET current_build_id = :current_build_id`,
+    UpdateExpression: `SET currentBuildId = :currentBuildId`,
     ReturnValues: 'ALL_NEW',
   };
 

@@ -14,8 +14,8 @@ const TableName = process.env.BUILD_TABLE;
 export function getBuilds(userId) {
   const params = {
     TableName,
-    FilterExpression: 'user_id = :user_id',
-    ExpressionAttributeValues: { ':user_id': userId }
+    FilterExpression: 'userId = :userId',
+    ExpressionAttributeValues: { ':userId': userId }
   };
 
   return db.scan(params);
@@ -24,8 +24,8 @@ export function getBuilds(userId) {
 export function getBuildById(id, userId) {
   const params = {
     TableName,
-    FilterExpression: 'user_id = :user_id',
-    ExpressionAttributeValues: { ':user_id': userId },
+    FilterExpression: 'userId = :userId',
+    ExpressionAttributeValues: { ':userId': userId },
     Key: {
       id,
     },
@@ -44,7 +44,7 @@ export function createBuild(args, userId) {
       xp: 0,
       lvl: 1,
       ...args,
-      user_id: userId
+      userId: userId
     },
   };
 
