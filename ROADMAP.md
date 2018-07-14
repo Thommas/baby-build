@@ -4,14 +4,12 @@ Roadmap
 Short term
 ----------
 
-- Refactor with only one single view
-- Refactor quest/goal/reward/favorite as Task + type
-- Refactor gamification inside User/Child
 - Fix login won't redirect to current build
 
 Long term
 ---------
 
+- Refactor gamification inside User/Child
 - Implement tech tree view for skills
 - Design skill can have icon
 - Design reward into task

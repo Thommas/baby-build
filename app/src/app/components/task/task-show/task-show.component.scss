@@ -5,5 +5,28 @@
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   place-content: center space-around;
-  align-items: center;
+  width: 100%;
+}
+
+.mat-form-field input {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  min-height: 0;
+  padding: 4px 9px;
+}
+
+textarea {
+  min-height: 1px;
+  padding: 4px 9px;
+}
+
+.mat-form-field input,
+textarea {
+  border: 1px solid transparent;
+}
+
+.mat-form-field input:hover,
+textarea:hover {
+  border: 1px solid #d5dce0;
 }

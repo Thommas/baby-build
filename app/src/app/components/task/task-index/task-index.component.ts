@@ -103,10 +103,6 @@ export class TaskIndexComponent implements OnInit {
     }).subscribe();
   }
 
-  addSection() {
-
-  }
-
   selectTask(task) {
     this.selectedTask = task;
   }

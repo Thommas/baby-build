@@ -24,7 +24,8 @@ import {
 })
 export class TaskShowComponent implements OnChanges {
   @Input('task') task: any;
-  @ViewChild('inputElement') inputElement: any;
+  @ViewChild('labelElement') labelElement: any;
+  @ViewChild('descriptionElement') descriptionElement: any;
   formGroup: FormGroup;
   loading: boolean;
 
@@ -32,41 +33,48 @@ export class TaskShowComponent implements OnChanges {
     this.task = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', [Validators.required]),
+      label: new FormControl('', []),
       description: new FormControl('', [])
     });
     this.formGroup.setValue({
       id: null,
+      label: '',
       description: ''
     });
   }
 
   ngOnInit() {
-    fromEvent(this.inputElement.nativeElement, 'input').pipe(
+    fromEvent(this.labelElement.nativeElement, 'input').pipe(
       map((e: { target: HTMLInputElement }) => e.target.value),
       debounceTime(800),
       distinctUntilChanged(),
-    ).subscribe(data => this.save(data));
+    ).subscribe(data => this.save());
+
+    fromEvent(this.descriptionElement.nativeElement, 'input').pipe(
+      map((e: { target: HTMLInputElement }) => e.target.value),
+      debounceTime(800),
+      distinctUntilChanged(),
+    ).subscribe(data => this.save());
   }
 
   ngOnChanges() {
     if (!isEmpty(this.task)) {
       this.formGroup.setValue({
         id: this.task.id,
+        label: this.task.label,
         description: this.task.description
       });
     }
   }
 
-  save(description: string) {
+  save() {
     if (!this.formGroup.valid) {
       return;
     }
+    const data = clone(this.formGroup.value);
     this.apollo.mutate({
       mutation: UpdateTaskMutation,
-      variables: {
-        id: this.task.id,
-        description: description
-      },
+      variables: data,
       refetchQueries: [{
         query: GetTasks,
         variables: {

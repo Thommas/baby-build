@@ -1,7 +1,6 @@
 <mat-card fxFlex class="left-card">
-  <mat-card-header fxLayout="row" fxLayoutAlign="start start">
+  <mat-card-header fxLayout="row" fxLayoutAlign="start center">
     <button mat-raised-button color='primary' (click)="addTask()" i18n>task_index.add_task</button>
-    <button mat-raised-button color='primary' (click)="addSection()" i18n>task_index.add_section</button>
   </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="start start">
     <app-task-item-cmp
@@ -12,8 +11,8 @@
   </mat-card-content>
 </mat-card>
 <mat-card fxFlex class="right-card" *ngIf="selectedTask">
-  <mat-card-header>
-    <button mat-mini-fab (click)="this.selectedTask = null">
+  <mat-card-header fxLayoutAlign="end center">
+    <button mat-icon-button (click)="this.selectedTask = null">
       <mat-icon>close</mat-icon>
     </button>
   </mat-card-header>

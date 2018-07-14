@@ -1,14 +1,35 @@
+<form [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="stretch">
+  <mat-form-field>
+    <input
+      #labelElement
+      matInput
+      [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write a task name'"
+      formControlName="label">
+  </mat-form-field>
+  <mat-form-field>
+    DUE DATE HERE
+  </mat-form-field>
+  <div fxLayout="row">
+    <mat-icon>short_text</mat-icon>
+    <textarea
+      #descriptionElement
+      matInput
+      [placeholder]="this.formGroup.get('description').value && this.formGroup.get('description').value.length !== 0 ? '' : 'Description'"
+      formControlName="description"></textarea>
+  </div>
+</form>
 <div>
-  <form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="start center">
-    <mat-form-field>
-      <textarea
-        #inputElement
-        matInput
-        [placeholder]="this.formGroup.get('description').value && this.formGroup.get('description').value.length !== 0 ? '' : 'Description'"
-        formControlName="description"></textarea>
-    </mat-form-field>
-  </form>
+  LIST OF SUBTASKS HERE
 </div>
 <div>
   LOG LIST HERE
+</div>
+<div>
+  COMMENT LIST
+</div>
+<div>
+  EMPTY SPACE
+</div>
+<div>
+  COMMENT HERE
 </div>
