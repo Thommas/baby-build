@@ -8,15 +8,7 @@
 
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuardService } from './services';
-import { PageNotFoundComponent } from './components/shared';
-
 const appRoutes: Routes = [
-  {
-    path: '**',
-    component: PageNotFoundComponent,
-    canActivate: [AuthGuardService]
-  }
 ];
 
 export const appRoutingProviders: any[] = [

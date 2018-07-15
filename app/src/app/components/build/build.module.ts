@@ -21,13 +21,14 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
-import { BuildService } from '../../services';
 
 import {
   routing,
   BuildFormComponent,
-  BuildIndexComponent,
-  BuildShowComponent
+  BuildShowComponent,
+  TaskIndexComponent,
+  TaskItemComponent,
+  TaskShowComponent
 } from './';
 
 @NgModule({
@@ -49,11 +50,12 @@ import {
   ],
   declarations: [
     BuildFormComponent,
-    BuildIndexComponent,
-    BuildShowComponent
+    BuildShowComponent,
+    TaskIndexComponent,
+    TaskItemComponent,
+    TaskShowComponent
   ],
   providers: [
-    BuildService
   ]
 })
 export class BuildModule {

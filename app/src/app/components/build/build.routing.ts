@@ -10,29 +10,34 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
 import { BuildFormComponent } from './build-form/build-form.component';
-import { BuildIndexComponent } from './build-index/build-index.component';
 import { BuildShowComponent } from './build-show/build-show.component';
+import { TaskIndexComponent } from './task-index/task-index.component';
 
 const routes: Routes = [
   {
-    path: 'build/create',
-    component: BuildFormComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'build/update/:id',
-    component: BuildFormComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'build/overview',
-    component: BuildShowComponent,
+    path: ':buildId/task',
+    component: TaskIndexComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'build',
-    component: BuildIndexComponent,
-    canActivate: [AuthGuardService]
+    children: [
+      {
+        path: 'create',
+        component: BuildFormComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'update/:id',
+        component: BuildFormComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: ':id',
+        component: BuildShowComponent,
+        canActivate: [AuthGuardService]
+      }
+    ]
   }
 ];
 

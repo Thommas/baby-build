@@ -35,19 +35,20 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { BuildModule } from './components/build/build.module';
-import { ChildModule } from './components/child/child.module';
-import { HeaderModule } from './components/header/header.module';
-import { TaskModule } from './components/task/task.module';
 import { UserModule } from './components/user/user.module';
 import { SecurityModule } from './components/security/security.module';
-import { PageNotFoundModule } from './components/shared/page-not-found/page-not-found.module';
+import { StaticModule } from './components/static/static.module';
+import {
+  BuildIndexComponent,
+  SidebarComponent,
+  TopbarComponent
+} from './components/layout';
 import {
   AngularticsService,
   ApolloService,
   AuthGuardService,
   AuthService,
   BrowserService,
-  ChildService,
   DexieService,
   GoogleRecaptchaService,
   LocaleService,
@@ -62,7 +63,10 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BuildIndexComponent,
+    SidebarComponent,
+    TopbarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'path-of-child' }),
@@ -89,12 +93,9 @@ export function createTranslateLoader(http: HttpClient) {
     MatToolbarModule,
     MatTooltipModule,
     BuildModule,
-    ChildModule,
-    HeaderModule,
-    TaskModule,
     UserModule,
     SecurityModule,
-    PageNotFoundModule,
+    StaticModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
   ],
   providers: [
@@ -104,7 +105,6 @@ export function createTranslateLoader(http: HttpClient) {
     AuthGuardService,
     AuthService,
     BrowserService,
-    ChildService,
     DexieService,
     GoogleRecaptchaService,
     LocaleService,

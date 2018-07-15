@@ -6,7 +6,7 @@
     [value]="progressService.progress"
     [style.height]="progressService.progress === 0 ? '0' : '2px'">
   </mat-progress-bar>
-  <app-header-cmp *ngIf="authService.isAuthenticated | async"></app-header-cmp>
+  <app-topbar-cmp *ngIf="authService.isAuthenticated | async"></app-topbar-cmp>
   <div class="router-content" fxFlex fxLayout="column">
     <router-outlet></router-outlet>
   </div>

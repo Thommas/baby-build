@@ -17,7 +17,6 @@
   GetBuilds,
   UpdateBuildMutation
 } from '../../../graphql';
- import { ChildService } from '../../../services';
 
 @Component({
   selector: 'app-build-form-cmp',
@@ -34,7 +33,6 @@ export class BuildFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apollo: Apollo,
-    private childService: ChildService,
     private router: Router
   ) {
     this.formGroup = new FormGroup({

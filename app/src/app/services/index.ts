@@ -6,8 +6,6 @@ export * from './auth.service.stub';
 export * from './auth.service';
 export * from './browser.service.stub';
 export * from './browser.service';
-export * from './build.service';
-export * from './child.service';
 export * from './dexie.service';
 export * from './google-recaptcha.service';
 export * from './http.service';

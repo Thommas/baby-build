@@ -4,6 +4,9 @@ Roadmap
 Short term
 ----------
 
+- Refactor task index into build show
+- Left bar for build list + create
+- Subrouting for different tab (skill tree view)
 - Fix login won't redirect to current build
 
 Long term
