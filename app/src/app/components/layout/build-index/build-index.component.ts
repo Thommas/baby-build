@@ -40,8 +40,4 @@ export class BuildIndexComponent implements OnInit {
         this.builds = data.builds;
       });
   }
-
-  selectBuild(build) {
-    this.router.navigate(['build/overview']);
-  }
 }

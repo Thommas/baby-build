@@ -10,7 +10,7 @@ import * as dbTask from '../../dynamo/task';
 
 export default {
   Query: {
-    tasks: (_, args, context) => dbTask.getTasks(args.buildId, context.userId),
+    tasks: (_, args, context) => dbTask.getTasks(args, context.userId),
   },
   Mutation: {
     createTask: (_, args, context) => dbTask.createTask(args, context.userId),

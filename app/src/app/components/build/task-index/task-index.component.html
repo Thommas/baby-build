@@ -3,11 +3,11 @@
     <button mat-raised-button color='primary' (click)="addTask()" i18n>task_index.add_task</button>
   </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="start start">
-    <app-task-item-cmp
-      *ngFor="let task of tasks"
-      [task]="task"
-      (click)="selectTask(task)"
-    ></app-task-item-cmp>
+    <app-task-list-cmp
+      *ngIf="buildId"
+      [buildId]="buildId"
+      (selectTask)="selectTask($event)"
+    ></app-task-list-cmp>
   </mat-card-content>
 </mat-card>
 <mat-card fxFlex class="right-card" *ngIf="selectedTask">

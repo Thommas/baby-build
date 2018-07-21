@@ -9,12 +9,13 @@
 import gql from 'graphql-tag';
 
 export const GetTasks = gql`
-  query GetTasks($buildId: String!) {
-    tasks(buildId: $buildId) {
+  query GetTasks($buildId: String!, $parentId: String) {
+    tasks(buildId: $buildId, parentId: $parentId) {
       id
       label
       description
       buildId
+      parentId
     }
   }
 `;
@@ -22,9 +23,11 @@ export const GetTasks = gql`
 export const CreateTaskMutation = gql`
   mutation CreateTask(
     $buildId: String!
+    $parentId: String
   ) {
     createTask(
       buildId: $buildId
+      parentId: $parentId
     ) {
       id
     }

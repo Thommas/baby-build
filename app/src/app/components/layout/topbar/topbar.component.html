@@ -1,10 +1,9 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
   <header fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center">
-      <button mat-raised-button (click)="toggleSidebar.emit({})">Toggle drawer</button>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
-      </div>
+      <button mat-icon-button (click)="toggleSidebar.emit({})">
+        <mat-icon>menu</mat-icon>
+      </button>
     </div>
     <div fxLayout="row" fxLayoutAlign="end center">
       <span>Me</span>

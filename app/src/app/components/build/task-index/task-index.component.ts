@@ -22,7 +22,6 @@ import { UserService } from '../../../services';
 })
 export class TaskIndexComponent implements OnInit {
   loading: boolean;
-  tasks: any;
   buildId: string;
   selectedTask: any;
 
@@ -39,44 +38,25 @@ export class TaskIndexComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.buildId = params.buildId;
-      this.getBuild();
+      this.getBuild(params.buildId);
     });
   }
 
-  getBuild() {
+  getBuild(buildId: string) {
     this.loading = true;
     this.apollo.watchQuery<any>({
       query: GetBuild,
       variables: {
-        id: this.buildId
+        id: buildId
       }
     })
       .valueChanges
       .subscribe(
         ({ data, loading }) => {
+          this.buildId = buildId;
           this.userService.setCurrentBuildId(this.buildId);
-          this.getTasks();
         },
         (e) => console.log(['/page-not-found'])
-      )
-  }
-
-  getTasks() {
-    this.loading = true;
-    this.apollo.watchQuery<any>({
-      query: GetTasks,
-      variables: {
-        buildId: this.buildId
-      }
-    })
-      .valueChanges
-      .subscribe(
-        ({ data, loading }) => {
-          this.loading = loading;
-          this.tasks = data.tasks;
-        },
-        (e) => console.log('error while loading tasks', e)
       )
   }
 
@@ -95,7 +75,8 @@ export class TaskIndexComponent implements OnInit {
       refetchQueries: [{
         query: GetTasks,
         variables: {
-          buildId: this.buildId
+          buildId: this.buildId,
+          parentId: null
         }
       }]
     }).subscribe();

@@ -4,10 +4,16 @@
   flex-direction: column;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  place-content: stretch center;
-  flex-direction: row;
+  flex-direction: column;
+  background-color: #6545cc;
+  height: 100%;
+  color: #fff;
 }
 
 img {
   cursor: pointer;
+}
+
+header {
+  min-height: 68px;
 }

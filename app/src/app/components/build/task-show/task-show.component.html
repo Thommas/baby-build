@@ -7,7 +7,7 @@
         [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write a task name'"
         formControlName="label">
     </mat-form-field>
-    DUE DATE HERE
+    <!-- DUE DATE HERE -->
     <mat-divider></mat-divider>
     <div fxLayout="row" class="description-container">
       <mat-icon>short_text</mat-icon>
@@ -19,16 +19,17 @@
     </div>
     <mat-divider></mat-divider>
   </form>
-  <div>
-    LIST OF SUBTASKS HERE
+  <div fxLayout="column" fxLayoutAlign="start stretch">
+    <button mat-raised-button color='primary' (click)="addTask()" i18n>task_show.add_task</button>
+    <app-task-list-cmp [buildId]="task.buildId" [parentId]="task.id"></app-task-list-cmp>
   </div>
-  <div>
-    LOG LIST HERE
+  <div fxLayout="column" fxLayoutAlign="start stretch">
+    <!-- LOG LIST HERE -->
   </div>
-  <div>
-    COMMENT LIST
+  <div fxLayout="column" fxLayoutAlign="start stretch">
+    <!-- COMMENT LIST -->
   </div>
 </div>
-<div class="comment-form-container">
-  COMMENT HERE
+<div class="comment-form-container" fxLayout="column" fxLayoutAlign="start stretch">
+  <!-- COMMENT HERE -->
 </div>

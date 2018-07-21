@@ -4,6 +4,7 @@ Roadmap
 Short term
 ----------
 
+- Padding on left card and right card
 - Left bar for build list + create
 - Task list for subtasks
 - Subrouting for different tab (skill tree view)

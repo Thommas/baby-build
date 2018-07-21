@@ -39,6 +39,9 @@ var TaskSchema = new Schema({
   userId: {
     type: String,
   },
+  parentId: {
+    type: String,
+  },
   type: {
     type: String,
   },
@@ -48,11 +51,14 @@ var TaskSchema = new Schema({
 
 const Task = dynamoose.model(TableName, TaskSchema);
 
-export function getTasks(buildId, userId) {
-  const params = {
-    buildId: {eq: buildId},
+export function getTasks(args, userId) {
+  const params: any = {
+    buildId: {eq: args.buildId},
     userId: {eq: userId}
   };
+  if (args.parentId) {
+    params.parentId = {eq: args.parentId}
+  }
   return Task.scan(params).exec();
 }
 

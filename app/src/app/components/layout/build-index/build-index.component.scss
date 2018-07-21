@@ -6,8 +6,16 @@
   -webkit-box-direction: normal;
   place-content: center space-around;
   align-items: center;
+  padding: 15px;
 }
 
-img {
-  margin-right: 15px;
+a {
+  color: #fff;
+
+  &:hover,
+  &:link,
+  &:visited,
+  &:active {
+    color: #fff;
+  }
 }

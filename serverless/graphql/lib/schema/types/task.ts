@@ -14,13 +14,15 @@ const Task = `
     type: String
     userId: String!
     buildId: String!
+    parentId: String
   }
   type Query {
-    tasks(buildId: String!): [Task]
+    tasks(buildId: String!, parentId: String): [Task]
   }
   type Mutation {
     createTask(
       buildId: String!
+      parentId: String
     ): Task
     updateTask(
       id: ID!

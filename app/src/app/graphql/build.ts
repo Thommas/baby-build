@@ -9,8 +9,8 @@
 import gql from 'graphql-tag';
 
 export const GetBuilds = gql`
-  query GetBuilds($userId: String!) {
-    builds(userId: $userId) {
+  query GetBuilds {
+    builds {
       id
       name
       description

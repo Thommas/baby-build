@@ -28,6 +28,7 @@ import {
   BuildShowComponent,
   TaskIndexComponent,
   TaskItemComponent,
+  TaskListComponent,
   TaskShowComponent
 } from './';
 
@@ -53,6 +54,7 @@ import {
     BuildShowComponent,
     TaskIndexComponent,
     TaskItemComponent,
+    TaskListComponent,
     TaskShowComponent
   ],
   providers: [

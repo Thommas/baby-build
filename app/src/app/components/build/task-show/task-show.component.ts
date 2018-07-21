@@ -13,6 +13,7 @@ import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
+  CreateTaskMutation,
   UpdateTaskMutation,
   GetTasks
 } from '../../../graphql';
@@ -78,7 +79,25 @@ export class TaskShowComponent implements OnChanges {
       refetchQueries: [{
         query: GetTasks,
         variables: {
-          buildId: this.task.buildId
+          buildId: this.task.buildId,
+          parentId: null
+        }
+      }]
+    }).subscribe();
+  }
+
+  addTask() {
+    this.apollo.mutate({
+      mutation: CreateTaskMutation,
+      variables: {
+        buildId: this.task.buildId,
+        parentId: this.task.id
+      },
+      refetchQueries: [{
+        query: GetTasks,
+        variables: {
+          buildId: this.task.buildId,
+          parentId: this.task.id
         }
       }]
     }).subscribe();
