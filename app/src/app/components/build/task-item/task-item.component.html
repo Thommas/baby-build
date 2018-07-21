@@ -2,14 +2,13 @@
   <button mat-icon-button class="done">
     <mat-icon>done</mat-icon>
   </button>
-  <div>
-    <form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="start center">
-      <mat-form-field>
-        <input #inputElement
-               matInput
-               [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write a task name'"
-               formControlName="label">
-      </mat-form-field>
-    </form>
-  </div>
+  <form [formGroup]="formGroup" fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field fxFill>
+      <input #inputElement fxFill
+             matInput
+             [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write a task name'"
+             formControlName="label"
+             (keyup.backspace)="onKey($event)">
+    </mat-form-field>
+  </form>
 </div>

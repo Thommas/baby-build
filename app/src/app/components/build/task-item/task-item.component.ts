@@ -15,6 +15,7 @@ import { Apollo } from 'apollo-angular';
 import {
   CreateTaskMutation,
   UpdateTaskMutation,
+  DeleteTaskMutation,
   GetTasks
 } from '../../../graphql';
 
@@ -28,8 +29,10 @@ export class TaskItemComponent implements OnChanges {
   @ViewChild('inputElement') inputElement: any;
   formGroup: FormGroup;
   loading: boolean;
+  emptyTaskReadyForDeletion: boolean;
 
   constructor(private apollo: Apollo) {
+    this.emptyTaskReadyForDeletion = false;
     this.task = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
@@ -68,6 +71,34 @@ export class TaskItemComponent implements OnChanges {
         id: this.task.id ? this.task.id : undefined,
         label: label
       }
+    }).subscribe();
+  }
+
+  onKey(event: KeyboardEvent) {
+    if (this.formGroup.get('label').value.length === 0) {
+      if (this.emptyTaskReadyForDeletion) {
+        this.delete();
+      } else {
+        this.emptyTaskReadyForDeletion = true;
+      }
+    } else {
+      this.emptyTaskReadyForDeletion = false;
+    }
+  }
+
+  delete() {
+    this.apollo.mutate({
+      mutation: DeleteTaskMutation,
+      variables: {
+        id: this.task.id
+      },
+      refetchQueries: [{
+        query: GetTasks,
+        variables: {
+          buildId: this.task.buildId,
+          parentId: this.task.parentId
+        }
+      }]
     }).subscribe();
   }
 }

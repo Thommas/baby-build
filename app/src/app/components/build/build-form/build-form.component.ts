@@ -79,7 +79,10 @@ export class BuildFormComponent implements OnInit {
       mutation: build.id ? UpdateBuildMutation : CreateBuildMutation,
       variables: {
         ...build
-      }
+      },
+      refetchQueries: [{
+        query: GetBuilds
+      }]
     }).subscribe(
       res => this.router.navigate([`${res.data.createBuild.id}/task`])
     );

@@ -25,6 +25,7 @@ const Build = `
       description: String
     ): Build
     updateBuild(
+      id: ID!
       name: String!
       description: String
     ): Build

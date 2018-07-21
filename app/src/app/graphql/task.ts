@@ -50,7 +50,7 @@ export const UpdateTaskMutation = gql`
   }
 `;
 
-export const DeleteTask = gql`
+export const DeleteTaskMutation = gql`
   mutation DeleteTask(
     $id: ID!
   ) {
