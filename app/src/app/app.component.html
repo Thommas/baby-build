@@ -6,8 +6,15 @@
     [value]="progressService.progress"
     [style.height]="progressService.progress === 0 ? '0' : '2px'">
   </mat-progress-bar>
-  <app-topbar-cmp *ngIf="authService.isAuthenticated | async"></app-topbar-cmp>
-  <div class="router-content" fxFlex fxLayout="column">
-    <router-outlet></router-outlet>
-  </div>
+  <mat-drawer-container>
+    <mat-drawer #drawer mode="side" opened="true">
+      <app-sidebar-cmp></app-sidebar-cmp>
+    </mat-drawer>
+    <mat-drawer-content fxFlex fxLayout="column">
+      <app-topbar-cmp *ngIf="authService.isAuthenticated | async" (toggleSidebar)="drawer.toggle()"></app-topbar-cmp>
+      <div class="router-content" fxFlex fxLayout="column">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </section>

@@ -31,3 +31,13 @@ mat-toolbar {
     }
   }
 }
+
+mat-drawer-container,
+mat-drawer-content {
+  height: 100%;
+}
+
+mat-drawer {
+  width: 244px;
+  background: rgba(255, 255, 255, 0.87);
+}

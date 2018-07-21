@@ -4,15 +4,17 @@ Roadmap
 Short term
 ----------
 
-- Refactor task index into build show
 - Left bar for build list + create
+- Task list for subtasks
 - Subrouting for different tab (skill tree view)
 - Fix login won't redirect to current build
 
 Long term
 ---------
 
-- Refactor gamification inside User/Child
+- Refactor gamification
+- Logs
+- Comments
 - Implement tech tree view for skills
 - Design skill can have icon
 - Design reward into task
@@ -20,8 +22,6 @@ Long term
 - Implement Achievements based on count
 - Implement security checks in graphql lambda
 - Implement giving access to a child and its builds to other family members
-- Improve gamification lambda
-- Make unlockable items a core gamification component (calendar, categories, type of quests)
 - Build inspiration static page
 - Build roadmap static page
 - Add unit tests
@@ -31,6 +31,7 @@ Long term
 - Saas
 - Invitations
 - Notifications
+- Make unlockable items a core gamification component (calendar, categories, type of quests)
 
 
 Entities

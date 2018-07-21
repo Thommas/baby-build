@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../../services';
 
 @Component({
@@ -15,6 +15,8 @@ import { AuthService } from '../../../services';
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
+  @Output('toggleSidebar') toggleSidebar: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(
     public authService: AuthService
   ) {}

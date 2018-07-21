@@ -7,7 +7,7 @@
  */
 
 import { clone, isEmpty } from 'lodash';
-import { Component, Inject, OnChanges, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Inject, OnChanges, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
