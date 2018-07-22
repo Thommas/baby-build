@@ -1,5 +1,5 @@
 /**
- * Path of build
+ * Path of child
  *
  * GraphQL - Types - Build
  *
@@ -9,10 +9,8 @@
 const Build = `
   type Build {
     id: String!
-    name: String!
+    title: String!
     description: String
-    xp: Int!
-    lvl: Int!
     user: User!
   }
   type Query {
@@ -21,12 +19,12 @@ const Build = `
   }
   type Mutation {
     createBuild(
-      name: String!
+      title: String!
       description: String
     ): Build
     updateBuild(
       id: ID!
-      name: String!
+      title: String!
       description: String
     ): Build
     deleteBuild(

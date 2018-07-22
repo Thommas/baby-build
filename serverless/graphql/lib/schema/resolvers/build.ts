@@ -1,5 +1,5 @@
 /**
- * Path of build
+ * Path of child
  *
  * GraphQL - Resolvers - Build
  *
@@ -11,7 +11,7 @@ import * as dbBuild from '../../dynamo/build';
 export default {
   Query: {
     builds: (_, args, context) => dbBuild.getBuilds(context.userId),
-    build: (_, args, context) => dbBuild.getBuildById(args.id, context.userId),
+    build: (_, args, context) => dbBuild.getBuild(args, context.userId),
   },
   Mutation: {
     createBuild: (_, args, context) => dbBuild.createBuild(args, context.userId),

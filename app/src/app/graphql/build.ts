@@ -12,10 +12,8 @@ export const GetBuilds = gql`
   query GetBuilds {
     builds {
       id
-      name
+      title
       description
-      xp
-      lvl
     }
   }
 `;
@@ -24,21 +22,19 @@ export const GetBuild = gql`
   query GetBuild($id: ID!) {
     build(id: $id) {
       id
-      name
+      title
       description
-      xp
-      lvl
     }
   }
 `;
 
 export const CreateBuildMutation = gql`
   mutation CreateBuild(
-    $name: String!
+    $title: String!
     $description: String!
   ) {
     createBuild(
-      name: $name
+      title: $title
       description: $description
     ) {
       id
@@ -49,12 +45,12 @@ export const CreateBuildMutation = gql`
 export const UpdateBuildMutation = gql`
   mutation UpdateBuild(
     $id: ID!
-    $name: String!
+    $title: String!
     $description: String!
   ) {
     updateBuild(
       id: $id
-      name: $name
+      title: $title
       description: $description
     ) {
       id

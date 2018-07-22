@@ -3,18 +3,24 @@
     "id": "1",
     "createdAt": 1521053029000,
     "updatedAt": 1521053029000,
-    "title": "Language mastery",
-    "description": "Speak and read french, japanese and english perfectly",
-    "xp": 111,
-    "lvl": 1
+    "userId": "auth0|5a773beebfd2511753f2c9c0",
+    "title": "French mastery",
+    "description": "Speak and read french perfectly"
   },
   {
     "id": "2",
     "createdAt": 1521053029000,
     "updatedAt": 1521053029000,
+    "userId": "auth0|5a773beebfd2511753f2c9c0",
+    "title": "Japanese mastery",
+    "description": "Speak and read japanese perfectly"
+  },
+  {
+    "id": "3",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "userId": "auth0|5a773beebfd2511753f2c9c0",
     "title": "Gamer",
-    "description": "Become a true gamer like papa",
-    "xp": 111,
-    "lvl": 1
+    "description": "Become a true gamer like papa"
   }
 ]

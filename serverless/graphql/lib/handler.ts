@@ -1,5 +1,5 @@
 /**
- * Path of build
+ * Path of child
  *
  * GraphQL - Handler
  *
@@ -10,6 +10,18 @@ import { graphqlLambda } from 'graphql-server-lambda';
 import schema from './schema/schema';
 import { verify } from 'jsonwebtoken';
 import * as jwks from 'jwks-rsa';
+import * as dynamoose from 'dynamoose';
+
+declare var process : {
+  env: {
+    LOCAL_DYNAMODB_ENDPOINT: string,
+    AUTH0_CLIENT_ID: string,
+    AUTH0_JWKS_URI: string,
+    AUTH0_JWKS_KID: string,
+  }
+}
+
+dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
 
 /**
  * Returns an IAM policy document for a given user and resource.

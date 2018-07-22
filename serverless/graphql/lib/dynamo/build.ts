@@ -1,80 +1,65 @@
 /**
- * Path of build
+ * Path of child
  *
- * GraphQL - DynamoDB - Build
+ * GraphQL - Dynamo - Build
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import generate = require('nanoid/generate');
-import * as db from './dynamo';
-
-const TableName = process.env.BUILD_TABLE;
+import Build from '../model/build';
 
 export function getBuilds(userId) {
-  const params = {
-    TableName,
-    FilterExpression: 'userId = :userId',
-    ExpressionAttributeValues: { ':userId': userId }
+  const params: any = {
+    userId: {eq: userId}
   };
-
-  return db.scan(params);
+  return Build.scan(params).exec();
 }
 
-export function getBuildById(id, userId) {
-  const params = {
-    TableName,
-    FilterExpression: 'userId = :userId',
-    ExpressionAttributeValues: { ':userId': userId },
-    Key: {
-      id,
-    },
-  };
-
-  return db.get(params);
+export function getBuild(args, userId) {
+  return Build.get(args.id)
+    .then((build: any) => {
+      if (!build) {
+        throw new Error('Build not found');
+      }
+      if (build.userId !== userId) {
+        throw new Error('Permission denied');
+      }
+      return build;
+    });
 }
 
 export function createBuild(args, userId) {
-  const params = {
-    TableName,
-    Item: {
-      id: generate('0123456789', 20),
-      created_at: new Date().getTime(),
-      updated_at: new Date().getTime(),
-      xp: 0,
-      lvl: 1,
-      ...args,
-      userId: userId
-    },
-  };
-
-  return db.createItem(params);
+  const build = new Build({
+    id: generate('0123456789', 20),
+    userId: userId,
+    ...args
+  });
+  return build.save();
 }
 
 export function updateBuild(args, userId) {
-  const params = {
-    TableName,
-    Key: {
-      id: args.id,
-    },
-    ExpressionAttributeValues: {
-      ':name': args.name,
-      ':description': args.description
-    },
-    UpdateExpression: `SET name = :name, description = :description`,
-    ReturnValues: 'ALL_NEW',
-  };
-
-  return db.updateItem(params, args);
+  return Build.get(args.id)
+    .then((build: any) => {
+      if (!build) {
+        throw new Error('Build not found');
+      }
+      if (args.title) {
+        build.title = args.title;
+      }
+      if (args.description) {
+        build.description = args.description;
+      }
+      return build.save();
+    });
 }
 
 export function deleteBuild(args, userId) {
-  const params = {
-    TableName,
-    Key: {
-      id: args.id,
-    },
-  };
-
-  return db.deleteItem(params, args);
+  return Build.get(args.id)
+    .then((build: any) => {
+      if (!build) {
+        throw new Error('Build not found');
+      }
+      return build.delete();
+    });
 }

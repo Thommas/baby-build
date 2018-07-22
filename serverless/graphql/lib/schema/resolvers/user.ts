@@ -1,5 +1,5 @@
 /**
- * Path of build
+ * Path of child
  *
  * GraphQL - Resolvers - User
  *
@@ -10,9 +10,8 @@ import * as dbUser from '../../dynamo/user';
 
 export default {
   Query: {
-    users: (_, args, context) => dbUser.getUsers(),
-    user: (_, args, context) => dbUser.getUserById(args.id),
-    authUser: (_, args, context) => dbUser.getUserByIdOrCreate(context.userId),
+    user: (_, args, context) => dbUser.getUser(args.id),
+    authUser: (_, args, context) => dbUser.getUser(context.userId),
   },
   Mutation: {
     updateUser: (_, args, context) => dbUser.updateUser(args, context.userId),

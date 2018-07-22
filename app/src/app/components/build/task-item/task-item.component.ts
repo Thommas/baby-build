@@ -58,7 +58,11 @@ export class TaskItemComponent implements OnChanges {
         id: this.task.id,
         label: this.task.label
       });
+      if (!this.task.label || this.task.label.length === 0) {
+        this.emptyTaskReadyForDeletion = true;
+      }
     }
+
   }
 
   save(label: string) {
@@ -75,7 +79,7 @@ export class TaskItemComponent implements OnChanges {
   }
 
   onKey(event: KeyboardEvent) {
-    if (this.formGroup.get('label').value.length === 0) {
+    if (!this.formGroup.get('label').value || this.formGroup.get('label').value.length === 0) {
       if (this.emptyTaskReadyForDeletion) {
         this.delete();
       } else {

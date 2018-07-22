@@ -1,5 +1,5 @@
 /**
- * Path of build
+ * Path of child
  *
  * GraphQL - Types - User
  *
@@ -14,20 +14,13 @@ const User = `
     lvl: Int!
   }
   type Query {
-    users: [User]
     user(id: ID!): User
     authUser: User
   }
   type Mutation {
-    createUser(
-      id: ID!
-    ): User
     updateUser(
       id: ID!
       currentBuildId: String
-    ): User
-    deleteUser(
-      id: ID!
     ): User
   }
 `;

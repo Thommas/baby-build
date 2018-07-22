@@ -7,7 +7,7 @@
 <div fxFill fxLayout="column">
   <div fxFill fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let build of builds">
     <a [routerLink]="'/' + build.id + '/task'" fxLayout="row" fxLayoutAlign="start center">
-      {{ build.name }}
+      {{ build.title }}
     </a>
     <button mat-icon-button [routerLink]="['/build/update/' + build.id]">
       <mat-icon>more_horiz</mat-icon>

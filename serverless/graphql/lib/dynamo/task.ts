@@ -1,55 +1,13 @@
 /**
- * Path of build
+ * Path of child
  *
- * GraphQL - DynamoDB - Task
+ * GraphQL - Dynamo - Task
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import generate = require('nanoid/generate');
-import * as db from './dynamo';
-import * as dynamoose from 'dynamoose';
-
-declare var process : {
-  env: {
-    TASK_TABLE: string,
-    LOCAL_DYNAMODB_ENDPOINT: string
-  }
-}
-
-const TableName = process.env.TASK_TABLE;
-
-dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
-
-var Schema = dynamoose.Schema;
-
-var TaskSchema = new Schema({
-  id: {
-    type: String,
-  },
-  label: {
-    type: String,
-  },
-  description: {
-    type: String,
-  },
-  buildId: {
-    type: String,
-  },
-  userId: {
-    type: String,
-  },
-  parentId: {
-    type: String,
-  },
-  type: {
-    type: String,
-  },
-}, {
-  timestamps: true
-});
-
-const Task = dynamoose.model(TableName, TaskSchema);
+import Task from '../model/task';
 
 export function getTasks(args, userId) {
   const params: any = {
@@ -89,12 +47,11 @@ export function updateTask(args, userId) {
 }
 
 export function deleteTask(args, userId) {
-  const params = {
-    TableName,
-    Key: {
-      id: args.id,
-    },
-  };
-
-  return db.deleteItem(params, args);
+  return Task.get(args.id)
+    .then((task: any) => {
+      if (!task) {
+        throw new Error('Task not found');
+      }
+      return task.delete();
+    });
 }
