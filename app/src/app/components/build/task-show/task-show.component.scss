@@ -10,6 +10,10 @@
   padding: 4px 9px;
 }
 
+.cdk-textarea-autosize {
+  min-height: 100px;
+}
+
 textarea {
   min-height: 1px;
   padding: 4px 9px;

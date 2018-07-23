@@ -43,21 +43,10 @@ export class LocaleService {
   public setLocale(newLocale) {
     this.translateService.use(newLocale);
 
-    let subdomain = newLocale;
-    if (subdomain === 'en') {
-      subdomain = '';
-    } else {
-      subdomain += '.';
-    }
     if (!this.browserService.window) {
       return;
     }
-    const host = this.browserService.window.location.host;
-    const localeHost = subdomain + environment.baseDomainUrl;
-    if (host !== localeHost) {
-      const protocol = this.browserService.window.location.protocol;
-      this.browserService.window.location.href = protocol + '//' + localeHost;
-    }
+    this.browserService.window.location.href = environment.baseDomainUrl + '/' + newLocale;
   }
 
   public get locales() {

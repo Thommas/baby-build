@@ -7,7 +7,17 @@
         [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write a task name'"
         formControlName="label">
     </mat-form-field>
-    <!-- DUE DATE HERE -->
+    <div fxLayout="row">
+      <!--
+      <mat-form-field>
+        <mat-select placeholder="Age required">
+          <mat-option *ngFor="">
+
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      -->
+    </div>
     <mat-divider></mat-divider>
     <div fxLayout="row" class="description-container">
       <mat-icon>short_text</mat-icon>
@@ -15,13 +25,12 @@
         #descriptionElement
         matInput
         matTextareaAutosize
-        [rows]="5"
         [placeholder]="this.formGroup.get('description').value && this.formGroup.get('description').value.length !== 0 ? '' : 'Description'"
         formControlName="description"></textarea>
     </div>
     <mat-divider></mat-divider>
   </form>
-  <div fxLayout="column" fxLayoutAlign="start stretch">
+  <div fxLayout="column" fxLayoutAlign="start start">
     <button mat-raised-button color='primary' (click)="addTask()" i18n>task_show.add_task</button>
     <app-task-list-cmp [buildId]="task.buildId" [parentId]="task.id"></app-task-list-cmp>
   </div>

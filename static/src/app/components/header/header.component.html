@@ -4,7 +4,7 @@
       <img src="/assets/img/path-of-child-logo-horizontal.svg" width="203" [routerLink]="['']"/>
     </div>
     <div fxLayout="row" fxLayoutAlign="end center">
-      <button mat-button color="primary" i18n>nav.login</button>
+      <button mat-button color="primary" i18n (click)="login()">nav.login</button>
     </div>
   </header>
 </mat-toolbar>

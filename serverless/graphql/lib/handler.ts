@@ -21,7 +21,9 @@ declare var process : {
   }
 }
 
-dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
+if (process.env.LOCAL_DYNAMODB_ENDPOINT && process.env.LOCAL_DYNAMODB_ENDPOINT.length > 0) {
+  dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
+}
 
 /**
  * Returns an IAM policy document for a given user and resource.

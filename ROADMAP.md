@@ -4,9 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Padding on left card and right card
-- Left bar for build list + create
-- Task list for subtasks
 - Subrouting for different tab (skill tree view)
 - Fix login won't redirect to current build
 
@@ -153,6 +150,7 @@ https://www.click2houston.com/news/investigates/danger-warning-about-popular-vir
 Similar apps
 ------------
 
+https://habitica.com
 https://www.choremonster.com
 https://www.classcraft.com
 #edtech #familytech

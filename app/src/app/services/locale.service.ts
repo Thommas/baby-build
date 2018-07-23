@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LocaleService {
-  private LOCALE_KEY = 'pathofchild_frontend_locale';
+  private LOCALE_KEY = 'pathofchild_app_locale';
   private LOCALES = [
     { value: 'en', label: 'English'},
     { value: 'fr', label: 'Français'},

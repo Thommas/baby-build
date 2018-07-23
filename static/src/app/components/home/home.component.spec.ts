@@ -24,7 +24,6 @@ describe('HomeComponent', () => {
         HomeComponent
       ],
       providers: [
-        { provide: AuthService, useClass: AuthServiceStub },
         { provide: SeoService, useClass: SeoServiceStub }
       ]
     }).compileComponents();

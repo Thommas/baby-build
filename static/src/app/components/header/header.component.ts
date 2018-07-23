@@ -7,6 +7,8 @@
  */
 
 import { Component } from '@angular/core';
+import { BrowserService } from '../../services';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-header-cmp',
@@ -14,4 +16,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  constructor(
+    private browserService: BrowserService
+  ) {}
+
+  login() {
+    if (!this.browserService.window) {
+      return;
+    }
+    this.browserService.window.location.href = environment.appUrl;
+  }
 }

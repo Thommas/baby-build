@@ -1,6 +1,6 @@
 {
   "name": "pathofchild-static",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "license": "WTFPL",
   "scripts": {
     "ng": "ng",
@@ -12,7 +12,8 @@
     "start:fr": "BUILD_ENVIRONMENT=local BUILD_LOCALE=fr npm run start:locale",
     "build:staging": "BUILD_ENVIRONMENT=staging npm run build:all",
     "build:production": "BUILD_ENVIRONMENT=production npm run build:all",
-    "build:all": "npm run build-prepare && npm run build:en && npm run build:fr && npm run build:ja",
+    "build:all": "npm run build-prepare && npm run build:en && npm run build:fr && npm run build:ja && npm run build:all:finish",
+    "build:all:finish": "mv build/$BUILD_ENVIRONMENT/en/* build/$BUILD_ENVIRONMENT && rm -rf build/$BUILD_ENVIRONMENT/en",
     "build:en": "BUILD_LOCALE=en npm run build-locale",
     "build:ja": "BUILD_LOCALE=ja npm run build-locale",
     "build:fr": "BUILD_LOCALE=fr npm run build-locale",
@@ -26,7 +27,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "i18n-extract": "./node_modules/.bin/ng-xi18n --i18nFormat=xlf -p src/tsconfig.app.json"
+    "i18n-extract": "./node_modules/.bin/ng-xi18n --i18nFormat=xlf -p src/tsconfig.app.json",
+    "deploy:staging": "npm run deploy:staging:robots && deploy:staging:s3",
+    "deploy:staging:robots": "echo -e \"User-agent: *\nDisallow: /\" > build/staging/robots.txt",
+    "deploy:staging:s3": "aws s3 sync --delete build/staging s3://pathofchild-static-staging",
+    "deploy:production": "npm run deploy:production:robots && deploy:production:s3",
+    "deploy:production:robots": "echo -e \"User-agent: *\nAllow: /\" > build/production/robots.txt",
+    "deploy:production:s3": "aws s3 sync --delete build/production s3://pathofchild-static-production"
   },
   "private": true,
   "dependencies": {

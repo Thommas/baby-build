@@ -2,7 +2,7 @@
   <div fxLayout="row" fxLayoutAlign="start center">
     <img src="/assets/img/path-of-child-logo-horizontal-light.svg" width="203" [routerLink]="['']"/>
   </div>
-  <button mat-icon-button>
+  <button mat-icon-button (click)="toggleSidebar.emit({})">
     <mat-icon>close</mat-icon>
   </button>
 </header>

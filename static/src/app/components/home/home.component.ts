@@ -7,7 +7,8 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { SeoService } from '../../services';
+import { BrowserService, SeoService } from '../../services';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home-cmp',
@@ -16,10 +17,18 @@ import { SeoService } from '../../services';
 })
 export class HomeComponent implements OnInit {
   constructor(
+    private browserService: BrowserService,
     private seoService: SeoService
   ) {}
 
   ngOnInit() {
     this.seoService.setPage('home');
+  }
+
+  signUp() {
+    if (!this.browserService.window) {
+      return;
+    }
+    this.browserService.window.location.href = environment.appUrl;
   }
 }

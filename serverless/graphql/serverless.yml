@@ -1,4 +1,4 @@
-service: pathofbuild-graphql
+service: pathofchild-graphql
 
 plugins:
   - serverless-plugin-typescript

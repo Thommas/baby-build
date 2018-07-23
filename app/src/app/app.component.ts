@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import {
@@ -24,6 +24,8 @@ import {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  @ViewChild('drawer') drawer;
+
   /**
    * Constructor
    */
@@ -41,7 +43,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.authService.init();
     this.angularticsService.init();
-    this.localeService.init();
     this.userService.init();
 
     if (this.router.events) {
@@ -54,5 +55,9 @@ export class AppComponent implements OnInit {
         }
       });
     }
+  }
+
+  toggleDrawer() {
+    this.drawer.toggle();
   }
 }
