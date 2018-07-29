@@ -1,28 +1,28 @@
 /**
  * Path of child
  *
- * Component - Task - Index
+ * Component - Skill - Index
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { TaskListComponent } from './task-list.component';
+import { SkillListComponent } from './skill-list.component';
 
-describe('TaskListComponent', () => {
+describe('SkillListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
         NO_ERRORS_SCHEMA
       ],
       declarations: [
-        TaskListComponent
+        SkillListComponent
       ],
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(TaskListComponent);
+    const fixture = TestBed.createComponent(SkillListComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

@@ -1,16 +1,18 @@
 /**
  * Path of child
  *
- * Component - Build - Show
+ * Component - Skill - Index
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import swal from 'sweetalert2';
 import { clone } from 'lodash';
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
-import { GetBuild } from '../../../graphql';
+import { GetSkills, GetBuild, CreateSkillMutation } from '../../../graphql';
 import { UserService } from '../../../services';
 
 @Component({
@@ -20,41 +22,66 @@ import { UserService } from '../../../services';
 })
 export class BuildShowComponent implements OnInit {
   loading: boolean;
-  build: any;
   buildId: string;
+  selectedSkill: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private apollo: Apollo,
-    private userService: UserService
+    private userService: UserService,
+    private dialog: MatDialog
   ) {
-    this.build = null;
     this.buildId = null;
+    this.selectedSkill = null;
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.buildId = params.buildId;
-      this.getBuild();
+      this.getBuild(params.id);
     });
   }
 
-  getBuild() {
+  getBuild(buildId: string) {
     this.loading = true;
     this.apollo.watchQuery<any>({
       query: GetBuild,
       variables: {
-        id: this.buildId
+        id: buildId
       }
     })
       .valueChanges
       .subscribe(
         ({ data, loading }) => {
+          this.buildId = buildId;
           this.userService.setCurrentBuildId(this.buildId);
-          this.build = data.build;
         },
         (e) => console.log(['/page-not-found'])
       )
+  }
+
+  addSkill() {
+    if (!this.buildId) {
+      return;
+    }
+    const skill = {
+      buildId: this.buildId
+    };
+    this.apollo.mutate({
+      mutation: CreateSkillMutation,
+      variables: {
+        buildId: this.buildId
+      },
+      refetchQueries: [{
+        query: GetSkills,
+        variables: {
+          buildId: this.buildId
+        }
+      }]
+    }).subscribe();
+  }
+
+  selectSkill(skill) {
+    this.selectedSkill = skill;
   }
 }

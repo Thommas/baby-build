@@ -8,7 +8,8 @@ plugins:
 custom:
   stage: ${opt:stage, self:provider.stage}
   buildTable: ${self:service}-${self:custom.stage}-build
-  taskTable: ${self:service}-${self:custom.stage}-task
+  lvlTable: ${self:service}-${self:custom.stage}-lvl
+  skillTable: ${self:service}-${self:custom.stage}-skill
   userTable: ${self:service}-${self:custom.stage}-user
   secrets: ${file(secrets.yml):${self:custom.stage}}
   serverless-offline:
@@ -24,8 +25,10 @@ custom:
         sources:
           - table: ${self:custom.buildTable}
             sources: [./fixtures/build.json]
-          - table: ${self:custom.taskTable}
-            sources: [./fixtures/task.json]
+          - table: ${self:custom.lvlTable}
+            sources: [./fixtures/lvl.json]
+          - table: ${self:custom.skillTable}
+            sources: [./fixtures/skill.json]
           - table: ${self:custom.userTable}
             sources: [./fixtures/user.json]
 
@@ -59,7 +62,8 @@ provider:
     AUTH0_JWKS_URI: ${self:custom.secrets.AUTH0_JWKS_URI}
     AUTH0_JWKS_KID: ${self:custom.secrets.AUTH0_JWKS_KID}
     BUILD_TABLE: ${self:custom.buildTable}
-    TASK_TABLE: ${self:custom.taskTable}
+    LVL_TABLE: ${self:custom.lvlTable}
+    SKILL_TABLE: ${self:custom.skillTable}
     USER_TABLE: ${self:custom.userTable}
 
 functions:
@@ -92,7 +96,7 @@ resources:
         TableName: ${self:custom.buildTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    TaskTable:
+    LvlTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -105,7 +109,23 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
           WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.taskTable}
+        TableName: ${self:custom.lvlTable}
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+    SkillTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
+        TableName: ${self:custom.skillTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
     UserTable:
@@ -131,12 +151,18 @@ resources:
         "Fn::GetAtt": [ BuildTable, StreamArn ]
       Export:
         Name: ${self:service}:${self:custom.stage}:BuildTableStreamArn
-    TaskTableStreamArn:
-      Description: The StreamArn for the Task Table
+    LvlTableStreamArn:
+      Description: The StreamArn for the Lvl Table
       Value:
-        "Fn::GetAtt": [ TaskTable, StreamArn ]
+        "Fn::GetAtt": [ LvlTable, StreamArn ]
       Export:
-        Name: ${self:service}:${self:custom.stage}:TaskTableStreamArn
+        Name: ${self:service}:${self:custom.stage}:LvlTableStreamArn
+    SkillTableStreamArn:
+      Description: The StreamArn for the Skill Table
+      Value:
+        "Fn::GetAtt": [ SkillTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:SkillTableStreamArn
     UserTableStreamArn:
       Description: The StreamArn for the User Table
       Value:

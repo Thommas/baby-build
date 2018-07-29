@@ -9,20 +9,15 @@
 import { graphqlLambda } from 'graphql-server-lambda';
 import schema from './schema/schema';
 import { verify } from 'jsonwebtoken';
-import * as jwks from 'jwks-rsa';
 import * as dynamoose from 'dynamoose';
+import * as jwks from 'jwks-rsa';
 
 declare var process : {
   env: {
-    LOCAL_DYNAMODB_ENDPOINT: string,
     AUTH0_CLIENT_ID: string,
     AUTH0_JWKS_URI: string,
     AUTH0_JWKS_KID: string,
   }
-}
-
-if (process.env.LOCAL_DYNAMODB_ENDPOINT && process.env.LOCAL_DYNAMODB_ENDPOINT.length > 0) {
-  dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
 }
 
 /**

@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Task - Show
+ * Component - Skill - Show
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -13,25 +13,25 @@ import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
-  CreateTaskMutation,
-  UpdateTaskMutation,
-  GetTasks
+  CreateLvlMutation,
+  UpdateSkillMutation,
+  GetSkills
 } from '../../../graphql';
 
 @Component({
-  selector: 'app-task-show-cmp',
-  templateUrl: './task-show.component.html',
-  styleUrls: ['./task-show.component.scss']
+  selector: 'app-skill-show-cmp',
+  templateUrl: './skill-show.component.html',
+  styleUrls: ['./skill-show.component.scss']
 })
-export class TaskShowComponent implements OnChanges {
-  @Input('task') task: any;
+export class SkillShowComponent implements OnChanges {
+  @Input('skill') skill: any;
   @ViewChild('labelElement') labelElement: any;
   @ViewChild('descriptionElement') descriptionElement: any;
   formGroup: FormGroup;
   loading: boolean;
 
   constructor(private apollo: Apollo) {
-    this.task = {};
+    this.skill = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', [Validators.required]),
       label: new FormControl('', []),
@@ -59,11 +59,11 @@ export class TaskShowComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    if (!isEmpty(this.task)) {
+    if (!isEmpty(this.skill)) {
       this.formGroup.setValue({
-        id: this.task.id,
-        label: this.task.label,
-        description: this.task.description
+        id: this.skill.id,
+        label: this.skill.label,
+        description: this.skill.description
       });
     }
   }
@@ -74,32 +74,23 @@ export class TaskShowComponent implements OnChanges {
     }
     const data = clone(this.formGroup.value);
     this.apollo.mutate({
-      mutation: UpdateTaskMutation,
+      mutation: UpdateSkillMutation,
       variables: data,
       refetchQueries: [{
-        query: GetTasks,
+        query: GetSkills,
         variables: {
-          buildId: this.task.buildId,
-          parentId: null
+          buildId: this.skill.buildId
         }
       }]
     }).subscribe();
   }
 
-  addTask() {
+  addLvl() {
     this.apollo.mutate({
-      mutation: CreateTaskMutation,
+      mutation: CreateLvlMutation,
       variables: {
-        buildId: this.task.buildId,
-        parentId: this.task.id
-      },
-      refetchQueries: [{
-        query: GetTasks,
-        variables: {
-          buildId: this.task.buildId,
-          parentId: this.task.id
-        }
-      }]
+        skillId: this.skill.id
+      }
     }).subscribe();
   }
 }

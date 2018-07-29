@@ -4,8 +4,17 @@ Roadmap
 Short term
 ----------
 
+- Refactor task to skill and lvl
+- Fix home
+- Fix sync build title between build item and build show
 - Subrouting for different tab (skill tree view)
 - Fix login won't redirect to current build
+
+Mid term
+--------
+
+- Requirement entity for min age or min xp/level
+- Upload picture for skill
 
 Long term
 ---------
@@ -14,7 +23,6 @@ Long term
 - Logs
 - Comments
 - Implement tech tree view for skills
-- Design skill can have icon
 - Design reward into task
 - Design task type "quest"
 - Implement Achievements based on count

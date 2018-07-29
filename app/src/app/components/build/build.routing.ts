@@ -11,14 +11,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from '../../services';
 import { BuildFormComponent } from './build-form/build-form.component';
 import { BuildShowComponent } from './build-show/build-show.component';
-import { TaskIndexComponent } from './task-index/task-index.component';
 
 const routes: Routes = [
-  {
-    path: ':buildId/task',
-    component: TaskIndexComponent,
-    canActivate: [AuthGuardService]
-  },
   {
     path: 'build',
     children: [

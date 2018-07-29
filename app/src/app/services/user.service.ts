@@ -45,7 +45,7 @@ export class UserService {
       if (response && response.data) {
         const authUser = response.data.authUser;
         if (authUser.currentBuildId) {
-          this.router.navigate([`${authUser.currentBuildId}/task`]);
+          this.router.navigate([`build/${authUser.currentBuildId}`]);
         } else {
           this.router.navigate([`build/create`]);
         }
@@ -55,14 +55,16 @@ export class UserService {
 
   setCurrentBuildId(buildId: string) {
     this.user.pipe(flatMap((response: any) => {
-      const authUser = response.data.authUser;
-      return this.apollo.mutate({
-        mutation: UpdateUserMutation,
-        variables: {
-          id: authUser.id,
-          currentBuildId: buildId
-        }
-      })
+      if (response && response.data) {
+        const authUser = response.data.authUser;
+        return this.apollo.mutate({
+          mutation: UpdateUserMutation,
+          variables: {
+            id: authUser.id,
+            currentBuildId: buildId
+          }
+        })
+      }
     })).subscribe();
   }
 }

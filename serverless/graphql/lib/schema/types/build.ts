@@ -9,7 +9,7 @@
 const Build = `
   type Build {
     id: String!
-    title: String!
+    label: String
     description: String
     user: User!
   }

@@ -1,37 +1,34 @@
 /**
  * Path of child
  *
- * GraphQL - Types - Task
+ * GraphQL - Types - Skill
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-const Task = `
-  type Task {
+const Skill = `
+  type Skill {
     id: String!
     label: String
     description: String
-    type: String
     userId: String!
     buildId: String!
-    parentId: String
   }
   type Query {
-    tasks(buildId: String!, parentId: String): [Task]
+    skills(buildId: String!): [Skill]
   }
   type Mutation {
-    createTask(
+    createSkill(
       buildId: String!
-      parentId: String
-    ): Task
-    updateTask(
+    ): Skill
+    updateSkill(
       id: ID!
       label: String
       description: String
-    ): Task
-    deleteTask(
+    ): Skill
+    deleteSkill(
       id: ID!
-    ): Task
+    ): Skill
   }
 `;
-export default Task;
+export default Skill;

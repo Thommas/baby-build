@@ -1,38 +1,38 @@
 /**
  * Path of child
  *
- * Component - Build - Show
+ * Component - Skill - Form
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
-import { Observable, from } from 'rxjs';
-import { ApolloStub, RouterStub } from '../../../services';
-import { BuildShowComponent } from './build-show.component';
+import { ApolloStub } from '../../../services';
+import { SkillItemComponent } from './skill-item.component';
 
-describe('BuildShowComponent', () => {
+describe('SkillItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
         NO_ERRORS_SCHEMA
       ],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule
+      ],
       declarations: [
-        BuildShowComponent
+        SkillItemComponent
       ],
       providers: [
-        { provide: ActivatedRoute, useValue: { 'params': from([{ 'id': 1 }]) } },
-        { provide: Apollo, useClass: ApolloStub },
-        { provide: Router, useClass: RouterStub }
+        { provide: Apollo, useClass: ApolloStub }
       ]
     }).compileComponents();
   }));
-
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(BuildShowComponent);
+    const fixture = TestBed.createComponent(SkillItemComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

@@ -66,7 +66,7 @@ export class BuildFormComponent implements OnInit {
           this.loading = loading;
           this.formGroup.setValue({
             id: data.build.id,
-            title: data.build.title,
+            title: data.build.label,
             description: data.build.description
           });
         });
@@ -84,7 +84,7 @@ export class BuildFormComponent implements OnInit {
         query: GetBuilds
       }]
     }).subscribe(
-      res => this.router.navigate([`${res.data.createBuild.id}/task`])
+      res => this.router.navigate([`build/${res.data.createBuild.id}`])
     );
   }
 }

@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Task - Form
+ * Component - Lvl - Form
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -13,27 +13,27 @@ import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
-  CreateTaskMutation,
-  UpdateTaskMutation,
-  DeleteTaskMutation,
-  GetTasks
+  CreateLvlMutation,
+  UpdateLvlMutation,
+  DeleteLvlMutation,
+  GetLvls
 } from '../../../graphql';
 
 @Component({
-  selector: 'app-task-item-cmp',
-  templateUrl: './task-item.component.html',
-  styleUrls: ['./task-item.component.scss']
+  selector: 'app-lvl-item-cmp',
+  templateUrl: './lvl-item.component.html',
+  styleUrls: ['./lvl-item.component.scss']
 })
-export class TaskItemComponent implements OnChanges {
-  @Input() task: any;
+export class LvlItemComponent implements OnChanges {
+  @Input() lvl: any;
   @ViewChild('inputElement') inputElement: any;
   formGroup: FormGroup;
   loading: boolean;
-  emptyTaskReadyForDeletion: boolean;
+  emptyLvlReadyForDeletion: boolean;
 
   constructor(private apollo: Apollo) {
-    this.emptyTaskReadyForDeletion = false;
-    this.task = {};
+    this.emptyLvlReadyForDeletion = false;
+    this.lvl = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       label: new FormControl('', [Validators.required])
@@ -53,13 +53,13 @@ export class TaskItemComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    if (!isEmpty(this.task)) {
+    if (!isEmpty(this.lvl)) {
       this.formGroup.setValue({
-        id: this.task.id,
-        label: this.task.label
+        id: this.lvl.id,
+        label: this.lvl.label
       });
-      if (!this.task.label || this.task.label.length === 0) {
-        this.emptyTaskReadyForDeletion = true;
+      if (!this.lvl.label || this.lvl.label.length === 0) {
+        this.emptyLvlReadyForDeletion = true;
       }
     }
 
@@ -70,9 +70,9 @@ export class TaskItemComponent implements OnChanges {
       return;
     }
     this.apollo.mutate({
-      mutation: this.task.id ? UpdateTaskMutation : CreateTaskMutation,
+      mutation: this.lvl.id ? UpdateLvlMutation : CreateLvlMutation,
       variables: {
-        id: this.task.id ? this.task.id : undefined,
+        id: this.lvl.id ? this.lvl.id : undefined,
         label: label
       }
     }).subscribe();
@@ -80,27 +80,26 @@ export class TaskItemComponent implements OnChanges {
 
   onKey(event: KeyboardEvent) {
     if (!this.formGroup.get('label').value || this.formGroup.get('label').value.length === 0) {
-      if (this.emptyTaskReadyForDeletion) {
+      if (this.emptyLvlReadyForDeletion) {
         this.delete();
       } else {
-        this.emptyTaskReadyForDeletion = true;
+        this.emptyLvlReadyForDeletion = true;
       }
     } else {
-      this.emptyTaskReadyForDeletion = false;
+      this.emptyLvlReadyForDeletion = false;
     }
   }
 
   delete() {
     this.apollo.mutate({
-      mutation: DeleteTaskMutation,
+      mutation: DeleteLvlMutation,
       variables: {
-        id: this.task.id
+        id: this.lvl.id
       },
       refetchQueries: [{
-        query: GetTasks,
+        query: GetLvls,
         variables: {
-          buildId: this.task.buildId,
-          parentId: this.task.parentId
+          skillId: this.lvl.skillId
         }
       }]
     }).subscribe();

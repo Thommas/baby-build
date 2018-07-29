@@ -10,8 +10,13 @@ import * as dynamoose from 'dynamoose';
 
 declare var process : {
   env: {
+    LOCAL_DYNAMODB_ENDPOINT: string,
     BUILD_TABLE: string
   }
+}
+
+if (process.env.LOCAL_DYNAMODB_ENDPOINT && process.env.LOCAL_DYNAMODB_ENDPOINT.length > 0) {
+  dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
 }
 
 const TableName = process.env.BUILD_TABLE;
@@ -22,7 +27,7 @@ var BuildSchema = new Schema({
   id: {
     type: String,
   },
-  title: {
+  label: {
     type: String,
   },
   description: {

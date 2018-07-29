@@ -12,22 +12,26 @@ import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas';
 
 // Types
 import buildType from './types/build';
-import taskType from './types/task';
+import lvlType from './types/lvl';
+import skillType from './types/skill';
 import userType from './types/user';
 
 // Resolvers
 import buildResolver from './resolvers/build';
-import taskResolver from './resolvers/task';
+import lvlResolver from './resolvers/lvl';
+import skillResolver from './resolvers/skill';
 import userResolver from './resolvers/user';
 
 const typeDefs = mergeTypes([
   buildType,
-  taskType,
+  lvlType,
+  skillType,
   userType
 ]);
 const resolvers = mergeResolvers([
   buildResolver,
-  taskResolver,
+  lvlResolver,
+  skillResolver,
   userResolver
 ]);
 

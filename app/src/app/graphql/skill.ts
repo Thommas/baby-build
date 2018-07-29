@@ -1,46 +1,43 @@
 /**
  * Path of child
  *
- * GraphQL - Task
+ * GraphQL - Skill
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import gql from 'graphql-tag';
 
-export const GetTasks = gql`
-  query GetTasks($buildId: String!, $parentId: String) {
-    tasks(buildId: $buildId, parentId: $parentId) {
+export const GetSkills = gql`
+  query GetSkills($buildId: String!) {
+    skills(buildId: $buildId) {
       id
       label
       description
       buildId
-      parentId
     }
   }
 `;
 
-export const CreateTaskMutation = gql`
-  mutation CreateTask(
+export const CreateSkillMutation = gql`
+  mutation CreateSkill(
     $buildId: String!
-    $parentId: String
   ) {
-    createTask(
+    createSkill(
       buildId: $buildId
-      parentId: $parentId
     ) {
       id
     }
   }
 `;
 
-export const UpdateTaskMutation = gql`
-  mutation UpdateTask(
+export const UpdateSkillMutation = gql`
+  mutation UpdateSkill(
     $id: ID!
     $label: String
     $description: String
   ) {
-    updateTask(
+    updateSkill(
       id: $id
       label: $label
       description: $description
@@ -50,11 +47,11 @@ export const UpdateTaskMutation = gql`
   }
 `;
 
-export const DeleteTaskMutation = gql`
-  mutation DeleteTask(
+export const DeleteSkillMutation = gql`
+  mutation DeleteSkill(
     $id: ID!
   ) {
-    deleteTask(
+    deleteSkill(
       id: $id
     ) {
       id

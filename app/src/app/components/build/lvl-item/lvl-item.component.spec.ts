@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Task - Form
+ * Component - Lvl - Form
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -11,9 +11,9 @@ import { TestBed, async } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { ApolloStub } from '../../../services';
-import { TaskItemComponent } from './task-item.component';
+import { LvlItemComponent } from './lvl-item.component';
 
-describe('TaskItemComponent', () => {
+describe('LvlItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
@@ -24,7 +24,7 @@ describe('TaskItemComponent', () => {
         ReactiveFormsModule
       ],
       declarations: [
-        TaskItemComponent
+        LvlItemComponent
       ],
       providers: [
         { provide: Apollo, useClass: ApolloStub }
@@ -32,7 +32,7 @@ describe('TaskItemComponent', () => {
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(TaskItemComponent);
+    const fixture = TestBed.createComponent(LvlItemComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

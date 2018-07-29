@@ -26,10 +26,11 @@ import {
   routing,
   BuildFormComponent,
   BuildShowComponent,
-  TaskIndexComponent,
-  TaskItemComponent,
-  TaskListComponent,
-  TaskShowComponent
+  LvlItemComponent,
+  LvlListComponent,
+  SkillItemComponent,
+  SkillListComponent,
+  SkillShowComponent
 } from './';
 
 @NgModule({
@@ -52,10 +53,11 @@ import {
   declarations: [
     BuildFormComponent,
     BuildShowComponent,
-    TaskIndexComponent,
-    TaskItemComponent,
-    TaskListComponent,
-    TaskShowComponent
+    LvlItemComponent,
+    LvlListComponent,
+    SkillItemComponent,
+    SkillListComponent,
+    SkillShowComponent
   ],
   providers: [
   ]

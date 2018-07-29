@@ -6,7 +6,7 @@
     <mat-form-field fxFill>
       <input #inputElement fxFill
              matInput
-             [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write a task name'"
+             [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write a skill name'"
              formControlName="label"
              (keyup.backspace)="onKey($event)">
     </mat-form-field>

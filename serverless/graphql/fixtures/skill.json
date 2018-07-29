@@ -6,9 +6,8 @@
     "availableAt": 1521063029000,
     "userId": "auth0|5a773beebfd2511753f2c9c0",
     "buildId": "1",
-    "type": "default",
-    "label": "Play chess",
-    "description": "Play against dad every week"
+    "label": "Basics",
+    "description": "Learn the rules"
   },
   {
     "id": "2",
@@ -16,9 +15,8 @@
     "updatedAt": 1521053029000,
     "userId": "auth0|5a773beebfd2511753f2c9c0",
     "buildId": "1",
-    "type": "default",
-    "label": "Watch pokemon",
-    "description": "Watch pokemon anime all seasons"
+    "label": "Play",
+    "description": "Play many games"
   },
   {
     "id": "3",
@@ -26,9 +24,7 @@
     "updatedAt": 1521053029000,
     "userId": "auth0|5a773beebfd2511753f2c9c0",
     "buildId": "1",
-    "parentId": "1",
-    "type": "default",
-    "label": "Watch pokemon movie",
-    "description": "Watch pokemon movie"
+    "label": "Deck building",
+    "description": "Build decks"
   }
 ]

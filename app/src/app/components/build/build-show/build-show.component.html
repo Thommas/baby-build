@@ -1,16 +1,25 @@
-<mat-toolbar fxLayout="row" fxLayoutAlign="center center">
-  <div>
-    <h1 *ngIf="build">{{ build.title }}</h1>
-    <button mat-button>
-      <mat-icon>caret_down</mat-icon>
+<mat-card fxFlex class="left-card">
+  <mat-card-header fxLayout="row" fxLayoutAlign="start center">
+    <button mat-raised-button color='primary' (click)="addSkill()" i18n>skill_index.add_skill</button>
+  </mat-card-header>
+  <mat-card-content fxLayout="column" fxLayoutAlign="start start">
+    <app-skill-list-cmp
+      *ngIf="buildId"
+      [buildId]="buildId"
+      (selectSkill)="selectSkill($event)"
+    ></app-skill-list-cmp>
+  </mat-card-content>
+</mat-card>
+<mat-card fxFlex class="right-card" *ngIf="selectedSkill">
+  <mat-card-header fxLayoutAlign="end center">
+    <button mat-icon-button (click)="this.selectedSkill = null">
+      <mat-icon>close</mat-icon>
     </button>
-  </div>
-  <div>
-    <button mat-button>
-      Tasks
-    </button>
-    <button mat-button>
-      Skills
-    </button>
-  </div>
-</mat-toolbar>
+  </mat-card-header>
+  <mat-card-content>
+    <app-skill-show-cmp
+      fxFlex fxLayout="column" fxLayoutAlign="space-between none"
+      [skill]="selectedSkill"
+    ></app-skill-show-cmp>
+  </mat-card-content>
+</mat-card>

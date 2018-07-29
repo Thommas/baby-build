@@ -44,8 +44,8 @@ export function updateBuild(args, userId) {
       if (!build) {
         throw new Error('Build not found');
       }
-      if (args.title) {
-        build.title = args.title;
+      if (args.label) {
+        build.label = args.label;
       }
       if (args.description) {
         build.description = args.description;
