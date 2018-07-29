@@ -20,6 +20,7 @@ import { UserService } from '../../../services';
 })
 export class BuildShowComponent implements OnInit {
   loading: boolean;
+  build: any;
   buildId: string;
 
   constructor(
@@ -28,6 +29,7 @@ export class BuildShowComponent implements OnInit {
     private apollo: Apollo,
     private userService: UserService
   ) {
+    this.build = null;
     this.buildId = null;
   }
 
@@ -50,6 +52,7 @@ export class BuildShowComponent implements OnInit {
       .subscribe(
         ({ data, loading }) => {
           this.userService.setCurrentBuildId(this.buildId);
+          this.build = data.build;
         },
         (e) => console.log(['/page-not-found'])
       )

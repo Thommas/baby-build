@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
    */
   constructor(
     public router: Router,
-    private authService: AuthService,
+    public authService: AuthService,
     private browserService: BrowserService,
     private localeService: LocaleService,
     public progressService: ProgressService,

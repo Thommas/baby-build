@@ -50,9 +50,7 @@ import {
   AuthService,
   BrowserService,
   DexieService,
-  GoogleRecaptchaService,
   LocaleService,
-  SeoService,
   UserService,
   ProgressService
 } from './services';
@@ -106,9 +104,7 @@ export function createTranslateLoader(http: HttpClient) {
     AuthService,
     BrowserService,
     DexieService,
-    GoogleRecaptchaService,
     LocaleService,
-    SeoService,
     UserService,
     ProgressService
   ],

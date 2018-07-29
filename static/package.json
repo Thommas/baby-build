@@ -28,10 +28,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "i18n-extract": "./node_modules/.bin/ng-xi18n --i18nFormat=xlf -p src/tsconfig.app.json",
-    "deploy:staging": "npm run deploy:staging:robots && deploy:staging:s3",
+    "deploy:staging": "npm run build:staging && npm run deploy:staging:robots && npm run deploy:staging:s3",
     "deploy:staging:robots": "echo -e \"User-agent: *\nDisallow: /\" > build/staging/robots.txt",
     "deploy:staging:s3": "aws s3 sync --delete build/staging s3://pathofchild-static-staging",
-    "deploy:production": "npm run deploy:production:robots && deploy:production:s3",
+    "deploy:production": "npm run build:production && npm run deploy:production:robots && npm run deploy:production:s3",
     "deploy:production:robots": "echo -e \"User-agent: *\nAllow: /\" > build/production/robots.txt",
     "deploy:production:s3": "aws s3 sync --delete build/production s3://pathofchild-static-production"
   },

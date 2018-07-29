@@ -42,11 +42,13 @@ export class UserService {
 
   init() {
     this.user.subscribe((response) => {
-      const authUser = response.data.authUser;
-      if (authUser.currentBuildId) {
-        this.router.navigate([`${authUser.currentBuildId}/task`]);
-      } else {
-        this.router.navigate([`build/create`]);
+      if (response && response.data) {
+        const authUser = response.data.authUser;
+        if (authUser.currentBuildId) {
+          this.router.navigate([`${authUser.currentBuildId}/task`]);
+        } else {
+          this.router.navigate([`build/create`]);
+        }
       }
     });
   }

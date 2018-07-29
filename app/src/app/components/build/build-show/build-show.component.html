@@ -1,6 +1,6 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
   <div>
-    <h1>{{ build.title }}</h1>
+    <h1 *ngIf="build">{{ build.title }}</h1>
     <button mat-button>
       <mat-icon>caret_down</mat-icon>
     </button>
