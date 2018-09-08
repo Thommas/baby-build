@@ -1,9 +1,0 @@
-<div fxFill fxLayout="row" fxLayoutAlign="center center">
-  <span>Level {{ gamification.lvl }}</span>
-</div>
-<mat-progress-bar
-  mode="determinate"
-  [value]="gamification.xp / (gamification.xp|xpToLevelUp) * 100"
-  color="primary"
-  [matTooltip]="gamification.xp + ' / ' + (gamification.xp|xpToLevelUp)">
-</mat-progress-bar>

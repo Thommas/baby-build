@@ -9,26 +9,23 @@
 const Build = `
   type Build {
     id: String!
-    title: String
+    label: String
     description: String
-    child: Child
-    gamification: Gamification
-    quests: [Quest]
+    user: User!
   }
   type Query {
-    builds(child_id: String!): [Build]
+    builds: [Build]
     build(id: ID!): Build
   }
   type Mutation {
     createBuild(
       title: String!
-      description: String!
-      child_id: String!
+      description: String
     ): Build
     updateBuild(
       id: ID!
       title: String!
-      description: String!
+      description: String
     ): Build
     deleteBuild(
       id: ID!

@@ -1,7 +1,9 @@
 Path of child
 =============
 
-Gamified life planning platform for your child
+Gamified life planning platform for your child.
+
+A blend of action RPG and project management.
 
 
 Stack

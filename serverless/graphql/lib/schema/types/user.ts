@@ -9,22 +9,18 @@
 const User = `
   type User {
     id: String!
-    gamification: Gamification
+    currentBuildId: String
+    xp: Int!
+    lvl: Int!
   }
   type Query {
-    users: [User]
     user(id: ID!): User
     authUser: User
   }
   type Mutation {
-    createUser(
-      id: ID!
-    ): User
     updateUser(
       id: ID!
-    ): User
-    deleteUser(
-      id: ID!
+      currentBuildId: String
     ): User
   }
 `;

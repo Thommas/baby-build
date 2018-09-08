@@ -1,80 +1,65 @@
 /**
  * Path of child
  *
- * GraphQL - DynamoDB - Build
+ * GraphQL - Dynamo - Build
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import nanoid = require('nanoid');
-import * as db from './dynamo';
+import generate = require('nanoid/generate');
+import Build from '../model/build';
 
-const TableName = process.env.BUILD_TABLE;
-
-export function getBuilds(childId, userId) {
-  const params = {
-    TableName,
-    FilterExpression: 'user_id = :user_id AND child_id = :child_id',
-    ExpressionAttributeValues: { ':child_id': childId, ':user_id': userId },
+export function getBuilds(userId) {
+  const params: any = {
+    userId: {eq: userId}
   };
-
-  return db.scan(params);
+  return Build.scan(params).exec();
 }
 
-export function getBuildById(id, userId) {
-  const params = {
-    TableName,
-    FilterExpression: 'user_id = :user_id',
-    ExpressionAttributeValues: { ':user_id': userId },
-    Key: {
-      id,
-    },
-  };
-
-  return db.get(params);
+export function getBuild(args, userId) {
+  return Build.get(args.id)
+    .then((build: any) => {
+      if (!build) {
+        throw new Error('Build not found');
+      }
+      if (build.userId !== userId) {
+        throw new Error('Permission denied');
+      }
+      return build;
+    });
 }
 
 export function createBuild(args, userId) {
-  const params = {
-    TableName,
-    Item: {
-      id: nanoid(12),
-      created_at: new Date().getTime(),
-      updated_at: new Date().getTime(),
-      title: args.title,
-      description: args.description,
-      child_id: args.child_id,
-      user_id: userId
-    },
-  };
-
-  return db.createItem(params);
+  const build = new Build({
+    id: generate('0123456789', 20),
+    userId: userId,
+    ...args
+  });
+  return build.save();
 }
 
 export function updateBuild(args, userId) {
-  const params = {
-    TableName,
-    Key: {
-      id: args.id,
-    },
-    ExpressionAttributeValues: {
-      ':title': args.title,
-      ':description': args.description,
-    },
-    UpdateExpression: 'SET title = :title, description = :description',
-    ReturnValues: 'ALL_NEW',
-  };
-
-  return db.updateItem(params, args);
+  return Build.get(args.id)
+    .then((build: any) => {
+      if (!build) {
+        throw new Error('Build not found');
+      }
+      if (args.label) {
+        build.label = args.label;
+      }
+      if (args.description) {
+        build.description = args.description;
+      }
+      return build.save();
+    });
 }
 
 export function deleteBuild(args, userId) {
-  const params = {
-    TableName,
-    Key: {
-      id: args.id,
-    },
-  };
-
-  return db.deleteItem(params, args);
+  return Build.get(args.id)
+    .then((build: any) => {
+      if (!build) {
+        throw new Error('Build not found');
+      }
+      return build.delete();
+    });
 }

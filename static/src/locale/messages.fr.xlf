@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="70d23731a3d0665ecd858e227d14f9c53d619d90" datatype="html">
+        <source>footer.locale</source>
+        <target>Language</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/footer/footer/footer.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9c9c35b059bd240f8f7425d72cb8607a659cce55" datatype="html">
+        <source>footer.company</source>
+        <target>Company</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/footer/footer/footer.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="428e4b8d0260eaa8bb061c8204396c53890c6a5d" datatype="html">
+        <source>footer.terms</source>
+        <target>Terms</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/footer/footer/footer.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3b794d284737f916fffb127d607de7822531abfa" datatype="html">
+        <source>footer.branding</source>
+        <target>Branding</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/footer/footer/footer.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="95def9ed7a71aaeb276157b02121753f23717524" datatype="html">
+        <source>footer.contact</source>
+        <target>Contact</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/footer/footer/footer.component.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a9135204c743da1cfff1e695f5cdff5badcc997f" datatype="html">
+        <source>footer.social</source>
+        <target>Social</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/footer/footer/footer.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="78e6d2a011c1338b7c2391a9c69812a4e9a4f08e" datatype="html">
+        <source>nav.login</source>
+        <target>Login</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/header/header/header.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1c6dc811653170d16b1051eda5ee6c04fa4841fe" datatype="html">
+        <source>shared.page_not_found.title</source>
+        <target>Page not found</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/shared/page-not-found/page-not-found.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fb82cc663976a94294f26ca8dd45034a7cd363bc" datatype="html">
+        <source>shared.page_not_found.description</source>
+        <target></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/shared/page-not-found/page-not-found.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ec515efebab17ac56329c9610cd0fb0450145874" datatype="html">
+        <source>shared.page_not_found.back</source>
+        <target>Go back</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/shared/page-not-found/page-not-found.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6dbe5d69c96ff8a2043c9166633f2713931d6476" datatype="html">
+        <source>global.go_back</source>
+        <target>Go back</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-create/build-create.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-show/build-show.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/quest-create/quest-create.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-create/child-create.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-delete/child-delete.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-update/child-update.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b52ba4420bfeff91705e037df70d6cdba870330" datatype="html">
+        <source>build_create.title</source>
+        <target>Create a new build</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-create/build-create.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="feb2866f62c68f41598741be77827080efabdf18" datatype="html">
+        <source>build.title</source>
+        <target>Title</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-create/build-create.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7c902e5c9b26bb6c590947734b27a0ac3bb65a15" datatype="html">
+        <source>build.description</source>
+        <target>Description</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-create/build-create.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1952881b18a79110c387c3016451e6d67027d2fb" datatype="html">
+        <source>form.submit</source>
+        <target>Submit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-create/build-create.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/quest-create/quest-create.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/whitelist/whitelist-form/whitelist-form.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="75dc3f28ed33af5a5e65b4627b65b021e7e0b606" datatype="html">
+        <source>build_index.title</source>
+        <target>List of builds</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-index/build-index.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="108043d7bf71464dad195911561137545dc5d3a0" datatype="html">
+        <source>build_show.quest_create</source>
+        <target>Create quest</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/build-show/build-show.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="434e5110f5f34354de153cbb189143eeac5ec5b5" datatype="html">
+        <source>quest_create.title</source>
+        <target>Create quest</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/build/quest-create/quest-create.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="838097a55bf515fbb8cca534c6f21cc5615e876b" datatype="html">
+        <source>child_delete.title</source>
+        <target>Remove a child</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-delete/child-delete.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3d3975051b72eb5915f937f0154447750470c14b" datatype="html">
+        <source>global.yes</source>
+        <target>Yes</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-delete/child-delete.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="852db2fede80cada31e4804dcf6d1bdb79da1631" datatype="html">
+        <source>child_form.title</source>
+        <target>Title</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="695209b7204d063378ccdc031a56d28626285393" datatype="html">
+        <source>child_form.first_name</source>
+        <target>First name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="30cdbc3d4cfad0cde7d84eb6f418b2022bc3266c" datatype="html">
+        <source>child_form.middle_names</source>
+        <target>Middle names</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a754329b85335f53ee39fe31c491cd289f97860" datatype="html">
+        <source>child_form.last_name</source>
+        <target>Last name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="71557fa41d2403083092a3881dccc6fb3f570784" datatype="html">
+        <source>child_form.nickname</source>
+        <target>Nickname</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="848be0afe804b252d12b04b608ae525c72a28eb4" datatype="html">
+        <source>child_form.birthdate</source>
+        <target>Birthdate</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7ff5de86a03317fa8e97f0be3a3e529c94a7b64" datatype="html">
+        <source>child_form.girl</source>
+        <target>Girl</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4495e3e0366b5b5d0d3ddaea4faf06f6d55bc721" datatype="html">
+        <source>child_form.boy</source>
+        <target>Boy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-form/child-form.component.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="423956296786635b506c70135f3e65f9df427248" datatype="html">
+        <source>child_index.title</source>
+        <target>List of children</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-index/child-index.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d0c028e2cdbfc31e9f395df5f7074dc5ff719c1e" datatype="html">
+        <source>child_index.child_create</source>
+        <target>Add child</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/child/child-index/child-index.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d35664c007b42da0d321cf2db6e633b7f702c5c7" datatype="html">
+        <source>nav.build</source>
+        <target>Builds</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/header/header-build/header-build.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="036280b90d44df165ec9017d216b9c69f6c2b4b3" datatype="html">
+        <source>nav.child</source>
+        <target>Children</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/header/header-child/header-child.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7b16bdabcc99501b771e3edc61478b9652500b96" datatype="html">
+        <source>nav.whitelist</source>
+        <target>Whitelist</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/header/header-parent/header-parent.component.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="97cb1c2d2060255df00a3a3fa579e61604fe0cba" datatype="html">
+        <source>nav.profile</source>
+        <target>Profile</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/header/header-parent/header-parent.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8632a90cb2d9a4f5b1b4486b24c6ebdccb950416" datatype="html">
+        <source>home.title</source>
+        <target>Have fun planning your child's future</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8661041ced3b3ced1b7b1a76f22ab22f18044f1a" datatype="html">
+        <source>home.hero1</source>
+        <target>Organize education goals</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7527e62aa3286845b3f9469f6caddd1d6931bee" datatype="html">
+        <source>home.hero2</source>
+        <target>Prepare incentives and rewards</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="196e0b265e13b58ef2959bf2aeefeb95e07a59ac" datatype="html">
+        <source>home.hero3</source>
+        <target>Share your ideas and learn new tips</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="700e8cd41c752cf34677527d3ce4adba6702584a" datatype="html">
+        <source>home.hero4</source>
+        <target>Enjoy imagining new possibilities</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0fa3d0f7faaa107369f95d8a89fd1eb641597765" datatype="html">
+        <source>home.signup</source>
+        <target>Sign up</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a1f335c82f7aee1cb41010ce84bd11144705e1a0" datatype="html">
+        <source>home.story.idea</source>
+        <target><![CDATA[Plan the education of your child
+        <ul>
+          <li>Each parent can tailor the platform to match their vision of education</li>
+          <li>Stay in control of what you give access to your child</li>
+          <li>Improve your child curiosity by giving interesting choices to explore</li>
+          <li>Identify and prevent passivity like watching TV, youtube or playing bad quality games</li>
+        </ul>]]></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f3d24e1190b56ec68b92112597d5b5b7d2593967" datatype="html">
+        <source>home.story.share</source>
+        <target><![CDATA[Share popular education tips
+        <ul>
+          <li>Read about how to best ensure your child's success</li>
+          <li>See statistics about recommended age to access digital contents</li>
+          <li>Share your ideas with the community</li>
+          <li>Other family members can also contribute</li>
+        </ul>]]></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3f19ca2a6cd6f14c8d60b248b572aba8d839edb6" datatype="html">
+        <source>home.story.path</source>
+        <target><![CDATA[Imagine multiple paths
+        <ul>
+          <li>Build multiple paths for your child to explore</li>
+          <li>Give positive incentives for your child to try new things</li>
+          <li>Write time capsule messages for your child to read in the future</li>
+          <li>Cherry pick a few quality photos every month</li>
+        </ul>]]></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dbb2f402815b7a6444fbc344410b0fbd37deb26d" datatype="html">
+        <source>home.path_of_child.title</source>
+        <target>What is path of child?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0e10bb41583b214b006799e31a47dac4294735f2" datatype="html">
+        <source>home.path_of_child.description</source>
+        <target>Path of child is a gamification platform for planning the life and education of your children. You can have fun and share useful information with other family members and parents.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cb2fa6275ca2afd976e025ddf4e65edc5b896261" datatype="html">
+        <source>home.path_of_child.quote</source>
+        <target>Prepare the child for the path, not the path for the child.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home-anonymous/home-anonymous.component.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f196f0ef68cd65b749bd23fa220384701e19b002" datatype="html">
+        <source>nav.logout</source>
+        <target>Logout</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/parent/parent-edit/parent-edit.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="047064c7dfec971704ba1439a8ca1ae454ba9fdc" datatype="html">
+        <source>contact.title</source>
+        <target>Contact</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bb455b3bfe39d9b58c25641bb7badd38c919c720" datatype="html">
+        <source>contact.description</source>
+        <target>Want to give us a feedback?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cee0a83c6f26c57510910cfc677960770d6f8f1e" datatype="html">
+        <source>contact.reddit.title</source>
+        <target>Reddit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="457265172da1d85489bfe7f6900f23dc00f36379" datatype="html">
+        <source>contact.reddit.description</source>
+        <target>/r/pathofchild</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d40a167bee884d612adb6955eafbf591787c9289" datatype="html">
+        <source>contact.facebook.title</source>
+        <target>Facebook</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="059e42b03775d7731920a03f2eabebdebba09902" datatype="html">
+        <source>contact.facebook.description</source>
+        <target>Path of child facebook page</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="afb69d25511f79e229661ea46b1856fa1b03c9fa" datatype="html">
+        <source>contact.twitter.title</source>
+        <target>Twitter</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f162a76bc3ff81ac473e69eec0d0fb4adf6cdf83" datatype="html">
+        <source>contact.twitter.description</source>
+        <target>@pathofchild</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a8a0066ae54e9af19ec2742bb2131dcdb0093cf7" datatype="html">
+        <source>contact.name</source>
+        <target>Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5d4a35967a9a115df4910b334b7ec0a1921e6a3d" datatype="html">
+        <source>contact.email</source>
+        <target>Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ebe5259f58b09941808555a944e703b8d0ad0b74" datatype="html">
+        <source>contact.message</source>
+        <target>Message</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/contact/contact.component.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6fcf92cd4b96cb681c65b28a59555d010fbc83d2" datatype="html">
+        <source>terms.title</source>
+        <target>Path of child Terms of Service</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/terms/terms.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="435154a40ec8f72b206fdcf21f91628139314fd4" datatype="html">
+        <source>terms.contract</source>
+        <target><![CDATA[
+<h5>TLDR</h5>
+<ul>
+  <li>I'm a person, not a company.</li>
+  <li>I live in London so we are under UK law.</li>
+  <li>The data is hosted mostly in the Amazon UK datacenter.</li>
+  <li>I use the best tools to protect your data.</li>
+  <li>I'm using this website for my personal use first and foremost.</li>
+  <li>The service is free, I'm paying for everything.</li>
+  <li>Feel free to join the fun. It's an experiment.</li>
+  <li>You can find me on <a href="https://www.linkedin.com/in/thomas-bullier-a5529313">LinkedIn</a></li>
+  <li>This platform source code is open source on WTFPL license and hosted on <a href="https://github.com/Thommas/path-of-child">GitHub</a></li>
+</ul>
+<br>
+<p>Last updated: March 25, 2018</p>
+<br>
+<p>
+These Terms of Service ("Terms") govern your access to and use of the services, websites, and applications offered by Path of child (the "Service"), operated by Thomas Bullier. Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. By accessing or using the Service you agree to be bound by these Terms.
+</p>
+<h5>Use of the Service</h5>
+<p>You may use the Service only if you can form a binding contract with Thomas Bullier, and only in compliance with these Terms and all applicable local, state, national, and international laws, rules and regulations.</p>
+<p>We may, without prior notice, change the Service; stop providing the Service or features of the Service, to you or to users generally; or create usage limits for the Service.</p>
+<h5>User Content</h5>
+<div style="margin-left:20px">
+<p>"Content" means any information, text, graphics, or other materials uploaded, downloaded or appearing on the Service. You retain ownership of all Content you submit, post, display, or otherwise make available on the Service.</p>
+<h5>Your License to Path of child</h5>
+<p>By submitting, posting or displaying Content on or through the Service, you grant us a worldwide, non-exclusive, royalty-free license (with the right to sublicense) to use, copy, reproduce, process, adapt, modify, publish, transmit, display and distribute such Content in any and all media or distribution methods (now known or later developed).</p>
+<p>You agree that this license includes the right for other users of the Service to modify your Content, and for Path of child to make your Content available to others for the publication, distribution, syndication, or broadcast of such Content on other media and services, subject to our terms and conditions for such Content use. Such additional uses by Path of child or others may be made with no compensation paid to you with respect to the Content that you submit, post, transmit or otherwise make available through the Service.</p>
+<p>We may modify or adapt your Content in order to transmit, display or distribute it over computer networks and in various media and/or make changes to your Content as are necessary to conform and adapt that Content to any requirements or limitations of any networks, devices, services or media.</p>
+<p>Additionally, by uploading content to the site, you warrant, represent and agree that you have the right to grant Path of child the license described above. You also represent, warrant and agree that you have not and will not contribute any Content that (a) infringes, violates or otherwise interferes with any copyright or trademark of another party, (b) reveals any trade secret, unless the trade secret belongs to you or you have the owner's permission to disclose it, (c) infringes any intellectual property right of another or the privacy or publicity rights of another, (d) is libelous, defamatory, abusive, threatening, harassing, hateful, offensive or otherwise violates any law or right of any third party, (e) creates an impression that you know is incorrect, misleading, or deceptive, including by impersonating others or otherwise misrepresenting your affiliation with a person or entity; (f) contains other people's private or personally identifiable information without their express authorization and permission, and/or (g) contains or links to a virus, trojan horse, worm, time bomb or other computer programming routine or engine that is intended to damage, detrimentally interfere with, surreptitiously intercept or expropriate any system, data or information. Path of child reserves the right in its discretion to remove any Content from the Site, suspend or terminate your account at any time, or pursue any other remedy or relief available under equity or law.</p>
+<h5>Path of child's Licenses to You</h5>
+<p>Subject to these Terms, Path of child gives you a worldwide, royalty-free, non-assignable and non-exclusive license to re-post any of the Content on Path of child anywhere on the rest of the web, provided that the user who created the content has not explicitly marked the content as not for reproduction, and provided that you: (a) do not modify the Content; (b) attribute Path of child by name in readable text and with a human and machine-followable link (an HTML anchor tag) linking back to the page displaying the original source of the content on Path of child.io on every page that contains Path of child content; (c) upon request, either by Path of child or a user, remove the user's name from Content which the user has subsequently made anonymous; (d) upon request, either by Path of child or by a user who contributed to the Content, make a reasonable effort to update a particular piece of Content to the latest version on Path of child.io; and (e) upon request, either by Path of child or by a user who contributed to the Content, make a reasonable attempt to delete Content that has been deleted or marked as not for reproduction on Path of child.io.</p>
+<p>You may only use the attribution required by this Section in the manner set out above. In exercising these rights, you may not implicitly or explicitly assert or imply any connection with, sponsorship or endorsement by Path of child, or any Path of child user of you or your use of the work, without the separate, express prior written permission of Path of child or the Path of child user.</p>
+<p>If you operate a search engine or robot, or you republish a significant fraction of all Path of child Content (as we may determine in our reasonable discretion), you must additionally follow these rules:</p>
+<p>
+</p><ul>
+<li>You must use a descriptive user agent header.</li>
+<li>You must follow robots.txt at all times.</li>
+<li>You must make it clear how to contact you, either in your user agent string, or on your website if you have one.</li>
+</ul>
+<p></p>
+<p>Subject to these Terms, Path of child gives you a personal, worldwide, royalty-free, revocable, non-assignable and non-exclusive license to use the Service as it is provided to you by Path of child.</p>
+<p>Your Content will be viewable by other users of the Service and through third party services and websites. You should only provide Content that you are comfortable sharing with others under these Terms.</p>
+<p>All Content, whether publicly posted or privately transmitted, is the sole responsibility of the person who originated such Content. We may not monitor or control the Content posted via the Service. Any use of or reliance on any Content or materials posted via the Service or obtained by you through the Service is at your own risk. We do not endorse, support, represent or guarantee the completeness, truthfulness, accuracy, or reliability of any Content or communications posted via the Service or endorse any opinions expressed via the Service. You understand that by using the Service, you may be exposed to Content that might be offensive, harmful, inaccurate or otherwise inappropriate. Under no circumstances will Path of child be liable in any way for any Content, including, but not limited to, any errors or omissions in any Content, or any loss or damage of any kind incurred as a result of the use of any Content made available via the Service or broadcast elsewhere.</p>
+<p>You are responsible for your use of the Service, for any Content you provide, and for any consequences thereof, including the use of your Content by other users and third party partners. You understand that your Content may be republished and if you do not have the right to submit Content for such use, it may subject you to liability. Path of child will not be responsible or liable for any use of your Content by Path of child in accordance with these Terms.</p>
+<p>We reserve the right at all times (but will not have an obligation) to remove or refuse to distribute any Content on the Service and to terminate users or reclaim usernames. We also reserve the right to access, read, preserve, and disclose any information as we reasonably believe is necessary to (i) satisfy any applicable law, regulation, legal process or governmental request, (ii) enforce the Terms, including investigation of potential violations hereof, (iii) detect, prevent, or otherwise address fraud, security or technical issues, (iv) respond to user support requests, or (v) protect the rights, property or safety of Path of child, its users and the public.</p>
+</div>
+<h5>Rules</h5>
+<p>You must not do any of the following while accessing or using the Service: (i) use the Service for any unlawful purposes or for promotion of illegal activities; (ii) upload or post any Content (as defined above) in violation of the provisions contained in the "Your License to Path of child" section of these terms; (iii) use the Service for the purpose of spamming anyone; (iv) access or tamper with non-public areas of the Service, Path of child's computer systems, or the technical delivery systems of Path of child's providers; (v) probe, scan, or test the vulnerability of any system or network or breach or circumvent any security or authentication measures; (vi) access or search or attempt to access or search the Service by any means (automated or otherwise) other than through the currently available, published interfaces that are provided by Path of child (and only pursuant to those terms and conditions), unless you have been specifically allowed to do so in a separate agreement with Path of child (crawling the Service is permissible in accordance with these Terms, but scraping the Service without the prior consent of Path of child except as permitted by these Terms is expressly prohibited); (vii) forge any TCP/IP packet header or any part of the header information in any email or posting, or in any way use the Service to send altered, deceptive or false source-identifying information; or (viii) interfere with or disrupt (or attempt to do so) the access of any user, host or network, including, without limitation, sending a virus, overloading, flooding, spamming, mail-bombing the Service, or by scripting the creation of Content in such a manner as to interfere with or create an undue burden on the Service.</p>
+<p>We may make available one or more APIs for interacting with the Service. Your use of any Path of child API is subject to these terms and the Path of child API Rules, which will be posted before we make these APIs available (as part of these Terms).</p>
+<h5>Proprietary Rights</h5>
+<p>All right, title, and interest in and to the Service (excluding Content provided by users) are and will remain the exclusive property of Path of child and its licensors. The Service is not protected by copyright and trademark yet. Except as expressly provided herein, nothing in the Terms gives you a right to use the Path of child name or any of the Path of child trademarks, logos, domain names, and other distinctive brand features. Any feedback, comments, or suggestions you may provide regarding the Service is entirely voluntary and we will be free to use such feedback, comments or suggestions as we see fit and without any obligation to you.</p>
+<p>The Service may include advertisements, which may be targeted to the Content or information on the Service, queries made through the Service, or other information. The types and extent of advertising by Path of child on the Service are subject to change. In consideration for Path of child granting you access to and use of the Service, you agree that Path of child and its third party providers and partners may place such advertising on the Service or in connection with the display of Content or information from the Service whether submitted by you or others.</p>
+<p>We reserve the right to remove Content alleged to be infringing or otherwise illegal without prior notice and at our sole discretion. In appropriate circumstances, Path of child will also terminate a user's account if the user is determined to be a repeat infringer.</p>
+<h5>Privacy</h5>
+<p>
+Path of child values your privacy. By using the Service you consent to the transfer of your information to the UK and/or other countries for storage, processing and use by Path of child.
+</p>
+<h5>Links</h5>
+<p>The Service may contain links to third-party websites or resources. You acknowledge and agree that we are not responsible or liable for: (i) the availability or accuracy of such websites or resources; or (ii) the content, products, or services on or available from such websites or resources. Links to such websites or resources do not imply any endorsement by Path of child of such websites or resources or the content, products, or services available from such websites or resources. You acknowledge sole responsibility for and assume all risk arising from your use of any such websites or resources.</p>
+<h5>INDEMNIFICATION</h5>
+YOU HEREBY AGREE, AT YOUR EXPENSE, TO INDEMNIFY, DEFEND AND HOLD HARMLESS PATHOFCHILD.IO ITS LICENSORS, AND THEIR RESPECTIVE DIRECTORS, OFFICERS, EMPLOYEES AND AGENTS FROM AND AGAINST ALL DEMANDS, LIABILITIES, LOSSES, CLAIMS AND EXPENSES, INCLUDING ATTORNEY’S FEES, ARISING OUT OF (A) YOUR USE OF THE SERVICE, (B) THIRD PARTY CLAIMS, ACTIONS OR ALLEGATIONS OF INFRINGEMENT BASED ON INFORMATION, DATA OR CONTENT YOU SUBMITTED IN CONNECTION WITH THE SERVICE, (C) ANY FRAUD OR MANIPULATION, OR OTHER BREACH OF THIS AGREEMENT, BY YOU, OR (D) THIRD PARTY CLAIMS, ACTIONS OR ALLEGATIONS BROUGHT AGAINST US ARISING OUT OF YOUR USE OF THE SERVICE OR THE SITE. PATHOFCHILD.IO RESERVES THE RIGHT, AT ITS OWN EXPENSE AND IN ITS SOLE DISCRETION, TO ASSUME THE EXCLUSIVE DEFENSE AND CONTROL OF ANY MATTER OTHERWISE SUBJECT TO INDEMNIFICATION BY YOU.
+<h5>General Terms</h5>
+<p>These Terms and any action related thereto will be governed by the UK laws without regard to or application of its conflict of law provisions or your state or country of residence. Unless submitted to arbitration as set forth in the following paragraph, all claims, legal proceedings or litigation arising in connection with the Service will be brought solely in UK, and you consent to the jurisdiction of and venue in such courts and waive any objection as to inconvenient forum.</p>
+<p>These Terms are the entire and exclusive agreement between Thomas Bullier and you regarding the Service (excluding any services for which you have a separate agreement with Path of child that is explicitly in addition or in place of these Terms), and these Terms supersede and replace any prior agreements between Path of child and you regarding the Service.</p>
+<p>The failure of Thomas Bullier to enforce any right or provision of these Terms will not be deemed a waiver of such right or provision. In the event that any provision of these Terms is held to be invalid or unenforceable, the remaining provisions of these Terms will remain in full force and effect.</p>
+<p>We may revise these Terms from time to time. The most current version will always be on this page (or such other page as the Service may indicate). If the revision, in our sole discretion, is material we will notify you via posting to our website or e-mail to the email associated with your account. By continuing to access or use the Service after those revisions become effective, you agree to be bound by the revised Terms.</p>
+<p>The Service is operated and provided by Thomas Bullier. If you have questions about these Terms, please contact us at info@pathofchild.io.</p>
+<br>
+<p>Heavily inspired by <a href="https://stackshare.io/terms">https://stackshare.io/terms</a></p>
+        ]]></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/static/terms/terms.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2feb775bd9e1d01714a7545173ea322d40c537d5" datatype="html">
+        <source>whitelist.list.header.title</source>
+        <target>Title</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/whitelist/whitelist-list/whitelist-list.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="95bd8efb4b5af5e7c0129a7547fdff78dcfa8870" datatype="html">
+        <source>whitelist.list.header.required_age</source>
+        <target>Required age</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/whitelist/whitelist-list/whitelist-list.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

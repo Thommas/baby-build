@@ -4,36 +4,46 @@ Roadmap
 Short term
 ----------
 
-- Design Calendar
-- Manage Rewards
-- Manage Goal
-- Manage Quest
+- Refactor task to skill and lvl
+- Fix home
+- Fix sync build title between build item and build show
+- Subrouting for different tab (skill tree view)
+- Fix login won't redirect to current build
 
 Mid term
 --------
 
-- Add more tooltips on UX
-- Implement instructions on home based on xp/level
-- Implement xp and level to unlock calendar
-- Improve gamification lambda
-- Implement giving access to a child to other family members
+- Requirement entity for min age or min xp/level
+- Upload picture for skill
 
 Long term
 ---------
 
-- Test renew token
+- Refactor gamification
+- Logs
+- Comments
+- Implement tech tree view for skills
+- Design reward into task
+- Design task type "quest"
+- Implement Achievements based on count
+- Implement security checks in graphql lambda
+- Implement giving access to a child and its builds to other family members
 - Build inspiration static page
 - Build roadmap static page
 - Add unit tests
 - Make a list of what this platform should not be used for (aka everything that did not work)
+- Badges
+- Leaderboards
+- Saas
+- Invitations
+- Notifications
+- Make unlockable items a core gamification component (calendar, categories, type of quests)
 
 
 Entities
 --------
 
 ### Rewards
-
-Need to create a list of small and big rewards.
 
 Rewards types:
 
@@ -79,12 +89,6 @@ Permanent reward system with gauge
 8) Eat oishii food
 
 9) The child can ask for a reward
-
-### Build
-
-A build is the following:
-- Goals > big rewards
-- Quests > small rewards
 
 ### Goal
 
@@ -154,6 +158,7 @@ https://www.click2houston.com/news/investigates/danger-warning-about-popular-vir
 Similar apps
 ------------
 
+https://habitica.com
 https://www.choremonster.com
 https://www.classcraft.com
 #edtech #familytech

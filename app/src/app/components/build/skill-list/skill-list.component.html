@@ -1,0 +1,5 @@
+<app-skill-item-cmp
+  *ngFor="let skill of skills"
+  [skill]="skill"
+  (click)="selectSkill.emit(skill)"
+></app-skill-item-cmp>

@@ -12,35 +12,27 @@ import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas';
 
 // Types
 import buildType from './types/build';
-import childType from './types/child';
-import gamificationType from './types/gamification';
-import questType from './types/quest';
+import lvlType from './types/lvl';
+import skillType from './types/skill';
 import userType from './types/user';
-import whitelistItemType from './types/whitelist-item';
 
 // Resolvers
 import buildResolver from './resolvers/build';
-import childResolver from './resolvers/child';
-import gamificationResolver from './resolvers/gamification';
-import questResolver from './resolvers/quest';
+import lvlResolver from './resolvers/lvl';
+import skillResolver from './resolvers/skill';
 import userResolver from './resolvers/user';
-import whitelistItemResolver from './resolvers/whitelist-item';
 
 const typeDefs = mergeTypes([
   buildType,
-  childType,
-  gamificationType,
-  questType,
-  userType,
-  whitelistItemType
+  lvlType,
+  skillType,
+  userType
 ]);
 const resolvers = mergeResolvers([
   buildResolver,
-  childResolver,
-  gamificationResolver,
-  questResolver,
-  userResolver,
-  whitelistItemResolver
+  lvlResolver,
+  skillResolver,
+  userResolver
 ]);
 
 const schema = makeExecutableSchema({

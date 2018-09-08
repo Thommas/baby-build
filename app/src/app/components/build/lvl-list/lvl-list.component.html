@@ -1,0 +1,5 @@
+<app-lvl-item-cmp
+  *ngFor="let lvl of lvls"
+  [lvl]="lvl"
+  (click)="selectLvl.emit(lvl)"
+></app-lvl-item-cmp>
