@@ -3,13 +3,11 @@ Path of child
 
 Gamified life planning platform for your child.
 
-A blend of action RPG and project management.
-
 
 Stack
 -----
 
-- Angular 5
+- Angular
 - Serverless framework
 - Apollo GraphQL
 - Dexie

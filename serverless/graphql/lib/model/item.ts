@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - Model - Skill
+ * GraphQL - Model - Item
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -11,7 +11,7 @@ import * as dynamoose from 'dynamoose';
 declare var process : {
   env: {
     LOCAL_DYNAMODB_ENDPOINT: string,
-    SKILL_TABLE: string
+    ITEM_TABLE: string
   }
 }
 
@@ -19,21 +19,30 @@ if (process.env.LOCAL_DYNAMODB_ENDPOINT && process.env.LOCAL_DYNAMODB_ENDPOINT.l
   dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
 }
 
-const TableName = process.env.SKILL_TABLE;
+const TableName = process.env.ITEM_TABLE;
 
 var Schema = dynamoose.Schema;
 
-var SkillSchema = new Schema({
+var ItemSchema = new Schema({
   id: {
     type: String,
   },
   label: {
     type: String,
   },
-  description: {
+  required_age: {
+    type: Number,
+  },
+  required_age_explanation: {
     type: String,
   },
-  buildId: {
+  score: {
+    type: Number,
+  },
+  score_explanation: {
+    type: String,
+  },
+  childId: {
     type: String,
   },
   userId: {
@@ -43,6 +52,6 @@ var SkillSchema = new Schema({
   timestamps: true
 });
 
-const Skill = dynamoose.model(TableName, SkillSchema);
+const Item = dynamoose.model(TableName, ItemSchema);
 
-export default Skill
+export default Item

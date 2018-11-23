@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - Model - Lvl
+ * GraphQL - Model - Child
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -11,7 +11,7 @@ import * as dynamoose from 'dynamoose';
 declare var process : {
   env: {
     LOCAL_DYNAMODB_ENDPOINT: string,
-    LVL_TABLE: string
+    CHILD_TABLE: string
   }
 }
 
@@ -19,22 +19,31 @@ if (process.env.LOCAL_DYNAMODB_ENDPOINT && process.env.LOCAL_DYNAMODB_ENDPOINT.l
   dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
 }
 
-const TableName = process.env.LVL_TABLE;
+const TableName = process.env.CHILD_TABLE;
 
 var Schema = dynamoose.Schema;
 
-var LvlSchema = new Schema({
+var ChildSchema = new Schema({
   id: {
     type: String,
   },
-  label: {
+  first_name: {
     type: String,
   },
-  description: {
+  middle_names: {
     type: String,
   },
-  skillId: {
+  last_name: {
     type: String,
+  },
+  nickname: {
+    type: String,
+  },
+  gender: {
+    type: Boolean,
+  },
+  birthdate: {
+    type: Date,
   },
   userId: {
     type: String,
@@ -43,6 +52,6 @@ var LvlSchema = new Schema({
   timestamps: true
 });
 
-const Lvl = dynamoose.model(TableName, LvlSchema);
+const Child = dynamoose.model(TableName, ChildSchema);
 
-export default Lvl
+export default Child

@@ -39,8 +39,8 @@ export function updateUser(args, userId) {
       if (!user) {
         throw new Error('User not found');
       }
-      if (args.currentBuildId) {
-        user.currentBuildId = args.currentBuildId;
+      if (args.currentChildId) {
+        user.currentChildId = args.currentChildId;
       }
       return user.save();
     });

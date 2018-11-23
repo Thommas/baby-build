@@ -27,7 +27,7 @@ var UserSchema = new Schema({
   id: {
     type: String,
   },
-  currentBuildId: {
+  currentChildId: {
     type: String,
   },
   xp: {

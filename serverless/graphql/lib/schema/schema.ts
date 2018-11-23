@@ -11,27 +11,23 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas';
 
 // Types
-import buildType from './types/build';
-import lvlType from './types/lvl';
-import skillType from './types/skill';
+import childType from './types/child';
+import itemType from './types/item';
 import userType from './types/user';
 
 // Resolvers
-import buildResolver from './resolvers/build';
-import lvlResolver from './resolvers/lvl';
-import skillResolver from './resolvers/skill';
+import childResolver from './resolvers/child';
+import itemResolver from './resolvers/item';
 import userResolver from './resolvers/user';
 
 const typeDefs = mergeTypes([
-  buildType,
-  lvlType,
-  skillType,
+  childType,
+  itemType,
   userType
 ]);
 const resolvers = mergeResolvers([
-  buildResolver,
-  lvlResolver,
-  skillResolver,
+  childResolver,
+  itemResolver,
   userResolver
 ]);
 

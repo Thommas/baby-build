@@ -23,14 +23,14 @@ declare var process : {
 /**
  * Returns an IAM policy document for a given user and resource.
  *
- * @method buildIAMPolicy
+ * @method childIAMPolicy
  * @param {String} userId - user id
  * @param {String} effect  - Allow / Deny
  * @param {String} resource - resource ARN
  * @param {String} context - response context
  * @returns {Object} policyDocument
  */
-const buildIAMPolicy = (userId, effect, resource, context) => {
+const childIAMPolicy = (userId, effect, resource, context) => {
   const policy = {
     principalId: userId,
     policyDocument: {
@@ -88,7 +88,7 @@ exports.auth = (event, context, callback) => {
         const effect = 'Allow'
         const resource = event.methodArn
         const authorizerContext = { userId: userId }
-        return callback(null, buildIAMPolicy(userId, effect, resource, authorizerContext))
+        return callback(null, childIAMPolicy(userId, effect, resource, authorizerContext))
       })
     })
   } catch (err) {
