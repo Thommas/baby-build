@@ -34,7 +34,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
-import { BuildModule } from './components/build/build.module';
+import { IdeaModule } from './components/idea/idea.module';
 import { UserModule } from './components/user/user.module';
 import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
@@ -90,7 +90,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatSidenavModule,
     MatToolbarModule,
     MatTooltipModule,
-    BuildModule,
+    IdeaModule,
     UserModule,
     SecurityModule,
     StaticModule,

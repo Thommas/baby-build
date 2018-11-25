@@ -1,0 +1,14 @@
+<div fxFill fxLayout="row" fxLayoutAlign="start center">
+  <button mat-icon-button class="done">
+    <mat-icon>done</mat-icon>
+  </button>
+  <form [formGroup]="formGroup" fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field fxFill>
+      <input #inputElement fxFill
+             matInput
+             [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write a idea name'"
+             formControlName="label"
+             (keyup.backspace)="onKey($event)">
+    </mat-form-field>
+  </form>
+</div>

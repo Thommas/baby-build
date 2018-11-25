@@ -1,0 +1,5 @@
+<app-idea-idea-cmp
+  *ngFor="let idea of ideas"
+  [idea]="idea"
+  (click)="selectIdea.emit(idea)"
+></app-idea-idea-cmp>

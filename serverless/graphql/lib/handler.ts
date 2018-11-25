@@ -12,7 +12,7 @@ import { verify } from 'jsonwebtoken';
 import * as dynamoose from 'dynamoose';
 import * as jwks from 'jwks-rsa';
 
-declare var process : {
+declare var process: {
   env: {
     AUTH0_CLIENT_ID: string,
     AUTH0_JWKS_URI: string,

@@ -6,8 +6,8 @@ export const environment = {
   contactUrl: '',
   dexieDatabase: '',
   auth0: {
-    clientID: ~,
-    domain: ~,
+    clientID: '',
+    domain: '',
     options: {
       container: 'login-form',
       auth: {
@@ -29,6 +29,6 @@ export const environment = {
     }
   },
   apollo: {
-    url: ~
+    url: ''
   }
-}
+};
