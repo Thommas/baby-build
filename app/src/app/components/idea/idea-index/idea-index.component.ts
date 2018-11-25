@@ -1,14 +1,13 @@
 /**
  * Path of child
  *
- * Component - Skill - Index
+ * Component - Idea - Index
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import swal from 'sweetalert2';
-import { clone } from 'lodash';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
@@ -20,10 +19,9 @@ import { UserService } from '../../../services';
   templateUrl: './idea-index.component.html',
   styleUrls: ['./idea-index.component.scss']
 })
-export class IdeaIndexComponent implements OnInit {
+export class IdeaIndexComponent {
   loading: boolean;
-  buildId: string;
-  selectedSkill: any;
+  selectedIdea: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,11 +30,7 @@ export class IdeaIndexComponent implements OnInit {
     private userService: UserService,
     private dialog: MatDialog
   ) {
-    this.buildId = null;
-    this.selectedSkill = null;
-  }
-
-  ngOnInit() {
+    this.selectedIdea = null;
   }
 
   addIdea() {
@@ -53,7 +47,7 @@ export class IdeaIndexComponent implements OnInit {
     }).subscribe();
   }
 
-  selectSkill(skill) {
-    this.selectedSkill = skill;
+  selectIdea(idea) {
+    this.selectedIdea = idea;
   }
 }

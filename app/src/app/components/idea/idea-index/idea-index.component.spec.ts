@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Build - Show
+ * Component - Idea - Index
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { Observable, from } from 'rxjs';
 import { ApolloStub, RouterStub } from '../../../services';
-import { BuildShowComponent } from './build-show.component';
+import { IdeaIndexComponent } from './idea-index.component';
 
 describe('BuildShowComponent', () => {
   beforeEach(async(() => {
@@ -21,7 +21,7 @@ describe('BuildShowComponent', () => {
         NO_ERRORS_SCHEMA
       ],
       declarations: [
-        BuildShowComponent
+        IdeaIndexComponent
       ],
       providers: [
         { provide: ActivatedRoute, useValue: { 'params': from([{ 'id': 1 }]) } },
@@ -32,7 +32,7 @@ describe('BuildShowComponent', () => {
   }));
 
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(BuildShowComponent);
+    const fixture = TestBed.createComponent(IdeaIndexComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

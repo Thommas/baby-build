@@ -7,21 +7,21 @@
  */
 
 require('dotenv').config();
-import { getUserByIdOrCreate } from '../lib/dynamo/user'
+import { getAuthUser } from '../lib/dynamo/user'
 
 describe('User', () => {
   const now = new Date().getTime();
   const userId = 'user-' + now;
 
-  it('getUserByIdOrCreate', (done) => {
-    getUserByIdOrCreate(userId).then((data: any) => {
-      expect(data.id).toEqual(userId);
-      expect(data.created_at).not.toBe(null);
-      expect(data.updated_at).not.toBe(null);
-      getUserByIdOrCreate(userId).then((data: any) => {
-        expect(data.id).toEqual(userId);
-        expect(data.created_at).not.toBe(null);
-        expect(data.updated_at).not.toBe(null);
+  it('getAuthUser', (done) => {
+    getAuthUser(userId).then((data1: any) => {
+      expect(data1.id).toEqual(userId);
+      expect(data1.created_at).not.toBe(null);
+      expect(data1.updated_at).not.toBe(null);
+      getAuthUser(userId).then((data2: any) => {
+        expect(data2.id).toEqual(userId);
+        expect(data2.created_at).not.toBe(null);
+        expect(data2.updated_at).not.toBe(null);
         done();
       });
     })

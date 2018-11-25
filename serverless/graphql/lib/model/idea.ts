@@ -8,7 +8,7 @@
 
 import * as dynamoose from 'dynamoose';
 
-declare var process : {
+declare var process: {
   env: {
     LOCAL_DYNAMODB_ENDPOINT: string,
     IDEA_TABLE: string
@@ -21,9 +21,9 @@ if (process.env.LOCAL_DYNAMODB_ENDPOINT && process.env.LOCAL_DYNAMODB_ENDPOINT.l
 
 const TableName = process.env.IDEA_TABLE;
 
-var Schema = dynamoose.Schema;
+const Schema = dynamoose.Schema;
 
-var IdeaSchema = new Schema({
+const IdeaSchema = new Schema({
   id: {
     type: String,
   },

@@ -1,13 +1,13 @@
 /**
  * Path of child
  *
- * Component - Idea - Form
+ * Component - Idea - Item
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { clone, isEmpty } from 'lodash';
-import { Component, Input, ViewChild, OnChanges } from '@angular/core';
+import { Component, Input, ViewChild, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -24,7 +24,7 @@ import {
   templateUrl: './idea-item.component.html',
   styleUrls: ['./idea-item.component.scss']
 })
-export class IdeaItemComponent implements OnChanges {
+export class IdeaItemComponent implements OnInit, OnChanges {
   @Input() idea: any;
   @ViewChild('inputElement') inputElement: any;
   formGroup: FormGroup;

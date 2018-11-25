@@ -10,19 +10,17 @@ const Idea = `
   type Idea {
     id: String!
     label: String
-    required_age: Number
-    required_age_explanation: String
-    score: Number
-    score_explanation: String
+    requiredAge: Int
+    requiredAgeExplanation: String
+    score: Int
+    scoreExplanation: String
     userId: String!
   }
   type Query {
-    ideas(childId: String!): [Idea]
+    ideas: [Idea]
   }
   type Mutation {
-    createIdea(
-      childId: String!
-    ): Idea
+    createIdea: Idea
     updateIdea(
       id: ID!
       label: String

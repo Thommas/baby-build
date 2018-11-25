@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Idea - Form
+ * Component - Idea - Item
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

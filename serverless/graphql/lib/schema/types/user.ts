@@ -9,7 +9,6 @@
 const User = `
   type User {
     id: String!
-    currentChildId: String
     xp: Int!
     lvl: Int!
   }
@@ -20,7 +19,6 @@ const User = `
   type Mutation {
     updateUser(
       id: ID!
-      currentChildId: String
     ): User
   }
 `;

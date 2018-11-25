@@ -10,7 +10,7 @@ import * as dbIdea from '../../dynamo/idea';
 
 export default {
   Query: {
-    ideas: (_, args, context) => dbIdea.getIdeas(args, context.userId),
+    ideas: (_, args, context) => dbIdea.getIdeas(context.userId),
   },
   Mutation: {
     createIdea: (_, args, context) => dbIdea.createIdea(args, context.userId),

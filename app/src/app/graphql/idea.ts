@@ -9,17 +9,21 @@
 import gql from 'graphql-tag';
 
 export const GetIdeas = gql`
-  query GetIdeas() {
-    ideas() {
+  query GetIdeas {
+    ideas {
       id
       label
+      requiredAge
+      requiredAgeExplanation
+      score
+      scoreExplanation
     }
   }
 `;
 
 export const CreateIdeaMutation = gql`
-  mutation CreateIdea() {
-    createIdea() {
+  mutation CreateIdea {
+    createIdea {
       id
     }
   }
@@ -29,11 +33,18 @@ export const UpdateIdeaMutation = gql`
   mutation UpdateIdea(
     $id: ID!
     $label: String
-    $description: String
+    $requiredAge: Int
+    $requiredAgeExplanation: String
+    $score: Int
+    $scoreExplanation: String
   ) {
     updateIdea(
       id: $id
       label: $label
+      requiredAge: $requiredAge
+      requiredAgeExplanation: $requiredAgeExplanation
+      score: $score
+      scoreExplanation: $scoreExplanation
     ) {
       id
     }

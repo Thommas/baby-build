@@ -7,13 +7,12 @@
  */
 
 import { clone, isEmpty } from 'lodash';
-import { Component, Inject, OnChanges, Input, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, OnChanges, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
-  CreateLvlMutation,
   UpdateIdeaMutation,
   GetIdeas
 } from '../../../graphql';
@@ -23,7 +22,7 @@ import {
   templateUrl: './idea-show.component.html',
   styleUrls: ['./idea-show.component.scss']
 })
-export class IdeaShowComponent implements OnChanges {
+export class IdeaShowComponent implements OnInit, OnChanges {
   @Input('idea') idea: any;
   @ViewChild('labelElement') labelElement: any;
   @ViewChild('descriptionElement') descriptionElement: any;
@@ -82,15 +81,6 @@ export class IdeaShowComponent implements OnChanges {
           buildId: this.idea.buildId
         }
       }]
-    }).subscribe();
-  }
-
-  addLvl() {
-    this.apollo.mutate({
-      mutation: CreateLvlMutation,
-      variables: {
-        ideaId: this.idea.id
-      }
     }).subscribe();
   }
 }

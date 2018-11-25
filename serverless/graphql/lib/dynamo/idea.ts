@@ -9,9 +9,8 @@
 import generate = require('nanoid/generate');
 import Idea from '../model/idea';
 
-export function getIdeas(args, userId) {
+export function getIdeas(userId) {
   const params: any = {
-    childId: {eq: args.childId},
     userId: {eq: userId}
   };
   return Idea.scan(params).exec();

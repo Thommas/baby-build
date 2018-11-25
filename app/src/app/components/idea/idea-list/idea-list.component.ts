@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Idea - Index
+ * Component - Idea - List
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -12,7 +12,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angu
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
-import { GetIdeas, GetBuild, CreateIdeaMutation } from '../../../graphql';
+import { GetIdeas, CreateIdeaMutation } from '../../../graphql';
 import { UserService } from '../../../services';
 
 @Component({
@@ -22,7 +22,7 @@ import { UserService } from '../../../services';
 })
 export class IdeaListComponent implements OnInit, OnChanges {
   @Input('buildId') buildId: string;
-  @Output('selectIdea') selectIdea: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectIdea: EventEmitter<any> = new EventEmitter<any>();
   loading: boolean;
   ideas: any;
 
@@ -51,9 +51,7 @@ export class IdeaListComponent implements OnInit, OnChanges {
     this.apollo.watchQuery<any>({
       query: GetIdeas,
       fetchPolicy: 'network-only',
-      variables: {
-        buildId: this.buildId
-      }
+      variables: {}
     })
       .valueChanges
       .subscribe(
@@ -62,6 +60,6 @@ export class IdeaListComponent implements OnInit, OnChanges {
           this.ideas = data.ideas;
         },
         (e) => console.log('error while loading ideas', e)
-      )
+      );
   }
 }
