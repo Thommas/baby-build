@@ -25,9 +25,12 @@ import {
 export class IdeaShowComponent implements OnInit, OnChanges {
   @Input('idea') idea: any;
   @ViewChild('labelElement') labelElement: any;
-  @ViewChild('descriptionElement') descriptionElement: any;
+  @ViewChild('requiredAgeExplanationElement') requiredAgeExplanationElement: any;
+  @ViewChild('scoreExplanationElement') scoreExplanationElement: any;
   formGroup: FormGroup;
   loading: boolean;
+  ages: number[] = [];
+  scores: number[] = [];
 
   constructor(private apollo: Apollo) {
     this.idea = {};
@@ -41,20 +44,27 @@ export class IdeaShowComponent implements OnInit, OnChanges {
       label: '',
       description: ''
     });
+    for (let age = 1; age <= 20; age++) {
+      this.ages.push(age);
+    }
+    for (let score = -5; score <= 5; score++) {
+      this.scores.push(score);
+    }
   }
 
   ngOnInit() {
-    fromEvent(this.labelElement.nativeElement, 'input').pipe(
-      map((e: { target: HTMLInputElement }) => e.target.value),
-      debounceTime(800),
-      distinctUntilChanged(),
-    ).subscribe(data => this.save());
-
-    fromEvent(this.descriptionElement.nativeElement, 'input').pipe(
-      map((e: { target: HTMLInputElement }) => e.target.value),
-      debounceTime(800),
-      distinctUntilChanged(),
-    ).subscribe(data => this.save());
+    const elements = [
+      this.labelElement,
+      this.requiredAgeExplanationElement,
+      this.scoreExplanationElement,
+    ];
+    for (let element of elements) {
+      fromEvent(element.nativeElement, 'input').pipe(
+        map((e: { target: HTMLInputElement }) => e.target.value),
+        debounceTime(800),
+        distinctUntilChanged(),
+      ).subscribe(data => this.save());
+    }
   }
 
   ngOnChanges() {
@@ -62,7 +72,10 @@ export class IdeaShowComponent implements OnInit, OnChanges {
       this.formGroup.setValue({
         id: this.idea.id,
         label: this.idea.label,
-        description: this.idea.description
+        required_age: this.idea.required_age,
+        required_age_explanation: this.idea.required_age_explanation,
+        score: this.idea.score,
+        score_explanation: this.idea.score_explanation,
       });
     }
   }

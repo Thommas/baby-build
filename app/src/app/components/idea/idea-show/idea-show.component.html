@@ -8,33 +8,35 @@
         formControlName="label">
     </mat-form-field>
     <div fxLayout="row">
-      <!--
-      <mat-form-field>
-        <mat-select placeholder="Age required">
-          <mat-option *ngFor="">
-
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      -->
+      <button *ngFor="let age in ages">{{ age }}</button>
     </div>
     <mat-divider></mat-divider>
-    <div fxLayout="row" class="description-container">
+    <div fxLayout="row" class="required-age-explanation-container">
       <mat-icon>short_text</mat-icon>
       <textarea
-        #descriptionElement
+        #requiredAgeExplanationElement
         matInput
         matTextareaAutosize
-        [placeholder]="this.formGroup.get('description').value && this.formGroup.get('description').value.length !== 0 ? '' : 'Description'"
-        formControlName="description"></textarea>
+        [placeholder]="this.formGroup.get('required_age_explanation').value && this.formGroup.get('required_age_explanation').value.length !== 0 ? '' : 'Explain this age requirement'"
+        formControlName="required_age_explanation"></textarea>
     </div>
     <mat-divider></mat-divider>
+    <div fxLayout="row">
+      <button *ngFor="let score in scores">{{ score }}</button>
+    </div>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" class="score-explanation-container">
+      <mat-icon>short_text</mat-icon>
+      <textarea
+        #scoreExplanationElement
+        matInput
+        matTextareaAutosize
+        [placeholder]="this.formGroup.get('score_explanation').value && this.formGroup.get('score_explanation').value.length !== 0 ? '' : 'Explain this score'"
+        formControlName="score_explanation"></textarea>
+    </div>
   </form>
   <div fxLayout="column" fxLayoutAlign="start stretch">
     <!-- LOG LIST HERE -->
-  </div>
-  <div fxLayout="column" fxLayoutAlign="start stretch">
-    <!-- COMMENT LIST -->
   </div>
 </div>
 <div class="comment-form-container" fxLayout="column" fxLayoutAlign="start stretch">
