@@ -37,17 +37,23 @@ export class IdeaShowComponent implements OnInit, OnChanges {
     this.formGroup = new FormGroup({
       id: new FormControl('', [Validators.required]),
       label: new FormControl('', []),
-      description: new FormControl('', [])
+      requiredAge: new FormControl('', []),
+      requiredAgeExplanation: new FormControl('', []),
+      score: new FormControl('', []),
+      scoreExplanation: new FormControl('', [])
     });
     this.formGroup.setValue({
       id: null,
       label: '',
-      description: ''
+      requiredAge: null,
+      requiredAgeExplanation: '',
+      score: null,
+      scoreExplanation: ''
     });
     for (let age = 1; age <= 20; age++) {
       this.ages.push(age);
     }
-    for (let score = -5; score <= 5; score++) {
+    for (let score = -3; score <= 3; score++) {
       this.scores.push(score);
     }
   }
@@ -67,15 +73,29 @@ export class IdeaShowComponent implements OnInit, OnChanges {
     }
   }
 
+  selectRequiredAge(age: number) {
+    this.formGroup.patchValue({
+      requiredAge: age,
+    });
+    this.save();
+  }
+
+  selectScore(score: number) {
+    this.formGroup.patchValue({
+      score: score,
+    });
+    this.save();
+  }
+
   ngOnChanges() {
     if (!isEmpty(this.idea)) {
       this.formGroup.setValue({
         id: this.idea.id,
         label: this.idea.label,
-        required_age: this.idea.required_age,
-        required_age_explanation: this.idea.required_age_explanation,
+        requiredAge: this.idea.requiredAge,
+        requiredAgeExplanation: this.idea.requiredAgeExplanation,
         score: this.idea.score,
-        score_explanation: this.idea.score_explanation,
+        scoreExplanation: this.idea.scoreExplanation,
       });
     }
   }

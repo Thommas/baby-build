@@ -24,7 +24,10 @@ const Idea = `
     updateIdea(
       id: ID!
       label: String
-      description: String
+      requiredAge: Int
+      requiredAgeExplanation: String
+      score: Int
+      scoreExplanation: String
     ): Idea
     deleteIdea(
       id: ID!

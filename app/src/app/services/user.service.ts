@@ -44,11 +44,7 @@ export class UserService {
     this.user.subscribe((response) => {
       if (response && response.data) {
         const authUser = response.data.authUser;
-        if (authUser.currentBuildId) {
-          this.router.navigate([`build/${authUser.currentBuildId}`]);
-        } else {
-          this.router.navigate([`build/create`]);
-        }
+        this.router.navigate([``]);
       }
     });
   }

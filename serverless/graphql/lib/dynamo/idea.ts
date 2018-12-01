@@ -34,9 +34,7 @@ export function updateIdea(args, userId) {
       if (idea.userId !== userId) {
         throw new Error('Unauthorized');
       }
-      if (args.label) {
-        idea.label = args.label;
-      }
+      Object.assign(idea, args);
       return idea.save();
     });
 }
