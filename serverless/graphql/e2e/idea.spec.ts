@@ -30,7 +30,7 @@ describe('Idea', () => {
   });
 
   it('updateIdea', (done) => {
-    updateIdea({ id: 'test-id-test' }, 'user-id-test').then((data: any) => {
+    updateIdea({ id: 1, label: 'updated label' }, 'auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
       done();
     })
   });

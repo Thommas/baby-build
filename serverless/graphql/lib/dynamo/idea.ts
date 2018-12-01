@@ -31,6 +31,9 @@ export function updateIdea(args, userId) {
       if (!idea) {
         throw new Error('Idea not found');
       }
+      if (idea.userId !== userId) {
+        throw new Error('Unauthorized');
+      }
       if (args.label) {
         idea.label = args.label;
       }
@@ -43,6 +46,9 @@ export function deleteIdea(args, userId) {
     .then((idea: any) => {
       if (!idea) {
         throw new Error('Idea not found');
+      }
+      if (idea.userId !== userId) {
+        throw new Error('Unauthorized');
       }
       return idea.delete();
     });

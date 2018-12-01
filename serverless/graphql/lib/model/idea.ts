@@ -16,6 +16,9 @@ declare var process: {
 }
 
 if (process.env.LOCAL_DYNAMODB_ENDPOINT && process.env.LOCAL_DYNAMODB_ENDPOINT.length > 0) {
+  dynamoose.AWS.config.update({
+    region: 'eu-west-2',
+  });
   dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
 }
 
@@ -30,16 +33,16 @@ const IdeaSchema = new Schema({
   label: {
     type: String,
   },
-  required_age: {
+  requiredAge: {
     type: Number,
   },
-  required_age_explanation: {
+  requiredAgeExplanation: {
     type: String,
   },
   score: {
     type: Number,
   },
-  score_explanation: {
+  scoreExplanation: {
     type: String,
   },
   userId: {

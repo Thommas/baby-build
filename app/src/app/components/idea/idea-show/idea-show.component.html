@@ -8,7 +8,7 @@
         formControlName="label">
     </mat-form-field>
     <div fxLayout="row">
-      <button *ngFor="let age in ages">{{ age }}</button>
+      <button mat-icon-button *ngFor="let age of ages">{{ age }}</button>
     </div>
     <mat-divider></mat-divider>
     <div fxLayout="row" class="required-age-explanation-container">
@@ -22,7 +22,7 @@
     </div>
     <mat-divider></mat-divider>
     <div fxLayout="row">
-      <button *ngFor="let score in scores">{{ score }}</button>
+      <button mat-icon-button *ngFor="let score of scores">{{ score }}</button>
     </div>
     <mat-divider></mat-divider>
     <div fxLayout="row" class="score-explanation-container">

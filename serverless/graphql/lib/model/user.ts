@@ -16,6 +16,9 @@ declare var process: {
 }
 
 if (process.env.LOCAL_DYNAMODB_ENDPOINT && process.env.LOCAL_DYNAMODB_ENDPOINT.length > 0) {
+  dynamoose.AWS.config.update({
+    region: 'eu-west-2',
+  });
   dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
 }
 
