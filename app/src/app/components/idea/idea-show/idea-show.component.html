@@ -1,62 +1,6 @@
 <div fxFlex fxFill>
-  <form [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="start stretch">
-    <mat-form-field>
-      <input
-        #labelElement
-        matInput
-        [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : ''"
-        formControlName="label">
-    </mat-form-field>
-    <h2>Required age</h2>
-    <div fxLayout="row">
-      <ng-container *ngFor="let age of ages">
-        <button mat-fab
-                *ngIf="age <= 10"
-                [color]="this.formGroup.get('requiredAge').value === age ? 'accent' : ''"
-                (click)="selectRequiredAge(age)">
-          {{ age }}
-        </button>
-      </ng-container>
-    </div>
-    <div fxLayout="row">
-      <ng-container *ngFor="let age of ages">
-        <button mat-fab
-                *ngIf="age > 10"
-                [color]="this.formGroup.get('requiredAge').value === age ? 'accent' : ''"
-                (click)="selectRequiredAge(age)">
-          {{ age }}
-        </button>
-      </ng-container>
-    </div>
-    <mat-divider></mat-divider>
-    <div fxLayout="row" class="text-area-container">
-      <mat-icon>short_text</mat-icon>
-      <textarea
-        #requiredAgeExplanationElement
-        matInput
-        matTextareaAutosize
-        [placeholder]="this.formGroup.get('requiredAgeExplanation').value && this.formGroup.get('requiredAgeExplanation').value.length !== 0 ? '' : 'Explain this age requirement'"
-        formControlName="requiredAgeExplanation"></textarea>
-    </div>
-    <mat-divider></mat-divider>
-    <h2>Recommendation Score</h2>
-    <div fxLayout="row">
-      <button mat-raised-button
-              *ngFor="let score of scores"
-              [color]="this.formGroup.get('score').value === score ? 'primary' : ''"
-              (click)="selectScore(score)">{{ score }}</button>
-    </div>
-    <mat-divider></mat-divider>
-    <div fxLayout="row" class="text-area-container">
-      <mat-icon>short_text</mat-icon>
-      <textarea
-        #scoreExplanationElement
-        matInput
-        matTextareaAutosize
-        [placeholder]="this.formGroup.get('scoreExplanation').value && this.formGroup.get('scoreExplanation').value.length !== 0 ? '' : 'Explain this score'"
-        formControlName="scoreExplanation"></textarea>
-    </div>
-  </form>
+  <h1>{{ idea.label }}</h1>
+  <app-idea-user-show></app-idea-user-show>
   <div fxLayout="column" fxLayoutAlign="start stretch">
     <!-- LOG LIST HERE -->
   </div>

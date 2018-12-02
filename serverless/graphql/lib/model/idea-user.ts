@@ -11,7 +11,7 @@ import * as dynamoose from 'dynamoose';
 declare var process: {
   env: {
     LOCAL_DYNAMODB_ENDPOINT: string,
-    IDEA_TABLE: string
+    IDEA_USER_TABLE: string
   }
 }
 
@@ -22,24 +22,36 @@ if (process.env.LOCAL_DYNAMODB_ENDPOINT && process.env.LOCAL_DYNAMODB_ENDPOINT.l
   dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
 }
 
-const TableName = process.env.IDEA_TABLE;
+const TableName = process.env.IDEA_USER_TABLE;
 
 const Schema = dynamoose.Schema;
 
-const IdeaSchema = new Schema({
+const IdeaUserSchema = new Schema({
   id: {
     type: String,
   },
-  label: {
+  ideaId: {
     type: String,
   },
   userId: {
+    type: String,
+  },
+  requiredAge: {
+    type: Number,
+  },
+  requiredAgeExplanation: {
+    type: String,
+  },
+  score: {
+    type: Number,
+  },
+  scoreExplanation: {
     type: String,
   },
 }, {
   timestamps: true
 });
 
-const Idea = dynamoose.model(TableName, IdeaSchema);
+const IdeaUser = dynamoose.model(TableName, IdeaUserSchema);
 
-export default Idea
+export default IdeaUser

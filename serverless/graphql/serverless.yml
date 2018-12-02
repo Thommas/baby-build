@@ -8,6 +8,7 @@ plugins:
 custom:
   stage: ${opt:stage, self:provider.stage}
   ideaTable: ${self:service}-${self:custom.stage}-idea
+  ideaUserTable: ${self:service}-${self:custom.stage}-idea-user
   userTable: ${self:service}-${self:custom.stage}-user
   secrets: ${file(secrets.yml):${self:custom.stage}}
   serverless-offline:
@@ -23,6 +24,8 @@ custom:
         sources:
           - table: ${self:custom.ideaTable}
             sources: [./fixtures/idea.json]
+          - table: ${self:custom.ideaUserTable}
+            sources: [./fixtures/idea-user.json]
           - table: ${self:custom.userTable}
             sources: [./fixtures/user.json]
 
@@ -57,6 +60,7 @@ provider:
     AUTH0_JWKS_URI: ${self:custom.secrets.AUTH0_JWKS_URI}
     AUTH0_JWKS_KID: ${self:custom.secrets.AUTH0_JWKS_KID}
     IDEA_TABLE: ${self:custom.ideaTable}
+    IDEA_USER_TABLE: ${self:custom.ideaUserTable}
     USER_TABLE: ${self:custom.userTable}
 
 functions:
@@ -89,6 +93,22 @@ resources:
         TableName: ${self:custom.ideaTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
+    IdeaUserTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
+          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
+        TableName: ${self:custom.ideaUserTable}
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
     UserTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
@@ -112,6 +132,12 @@ resources:
         "Fn::GetAtt": [ IdeaTable, StreamArn ]
       Export:
         Name: ${self:service}:${self:custom.stage}:IdeaTableStreamArn
+    IdeaUserTableStreamArn:
+      Description: The StreamArn for the IdeaUser Table
+      Value:
+        "Fn::GetAtt": [ IdeaUserTable, StreamArn ]
+      Export:
+        Name: ${self:service}:${self:custom.stage}:IdeaUserTableStreamArn
     UserTableStreamArn:
       Description: The StreamArn for the User Table
       Value:

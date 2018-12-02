@@ -15,7 +15,7 @@ import {
 
 describe('Idea', () => {
   it('getIdeas', (done) => {
-    getIdeas('user-id-test').then((data: any) => {
+    getIdeas('auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
       done();
     })
   });
@@ -24,13 +24,17 @@ describe('Idea', () => {
     const args = {
       label: 'test-label',
     };
-    createIdea(args, 'user-id-test').then((data: any) => {
+    createIdea(args, 'auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
       done();
     })
   });
 
   it('updateIdea', (done) => {
-    updateIdea({ id: 1, label: 'updated label' }, 'auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
+    const args: any = {
+      id: '0986945c-36de-4f34-b869-d06039501879',
+      label: 'Mario - Updated'
+    };
+    updateIdea(args, 'auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
       done();
     })
   });

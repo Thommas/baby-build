@@ -6,30 +6,28 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-const Idea = `
-  type Idea {
+const IdeaUser = `
+  type IdeaUser {
     id: String!
-    label: String
+    requiredAge: Int
+    requiredAgeExplanation: String
+    score: Int
+    scoreExplanation: String
+    ideaId: String!
     userId: String!
-    loggedUserIdea: UserIdea
   }
   type Query {
-    ideas: [Idea]
-    loggedUserIdea: UserIdea
+    ideaUsers: [IdeaUser]
   }
   type Mutation {
-    createIdea: Idea
-    updateIdea(
+    createIdeaUser: IdeaUser
+    updateIdeaUser(
       id: ID!
-      label: String
       requiredAge: Int
       requiredAgeExplanation: String
       score: Int
       scoreExplanation: String
     ): Idea
-    deleteIdea(
-      id: ID!
-    ): Idea
   }
 `;
-export default Idea;
+export default IdeaUser;
