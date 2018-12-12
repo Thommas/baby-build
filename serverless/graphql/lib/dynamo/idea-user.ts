@@ -35,19 +35,15 @@ export function getLoggedIdeaUser(ideaId, userId) {
 }
 
 export function updateIdeaUser(args, userId) {
-  const params: any = {
-    ideaId: {eq: args.ideaId},
-    userId: {eq: userId}
-  };
-  return IdeaUser.scan(params)
-    .exec()
-    .then((ideaUsers: any) => {
-      if (ideaUsers.count === 0) {
-        throw new Error('IdeaUser not found');
+  return IdeaUser.get(args.id)
+    .then((ideaUser: any) => {
+      if (!ideaUser) {
+        throw new Error('Idea not found');
       }
-      const ideaUser = ideaUsers[0];
+      if (ideaUser.userId !== userId) {
+        throw new Error('Unauthorized');
+      }
       Object.assign(ideaUser, args);
       return ideaUser.save();
-    })
-    .catch(e => console.log(e));
+    });
 }
