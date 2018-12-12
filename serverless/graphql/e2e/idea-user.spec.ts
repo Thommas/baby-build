@@ -9,7 +9,7 @@
 require('dotenv').config();
 import {
   getIdeaUsers,
-  getLoggedUserIdea,
+  getLoggedIdeaUser,
   updateIdeaUser
 } from '../lib/dynamo/idea-user'
 
@@ -20,8 +20,8 @@ describe('IdeaUser', () => {
     })
   });
 
-  it('getLoggedUserIdea', (done) => {
-    getLoggedUserIdea('0986945c-36de-4f34-b869-d06039501879', 'auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
+  it('getLoggedIdeaUser', (done) => {
+    getLoggedIdeaUser('0986945c-36de-4f34-b869-d06039501879', 'auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
       done();
     })
   });

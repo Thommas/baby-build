@@ -11,22 +11,14 @@ const Idea = `
     id: String!
     label: String
     userId: String!
-    loggedUserIdea: UserIdea
+    loggedIdeaUser: IdeaUser
   }
   type Query {
     ideas: [Idea]
-    loggedUserIdea: UserIdea
+    loggedIdeaUser: IdeaUser
   }
   type Mutation {
     createIdea: Idea
-    updateIdea(
-      id: ID!
-      label: String
-      requiredAge: Int
-      requiredAgeExplanation: String
-      score: Int
-      scoreExplanation: String
-    ): Idea
     deleteIdea(
       id: ID!
     ): Idea

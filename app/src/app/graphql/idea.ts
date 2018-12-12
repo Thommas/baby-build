@@ -13,10 +13,14 @@ export const GetIdeas = gql`
     ideas {
       id
       label
-      requiredAge
-      requiredAgeExplanation
-      score
-      scoreExplanation
+      userId
+      loggedIdeaUser {
+        id
+        requiredAge
+        requiredAgeExplanation
+        score
+        scoreExplanation
+      }
     }
   }
 `;
@@ -24,28 +28,6 @@ export const GetIdeas = gql`
 export const CreateIdeaMutation = gql`
   mutation CreateIdea {
     createIdea {
-      id
-    }
-  }
-`;
-
-export const UpdateIdeaMutation = gql`
-  mutation UpdateIdea(
-    $id: ID!
-    $label: String
-    $requiredAge: Int
-    $requiredAgeExplanation: String
-    $score: Int
-    $scoreExplanation: String
-  ) {
-    updateIdea(
-      id: $id
-      label: $label
-      requiredAge: $requiredAge
-      requiredAgeExplanation: $requiredAgeExplanation
-      score: $score
-      scoreExplanation: $scoreExplanation
-    ) {
       id
     }
   }

@@ -27,7 +27,8 @@ import {
   IdeaIndexComponent,
   IdeaItemComponent,
   IdeaListComponent,
-  IdeaShowComponent
+  IdeaShowComponent,
+  IdeaUserShowComponent
 } from './';
 
 @NgModule({
@@ -51,7 +52,8 @@ import {
     IdeaIndexComponent,
     IdeaItemComponent,
     IdeaListComponent,
-    IdeaShowComponent
+    IdeaShowComponent,
+    IdeaUserShowComponent
   ],
   providers: [
   ]

@@ -14,7 +14,6 @@ import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs
 import { Apollo } from 'apollo-angular';
 import {
   CreateIdeaMutation,
-  UpdateIdeaMutation,
   DeleteIdeaMutation,
   GetIdeas
 } from '../../../graphql';
@@ -69,13 +68,13 @@ export class IdeaItemComponent implements OnInit, OnChanges {
     if (!this.formGroup.valid) {
       return;
     }
-    this.apollo.mutate({
-      mutation: this.idea.id ? UpdateIdeaMutation : CreateIdeaMutation,
-      variables: {
-        id: this.idea.id ? this.idea.id : undefined,
-        label: label
-      }
-    }).subscribe();
+    // this.apollo.mutate({
+    //   mutation: this.idea.id ? UpdateIdeaMutation : CreateIdeaMutation,
+    //   variables: {
+    //     id: this.idea.id ? this.idea.id : undefined,
+    //     label: label
+    //   }
+    // }).subscribe();
   }
 
   onKey(event: KeyboardEvent) {

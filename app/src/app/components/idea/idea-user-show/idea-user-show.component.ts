@@ -13,7 +13,6 @@ import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
-  UpdateIdeaMutation,
   GetIdeas
 } from '../../../graphql';
 
@@ -22,7 +21,7 @@ import {
   templateUrl: './idea-user-show.component.html',
   styleUrls: ['./idea-user-show.component.scss']
 })
-export class IdeaShowComponent implements OnInit, OnChanges {
+export class IdeaUserShowComponent implements OnInit, OnChanges {
   @Input('idea') idea: any;
   @ViewChild('labelElement') labelElement: any;
   @ViewChild('requiredAgeExplanationElement') requiredAgeExplanationElement: any;
@@ -64,7 +63,7 @@ export class IdeaShowComponent implements OnInit, OnChanges {
       this.requiredAgeExplanationElement,
       this.scoreExplanationElement,
     ];
-    for (let element of elements) {
+    for (const element of elements) {
       fromEvent(element.nativeElement, 'input').pipe(
         map((e: { target: HTMLInputElement }) => e.target.value),
         debounceTime(800),
@@ -101,19 +100,19 @@ export class IdeaShowComponent implements OnInit, OnChanges {
   }
 
   save() {
-    if (!this.formGroup.valid) {
-      return;
-    }
-    const data = clone(this.formGroup.value);
-    this.apollo.mutate({
-      mutation: UpdateIdeaMutation,
-      variables: data,
-      refetchQueries: [{
-        query: GetIdeas,
-        variables: {
-          buildId: this.idea.buildId
-        }
-      }]
-    }).subscribe();
+    // if (!this.formGroup.valid) {
+    //   return;
+    // }
+    // const data = clone(this.formGroup.value);
+    // this.apollo.mutate({
+    //   mutation: UpdateIdeaMutation,
+    //   variables: data,
+    //   refetchQueries: [{
+    //     query: GetIdeas,
+    //     variables: {
+    //       buildId: this.idea.buildId
+    //     }
+    //   }]
+    // }).subscribe();
   }
 }

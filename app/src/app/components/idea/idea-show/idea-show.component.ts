@@ -6,16 +6,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { clone, isEmpty } from 'lodash';
-import { Component, Inject, OnInit, OnChanges, Input, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { fromEvent } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Component, Input } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import {
-  UpdateIdeaMutation,
-  GetIdeas
-} from '../../../graphql';
 
 @Component({
   selector: 'app-idea-show-cmp',

@@ -13,10 +13,12 @@ export function getIdeaUsers(ideaId) {
   const params: any = {
     ideaId: {eq: ideaId}
   };
-  return IdeaUser.scan(params).exec();
+  return IdeaUser.scan(params)
+    .exec()
+    .catch(e => console.log(e));
 }
 
-export function getLoggedUserIdea(ideaId, userId) {
+export function getLoggedIdeaUser(ideaId, userId) {
   const params: any = {
     ideaId: {eq: ideaId},
     userId: {eq: userId}
@@ -28,7 +30,8 @@ export function getLoggedUserIdea(ideaId, userId) {
         throw new Error('IdeaUser not found');
       }
       return ideaUsers[0];
-    });
+    })
+    .catch(e => console.log(e));
 }
 
 export function updateIdeaUser(args, userId) {
@@ -45,5 +48,6 @@ export function updateIdeaUser(args, userId) {
       const ideaUser = ideaUsers[0];
       Object.assign(ideaUser, args);
       return ideaUser.save();
-    });
+    })
+    .catch(e => console.log(e));
 }

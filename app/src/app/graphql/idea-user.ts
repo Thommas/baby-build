@@ -11,28 +11,27 @@ import gql from 'graphql-tag';
 export const GetIdeaUser = gql`
   query GetIdeaUser {
     ideaUser {
-      ideaId
-      userId
+      id
       requiredAge
       requiredAgeExplanation
       score
       scoreExplanation
+      ideaId
+      userId
     }
   }
 `;
 
 export const UpdateIdeaUserMutation = gql`
   mutation UpdateIdeaUser(
-    $ideaId: String!
-    $userId: String!
+    $id: String!
     $requiredAge: Int
     $requiredAgeExplanation: String
     $score: Int
     $scoreExplanation: String
   ) {
     updateIdeaUser(
-      ideaId: $ideaId
-      userId: $userId
+      id: $id
       requiredAge: $requiredAge
       requiredAgeExplanation: $requiredAgeExplanation
       score: $score
