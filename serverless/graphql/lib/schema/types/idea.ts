@@ -15,12 +15,15 @@ const Idea = `
   }
   type Query {
     ideas: [Idea]
-    loggedIdeaUser: IdeaUser
   }
   type Mutation {
     createIdea: Idea
+    updateIdea(
+      id: String!
+      label: String
+    ): Idea
     deleteIdea(
-      id: ID!
+      id: String!
     ): Idea
   }
 `;

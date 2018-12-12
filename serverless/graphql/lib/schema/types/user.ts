@@ -13,12 +13,12 @@ const User = `
     lvl: Int!
   }
   type Query {
-    user(id: ID!): User
+    user(id: String!): User
     authUser: User
   }
   type Mutation {
     updateUser(
-      id: ID!
+      id: String!
     ): User
   }
 `;

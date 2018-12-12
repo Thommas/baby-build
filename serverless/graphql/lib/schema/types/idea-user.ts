@@ -22,12 +22,12 @@ const IdeaUser = `
   type Mutation {
     createIdeaUser: IdeaUser
     updateIdeaUser(
-      id: ID!
+      id: String!
       requiredAge: Int
       requiredAgeExplanation: String
       score: Int
       scoreExplanation: String
-    ): Idea
+    ): IdeaUser
   }
 `;
 export default IdeaUser;

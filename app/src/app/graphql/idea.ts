@@ -33,6 +33,20 @@ export const CreateIdeaMutation = gql`
   }
 `;
 
+export const UpdateIdeaMutation = gql`
+  mutation UpdateIdea(
+    $id: String!
+    $label: String
+  ) {
+    updateIdea(
+      id: $id
+      label: $label
+    ) {
+      id
+    }
+  }
+`;
+
 export const DeleteIdeaMutation = gql`
   mutation DeleteIdea(
     $id: ID!

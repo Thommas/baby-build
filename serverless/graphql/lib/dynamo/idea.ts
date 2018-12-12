@@ -25,6 +25,20 @@ export function createIdea(args, userId) {
   return idea.save();
 }
 
+export function updateIdea(args, userId) {
+  return Idea.get(args.id)
+    .then((idea: any) => {
+      if (!idea) {
+        throw new Error('Idea not found');
+      }
+      if (idea.userId !== userId) {
+        throw new Error('Unauthorized');
+      }
+      idea.label = args.label;
+      return idea.save();
+    });
+}
+
 export function deleteIdea(args, userId) {
   return Idea.get(args.id)
     .then((idea: any) => {

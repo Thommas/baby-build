@@ -10,9 +10,9 @@
     </mat-form-field>
   </form>
   <button mat-mini-fab>
-    {{ idea.requiredAge ? idea.requiredAge : '?' }}
+    {{ idea.loggedIdeaUser ? idea.loggedIdeaUser.requiredAge ? idea.loggedIdeaUser.requiredAge : '?' : '?' }}
   </button>
   <button mat-raised-button color="primary">
-    {{ idea.score ? idea.score : '?' }}
+    {{ idea.loggedIdeaUser ? idea.loggedIdeaUser.score ? idea.loggedIdeaUser.score : '?' : '?' }}
   </button>
 </div>

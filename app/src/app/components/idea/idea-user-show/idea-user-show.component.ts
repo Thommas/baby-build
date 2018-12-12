@@ -13,7 +13,7 @@ import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
-  GetIdeas
+  UpdateIdeaUserMutation
 } from '../../../graphql';
 
 @Component({
@@ -22,8 +22,7 @@ import {
   styleUrls: ['./idea-user-show.component.scss']
 })
 export class IdeaUserShowComponent implements OnInit, OnChanges {
-  @Input('idea') idea: any;
-  @ViewChild('labelElement') labelElement: any;
+  @Input('userIdea') userIdea: any;
   @ViewChild('requiredAgeExplanationElement') requiredAgeExplanationElement: any;
   @ViewChild('scoreExplanationElement') scoreExplanationElement: any;
   formGroup: FormGroup;
@@ -32,10 +31,9 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
   scores: number[] = [];
 
   constructor(private apollo: Apollo) {
-    this.idea = {};
+    this.userIdea = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', [Validators.required]),
-      label: new FormControl('', []),
       requiredAge: new FormControl('', []),
       requiredAgeExplanation: new FormControl('', []),
       score: new FormControl('', []),
@@ -43,7 +41,6 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
     });
     this.formGroup.setValue({
       id: null,
-      label: '',
       requiredAge: null,
       requiredAgeExplanation: '',
       score: null,
@@ -59,7 +56,6 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     const elements = [
-      this.labelElement,
       this.requiredAgeExplanationElement,
       this.scoreExplanationElement,
     ];
@@ -87,32 +83,33 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (!isEmpty(this.idea)) {
+    if (!isEmpty(this.userIdea)) {
       this.formGroup.setValue({
-        id: this.idea.id,
-        label: this.idea.label,
-        requiredAge: this.idea.requiredAge,
-        requiredAgeExplanation: this.idea.requiredAgeExplanation,
-        score: this.idea.score,
-        scoreExplanation: this.idea.scoreExplanation,
+        id: this.userIdea.id,
+        requiredAge: this.userIdea.requiredAge,
+        requiredAgeExplanation: this.userIdea.requiredAgeExplanation,
+        score: this.userIdea.score,
+        scoreExplanation: this.userIdea.scoreExplanation,
+      });
+    } else {
+      this.formGroup.setValue({
+        id: null,
+        requiredAge: null,
+        requiredAgeExplanation: '',
+        score: null,
+        scoreExplanation: ''
       });
     }
   }
 
   save() {
-    // if (!this.formGroup.valid) {
-    //   return;
-    // }
-    // const data = clone(this.formGroup.value);
-    // this.apollo.mutate({
-    //   mutation: UpdateIdeaMutation,
-    //   variables: data,
-    //   refetchQueries: [{
-    //     query: GetIdeas,
-    //     variables: {
-    //       buildId: this.idea.buildId
-    //     }
-    //   }]
-    // }).subscribe();
+    if (!this.formGroup.valid) {
+      return;
+    }
+    const data = clone(this.formGroup.value);
+    this.apollo.mutate({
+      mutation: UpdateIdeaUserMutation,
+      variables: data,
+    }).subscribe();
   }
 }
