@@ -6,6 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import uuid from 'uuid/v4';
 import swal from 'sweetalert2';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,12 +38,21 @@ export class IdeaIndexComponent {
     const idea = {};
     this.apollo.mutate({
       mutation: CreateIdeaMutation,
-      variables: {
+      optimisticResponse: {
+        __typename: 'Mutation',
+        createIdea: {
+          __typename: 'Idea',
+          id: -uuid(),
+          label: '',
+        },
+      },
+      update: (store, { data: { createIdea } }) => {
+        const data: any = store.readQuery({ query: GetIdeas });
+        data.ideas.unshift(createIdea);
+        store.writeQuery({ query: GetIdeas, data });
       },
       refetchQueries: [{
         query: GetIdeas,
-        variables: {
-        }
       }]
     }).subscribe();
   }

@@ -13,6 +13,7 @@ export default {
     ideaUsers: (_, args, context) => dbIdeaUser.getIdeaUsers(args.ideaId),
   },
   Mutation: {
+    createIdeaUser: (_, args, context) => dbIdeaUser.createIdeaUser(args, context.userId),
     updateIdeaUser: (_, args, context) => dbIdeaUser.updateIdeaUser(args, context.userId),
   }
 };

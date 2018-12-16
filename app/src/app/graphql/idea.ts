@@ -29,6 +29,7 @@ export const CreateIdeaMutation = gql`
   mutation CreateIdea {
     createIdea {
       id
+      label
     }
   }
 `;

@@ -8,9 +8,9 @@
 
 const User = `
   type User {
-    id: String!
-    xp: Int!
-    lvl: Int!
+    id: String
+    xp: Int
+    lvl: Int
   }
   type Query {
     user(id: String!): User

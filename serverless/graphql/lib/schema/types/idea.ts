@@ -8,9 +8,9 @@
 
 const Idea = `
   type Idea {
-    id: String!
+    id: String
     label: String
-    userId: String!
+    userId: String
     loggedIdeaUser: IdeaUser
   }
   type Query {

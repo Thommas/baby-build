@@ -22,6 +22,24 @@ export const GetIdeaUser = gql`
   }
 `;
 
+export const CreateIdeaUserMutation = gql`
+  mutation CreateIdeaUser(
+    $ideaId: String!
+    $requiredAge: Int
+    $requiredAgeExplanation: String
+    $score: Int
+    $scoreExplanation: String
+  ) {
+    createIdeaUser(
+      ideaId: $ideaId
+      requiredAge: $requiredAge
+      requiredAgeExplanation: $requiredAgeExplanation
+      score: $score
+      scoreExplanation: $scoreExplanation
+    )
+  }
+`;
+
 export const UpdateIdeaUserMutation = gql`
   mutation UpdateIdeaUser(
     $id: String!

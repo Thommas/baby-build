@@ -34,6 +34,15 @@ export function getLoggedIdeaUser(ideaId, userId) {
     .catch(e => console.log(e));
 }
 
+export function createIdeaUser(args, userId) {
+  const ideaUser = new IdeaUser({
+    id: generate('0123456789', 20),
+    userId,
+    ...args
+  });
+  return ideaUser.save();
+}
+
 export function updateIdeaUser(args, userId) {
   return IdeaUser.get(args.id)
     .then((ideaUser: any) => {

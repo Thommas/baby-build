@@ -8,19 +8,25 @@
 
 const IdeaUser = `
   type IdeaUser {
-    id: String!
+    id: String
     requiredAge: Int
     requiredAgeExplanation: String
     score: Int
     scoreExplanation: String
-    ideaId: String!
-    userId: String!
+    ideaId: String
+    userId: String
   }
   type Query {
     ideaUsers: [IdeaUser]
   }
   type Mutation {
-    createIdeaUser: IdeaUser
+    createIdeaUser(
+      ideaId: String!
+      requiredAge: Int
+      requiredAgeExplanation: String
+      score: Int
+      scoreExplanation: String
+    ): IdeaUser
     updateIdeaUser(
       id: String!
       requiredAge: Int

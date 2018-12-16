@@ -6,6 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import uuid from 'uuid/v4';
 import { clone, isEmpty } from 'lodash';
 import { Component, Inject, OnInit, OnChanges, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -13,6 +14,8 @@ import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
+  GetIdeas,
+  CreateIdeaUserMutation,
   UpdateIdeaUserMutation
 } from '../../../graphql';
 
@@ -22,6 +25,7 @@ import {
   styleUrls: ['./idea-user-show.component.scss']
 })
 export class IdeaUserShowComponent implements OnInit, OnChanges {
+  @Input('idea') idea: any;
   @Input('userIdea') userIdea: any;
   @ViewChild('requiredAgeExplanationElement') requiredAgeExplanationElement: any;
   @ViewChild('scoreExplanationElement') scoreExplanationElement: any;
@@ -33,7 +37,7 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
   constructor(private apollo: Apollo) {
     this.userIdea = {};
     this.formGroup = new FormGroup({
-      id: new FormControl('', [Validators.required]),
+      id: new FormControl('', []),
       requiredAge: new FormControl('', []),
       requiredAgeExplanation: new FormControl('', []),
       score: new FormControl('', []),
@@ -107,9 +111,35 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
       return;
     }
     const data = clone(this.formGroup.value);
+    data.ideaId = this.idea.id;
     this.apollo.mutate({
-      mutation: UpdateIdeaUserMutation,
+      mutation: data.id ? UpdateIdeaUserMutation : CreateIdeaUserMutation,
       variables: data,
+      optimisticResponse: {
+        __typename: 'Mutation',
+        createIdeaUser: {
+          __typename: 'IdeaUser',
+          id: -uuid(),
+          ...data
+        },
+      },
+      update: (store, { data: { createIdeaUser, updateIdeaUser } }) => {
+        if (!createIdeaUser && !updateIdeaUser) {
+          return;
+        }
+        const ideaUser: any = createIdeaUser ? createIdeaUser : updateIdeaUser;
+        Object.assign(ideaUser, data);
+        const query: any = store.readQuery({ query: GetIdeas });
+        const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === this.idea.id ? {
+          ...idea,
+          loggedIdeaUser: ideaUser,
+        } : idea);
+        store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
+        this.userIdea = ideaUser;
+      },
+      refetchQueries: [{
+        query: GetIdeas,
+      }]
     }).subscribe();
   }
 }
