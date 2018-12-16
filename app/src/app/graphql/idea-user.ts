@@ -36,7 +36,9 @@ export const CreateIdeaUserMutation = gql`
       requiredAgeExplanation: $requiredAgeExplanation
       score: $score
       scoreExplanation: $scoreExplanation
-    )
+    ) {
+      ideaId
+    }
   }
 `;
 

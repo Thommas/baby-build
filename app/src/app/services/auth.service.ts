@@ -136,7 +136,7 @@ export class AuthService {
   login() {
     this.lock.subscribe(lock => {
       if (lock) {
-        lock.show()
+        lock.show();
       }
     });
   }
@@ -149,7 +149,7 @@ export class AuthService {
       if (lock) {
         lock.show({
           initialScreen: 'signUp'
-        })
+        });
       }
     });
   }

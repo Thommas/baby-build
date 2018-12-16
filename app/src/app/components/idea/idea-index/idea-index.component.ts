@@ -12,6 +12,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
+import { flatMap } from 'rxjs/operators';
 import { GetIdeas, CreateIdeaMutation } from '../../../graphql';
 import { UserService } from '../../../services';
 
@@ -35,26 +36,37 @@ export class IdeaIndexComponent {
   }
 
   addIdea() {
-    const idea = {};
-    this.apollo.mutate({
-      mutation: CreateIdeaMutation,
-      optimisticResponse: {
-        __typename: 'Mutation',
-        createIdea: {
-          __typename: 'Idea',
-          id: -uuid(),
-          label: '',
-        },
-      },
-      update: (store, { data: { createIdea } }) => {
-        const data: any = store.readQuery({ query: GetIdeas });
-        data.ideas.unshift(createIdea);
-        store.writeQuery({ query: GetIdeas, data });
-      },
-      refetchQueries: [{
-        query: GetIdeas,
-      }]
-    }).subscribe();
+    this.userService.user.pipe(
+      flatMap((user: any) => {
+        const userId = user.data.authUser.id;
+        const idea = {};
+        return this.apollo.mutate({
+          mutation: CreateIdeaMutation,
+          optimisticResponse: {
+            __typename: 'Mutation',
+            createIdea: {
+              __typename: 'Idea',
+              id: -uuid(),
+              userId: userId,
+              label: '',
+              loggedIdeaUser: null,
+            },
+          },
+          update: (store, { data: { createIdea } }) => {
+            if (!createIdea) {
+              return;
+            }
+            const data: any = store.readQuery({ query: GetIdeas });
+            const updatedIdeas: any = data.ideas;
+            updatedIdeas.unshift(createIdea);
+            store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas } });
+          },
+          refetchQueries: [{
+            query: GetIdeas,
+          }]
+        });
+      })
+    ).subscribe();
   }
 
   selectIdea(idea) {

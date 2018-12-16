@@ -30,6 +30,10 @@ export const CreateIdeaMutation = gql`
     createIdea {
       id
       label
+      userId
+      loggedIdeaUser {
+        id
+      }
     }
   }
 `;

@@ -110,14 +110,14 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
     if (!this.formGroup.valid) {
       return;
     }
-    const data = clone(this.formGroup.value);
+    const data: any = clone(this.formGroup.value);
     data.ideaId = this.idea.id;
     this.apollo.mutate({
       mutation: data.id ? UpdateIdeaUserMutation : CreateIdeaUserMutation,
       variables: data,
       optimisticResponse: {
         __typename: 'Mutation',
-        createIdeaUser: {
+        [data.id ? 'updateIdeaUser' : 'createIdeaUser']: {
           __typename: 'IdeaUser',
           id: -uuid(),
           ...data

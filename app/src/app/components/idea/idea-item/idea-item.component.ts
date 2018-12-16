@@ -6,6 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import uuid from 'uuid/v4';
 import { clone, isEmpty } from 'lodash';
 import { Component, Input, ViewChild, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -18,6 +19,7 @@ import {
   DeleteIdeaMutation,
   GetIdeas
 } from '../../../graphql';
+import { UserService } from '../../../services';
 
 @Component({
   selector: 'app-idea-item-cmp',
@@ -31,7 +33,7 @@ export class IdeaItemComponent implements OnInit, OnChanges {
   loading: boolean;
   emptyIdeaReadyForDeletion: boolean;
 
-  constructor(private apollo: Apollo) {
+  constructor(private apollo: Apollo, private userService: UserService) {
     this.emptyIdeaReadyForDeletion = false;
     this.idea = {};
     this.formGroup = new FormGroup({
@@ -74,7 +76,28 @@ export class IdeaItemComponent implements OnInit, OnChanges {
       variables: {
         id: this.idea.id,
         label
-      }
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateIdea: {
+          __typename: 'Idea',
+          id: -uuid(),
+          userId: this.userService.user.id,
+          label
+        },
+      },
+      update: (store, { data: { updateIdea } }) => {
+        if (!updateIdea) {
+          return;
+        }
+        const query: any = store.readQuery({ query: GetIdeas });
+        const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === this.idea.id ? updateIdea : idea);
+        store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
+        this.idea = updateIdea;
+      },
+      refetchQueries: [{
+        query: GetIdeas,
+      }]
     }).subscribe();
   }
 
