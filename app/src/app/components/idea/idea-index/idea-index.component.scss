@@ -19,25 +19,12 @@
   }
 }
 
-.row {
-  height: 40px;
-  border-bottom: 1px solid #cccccc;
-
-  button {
-    display: none;
-  }
-  &:hover {
-    button {
-      display: block;
-    }
-  }
-}
-
 .left-card {
   min-width: 405px;
   max-width: 1000px;
   margin-left: 20px;
   padding: 0;
+  overflow-y: auto;
 
   .mat-card-content {
     padding: 10px;

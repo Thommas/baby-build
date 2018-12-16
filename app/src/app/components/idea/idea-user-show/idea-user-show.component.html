@@ -1,9 +1,9 @@
 <div fxFlex fxFill>
   <form [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="start stretch">
     <h2>Required age</h2>
-    <div fxLayout="row">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
       <ng-container *ngFor="let age of ages">
-        <button mat-fab
+        <button mat-mini-fab
                 *ngIf="age <= 10"
                 [color]="this.formGroup.get('requiredAge').value === age ? 'accent' : ''"
                 (click)="selectRequiredAge(age)">
@@ -11,9 +11,9 @@
         </button>
       </ng-container>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
       <ng-container *ngFor="let age of ages">
-        <button mat-fab
+        <button mat-mini-fab
                 *ngIf="age > 10"
                 [color]="this.formGroup.get('requiredAge').value === age ? 'accent' : ''"
                 (click)="selectRequiredAge(age)">
