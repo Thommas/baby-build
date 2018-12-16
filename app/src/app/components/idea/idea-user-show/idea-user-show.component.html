@@ -3,7 +3,7 @@
     <h2>Required age</h2>
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <ng-container *ngFor="let age of ages">
-        <button mat-mini-fab
+        <button mat-raised-button
                 *ngIf="age <= 10"
                 [color]="this.formGroup.get('requiredAge').value === age ? 'accent' : ''"
                 (click)="selectRequiredAge(age)">
@@ -13,7 +13,7 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <ng-container *ngFor="let age of ages">
-        <button mat-mini-fab
+        <button mat-raised-button
                 *ngIf="age > 10"
                 [color]="this.formGroup.get('requiredAge').value === age ? 'accent' : ''"
                 (click)="selectRequiredAge(age)">
@@ -33,11 +33,11 @@
     </div>
     <mat-divider></mat-divider>
     <h2>Recommendation Score</h2>
-    <div fxLayout="row">
-      <button mat-raised-button
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <button mat-fab
               *ngFor="let score of scores"
               [color]="this.formGroup.get('score').value === score ? 'primary' : ''"
-              (click)="selectScore(score)">{{ score }}</button>
+              (click)="selectScore(score)"><mat-icon [svgIcon]="'recommandation_' + score"></mat-icon></button>
     </div>
     <mat-divider></mat-divider>
     <div fxLayout="row" class="text-area-container">

@@ -9,10 +9,10 @@
              autocomplete="off">
     </mat-form-field>
   </form>
-  <button mat-mini-fab>
+  <button mat-button>
     {{ idea.loggedIdeaUser ? idea.loggedIdeaUser.requiredAge ? idea.loggedIdeaUser.requiredAge : '?' : '?' }}
   </button>
-  <button mat-raised-button color="primary">
-    {{ idea.loggedIdeaUser ? idea.loggedIdeaUser.score ? idea.loggedIdeaUser.score : '?' : '?' }}
+  <button mat-icon-button>
+    <mat-icon [svgIcon]="'recommandation_' + (idea.loggedIdeaUser ? idea.loggedIdeaUser.score ? idea.loggedIdeaUser.score : '0' : '0')"></mat-icon>
   </button>
 </div>

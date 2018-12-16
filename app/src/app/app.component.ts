@@ -8,6 +8,8 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import {
   AngularticsService,
@@ -37,8 +39,39 @@ export class AppComponent implements OnInit {
     public progressService: ProgressService,
     private userService: UserService,
     private angularticsService: AngularticsService,
-    private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
-  ) {}
+    private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'recommandation_-3',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/-3.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'recommandation_-2',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/-2.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'recommandation_-1',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/-1.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'recommandation_0',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/0.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'recommandation_1',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/1.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'recommandation_2',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/2.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'recommandation_3',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/3.svg')
+    );
+  }
 
   ngOnInit() {
     this.authService.init();
