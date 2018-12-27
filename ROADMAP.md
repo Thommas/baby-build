@@ -4,33 +4,21 @@ Roadmap
 Short term
 ----------
 
-- Remove build
-- Rename task to item
-- Select required_age in item
-- Filter by required_age
+- Implement ES mapping lambda
+- Implement ES query with filter by requiredAge/score
+- Implement sharing ideas
 
 Long term
 ---------
 
-- Refactor gamification
+- Refactor gamification xp/lvl
 - Logs
 - Comments
-- Implement tech tree view for skills
-- Design reward into task
-- Design task type "quest"
-- Implement Achievements based on count
-- Implement security checks in graphql lambda
-- Implement giving access to a child and its builds to other family members
-- Build inspiration static page
-- Build roadmap static page
+- Achievements based on count
+- Security checks in graphql lambda
 - Add unit tests
-- Make a list of what this platform should not be used for (aka everything that did not work)
-- Badges
-- Leaderboards
-- Saas
 - Invitations
 - Notifications
-- Make unlockable items a core gamification component (calendar, categories, type of quests)
 
 
 Entities
@@ -135,17 +123,6 @@ Same for video game with empty gameplay (Candy crush).
 - Internet
 - Digital addiction
 - Online shaming/harassment
-
-
-Links
------
-
-https://www.reddit.com/r/Parenting/comments/7ta1mk/1314_yr_olds_how_do_you_handle_technologyvideo/
-https://www.reddit.com/r/Parenting/comments/64da9v/child_is_addicted_to_video_games/
-https://www.reddit.com/r/Parenting/comments/53vl3e/precious_moment_after_finishing_our_first_video/
-http://www.atlantico.fr/decryptage/protegezvosgosses-nikita-belluci-star-x-qui-alerte-parents-francais-inconscience-face-effarante-consommation-porno-enfants-et-3289001.html
-https://thenextweb.com/virtual-reality/2018/02/21/how-a-16-year-old-in-a-village-in-france-taught-the-world-to-build-vr-headsets-for-100/
-https://www.click2houston.com/news/investigates/danger-warning-about-popular-virtual-world-for-childs
 
 
 Similar apps
