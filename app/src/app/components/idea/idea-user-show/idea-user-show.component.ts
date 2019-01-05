@@ -8,7 +8,7 @@
 
 import uuid from 'uuid/v4';
 import { clone, isEmpty } from 'lodash';
-import { Component, Inject, OnInit, OnChanges, Input, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, OnChanges, Input, ViewChild, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -26,7 +26,7 @@ import {
 })
 export class IdeaUserShowComponent implements OnInit, OnChanges {
   @Input('idea') idea: any;
-  @Input('userIdea') userIdea: any;
+  @Input('ideaUser') ideaUser: any;
   @ViewChild('requiredAgeExplanationElement') requiredAgeExplanationElement: any;
   @ViewChild('scoreExplanationElement') scoreExplanationElement: any;
   formGroup: FormGroup;
@@ -35,20 +35,22 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
   scores: number[] = [];
 
   constructor(private apollo: Apollo) {
-    this.userIdea = {};
+    this.ideaUser = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       requiredAge: new FormControl('', []),
       requiredAgeExplanation: new FormControl('', []),
       score: new FormControl('', []),
-      scoreExplanation: new FormControl('', [])
+      scoreExplanation: new FormControl('', []),
+      ideaId: new FormControl('', [Validators.required])
     });
     this.formGroup.setValue({
       id: null,
       requiredAge: null,
       requiredAgeExplanation: '',
       score: null,
-      scoreExplanation: ''
+      scoreExplanation: '',
+      ideaId: null
     });
     for (let age = 1; age <= 20; age++) {
       this.ages.push(age);
@@ -86,22 +88,25 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
     this.save();
   }
 
-  ngOnChanges() {
-    if (!isEmpty(this.userIdea)) {
-      this.formGroup.setValue({
-        id: this.userIdea.id,
-        requiredAge: this.userIdea.requiredAge,
-        requiredAgeExplanation: this.userIdea.requiredAgeExplanation,
-        score: this.userIdea.score,
-        scoreExplanation: this.userIdea.scoreExplanation,
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.ideaUser && changes.ideaUser.previousValue
+      && changes.idea && changes.idea.previousValue) {
+      this.save();
+    }
+    if (changes.ideaUser && changes.ideaUser.currentValue) {
+      const ideaUser: any = changes.ideaUser.currentValue;
+      this.formGroup.patchValue({
+        id: ideaUser.id,
+        requiredAge: ideaUser.requiredAge,
+        requiredAgeExplanation: ideaUser.requiredAgeExplanation,
+        score: ideaUser.score,
+        scoreExplanation: ideaUser.scoreExplanation,
       });
-    } else {
-      this.formGroup.setValue({
-        id: null,
-        requiredAge: null,
-        requiredAgeExplanation: '',
-        score: null,
-        scoreExplanation: ''
+    }
+    if (changes.idea && changes.idea.currentValue) {
+      const idea: any = changes.idea.currentValue;
+      this.formGroup.patchValue({
+        ideaId: idea.id,
       });
     }
   }
@@ -111,7 +116,6 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
       return;
     }
     const data: any = clone(this.formGroup.value);
-    data.ideaId = this.idea.id;
     this.apollo.mutate({
       mutation: data.id ? UpdateIdeaUserMutation : CreateIdeaUserMutation,
       variables: data,
@@ -135,7 +139,7 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
           loggedIdeaUser: ideaUser,
         } : idea);
         store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
-        this.userIdea = ideaUser;
+        this.ideaUser = ideaUser;
       },
       refetchQueries: [{
         query: GetIdeas,

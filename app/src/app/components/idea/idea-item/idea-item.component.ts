@@ -8,7 +8,7 @@
 
 import uuid from 'uuid/v4';
 import { clone, isEmpty } from 'lodash';
-import { Component, Input, ViewChild, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -37,7 +37,7 @@ export class IdeaItemComponent implements OnInit, OnChanges {
     this.emptyIdeaReadyForDeletion = false;
     this.idea = {};
     this.formGroup = new FormGroup({
-      id: new FormControl('', []),
+      id: new FormControl('', [Validators.required]),
       label: new FormControl('', [Validators.required])
     });
     this.formGroup.setValue({
@@ -51,39 +51,39 @@ export class IdeaItemComponent implements OnInit, OnChanges {
       map((e: { target: HTMLInputElement }) => e.target.value),
       debounceTime(800),
       distinctUntilChanged(),
-    ).subscribe(data => this.save(data));
+    ).subscribe(data => this.save());
   }
 
-  ngOnChanges() {
-    if (!isEmpty(this.idea)) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.idea && changes.idea.previousValue) {
+      this.save();
+    }
+    if (changes.idea && changes.idea.currentValue) {
+      const idea: any = changes.idea.currentValue;
       this.formGroup.setValue({
-        id: this.idea.id,
-        label: this.idea.label
+        id: idea.id,
+        label: idea.label
       });
-      if (!this.idea.label || this.idea.label.length === 0) {
+      if (!idea.label || idea.label.length === 0) {
         this.emptyIdeaReadyForDeletion = true;
       }
     }
-
   }
 
-  save(label: string) {
-    if (!this.formGroup.valid || !this.idea.id) {
+  save() {
+    if (!this.formGroup.valid) {
       return;
     }
+    const data: any = clone(this.formGroup.value);
     this.apollo.mutate({
       mutation: UpdateIdeaMutation,
-      variables: {
-        id: this.idea.id,
-        label
-      },
+      variables: data,
       optimisticResponse: {
         __typename: 'Mutation',
         updateIdea: {
           __typename: 'Idea',
-          id: -uuid(),
           userId: this.userService.user.id,
-          label
+          ...data
         },
       },
       update: (store, { data: { updateIdea } }) => {

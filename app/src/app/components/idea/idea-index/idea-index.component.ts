@@ -69,7 +69,7 @@ export class IdeaIndexComponent {
     ).subscribe();
   }
 
-  selectIdea(idea) {
+  selectIdea(idea: any) {
     this.selectedIdea = idea;
   }
 }
