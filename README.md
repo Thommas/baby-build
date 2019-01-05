@@ -25,3 +25,13 @@ Third party
 - Auth0
 - Google reCaptcha
 - Google Analytics
+
+
+Similar apps
+------------
+
+https://asana.com
+https://habitica.com
+https://www.choremonster.com
+https://www.classcraft.com
+#edtech #familytech
