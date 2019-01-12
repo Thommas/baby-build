@@ -93,14 +93,14 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
       && changes.idea && changes.idea.previousValue) {
       this.save();
     }
-    if (changes.ideaUser && changes.ideaUser.currentValue) {
+    if (changes.ideaUser) {
       const ideaUser: any = changes.ideaUser.currentValue;
       this.formGroup.patchValue({
-        id: ideaUser.id,
-        requiredAge: ideaUser.requiredAge,
-        requiredAgeExplanation: ideaUser.requiredAgeExplanation,
-        score: ideaUser.score,
-        scoreExplanation: ideaUser.scoreExplanation,
+        id: ideaUser ? ideaUser.id : null,
+        requiredAge: ideaUser ? ideaUser.requiredAge : null,
+        requiredAgeExplanation: ideaUser ? ideaUser.requiredAgeExplanation : null,
+        score: ideaUser ? ideaUser.score : null,
+        scoreExplanation: ideaUser ? ideaUser.scoreExplanation : null,
       });
     }
     if (changes.idea && changes.idea.currentValue) {
@@ -134,7 +134,7 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
         const ideaUser: any = createIdeaUser ? createIdeaUser : updateIdeaUser;
         Object.assign(ideaUser, data);
         const query: any = store.readQuery({ query: GetIdeas });
-        const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === this.idea.id ? {
+        const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === data.ideaId ? {
           ...idea,
           loggedIdeaUser: ideaUser,
         } : idea);

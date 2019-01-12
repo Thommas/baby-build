@@ -38,7 +38,7 @@ export class IdeaItemComponent implements OnInit, OnChanges {
     this.idea = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', [Validators.required]),
-      label: new FormControl('', [Validators.required])
+      label: new FormControl('', [])
     });
     this.formGroup.setValue({
       id: null,
