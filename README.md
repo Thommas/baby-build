@@ -35,3 +35,13 @@ https://habitica.com
 https://www.choremonster.com
 https://www.classcraft.com
 #edtech #familytech
+
+
+Setup
+-----
+
+serverless/graphql
+
+```
+sls dynamodb install --localPath ./bin
+```

@@ -27,7 +27,7 @@ export function getLoggedIdeaUser(ideaId, userId) {
     .exec()
     .then((ideaUsers: any) => {
       if (ideaUsers.count === 0) {
-        throw new Error('IdeaUser not found');
+        return null;
       }
       return ideaUsers[0];
     })

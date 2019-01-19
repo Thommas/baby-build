@@ -2,8 +2,8 @@ service: pathofchild-graphql
 
 plugins:
   - serverless-plugin-typescript
-  - serverless-dynamodb-local
   - serverless-offline
+  - serverless-dynamodb-local
 
 custom:
   stage: ${opt:stage, self:provider.stage}
@@ -55,7 +55,8 @@ provider:
         - dynamodb:ListStreams
       Resource: arn:aws:dynamodb:${self:provider.region}:*:*
   environment:
-    LOCAL_DYNAMODB_ENDPOINT: ${self:custom.secrets.LOCAL_DYNAMODB_ENDPOINT}
+    LOCAL_DYNAMODB_HOST: ${self:custom.secrets.LOCAL_DYNAMODB_HOST}
+    LOCAL_DYNAMODB_PORT: ${self:custom.secrets.LOCAL_DYNAMODB_PORT}
     AUTH0_CLIENT_ID: ${self:custom.secrets.AUTH0_CLIENT_ID}
     AUTH0_JWKS_URI: ${self:custom.secrets.AUTH0_JWKS_URI}
     AUTH0_JWKS_KID: ${self:custom.secrets.AUTH0_JWKS_KID}
@@ -74,6 +75,13 @@ functions:
           method: post
           cors: true
           authorizer: customAuthorizer
+  idea:
+    handler: lib/handler.idea
+    events:
+      - stream:
+          enabled: true
+          type: dynamodb
+          tableName: pathofchild-graphql-dev-idea
 
 resources:
   Resources:

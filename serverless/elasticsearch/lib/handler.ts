@@ -6,8 +6,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { handleIdea } from './handlers/idea'
+import { handleEvent } from './handlers/event.handler'
 
 exports.idea = (event, context, callback) => {
-  handleIdea(event, context, callback)
+  handleEvent(event, context, callback, 'idea');
 };

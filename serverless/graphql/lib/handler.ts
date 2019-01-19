@@ -98,11 +98,11 @@ exports.auth = (event, context, callback) => {
 }
 
 exports.graphql = (event, context, callback) => {
-  console.log('userId', event.requestContext.authorizer.userId);
+  // console.log('userId', event.requestContext.authorizer.userId);
   const graphQLContext = { userId: event.requestContext.authorizer.userId };
 
   const callbackFilter = (error, output) => {
-    console.log('output', output)
+    // console.log('output', output)
     const outputWithHeader = Object.assign({}, output, {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -112,4 +112,8 @@ exports.graphql = (event, context, callback) => {
   };
 
   graphqlLambda({ schema, context: graphQLContext })(event, context, callbackFilter);
+};
+
+exports.idea = (event, context, callback) => {
+  console.log('STREAM IDEA');
 };

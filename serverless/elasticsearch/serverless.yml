@@ -2,11 +2,22 @@ service: pathofchild-es
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-plugin-offline-dynamodb-stream
+  - serverless-offline
 
 custom:
   stage: ${opt:stage, self:provider.stage}
   secrets: ${file(secrets.yml):${self:custom.stage}}
-  ideaTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.IdeaTableStreamArn}
+  serverless-offline:
+    port: 4003
+  dynamodbStream:
+    host: ${self:custom.secrets.LOCAL_DYNAMODB_HOST}
+    port: ${self:custom.secrets.LOCAL_DYNAMODB_PORT}
+    pollForever: true
+    streams:
+      - table: ${self:custom.secrets.IDEA_TABLE}
+        functions:
+          - idea
 
 package:
   exclude:
@@ -32,11 +43,14 @@ provider:
         - dynamodb:DescribeStream
         - dynamodb:ListStreams
       Resource: arn:aws:dynamodb:${self:provider.region}:*:*
+  environment:
+    ELASTIC_SEARCH_INDEX: ${self:custom.secrets.ELASTIC_SEARCH_INDEX}
+    ELASTIC_SEARCH_HOST: ${self:custom.secrets.ELASTIC_SEARCH_HOST}
 
 functions:
   idea:
     handler: lib/handler.idea
     events:
       - stream:
+          enabled: true
           type: dynamodb
-          arn: ${self:custom.ideaTableStreamArn}

@@ -20,18 +20,18 @@ import ideaResolver from './resolvers/idea';
 import ideaUserResolver from './resolvers/idea-user';
 import userResolver from './resolvers/user';
 
-const typeDefs = mergeTypes([
+const typeDefs: any = mergeTypes([
   ideaType,
   ideaUserType,
   userType
 ]);
-const resolvers = mergeResolvers([
+const resolvers: any = mergeResolvers([
   ideaResolver,
   ideaUserResolver,
   userResolver
 ]);
 
-const schema = makeExecutableSchema({
+const schema: any = makeExecutableSchema({
   typeDefs,
   resolvers,
 });

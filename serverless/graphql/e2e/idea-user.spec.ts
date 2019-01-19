@@ -27,7 +27,11 @@ describe('IdeaUser', () => {
   });
 
   it('updateIdeaUser', (done) => {
-    updateIdeaUser({ ideaId: '0986945c-36de-4f34-b869-d06039501879', score: 2 }, 'auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
+    updateIdeaUser({
+      id: '4ae840c5-d097-4e4f-a3d4-19b38b6d9c40',
+      ideaId: '0986945c-36de-4f34-b869-d06039501879',
+      score: 2
+    }, 'auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
       done();
     })
   });

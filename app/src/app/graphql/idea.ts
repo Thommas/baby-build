@@ -54,7 +54,7 @@ export const UpdateIdeaMutation = gql`
 
 export const DeleteIdeaMutation = gql`
   mutation DeleteIdea(
-    $id: ID!
+    $id: String!
   ) {
     deleteIdea(
       id: $id

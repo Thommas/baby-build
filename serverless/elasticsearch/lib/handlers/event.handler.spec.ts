@@ -7,10 +7,10 @@
  */
 
 import * as elasticsearchService from '../services/elasticsearch';
-import { handleIdea } from './idea';
+import { handleEvent } from './event.handler';
 
 describe('Handlers', function() {
-  it('handleBuild', function() {
+  it('handleEvent', function() {
     spyOn(elasticsearchService, 'insert').and.returnValue(new Promise((resolve) =>
       resolve()
     ))
@@ -30,6 +30,6 @@ describe('Handlers', function() {
     }
     const context = {}
     const callback = () => {}
-    handleIdea(event, context, callback)
+    handleEvent(event, context, callback, 'idea')
   });
 });

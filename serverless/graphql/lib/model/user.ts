@@ -7,19 +7,14 @@
  */
 
 import * as dynamoose from 'dynamoose';
+import config from './config';
+
+config(dynamoose);
 
 declare var process: {
   env: {
-    LOCAL_DYNAMODB_ENDPOINT: string,
     USER_TABLE: string
   }
-}
-
-if (process.env.LOCAL_DYNAMODB_ENDPOINT && process.env.LOCAL_DYNAMODB_ENDPOINT.length > 0) {
-  dynamoose.AWS.config.update({
-    region: 'eu-west-2',
-  });
-  dynamoose.local(process.env.LOCAL_DYNAMODB_ENDPOINT);
 }
 
 const TableName = process.env.USER_TABLE;

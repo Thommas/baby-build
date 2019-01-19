@@ -121,9 +121,6 @@ export class IdeaItemComponent implements OnInit, OnChanges {
       },
       refetchQueries: [{
         query: GetIdeas,
-        variables: {
-          buildId: this.idea.buildId
-        }
       }]
     }).subscribe();
   }
