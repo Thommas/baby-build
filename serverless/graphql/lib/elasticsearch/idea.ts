@@ -10,14 +10,9 @@ import { search } from '../services/elasticsearch.service';
 
 export function queryIdeas(userId): Promise<any> {
   const query: any = {
-    bool: {
-      must: {
-        term: {
-          userId
-        }
-      }
+    term: {
+      userId
     }
   };
-  console.log('query', query);
-  return search('app', query);
+  return search('idea', query);
 }

@@ -12,8 +12,8 @@ import { queryIdeas } from '../elasticsearch/idea';
 
 export function getIdeas(userId) {
   return queryIdeas(userId).then((ideas) => {
-    console.log('ideas', ideas);
-    const params: any = [{id: '0986945c-36de-4f34-b869-d06039501879'}];
+    const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
+    console.log('params', params);
     return Idea.batchGet(params);
   });
 }

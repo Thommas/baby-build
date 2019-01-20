@@ -1,0 +1,22 @@
+{
+  "name": "pathofchild-fixtures",
+  "version": "0.1.0",
+  "license": "MTI",
+  "scripts": {
+    "start": "./node_modules/.bin/ts-node ./src/index.ts"
+  },
+  "dependencies": {
+    "@types/node": "^10.12.18",
+    "dotenv": "^6.2.0",
+    "dynamoose": "^1.3.1",
+    "elasticsearch": "^15.3.0",
+    "jasmine": "^3.3.1",
+    "jasmine-ts": "^0.3.0",
+    "lodash": "^4.17.11",
+    "nanoid": "^2.0.0",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.12.1",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.2.2"
+  }
+}
