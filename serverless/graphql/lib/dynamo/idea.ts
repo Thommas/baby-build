@@ -8,12 +8,14 @@
 
 import generate = require('nanoid/generate');
 import Idea from '../model/idea';
+import { queryIdeas } from '../elasticsearch/idea';
 
 export function getIdeas(userId) {
-  const params: any = {
-    userId: {eq: userId}
-  };
-  return Idea.scan(params).exec();
+  return queryIdeas(userId).then((ideas) => {
+    console.log('ideas', ideas);
+    const params: any = [{id: '0986945c-36de-4f34-b869-d06039501879'}];
+    return Idea.batchGet(params);
+  });
 }
 
 export function createIdea(args, userId) {
