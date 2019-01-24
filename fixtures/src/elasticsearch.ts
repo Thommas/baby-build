@@ -6,9 +6,9 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import * as dotenv from 'dotenv';
 import * as elasticsearch from 'elasticsearch';
 import * as fs from 'fs';
-import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 dotenv.config();

@@ -3,7 +3,7 @@ service: pathofchild-graphql
 plugins:
   - serverless-plugin-typescript
   - serverless-offline
-  - serverless-dynamodb-local
+  # - serverless-dynamodb-local
 
 custom:
   stage: ${opt:stage, self:provider.stage}
@@ -13,21 +13,21 @@ custom:
   secrets: ${file(secrets.yml):${self:custom.stage}}
   serverless-offline:
     port: 4001
-  dynamodb:
-    start:
-      port: 8000
-      inMemory: true
-      migrate: true
-      seed: true
-    seed:
-      test:
-        sources:
-          - table: ${self:custom.ideaTable}
-            sources: [./fixtures/idea.json]
-          - table: ${self:custom.ideaUserTable}
-            sources: [./fixtures/idea-user.json]
-          - table: ${self:custom.userTable}
-            sources: [./fixtures/user.json]
+  # dynamodb:
+  #   start:
+  #     port: 8000
+  #     inMemory: true
+  #     migrate: true
+  #     seed: true
+  #   seed:
+  #     test:
+  #       sources:
+  #         - table: ${self:custom.ideaTable}
+  #           sources: [./fixtures/idea.json]
+  #         - table: ${self:custom.ideaUserTable}
+  #           sources: [./fixtures/idea-user.json]
+  #         - table: ${self:custom.userTable}
+  #           sources: [./fixtures/user.json]
 
 package:
   exclude:
