@@ -7,7 +7,7 @@
  */
 
 import nanoid = require('nanoid');
-import User from '../model/user';
+import { User } from '../model';
 
 export function getAuthUser(userId) {
   return User.get(userId)

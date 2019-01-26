@@ -7,7 +7,7 @@
  */
 
 import generate = require('nanoid/generate');
-import IdeaUser from '../model/idea-user';
+import { IdeaUser } from '../model';
 
 export function getIdeaUsers(ideaId) {
   const params: any = {

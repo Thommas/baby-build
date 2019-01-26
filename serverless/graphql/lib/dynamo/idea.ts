@@ -7,7 +7,7 @@
  */
 
 import generate = require('nanoid/generate');
-import Idea from '../model/idea';
+import { Idea } from '../model';
 import { queryIdeas } from '../elasticsearch/idea';
 
 export function getIdeas(userId) {

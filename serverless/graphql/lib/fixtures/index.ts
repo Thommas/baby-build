@@ -10,7 +10,7 @@ import { loadFixtures as dynamoLoadFixtures } from './dynamo';
 import { loadFixtures as elasticsearchLoadFixtures } from './elasticsearch';
 
 const promises = [
-  dynamoLoadFixtures(),
+  // dynamoLoadFixtures(),
   elasticsearchLoadFixtures(),
 ];
 

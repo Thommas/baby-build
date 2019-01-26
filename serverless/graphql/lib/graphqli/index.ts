@@ -9,7 +9,7 @@
 import express = require('express');
 import graphqlHTTP = require( 'express-graphql');
 import cors = require('cors');
-import schema from './schema/schema';
+import schema from '../schema/schema';
 
 const app = express();
 

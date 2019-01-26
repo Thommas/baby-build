@@ -57,7 +57,7 @@ function index(type: string, document: any): Promise<any> {
 }
 
 function loadData(): Promise<any> {
-  const data: any = fs.readFileSync(path.join(__dirname, '../data/idea.json'));
+  const data: any = fs.readFileSync(path.join(__dirname, 'data/idea.json'));
   const items: any[] = JSON.parse(data);
   const promises: Promise<any>[] = [];
   for (let item of items) {

@@ -4,7 +4,8 @@
   "license": "WTFPL",
   "scripts": {
     "start": "SLS_DEBUG=* serverless offline start --stage dev --region eu-west-2",
-    "graphqli": "./node_modules/.bin/ts-node ./lib/graphqli.ts",
+    "fixtures": "./node_modules/.bin/ts-node ./lib/fixtures/index.ts",
+    "graphqli": "./node_modules/.bin/ts-node ./lib/graphqli/index.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "lint": "tslint -c tslint.json './src/**/*.ts'",
     "test": "jasmine-ts \"lib/**/*.spec.ts\"",

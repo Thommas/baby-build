@@ -35,6 +35,4 @@ const IdeaSchema = new Schema({
   timestamps: true
 });
 
-const Idea = dynamoose.model(TableName, IdeaSchema);
-
-export default Idea
+export const Idea = dynamoose.model(TableName, IdeaSchema);
