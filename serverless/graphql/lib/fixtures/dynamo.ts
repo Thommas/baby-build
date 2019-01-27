@@ -6,50 +6,22 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as AWS from 'aws-sdk';
-import * as bluebird from 'bluebird';
-import * as dotenv from 'dotenv';
-import * as dynamoose from 'dynamoose';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
-import { entities, models } from './data';
+import { configService, getAWSDynamo } from '../services';
+import { entities } from './data';
 
-dotenv.config();
+const ddb: any = getAWSDynamo();
 
-declare var process: {
-  env: {
-    LOCAL_DYNAMODB_HOST: string,
-    LOCAL_DYNAMODB_PORT: string,
-    LOCAL_DYNAMODB_TABLE_PREFIX: string,
-  }
+function deleteTable(entity: string): Promise<any> {
+  const params = {
+    TableName: `${configService.localDynamoDBTablePrefix}-${entity}`,
+  };
+  return ddb.deleteTable(params).promise().catch((err) => {
+    // Ignore error
+    console.log('CANNOT DELETE', entity, err);
+  });
 }
-
-const {
-  LOCAL_DYNAMODB_HOST,
-  LOCAL_DYNAMODB_PORT,
-  LOCAL_DYNAMODB_TABLE_PREFIX,
-} = process.env;
-
-AWS.config.setPromisesDependency(bluebird);
-
-console.log(`http://${LOCAL_DYNAMODB_HOST}:${LOCAL_DYNAMODB_PORT}`);
-
-const serviceConfigOptions : ServiceConfigurationOptions = {
-  region: 'eu-west-2',
-  endpoint: `http://${LOCAL_DYNAMODB_HOST}:${LOCAL_DYNAMODB_PORT}`,
-};
-
-console.log(`http://${LOCAL_DYNAMODB_HOST}:${LOCAL_DYNAMODB_PORT}`);
-
-AWS.config.update(serviceConfigOptions);
-
-dynamoose.AWS.config.update({
-  region: 'eu-west-2',
-});
-dynamoose.local(`http://${LOCAL_DYNAMODB_HOST}:${LOCAL_DYNAMODB_PORT}`);
-
-const ddb = new AWS.DynamoDB(serviceConfigOptions);
 
 function createTable(entity: string): Promise<any> {
   const params = {
@@ -66,19 +38,22 @@ function createTable(entity: string): Promise<any> {
       },
     ],
     ProvisionedThroughput: {
-      ReadCapacityUnits: 1,
-      WriteCapacityUnits: 1
+      ReadCapacityUnits: 2,
+      WriteCapacityUnits: 2
     },
-    TableName: `${LOCAL_DYNAMODB_TABLE_PREFIX}-${entity}`,
+    TableName: `${configService.localDynamoDBTablePrefix}-${entity}`,
     StreamSpecification: {
       StreamEnabled: true
     }
   };
-  return ddb.createTable(params).promise();
+  return ddb.createTable(params).promise().catch((err) => {
+    // Ignore error
+    console.log('CANNOT CREATE', entity, err);
+  });
 }
 
 function createDocument(entity: string, document: any): Promise<any> {
-  const Model: any = models[entity];
+  const Model: any = entities[entity].model;
   const item = new Model({
     ...document
   });
@@ -96,9 +71,17 @@ function loadData(entity: string): Promise<any> {
   return Promise.all(promises);
 }
 
+function timeout(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export async function loadFixtures() {
-  for (let entity of entities) {
+  for (let entity of Object.keys(entities)) {
+    console.log('entity', entity);
+    await deleteTable(entity);
+    await timeout(1000);
     await createTable(entity);
+    await timeout(1000);
     await loadData(entity);
   }
 }

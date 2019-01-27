@@ -6,18 +6,11 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dynamoose from 'dynamoose';
-import config from './config';
+import { configService, getDynamoose } from '../services';
 
-config(dynamoose);
+const dynamoose: any = getDynamoose();
 
-declare var process: {
-  env: {
-    IDEA_USER_TABLE: string
-  }
-}
-
-const TableName = process.env.IDEA_USER_TABLE;
+const TableName = `${configService.localDynamoDBTablePrefix}-idea-user`;
 
 const Schema = dynamoose.Schema;
 

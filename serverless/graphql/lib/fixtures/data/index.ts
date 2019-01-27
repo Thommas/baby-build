@@ -8,14 +8,14 @@
 
 import { Idea, IdeaUser, User } from '../../model';
 
-export const entities: string[] = [
-  'idea',
-  'idea-user',
-  'user'
-];
-
-export const models: any = {
-  'idea': Idea,
-  'idea-user': IdeaUser,
-  'user': User,
+export const entities: any = {
+  'idea': {
+    model: Idea,
+  },
+  'idea-user': {
+    model: IdeaUser,
+  },
+  'user': {
+    model: User,
+  },
 };

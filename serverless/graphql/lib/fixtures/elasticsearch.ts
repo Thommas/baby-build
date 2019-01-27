@@ -6,55 +6,9 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dotenv from 'dotenv';
-import * as elasticsearch from 'elasticsearch';
 import * as fs from 'fs';
 import * as path from 'path';
-
-dotenv.config();
-
-declare var process: {
-  env: {
-    ELASTIC_SEARCH_HOST: string,
-    ELASTIC_SEARCH_INDEX: string,
-  }
-}
-
-const client = new elasticsearch.Client({
-  hosts: [process.env.ELASTIC_SEARCH_HOST]
-});
-
-function deleteIndex(): Promise<any> {
-  return client.indices.delete({
-    index: process.env.ELASTIC_SEARCH_INDEX,
-  });
-}
-
-function createIndex(): Promise<any> {
-  return client.indices.create({
-    index: process.env.ELASTIC_SEARCH_INDEX,
-    body: {
-      mappings: {
-        idea: {
-          properties: {
-            userId: {type: 'keyword'},
-          }
-        }
-      }
-    }
-  });
-}
-
-function index(type: string, document: any): Promise<any> {
-  return client.index({
-    index: process.env.ELASTIC_SEARCH_INDEX,
-    type,
-    id: document.id,
-    body: {
-      ...document,
-    }
-  });
-}
+import { createIndex, deleteIndex, index } from '../services';
 
 function loadData(): Promise<any> {
   const data: any = fs.readFileSync(path.join(__dirname, 'data/idea.json'));
