@@ -61,9 +61,6 @@ export class IdeaIndexComponent {
             updatedIdeas.unshift(createIdea);
             store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas } });
           },
-          refetchQueries: [{
-            query: GetIdeas,
-          }]
         });
       })
     ).subscribe();
