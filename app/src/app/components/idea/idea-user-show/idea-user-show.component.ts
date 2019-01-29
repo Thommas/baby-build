@@ -141,9 +141,6 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
         store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
         this.ideaUser = ideaUser;
       },
-      refetchQueries: [{
-        query: GetIdeas,
-      }]
     }).subscribe();
   }
 }

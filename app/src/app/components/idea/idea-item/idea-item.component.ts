@@ -58,14 +58,21 @@ export class IdeaItemComponent implements OnInit, OnChanges {
     if (changes.idea && changes.idea.previousValue) {
       this.save();
     }
-    if (changes.idea && changes.idea.currentValue) {
-      const idea: any = changes.idea.currentValue;
-      this.formGroup.setValue({
-        id: idea.id,
-        label: idea.label,
-      });
-      if (!idea.label || idea.label.length === 0) {
-        this.emptyIdeaReadyForDeletion = true;
+    if (changes.idea) {
+      if (changes.idea.currentValue) {
+        const idea: any = changes.idea.currentValue;
+        this.formGroup.setValue({
+          id: idea.id,
+          label: idea.label,
+        });
+        if (!idea.label || idea.label.length === 0) {
+          this.emptyIdeaReadyForDeletion = true;
+        }
+      } else {
+        this.formGroup.setValue({
+          id: null,
+          label: '',
+        });
       }
     }
   }
@@ -75,6 +82,7 @@ export class IdeaItemComponent implements OnInit, OnChanges {
       return;
     }
     const data: any = clone(this.formGroup.value);
+    console.log('SUBMIT DATA', data);
     this.apollo.mutate({
       mutation: UpdateIdeaMutation,
       variables: data,
@@ -114,7 +122,23 @@ export class IdeaItemComponent implements OnInit, OnChanges {
       mutation: DeleteIdeaMutation,
       variables: {
         id: this.idea.id
-      }
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        deleteIdea: {
+          __typename: 'Idea',
+          id: this.idea.id
+        },
+      },
+      update: (store, { data: { deleteIdea } }) => {
+        if (!deleteIdea) {
+          return;
+        }
+        const query: any = store.readQuery({ query: GetIdeas });
+        const updatedIdeas: any[] = query.ideas.filter((idea: any) => idea.id && idea.id !== deleteIdea.id);
+        store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
+        this.idea.id = null;
+      },
     }).subscribe();
   }
 }
