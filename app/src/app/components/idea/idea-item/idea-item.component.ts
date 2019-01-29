@@ -38,11 +38,11 @@ export class IdeaItemComponent implements OnInit, OnChanges {
     this.idea = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', [Validators.required]),
-      label: new FormControl('', [])
+      label: new FormControl('', []),
     });
     this.formGroup.setValue({
       id: null,
-      label: ''
+      label: '',
     });
   }
 
@@ -62,7 +62,7 @@ export class IdeaItemComponent implements OnInit, OnChanges {
       const idea: any = changes.idea.currentValue;
       this.formGroup.setValue({
         id: idea.id,
-        label: idea.label
+        label: idea.label,
       });
       if (!idea.label || idea.label.length === 0) {
         this.emptyIdeaReadyForDeletion = true;
@@ -82,22 +82,18 @@ export class IdeaItemComponent implements OnInit, OnChanges {
         __typename: 'Mutation',
         updateIdea: {
           __typename: 'Idea',
-          userId: this.userService.user.id,
           ...data
         },
       },
       update: (store, { data: { updateIdea } }) => {
-        if (!updateIdea) {
+        if (!updateIdea || undefined === updateIdea.label) {
           return;
         }
         const query: any = store.readQuery({ query: GetIdeas });
-        const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === this.idea.id ? updateIdea : idea);
+        const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === this.idea.id ? { ...idea, label: updateIdea.label } : idea);
         store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
-        this.idea = updateIdea;
-      },
-      refetchQueries: [{
-        query: GetIdeas,
-      }]
+        this.idea.label = updateIdea.label;
+      }
     }).subscribe();
   }
 
@@ -118,10 +114,7 @@ export class IdeaItemComponent implements OnInit, OnChanges {
       mutation: DeleteIdeaMutation,
       variables: {
         id: this.idea.id
-      },
-      refetchQueries: [{
-        query: GetIdeas,
-      }]
+      }
     }).subscribe();
   }
 }

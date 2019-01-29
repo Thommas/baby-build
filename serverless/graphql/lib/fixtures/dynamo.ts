@@ -17,14 +17,15 @@ function deleteTable(entity: string): Promise<any> {
   const params = {
     TableName: `${configService.localDynamoDBTablePrefix}-${entity}`,
   };
-  return ddb.deleteTable(params).promise().catch((err) => {
-    // Ignore error
-    console.log('CANNOT DELETE', entity, err);
-  });
+  return ddb.deleteTable(params).promise()
+    .catch((err) => {
+      // Ignore error
+    });
 }
 
 function createTable(entity: string): Promise<any> {
   const params = {
+    TableName: `${configService.localDynamoDBTablePrefix}-${entity}`,
     AttributeDefinitions: [
       {
         AttributeName: 'id',
@@ -41,15 +42,15 @@ function createTable(entity: string): Promise<any> {
       ReadCapacityUnits: 2,
       WriteCapacityUnits: 2
     },
-    TableName: `${configService.localDynamoDBTablePrefix}-${entity}`,
     StreamSpecification: {
-      StreamEnabled: true
+      StreamEnabled: true,
+      StreamViewType: 'NEW_AND_OLD_IMAGES',
     }
   };
-  return ddb.createTable(params).promise().catch((err) => {
-    // Ignore error
-    console.log('CANNOT CREATE', entity, err);
-  });
+  return ddb.createTable(params).promise()
+    .catch((err) => {
+      // Ignore error
+    });
 }
 
 function createDocument(entity: string, document: any): Promise<any> {
@@ -57,7 +58,6 @@ function createDocument(entity: string, document: any): Promise<any> {
   const item = new Model({
     ...document
   });
-  console.log('document', document);
   return item.save();
 }
 
@@ -77,7 +77,6 @@ function timeout(ms) {
 
 export async function loadFixtures() {
   for (let entity of Object.keys(entities)) {
-    console.log('entity', entity);
     await deleteTable(entity);
     await timeout(1000);
     await createTable(entity);
