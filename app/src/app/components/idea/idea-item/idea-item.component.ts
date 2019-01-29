@@ -82,7 +82,6 @@ export class IdeaItemComponent implements OnInit, OnChanges {
       return;
     }
     const data: any = clone(this.formGroup.value);
-    console.log('SUBMIT DATA', data);
     this.apollo.mutate({
       mutation: UpdateIdeaMutation,
       variables: data,
@@ -94,11 +93,14 @@ export class IdeaItemComponent implements OnInit, OnChanges {
         },
       },
       update: (store, { data: { updateIdea } }) => {
-        if (!updateIdea || undefined === updateIdea.label) {
+        if (!updateIdea) {
           return;
         }
         const query: any = store.readQuery({ query: GetIdeas });
-        const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === this.idea.id ? { ...idea, label: updateIdea.label } : idea);
+        const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === updateIdea.id ? {
+          ...idea,
+          label: updateIdea.label,
+        } : idea);
         store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
         this.idea.label = updateIdea.label;
       }

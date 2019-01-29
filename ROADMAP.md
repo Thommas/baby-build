@@ -5,7 +5,6 @@ Short term
 ----------
 
 - Fix update bug
-- Implement ES mapping lambda
 - Implement ES query with filter by requiredAge/score
 - Implement icon
 - Implement sharing ideas

@@ -48,6 +48,7 @@ export const UpdateIdeaMutation = gql`
       label: $label
     ) {
       id
+      label
     }
   }
 `;

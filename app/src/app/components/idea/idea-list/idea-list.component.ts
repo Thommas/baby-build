@@ -41,7 +41,6 @@ export class IdeaListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('ON CHANGES');
     this.getIdeas();
   }
 
@@ -50,7 +49,6 @@ export class IdeaListComponent implements OnInit, OnChanges {
 
     this.apollo.watchQuery<any>({
       query: GetIdeas,
-      fetchPolicy: 'network-only',
       variables: {}
     })
       .valueChanges
