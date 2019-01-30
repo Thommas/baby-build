@@ -1,0 +1,21 @@
+<h2>Required age</h2>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <ng-container *ngFor="let age of ages">
+    <button mat-raised-button
+            *ngIf="age <= 10"
+            [color]="false ? 'accent' : ''"
+            (click)="selectRequiredAge(age)">
+      {{ age }}
+    </button>
+  </ng-container>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <ng-container *ngFor="let age of ages">
+    <button mat-raised-button
+            *ngIf="age > 10"
+            [color]="false ? 'accent' : ''"
+            (click)="selectRequiredAge(age)">
+      {{ age }}
+    </button>
+  </ng-container>
+</div>

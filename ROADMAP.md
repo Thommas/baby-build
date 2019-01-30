@@ -4,7 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Fix update bug
 - Implement ES query with filter by requiredAge/score
 - Implement icon
 - Implement sharing ideas

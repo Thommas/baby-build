@@ -1,8 +1,10 @@
 <mat-card fxFlex class="left-card">
   <mat-card-header fxLayout="row" fxLayoutAlign="start center">
     <button mat-raised-button color='primary' (click)="addIdea()" i18n>idea_index.add_idea</button>
+    <button mat-raised-button color='primary' (click)="toggleFilters()" i18n>idea_index.toggle_filters</button>
   </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="start start">
+    <app-idea-list-filters-cmp *ngIf="displayFilters"></app-idea-list-filters-cmp>
     <app-idea-list-cmp
       (selectIdea)="selectIdea($event)"
     ></app-idea-list-cmp>

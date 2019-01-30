@@ -23,6 +23,7 @@ import { UserService } from '../../../services';
 })
 export class IdeaIndexComponent {
   loading: boolean;
+  displayFilters: boolean;
   selectedIdea: any;
 
   constructor(
@@ -32,6 +33,7 @@ export class IdeaIndexComponent {
     private userService: UserService,
     private dialog: MatDialog
   ) {
+    this.displayFilters = false;
     this.selectedIdea = null;
   }
 
@@ -68,5 +70,9 @@ export class IdeaIndexComponent {
 
   selectIdea(idea: any) {
     this.selectedIdea = idea;
+  }
+
+  toggleFilters() {
+    this.displayFilters = !this.displayFilters;
   }
 }

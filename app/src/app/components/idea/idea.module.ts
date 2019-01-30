@@ -27,6 +27,7 @@ import {
   IdeaIndexComponent,
   IdeaItemComponent,
   IdeaListComponent,
+  IdeaListFiltersComponent,
   IdeaShowComponent,
   IdeaUserShowComponent
 } from './';
@@ -52,6 +53,7 @@ import {
     IdeaIndexComponent,
     IdeaItemComponent,
     IdeaListComponent,
+    IdeaListFiltersComponent,
     IdeaShowComponent,
     IdeaUserShowComponent
   ],
