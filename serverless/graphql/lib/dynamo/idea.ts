@@ -10,10 +10,14 @@ import generate = require('nanoid/generate');
 import { Idea } from '../model';
 import { queryIdeas } from '../elasticsearch/idea';
 
-export function getIdeas(userId) {
-  return queryIdeas(userId).then((ideas) => {
+export function getIdeas(userId: string, args: any) {
+  console.log('args', args);
+  return queryIdeas(userId, args).then((ideas) => {
     const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
     console.log('params', params);
+    if (params.length === 0) {
+      return [];
+    }
     return Idea.batchGet(params);
   });
 }

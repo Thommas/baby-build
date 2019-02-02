@@ -6,7 +6,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component } from '@angular/core';
+import { xor } from 'lodash';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-idea-list-filters-cmp',
@@ -14,15 +15,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./idea-list-filters.component.scss']
 })
 export class IdeaListFiltersComponent {
+  @Input() filters: any;
+  @Output() filtersChange: EventEmitter<any> = new EventEmitter<any>;
   ages: number[] = [];
 
   constructor() {
+    this.filters = {
+      requiredAge: [],
+      score: [],
+    };
     for (let age = 1; age <= 20; age++) {
       this.ages.push(age);
     }
   }
 
-  selectRequiredAge() {
-
+  selectRequiredAge(requiredAge: number) {
+    this.filters.requiredAge = xor(this.filters.requiredAge, [requiredAge]);
+    this.filtersChange.emit(this.filters);
   }
 }

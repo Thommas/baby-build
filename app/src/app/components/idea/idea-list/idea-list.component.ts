@@ -21,10 +21,12 @@ import { UserService } from '../../../services';
   styleUrls: ['./idea-list.component.scss']
 })
 export class IdeaListComponent implements OnInit, OnChanges {
-  @Input('buildId') buildId: string;
+  @Input() displayFilters: boolean;
+  @Input() buildId: string;
   @Output() selectIdea: EventEmitter<any> = new EventEmitter<any>();
   loading: boolean;
   ideas: any;
+  filters: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,9 +36,18 @@ export class IdeaListComponent implements OnInit, OnChanges {
     private dialog: MatDialog
   ) {
     this.buildId = null;
+    this.filters = {
+      requiredAge: [],
+      score: [],
+    };
   }
 
   ngOnInit() {
+    this.getIdeas();
+  }
+
+  onFiltersChange(filters: any) {
+    this.filters = filters;
     this.getIdeas();
   }
 
@@ -49,7 +60,7 @@ export class IdeaListComponent implements OnInit, OnChanges {
 
     this.apollo.watchQuery<any>({
       query: GetIdeas,
-      variables: {}
+      variables: this.filters,
     })
       .valueChanges
       .subscribe(

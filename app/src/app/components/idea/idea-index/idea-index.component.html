@@ -4,8 +4,8 @@
     <button mat-raised-button color='primary' (click)="toggleFilters()" i18n>idea_index.toggle_filters</button>
   </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="start start">
-    <app-idea-list-filters-cmp *ngIf="displayFilters"></app-idea-list-filters-cmp>
     <app-idea-list-cmp
+      [displayFilters]="displayFilters"
       (selectIdea)="selectIdea($event)"
     ></app-idea-list-cmp>
   </mat-card-content>

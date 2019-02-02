@@ -4,6 +4,17 @@
     "createdAt": 1521053029000,
     "updatedAt": 1521053029000,
     "userId": "auth0|5a773beebfd2511753f2c9c0",
-    "label": "Mario"
+    "label": "Mario",
+    "requiredAge": 7.1,
+    "score": 2
+  },
+  {
+    "id": "12436278156271596",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "userId": "auth0|5a773beebfd2511753f2c9c0",
+    "label": "Sonic",
+    "requiredAge": 6.1,
+    "score": 3
   }
 ]

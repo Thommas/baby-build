@@ -14,7 +14,7 @@ export default {
     loggedIdeaUser: (_, args, context) => dbIdeaUser.getLoggedIdeaUser(_.id, context.userId),
   },
   Query: {
-    ideas: (_, args, context) => dbIdea.getIdeas(context.userId),
+    ideas: (_, args, context) => dbIdea.getIdeas(context.userId, args),
   },
   Mutation: {
     createIdea: (_, args, context) => dbIdea.createIdea(args, context.userId),

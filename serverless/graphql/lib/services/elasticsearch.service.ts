@@ -13,17 +13,11 @@ export const elasticsearchClient = new elasticsearch.Client({
   hosts: [configService.elasticSearchHost]
 });
 
-export function createIndex(): Promise<any> {
+export function createIndex(mappings: any): Promise<any> {
   return elasticsearchClient.indices.create({
     index: configService.elasticSearchIndex,
     body: {
-      mappings: {
-        idea: {
-          properties: {
-            userId: {type: 'keyword'},
-          }
-        }
-      }
+      mappings,
     }
   });
 }

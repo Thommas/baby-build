@@ -3,7 +3,7 @@
   <ng-container *ngFor="let age of ages">
     <button mat-raised-button
             *ngIf="age <= 10"
-            [color]="false ? 'accent' : ''"
+            [color]="filters.requiredAge.includes(age) ? 'accent' : ''"
             (click)="selectRequiredAge(age)">
       {{ age }}
     </button>
@@ -13,7 +13,7 @@
   <ng-container *ngFor="let age of ages">
     <button mat-raised-button
             *ngIf="age > 10"
-            [color]="false ? 'accent' : ''"
+            [color]="filters.requiredAge.includes(age) ? 'accent' : ''"
             (click)="selectRequiredAge(age)">
       {{ age }}
     </button>

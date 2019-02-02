@@ -14,7 +14,7 @@ const Idea = `
     loggedIdeaUser: IdeaUser
   }
   type Query {
-    ideas: [Idea]
+    ideas(requiredAge: [Int]): [Idea]
   }
   type Mutation {
     createIdea: Idea

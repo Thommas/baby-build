@@ -7,7 +7,18 @@
     "updatedAt": 1521053029000,
     "requiredAge": 7,
     "requiredAgeExplanation": "Simple graphics and gameplay",
-    "score": 3,
+    "score": 2,
     "scoreExplanation": "Good introduction to video game"
+  },
+  {
+    "id": "4ae840c5-d097-4e4f-a3d4-19b38b6d9c40",
+    "ideaId": "12436278156271596",
+    "userId": "auth0|5a773beebfd2511753f2c9c0",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "requiredAge": 6,
+    "requiredAgeExplanation": "Cool game",
+    "score": 3,
+    "scoreExplanation": "Need to see if he prefers over Mario"
   }
 ]

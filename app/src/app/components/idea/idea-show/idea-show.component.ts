@@ -15,7 +15,7 @@ import { Apollo } from 'apollo-angular';
   styleUrls: ['./idea-show.component.scss']
 })
 export class IdeaShowComponent {
-  @Input('idea') idea: any;
+  @Input() idea: any;
   loading: boolean;
 
   constructor(private apollo: Apollo) {

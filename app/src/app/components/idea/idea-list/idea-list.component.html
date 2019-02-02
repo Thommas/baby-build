@@ -1,3 +1,8 @@
+<app-idea-list-filters-cmp
+  *ngIf="displayFilters"
+  [filters]="filters"
+  (filtersChange)="onFiltersChange($event)"
+></app-idea-list-filters-cmp>
 <app-idea-item-cmp
   *ngFor="let idea of ideas"
   [idea]="idea"

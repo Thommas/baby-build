@@ -10,6 +10,16 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { createIndex, deleteIndex, index } from '../services';
 
+const mappings: any = {
+  idea: {
+    properties: {
+      userId: {type: 'keyword'},
+      requiredAge: {type: 'double'},
+      score: {type: 'double'},
+    }
+  }
+};
+
 function loadData(): Promise<any> {
   const data: any = fs.readFileSync(path.join(__dirname, 'data/idea.json'));
   const items: any[] = JSON.parse(data);
@@ -22,6 +32,6 @@ function loadData(): Promise<any> {
 
 export async function loadFixtures(): Promise<any> {
   await deleteIndex();
-  await createIndex();
+  await createIndex(mappings);
   await loadData();
 }

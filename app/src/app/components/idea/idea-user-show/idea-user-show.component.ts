@@ -25,8 +25,8 @@ import {
   styleUrls: ['./idea-user-show.component.scss']
 })
 export class IdeaUserShowComponent implements OnInit, OnChanges {
-  @Input('idea') idea: any;
-  @Input('ideaUser') ideaUser: any;
+  @Input() idea: any;
+  @Input() ideaUser: any;
   @ViewChild('requiredAgeExplanationElement') requiredAgeExplanationElement: any;
   @ViewChild('scoreExplanationElement') scoreExplanationElement: any;
   formGroup: FormGroup;
