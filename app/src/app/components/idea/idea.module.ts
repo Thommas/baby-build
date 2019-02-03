@@ -24,6 +24,7 @@ import {
 
 import {
   routing,
+  IdeaIconComponent,
   IdeaIndexComponent,
   IdeaItemComponent,
   IdeaListComponent,
@@ -50,6 +51,7 @@ import {
     MatTooltipModule
   ],
   declarations: [
+    IdeaIconComponent,
     IdeaIndexComponent,
     IdeaItemComponent,
     IdeaListComponent,

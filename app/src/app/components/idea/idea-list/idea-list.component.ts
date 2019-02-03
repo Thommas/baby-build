@@ -58,9 +58,14 @@ export class IdeaListComponent implements OnInit, OnChanges {
   getIdeas() {
     this.loading = true;
 
+    const filters = Object.assign({}, this.filters);
+    if (filters.requiredAge.length === 0) {
+      delete filters.requiredAge;
+    }
+
     this.apollo.watchQuery<any>({
       query: GetIdeas,
-      variables: this.filters,
+      variables: filters,
     })
       .valueChanges
       .subscribe(

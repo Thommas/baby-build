@@ -10,6 +10,7 @@ const Idea = `
   type Idea {
     id: String
     label: String
+    icon: String
     userId: String
     loggedIdeaUser: IdeaUser
   }
@@ -21,6 +22,9 @@ const Idea = `
     updateIdea(
       id: String!
       label: String
+    ): Idea
+    updateIdeaIcon(
+      id: String!
     ): Idea
     deleteIdea(
       id: String!

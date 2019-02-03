@@ -9,6 +9,8 @@
 import generate = require('nanoid/generate');
 import { Idea } from '../model';
 import { queryIdeas } from '../elasticsearch/idea';
+import { fetchImage } from '../puppeteer';
+import { storeBase64File } from '../s3';
 
 export function getIdeas(userId: string, args: any) {
   console.log('args', args);
@@ -43,6 +45,29 @@ export function updateIdea(args, userId) {
       idea.label = args.label;
       return idea.save();
     });
+}
+
+export function updateIdeaIcon(args, userId) {
+  return Idea.get(args.id)
+    .then((idea: any) => {
+      if (!idea) {
+        throw new Error('Idea not found');
+      }
+      if (idea.userId !== userId) {
+        throw new Error('Unauthorized');
+      }
+      return fetchImage(idea.label)
+        .then((imageData: string) => {
+          if (null === imageData) {
+            throw new Error('Cannot fetch image');
+          }
+          return storeBase64File(`idea-icon/${userId}/${idea.id}`, imageData);
+        })
+        .then((icon: string) => {
+          idea.icon = icon;
+          return idea.save();
+        });
+    })
 }
 
 export function deleteIdea(args, userId) {

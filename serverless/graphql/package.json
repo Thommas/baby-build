@@ -4,6 +4,7 @@
   "license": "WTFPL",
   "scripts": {
     "start": "SLS_DEBUG=* serverless offline start --stage dev --region eu-west-2",
+    "puppeteer": "./node_modules/.bin/ts-node ./lib/puppeteer/index.ts",
     "fixtures": "./node_modules/.bin/ts-node ./lib/fixtures/index.ts",
     "graphqli": "./node_modules/.bin/ts-node ./lib/graphqli/index.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
@@ -40,6 +41,7 @@
     "lodash": "^4.17.11",
     "merge-graphql-schemas": "^1.5.8",
     "nanoid": "^2.0.0",
+    "puppeteer": "^1.12.1",
     "serverless-dynamodb-local": "^0.2.36",
     "serverless-offline": "^3.32.2",
     "serverless-plugin-typescript": "^1.1.5",

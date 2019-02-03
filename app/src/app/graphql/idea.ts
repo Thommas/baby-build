@@ -13,6 +13,7 @@ export const GetIdeas = gql`
     ideas(requiredAge: $requiredAge) {
       id
       label
+      icon
       userId
       loggedIdeaUser {
         id
@@ -30,6 +31,7 @@ export const CreateIdeaMutation = gql`
     createIdea {
       id
       label
+      icon
       userId
       loggedIdeaUser {
         id
@@ -49,6 +51,21 @@ export const UpdateIdeaMutation = gql`
     ) {
       id
       label
+      icon
+    }
+  }
+`;
+
+export const UpdateIdeaIconMutation = gql`
+  mutation UpdateIdeaIcon(
+    $id: String!
+  ) {
+    updateIdeaIcon(
+      id: $id
+    ) {
+      id
+      label
+      icon
     }
   }
 `;

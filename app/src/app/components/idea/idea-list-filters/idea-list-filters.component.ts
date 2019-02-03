@@ -16,7 +16,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class IdeaListFiltersComponent {
   @Input() filters: any;
-  @Output() filtersChange: EventEmitter<any> = new EventEmitter<any>;
+  @Output() filtersChange: EventEmitter<any> = new EventEmitter<any>();
   ages: number[] = [];
 
   constructor() {

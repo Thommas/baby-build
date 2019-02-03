@@ -1,4 +1,9 @@
 <div fxFill fxLayout="row" fxLayoutAlign="start center">
+  <app-idea-icon-cmp
+    [ideaId]="idea.id"
+    [ideaLabel]="idea.label"
+    [ideaIcon]="idea.icon"
+  ></app-idea-icon-cmp>
   <form [formGroup]="formGroup" fxFlex fxLayout="row" fxLayoutAlign="start center">
     <mat-form-field fxFill>
       <input #inputElement fxFill
