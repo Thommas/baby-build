@@ -15,7 +15,7 @@ const Idea = `
     loggedIdeaUser: IdeaUser
   }
   type Query {
-    ideas(requiredAge: [Int]): [Idea]
+    ideas(label: String, requiredAge: [Int], score: [Int]): [Idea]
   }
   type Mutation {
     createIdea: Idea

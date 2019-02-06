@@ -13,18 +13,18 @@ export const elasticsearchClient = new elasticsearch.Client({
   hosts: [configService.elasticSearchHost]
 });
 
-export function createIndex(mappings: any): Promise<any> {
+export function createIndex(body: any): Promise<any> {
   return elasticsearchClient.indices.create({
     index: configService.elasticSearchIndex,
-    body: {
-      mappings,
-    }
+    body
   });
 }
 
 export function deleteIndex(): Promise<any> {
   return elasticsearchClient.indices.delete({
     index: configService.elasticSearchIndex,
+  }).catch((err) => {
+    // Ignore error
   });
 }
 

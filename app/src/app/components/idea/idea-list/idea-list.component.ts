@@ -37,6 +37,7 @@ export class IdeaListComponent implements OnInit, OnChanges {
   ) {
     this.buildId = null;
     this.filters = {
+      name: null,
       requiredAge: [],
       score: [],
     };

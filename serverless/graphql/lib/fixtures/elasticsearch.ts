@@ -10,12 +10,46 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { createIndex, deleteIndex, index } from '../services';
 
-const mappings: any = {
-  idea: {
-    properties: {
-      userId: {type: 'keyword'},
-      requiredAge: {type: 'double'},
-      score: {type: 'double'},
+const configuration: any = {
+  settings: {
+    analysis: {
+      filter: {
+        autocomplete_filter: {
+          type: 'edge_ngram',
+          min_gram: 1,
+          max_gram: 20
+        }
+      },
+      analyzer: {
+        autocomplete: {
+          type: 'custom',
+          tokenizer: 'standard',
+          filter: [
+            'lowercase',
+            'autocomplete_filter',
+          ]
+        }
+      }
+    }
+  },
+  mappings: {
+    idea: {
+      properties: {
+        label: {
+          type: 'text',
+          analyzer: 'autocomplete',
+          search_analyzer: 'standard'
+        },
+        userId: {
+          type: 'keyword',
+        },
+        requiredAge: {
+          type: 'double',
+        },
+        score: {
+          type: 'double',
+        },
+      }
     }
   }
 };
@@ -32,6 +66,6 @@ function loadData(): Promise<any> {
 
 export async function loadFixtures(): Promise<any> {
   await deleteIndex();
-  await createIndex(mappings);
+  await createIndex(configuration);
   await loadData();
 }
