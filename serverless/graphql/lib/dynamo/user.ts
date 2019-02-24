@@ -10,7 +10,7 @@ import nanoid = require('nanoid');
 import { Entity } from '../model';
 
 export function getAuthUser(userId) {
-  return Entity.get(`User-${userId}`)
+  return Entity.get(userId)
     .then((user: any) => {
       if (!user) {
         user = new Entity();
@@ -24,7 +24,7 @@ export function getAuthUser(userId) {
 }
 
 export function getUser(args) {
-  return Entity.get(`User-${args.id}`)
+  return Entity.get(args.id)
     .then((user: any) => {
       if (!user) {
         throw new Error('User not found');
@@ -34,7 +34,7 @@ export function getUser(args) {
 }
 
 export function updateUser(args, userId) {
-  return Entity.get(`User-${args.id}`)
+  return Entity.get(args.id)
     .then((user: any) => {
       if (!user) {
         throw new Error('User not found');

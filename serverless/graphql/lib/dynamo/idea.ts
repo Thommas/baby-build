@@ -26,15 +26,16 @@ export function getIdeas(userId: string, args: any) {
 export function createIdea(args, userId) {
   const id = generate('0123456789', 20);
   const idea = new Entity({
-    id: `User-${id}`,
+    id: `Idea-${id}`,
     userId,
+    icon: null,
     ...args
   });
   return idea.save();
 }
 
 export function updateIdea(args, userId) {
-  return Entity.get(`User-${args.id}`)
+  return Entity.get(args.id)
     .then((idea: any) => {
       if (!idea) {
         throw new Error('Idea not found');
@@ -48,7 +49,7 @@ export function updateIdea(args, userId) {
 }
 
 export function updateIdeaIcon(args, userId) {
-  return Entity.get(`User-${args.id}`)
+  return Entity.get(args.id)
     .then((idea: any) => {
       if (!idea) {
         throw new Error('Idea not found');
@@ -71,7 +72,7 @@ export function updateIdeaIcon(args, userId) {
 }
 
 export function deleteIdea(args, userId) {
-  return Entity.get(`User-${args.id}`)
+  return Entity.get(args.id)
     .then((idea: any) => {
       if (!idea) {
         throw new Error('Idea not found');

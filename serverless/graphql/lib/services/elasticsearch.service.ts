@@ -29,10 +29,12 @@ export function deleteIndex(): Promise<any> {
 }
 
 export function index(type: string, document: any): Promise<any> {
+  const id = document.id;
+  delete document.id;
   return elasticsearchClient.index({
     index: configService.elasticSearchIndex,
     type: '_doc',
-    id: document.id,
+    id,
     body: {
       ...document,
       type,

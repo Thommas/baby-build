@@ -39,10 +39,12 @@ export class IdeaItemComponent implements OnInit, OnChanges {
     this.formGroup = new FormGroup({
       id: new FormControl('', [Validators.required]),
       label: new FormControl('', []),
+      icon: new FormControl('', []),
     });
     this.formGroup.setValue({
       id: null,
       label: '',
+      icon: null,
     });
   }
 
@@ -64,6 +66,7 @@ export class IdeaItemComponent implements OnInit, OnChanges {
         this.formGroup.setValue({
           id: idea.id,
           label: idea.label,
+          icon: idea.icon,
         });
         if (!idea.label || idea.label.length === 0) {
           this.emptyIdeaReadyForDeletion = true;
@@ -72,6 +75,7 @@ export class IdeaItemComponent implements OnInit, OnChanges {
         this.formGroup.setValue({
           id: null,
           label: '',
+          icon: null,
         });
       }
     }

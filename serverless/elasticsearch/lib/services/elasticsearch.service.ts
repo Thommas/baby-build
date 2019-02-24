@@ -19,23 +19,52 @@ const client = new elasticsearch.Client({
   hosts: [process.env.ELASTIC_SEARCH_HOST]
 });
 
-export function index(type: string, document: any) {
+export function detectType(documentId: any)
+{
+  if (!documentId) {
+    return null;
+  }
+  if (documentId.startsWith('Review-')) {
+    return 'review';
+  }
+  if (documentId.startsWith('Idea-')) {
+    return 'idea';
+  }
+  if (documentId.startsWith('User-')) {
+    return 'user';
+  }
+
+  return null;
+}
+
+export function index(document: any) {
+  console.log('document', document);
+  const id = document.id;
+  const type = detectType(id);
+
+  if (null === type) {
+    return;
+  }
+
+  delete document.id;
+
   client.index({
     index: process.env.ELASTIC_SEARCH_INDEX,
-    type,
-    id: document.id,
+    type: '_doc',
+    id,
     body: {
       ...document,
+      type,
     }
   }, (err, resp, status) => {
     console.log(resp);
   });
 }
 
-export function remove(type: string, document: any) {
+export function remove(document: any) {
   client.delete({
     index: process.env.ELASTIC_SEARCH_INDEX,
-    type,
+    type: '_doc',
     id: document.id,
   }, (err, resp, status) => {
     console.log(resp);

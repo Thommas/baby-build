@@ -30,7 +30,7 @@ export function createReview(args, userId) {
 }
 
 export function updateReview(args, userId) {
-  return Entity.get(`Review-${args.id}`)
+  return Entity.get(args.id)
     .then((review: any) => {
       if (!review) {
         throw new Error('Idea not found');

@@ -15,9 +15,9 @@ custom:
     port: ${self:custom.secrets.LOCAL_DYNAMODB_PORT}
     pollForever: true
     streams:
-      - table: ${self:custom.secrets.IDEA_TABLE}
+      - table: ${self:custom.secrets.TABLE}
         functions:
-          - idea
+          - handle
 
 package:
   exclude:
@@ -48,8 +48,8 @@ provider:
     ELASTIC_SEARCH_HOST: ${self:custom.secrets.ELASTIC_SEARCH_HOST}
 
 functions:
-  idea:
-    handler: lib/handler.idea
+  handle:
+    handler: lib/handler.handle
     events:
       - stream:
           enabled: true

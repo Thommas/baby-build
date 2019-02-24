@@ -63,6 +63,9 @@ export class IdeaListComponent implements OnInit, OnChanges {
     if (filters.requiredAge.length === 0) {
       delete filters.requiredAge;
     }
+    if (filters.score.length === 0) {
+      delete filters.score;
+    }
 
     this.apollo.watchQuery<any>({
       query: GetIdeas,

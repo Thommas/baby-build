@@ -30,6 +30,6 @@ describe('Handlers', function() {
     }
     const context = {}
     const callback = () => {}
-    handleEvent(event, context, callback, 'idea')
+    handleEvent(event, context, callback)
   });
 });

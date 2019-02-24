@@ -8,6 +8,6 @@
 
 import { handleEvent } from './handlers/event.handler'
 
-exports.idea = (event, context, callback) => {
-  handleEvent(event, context, callback, 'idea');
+exports.handle = (event, context, callback) => {
+  handleEvent(event, context, callback);
 };
