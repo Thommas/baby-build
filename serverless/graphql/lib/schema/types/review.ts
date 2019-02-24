@@ -6,8 +6,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-const IdeaUser = `
-  type IdeaUser {
+const Review = `
+  type Review {
     id: String
     requiredAge: Int
     requiredAgeExplanation: String
@@ -17,23 +17,23 @@ const IdeaUser = `
     userId: String
   }
   type Query {
-    ideaUsers: [IdeaUser]
+    reviews: [Review]
   }
   type Mutation {
-    createIdeaUser(
+    createReview(
       ideaId: String!
       requiredAge: Int
       requiredAgeExplanation: String
       score: Int
       scoreExplanation: String
-    ): IdeaUser
-    updateIdeaUser(
+    ): Review
+    updateReview(
       id: String!
       requiredAge: Int
       requiredAgeExplanation: String
       score: Int
       scoreExplanation: String
-    ): IdeaUser
+    ): Review
   }
 `;
-export default IdeaUser;
+export default Review;

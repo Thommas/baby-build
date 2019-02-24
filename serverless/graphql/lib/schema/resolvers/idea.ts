@@ -7,12 +7,8 @@
  */
 
 import * as dbIdea from '../../dynamo/idea';
-import * as dbIdeaUser from '../../dynamo/idea-user';
 
 export default {
-  Idea: {
-    loggedIdeaUser: (_, args, context) => dbIdeaUser.getLoggedIdeaUser(_.id, context.userId),
-  },
   Query: {
     ideas: (_, args, context) => dbIdea.getIdeas(context.userId, args),
   },

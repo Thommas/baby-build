@@ -14,6 +14,7 @@ export const GetAuthUser = gql`
       id
       xp
       lvl
+      nextLvlXp
     }
   }
 `;

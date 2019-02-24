@@ -15,13 +15,6 @@ export const GetIdeas = gql`
       label
       icon
       userId
-      loggedIdeaUser {
-        id
-        requiredAge
-        requiredAgeExplanation
-        score
-        scoreExplanation
-      }
     }
   }
 `;
@@ -33,9 +26,6 @@ export const CreateIdeaMutation = gql`
       label
       icon
       userId
-      loggedIdeaUser {
-        id
-      }
     }
   }
 `;

@@ -22,6 +22,22 @@ export function getLevel(xp: number) {
   return 99;
 }
 
+export function getNextLevelXp(xp: number): any {
+    if (xp < USER_LEVELS[0]) {
+      return USER_LEVELS[0];
+    }
+    if (xp >= USER_LEVELS[USER_LEVELS.length - 1]) {
+      return '';
+    }
+    for (let i = USER_LEVELS.length - 2; i >= 0; i--) {
+      if (xp >= USER_LEVELS[i]) {
+        return USER_LEVELS[i + 1];
+      }
+    }
+    return '';
+  }
+}
+
 export async function addXp(entityType, entityId, xp) {
   const id = entityType + '-' + entityId;
 
@@ -40,7 +56,8 @@ export async function addXp(entityType, entityId, xp) {
       Item: {
         id,
         xp: xp,
-        lvl: getLevel(xp)
+        lvl: getLevel(xp),
+        nextLvlXp: getNextLevelXp(xp),
       },
     };
 
@@ -51,7 +68,8 @@ export async function addXp(entityType, entityId, xp) {
   const newLevel = getLevel(newXp);
   const args = {
     xp: newXp,
-    lvl: newLevel
+    lvl: newLevel,
+    nextLvlXp: getNextLevelXp(newXp),
   };
 
   const updateParams = {

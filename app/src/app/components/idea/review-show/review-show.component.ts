@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Idea - Show
+ * Component - Review - Show
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -15,18 +15,18 @@ import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs
 import { Apollo } from 'apollo-angular';
 import {
   GetIdeas,
-  CreateIdeaUserMutation,
-  UpdateIdeaUserMutation
+  CreateReviewMutation,
+  UpdateReviewMutation
 } from '../../../graphql';
 
 @Component({
-  selector: 'app-idea-user-show-cmp',
-  templateUrl: './idea-user-show.component.html',
-  styleUrls: ['./idea-user-show.component.scss']
+  selector: 'app-review-show-cmp',
+  templateUrl: './review-show.component.html',
+  styleUrls: ['./review-show.component.scss']
 })
-export class IdeaUserShowComponent implements OnInit, OnChanges {
+export class ReviewShowComponent implements OnInit, OnChanges {
   @Input() idea: any;
-  @Input() ideaUser: any;
+  @Input() review: any;
   @ViewChild('requiredAgeExplanationElement') requiredAgeExplanationElement: any;
   @ViewChild('scoreExplanationElement') scoreExplanationElement: any;
   formGroup: FormGroup;
@@ -35,7 +35,7 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
   scores: number[] = [];
 
   constructor(private apollo: Apollo) {
-    this.ideaUser = {};
+    this.review = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       requiredAge: new FormControl('', []),
@@ -89,18 +89,18 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.ideaUser && changes.ideaUser.previousValue
+    if (changes.review && changes.review.previousValue
       && changes.idea && changes.idea.previousValue) {
       this.save();
     }
-    if (changes.ideaUser) {
-      const ideaUser: any = changes.ideaUser.currentValue;
+    if (changes.review) {
+      const review: any = changes.review.currentValue;
       this.formGroup.patchValue({
-        id: ideaUser ? ideaUser.id : null,
-        requiredAge: ideaUser ? ideaUser.requiredAge : null,
-        requiredAgeExplanation: ideaUser ? ideaUser.requiredAgeExplanation : null,
-        score: ideaUser ? ideaUser.score : null,
-        scoreExplanation: ideaUser ? ideaUser.scoreExplanation : null,
+        id: review ? review.id : null,
+        requiredAge: review ? review.requiredAge : null,
+        requiredAgeExplanation: review ? review.requiredAgeExplanation : null,
+        score: review ? review.score : null,
+        scoreExplanation: review ? review.scoreExplanation : null,
       });
     }
     if (changes.idea && changes.idea.currentValue) {
@@ -117,29 +117,29 @@ export class IdeaUserShowComponent implements OnInit, OnChanges {
     }
     const data: any = clone(this.formGroup.value);
     this.apollo.mutate({
-      mutation: data.id ? UpdateIdeaUserMutation : CreateIdeaUserMutation,
+      mutation: data.id ? UpdateReviewMutation : CreateReviewMutation,
       variables: data,
       optimisticResponse: {
         __typename: 'Mutation',
-        [data.id ? 'updateIdeaUser' : 'createIdeaUser']: {
-          __typename: 'IdeaUser',
+        [data.id ? 'updateReview' : 'createReview']: {
+          __typename: 'Review',
           id: -uuid(),
           ...data
         },
       },
-      update: (store, { data: { createIdeaUser, updateIdeaUser } }) => {
-        if (!createIdeaUser && !updateIdeaUser) {
+      update: (store, { data: { createReview, updateReview } }) => {
+        if (!createReview && !updateReview) {
           return;
         }
-        const ideaUser: any = createIdeaUser ? createIdeaUser : updateIdeaUser;
-        Object.assign(ideaUser, data);
+        const review: any = createReview ? createReview : updateReview;
+        Object.assign(review, data);
         const query: any = store.readQuery({ query: GetIdeas });
         const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === data.ideaId ? {
           ...idea,
-          loggedIdeaUser: ideaUser,
+          // loggedReview: review,
         } : idea);
         store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
-        this.ideaUser = ideaUser;
+        this.review = review;
       },
     }).subscribe();
   }

@@ -1,26 +1,3 @@
-<!--
-<div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-<img src="/assets/img/user.svg"
-     *ngIf="userService.user"
-     matTooltip="header_user.user" i18n-matTooltip
-     width="50" height="50"/>
-</div>
-<div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">
-  <app-header-level-cmp
-    *ngIf="userService.user"
-    [gamification]="userService.user.gamification">
-  </app-header-level-cmp>
-  <div fxFill fxLayout="row" fxLayoutAlign="center center">
-    <span>Level {{ gamification.lvl }}</span>
-  </div>
-  <mat-progress-bar
-    mode="determinate"
-    [value]="gamification.xp / (gamification.xp|xpToLevelUp) * 100"
-    color="primary"
-    [matTooltip]="gamification.xp + ' / ' + (gamification.xp|xpToLevelUp)">
-  </mat-progress-bar>
-</div>
--->
 <header fxLayout="row" fxLayoutAlign="start center">
   <div fxLayout="row" fxLayoutAlign="start center">
     <img src="/assets/img/path-of-child-logo-horizontal-light.svg" width="203" [routerLink]="['']"/>
@@ -29,3 +6,21 @@
     <mat-icon>close</mat-icon>
   </button>
 </header>
+<div fxLayout="column" fxLayoutAlign="start center" *ngIf="userService.user">
+  <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+    <img src="/assets/img/user.svg"
+         matTooltip="header_user.user" i18n-matTooltip
+         width="50" height="50"/>
+  </div>
+  <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">
+    <div fxFill fxLayout="row" fxLayoutAlign="center center">
+      <span>Level {{ userService.user.lvl }}</span>
+    </div>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="userService.user.xp / (userService.user.nextLvlXp) * 100"
+      color="primary"
+      [matTooltip]="userService.user.xp + ' / ' + (userService.user.nextLvlXp)">
+    </mat-progress-bar>
+  </div>
+</div>

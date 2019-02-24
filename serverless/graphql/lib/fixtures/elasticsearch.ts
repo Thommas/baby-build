@@ -9,6 +9,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { createIndex, deleteIndex, index } from '../services';
+import { entities } from '../model';
 
 const configuration: any = {
   settings: {
@@ -33,15 +34,12 @@ const configuration: any = {
     }
   },
   mappings: {
-    idea: {
+    _doc: {
       properties: {
         label: {
           type: 'text',
           analyzer: 'autocomplete',
           search_analyzer: 'standard'
-        },
-        userId: {
-          type: 'keyword',
         },
         requiredAge: {
           type: 'double',
@@ -49,17 +47,39 @@ const configuration: any = {
         score: {
           type: 'double',
         },
+        requiredAgeExplanation: {
+          type: 'text',
+          analyzer: 'autocomplete',
+          search_analyzer: 'standard'
+        },
+        scoreExplanation: {
+          type: 'text',
+          analyzer: 'autocomplete',
+          search_analyzer: 'standard'
+        },
+        xp: {
+          type: 'integer',
+        },
+        lvl: {
+          type: 'integer',
+        },
+        userId: {
+          type: 'keyword',
+        },
+        ideaId: {
+          type: 'keyword',
+        },
       }
     }
   }
 };
 
-function loadData(): Promise<any> {
-  const data: any = fs.readFileSync(path.join(__dirname, 'data/idea.json'));
+function loadData(entity: string): Promise<any> {
+  const data: any = fs.readFileSync(path.join(__dirname, `data/${entity}.json`));
   const items: any[] = JSON.parse(data);
   const promises: Promise<any>[] = [];
   for (let item of items) {
-    promises.push(index('idea', item));
+    promises.push(index(entity, item));
   }
   return Promise.all(promises);
 }
@@ -67,5 +87,7 @@ function loadData(): Promise<any> {
 export async function loadFixtures(): Promise<any> {
   await deleteIndex();
   await createIndex(configuration);
-  await loadData();
+  for (let entity of entities) {
+    await loadData(entity);
+  }
 }

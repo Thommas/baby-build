@@ -7,7 +7,7 @@
  */
 
 import { Component, Output, EventEmitter } from '@angular/core';
-import { AuthService } from '../../../services';
+import { UserService } from '../../../services';
 
 @Component({
   selector: 'app-sidebar-cmp',
@@ -18,6 +18,6 @@ export class SidebarComponent {
   @Output('toggleSidebar') toggleSidebar: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    public authService: AuthService
+    public userService: UserService
   ) {}
 }

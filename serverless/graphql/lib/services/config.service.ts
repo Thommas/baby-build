@@ -43,7 +43,7 @@ class ConfigService {
       ELASTIC_SEARCH_HOST: Joi.string().default('http://localhost:9200'),
       LOCAL_DYNAMODB_HOST: Joi.string().default('localhost'),
       LOCAL_DYNAMODB_PORT: Joi.number().default(4567),
-      LOCAL_DYNAMODB_TABLE_PREFIX: Joi.string().default('pathofchild-graphql-dev'),
+      LOCAL_DYNAMODB_TABLE: Joi.string().default('pathofchild-graphql-dev'),
       S3_BUCKET: Joi.string().default('pathofchild-local'),
     });
 
@@ -73,8 +73,8 @@ class ConfigService {
     return Number(this.envConfig.LOCAL_DYNAMODB_PORT);
   }
 
-  get localDynamoDBTablePrefix(): string {
-    return String(this.envConfig.LOCAL_DYNAMODB_TABLE_PREFIX);
+  get localDynamoDBTable(): string {
+    return String(this.envConfig.LOCAL_DYNAMODB_TABLE);
   }
 
   get s3Bucket(): string {

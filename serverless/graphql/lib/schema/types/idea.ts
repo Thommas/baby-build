@@ -12,7 +12,6 @@ const Idea = `
     label: String
     icon: String
     userId: String
-    loggedIdeaUser: IdeaUser
   }
   type Query {
     ideas(label: String, requiredAge: [Int], score: [Int]): [Idea]

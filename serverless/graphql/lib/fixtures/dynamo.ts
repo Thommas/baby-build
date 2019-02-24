@@ -9,13 +9,13 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { configService, getAWSDynamo } from '../services';
-import { entities } from './data';
+import { entities, Entity } from '../model';
 
 const ddb: any = getAWSDynamo();
 
-function deleteTable(entity: string): Promise<any> {
+function deleteTable(): Promise<any> {
   const params = {
-    TableName: `${configService.localDynamoDBTablePrefix}-${entity}`,
+    TableName: configService.localDynamoDBTable,
   };
   return ddb.deleteTable(params).promise()
     .catch((err) => {
@@ -23,9 +23,9 @@ function deleteTable(entity: string): Promise<any> {
     });
 }
 
-function createTable(entity: string): Promise<any> {
+function createTable(): Promise<any> {
   const params = {
-    TableName: `${configService.localDynamoDBTablePrefix}-${entity}`,
+    TableName: configService.localDynamoDBTable,
     AttributeDefinitions: [
       {
         AttributeName: 'id',
@@ -54,8 +54,7 @@ function createTable(entity: string): Promise<any> {
 }
 
 function createDocument(entity: string, document: any): Promise<any> {
-  const Model: any = entities[entity].model;
-  const item = new Model({
+  const item = new Entity({
     ...document
   });
   return item.save();
@@ -76,11 +75,11 @@ function timeout(ms) {
 }
 
 export async function loadFixtures() {
-  for (let entity of Object.keys(entities)) {
-    await deleteTable(entity);
-    await timeout(1000);
-    await createTable(entity);
-    await timeout(1000);
+  await deleteTable();
+  await timeout(1000);
+  await createTable();
+  await timeout(1000);
+  for (let entity of entities) {
     await loadData(entity);
   }
 }

@@ -87,7 +87,7 @@ exports.auth = (event, context, callback) => {
         const userId = decoded.sub
         const effect = 'Allow'
         const resource = event.methodArn
-        const authorizerContext = { userId: userId }
+        const authorizerContext = { userId: `User-${userId}` }
         return callback(null, childIAMPolicy(userId, effect, resource, authorizerContext))
       })
     })

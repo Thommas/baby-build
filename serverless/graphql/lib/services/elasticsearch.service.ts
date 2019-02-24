@@ -31,18 +31,19 @@ export function deleteIndex(): Promise<any> {
 export function index(type: string, document: any): Promise<any> {
   return elasticsearchClient.index({
     index: configService.elasticSearchIndex,
-    type,
+    type: '_doc',
     id: document.id,
     body: {
       ...document,
+      type,
     }
   });
 }
 
-export function search(type: string, query: any) {
+export function search(query: any) {
   return elasticsearchClient.search({
     index: configService.elasticSearchIndex,
-    type,
+    type: '_doc',
     body: {
       query,
     }

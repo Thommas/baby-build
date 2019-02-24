@@ -7,34 +7,34 @@
  */
 
 import generate = require('nanoid/generate');
-import { Idea } from '../model';
+import { Entity } from '../model';
 import { queryIdeas } from '../elasticsearch/idea';
 import { fetchImage } from '../puppeteer';
 import { storeBase64File } from '../s3';
 
 export function getIdeas(userId: string, args: any) {
-  console.log('args', args);
   return queryIdeas(userId, args).then((ideas) => {
     const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
     console.log('params', params);
     if (params.length === 0) {
       return [];
     }
-    return Idea.batchGet(params);
+    return Entity.batchGet(params);
   });
 }
 
 export function createIdea(args, userId) {
-  const idea = new Idea({
-    id: generate('0123456789', 20),
-    userId: userId,
+  const id = generate('0123456789', 20);
+  const idea = new Entity({
+    id: `User-${id}`,
+    userId,
     ...args
   });
   return idea.save();
 }
 
 export function updateIdea(args, userId) {
-  return Idea.get(args.id)
+  return Entity.get(`User-${args.id}`)
     .then((idea: any) => {
       if (!idea) {
         throw new Error('Idea not found');
@@ -48,7 +48,7 @@ export function updateIdea(args, userId) {
 }
 
 export function updateIdeaIcon(args, userId) {
-  return Idea.get(args.id)
+  return Entity.get(`User-${args.id}`)
     .then((idea: any) => {
       if (!idea) {
         throw new Error('Idea not found');
@@ -71,7 +71,7 @@ export function updateIdeaIcon(args, userId) {
 }
 
 export function deleteIdea(args, userId) {
-  return Idea.get(args.id)
+  return Entity.get(`User-${args.id}`)
     .then((idea: any) => {
       if (!idea) {
         throw new Error('Idea not found');

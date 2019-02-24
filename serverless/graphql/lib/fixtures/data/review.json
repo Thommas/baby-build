@@ -1,8 +1,8 @@
 [
   {
-    "id": "4ae840c5-d097-4e4f-a3d4-19b38b6d9c40",
-    "ideaId": "0986945c-36de-4f34-b869-d06039501879",
-    "userId": "auth0|5a773beebfd2511753f2c9c0",
+    "id": "Review-4ae840c5-d097-4e4f-a3d4-19b38b6d9c40",
+    "ideaId": "Idea-0986945c-36de-4f34-b869-d06039501879",
+    "userId": "User-auth0|5a773beebfd2511753f2c9c0",
     "createdAt": 1521053029000,
     "updatedAt": 1521053029000,
     "requiredAge": 7,
@@ -11,9 +11,9 @@
     "scoreExplanation": "Good introduction to video game"
   },
   {
-    "id": "4ae840c5-d097-4e4f-a3d4-19b38b6d9c40",
-    "ideaId": "12436278156271596",
-    "userId": "auth0|5a773beebfd2511753f2c9c0",
+    "id": "Review-4ae840c5-d097-4e4f-a3d4-19b38b6d9c40",
+    "ideaId": "Idea-12436278156271596",
+    "userId": "User-auth0|5a773beebfd2511753f2c9c0",
     "createdAt": 1521053029000,
     "updatedAt": 1521053029000,
     "requiredAge": 6,

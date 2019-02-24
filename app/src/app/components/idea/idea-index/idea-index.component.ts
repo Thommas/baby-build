@@ -52,7 +52,6 @@ export class IdeaIndexComponent {
               userId: userId,
               label: null,
               icon: null,
-              loggedIdeaUser: null,
             },
           },
           update: (store, { data: { createIdea } }) => {

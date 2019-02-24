@@ -11,6 +11,7 @@ const User = `
     id: String
     xp: Int
     lvl: Int
+    nextLvlXp: Int
   }
   type Query {
     user(id: String!): User

@@ -30,7 +30,7 @@ import {
   IdeaListComponent,
   IdeaListFiltersComponent,
   IdeaShowComponent,
-  IdeaUserShowComponent
+  ReviewShowComponent
 } from './';
 
 @NgModule({
@@ -57,7 +57,7 @@ import {
     IdeaListComponent,
     IdeaListFiltersComponent,
     IdeaShowComponent,
-    IdeaUserShowComponent
+    ReviewShowComponent
   ],
   providers: [
   ]

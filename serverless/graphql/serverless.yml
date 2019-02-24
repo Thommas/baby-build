@@ -7,7 +7,7 @@ plugins:
 custom:
   stage: ${opt:stage, self:provider.stage}
   ideaTable: ${self:service}-${self:custom.stage}-idea
-  ideaUserTable: ${self:service}-${self:custom.stage}-idea-user
+  ideaUserTable: ${self:service}-${self:custom.stage}-review
   userTable: ${self:service}-${self:custom.stage}-user
   secrets: ${file(secrets.yml):${self:custom.stage}}
   serverless-offline:
@@ -87,7 +87,7 @@ resources:
         TableName: ${self:custom.ideaTable}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    IdeaUserTable:
+    ReviewTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
@@ -126,12 +126,12 @@ resources:
         "Fn::GetAtt": [ IdeaTable, StreamArn ]
       Export:
         Name: ${self:service}:${self:custom.stage}:IdeaTableStreamArn
-    IdeaUserTableStreamArn:
-      Description: The StreamArn for the IdeaUser Table
+    ReviewTableStreamArn:
+      Description: The StreamArn for the Review Table
       Value:
-        "Fn::GetAtt": [ IdeaUserTable, StreamArn ]
+        "Fn::GetAtt": [ ReviewTable, StreamArn ]
       Export:
-        Name: ${self:service}:${self:custom.stage}:IdeaUserTableStreamArn
+        Name: ${self:service}:${self:custom.stage}:ReviewTableStreamArn
     UserTableStreamArn:
       Description: The StreamArn for the User Table
       Value:

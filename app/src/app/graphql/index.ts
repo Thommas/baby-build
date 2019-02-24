@@ -1,3 +1,3 @@
-export * from './idea-user';
+export * from './review';
 export * from './idea';
 export * from './user';

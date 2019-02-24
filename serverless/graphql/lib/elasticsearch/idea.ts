@@ -14,8 +14,13 @@ export function queryIdeas(userId: string, args: any): Promise<any> {
       must: [
         {
           term: {
-            userId
-          }
+            type: 'idea',
+          },
+        },
+        {
+          term: {
+            userId,
+          },
         },
       ],
     },
@@ -56,5 +61,5 @@ export function queryIdeas(userId: string, args: any): Promise<any> {
     }
   }
   console.log('query', query.bool.must);
-  return search('idea', query);
+  return search(query);
 }

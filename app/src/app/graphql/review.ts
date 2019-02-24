@@ -8,9 +8,9 @@
 
 import gql from 'graphql-tag';
 
-export const GetIdeaUser = gql`
-  query GetIdeaUser {
-    ideaUser {
+export const GetReview = gql`
+  query GetReview {
+    review {
       id
       requiredAge
       requiredAgeExplanation
@@ -22,15 +22,15 @@ export const GetIdeaUser = gql`
   }
 `;
 
-export const CreateIdeaUserMutation = gql`
-  mutation CreateIdeaUser(
+export const CreateReviewMutation = gql`
+  mutation CreateReview(
     $ideaId: String!
     $requiredAge: Int
     $requiredAgeExplanation: String
     $score: Int
     $scoreExplanation: String
   ) {
-    createIdeaUser(
+    createReview(
       ideaId: $ideaId
       requiredAge: $requiredAge
       requiredAgeExplanation: $requiredAgeExplanation
@@ -42,15 +42,15 @@ export const CreateIdeaUserMutation = gql`
   }
 `;
 
-export const UpdateIdeaUserMutation = gql`
-  mutation UpdateIdeaUser(
+export const UpdateReviewMutation = gql`
+  mutation UpdateReview(
     $id: String!
     $requiredAge: Int
     $requiredAgeExplanation: String
     $score: Int
     $scoreExplanation: String
   ) {
-    updateIdeaUser(
+    updateReview(
       id: $id
       requiredAge: $requiredAge
       requiredAgeExplanation: $requiredAgeExplanation

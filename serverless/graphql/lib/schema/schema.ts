@@ -12,22 +12,22 @@ import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas';
 
 // Types
 import ideaType from './types/idea';
-import ideaUserType from './types/idea-user';
+import reviewType from './types/review';
 import userType from './types/user';
 
 // Resolvers
 import ideaResolver from './resolvers/idea';
-import ideaUserResolver from './resolvers/idea-user';
+import reviewResolver from './resolvers/review';
 import userResolver from './resolvers/user';
 
 const typeDefs: any = mergeTypes([
   ideaType,
-  ideaUserType,
+  reviewType,
   userType
 ]);
 const resolvers: any = mergeResolvers([
   ideaResolver,
-  ideaUserResolver,
+  reviewResolver,
   userResolver
 ]);
 
