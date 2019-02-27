@@ -1,0 +1,16 @@
+[
+  {
+    "id": "Tag-12498278591621",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "label": "Video game",
+    "userId": "User-auth0|5a773beebfd2511753f2c9c0"
+  },
+  {
+    "id": "Tag-987354894156",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "label": "Board game",
+    "userId": "User-auth0|5a773beebfd2511753f2c9c0"
+  }
+]

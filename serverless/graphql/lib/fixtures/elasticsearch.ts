@@ -63,10 +63,16 @@ const configuration: any = {
         lvl: {
           type: 'integer',
         },
-        userId: {
+        ideaId: {
           type: 'keyword',
         },
-        ideaId: {
+        sharerId: {
+          type: 'keyword',
+        },
+        tagId: {
+          type: 'keyword',
+        },
+        userId: {
           type: 'keyword',
         },
       }

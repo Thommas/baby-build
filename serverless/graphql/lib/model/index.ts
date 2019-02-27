@@ -24,7 +24,10 @@ const EntitySchema = new Schema({
 export const Entity = dynamoose.model(configService.localDynamoDBTable, EntitySchema);
 
 export const entities = [
-  'review',
+  'idea-tag',
   'idea',
+  'review',
+  'sharing',
+  'tag',
   'user',
 ];

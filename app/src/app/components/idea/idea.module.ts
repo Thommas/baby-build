@@ -30,6 +30,8 @@ import {
   IdeaListComponent,
   IdeaListFiltersComponent,
   IdeaShowComponent,
+  ReviewItemComponent,
+  ReviewListComponent,
   ReviewShowComponent
 } from './';
 
@@ -57,6 +59,8 @@ import {
     IdeaListComponent,
     IdeaListFiltersComponent,
     IdeaShowComponent,
+    ReviewItemComponent,
+    ReviewListComponent,
     ReviewShowComponent
   ],
   providers: [

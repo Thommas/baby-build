@@ -17,7 +17,7 @@ const Review = `
     userId: String
   }
   type Query {
-    reviews: [Review]
+    reviews(ideaId: String): [Review]
   }
   type Mutation {
     createReview(

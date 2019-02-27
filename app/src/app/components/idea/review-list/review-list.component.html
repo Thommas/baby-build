@@ -1,0 +1,3 @@
+<div *ngFor="let review of reviews">
+  <button mat-raised-button color='primary' (click)="selectReview(review)">{{ review.userId }}</button>
+</div>

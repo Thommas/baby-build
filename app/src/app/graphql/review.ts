@@ -8,9 +8,9 @@
 
 import gql from 'graphql-tag';
 
-export const GetReview = gql`
-  query GetReview {
-    review {
+export const GetReviews = gql`
+  query GetReviews($ideaId: String) {
+    reviews(ideaId: $ideaId) {
       id
       requiredAge
       requiredAgeExplanation

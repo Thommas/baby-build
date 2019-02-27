@@ -4,9 +4,8 @@ Roadmap
 Short term
 ----------
 
-- Implement ES query with filter by requiredAge/score
-- Implement icon
-- Implement sharing ideas
+- Refactor review for multiple users
+- Implement sharing ideas to other users
 
 Long term
 ---------
