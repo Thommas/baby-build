@@ -15,6 +15,7 @@ const Review = `
     scoreExplanation: String
     ideaId: String
     userId: String
+    user: User
   }
   type Query {
     reviews(ideaId: String): [Review]

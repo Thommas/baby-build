@@ -12,6 +12,7 @@ const Idea = `
     label: String
     icon: String
     userId: String
+    user: User
   }
   type Query {
     ideas(label: String, requiredAge: [Int], score: [Int]): [Idea]

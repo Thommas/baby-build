@@ -15,6 +15,10 @@ export const GetIdeas = gql`
       label
       icon
       userId
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;

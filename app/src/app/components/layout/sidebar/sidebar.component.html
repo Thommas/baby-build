@@ -6,21 +6,21 @@
     <mat-icon>close</mat-icon>
   </button>
 </header>
-<div fxLayout="column" fxLayoutAlign="start center" *ngIf="userService.user">
+<div fxLayout="column" fxLayoutAlign="start center" *ngIf="(userService.user$ | async) as user">
   <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
     <img src="/assets/img/user.svg"
-         matTooltip="header_user.user" i18n-matTooltip
+         [matTooltip]="user.firstName + ' ' + user.lastName" i18n-matTooltip
          width="50" height="50"/>
   </div>
   <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">
     <div fxFill fxLayout="row" fxLayoutAlign="center center">
-      <span>Level {{ userService.user.lvl }}</span>
+      <span>Level {{ user.lvl }}</span>
     </div>
     <mat-progress-bar
       mode="determinate"
-      [value]="userService.user.xp / (userService.user.nextLvlXp) * 100"
+      [value]="user.xp / (user.nextLvlXp) * 100"
       color="primary"
-      [matTooltip]="userService.user.xp + ' / ' + (userService.user.nextLvlXp)">
+      [matTooltip]="user.xp + ' / ' + (user.nextLvlXp)">
     </mat-progress-bar>
   </div>
 </div>

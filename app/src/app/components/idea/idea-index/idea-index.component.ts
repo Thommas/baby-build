@@ -38,9 +38,8 @@ export class IdeaIndexComponent {
   }
 
   addIdea() {
-    this.userService.user.pipe(
+    this.userService.user$.pipe(
       flatMap((user: any) => {
-        const userId = user.data.authUser.id;
         const idea = {};
         return this.apollo.mutate({
           mutation: CreateIdeaMutation,
@@ -49,7 +48,7 @@ export class IdeaIndexComponent {
             createIdea: {
               __typename: 'Idea',
               id: -uuid(),
-              userId: userId,
+              userId: user.id,
               label: null,
               icon: null,
             },

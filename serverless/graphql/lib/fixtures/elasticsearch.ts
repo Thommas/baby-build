@@ -36,6 +36,16 @@ const configuration: any = {
   mappings: {
     _doc: {
       properties: {
+        firstName: {
+          type: 'text',
+          analyzer: 'autocomplete',
+          search_analyzer: 'standard'
+        },
+        lastName: {
+          type: 'text',
+          analyzer: 'autocomplete',
+          search_analyzer: 'standard'
+        },
         label: {
           type: 'text',
           analyzer: 'autocomplete',

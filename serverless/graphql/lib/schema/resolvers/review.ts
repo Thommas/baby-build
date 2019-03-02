@@ -7,8 +7,12 @@
  */
 
 import * as dbReview from '../../dynamo/review';
+import * as dbUser from '../../dynamo/user';
 
 export default {
+  Review: {
+    user: (obj) => dbUser.getUser(obj.userId),
+  },
   Query: {
     reviews: (_, args, context) => dbReview.getReviews(args.ideaId),
   },

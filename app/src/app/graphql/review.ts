@@ -18,6 +18,10 @@ export const GetReviews = gql`
       scoreExplanation
       ideaId
       userId
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;

@@ -12,6 +12,8 @@ export const GetAuthUser = gql`
   query GetAuthUser {
     authUser {
       id
+      firstName
+      lastName
       xp
       lvl
       nextLvlXp
