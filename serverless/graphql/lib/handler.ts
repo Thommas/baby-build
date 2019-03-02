@@ -83,11 +83,11 @@ exports.auth = (event, context, callback) => {
           console.log(`Token invalid. ${verifyError}`)
           return callback('Unauthorized')
         }
-        console.log('valid from customAuthorizer', decoded)
         const userId = decoded.sub
         const effect = 'Allow'
         const resource = event.methodArn
         const authorizerContext = { userId: `User-${userId}` }
+        console.log('Valid userId', userId)
         return callback(null, childIAMPolicy(userId, effect, resource, authorizerContext))
       })
     })
@@ -112,8 +112,4 @@ exports.graphql = (event, context, callback) => {
   };
 
   graphqlLambda({ schema, context: graphQLContext })(event, context, callbackFilter);
-};
-
-exports.idea = (event, context, callback) => {
-  console.log('STREAM IDEA');
 };

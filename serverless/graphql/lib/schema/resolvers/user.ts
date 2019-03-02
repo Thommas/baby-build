@@ -10,7 +10,7 @@ import * as dbUser from '../../dynamo/user';
 
 export default {
   Query: {
-    user: (_, args, context) => dbUser.getUser(args),
+    user: (_, args, context) => dbUser.getUser(args.id),
     authUser: (_, args, context) => dbUser.getAuthUser(context.userId),
   },
   Mutation: {

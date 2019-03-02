@@ -8,7 +8,7 @@
 
 import { search } from '../services/elasticsearch.service';
 
-export function queryIdeas(userId: string, args: any): Promise<any> {
+export function queryIdeas(userIds: string[], args: any): Promise<any> {
   const query: any = {
     bool: {
       must: [
@@ -18,8 +18,8 @@ export function queryIdeas(userId: string, args: any): Promise<any> {
           },
         },
         {
-          term: {
-            userId,
+          terms: {
+            userId: userIds,
           },
         },
       ],
@@ -60,6 +60,5 @@ export function queryIdeas(userId: string, args: any): Promise<any> {
       });
     }
   }
-  console.log('query', query.bool.must);
   return search(query);
 }

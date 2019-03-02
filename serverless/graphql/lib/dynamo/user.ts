@@ -9,7 +9,7 @@
 import nanoid = require('nanoid');
 import { Entity } from '../model';
 
-export function getAuthUser(userId) {
+export function getAuthUser(userId: string) {
   return Entity.get(userId)
     .then((user: any) => {
       if (!user) {
@@ -23,8 +23,8 @@ export function getAuthUser(userId) {
     });
 }
 
-export function getUser(args) {
-  return Entity.get(args.id)
+export function getUser(userId: string) {
+  return Entity.get(userId)
     .then((user: any) => {
       if (!user) {
         throw new Error('User not found');
@@ -33,7 +33,7 @@ export function getUser(args) {
     });
 }
 
-export function updateUser(args, userId) {
+export function updateUser(args: any, userId: string) {
   return Entity.get(args.id)
     .then((user: any) => {
       if (!user) {

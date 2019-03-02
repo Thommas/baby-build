@@ -46,9 +46,6 @@ provider:
     AUTH0_CLIENT_ID: ${self:custom.secrets.AUTH0_CLIENT_ID}
     AUTH0_JWKS_URI: ${self:custom.secrets.AUTH0_JWKS_URI}
     AUTH0_JWKS_KID: ${self:custom.secrets.AUTH0_JWKS_KID}
-    IDEA_TABLE: ${self:custom.ideaTable}
-    IDEA_USER_TABLE: ${self:custom.ideaUserTable}
-    USER_TABLE: ${self:custom.userTable}
 
 functions:
   customAuthorizer:
@@ -61,13 +58,6 @@ functions:
           method: post
           cors: true
           authorizer: customAuthorizer
-  idea:
-    handler: lib/handler.idea
-    events:
-      - stream:
-          enabled: true
-          type: dynamodb
-          tableName: pathofchild-graphql-dev-idea
 
 resources:
   Resources:

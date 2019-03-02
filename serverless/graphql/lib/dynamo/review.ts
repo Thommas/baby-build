@@ -10,10 +10,9 @@ import generate = require('nanoid/generate');
 import { Entity } from '../model';
 import { queryReviews } from '../elasticsearch/review';
 
-export function getReviews(ideaId) {
+export function getReviews(ideaId: string) {
   return queryReviews(ideaId).then((reviews) => {
     const params: any = reviews.hits.hits.map((hit: any) => ({id: hit._id}));
-    console.log('params', params);
     if (params.length === 0) {
       return [];
     }
@@ -21,7 +20,7 @@ export function getReviews(ideaId) {
   });
 }
 
-export function createReview(args, userId) {
+export function createReview(args: any, userId: string) {
   const id = generate('0123456789', 20);
   const review = new Entity({
     id: `Review-${id}`,
@@ -31,7 +30,7 @@ export function createReview(args, userId) {
   return review.save();
 }
 
-export function updateReview(args, userId) {
+export function updateReview(args: any, userId: string) {
   return Entity.get(args.id)
     .then((review: any) => {
       if (!review) {

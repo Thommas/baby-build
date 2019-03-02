@@ -8,18 +8,18 @@
 
 import { search } from '../services/elasticsearch.service';
 
-export function queryReviews(ideaId: string): Promise<any> {
+export function querySharings(userId: string): Promise<any> {
   const query: any = {
     bool: {
       must: [
         {
           term: {
-            type: 'review',
+            type: 'sharing',
           },
         },
         {
           term: {
-            ideaId,
+            userId,
           },
         },
       ],
