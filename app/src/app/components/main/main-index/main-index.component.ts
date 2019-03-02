@@ -17,11 +17,11 @@ import { GetIdeas, CreateIdeaMutation } from '../../../graphql';
 import { UserService } from '../../../services';
 
 @Component({
-  selector: 'app-idea-index-cmp',
-  templateUrl: './idea-index.component.html',
-  styleUrls: ['./idea-index.component.scss']
+  selector: 'app-main-index-cmp',
+  templateUrl: './main-index.component.html',
+  styleUrls: ['./main-index.component.scss']
 })
-export class IdeaIndexComponent {
+export class MainIndexComponent {
   loading: boolean;
   displayFilters: boolean;
   selectedIdea: any;

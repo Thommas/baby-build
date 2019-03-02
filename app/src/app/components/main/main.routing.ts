@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Build
+ * Component - Main - Routing
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -9,12 +9,12 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { IdeaIndexComponent } from './idea-index/idea-index.component';
+import { MainIndexComponent } from './main-index/main-index.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: IdeaIndexComponent,
+    component: MainIndexComponent,
     canActivate: [AuthGuardService]
   }
 ];

@@ -1,72 +1,60 @@
 /**
  * Path of child
  *
- * Component - User
+ * Component - User - Module
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule } from '@angular/common/http';
-import { ApolloModule } from 'apollo-angular';
-import { HttpLinkModule } from 'apollo-angular-link-http';
 import {
   MatButtonModule,
   MatCardModule,
-  MatDatepickerModule,
+  MatDialogModule,
   MatIconModule,
-  MatMenuModule,
-  MatOptionModule,
   MatDividerModule,
-  MatSelectModule,
-  MatInputModule,
   MatFormFieldModule,
-  MatProgressBarModule,
-  MatSidenavModule,
+  MatInputModule,
+  MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { AuthService } from '../../services';
 
 import {
-  routing,
-  UserEditComponent
+  UserEditComponent,
+  UserSettingsComponent,
+  UserSharingComponent
 } from './';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
-    HttpClientModule,
-    ApolloModule,
-    HttpLinkModule,
-    routing,
     MatButtonModule,
     MatCardModule,
-    MatDatepickerModule,
-    MatDividerModule,
-    MatMomentDateModule,
+    MatDialogModule,
     MatIconModule,
-    MatMenuModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatInputModule,
+    MatDividerModule,
     MatFormFieldModule,
-    MatProgressBarModule,
-    MatSidenavModule,
+    MatInputModule,
+    MatTabsModule,
     MatToolbarModule,
     MatTooltipModule
   ],
   declarations: [
-    UserEditComponent
+    UserEditComponent,
+    UserSettingsComponent,
+    UserSharingComponent
+  ],
+  entryComponents: [
+    UserSettingsComponent,
   ],
   providers: [
-    AuthService
   ]
 })
 export class UserModule {

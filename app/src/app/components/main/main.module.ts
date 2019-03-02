@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - Build
+ * Component - Main - Module
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -25,11 +25,11 @@ import {
 import {
   routing,
   IdeaIconComponent,
-  IdeaIndexComponent,
   IdeaItemComponent,
   IdeaListComponent,
   IdeaListFiltersComponent,
   IdeaShowComponent,
+  MainIndexComponent,
   ReviewItemComponent,
   ReviewListComponent,
   ReviewShowComponent
@@ -54,11 +54,11 @@ import {
   ],
   declarations: [
     IdeaIconComponent,
-    IdeaIndexComponent,
     IdeaItemComponent,
     IdeaListComponent,
     IdeaListFiltersComponent,
     IdeaShowComponent,
+    MainIndexComponent,
     ReviewItemComponent,
     ReviewListComponent,
     ReviewShowComponent
@@ -66,5 +66,5 @@ import {
   providers: [
   ]
 })
-export class IdeaModule {
+export class MainModule {
 }
