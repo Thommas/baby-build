@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - Idea
+ * GraphQL - Review
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

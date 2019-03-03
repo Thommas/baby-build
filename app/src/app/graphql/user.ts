@@ -23,10 +23,14 @@ export const GetAuthUser = gql`
 
 export const UpdateUserMutation = gql`
   mutation UpdateUser(
-    $id: ID!
+    $id: String!
+    $firstName: String
+    $lastName: String
   ) {
     updateUser(
       id: $id
+      firstName: $firstName
+      lastName: $lastName
     ) {
       id
     }

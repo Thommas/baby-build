@@ -35,4 +35,9 @@ export class TopbarComponent {
       console.log('The dialog was closed');
     });
   }
+
+  logout() {
+    this.authService.logout();
+    console.log('REDIRECT');
+  }
 }

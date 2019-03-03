@@ -8,7 +8,7 @@
 
 import { search } from '../services/elasticsearch.service';
 
-export function querySharings(userId: string): Promise<any> {
+export function querySharingsByUserId(userId: string): Promise<any> {
   const query: any = {
     bool: {
       must: [
@@ -20,6 +20,26 @@ export function querySharings(userId: string): Promise<any> {
         {
           term: {
             userId,
+          },
+        },
+      ],
+    },
+  };
+  return search(query);
+}
+
+export function querySharingsBySharerId(sharerId: string): Promise<any> {
+  const query: any = {
+    bool: {
+      must: [
+        {
+          term: {
+            type: 'sharing',
+          },
+        },
+        {
+          term: {
+            sharerId,
           },
         },
       ],

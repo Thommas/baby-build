@@ -9,12 +9,12 @@
 import generate = require('nanoid/generate');
 import { Entity } from '../model';
 import { queryIdeas } from '../elasticsearch/idea';
-import { querySharings } from '../elasticsearch/sharing';
+import { querySharingsByUserId } from '../elasticsearch/sharing';
 import { fetchImage } from '../puppeteer';
 import { storeBase64File } from '../s3';
 
 export function getIdeas(userId: string, args: any) {
-  return querySharings(userId)
+  return querySharingsByUserId(userId)
     .then((sharings) => {
       const userIds = sharings.hits.hits.map((hit: any) => hit._source.sharerId);
       userIds.push(userId);
@@ -31,61 +31,61 @@ export function getIdeas(userId: string, args: any) {
 
 export function createIdea(args: any, userId: string) {
   const id = generate('0123456789', 20);
-  const idea = new Entity({
+  const entity = new Entity({
     id: `Idea-${id}`,
     userId,
     icon: null,
     ...args
   });
-  return idea.save();
+  return entity.save();
 }
 
 export function updateIdea(args: any, userId: string) {
   return Entity.get(args.id)
-    .then((idea: any) => {
-      if (!idea) {
+    .then((entity: any) => {
+      if (!entity) {
         throw new Error('Idea not found');
       }
-      if (idea.userId !== userId) {
+      if (entity.userId !== userId) {
         throw new Error('Unauthorized');
       }
-      idea.label = args.label;
-      return idea.save();
+      entity.label = args.label;
+      return entity.save();
     });
 }
 
 export function updateIdeaIcon(args: any, userId: string) {
   return Entity.get(args.id)
-    .then((idea: any) => {
-      if (!idea) {
+    .then((entity: any) => {
+      if (!entity) {
         throw new Error('Idea not found');
       }
-      if (idea.userId !== userId) {
+      if (entity.userId !== userId) {
         throw new Error('Unauthorized');
       }
-      return fetchImage(idea.label)
+      return fetchImage(entity.label)
         .then((imageData: string) => {
           if (null === imageData) {
             throw new Error('Cannot fetch image');
           }
-          return storeBase64File(`idea-icon/${userId}/${idea.id}`, imageData);
+          return storeBase64File(`idea-icon/${userId}/${entity.id}`, imageData);
         })
         .then((icon: string) => {
-          idea.icon = icon;
-          return idea.save();
+          entity.icon = icon;
+          return entity.save();
         });
     })
 }
 
 export function deleteIdea(args: any, userId: string) {
   return Entity.get(args.id)
-    .then((idea: any) => {
-      if (!idea) {
+    .then((entity: any) => {
+      if (!entity) {
         throw new Error('Idea not found');
       }
-      if (idea.userId !== userId) {
+      if (entity.userId !== userId) {
         throw new Error('Unauthorized');
       }
-      return idea.delete();
+      return entity.delete();
     });
 }

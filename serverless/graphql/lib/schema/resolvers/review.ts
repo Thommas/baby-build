@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - Resolvers - Idea
+ * GraphQL - Resolvers - Review
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

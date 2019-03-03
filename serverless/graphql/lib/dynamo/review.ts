@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - Dynamo - Idea
+ * GraphQL - Dynamo - Review
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -22,24 +22,24 @@ export function getReviews(ideaId: string) {
 
 export function createReview(args: any, userId: string) {
   const id = generate('0123456789', 20);
-  const review = new Entity({
+  const entity = new Entity({
     id: `Review-${id}`,
     userId,
     ...args
   });
-  return review.save();
+  return entity.save();
 }
 
 export function updateReview(args: any, userId: string) {
   return Entity.get(args.id)
-    .then((review: any) => {
-      if (!review) {
+    .then((entity: any) => {
+      if (!entity) {
         throw new Error('Idea not found');
       }
-      if (review.userId !== userId) {
+      if (entity.userId !== userId) {
         throw new Error('Unauthorized');
       }
-      Object.assign(review, args);
-      return review.save();
+      Object.assign(entity, args);
+      return entity.save();
     });
 }

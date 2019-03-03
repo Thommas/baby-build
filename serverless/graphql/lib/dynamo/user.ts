@@ -11,34 +11,37 @@ import { Entity } from '../model';
 
 export function getAuthUser(userId: string) {
   return Entity.get(userId)
-    .then((user: any) => {
-      if (!user) {
-        user = new Entity();
-        user.id = userId;
-        user.xp = 0;
-        user.lvl = 1;
-        return user.save();
+    .then((entity: any) => {
+      if (!entity) {
+        entity = new Entity();
+        entity.type = 'user';
+        entity.id = userId;
+        entity.xp = 0;
+        entity.lvl = 1;
+        return entity.save();
       }
-      return user;
+      return entity;
     });
 }
 
 export function getUser(userId: string) {
   return Entity.get(userId)
-    .then((user: any) => {
-      if (!user) {
+    .then((entity: any) => {
+      if (!entity) {
         throw new Error('User not found');
       }
-      return user;
+      return entity;
     });
 }
 
 export function updateUser(args: any, userId: string) {
-  return Entity.get(args.id)
-    .then((user: any) => {
-      if (!user) {
+  return Entity.get(userId)
+    .then((entity: any) => {
+      if (!entity) {
         throw new Error('User not found');
       }
-      return user.save();
+      entity.firstName = args.firstName;
+      entity.lastName = args.lastName;
+      return entity.save();
     });
 }

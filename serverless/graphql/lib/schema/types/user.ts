@@ -22,6 +22,8 @@ const User = `
   type Mutation {
     updateUser(
       id: String!
+      firstName: String
+      lastName: String
     ): User
   }
 `;
