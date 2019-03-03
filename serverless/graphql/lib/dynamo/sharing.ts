@@ -25,8 +25,8 @@ export function createSharing(args: any, userId: string) {
   const id = generate('0123456789', 20);
   const entity = new Entity({
     id: `Sharing-${id}`,
-    userId,
-    sharerId: args.sharerId
+    sharerId: userId,
+    userId: args.userId,
   });
   return entity.save();
 }
@@ -37,7 +37,7 @@ export function deleteSharing(args: any, userId: string) {
       if (!entity) {
         throw new Error('Sharing not found');
       }
-      if (entity.userId !== userId) {
+      if (entity.sharerId !== userId) {
         throw new Error('Unauthorized');
       }
       return entity.delete();

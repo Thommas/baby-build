@@ -7,6 +7,7 @@
  */
 
 import nanoid = require('nanoid');
+import { queryUsersBySearchQuery } from '../elasticsearch/user';
 import { Entity } from '../model';
 
 export function getAuthUser(userId: string) {
@@ -21,6 +22,17 @@ export function getAuthUser(userId: string) {
         return entity.save();
       }
       return entity;
+    });
+}
+
+export function getUsers(args: any) {
+  return queryUsersBySearchQuery(args.searchQuery)
+    .then((entities: any) => {
+      const params: any = entities.hits.hits.map((hit: any) => ({id: hit._id}));
+      if (params.length === 0) {
+        return [];
+      }
+      return Entity.batchGet(params);
     });
 }
 

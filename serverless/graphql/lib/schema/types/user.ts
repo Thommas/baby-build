@@ -16,6 +16,7 @@ const User = `
     nextLvlXp: Int
   }
   type Query {
+    users(searchQuery: String!): [User]
     user(id: String!): User
     authUser: User
   }

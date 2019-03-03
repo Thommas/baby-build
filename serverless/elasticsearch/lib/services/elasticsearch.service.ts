@@ -24,11 +24,14 @@ export function detectType(documentId: any)
   if (!documentId) {
     return null;
   }
+  if (documentId.startsWith('Idea-')) {
+    return 'idea';
+  }
   if (documentId.startsWith('Review-')) {
     return 'review';
   }
-  if (documentId.startsWith('Idea-')) {
-    return 'idea';
+  if (documentId.startsWith('Sharing-')) {
+    return 'sharing';
   }
   if (documentId.startsWith('User-')) {
     return 'user';

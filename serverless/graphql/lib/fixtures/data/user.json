@@ -18,5 +18,35 @@
     "xp": 0,
     "lvl": 1,
     "nextLvlXp": 300
+  },
+  {
+    "id": "User-Sora",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "firstName": "Sora",
+    "lastName": "Keyblade wielder",
+    "xp": 0,
+    "lvl": 1,
+    "nextLvlXp": 300
+  },
+  {
+    "id": "User-Riku",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "firstName": "Riku",
+    "lastName": "Keyblade wielder",
+    "xp": 0,
+    "lvl": 1,
+    "nextLvlXp": 300
+  },
+  {
+    "id": "User-Kairi",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "firstName": "Kairi",
+    "lastName": "Keyblade wielder",
+    "xp": 0,
+    "lvl": 1,
+    "nextLvlXp": 300
   }
 ]

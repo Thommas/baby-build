@@ -38,7 +38,7 @@ export const DeleteSharingMutation = gql`
   mutation DeleteSharing(
     $id: String!
   ) {
-    deleteIdea(
+    deleteSharing(
       id: $id
     ) {
       id

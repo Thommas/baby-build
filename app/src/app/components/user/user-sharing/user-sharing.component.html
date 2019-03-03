@@ -1,1 +1,16 @@
-<div *ngFor="let sharing of sharings">{{ sharing.user.firstName }} {{ sharing.user.lastName }}</div>
+<h2 i18n>user_sharing.invited_users</h2>
+<div *ngFor="let sharing of sharings">
+  <span>{{ sharing.user.firstName }} {{ sharing.user.lastName }}</span>
+  <button (click)="deleteSharing(sharing.id)">X</button>
+</div>
+<h2>user_sharing.invite_user</h2>
+<form>
+  <mat-form-field>
+    <input #inputElement fxFill matInput placeholder="Search users" aria-label="User" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+      <mat-option *ngFor="let user of (users$ | async)" [value]="user.id">
+        <span>{{ user.firstName }} {{ user.lastName }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

@@ -21,6 +21,19 @@ export const GetAuthUser = gql`
   }
 `;
 
+export const GetUsers = gql`
+  query GetUsers($searchQuery: String!) {
+    users(searchQuery: $searchQuery) {
+      id
+      firstName
+      lastName
+      xp
+      lvl
+      nextLvlXp
+    }
+  }
+`;
+
 export const UpdateUserMutation = gql`
   mutation UpdateUser(
     $id: String!
