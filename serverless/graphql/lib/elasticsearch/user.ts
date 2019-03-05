@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * GraphQL - Dynamo - Idea
+ * GraphQL - Elasticsearch - User
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

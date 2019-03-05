@@ -40,6 +40,7 @@ import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
 import {
   SidebarComponent,
+  TagListComponent,
   TopbarComponent
 } from './components/layout';
 import {
@@ -62,6 +63,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     SidebarComponent,
+    TagListComponent,
     TopbarComponent
   ],
   imports: [

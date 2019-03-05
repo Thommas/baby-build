@@ -6,7 +6,6 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import nanoid = require('nanoid');
 import { queryUsersBySearchQuery } from '../elasticsearch/user';
 import { Entity } from '../model';
 
