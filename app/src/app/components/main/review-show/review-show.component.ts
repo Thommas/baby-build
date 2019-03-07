@@ -27,6 +27,5 @@ export class ReviewShowComponent implements OnChanges {
 
   selectedReviewChange(selectedReview: any) {
     this.selectedReview = selectedReview;
-    console.log('selectedReview', selectedReview);
   }
 }

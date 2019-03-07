@@ -41,7 +41,17 @@ export const CreateReviewMutation = gql`
       score: $score
       scoreExplanation: $scoreExplanation
     ) {
+      id
+      requiredAge
+      requiredAgeExplanation
+      score
+      scoreExplanation
       ideaId
+      userId
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;
@@ -62,6 +72,16 @@ export const UpdateReviewMutation = gql`
       scoreExplanation: $scoreExplanation
     ) {
       id
+      requiredAge
+      requiredAgeExplanation
+      score
+      scoreExplanation
+      ideaId
+      userId
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;

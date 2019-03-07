@@ -4,8 +4,8 @@ Roadmap
 Short term
 ----------
 
-- Refactor review for multiple users
-- Implement sharing ideas to other users
+- Finish review for multiple users
+- Implement add/remove tag
 
 Long term
 ---------

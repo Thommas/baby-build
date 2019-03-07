@@ -14,7 +14,7 @@ import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
-  GetIdeas,
+  GetReviews,
   CreateReviewMutation,
   UpdateReviewMutation
 } from '../../../graphql';
@@ -100,6 +100,7 @@ export class ReviewItemComponent implements OnInit, OnChanges {
         requiredAgeExplanation: review ? review.requiredAgeExplanation : null,
         score: review ? review.score : null,
         scoreExplanation: review ? review.scoreExplanation : null,
+        ideaId: review ? review.ideaId : null,
       });
     }
     if (changes.idea && changes.idea.currentValue) {
@@ -130,15 +131,29 @@ export class ReviewItemComponent implements OnInit, OnChanges {
         if (!createReview && !updateReview) {
           return;
         }
-        const review: any = createReview ? createReview : updateReview;
-        Object.assign(review, data);
-        const query: any = store.readQuery({ query: GetIdeas });
-        const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === data.ideaId ? {
-          ...idea,
-          // loggedReview: review,
-        } : idea);
-        store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
-        this.review = review;
+        const updatedReview: any = createReview ? createReview : updateReview;
+        if (!updatedReview.id) {
+          return;
+        }
+        const query: any = store.readQuery({
+          query: GetReviews,
+          variables: { ideaId: this.review.ideaId },
+        });
+        const reviews: any[] = query.reviews.map((review: any) => review.id === data.id ? updatedReview : review);
+        store.writeQuery({
+          query: GetReviews,
+          variables: { ideaId: this.review.ideaId },
+          data: { reviews },
+        });
+        this.review = updatedReview;
+        this.formGroup.patchValue({
+          id: this.review.id,
+          requiredAge: this.review.requiredAge,
+          requiredAgeExplanation: this.review.requiredAgeExplanation,
+          score: this.review.score,
+          scoreExplanation: this.review.scoreExplanation,
+          ideaId: this.review.ideaId,
+        });
       },
     }).subscribe();
   }
