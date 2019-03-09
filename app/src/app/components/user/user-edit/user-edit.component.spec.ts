@@ -8,10 +8,14 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule, MatFormFieldModule } from '@angular/material';
 import { Apollo } from 'apollo-angular';
-import { ApolloStub, AuthService, AuthServiceStub, RouterStub } from '../../../services';
+import {
+  ApolloStub,
+  UserService,
+  UserServiceStub
+} from '../../../services';
 import { UserEditComponent } from './user-edit.component';
 
 describe('UserEditComponent', () => {
@@ -21,15 +25,16 @@ describe('UserEditComponent', () => {
         NO_ERRORS_SCHEMA
       ],
       imports: [
-        FormsModule
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
       ],
       declarations: [
         UserEditComponent
       ],
       providers: [
         { provide: Apollo, useClass: ApolloStub },
-        { provide: AuthService, useClass: AuthServiceStub },
-        { provide: Router, useClass: RouterStub }
+        { provide: UserService, useClass: UserServiceStub },
       ]
     }).compileComponents();
   }));

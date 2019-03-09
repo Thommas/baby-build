@@ -12,7 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
-import { AuthService, UserService } from '../../../services';
+import { UserService } from '../../../services';
 import { UpdateUserMutation } from '../../../graphql';
 
 @Component({
@@ -26,7 +26,6 @@ export class UserEditComponent implements OnInit {
   loading: boolean;
 
   constructor(
-    public authService: AuthService,
     public userService: UserService,
     private apollo: Apollo
   ) {

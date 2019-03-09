@@ -9,7 +9,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { AuthService, AuthServiceStub } from '../../../services';
 import { CallbackComponent } from './callback.component';
 
@@ -23,7 +23,7 @@ describe('CallbackComponent', () => {
         CallbackComponent
       ],
       providers: [
-        { provide: ActivatedRoute, useValue: { 'fragment': Observable.of('hash') } },
+        { provide: ActivatedRoute, useValue: { 'fragment': of('hash') } },
         { provide: AuthService, useClass: AuthServiceStub }
       ]
     }).compileComponents();

@@ -7,7 +7,7 @@
  */
 
 import { TestBed, async } from '@angular/core/testing';
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { ProgressService } from './progress.service';
 
 describe('ProgressService', () => {
@@ -26,6 +26,6 @@ describe('ProgressService', () => {
   });
 
   it('#trackObservable', () => {
-    service.trackObservable(Observable.of(true));
+    service.trackObservable(of(true));
   });
 });

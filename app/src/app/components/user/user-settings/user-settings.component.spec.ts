@@ -9,27 +9,31 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule, MatDialogRef } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import { ApolloStub, AuthService, AuthServiceStub, RouterStub } from '../../../services';
 import { UserSettingsComponent } from './user-settings.component';
 
-describe('UserEditComponent', () => {
+describe('UserSettingsComponent', () => {
+  const mockDialogRef = {
+    close: jasmine.createSpy('close')
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
         NO_ERRORS_SCHEMA
       ],
       imports: [
-        FormsModule
+        ReactiveFormsModule,
+        MatDialogModule,
       ],
       declarations: [
         UserSettingsComponent
       ],
       providers: [
-        { provide: Apollo, useClass: ApolloStub },
-        { provide: AuthService, useClass: AuthServiceStub },
-        { provide: Router, useClass: RouterStub }
+        { provide: MatDialogRef, useValue: mockDialogRef },
       ]
     }).compileComponents();
   }));

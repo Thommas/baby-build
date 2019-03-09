@@ -8,13 +8,11 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { Observable, from } from 'rxjs';
-import { ApolloStub, RouterStub } from '../../../services';
+import { ApolloStub, UserService, UserServiceStub } from '../../../services';
 import { MainIndexComponent } from './main-index.component';
 
-describe('BuildShowComponent', () => {
+describe('MainIndexComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
@@ -24,9 +22,8 @@ describe('BuildShowComponent', () => {
         MainIndexComponent
       ],
       providers: [
-        { provide: ActivatedRoute, useValue: { 'params': from([{ 'id': 1 }]) } },
         { provide: Apollo, useClass: ApolloStub },
-        { provide: Router, useClass: RouterStub }
+        { provide: UserService, useClass: UserServiceStub },
       ]
     }).compileComponents();
   }));

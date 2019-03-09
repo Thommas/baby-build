@@ -10,10 +10,14 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
-import { ApolloStub } from '../../../services';
+import {
+  ApolloStub,
+  UserService,
+  UserServiceStub,
+} from '../../../services';
 import { IdeaItemComponent } from './idea-item.component';
 
-describe('IdeaIdeaComponent', () => {
+describe('IdeaItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
@@ -27,7 +31,8 @@ describe('IdeaIdeaComponent', () => {
         IdeaItemComponent
       ],
       providers: [
-        { provide: Apollo, useClass: ApolloStub }
+        { provide: Apollo, useClass: ApolloStub },
+        { provide: UserService, useClass: UserServiceStub },
       ]
     }).compileComponents();
   }));

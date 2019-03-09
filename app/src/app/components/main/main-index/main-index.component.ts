@@ -9,8 +9,6 @@
 import uuid from 'uuid/v4';
 import swal from 'sweetalert2';
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import { flatMap } from 'rxjs/operators';
 import { GetIdeas, CreateIdeaMutation } from '../../../graphql';
@@ -27,11 +25,8 @@ export class MainIndexComponent {
   selectedIdea: any;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private apollo: Apollo,
-    private userService: UserService,
-    private dialog: MatDialog
+    private userService: UserService
   ) {
     this.displayFilters = false;
     this.selectedIdea = null;

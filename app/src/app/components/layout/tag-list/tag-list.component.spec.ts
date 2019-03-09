@@ -9,6 +9,8 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { AuthService, AuthServiceStub } from '../../../services';
+import { Apollo } from 'apollo-angular';
+import { ApolloStub } from '../../../services';
 import { TagListComponent } from './tag-list.component';
 
 describe('TagListComponent', () => {
@@ -21,7 +23,8 @@ describe('TagListComponent', () => {
         TagListComponent
       ],
       providers: [
-        { provide: AuthService, useClass: AuthServiceStub }
+        { provide: AuthService, useClass: AuthServiceStub },
+        { provide: Apollo, useClass: ApolloStub },
       ]
     }).compileComponents();
   }));

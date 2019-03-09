@@ -6,14 +6,10 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import swal from 'sweetalert2';
 import { clone } from 'lodash';
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import { GetIdeas, CreateIdeaMutation } from '../../../graphql';
-import { UserService } from '../../../services';
 
 @Component({
   selector: 'app-idea-list-cmp',
@@ -29,11 +25,7 @@ export class IdeaListComponent implements OnInit, OnChanges {
   filters: any;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private apollo: Apollo,
-    private userService: UserService,
-    private dialog: MatDialog
+    private apollo: Apollo
   ) {
     this.buildId = null;
     this.filters = {

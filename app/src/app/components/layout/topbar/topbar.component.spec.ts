@@ -10,6 +10,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { AuthService, AuthServiceStub } from '../../../services';
 import { TopbarComponent } from './topbar.component';
+import { MatDialogModule, MatMenuModule } from '@angular/material';
 
 describe('TopbarComponent', () => {
   beforeEach(async(() => {
@@ -18,7 +19,11 @@ describe('TopbarComponent', () => {
         NO_ERRORS_SCHEMA
       ],
       declarations: [
-        TopbarComponent
+        TopbarComponent,
+      ],
+      imports: [
+        MatDialogModule,
+        MatMenuModule,
       ],
       providers: [
         { provide: AuthService, useClass: AuthServiceStub }
