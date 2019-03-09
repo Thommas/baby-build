@@ -11,13 +11,14 @@ import { clone, isEmpty } from 'lodash';
 import { Component, Inject, OnInit, OnChanges, Input, ViewChild, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { map, filter, debounceTime, distinctUntilChanged, switchMap, flatMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
   GetReviews,
   CreateReviewMutation,
   UpdateReviewMutation
 } from '../../../graphql';
+import { UserService } from '../../../services';
 
 @Component({
   selector: 'app-review-item-cmp',
@@ -33,7 +34,7 @@ export class ReviewItemComponent implements OnInit, OnChanges {
   ages: number[] = [];
   scores: number[] = [];
 
-  constructor(private apollo: Apollo) {
+  constructor(private apollo: Apollo, private userService: UserService) {
     this.review = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
@@ -115,46 +116,52 @@ export class ReviewItemComponent implements OnInit, OnChanges {
     if (!this.formGroup.valid) {
       return;
     }
-    const data: any = clone(this.formGroup.value);
-    this.apollo.mutate({
-      mutation: data.id ? UpdateReviewMutation : CreateReviewMutation,
-      variables: data,
-      optimisticResponse: {
-        __typename: 'Mutation',
-        [data.id ? 'updateReview' : 'createReview']: {
-          __typename: 'Review',
-          id: -uuid(),
-          ...data
-        },
-      },
-      update: (store, { data: { createReview, updateReview } }) => {
-        if (!createReview && !updateReview) {
-          return;
-        }
-        const updatedReview: any = createReview ? createReview : updateReview;
-        if (!updatedReview.id) {
-          return;
-        }
-        const query: any = store.readQuery({
-          query: GetReviews,
-          variables: { ideaId: this.review.ideaId },
+    this.userService.user$.pipe(
+      flatMap((user: any) => {
+        const data: any = clone(this.formGroup.value);
+        return this.apollo.mutate({
+          mutation: data.id ? UpdateReviewMutation : CreateReviewMutation,
+          variables: data,
+          optimisticResponse: {
+            __typename: 'Mutation',
+            [data.id ? 'updateReview' : 'createReview']: {
+              __typename: 'Review',
+              id: -uuid(),
+              ...data,
+              userId: user.id,
+              user,
+            },
+          },
+          update: (store, { data: { createReview, updateReview } }) => {
+            if (!createReview && !updateReview) {
+              return;
+            }
+            const updatedReview: any = createReview ? createReview : updateReview;
+            if (!updatedReview.id) {
+              return;
+            }
+            const query: any = store.readQuery({
+              query: GetReviews,
+              variables: { ideaId: this.review.ideaId },
+            });
+            const reviews: any[] = query.reviews.map((review: any) => review.id === data.id ? updatedReview : review);
+            store.writeQuery({
+              query: GetReviews,
+              variables: { ideaId: this.review.ideaId },
+              data: { reviews },
+            });
+            this.review = updatedReview;
+            this.formGroup.patchValue({
+              id: this.review.id,
+              requiredAge: this.review.requiredAge,
+              requiredAgeExplanation: this.review.requiredAgeExplanation,
+              score: this.review.score,
+              scoreExplanation: this.review.scoreExplanation,
+              ideaId: this.review.ideaId,
+            });
+          },
         });
-        const reviews: any[] = query.reviews.map((review: any) => review.id === data.id ? updatedReview : review);
-        store.writeQuery({
-          query: GetReviews,
-          variables: { ideaId: this.review.ideaId },
-          data: { reviews },
-        });
-        this.review = updatedReview;
-        this.formGroup.patchValue({
-          id: this.review.id,
-          requiredAge: this.review.requiredAge,
-          requiredAgeExplanation: this.review.requiredAgeExplanation,
-          score: this.review.score,
-          scoreExplanation: this.review.scoreExplanation,
-          ideaId: this.review.ideaId,
-        });
-      },
-    }).subscribe();
+      })
+    ).subscribe();
   }
 }

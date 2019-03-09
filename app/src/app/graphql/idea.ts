@@ -30,6 +30,10 @@ export const CreateIdeaMutation = gql`
       label
       icon
       userId
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;
@@ -46,6 +50,11 @@ export const UpdateIdeaMutation = gql`
       id
       label
       icon
+      userId
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;
@@ -60,6 +69,11 @@ export const UpdateIdeaIconMutation = gql`
       id
       label
       icon
+      userId
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;

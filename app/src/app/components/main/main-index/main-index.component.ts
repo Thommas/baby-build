@@ -51,6 +51,7 @@ export class MainIndexComponent {
               userId: user.id,
               label: null,
               icon: null,
+              user,
             },
           },
           update: (store, { data: { createIdea } }) => {

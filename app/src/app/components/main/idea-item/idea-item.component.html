@@ -14,12 +14,10 @@
              autocomplete="off">
     </mat-form-field>
   </form>
-  <!--
   <button mat-button>
-    {{ idea.loggedReview ? idea.loggedReview.requiredAge ? idea.loggedReview.requiredAge : '?' : '?' }}
+    {{ idea.requiredAge ? idea.requiredAge : '?' }}
   </button>
   <button mat-icon-button>
-    <mat-icon [svgIcon]="'recommandation_' + (idea.loggedReview ? idea.loggedReview.score ? idea.loggedReview.score : '0' : '0')"></mat-icon>
+    <mat-icon [svgIcon]="'recommandation_' + (idea.score ? idea.score : '0')"></mat-icon>
   </button>
-  -->
 </div>
