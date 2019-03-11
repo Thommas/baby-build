@@ -36,6 +36,9 @@ const configuration: any = {
   mappings: {
     _doc: {
       properties: {
+        type: {
+          type: 'keyword',
+        },
         firstName: {
           type: 'text',
           analyzer: 'autocomplete',

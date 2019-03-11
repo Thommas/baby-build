@@ -10,6 +10,16 @@ import generate = require('nanoid/generate');
 import { queryTags } from '../elasticsearch/tag';
 import { Entity } from '../model';
 
+export function getTag(tagId: string) {
+  return Entity.get(tagId)
+    .then((entity: any) => {
+      if (!entity) {
+        throw new Error('Tag not found');
+      }
+      return entity;
+    });
+}
+
 export function getTags(userId: string) {
   return queryTags(userId)
     .then((entities: any) => {

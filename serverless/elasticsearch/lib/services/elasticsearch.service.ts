@@ -24,6 +24,9 @@ export function detectType(documentId: any)
   if (!documentId) {
     return null;
   }
+  if (documentId.startsWith('IdeaTag-')) {
+    return 'idea-tag';
+  }
   if (documentId.startsWith('Idea-')) {
     return 'idea';
   }

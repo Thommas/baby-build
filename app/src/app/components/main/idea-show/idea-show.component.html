@@ -1,6 +1,7 @@
 <div fxFlex fxFill>
   <h1>{{ idea.label }}</h1>
   <h2>{{ idea.user.firstName }} {{ idea.user.lastName }}</h2>
+  <app-idea-tag-list-cmp [idea]="idea"></app-idea-tag-list-cmp>
   <app-review-show-cmp [idea]="idea"></app-review-show-cmp>
   <div fxLayout="column" fxLayoutAlign="start stretch">
     <!-- LOG LIST HERE -->

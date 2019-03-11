@@ -4,8 +4,8 @@ Roadmap
 Short term
 ----------
 
-- Finish review for multiple users
 - Implement add/remove tag
+- Paginate ideas
 
 Long term
 ---------
