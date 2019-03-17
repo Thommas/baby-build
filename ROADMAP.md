@@ -18,3 +18,9 @@ Long term
 - Add unit tests
 - Invitations
 - Notifications
+
+Nice to have
+------------
+
+- Loading effect
+- CSS3 animations

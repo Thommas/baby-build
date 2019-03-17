@@ -1,4 +1,3 @@
 <div *ngFor="let ideaTag of ideaTags">
-  {{ ideaTag.tag.label }}
-  <button>Remove {{ ideaTag.id }}</button>
+  <app-idea-tag-item-cmp [ideaTag]="ideaTag" [idea]="idea"></app-idea-tag-item-cmp>
 </div>

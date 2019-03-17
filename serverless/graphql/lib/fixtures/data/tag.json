@@ -1,16 +1,44 @@
 [
   {
-    "id": "Tag-12498278591621",
+    "id": "Tag-VG",
     "createdAt": 1521053029000,
     "updatedAt": 1521053029000,
     "label": "Video game",
     "userId": "User-auth0|5a773beebfd2511753f2c9c0"
   },
   {
-    "id": "Tag-987354894156",
+    "id": "Tag-BG",
     "createdAt": 1521053029000,
     "updatedAt": 1521053029000,
     "label": "Board game",
+    "userId": "User-auth0|5a773beebfd2511753f2c9c0"
+  },
+  {
+    "id": "Tag-TV",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "label": "TV Show",
+    "userId": "User-auth0|5a773beebfd2511753f2c9c0"
+  },
+  {
+    "id": "Tag-AN",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "label": "Anime",
+    "userId": "User-auth0|5a773beebfd2511753f2c9c0"
+  },
+  {
+    "id": "Tag-MA",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "label": "Manga",
+    "userId": "User-auth0|5a773beebfd2511753f2c9c0"
+  },
+  {
+    "id": "Tag-OA",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "label": "Outdoor activity",
     "userId": "User-auth0|5a773beebfd2511753f2c9c0"
   }
 ]
