@@ -25,6 +25,7 @@ export function createIdeaTag(args: any, userId: string) {
   const id = generate('0123456789', 20);
   const entity = new Entity({
     id: `IdeaTag-${id}`,
+    userId,
     ...args
   });
   return entity.save();

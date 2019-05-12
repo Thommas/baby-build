@@ -4,8 +4,7 @@ Roadmap
 Short term
 ----------
 
-- Implement add tag
-- Refactor filters to include tags and search by default visible at the top
+- Click on tag in left bar should filter by tag
 - Display requiredAge/score in list + compute based on loaded reviews when changed
 - Paginate ideas
 - Deploy website on a new url

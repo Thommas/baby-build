@@ -46,9 +46,10 @@ export function updateIdea(args: any, userId: string) {
       if (!entity) {
         throw new Error('Idea not found');
       }
-      if (entity.userId !== userId) {
-        throw new Error('Unauthorized');
-      }
+      // FIXME Need to check sharing permission
+      // if (entity.userId !== userId) {
+      //   throw new Error('Unauthorized');
+      // }
       entity.label = args.label;
       return entity.save();
     });
@@ -60,9 +61,10 @@ export function updateIdeaIcon(args: any, userId: string) {
       if (!entity) {
         throw new Error('Idea not found');
       }
-      if (entity.userId !== userId) {
-        throw new Error('Unauthorized');
-      }
+      // FIXME Need to check sharing permission
+      // if (entity.userId !== userId) {
+      //   throw new Error('Unauthorized');
+      // }
       return fetchImage(entity.label)
         .then((imageData: string) => {
           if (null === imageData) {

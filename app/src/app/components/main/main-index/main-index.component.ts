@@ -43,10 +43,17 @@ export class MainIndexComponent {
             createIdea: {
               __typename: 'Idea',
               id: -uuid(),
-              userId: user.id,
               label: null,
               icon: null,
-              user,
+              userId: user.id,
+              user: {
+                __typename: 'User',
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+              },
+              requiredAge: 0,
+              score: 0,
             },
           },
           update: (store, { data: { createIdea } }) => {

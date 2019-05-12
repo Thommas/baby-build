@@ -6,9 +6,11 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import uuid from 'uuid/v4';
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { MatOption } from '@angular/material';
 import { fromEvent, Observable, concat } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap, mergeMap } from 'rxjs/operators';
+import { map, filter, debounceTime, distinctUntilChanged, switchMap, mergeMap, flatMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { CreateIdeaTagMutation, GetIdeaTags, GetTags } from '../../../graphql';
 import { UserService } from '../../../services';
@@ -75,14 +77,49 @@ export class IdeaTagListComponent implements OnInit, OnChanges {
       ).subscribe();
   }
 
-  optionSelected(option: any) {
-    const tagId: string = option.option.value;
-    this.apollo.mutate({
-      mutation: CreateIdeaTagMutation,
-      variables: {
-        ideaId: this.idea.id,
-        tagId,
-      },
-    }).subscribe();
+  optionSelected(event: any) {
+    this.inputElement.nativeElement.value = '';
+    const tag: any = event.option.value;
+    this.userService.user$.pipe(
+      flatMap((user: any) => {
+        return this.apollo.mutate({
+          mutation: CreateIdeaTagMutation,
+          variables: {
+            ideaId: this.idea.id,
+            tagId: tag.id,
+          },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            createIdeaTag: {
+              __typename: 'IdeaTag',
+              id: -uuid(),
+              tag: {
+                __typename: 'Tag',
+                label: tag.label,
+              },
+              userId: user.id,
+            },
+          },
+          update: (store, { data: { createIdeaTag } }) => {
+            if (!createIdeaTag) {
+              return;
+            }
+            const query: any = store.readQuery({
+              query: GetIdeaTags,
+              variables: {
+                ideaId: this.idea.id,
+              }
+            });
+            store.writeQuery({
+              query: GetIdeaTags,
+              variables: {
+                ideaId: this.idea.id,
+              },
+              data: { ideaTags: [...query.ideaTags, createIdeaTag] }
+            });
+          }
+        });
+      })
+    ).subscribe();
   }
 }

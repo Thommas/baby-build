@@ -24,6 +24,10 @@ export const CreateIdeaTagMutation = gql`
   mutation CreateIdeaTag($ideaId: String!, $tagId: String!) {
     createIdeaTag(ideaId: $ideaId, tagId: $tagId) {
       id
+      tag {
+        label
+      }
+      userId
     }
   }
 `;

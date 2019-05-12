@@ -3,7 +3,7 @@
   <mat-form-field>
     <input #inputElement fxFill matInput placeholder="Add tag" aria-label="Tag" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
-      <mat-option *ngFor="let tag of (tags$ | async)" [value]="tag.id">
+      <mat-option *ngFor="let tag of (tags$ | async)" [value]="tag">
         <span>{{ tag.label }}</span>
       </mat-option>
     </mat-autocomplete>
