@@ -1,50 +1,18 @@
 [
   {
-    "id": "IdeaTag-1",
+    "id": "IdeaTag-Idea-Mario-Tag-VG",
     "createdAt": 1521053029000,
     "updatedAt": 1521053029000,
     "userId": "User-auth0|5a773beebfd2511753f2c9c0",
-    "ideaId": "Idea-0986945c-36de-4f34-b869-d06039501879",
+    "ideaId": "Idea-Mario",
     "tagId": "Tag-VG"
   },
   {
-    "id": "IdeaTag-2",
-    "createdAt": 1521053029000,
-    "updatedAt": 1521053029000,
-    "userId": "User-auth0|5a773beebfd2511753f2c9c0",
-    "ideaId": "Idea-0986945c-36de-4f34-b869-d06039501879",
-    "tagId": "Tag-BG"
-  },
-  {
-    "id": "IdeaTag-3",
-    "createdAt": 1521053029000,
-    "updatedAt": 1521053029000,
-    "userId": "User-auth0|5a773beebfd2511753f2c9c0",
-    "ideaId": "Idea-0986945c-36de-4f34-b869-d06039501879",
-    "tagId": "Tag-MA"
-  },
-  {
-    "id": "IdeaTag-4",
-    "createdAt": 1521053029000,
-    "updatedAt": 1521053029000,
-    "userId": "User-auth0|5a773beebfd2511753f2c9c0",
-    "ideaId": "Idea-0986945c-36de-4f34-b869-d06039501879",
-    "tagId": "Tag-AN"
-  },
-  {
-    "id": "IdeaTag-5",
-    "createdAt": 1521053029000,
-    "updatedAt": 1521053029000,
-    "userId": "User-auth0|5a773beebfd2511753f2c9c0",
-    "ideaId": "Idea-0986945c-36de-4f34-b869-d06039501879",
-    "tagId": "Tag-OA"
-  },
-  {
-    "id": "IdeaTag-6",
+    "id": "IdeaTag-Idea-Sonic-Tag-VG",
     "createdAt": 1521053029000,
     "updatedAt": 1521053029000,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "ideaId": "Idea-12436278156271596",
-    "tagId": "Tag-BG"
+    "ideaId": "Idea-Sonic",
+    "tagId": "Tag-VG"
   }
 ]

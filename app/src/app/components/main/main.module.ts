@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
+  MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
@@ -18,6 +19,7 @@ import {
   MatDividerModule,
   MatFormFieldModule,
   MatInputModule,
+  MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
@@ -44,6 +46,7 @@ import {
     ReactiveFormsModule,
     FlexLayoutModule,
     routing,
+    MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -51,6 +54,7 @@ import {
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTabsModule,
     MatToolbarModule,
     MatTooltipModule
   ],

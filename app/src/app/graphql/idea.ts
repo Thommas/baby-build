@@ -14,6 +14,8 @@ export const GetIdeas = gql`
       id
       label
       icon
+      requiredAge
+      score
       userId
       user {
         firstName
@@ -29,6 +31,8 @@ export const CreateIdeaMutation = gql`
       id
       label
       icon
+      requiredAge
+      score
       userId
       user {
         firstName
@@ -50,6 +54,8 @@ export const UpdateIdeaMutation = gql`
       id
       label
       icon
+      requiredAge
+      score
       userId
       user {
         firstName
@@ -69,6 +75,8 @@ export const UpdateIdeaIconMutation = gql`
       id
       label
       icon
+      requiredAge
+      score
       userId
       user {
         firstName

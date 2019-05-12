@@ -18,6 +18,6 @@
     {{ idea.requiredAge ? idea.requiredAge : '?' }}
   </button>
   <button mat-icon-button>
-    <mat-icon [svgIcon]="'recommandation_' + (idea.score ? idea.score : '0')"></mat-icon>
+    <mat-icon [svgIcon]="'recommandation_' + (idea.score ? (idea.score | number:'1.0-0') : '0')"></mat-icon>
   </button>
 </div>

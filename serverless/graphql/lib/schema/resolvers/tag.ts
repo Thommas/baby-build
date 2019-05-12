@@ -14,7 +14,7 @@ export default {
     user: (obj) => dbUser.getUser(obj.userId),
   },
   Query: {
-    tags: (_, args, context) => dbTag.getTags(context.userId),
+    tags: (_, args, context) => dbTag.getTags(context.userId, args),
   },
   Mutation: {
     createTag: (_, args, context) => dbTag.createTag(args, context.userId),

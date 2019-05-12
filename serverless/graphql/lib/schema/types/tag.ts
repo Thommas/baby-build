@@ -14,7 +14,7 @@ const Tag = `
     user: User
   }
   type Query {
-    tags: [Tag]
+    tags(label: String): [Tag]
   }
   type Mutation {
     createTag(

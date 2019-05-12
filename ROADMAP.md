@@ -4,12 +4,16 @@ Roadmap
 Short term
 ----------
 
-- Implement add/remove tag
+- Implement add tag
+- Refactor filters to include tags and search by default visible at the top
+- Display requiredAge/score in list + compute based on loaded reviews when changed
 - Paginate ideas
+- Deploy website on a new url
 
 Long term
 ---------
 
+- Implement voice recording to create task
 - Refactor gamification xp/lvl
 - Logs
 - Comments

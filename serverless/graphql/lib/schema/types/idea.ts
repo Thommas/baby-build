@@ -11,6 +11,8 @@ const Idea = `
     id: String
     label: String
     icon: String
+    requiredAge: Float
+    score: Float
     userId: String
     user: User
   }

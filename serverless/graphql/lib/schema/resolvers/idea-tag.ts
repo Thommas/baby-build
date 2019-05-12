@@ -8,6 +8,7 @@
 
 import * as dbTag from '../../dynamo/tag';
 import * as dbIdeaTag from '../../dynamo/idea-tag';
+import * as dbUser from '../../dynamo/user';
 
 export default {
   IdeaTag: {

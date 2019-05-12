@@ -20,8 +20,8 @@ export function getTag(tagId: string) {
     });
 }
 
-export function getTags(userId: string) {
-  return queryTags(userId)
+export function getTags(userId: string, args: any) {
+  return queryTags(userId, args)
     .then((entities: any) => {
       const params: any = entities.hits.hits.map((hit: any) => ({id: hit._id}));
       if (params.length === 0) {

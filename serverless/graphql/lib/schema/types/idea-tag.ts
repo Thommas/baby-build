@@ -10,6 +10,7 @@ const IdeaTag = `
   type IdeaTag {
     id: String
     tag: Tag
+    userId: String
   }
   type Query {
     ideaTags(ideaId: String!): [IdeaTag]

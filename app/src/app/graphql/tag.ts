@@ -9,8 +9,8 @@
 import gql from 'graphql-tag';
 
 export const GetTags = gql`
-  query GetTags {
-    tags {
+  query GetTags($label: String) {
+    tags(label: $label) {
       id
       label
       userId

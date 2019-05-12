@@ -8,7 +8,7 @@
 
 import { search } from '../services/elasticsearch.service';
 
-export function queryTags(userId: string): Promise<any> {
+export function queryTags(userId: string, args: any): Promise<any> {
   const query: any = {
     bool: {
       must: [
@@ -25,5 +25,16 @@ export function queryTags(userId: string): Promise<any> {
       ],
     }
   };
+  if (args.label && args.label.length > 0) {
+    query.bool.must.push({
+      match: {
+        label: {
+          query: args.label,
+          fuzziness: 2,
+          prefix_length: 1,
+        },
+      },
+    });
+  }
   return search(query);
 }

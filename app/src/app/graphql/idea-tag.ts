@@ -15,6 +15,7 @@ export const GetIdeaTags = gql`
       tag {
         label
       }
+      userId
     }
   }
 `;

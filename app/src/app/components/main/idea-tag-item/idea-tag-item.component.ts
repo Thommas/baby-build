@@ -10,6 +10,7 @@ import { Component, Input } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { GetIdeaTags, DeleteIdeaTagMutation } from '../../../graphql';
+import { UserService } from '../../../services';
 
 @Component({
   selector: 'app-idea-tag-item-cmp',
@@ -21,7 +22,10 @@ export class IdeaTagItemComponent {
   @Input() idea: any;
   loading: boolean;
 
-  constructor(private apollo: Apollo) {}
+  constructor(
+    private apollo: Apollo,
+    public userService: UserService
+  ) {}
 
   deleteIdeaTag() {
     this.apollo.mutate({

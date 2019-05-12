@@ -1,3 +1,14 @@
+<h2>idea_tag_list.title</h2>
+<form>
+  <mat-form-field>
+    <input #inputElement fxFill matInput placeholder="Add tag" aria-label="Tag" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+      <mat-option *ngFor="let tag of (tags$ | async)" [value]="tag.id">
+        <span>{{ tag.label }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
 <div *ngFor="let ideaTag of ideaTags">
   <app-idea-tag-item-cmp [ideaTag]="ideaTag" [idea]="idea"></app-idea-tag-item-cmp>
 </div>
