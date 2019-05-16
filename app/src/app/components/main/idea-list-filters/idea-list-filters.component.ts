@@ -6,10 +6,12 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { xor } from 'lodash';
 import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { fromEvent } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Update } from '../../../store/idea-filters/idea-filters.actions';
+import { ideaFiltersReducer } from '../../../store';
 
 @Component({
   selector: 'app-idea-list-filters-cmp',
@@ -17,18 +19,13 @@ import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs
   styleUrls: ['./idea-list-filters.component.scss']
 })
 export class IdeaListFiltersComponent implements OnInit {
-  @Input() filters: any;
-  @Output() filtersChange: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('inputElement') inputElement: any;
+  filters$: any;
   ages: number[] = [];
   scores: number[] = [];
 
-  constructor() {
-    this.filters = {
-      label: null,
-      requiredAge: [],
-      score: [],
-    };
+  constructor(private store: Store<{ ideaFilters: any }>) {
+    this.filters$ = store.pipe(select('ideaFilters'));
     for (let age = 1; age <= 20; age++) {
       this.ages.push(age);
     }
@@ -46,17 +43,20 @@ export class IdeaListFiltersComponent implements OnInit {
   }
 
   selectLabel(label: string) {
-    this.filters.label = label;
-    this.filtersChange.emit(this.filters);
+    this.store.dispatch(new Update({
+      label,
+    }));
   }
 
   selectRequiredAge(requiredAge: number) {
-    this.filters.requiredAge = xor(this.filters.requiredAge, [requiredAge]);
-    this.filtersChange.emit(this.filters);
+    this.store.dispatch(new Update({
+      requiredAge,
+    }));
   }
 
   selectScore(score: number) {
-    this.filters.score = xor(this.filters.score, [score]);
-    this.filtersChange.emit(this.filters);
+    this.store.dispatch(new Update({
+      score,
+    }));
   }
 }

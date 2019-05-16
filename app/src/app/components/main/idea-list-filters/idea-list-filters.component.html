@@ -11,7 +11,7 @@
 <div fxLayout="row" fxLayoutAlign="space-around center">
   <ng-container *ngFor="let age of ages">
     <button mat-raised-button
-            [color]="filters.requiredAge.includes(age) ? 'accent' : ''"
+            [color]="(filters$ | async).requiredAge.includes(age) ? 'accent' : ''"
             (click)="selectRequiredAge(age)">
       {{ age }}
     </button>
@@ -21,7 +21,7 @@
 <div fxLayout="row" fxLayoutAlign="space-around center">
   <ng-container *ngFor="let score of scores">
     <button mat-fab
-            [color]="filters.score.includes(score) ? 'accent' : ''"
+            [color]="(filters$ | async).score.includes(score) ? 'accent' : ''"
             (click)="selectScore(score)">
       <mat-icon [svgIcon]="'recommandation_' + score"></mat-icon>
     </button>

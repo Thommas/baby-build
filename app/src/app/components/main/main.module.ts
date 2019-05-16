@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { StoreModule } from '@ngrx/store';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -39,6 +40,8 @@ import {
   ReviewShowComponent
 } from './';
 
+import { ideaFiltersReducer } from '../../store';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import {
     MatInputModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    StoreModule.forRoot({ ideaFilters: ideaFiltersReducer })
   ],
   declarations: [
     IdeaIconComponent,

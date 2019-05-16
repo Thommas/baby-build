@@ -9,8 +9,8 @@
 import gql from 'graphql-tag';
 
 export const GetIdeas = gql`
-  query GetIdeas($label: String, $requiredAge: [Int], $score: [Int]) {
-    ideas(label: $label, requiredAge: $requiredAge, score: $score) {
+  query GetIdeas($label: String, $requiredAge: [Int], $score: [Int], $tagId: String) {
+    ideas(label: $label, requiredAge: $requiredAge, score: $score, tagId: $tagId) {
       id
       label
       icon

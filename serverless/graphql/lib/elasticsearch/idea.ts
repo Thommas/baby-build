@@ -60,5 +60,17 @@ export function queryIdeas(userIds: string[], args: any): Promise<any> {
       });
     }
   }
+  if (args.tagId) {
+    query.bool.must.push({
+      has_child: {
+        type: 'idea-tag',
+        query: {
+          term: {
+            tagId: args.tagId,
+          }
+        },
+      },
+    });
+  }
   return search(query);
 }

@@ -7,8 +7,11 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { Apollo } from 'apollo-angular';
 import { GetTags } from '../../../graphql';
+import { Update } from '../../../store/idea-filters/idea-filters.actions';
+import { ideaFiltersReducer } from '../../../store';
 
 @Component({
   selector: 'app-tag-list-cmp',
@@ -16,10 +19,15 @@ import { GetTags } from '../../../graphql';
   styleUrls: ['./tag-list.component.scss']
 })
 export class TagListComponent implements OnInit {
+  filters$: any;
   loading: boolean;
   tags: any;
 
-  constructor(private apollo: Apollo) {
+  constructor(
+    private apollo: Apollo,
+    private store: Store<{ ideaFilters: any }>
+  ) {
+    this.filters$ = store.pipe(select('ideaFilters'));
     this.loading = false;
     this.tags = [];
   }
@@ -42,5 +50,11 @@ export class TagListComponent implements OnInit {
         },
         (e) => console.log('error while loading tags', e)
       );
+  }
+
+  selectTag(tag?: any) {
+    this.store.dispatch(new Update({
+      tagId: tag ? tag.id : null,
+    }));
   }
 }

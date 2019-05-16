@@ -19,6 +19,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   MatButtonModule,
   MatCardModule,
@@ -32,6 +34,7 @@ import {
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
+import { environment } from '../environments/environment';
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { MainModule } from './components/main/main.module';
@@ -54,6 +57,7 @@ import {
   UserService,
   ProgressService
 } from './services';
+import { ideaFiltersReducer } from './store';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -94,7 +98,12 @@ export function createTranslateLoader(http: HttpClient) {
     UserModule,
     SecurityModule,
     StaticModule,
-    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+    StoreModule.forRoot({ ideaFilters: ideaFiltersReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     appRoutingProviders,

@@ -1,1 +1,2 @@
-<div *ngFor="let tag of tags">{{ tag.label }}</div>
+<div (click)="selectTag()">All</div>
+<div (click)="selectTag(tag)" *ngFor="let tag of tags">{{ tag.label }}</div>

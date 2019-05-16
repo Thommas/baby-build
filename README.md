@@ -8,9 +8,9 @@ Stack
 -----
 
 - Angular
+- Ngrx
 - Serverless framework
 - Apollo GraphQL
-- Dexie
 
 
 Third party
