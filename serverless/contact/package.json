@@ -4,12 +4,10 @@
   "license": "WTFPL",
   "scripts": {
     "start": "serverless offline start --stage local",
-    "start:dev": "serverless offline start --stage dev",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "test": "jasmine-ts \"lib/**/*.spec.ts\"",
     "e2e": "jasmine-ts \"e2e/**/*.spec.ts\"",
     "lint": "tslint -c tslint.json './src/**/*.ts'",
-    "deploy:dev": "serverless deploy --stage dev",
     "deploy:staging": "serverless deploy --stage staging",
     "deploy:production": "serverless deploy --stage production"
   },

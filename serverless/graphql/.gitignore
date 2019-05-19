@@ -1,6 +1,7 @@
 /node_modules
 /secrets.yml
 /.build
+/.dynamodb
 /.serverless
 /npm-debug.log
 /.env

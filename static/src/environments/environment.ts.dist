@@ -1,0 +1,9 @@
+export const environment = {
+  production: false,
+  appUrl: '',
+  googleAnalyticsId: '',
+  googleRecaptchaSiteKey: '',
+  baseDomainUrl: '',
+  contactUrl: '',
+  dexieDatabase: ''
+}

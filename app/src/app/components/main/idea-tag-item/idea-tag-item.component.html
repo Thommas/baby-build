@@ -1,0 +1,2 @@
+{{ ideaTag.tag.label }}
+<button *ngIf="(userService.user$ | async)?.id === ideaTag.userId" (click)="deleteIdeaTag()">Remove {{ ideaTag.id }}</button>

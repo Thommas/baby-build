@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  place-content: stretch center;
+  flex-direction: row;
+  padding-top: 20px;
+  flex: 1;
+}
+
+.header {
+  color: grey;
+  border-bottom: 1px solid #cccccc;
+
+  .mat-raised-button {
+    margin: 10px;
+  }
+}
+
+.left-card {
+  min-width: 405px;
+  max-width: 1000px;
+  margin-left: 20px;
+  padding: 0;
+  overflow-y: auto;
+
+  .mat-card-content {
+    padding: 10px;
+  }
+}
+
+.right-card {
+  min-width: 0px;
+  max-width: 675px;
+  margin-left: 15px;
+  margin-right: 20px;
+  padding: 0;
+}

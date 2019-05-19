@@ -9,24 +9,28 @@
 import { graphqlLambda } from 'graphql-server-lambda';
 import schema from './schema/schema';
 import { verify } from 'jsonwebtoken';
+import * as dynamoose from 'dynamoose';
 import * as jwks from 'jwks-rsa';
 
-const jwksClient = jwks({
-  strictSsl: true,
-  jwksUri: process.env.AUTH0_JWKS_URI
-});
+declare var process: {
+  env: {
+    AUTH0_CLIENT_ID: string,
+    AUTH0_JWKS_URI: string,
+    AUTH0_JWKS_KID: string,
+  }
+}
 
 /**
  * Returns an IAM policy document for a given user and resource.
  *
- * @method buildIAMPolicy
+ * @method childIAMPolicy
  * @param {String} userId - user id
  * @param {String} effect  - Allow / Deny
  * @param {String} resource - resource ARN
  * @param {String} context - response context
  * @returns {Object} policyDocument
  */
-const buildIAMPolicy = (userId, effect, resource, context) => {
+const childIAMPolicy = (userId, effect, resource, context) => {
   const policy = {
     principalId: userId,
     policyDocument: {
@@ -46,7 +50,6 @@ const buildIAMPolicy = (userId, effect, resource, context) => {
 };
 
 exports.auth = (event, context, callback) => {
-  console.log('event', event)
   if (!event.authorizationToken) {
     return callback('Unauthorized')
   }
@@ -67,6 +70,11 @@ exports.auth = (event, context, callback) => {
     algorithms: ['RS256']
   }
   try {
+    const jwksClient = jwks({
+      strictSsl: true,
+      cache: true,
+      jwksUri: process.env.AUTH0_JWKS_URI
+    });
     return jwksClient.getSigningKey(process.env.AUTH0_JWKS_KID, (err, key) => {
       const signingKey = key.publicKey || key.rsaPublicKey || '';
       verify(tokenValue, signingKey, options, (verifyError: any, decoded: any) => {
@@ -75,12 +83,12 @@ exports.auth = (event, context, callback) => {
           console.log(`Token invalid. ${verifyError}`)
           return callback('Unauthorized')
         }
-        console.log('valid from customAuthorizer', decoded)
         const userId = decoded.sub
         const effect = 'Allow'
         const resource = event.methodArn
-        const authorizerContext = { user_id: userId }
-        return callback(null, buildIAMPolicy(userId, effect, resource, authorizerContext))
+        const authorizerContext = { userId: `User-${userId}` }
+        console.log('Valid userId', userId)
+        return callback(null, childIAMPolicy(userId, effect, resource, authorizerContext))
       })
     })
   } catch (err) {
@@ -90,11 +98,11 @@ exports.auth = (event, context, callback) => {
 }
 
 exports.graphql = (event, context, callback) => {
-  console.log('userId', event.requestContext.authorizer.user_id);
-  const graphQLContext = { user_id: event.requestContext.authorizer.user_id };
+  // console.log('userId', event.requestContext.authorizer.userId);
+  const graphQLContext = { userId: event.requestContext.authorizer.userId };
 
   const callbackFilter = (error, output) => {
-    console.log('output', output)
+    // console.log('output', output)
     const outputWithHeader = Object.assign({}, output, {
       headers: {
         'Access-Control-Allow-Origin': '*',

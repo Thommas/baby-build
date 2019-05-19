@@ -7,7 +7,6 @@
     "test": "jasmine-ts \"lib/**/*.spec.ts\"",
     "e2e": "jasmine-ts \"e2e/**/*.spec.ts\"",
     "lint": "tslint -c tslint.json './src/**/*.ts'",
-    "deploy:dev": "serverless deploy --stage dev",
     "deploy:staging": "serverless deploy --stage staging",
     "deploy:production": "serverless deploy --stage production"
   },

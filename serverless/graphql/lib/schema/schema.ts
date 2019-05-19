@@ -11,39 +11,39 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas';
 
 // Types
-import buildType from './types/build';
-import childType from './types/child';
-import gamificationType from './types/gamification';
-import questType from './types/quest';
+import ideaType from './types/idea';
+import ideaTagType from './types/idea-tag';
+import reviewType from './types/review';
+import sharingType from './types/sharing';
+import tagType from './types/tag';
 import userType from './types/user';
-import whitelistItemType from './types/whitelist-item';
 
 // Resolvers
-import buildResolver from './resolvers/build';
-import childResolver from './resolvers/child';
-import gamificationResolver from './resolvers/gamification';
-import questResolver from './resolvers/quest';
+import ideaResolver from './resolvers/idea';
+import ideaTagResolver from './resolvers/idea-tag';
+import reviewResolver from './resolvers/review';
+import sharingResolver from './resolvers/sharing';
+import tagResolver from './resolvers/tag';
 import userResolver from './resolvers/user';
-import whitelistItemResolver from './resolvers/whitelist-item';
 
-const typeDefs = mergeTypes([
-  buildType,
-  childType,
-  gamificationType,
-  questType,
-  userType,
-  whitelistItemType
+const typeDefs: any = mergeTypes([
+  ideaType,
+  ideaTagType,
+  reviewType,
+  sharingType,
+  tagType,
+  userType
 ]);
-const resolvers = mergeResolvers([
-  buildResolver,
-  childResolver,
-  gamificationResolver,
-  questResolver,
-  userResolver,
-  whitelistItemResolver
+const resolvers: any = mergeResolvers([
+  ideaResolver,
+  ideaTagResolver,
+  reviewResolver,
+  sharingResolver,
+  tagResolver,
+  userResolver
 ]);
 
-const schema = makeExecutableSchema({
+const schema: any = makeExecutableSchema({
   typeDefs,
   resolvers,
 });

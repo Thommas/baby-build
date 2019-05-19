@@ -8,7 +8,7 @@ custom:
   buildTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.BuildTableStreamArn}
   childTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.ChildTableStreamArn}
   gamificationTable: pathofchild-graphql-${self:custom.stage}-gamification
-  whitelistItemTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.WhitelistItemTableStreamArn}
+  favoriteTableStreamArn: ${cf:pathofchild-graphql-${self:custom.stage}.FavoriteTableStreamArn}
   secrets: ${file(secrets.yml):${self:custom.stage}}
 
 package:
@@ -51,9 +51,9 @@ functions:
       - stream:
           type: dynamodb
           arn: ${self:custom.childTableStreamArn}
-  whitelistItem:
-    handler: lib/handler.whitelistItem
+  favoriteItem:
+    handler: lib/handler.favoriteItem
     events:
       - stream:
           type: dynamodb
-          arn: ${self:custom.whitelistItemTableStreamArn}
+          arn: ${self:custom.favoriteTableStreamArn}

@@ -8,23 +8,23 @@
 
 const User = `
   type User {
-    id: String!
-    gamification: Gamification
+    id: String
+    firstName: String
+    lastName: String
+    xp: Int
+    lvl: Int
+    nextLvlXp: Int
   }
   type Query {
-    users: [User]
-    user(id: ID!): User
+    users(searchQuery: String!): [User]
+    user(id: String!): User
     authUser: User
   }
   type Mutation {
-    createUser(
-      id: ID!
-    ): User
     updateUser(
-      id: ID!
-    ): User
-    deleteUser(
-      id: ID!
+      id: String!
+      firstName: String
+      lastName: String
     ): User
   }
 `;

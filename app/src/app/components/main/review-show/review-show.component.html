@@ -1,0 +1,2 @@
+<app-review-list-cmp [idea]="idea" (selectedReviewChange)="selectedReviewChange($event)"></app-review-list-cmp>
+<app-review-item-cmp *ngIf="selectedReview" [review]="selectedReview"></app-review-item-cmp>

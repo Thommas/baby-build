@@ -1,0 +1,52 @@
+[
+  {
+    "id": "User-auth0|5a773beebfd2511753f2c9c0",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "firstName": "Thomas",
+    "lastName": "Bullier",
+    "xp": 0,
+    "lvl": 1,
+    "nextLvlXp": 300
+  },
+  {
+    "id": "User-auth0|5c76cf3d51aac62f2939ed73",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "firstName": "Thommasc",
+    "lastName": "Keyblade wielder",
+    "xp": 0,
+    "lvl": 1,
+    "nextLvlXp": 300
+  },
+  {
+    "id": "User-Sora",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "firstName": "Sora",
+    "lastName": "Keyblade wielder",
+    "xp": 0,
+    "lvl": 1,
+    "nextLvlXp": 300
+  },
+  {
+    "id": "User-Riku",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "firstName": "Riku",
+    "lastName": "Keyblade wielder",
+    "xp": 0,
+    "lvl": 1,
+    "nextLvlXp": 300
+  },
+  {
+    "id": "User-Kairi",
+    "createdAt": 1521053029000,
+    "updatedAt": 1521053029000,
+    "firstName": "Kairi",
+    "lastName": "Keyblade wielder",
+    "xp": 0,
+    "lvl": 1,
+    "nextLvlXp": 300
+  }
+]

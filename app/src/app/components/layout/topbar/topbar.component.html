@@ -1,0 +1,19 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="center center">
+  <header fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <button mat-icon-button (click)="toggleSidebar.emit({})">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <span>Me</span>
+      <button mat-icon-button [matMenuTriggerFor]="mainMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </header>
+</mat-toolbar>
+<mat-menu #mainMenu="matMenu">
+  <button mat-menu-item (click)="openSettings()" i18n>nav.profile</button>
+  <button mat-menu-item (click)="logout()" i18n>nav.logout</button>
+</mat-menu>

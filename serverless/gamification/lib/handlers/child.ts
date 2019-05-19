@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Gamification - Handlers - Build
+ * Gamification - Handlers - Child
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

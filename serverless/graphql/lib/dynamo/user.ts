@@ -1,72 +1,58 @@
 /**
- * Path of user
+ * Path of child
  *
- * GraphQL - DynamoDB - User
+ * GraphQL - Dynamo - User
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import nanoid = require('nanoid');
-import * as db from './dynamo';
+import { queryUsersBySearchQuery } from '../elasticsearch/user';
+import { Entity } from '../model';
 
-const TableName = process.env.USER_TABLE;
-
-export function getUsers() {
-  const params = {
-    TableName,
-    AttributesToGet: [
-      'id'
-    ],
-  };
-
-  return db.scan(params);
+export function getAuthUser(userId: string) {
+  return Entity.get(userId)
+    .then((entity: any) => {
+      if (!entity) {
+        entity = new Entity();
+        entity.type = 'user';
+        entity.id = userId;
+        entity.xp = 0;
+        entity.lvl = 1;
+        return entity.save();
+      }
+      return entity;
+    });
 }
 
-export function getUserById(id) {
-  const params = {
-    TableName,
-    Key: {
-      id,
-    },
-  };
-
-  return db.get(params);
+export function getUsers(args: any) {
+  return queryUsersBySearchQuery(args.searchQuery)
+    .then((entities: any) => {
+      const params: any = entities.hits.hits.map((hit: any) => ({id: hit._id}));
+      if (params.length === 0) {
+        return [];
+      }
+      return Entity.batchGet(params);
+    });
 }
 
-export function createUser(userId) {
-  const params = {
-    TableName,
-    Item: {
-      id: userId,
-      created_at: new Date().getTime(),
-      updated_at: new Date().getTime(),
-    },
-  };
-
-  return db.createItem(params);
+export function getUser(userId: string) {
+  return Entity.get(userId)
+    .then((entity: any) => {
+      if (!entity) {
+        throw new Error('User not found');
+      }
+      return entity;
+    });
 }
 
-export function updateUser(args, userId) {
-  const params = {
-    TableName,
-    Key: {
-      id: args.id,
-    },
-    ExpressionAttributeValues: {
-      ':nickname': args.nickname
-    },
-    UpdateExpression: `SET nickname = :nickname`,
-    ReturnValues: 'ALL_NEW',
-  };
-
-  return db.updateItem(params, args);
-}
-
-export function getUserByIdOrCreate(userId) {
-  return getUserById(userId).then((user) => {
-    if (user) {
-      return user;
-    }
-    return createUser(userId);
-  })
+export function updateUser(args: any, userId: string) {
+  return Entity.get(userId)
+    .then((entity: any) => {
+      if (!entity) {
+        throw new Error('User not found');
+      }
+      entity.firstName = args.firstName;
+      entity.lastName = args.lastName;
+      return entity.save();
+    });
 }

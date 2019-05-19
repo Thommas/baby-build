@@ -1,0 +1,34 @@
+export const environment = {
+  production: false,
+  googleAnalyticsId: '',
+  googleRecaptchaSiteKey: '',
+  baseDomainUrl: '',
+  contactUrl: '',
+  dexieDatabase: '',
+  auth0: {
+    clientID: '',
+    domain: '',
+    options: {
+      container: 'login-form',
+      auth: {
+        audience: '',
+        redirect: true,
+        redirectUrl: '',
+        responseType: 'token id_token',
+        params: {
+          scope: 'openid email'
+        }
+      },
+      theme: {
+        logo: 'https://app.pathofchild.io/assets/img/path-of-child-logo-horizontal.svg',
+        primaryColor: '#31324F'
+      },
+      languageDictionary: {
+        title: ''
+      }
+    }
+  },
+  apollo: {
+    url: ''
+  }
+};

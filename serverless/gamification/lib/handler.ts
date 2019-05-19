@@ -8,7 +8,7 @@
 
 import { handleBuild } from './handlers/build'
 import { handleChild } from './handlers/child'
-import { handleWhitelistItem } from './handlers/whitelist-item'
+import { handleFavorite } from './handlers/favorite'
 
 exports.build = (event, context, callback) => {
   handleBuild(event, context, callback)
@@ -18,6 +18,6 @@ exports.child = (event, context, callback) => {
   handleChild(event, context, callback)
 };
 
-exports.whitelistItem = (event, context, callback) => {
-  handleWhitelistItem(event, context, callback)
+exports.favorite = (event, context, callback) => {
+  handleFavorite(event, context, callback)
 };

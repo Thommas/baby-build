@@ -1,0 +1,23 @@
+<div fxFill fxLayout="row" fxLayoutAlign="start center">
+  <app-idea-icon-cmp
+    [ideaId]="idea.id"
+    [ideaLabel]="idea.label"
+    [ideaIcon]="idea.icon"
+  ></app-idea-icon-cmp>
+  <form [formGroup]="formGroup" fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field fxFill>
+      <input #inputElement fxFill
+             matInput
+             [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write an idea'"
+             formControlName="label"
+             (keyup.backspace)="onKey($event)"
+             autocomplete="off">
+    </mat-form-field>
+  </form>
+  <button mat-button>
+    {{ idea.requiredAge ? idea.requiredAge : '?' }}
+  </button>
+  <button mat-icon-button>
+    <mat-icon [svgIcon]="'recommandation_' + (idea.score ? (idea.score | number:'1.0-0') : '0')"></mat-icon>
+  </button>
+</div>
