@@ -8,90 +8,16 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { createIndex, deleteIndex, index } from '../services';
+import {
+  addNestedObject,
+  createIndex,
+  deleteIndex,
+  index,
+  refreshIndex,
+  searchOne,
+} from '../services';
 import { entities } from '../model';
-
-const configuration: any = {
-  settings: {
-    analysis: {
-      filter: {
-        autocomplete_filter: {
-          type: 'edge_ngram',
-          min_gram: 1,
-          max_gram: 20
-        }
-      },
-      analyzer: {
-        autocomplete: {
-          type: 'custom',
-          tokenizer: 'standard',
-          filter: [
-            'lowercase',
-            'autocomplete_filter',
-          ]
-        }
-      }
-    }
-  },
-  mappings: {
-    _doc: {
-      properties: {
-        type: {
-          type: 'keyword',
-        },
-        firstName: {
-          type: 'text',
-          analyzer: 'autocomplete',
-          search_analyzer: 'standard'
-        },
-        lastName: {
-          type: 'text',
-          analyzer: 'autocomplete',
-          search_analyzer: 'standard'
-        },
-        label: {
-          type: 'text',
-          analyzer: 'autocomplete',
-          search_analyzer: 'standard'
-        },
-        requiredAge: {
-          type: 'double',
-        },
-        score: {
-          type: 'double',
-        },
-        requiredAgeExplanation: {
-          type: 'text',
-          analyzer: 'autocomplete',
-          search_analyzer: 'standard'
-        },
-        scoreExplanation: {
-          type: 'text',
-          analyzer: 'autocomplete',
-          search_analyzer: 'standard'
-        },
-        xp: {
-          type: 'integer',
-        },
-        lvl: {
-          type: 'integer',
-        },
-        ideaId: {
-          type: 'keyword',
-        },
-        sharerId: {
-          type: 'keyword',
-        },
-        tagId: {
-          type: 'keyword',
-        },
-        userId: {
-          type: 'keyword',
-        },
-      }
-    }
-  }
-};
+import { configuration } from './elasticsearch-config';
 
 function loadData(entity: string): Promise<any> {
   const data: any = fs.readFileSync(path.join(__dirname, `data/${entity}.json`));
@@ -103,10 +29,41 @@ function loadData(entity: string): Promise<any> {
   return Promise.all(promises);
 }
 
+async function linkData(parentType: string, child: string, parentIdField: string): Promise<any> {
+  const data: any = fs.readFileSync(path.join(__dirname, `data/${child}.json`));
+  const items: any[] = JSON.parse(data);
+  const promises: Promise<any>[] = [];
+  for (let item of items) {
+    const query: any = {
+      bool: {
+        must: [
+          {
+            term: {
+              type: parentType,
+            },
+          },
+          {
+            term: {
+              _id: item[parentIdField],
+            },
+          },
+        ],
+      },
+    };
+    const parent = await searchOne(query);
+    if (parent) {
+      promises.push(addNestedObject(parentType, parent, item, 'tagIdNested'));
+    }
+  }
+  return Promise.all(promises);
+}
+
 export async function loadFixtures(): Promise<any> {
   await deleteIndex();
   await createIndex(configuration);
   for (let entity of entities) {
     await loadData(entity);
   }
+  await refreshIndex();
+  await linkData('idea', 'idea-tag', 'ideaId');
 }

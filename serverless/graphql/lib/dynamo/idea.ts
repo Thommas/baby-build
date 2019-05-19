@@ -21,10 +21,10 @@ export function getIdeas(userId: string, args: any) {
       return queryIdeas(userIds, args)
     })
     .then((ideas) => {
-      const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
-      if (params.length === 0) {
+      if (0 === ideas.hits.total) {
         return [];
       }
+      const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
       return Entity.batchGet(params);
     });
 }

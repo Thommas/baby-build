@@ -25,6 +25,13 @@ export function queryIdeas(userIds: string[], args: any): Promise<any> {
       ],
     },
   };
+  if (args.ids && args.ids.length > 0) {
+    query.bool.must.push({
+      terms: {
+        id: args.ids,
+      },
+    });
+  }
   if (args.label && args.label.length > 0) {
     query.bool.must.push({
       match: {
@@ -62,13 +69,19 @@ export function queryIdeas(userIds: string[], args: any): Promise<any> {
   }
   if (args.tagId) {
     query.bool.must.push({
-      has_child: {
-        type: 'idea-tag',
+      nested: {
+        path: 'tagIdNested',
         query: {
-          term: {
-            tagId: args.tagId,
+          bool: {
+            must: [
+              {
+                term: {
+                  'tagIdNested.tagId': args.tagId,
+                }
+              }
+            ]
           }
-        },
+        }
       },
     });
   }

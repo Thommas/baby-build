@@ -38,11 +38,12 @@ export function index(type: string, document: any): Promise<any> {
     body: {
       ...document,
       type,
-    }
+    },
+    refresh: true,
   });
 }
 
-export function search(query: any) {
+export function search(query: any): Promise<any> {
   return elasticsearchClient.search({
     index: configService.elasticSearchIndex,
     type: '_doc',
@@ -50,4 +51,29 @@ export function search(query: any) {
       query,
     }
   });
+}
+
+export function searchOne(query: any): Promise<any> {
+  return this.search(query).then((items) => {
+    if (items.hits.total > 0) {
+      return {
+        id: items.hits.hits[0]._id,
+        ...items.hits.hits[0]._source,
+      }
+    }
+
+    return null;
+  });
+}
+
+export function addNestedObject(parentType: string, parent: any, child: any, field: string): Promise<any> {
+  if (!parent[field]) {
+    parent[field] = [];
+  }
+  parent[field].push(child);
+  return this.index(parentType, parent);
+}
+
+export function refreshIndex(): Promise<any> {
+  return elasticsearchClient.indices.refresh();
 }
