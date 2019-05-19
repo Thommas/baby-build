@@ -14,6 +14,7 @@ import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap, flatMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
+  GetIdeas,
   GetReviews,
   CreateReviewMutation,
   UpdateReviewMutation
@@ -112,6 +113,37 @@ export class ReviewItemComponent implements OnInit, OnChanges {
     }
   }
 
+  updateReviews(store: any, data, updatedReview) {
+    const query: any = store.readQuery({
+      query: GetReviews,
+      variables: { ideaId: this.review.ideaId },
+    });
+    const reviews: any[] = query.reviews.map((review: any) => review.id === data.id ? updatedReview : review);
+    store.writeQuery({
+      query: GetReviews,
+      variables: { ideaId: this.review.ideaId },
+      data: { reviews },
+    });
+    this.review = updatedReview;
+    this.formGroup.patchValue({
+      id: this.review.id,
+      requiredAge: this.review.requiredAge,
+      requiredAgeExplanation: this.review.requiredAgeExplanation,
+      score: this.review.score,
+      scoreExplanation: this.review.scoreExplanation,
+      ideaId: this.review.ideaId,
+    });
+  }
+
+  updateIdeas(store: any, data: any, updatedReview: any) {
+    console.log('Update idea in store');
+    // store.writeQuery({
+    //   query: GetReviews,
+    //   variables: { ideaId: this.review.ideaId },
+    //   data: { reviews },
+    // });
+  }
+
   save() {
     if (!this.formGroup.valid) {
       return;
@@ -140,25 +172,8 @@ export class ReviewItemComponent implements OnInit, OnChanges {
             if (!updatedReview.id) {
               return;
             }
-            const query: any = store.readQuery({
-              query: GetReviews,
-              variables: { ideaId: this.review.ideaId },
-            });
-            const reviews: any[] = query.reviews.map((review: any) => review.id === data.id ? updatedReview : review);
-            store.writeQuery({
-              query: GetReviews,
-              variables: { ideaId: this.review.ideaId },
-              data: { reviews },
-            });
-            this.review = updatedReview;
-            this.formGroup.patchValue({
-              id: this.review.id,
-              requiredAge: this.review.requiredAge,
-              requiredAgeExplanation: this.review.requiredAgeExplanation,
-              score: this.review.score,
-              scoreExplanation: this.review.scoreExplanation,
-              ideaId: this.review.ideaId,
-            });
+            this.updateReviews(store, data, updatedReview);
+            this.updateIdeas(store, data, updatedReview);
           },
         });
       })

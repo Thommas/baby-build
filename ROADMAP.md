@@ -4,7 +4,11 @@ Roadmap
 Short term
 ----------
 
-- Click on tag in left bar should filter by tag
+- Refactor everything with Loona
+
+Medium term
+-----------
+
 - Add Idea permission based on sharing (mutualize checking sharing)
 - Display requiredAge/score in list + compute based on loaded reviews when changed
 - Paginate ideas
