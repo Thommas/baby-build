@@ -7,10 +7,9 @@
  */
 
 import { xor } from 'lodash';
-import { Action, State } from '@ngrx/store';
 import { ActionTypes, ActionsUnion } from './idea-filters.actions';
 
-export const initialState = {
+const initialState = {
   tagId: null,
   name: null,
   requiredAge: [],

@@ -3,7 +3,7 @@
   "version": "0.6.0",
   "license": "WTFPL",
   "scripts": {
-    "start": "SLS_DEBUG=* serverless offline start --stage dev --region eu-west-2",
+    "start": "serverless offline start --stage dev --region eu-west-2",
     "puppeteer": "./node_modules/.bin/ts-node ./lib/puppeteer/index.ts",
     "fixtures": "./node_modules/.bin/ts-node ./lib/fixtures/index.ts",
     "graphqli": "./node_modules/.bin/ts-node ./lib/graphqli/index.ts",

@@ -2,15 +2,11 @@ Roadmap
 =======
 
 Short term
-----------
-
-- Refactor everything with Loona
-
-Medium term
 -----------
 
+- Refactor auth with rxjs instead of dexie
 - Add Idea permission based on sharing (mutualize checking sharing)
-- Display requiredAge/score in list + compute based on loaded reviews when changed
+- Display requiredAge/score in list + compute based on loaded reviews when changed (+ purge queries)
 - Paginate ideas
 - Deploy website on a new url
 
@@ -30,6 +26,5 @@ Long term
 Nice to have
 ------------
 
-- Refactor dexie with ngrx instead
 - Loading effect
 - CSS3 animations

@@ -57,7 +57,10 @@ import {
   UserService,
   ProgressService
 } from './services';
-import { ideaFiltersReducer } from './store';
+import {
+  authReducer,
+  ideaFiltersReducer
+} from './store';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -99,7 +102,10 @@ export function createTranslateLoader(http: HttpClient) {
     SecurityModule,
     StaticModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
-    StoreModule.forRoot({ ideaFilters: ideaFiltersReducer }),
+    StoreModule.forRoot({
+      auth: authReducer,
+      ideaFilters: ideaFiltersReducer
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

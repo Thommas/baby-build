@@ -10,11 +10,9 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { Apollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular-link-http';
-import { ApolloLink } from 'apollo-link';
-import { setContext } from 'apollo-link-context';
+import { ApolloLink, concat } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { flatMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { ProgressService } from './progress.service';
 import { environment } from '../../environments/environment';
@@ -30,32 +28,20 @@ export class ApolloService {
     private progressService: ProgressService,
     private authService: AuthService
   ) {
-    apollo.create({
-      link: this.middlewareLinkInstance.concat(this.httpLinkInstance),
-      cache: new InMemoryCache()
+    const authLink = new ApolloLink((operation: any, forward: any): any => {
+      return this.authService.token.pipe(flatMap((token: string) => {
+        operation.setContext({
+          headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
+        });
+        return forward(operation);
+      }));
     });
-  }
-
-  /**
-   * Get HttpLink with uri
-   */
-  get httpLinkInstance(): ApolloLink {
-    return this.httpLink.create({ uri: environment.apollo.url });
-  }
-
-  /**
-   * Get middlewareLink to inject token in context headers
-   */
-  get middlewareLinkInstance(): ApolloLink {
-    return setContext((_, { headers }) => {
-      return this.authService.token.pipe(map((token: string) => {
-        return {
-          headers: {
-            ...headers,
-            authorization: `Bearer ${token}`
-          }
-        };
-      })).toPromise();
+    apollo.create({
+      link: concat(
+        authLink,
+        httpLink.create({ uri: environment.apollo.url }),
+      ),
+      cache: new InMemoryCache()
     });
   }
 }

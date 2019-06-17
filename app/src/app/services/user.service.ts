@@ -10,13 +10,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { Observable, of as observableOf } from 'rxjs';
-import { flatMap, map } from 'rxjs/operators';
+import { flatMap, pluck } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { GetAuthUser, UpdateUserMutation } from '../graphql';
 
 @Injectable()
 export class UserService {
-  private userObs: any;
+  private userObs: Observable<any>;
 
   constructor(
     private apollo: Apollo,
@@ -29,6 +29,7 @@ export class UserService {
   get user$() {
     if (!this.userObs) {
       this.userObs = this.authService.isAuthenticated.pipe(flatMap(isAuthenticated => {
+        console.log('isAuthenticated', isAuthenticated);
         if (!isAuthenticated) {
           return observableOf(null);
         }
@@ -37,7 +38,7 @@ export class UserService {
         })
           .valueChanges
           .pipe(
-            map((res: any) => res.data.authUser),
+            pluck('data', 'authUser')
           );
       }));
     }

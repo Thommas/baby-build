@@ -11,12 +11,14 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of as observableOf, from, forkJoin } from 'rxjs';
-import { map, flatMap, take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { Observable, of as observableOf } from 'rxjs';
+import { flatMap, pluck } from 'rxjs/operators';
 import * as jwt from 'jsonwebtoken';
 import { BrowserService } from './browser.service';
-import { DexieService } from './dexie.service';
 import { environment } from '../../environments/environment';
+import { LoginSuccess, LogoutSuccess } from '../store/auth/auth.actions';
+import { authReducer } from '../store';
 
 @Injectable()
 export class AuthService {
@@ -35,8 +37,8 @@ export class AuthService {
    */
   constructor(
     private router: Router,
-    private dexieService: DexieService,
-    private browserService: BrowserService
+    private browserService: BrowserService,
+    private store: Store<{ authReducer: any }>
   ) {
     this._lock = null;
     this.refreshSubscription = null;
@@ -95,9 +97,8 @@ export class AuthService {
       environment.auth0.options
     );
     this._lock.on('authenticated', (authResult: any) => {
-      this.setSession(authResult).subscribe(() => {
-        this.refreshIsAuthenticated();
-      });
+      this.setSession(authResult);
+      this.router.navigate(['']);
     });
 
     obs.next(this._lock);
@@ -107,27 +108,14 @@ export class AuthService {
   /**
    * Store authentication results in local storage
    */
-  setSession(authResult): Observable<any> {
+  setSession(authResult): void {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + Date.now());
 
-    const obs = [
-      this.dexieService.setItem(AuthService.LOCAL_STORAGE_ACCESS_TOKEN, authResult.accessToken),
-      this.dexieService.setItem(AuthService.LOCAL_STORAGE_ID_TOKEN, authResult.idToken),
-      this.dexieService.setItem(AuthService.LOCAL_STORAGE_EXPIRES_AT, expiresAt)
-    ];
-    return forkJoin(obs, () => {
-      // Nothing
-    });
-  }
-
-  /**
-   * Refresh isAuthenticated and redirect to home
-   */
-  refreshIsAuthenticated() {
-    this.isAuthenticatedObs = null;
-    this.isAuthenticated.pipe(take(1)).subscribe(() => {
-      this.router.navigate(['']);
-    });
+    this.store.dispatch(new LoginSuccess({
+      accessToken: authResult.accessToken,
+      idToken: authResult.idToken,
+      expiresAt,
+    }));
   }
 
   /**
@@ -158,9 +146,7 @@ export class AuthService {
    * Purge local storage and redirect to home
    */
   logout() {
-    this.dexieService.clearKeyValueStoreTable().subscribe(
-      () => this.refreshIsAuthenticated()
-    );
+    this.store.dispatch(new LogoutSuccess());
   }
 
   /**
@@ -185,7 +171,7 @@ export class AuthService {
    */
   get token(): Observable<string> {
     if (!this.tokenObs) {
-      this.tokenObs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_ID_TOKEN);
+      this.tokenObs = this.store.pipe(pluck('auth', 'idToken'));
     }
     return this.tokenObs;
   }
@@ -195,8 +181,9 @@ export class AuthService {
    */
   get isAuthenticated(): Observable<boolean> {
     if (!this.isAuthenticatedObs) {
-      this.isAuthenticatedObs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_EXPIRES_AT)
-        .pipe(flatMap((expiresAt: string) => {
+      this.isAuthenticatedObs = this.store.pipe(
+        pluck('auth', 'expiresAt'),
+        flatMap((expiresAt: string) => {
           if (!expiresAt) {
             return observableOf(false);
           }
@@ -233,7 +220,7 @@ export class AuthService {
             console.log(`Successfully renewed auth!`);
             obs.next(true);
             obs.complete();
-            this.setSession(result).subscribe();
+            this.setSession(result);
           }
         });
       });
