@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Facade - Idea Filters
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

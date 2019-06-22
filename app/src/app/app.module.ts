@@ -16,7 +16,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   MatButtonModule,
@@ -29,6 +29,7 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import { Angulartics2Module } from 'angulartics2';
+import { localStorageSync } from 'ngrx-store-localstorage';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { environment } from '../environments/environment';
 import { routing, appRoutingProviders } from './app.routing';
@@ -48,7 +49,6 @@ import {
   AuthGuardService,
   AuthService,
   BrowserService,
-  DexieService,
   LocaleService,
   ProgressService
 } from './services';
@@ -56,6 +56,7 @@ import {
   AuthFacade,
   IdeaFacade,
   IdeaFiltersFacade,
+  TagFacade,
   UserFacade,
 } from './facade';
 import {
@@ -63,6 +64,17 @@ import {
   ideaFiltersReducer
 } from './store';
 
+// ngrx-store-localstorage
+const reducers: ActionReducerMap<any> = {
+  auth: authReducer,
+  ideaFilters: ideaFiltersReducer,
+};
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({keys: ['auth'], rehydrate: true})(reducer);
+}
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
+
+// ngx-translate
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -103,10 +115,10 @@ export function createTranslateLoader(http: HttpClient) {
     SecurityModule,
     StaticModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
-    StoreModule.forRoot({
-      auth: authReducer,
-      ideaFilters: ideaFiltersReducer
-    }),
+    StoreModule.forRoot(
+      reducers,
+      {metaReducers}
+    ),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -119,12 +131,12 @@ export function createTranslateLoader(http: HttpClient) {
     AuthGuardService,
     AuthService,
     BrowserService,
-    DexieService,
     LocaleService,
     ProgressService,
     AuthFacade,
     IdeaFacade,
     IdeaFiltersFacade,
+    TagFacade,
     UserFacade,
   ],
   bootstrap: [

@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Facade - User
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

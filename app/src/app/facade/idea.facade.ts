@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Facade - User
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
@@ -18,10 +16,9 @@ export class IdeaFacade {
   ideas$: Observable<any>;
 
   constructor(private apollo: Apollo, private ideaFiltersFacade: IdeaFiltersFacade) {
-    console.log('CONSTRUCTOR');
     this.ideas$ = this.ideaFiltersFacade.filters$.pipe(
       flatMap((filters: any) => {
-        console.log('FILTERS', filters);
+        console.log('filters', filters);
         const currentFilters = Object.assign({}, filters);
         if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
           delete currentFilters.requiredAge;

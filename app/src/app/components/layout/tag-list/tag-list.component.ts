@@ -6,49 +6,22 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Apollo } from 'apollo-angular';
-import { GetTags } from '../../../graphql';
-import { IdeaFiltersFacade } from '../../../facade';
+import { Component } from '@angular/core';
+import { IdeaFiltersFacade, TagFacade } from '../../../facade';
 
 @Component({
   selector: 'app-tag-list-cmp',
   templateUrl: './tag-list.component.html',
   styleUrls: ['./tag-list.component.scss']
 })
-export class TagListComponent implements OnInit {
+export class TagListComponent {
   filters$ = this.ideaFiltersFacade.filters$;
-  loading: boolean;
-  tags: any;
+  tags$ = this.tagFacade.tags$;
 
   constructor(
-    private apollo: Apollo,
-    private ideaFiltersFacade: IdeaFiltersFacade
-  ) {
-    this.loading = false;
-    this.tags = [];
-  }
-
-  ngOnInit() {
-    this.getTags();
-  }
-
-  getTags() {
-    this.loading = true;
-
-    this.apollo.watchQuery<any>({
-      query: GetTags,
-    })
-      .valueChanges
-      .subscribe(
-        ({ data, loading }) => {
-          this.loading = loading;
-          this.tags = data.tags;
-        },
-        (e) => console.log('error while loading tags', e)
-      );
-  }
+    private ideaFiltersFacade: IdeaFiltersFacade,
+    private tagFacade: TagFacade
+  ) {}
 
   selectTag(tag?: any) {
     this.ideaFiltersFacade.selectTag(tag);
