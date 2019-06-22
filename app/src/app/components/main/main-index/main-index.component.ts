@@ -10,7 +10,7 @@ import uuid from 'uuid/v4';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Apollo } from 'apollo-angular';
-import { flatMap, take } from 'rxjs/operators';
+import { flatMap, map, take } from 'rxjs/operators';
 import { GetIdeas, CreateIdeaMutation } from '../../../graphql';
 import { UserFacade } from '../../../facade';
 import { IdeaFiltersFacade } from '../../../facade';
@@ -37,8 +37,8 @@ export class MainIndexComponent {
   addIdea() {
     this.ideaFiltersFacade.reset();
     this.userFacade.user$.pipe(
+      take(1),
       flatMap((user: any) => {
-        console.log('user', user);
         return this.apollo.mutate({
           mutation: CreateIdeaMutation,
           optimisticResponse: {

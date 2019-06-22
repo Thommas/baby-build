@@ -13,21 +13,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
-import * as jwt from 'jsonwebtoken';
 import { BrowserService } from './browser.service';
 import { environment } from '../../environments/environment';
 import { AuthFacade } from '../facade/auth.facade';
 
 @Injectable()
 export class AuthService {
-  static LOCAL_STORAGE_ACCESS_TOKEN = 'access_token';
-  static LOCAL_STORAGE_ID_TOKEN = 'id_token';
-  static LOCAL_STORAGE_EXPIRES_AT = 'expires_at';
-
   private _lock: any;
-  private refreshSubscription: any;
-  private tokenObs: Observable<string>;
-  private isAuthenticatedObs: Observable<boolean>;
   private renewTokenInnerSubscriber: any;
 
   /**
@@ -39,9 +31,6 @@ export class AuthService {
     private authFacade: AuthFacade
   ) {
     this._lock = null;
-    this.refreshSubscription = null;
-    this.tokenObs = null;
-    this.isAuthenticatedObs = null;
     this.renewTokenInnerSubscriber = null;
   }
 
@@ -95,8 +84,9 @@ export class AuthService {
       environment.auth0.options
     );
     this._lock.on('authenticated', (authResult: any) => {
-      this.setSession(authResult);
-      this.router.navigate(['']);
+      console.log('authenticated', authResult);
+      // this.setSession(authResult);
+      // this.router.navigate(['']);
     });
 
     obs.next(this._lock);
@@ -165,14 +155,14 @@ export class AuthService {
   /**
    * Return the current idToken
    */
-  get token(): Observable<string> {
+  get idToken$(): Observable<string> {
     return this.authFacade.idToken$;
   }
 
   /**
    * Check whether the current time is past the access token's expiry time
    */
-  get isAuthenticated(): Observable<boolean> {
+  get isAuthenticated$(): Observable<boolean> {
     return this.authFacade.expiresAt$.pipe(
       flatMap((expiresAt: string) => {
         if (!expiresAt) {
@@ -202,15 +192,16 @@ export class AuthService {
         this.renewTokenInnerSubscriber = obs;
         lock.checkSession({}, (err, result) => {
           if (err) {
-            this.router.navigate(['/security/login']);
-            obs.next(true);
-            obs.complete();
+            // this.router.navigate(['/security/login']);
+            // obs.next(true);
+            // obs.complete();
             // obs.error(`Could not get a new token (${err.error}: ${err.error_description}).`);
+            console.log(`Could not get a new token (${err.error}: ${err.error_description}).`);
           } else {
-            console.log(`Successfully renewed auth!`);
-            obs.next(true);
-            obs.complete();
-            this.setSession(result);
+            console.log(`Successfully renewed auth!`, result);
+            // obs.next(true);
+            // obs.complete();
+            // this.setSession(result);
           }
         });
       });

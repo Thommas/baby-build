@@ -14,7 +14,6 @@ import { ApolloLink, concat } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { flatMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-import { ProgressService } from './progress.service';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -25,11 +24,10 @@ export class ApolloService {
   constructor(
     private apollo: Apollo,
     private httpLink: HttpLink,
-    private progressService: ProgressService,
     private authService: AuthService
   ) {
     const authLink = new ApolloLink((operation: any, forward: any): any => {
-      return this.authService.token.pipe(flatMap((token: string) => {
+      return this.authService.idToken$.pipe(flatMap((token: string) => {
         operation.setContext({
           headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
         });

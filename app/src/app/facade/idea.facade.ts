@@ -18,7 +18,6 @@ export class IdeaFacade {
   constructor(private apollo: Apollo, private ideaFiltersFacade: IdeaFiltersFacade) {
     this.ideas$ = this.ideaFiltersFacade.filters$.pipe(
       flatMap((filters: any) => {
-        console.log('filters', filters);
         const currentFilters = Object.assign({}, filters);
         if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
           delete currentFilters.requiredAge;

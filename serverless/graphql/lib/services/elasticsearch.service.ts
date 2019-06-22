@@ -55,7 +55,7 @@ export function search(query: any): Promise<any> {
 
 export function searchOne(query: any): Promise<any> {
   return this.search(query).then((items) => {
-    if (items.hits.total > 0) {
+    if (items.hits.total.value > 0) {
       return {
         id: items.hits.hits[0]._id,
         ...items.hits.hits[0]._source,

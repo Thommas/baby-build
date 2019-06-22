@@ -16,9 +16,8 @@ export class UserFacade {
   user$: Observable<any>;
 
   constructor(private apollo: Apollo, private authService: AuthService) {
-    this.user$ = this.authService.isAuthenticated.pipe(
+    this.user$ = this.authService.isAuthenticated$.pipe(
       flatMap(isAuthenticated => {
-        console.log('isAuthenticated', isAuthenticated);
         if (!isAuthenticated) {
           return of(null);
         }

@@ -24,10 +24,10 @@ export function ideaFiltersReducer(state: any = initialState, action: IdeaFilter
     case IdeaFiltersActionTypes.UpdateIdeaFilters:
       return {
         ...state,
-        tagId: action.payload.tagId ? action.payload.tagId : state.tagId,
-        name: action.payload.name ? action.payload.name : state.name,
+        tagId: action.payload.tagId !== undefined ? action.payload.tagId : state.tagId,
+        name: action.payload.name !== undefined ? action.payload.name : state.name,
         score: action.payload.score !== undefined ? xor(state.score, [action.payload.score]) : state.score,
-        requiredAge: action.payload.requiredAge ? xor(state.requiredAge, [action.payload.requiredAge]) : state.requiredAge,
+        requiredAge: action.payload.requiredAge !== undefined ? xor(state.requiredAge, [action.payload.requiredAge]) : state.requiredAge,
       };
 
     default:
