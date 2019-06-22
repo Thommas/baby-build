@@ -50,9 +50,13 @@ import {
   BrowserService,
   DexieService,
   LocaleService,
-  UserService,
   ProgressService
 } from './services';
+import {
+  AuthFacade,
+  IdeaFiltersFacade,
+  UserFacade,
+} from './facade';
 import {
   authReducer,
   ideaFiltersReducer
@@ -116,8 +120,10 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserService,
     DexieService,
     LocaleService,
-    UserService,
-    ProgressService
+    ProgressService,
+    AuthFacade,
+    IdeaFiltersFacade,
+    UserFacade,
   ],
   bootstrap: [
     AppComponent

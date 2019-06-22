@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { ActionTypes, ActionsUnion } from './auth.actions';
+import { AuthActionTypes, AuthActionsUnion } from './auth.actions';
 
 const initialState = {
   accessToken: null,
@@ -14,14 +14,14 @@ const initialState = {
   expiresAt: null,
 };
 
-export function authReducer(state: any = initialState, action: ActionsUnion): any {
+export function authReducer(state: any = initialState, action: AuthActionsUnion): any {
   switch (action.type) {
-    case ActionTypes.LoginSuccess:
+    case AuthActionTypes.AuthLoginSuccess:
       return {
         ...action.payload,
       };
 
-    case ActionTypes.LogoutSuccess:
+    case AuthActionTypes.AuthLogoutSuccess:
       return {
         accessToken: null,
         idToken: null,

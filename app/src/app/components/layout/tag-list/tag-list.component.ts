@@ -1,7 +1,7 @@
 /**
  * Path of child
  *
- * Component - TagList
+ * Component - Tag List
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
@@ -10,8 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Apollo } from 'apollo-angular';
 import { GetTags } from '../../../graphql';
-import { Update } from '../../../store/idea-filters/idea-filters.actions';
-import { ideaFiltersReducer } from '../../../store';
+import { IdeaFiltersFacade } from '../../../facade';
 
 @Component({
   selector: 'app-tag-list-cmp',
@@ -19,15 +18,14 @@ import { ideaFiltersReducer } from '../../../store';
   styleUrls: ['./tag-list.component.scss']
 })
 export class TagListComponent implements OnInit {
-  filters$: any;
+  filters$ = this.ideaFiltersFacade.filters$;
   loading: boolean;
   tags: any;
 
   constructor(
     private apollo: Apollo,
-    private store: Store<{ ideaFilters: any }>
+    private ideaFiltersFacade: IdeaFiltersFacade
   ) {
-    this.filters$ = store.pipe(select('ideaFilters'));
     this.loading = false;
     this.tags = [];
   }
@@ -53,8 +51,6 @@ export class TagListComponent implements OnInit {
   }
 
   selectTag(tag?: any) {
-    this.store.dispatch(new Update({
-      tagId: tag ? tag.id : null,
-    }));
+    this.ideaFiltersFacade.selectTag(tag);
   }
 }

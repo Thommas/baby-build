@@ -11,14 +11,12 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable, of as observableOf } from 'rxjs';
-import { flatMap, pluck } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 import * as jwt from 'jsonwebtoken';
 import { BrowserService } from './browser.service';
 import { environment } from '../../environments/environment';
-import { LoginSuccess, LogoutSuccess } from '../store/auth/auth.actions';
-import { authReducer } from '../store';
+import { AuthFacade } from '../facade/auth.facade';
 
 @Injectable()
 export class AuthService {
@@ -38,7 +36,7 @@ export class AuthService {
   constructor(
     private router: Router,
     private browserService: BrowserService,
-    private store: Store<{ authReducer: any }>
+    private authFacade: AuthFacade
   ) {
     this._lock = null;
     this.refreshSubscription = null;
@@ -62,11 +60,11 @@ export class AuthService {
    */
   get lock(): Observable<any> {
     if (this._lock) {
-      return observableOf(this._lock);
+      return of(this._lock);
     }
 
     if (!this.browserService.document) {
-      return observableOf(null);
+      return of(null);
     }
 
     return Observable.create(obs => {
@@ -111,11 +109,7 @@ export class AuthService {
   setSession(authResult): void {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + Date.now());
 
-    this.store.dispatch(new LoginSuccess({
-      accessToken: authResult.accessToken,
-      idToken: authResult.idToken,
-      expiresAt,
-    }));
+    this.authFacade.loginSuccess(authResult.accessToken, authResult.idToken, expiresAt);
   }
 
   /**
@@ -147,7 +141,7 @@ export class AuthService {
    * Purge local storage and redirect to home
    */
   logout() {
-    this.store.dispatch(new LogoutSuccess());
+    this.authFacade.logoutSuccess();
     this.router.navigate(['/security/login']);
   }
 
@@ -172,30 +166,24 @@ export class AuthService {
    * Return the current idToken
    */
   get token(): Observable<string> {
-    if (!this.tokenObs) {
-      this.tokenObs = this.store.pipe(pluck('auth', 'idToken'));
-    }
-    return this.tokenObs;
+    return this.authFacade.idToken$;
   }
 
   /**
    * Check whether the current time is past the access token's expiry time
    */
   get isAuthenticated(): Observable<boolean> {
-    if (!this.isAuthenticatedObs) {
-      this.isAuthenticatedObs = this.store.pipe(
-        pluck('auth', 'expiresAt'),
-        flatMap((expiresAt: string) => {
-          if (!expiresAt) {
-            return observableOf(false);
-          }
-          if (new Date().getTime() < parseInt(expiresAt, 10)) {
-            return observableOf(true);
-          }
-          return this.renewToken();
-        }));
-    }
-    return this.isAuthenticatedObs;
+    return this.authFacade.expiresAt$.pipe(
+      flatMap((expiresAt: string) => {
+        if (!expiresAt) {
+          return of(false);
+        }
+        if (new Date().getTime() < parseInt(expiresAt, 10)) {
+          return of(true);
+        }
+        return this.renewToken();
+      })
+    );
   }
 
   /**
@@ -205,7 +193,7 @@ export class AuthService {
     this.renewTokenInnerSubscriber = null;
     return this.lock.pipe(flatMap(lock => {
       if (!lock) {
-        return observableOf(false);
+        return of(false);
       }
       return Observable.create(obs => {
         if (this.renewTokenInnerSubscriber) {

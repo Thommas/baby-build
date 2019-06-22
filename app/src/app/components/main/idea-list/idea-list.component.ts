@@ -45,28 +45,33 @@ export class IdeaListComponent implements OnInit, OnChanges {
   getIdeas() {
     this.loading = true;
 
-    this.filters$.pipe(map((filters: any) => {
-      console.log('filters', filters);
-      const currentFilters = Object.assign({}, filters);
-      if (currentFilters.requiredAge.length === 0) {
-        delete currentFilters.requiredAge;
-      }
-      if (currentFilters.score.length === 0) {
-        delete currentFilters.score;
-      }
+    // this.filters$.pipe(map((filters: any) => {
+    //   const currentFilters = Object.assign({}, filters);
+    //   if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
+    //     delete currentFilters.requiredAge;
+    //   }
+    //   if (!currentFilters.score || 0 === currentFilters.score.length) {
+    //     delete currentFilters.score;
+    //   }
+    //   if (!currentFilters.tagId) {
+    //     delete currentFilters.tagId;
+    //   }
+    //   if (!currentFilters.name) {
+    //     delete currentFilters.name;
+    //   }
 
-      this.apollo.watchQuery<any>({
-        query: GetIdeas,
-        variables: currentFilters,
-      })
-        .valueChanges
-        .subscribe(
-          ({ data, loading }) => {
-            this.loading = loading;
-            this.ideas = data.ideas;
-          },
-          (e) => console.log('error while loading ideas', e)
-        );
-    })).subscribe();
+    //   this.apollo.watchQuery<any>({
+    //     query: GetIdeas,
+    //     variables: currentFilters,
+    //   })
+    //     .valueChanges
+    //     .subscribe(
+    //       ({ data, loading }) => {
+    //         this.loading = loading;
+    //         this.ideas = data.ideas;
+    //       },
+    //       (e) => console.log('error while loading ideas', e)
+    //     );
+    // })).subscribe();
   }
 }

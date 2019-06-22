@@ -15,5 +15,3 @@ export * from './progress.service';
 export * from './progress.service.stub';
 export * from './router.stub';
 export * from './translate.service.stub';
-export * from './user.service';
-export * from './user.service.stub';

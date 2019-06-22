@@ -8,19 +8,19 @@
 
 import { Action } from '@ngrx/store';
 
-export enum ActionTypes {
-  LoginSuccess = '[Auth] Login',
-  LogoutSuccess = '[Auth] Logout',
+export enum AuthActionTypes {
+  AuthLoginSuccess = '[Auth] Login',
+  AuthLogoutSuccess = '[Auth] Logout',
 }
 
-export class LoginSuccess implements Action {
-  readonly type = ActionTypes.LoginSuccess;
+export class AuthLoginSuccess implements Action {
+  readonly type = AuthActionTypes.AuthLoginSuccess;
 
   constructor(public payload: any) {}
 }
 
-export class LogoutSuccess implements Action {
-  readonly type = ActionTypes.LogoutSuccess;
+export class AuthLogoutSuccess implements Action {
+  readonly type = AuthActionTypes.AuthLogoutSuccess;
 }
 
-export type ActionsUnion = LoginSuccess | LogoutSuccess;
+export type AuthActionsUnion = AuthLoginSuccess | AuthLogoutSuccess;

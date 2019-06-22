@@ -16,8 +16,7 @@ import {
   AuthService,
   BrowserService,
   ProgressService,
-  LocaleService,
-  UserService
+  LocaleService
 } from './services';
 
 @Component({
@@ -37,7 +36,6 @@ export class AppComponent implements OnInit {
     private browserService: BrowserService,
     private localeService: LocaleService,
     public progressService: ProgressService,
-    private userService: UserService,
     private angularticsService: AngularticsService,
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     private matIconRegistry: MatIconRegistry,
@@ -76,7 +74,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.authService.init();
     this.angularticsService.init();
-    this.userService.init();
 
     if (this.router.events) {
       this.router.events.subscribe((evt) => {

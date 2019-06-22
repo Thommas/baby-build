@@ -1,17 +1,15 @@
 /**
  * Path of child
  *
- * Component - Idea - List
+ * Component - Idea List Filters
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Update } from '../../../store/idea-filters/idea-filters.actions';
-import { ideaFiltersReducer } from '../../../store';
+import { IdeaFiltersFacade } from '../../../facade';
 
 @Component({
   selector: 'app-idea-list-filters-cmp',
@@ -20,12 +18,11 @@ import { ideaFiltersReducer } from '../../../store';
 })
 export class IdeaListFiltersComponent implements OnInit {
   @ViewChild('inputElement') inputElement: any;
-  filters$: any;
+  filters$ = this.ideaFiltersFacade.filters$;
   ages: number[] = [];
   scores: number[] = [];
 
-  constructor(private store: Store<{ ideaFilters: any }>) {
-    this.filters$ = store.pipe(select('ideaFilters'));
+  constructor(private ideaFiltersFacade: IdeaFiltersFacade) {
     for (let age = 1; age <= 20; age++) {
       this.ages.push(age);
     }
@@ -43,20 +40,14 @@ export class IdeaListFiltersComponent implements OnInit {
   }
 
   selectLabel(label: string) {
-    this.store.dispatch(new Update({
-      label,
-    }));
+    this.ideaFiltersFacade.selectLabel(label);
   }
 
   selectRequiredAge(requiredAge: number) {
-    this.store.dispatch(new Update({
-      requiredAge,
-    }));
+    this.ideaFiltersFacade.selectRequiredAge(requiredAge);
   }
 
   selectScore(score: number) {
-    this.store.dispatch(new Update({
-      score,
-    }));
+    this.ideaFiltersFacade.selectScore(score);
   }
 }

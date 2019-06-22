@@ -6,7 +6,7 @@
     <mat-icon>close</mat-icon>
   </button>
 </header>
-<div fxLayout="column" fxLayoutAlign="start center" *ngIf="(userService.user$ | async) as user">
+<div fxLayout="column" fxLayoutAlign="start center" *ngIf="(userFacade.user$ | async) as user">
   <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
     <img src="/assets/img/user.svg"
          [matTooltip]="user.firstName + ' ' + user.lastName" i18n-matTooltip

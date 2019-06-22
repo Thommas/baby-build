@@ -9,12 +9,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Apollo } from 'apollo-angular';
-import {
-  ApolloStub,
-  UserService,
-  UserServiceStub,
-} from '../../../services';
+import { UserFacade } from '../../../facade';
 import { IdeaItemComponent } from './idea-item.component';
 
 describe('IdeaItemComponent', () => {
@@ -31,8 +26,7 @@ describe('IdeaItemComponent', () => {
         IdeaItemComponent
       ],
       providers: [
-        { provide: Apollo, useClass: ApolloStub },
-        { provide: UserService, useClass: UserServiceStub },
+        { provide: UserFacade },
       ]
     }).compileComponents();
   }));

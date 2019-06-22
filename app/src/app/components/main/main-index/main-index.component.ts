@@ -7,12 +7,13 @@
  */
 
 import uuid from 'uuid/v4';
-import swal from 'sweetalert2';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Apollo } from 'apollo-angular';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, take } from 'rxjs/operators';
 import { GetIdeas, CreateIdeaMutation } from '../../../graphql';
-import { UserService } from '../../../services';
+import { UserFacade } from '../../../facade';
+import { IdeaFiltersFacade } from '../../../facade';
 
 @Component({
   selector: 'app-main-index-cmp',
@@ -26,16 +27,18 @@ export class MainIndexComponent {
 
   constructor(
     private apollo: Apollo,
-    private userService: UserService
+    private userFacade: UserFacade,
+    private ideaFiltersFacade: IdeaFiltersFacade
   ) {
     this.displayFilters = false;
     this.selectedIdea = null;
   }
 
   addIdea() {
-    this.userService.user$.pipe(
+    this.ideaFiltersFacade.reset();
+    this.userFacade.user$.pipe(
       flatMap((user: any) => {
-        const idea = {};
+        console.log('user', user);
         return this.apollo.mutate({
           mutation: CreateIdeaMutation,
           optimisticResponse: {

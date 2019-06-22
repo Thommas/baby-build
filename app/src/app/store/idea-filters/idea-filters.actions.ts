@@ -8,19 +8,19 @@
 
 import { Action } from '@ngrx/store';
 
-export enum ActionTypes {
-  Update = '[IdeaFilters] Update',
-  Reset = '[IdeaFilters] Reset',
+export enum IdeaFiltersActionTypes {
+  UpdateIdeaFilters = '[IdeaFilters] Update',
+  ResetIdeaFilters = '[IdeaFilters] Reset',
 }
 
-export class Update implements Action {
-  readonly type = ActionTypes.Update;
+export class UpdateIdeaFilters implements Action {
+  readonly type = IdeaFiltersActionTypes.UpdateIdeaFilters;
 
   constructor(public payload: any) {}
 }
 
-export class Reset implements Action {
-  readonly type = ActionTypes.Reset;
+export class ResetIdeaFilters implements Action {
+  readonly type = IdeaFiltersActionTypes.ResetIdeaFilters;
 }
 
-export type ActionsUnion = Update | Reset;
+export type IdeaFiltersActionsUnion = UpdateIdeaFilters | ResetIdeaFilters;

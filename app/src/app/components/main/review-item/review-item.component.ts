@@ -19,7 +19,7 @@ import {
   CreateReviewMutation,
   UpdateReviewMutation
 } from '../../../graphql';
-import { UserService } from '../../../services';
+import { UserFacade } from '../../../facade';
 
 @Component({
   selector: 'app-review-item-cmp',
@@ -35,7 +35,7 @@ export class ReviewItemComponent implements OnInit, OnChanges {
   ages: number[] = [];
   scores: number[] = [];
 
-  constructor(private apollo: Apollo, private userService: UserService) {
+  constructor(private apollo: Apollo, private userFacade: UserFacade) {
     this.review = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
@@ -148,7 +148,7 @@ export class ReviewItemComponent implements OnInit, OnChanges {
     if (!this.formGroup.valid) {
       return;
     }
-    this.userService.user$.pipe(
+    this.userFacade.user$.pipe(
       flatMap((user: any) => {
         const data: any = clone(this.formGroup.value);
         return this.apollo.mutate({

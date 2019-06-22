@@ -7,7 +7,7 @@
  */
 
 import { xor } from 'lodash';
-import { ActionTypes, ActionsUnion } from './idea-filters.actions';
+import { IdeaFiltersActionTypes, IdeaFiltersActionsUnion } from './idea-filters.actions';
 
 const initialState = {
   tagId: null,
@@ -16,12 +16,12 @@ const initialState = {
   score: [],
 };
 
-export function ideaFiltersReducer(state: any = initialState, action: ActionsUnion): any {
+export function ideaFiltersReducer(state: any = initialState, action: IdeaFiltersActionsUnion): any {
   switch (action.type) {
-    case ActionTypes.Reset:
+    case IdeaFiltersActionTypes.ResetIdeaFilters:
       return {};
 
-    case ActionTypes.Update:
+    case IdeaFiltersActionTypes.UpdateIdeaFilters:
       return {
         ...state,
         tagId: action.payload.tagId ? action.payload.tagId : state.tagId,

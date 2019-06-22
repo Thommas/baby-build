@@ -8,12 +8,7 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import {
-  AuthService,
-  AuthServiceStub,
-  UserService,
-  UserServiceStub,
-} from '../../../services';
+import { UserFacade } from '../../../facade';
 import { SidebarComponent } from './sidebar.component';
 
 describe('SidebarComponent', () => {
@@ -26,8 +21,7 @@ describe('SidebarComponent', () => {
         SidebarComponent
       ],
       providers: [
-        { provide: AuthService, useClass: AuthServiceStub },
-        { provide: UserService, useClass: UserServiceStub },
+        { provide: UserFacade },
       ]
     }).compileComponents();
   }));
