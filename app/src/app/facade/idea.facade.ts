@@ -1,26 +1,50 @@
 /**
  * Path of child
  *
- * Facade - Idea
+ * Facade - User
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { Injectable } from '@angular/core';
+import { Apollo } from 'apollo-angular';
+import { Observable, of } from 'rxjs';
+import { withLatestFrom, switchMap, flatMap, pluck } from 'rxjs/operators';
+import { GetIdeas } from '../graphql';
+import { IdeaFiltersFacade } from './idea-filters.facade';
 
 @Injectable()
 export class IdeaFacade {
-  // loaded$ = this.store.select(carsQuery.getIsLoaded);
-  // allCars$ = this.store.select(carsQuery.getAllCars);
-  // selectedCar$ = this.store.select(carsQuery.getSelectedCar);
+  ideas$: Observable<any>;
 
-  // constructor(private store: Store<CarsState>) {}
-
-  // loadAllCars() {
-  //   this.store.dispatch(new LoadCar());
-  // }
+  constructor(private apollo: Apollo, private ideaFiltersFacade: IdeaFiltersFacade) {
+    console.log('CONSTRUCTOR');
+    this.ideas$ = this.ideaFiltersFacade.filters$.pipe(
+      flatMap((filters: any) => {
+        console.log('FILTERS', filters);
+        const currentFilters = Object.assign({}, filters);
+        if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
+          delete currentFilters.requiredAge;
+        }
+        if (!currentFilters.score || 0 === currentFilters.score.length) {
+          delete currentFilters.score;
+        }
+        if (!currentFilters.tagId) {
+          delete currentFilters.tagId;
+        }
+        if (!currentFilters.name) {
+          delete currentFilters.name;
+        }
   
-  // selectCar(carId: string) {
-  //   this.store.dispatch(new SelectCar(carId));
-  // }
+        return this.apollo.watchQuery<any>({
+          query: GetIdeas,
+          variables: currentFilters,
+        })
+          .valueChanges
+          .pipe(
+            pluck('data', 'ideas')
+          )
+      })
+    );
+  }
 }

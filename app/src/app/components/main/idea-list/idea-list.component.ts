@@ -7,71 +7,24 @@
  */
 
 import { clone } from 'lodash';
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { map } from 'rxjs/operators';
-import { GetIdeas, CreateIdeaMutation } from '../../../graphql';
+import { IdeaFacade } from '../../../facade';
 
 @Component({
   selector: 'app-idea-list-cmp',
   templateUrl: './idea-list.component.html',
   styleUrls: ['./idea-list.component.scss']
 })
-export class IdeaListComponent implements OnInit, OnChanges {
+export class IdeaListComponent {
   @Input() displayFilters: boolean;
-  @Input() buildId: string;
   @Output() selectIdea: EventEmitter<any> = new EventEmitter<any>();
-  filters$: any;
-  loading: boolean;
-  ideas: any;
+  ideas$: any;
 
   constructor(
     private apollo: Apollo,
-    private store: Store<{ ideaFilters: any }>
+    private ideaFacade: IdeaFacade
   ) {
-    this.buildId = null;
-    this.filters$ = store.pipe(select('ideaFilters'));
-  }
-
-  ngOnInit() {
-    this.getIdeas();
-  }
-
-  ngOnChanges() {
-    this.getIdeas();
-  }
-
-  getIdeas() {
-    this.loading = true;
-
-    // this.filters$.pipe(map((filters: any) => {
-    //   const currentFilters = Object.assign({}, filters);
-    //   if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
-    //     delete currentFilters.requiredAge;
-    //   }
-    //   if (!currentFilters.score || 0 === currentFilters.score.length) {
-    //     delete currentFilters.score;
-    //   }
-    //   if (!currentFilters.tagId) {
-    //     delete currentFilters.tagId;
-    //   }
-    //   if (!currentFilters.name) {
-    //     delete currentFilters.name;
-    //   }
-
-    //   this.apollo.watchQuery<any>({
-    //     query: GetIdeas,
-    //     variables: currentFilters,
-    //   })
-    //     .valueChanges
-    //     .subscribe(
-    //       ({ data, loading }) => {
-    //         this.loading = loading;
-    //         this.ideas = data.ideas;
-    //       },
-    //       (e) => console.log('error while loading ideas', e)
-    //     );
-    // })).subscribe();
+    this.ideas$ = this.ideaFacade.ideas$;
   }
 }

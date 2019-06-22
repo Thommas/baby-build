@@ -54,6 +54,7 @@ import {
 } from './services';
 import {
   AuthFacade,
+  IdeaFacade,
   IdeaFiltersFacade,
   UserFacade,
 } from './facade';
@@ -122,6 +123,7 @@ export function createTranslateLoader(http: HttpClient) {
     LocaleService,
     ProgressService,
     AuthFacade,
+    IdeaFacade,
     IdeaFiltersFacade,
     UserFacade,
   ],
