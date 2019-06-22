@@ -124,6 +124,7 @@ export class AuthService {
   login() {
     this.lock.subscribe(lock => {
       if (lock) {
+        lock.hide();
         lock.show();
       }
     });
@@ -147,6 +148,7 @@ export class AuthService {
    */
   logout() {
     this.store.dispatch(new LogoutSuccess());
+    this.router.navigate(['/security/login']);
   }
 
   /**
