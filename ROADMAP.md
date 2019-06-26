@@ -4,7 +4,12 @@ Roadmap
 Short term
 -----------
 
-- Refactor auth with rxjs instead of dexie
+- Fix infinite loop when token expires
+- Refactor everything with facades
+
+Medium term
+-----------
+
 - Add Idea permission based on sharing (mutualize checking sharing)
 - Display requiredAge/score in list + compute based on loaded reviews when changed (+ purge queries)
 - Paginate ideas

@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Store - Idea filters - Reducers
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

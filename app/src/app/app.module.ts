@@ -56,17 +56,21 @@ import {
   AuthFacade,
   IdeaFacade,
   IdeaFiltersFacade,
+  IdeaTagFacade,
+  ReviewFacade,
   TagFacade,
   UserFacade,
 } from './facade';
 import {
   authReducer,
+  ideaReducer,
   ideaFiltersReducer
 } from './store';
 
 // ngrx-store-localstorage
 const reducers: ActionReducerMap<any> = {
   auth: authReducer,
+  idea: ideaReducer,
   ideaFilters: ideaFiltersReducer,
 };
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -136,6 +140,8 @@ export function createTranslateLoader(http: HttpClient) {
     AuthFacade,
     IdeaFacade,
     IdeaFiltersFacade,
+    IdeaTagFacade,
+    ReviewFacade,
     TagFacade,
     UserFacade,
   ],

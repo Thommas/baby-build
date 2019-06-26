@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Store - Auth - Actions
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

@@ -12,8 +12,7 @@ import { Store } from '@ngrx/store';
 import { Apollo } from 'apollo-angular';
 import { flatMap, map, take } from 'rxjs/operators';
 import { GetIdeas, CreateIdeaMutation } from '../../../graphql';
-import { UserFacade } from '../../../facade';
-import { IdeaFiltersFacade } from '../../../facade';
+import { IdeaFacade, IdeaFiltersFacade, UserFacade } from '../../../facade';
 
 @Component({
   selector: 'app-main-index-cmp',
@@ -21,17 +20,16 @@ import { IdeaFiltersFacade } from '../../../facade';
   styleUrls: ['./main-index.component.scss']
 })
 export class MainIndexComponent {
-  loading: boolean;
   displayFilters: boolean;
-  selectedIdea: any;
+  selectedIdea$ = this.ideaFacade.selectedIdea$;
 
   constructor(
     private apollo: Apollo,
     private userFacade: UserFacade,
+    private ideaFacade: IdeaFacade,
     private ideaFiltersFacade: IdeaFiltersFacade
   ) {
     this.displayFilters = false;
-    this.selectedIdea = null;
   }
 
   addIdea() {
@@ -73,8 +71,8 @@ export class MainIndexComponent {
     ).subscribe();
   }
 
-  selectIdea(idea: any) {
-    this.selectedIdea = idea;
+  selectIdea(idea?: any) {
+    this.ideaFacade.selectIdea(idea);
   }
 
   toggleFilters() {

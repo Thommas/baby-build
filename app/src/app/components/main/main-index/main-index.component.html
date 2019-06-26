@@ -10,16 +10,15 @@
     ></app-idea-list-cmp>
   </mat-card-content>
 </mat-card>
-<mat-card fxFlex class="right-card" *ngIf="selectedIdea">
+<mat-card fxFlex class="right-card" *ngIf="selectedIdea$ | async">
   <mat-card-header fxLayoutAlign="end center">
-    <button mat-icon-button (click)="this.selectedIdea = null">
+    <button mat-icon-button (click)="selectIdea()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-card-header>
   <mat-card-content>
     <app-idea-show-cmp
       fxFlex fxLayout="column" fxLayoutAlign="space-between none"
-      [idea]="selectedIdea"
     ></app-idea-show-cmp>
   </mat-card-content>
 </mat-card>

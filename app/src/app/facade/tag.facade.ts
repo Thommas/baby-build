@@ -23,4 +23,17 @@ export class TagFacade {
         pluck('data', 'tags')
       );
   }
+
+  getTagsByLabel(label: string) {
+    return this.apollo.watchQuery<any>({
+      query: GetTags,
+      variables: {
+        label,
+      },
+    })
+      .valueChanges
+      .pipe(
+        pluck('data', 'tags')
+      );
+  }
 }

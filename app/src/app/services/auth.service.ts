@@ -85,8 +85,8 @@ export class AuthService {
     );
     this._lock.on('authenticated', (authResult: any) => {
       console.log('authenticated', authResult);
-      // this.setSession(authResult);
-      // this.router.navigate(['']);
+      this.setSession(authResult);
+      this.router.navigate(['']);
     });
 
     obs.next(this._lock);
@@ -145,6 +145,7 @@ export class AuthService {
           if (error) {
             console.log('error', error);
           } else if (authResult && authResult.accessToken && authResult.idToken) {
+            console.log('resumeAuth', authResult);
             this.setSession(authResult);
           }
         });
@@ -192,16 +193,16 @@ export class AuthService {
         this.renewTokenInnerSubscriber = obs;
         lock.checkSession({}, (err, result) => {
           if (err) {
-            // this.router.navigate(['/security/login']);
-            // obs.next(true);
-            // obs.complete();
-            // obs.error(`Could not get a new token (${err.error}: ${err.error_description}).`);
+            this.router.navigate(['/security/login']);
+            obs.next(true);
+            obs.complete();
+            obs.error(`Could not get a new token (${err.error}: ${err.error_description}).`);
             console.log(`Could not get a new token (${err.error}: ${err.error_description}).`);
           } else {
             console.log(`Successfully renewed auth!`, result);
-            // obs.next(true);
-            // obs.complete();
-            // this.setSession(result);
+            obs.next(true);
+            obs.complete();
+            this.setSession(result);
           }
         });
       });

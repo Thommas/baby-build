@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Store - Auth - Reducers
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

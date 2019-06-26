@@ -6,8 +6,9 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Apollo } from 'apollo-angular';
+import { IdeaFacade } from '../../../facade';
 
 @Component({
   selector: 'app-idea-show-cmp',
@@ -15,10 +16,10 @@ import { Apollo } from 'apollo-angular';
   styleUrls: ['./idea-show.component.scss']
 })
 export class IdeaShowComponent {
-  @Input() idea: any;
-  loading: boolean;
+  selectedIdea$ = this.ideaFacade.selectedIdea$;
 
-  constructor(private apollo: Apollo) {
-    this.idea = {};
-  }
+  constructor(
+    private apollo: Apollo,
+    private ideaFacade: IdeaFacade
+  ) {}
 }
