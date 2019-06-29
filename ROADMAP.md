@@ -4,7 +4,6 @@ Roadmap
 Short term
 -----------
 
-- Fix infinite loop when token expires
 - Refactor everything with facades
 
 Medium term

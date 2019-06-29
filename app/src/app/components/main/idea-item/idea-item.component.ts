@@ -6,20 +6,12 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import uuid from 'uuid/v4';
-import { clone, isEmpty } from 'lodash';
+import { clone } from 'lodash';
 import { Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap, flatMap } from 'rxjs/operators';
-import { Apollo } from 'apollo-angular';
-import {
-  CreateIdeaMutation,
-  UpdateIdeaMutation,
-  DeleteIdeaMutation,
-  GetIdeas
-} from '../../../graphql';
-import { UserFacade } from '../../../facade';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { IdeaFacade, UserFacade } from '../../../facade';
 
 @Component({
   selector: 'app-idea-item-cmp',
@@ -33,7 +25,10 @@ export class IdeaItemComponent implements OnInit, OnChanges {
   loading: boolean;
   emptyIdeaReadyForDeletion: boolean;
 
-  constructor(private apollo: Apollo, private userFacade: UserFacade) {
+  constructor(
+    private ideaFacade: IdeaFacade,
+    private userFacade: UserFacade
+  ) {
     this.emptyIdeaReadyForDeletion = false;
     this.idea = {};
     this.formGroup = new FormGroup({
@@ -136,27 +131,6 @@ export class IdeaItemComponent implements OnInit, OnChanges {
   }
 
   delete() {
-    this.apollo.mutate({
-      mutation: DeleteIdeaMutation,
-      variables: {
-        id: this.idea.id
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        deleteIdea: {
-          __typename: 'Idea',
-          id: this.idea.id
-        },
-      },
-      update: (store, { data: { deleteIdea } }) => {
-        if (!deleteIdea) {
-          return;
-        }
-        const query: any = store.readQuery({ query: GetIdeas });
-        const updatedIdeas: any[] = query.ideas.filter((idea: any) => idea.id && idea.id !== deleteIdea.id);
-        store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
-        this.idea.id = null;
-      },
-    }).subscribe();
+    this.ideaFacade.deleteIdea(this.idea);
   }
 }

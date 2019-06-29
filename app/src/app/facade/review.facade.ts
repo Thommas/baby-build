@@ -5,10 +5,12 @@
  */
 
 import { Injectable } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
 import { GetReviews } from '../graphql';
+import { SelectReview } from '../store';
 import { IdeaFacade } from './idea.facade';
 import { UserFacade } from './user.facade';
 
@@ -16,16 +18,24 @@ import { UserFacade } from './user.facade';
 export class ReviewFacade {
   reviews$: Observable<any>;
   loggedUserReview$: Observable<any>;
+  selectedReview$ = this.store.pipe(select('review', 'selected'));
 
   constructor(
     private apollo: Apollo,
     private ideaFacade: IdeaFacade,
-    private userFacade: UserFacade
+    private userFacade: UserFacade,
+    private store: Store<{ review: any }>
   ) {
     this.reviews$ = this.ideaFacade.selectedIdea$.pipe(
       flatMap((selectedIdea: any) => {
+        if (!selectedIdea) {
+          return of([]);
+        }
         return this.userFacade.user$.pipe(
           flatMap((user: any) => {
+            if (!user) {
+              return of([]);
+            }
             return this.apollo.watchQuery<any>({
               query: GetReviews,
               variables: {
@@ -45,8 +55,14 @@ export class ReviewFacade {
 
     this.loggedUserReview$ = this.ideaFacade.selectedIdea$.pipe(
       flatMap((selectedIdea: any) => {
+        if (!selectedIdea) {
+          return of([]);
+        }
         return this.userFacade.user$.pipe(
           flatMap((user: any) => {
+            if (!user) {
+              return of([]);
+            }
             return this.apollo.watchQuery<any>({
               query: GetReviews,
               variables: {
@@ -64,12 +80,16 @@ export class ReviewFacade {
                       ideaId: selectedIdea.id,
                     };
                   }
-                  // this.selectReview(this.loggedUserReview);
+                  return loggedUserReview;
                 })
               );
             }),
         );
       }),
     );
+  }
+
+  selectReview(idea: any) {
+    this.store.dispatch(new SelectReview(idea));
   }
 }

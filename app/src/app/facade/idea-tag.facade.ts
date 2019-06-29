@@ -9,8 +9,13 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { of } from 'rxjs';
 import { flatMap, pluck } from 'rxjs/operators';
-import { CreateIdeaTagMutation, GetIdeaTags } from '../graphql';
+import {
+  CreateIdeaTagMutation,
+  DeleteIdeaTagMutation,
+  GetIdeaTags
+} from '../graphql';
 import { IdeaFacade } from './idea.facade';
+import { UserFacade } from './user.facade';
 
 @Injectable()
 export class IdeaTagFacade {
@@ -18,7 +23,8 @@ export class IdeaTagFacade {
 
   constructor(
     private apollo: Apollo,
-    private ideaFacade: IdeaFacade
+    private ideaFacade: IdeaFacade,
+    private userFacade: UserFacade
   ) {
     this.ideaTags$ = this.ideaFacade.selectedIdea$.pipe(
       flatMap((selectedIdea: any) => {
@@ -41,46 +47,67 @@ export class IdeaTagFacade {
   }
 
   createIdeaTag(tag: any) {
-    this.ideaFacade.selectedIdea$.pipe(
-      flatMap((selectedIdea: any) => {
-        return this.apollo.mutate({
-          mutation: CreateIdeaTagMutation,
-          variables: {
-            ideaId: selectedIdea.id,
-            tagId: tag.id,
-          },
-          optimisticResponse: {
-            __typename: 'Mutation',
-            createIdeaTag: {
-              __typename: 'IdeaTag',
-              id: -uuid(),
-              tag: {
-                __typename: 'Tag',
-                label: tag.label,
-              },
-              // userId: user.id,
-            },
-          },
-          update: (store, { data: { createIdeaTag } }) => {
-            if (!createIdeaTag) {
-              return;
-            }
-            const query: any = store.readQuery({
-              query: GetIdeaTags,
+    this.userFacade.user$.pipe(
+      flatMap((user: any) => {
+        return this.ideaFacade.selectedIdea$.pipe(
+          flatMap((selectedIdea: any) => {
+            return this.apollo.mutate({
+              mutation: CreateIdeaTagMutation,
               variables: {
                 ideaId: selectedIdea.id,
+                tagId: tag.id,
+              },
+              optimisticResponse: {
+                __typename: 'Mutation',
+                createIdeaTag: {
+                  __typename: 'IdeaTag',
+                  id: -uuid(),
+                  tag: {
+                    __typename: 'Tag',
+                    label: tag.label,
+                  },
+                  userId: user.id,
+                },
+              },
+              update: (store, { data: { createIdeaTag } }) => {
+                if (!createIdeaTag) {
+                  return;
+                }
+                const query: any = store.readQuery({
+                  query: GetIdeaTags,
+                  variables: {
+                    ideaId: selectedIdea.id,
+                  }
+                });
+                store.writeQuery({
+                  query: GetIdeaTags,
+                  variables: {
+                    ideaId: selectedIdea.id,
+                  },
+                  data: { ideaTags: [...query.ideaTags, createIdeaTag] }
+                });
               }
             });
-            store.writeQuery({
-              query: GetIdeaTags,
-              variables: {
-                ideaId: selectedIdea.id,
-              },
-              data: { ideaTags: [...query.ideaTags, createIdeaTag] }
-            });
-          }
-        });
+          })
+        );
       })
     ).subscribe();
+  }
+
+  deleteIdeaTag(ideaTag: any, idea: any) {
+    this.apollo.mutate({
+      mutation: DeleteIdeaTagMutation,
+      variables: {
+        id: ideaTag.id,
+      },
+      update: (store, { data: { deleteIdeaTag } }) => {
+        if (!deleteIdeaTag) {
+          return;
+        }
+        const query: any = store.readQuery({ query: GetIdeaTags, variables: { ideaId: idea.id } });
+        const ideaTags: any[] = query.ideaTags.filter((ideaTag: any) => ideaTag.id !== deleteIdeaTag.id);
+        store.writeQuery({ query: GetIdeaTags, variables: { ideaId: idea.id }, data: { ideaTags }});
+      }
+    }).subscribe();
   }
 }

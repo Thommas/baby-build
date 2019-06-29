@@ -7,7 +7,6 @@
  */
 
 import { Component } from '@angular/core';
-import { Apollo } from 'apollo-angular';
 import { IdeaFacade } from '../../../facade';
 
 @Component({
@@ -19,7 +18,6 @@ export class IdeaShowComponent {
   selectedIdea$ = this.ideaFacade.selectedIdea$;
 
   constructor(
-    private apollo: Apollo,
     private ideaFacade: IdeaFacade
   ) {}
 }

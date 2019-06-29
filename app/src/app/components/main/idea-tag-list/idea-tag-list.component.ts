@@ -7,7 +7,7 @@
  */
 
 import { Component, ViewChild } from '@angular/core';
-import { fromEvent, Observable } from 'rxjs';
+import { fromEvent, Observable, of } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
 import { IdeaFacade, IdeaTagFacade, TagFacade } from '../../../facade';
 
@@ -36,6 +36,9 @@ export class IdeaTagListComponent {
       debounceTime(800),
       distinctUntilChanged(),
       mergeMap((value: any) => {
+        if (0 === value.length) {
+          return of([]);
+        }
         return this.tagFacade.getTagsByLabel(value);
       }),
     );

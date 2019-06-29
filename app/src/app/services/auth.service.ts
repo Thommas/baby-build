@@ -20,7 +20,7 @@ import { AuthFacade } from '../facade/auth.facade';
 @Injectable()
 export class AuthService {
   private _lock: any;
-  private renewTokenInnerSubscriber: any;
+  private checkSessionSubscriber: any;
 
   /**
    * Constructor
@@ -31,7 +31,6 @@ export class AuthService {
     private authFacade: AuthFacade
   ) {
     this._lock = null;
-    this.renewTokenInnerSubscriber = null;
   }
 
   /**
@@ -181,31 +180,38 @@ export class AuthService {
    * Renew token
    */
   renewToken(): Observable<boolean> {
-    this.renewTokenInnerSubscriber = null;
     return this.lock.pipe(flatMap(lock => {
       if (!lock) {
         return of(false);
       }
-      return Observable.create(obs => {
-        if (this.renewTokenInnerSubscriber) {
-          return;
-        }
-        this.renewTokenInnerSubscriber = obs;
-        lock.checkSession({}, (err, result) => {
-          if (err) {
-            this.router.navigate(['/security/login']);
-            obs.next(true);
-            obs.complete();
-            obs.error(`Could not get a new token (${err.error}: ${err.error_description}).`);
-            console.log(`Could not get a new token (${err.error}: ${err.error_description}).`);
-          } else {
-            console.log(`Successfully renewed auth!`, result);
-            obs.next(true);
-            obs.complete();
-            this.setSession(result);
-          }
-        });
-      });
+      return this.checkSession(lock);
     }));
+  }
+
+  /**
+   * Check auth0 session
+   */
+  checkSession(lock: any): Observable<boolean> {
+    if (this.checkSessionSubscriber) {
+      return this.checkSessionSubscriber;
+    }
+    this.checkSessionSubscriber = Observable.create(obs => {
+      console.log('checkSession');
+      lock.checkSession({}, (err, result) => {
+        if (err) {
+          this.router.navigate(['/security/login']);
+          obs.next(true);
+          obs.complete();
+          obs.error(`Could not get a new token (${err.error}: ${err.error_description}).`);
+          console.log(`Could not get a new token (${err.error}: ${err.error_description}).`);
+        } else {
+          console.log(`Successfully renewed auth!`, result);
+          this.setSession(result);
+          obs.next(true);
+          obs.complete();
+        }
+      });
+    });
+    return this.checkSessionSubscriber;
   }
 }

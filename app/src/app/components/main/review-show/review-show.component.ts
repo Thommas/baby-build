@@ -6,26 +6,17 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
+import { ReviewFacade } from '../../../facade';
 
 @Component({
   selector: 'app-review-show-cmp',
   templateUrl: './review-show.component.html',
   styleUrls: ['./review-show.component.scss']
 })
-export class ReviewShowComponent implements OnChanges {
-  @Input() idea: any;
-  selectedReview: any;
+export class ReviewShowComponent {
+  selectedReview$ = this.reviewFacade.selectedReview$;
 
-  constructor() {
-    this.selectedReview = null;
-  }
-
-  ngOnChanges() {
-    this.selectedReview = null;
-  }
-
-  selectedReviewChange(selectedReview: any) {
-    this.selectedReview = selectedReview;
+  constructor(private reviewFacade: ReviewFacade) {
   }
 }

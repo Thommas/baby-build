@@ -4,5 +4,5 @@
 <app-idea-item-cmp
   *ngFor="let idea of (ideas$ | async)"
   [idea]="idea"
-  (click)="selectIdea.emit(idea)"
+  (click)="selectIdea(idea)"
 ></app-idea-item-cmp>

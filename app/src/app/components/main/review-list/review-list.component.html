@@ -1,7 +1,7 @@
-<button *ngIf="loggedUserReview" mat-raised-button color='primary' (click)="selectReview(loggedUserReview)">
+<button *ngIf="loggedUserReview$ | async as loggedUserReview" mat-raised-button color='primary' (click)="selectReview(loggedUserReview)">
   {{ loggedUserReview.user.firstName }} {{ loggedUserReview.user.lastName }}
 </button>
-<div *ngFor="let review of reviews">
+<div *ngFor="let review of reviews$ | async">
   <button mat-raised-button color='primary' (click)="selectReview(review)">
     {{ review.user.firstName }} {{ review.user.lastName }}
   </button>

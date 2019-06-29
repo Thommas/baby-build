@@ -4,3 +4,5 @@ export * from './idea/idea.actions';
 export * from './idea/idea.reducer';
 export * from './idea-filters/idea-filters.actions';
 export * from './idea-filters/idea-filters.reducer';
+export * from './review/review.actions';
+export * from './review/review.reducer';
