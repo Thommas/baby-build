@@ -7,16 +7,17 @@
 import uuid from 'uuid/v4';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
 import { flatMap, pluck, withLatestFrom, mergeMap } from 'rxjs/operators';
 import {
   CreateIdeaMutation,
   DeleteIdeaMutation,
-  GetIdeas
+  GetIdeas,
+  UpdateIdeaMutation
 } from '../graphql';
 import { ApolloService } from '../services';
-import { IdeaActionTypes, CreateIdea, SelectIdea } from '../store';
+import { IdeaActionTypes, CreateIdea, UpdateIdea, SelectIdea } from '../store';
 import { IdeaFiltersFacade } from './idea-filters.facade';
 import { UserFacade } from './user.facade';
 
@@ -71,19 +72,22 @@ export class IdeaFacade {
       withLatestFrom(this.userFacade.user$),
       mergeMap((args: any[]) => {
         const user: any = args[1];
+        if (!user) {
+          return of(EMPTY);
+        }
+        console.log('user', user);
         return this.apolloService.apolloClient.mutate({
           mutation: CreateIdeaMutation,
           optimisticResponse: {
             __typename: 'Mutation',
             createIdea: {
               __typename: 'Idea',
-              id: -uuid(),
+              id: `-${uuid()}`,
               label: null,
               icon: null,
               userId: user.id,
               user: {
                 __typename: 'User',
-                id: user.id,
                 firstName: user.firstName,
                 lastName: user.lastName,
               },
@@ -104,6 +108,56 @@ export class IdeaFacade {
         });
       })
     );
+
+  @Effect({dispatch: false})
+  updateIdea$ = this.actions$
+    .pipe(
+      ofType(IdeaActionTypes.UpdateIdea),
+      withLatestFrom(this.userFacade.user$),
+      mergeMap((args: any[]) => {
+        const action: any = args[0];
+        const user: any = args[1];
+        console.log('action', action);
+        if (!user) {
+          return of(EMPTY);
+        }
+        return this.apolloService.apolloClient.mutate({
+          mutation: UpdateIdeaMutation,
+          variables: action.payload,
+          optimisticResponse: {
+            __typename: 'Mutation',
+            updateIdea: {
+              __typename: 'Idea',
+              ...action.payload,
+              userId: user.id,
+              user: {
+                __typename: 'User',
+                firstName: user.firstName,
+                lastName: user.lastName,
+              },
+              requiredAge: 0,
+              score: 0,
+            },
+          },
+          update: (store, { data: { updateIdea } }) => {
+            if (!updateIdea) {
+              return;
+            }
+            const query: any = store.readQuery({ query: GetIdeas });
+            const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === updateIdea.id ? {
+              ...idea,
+              label: updateIdea.label,
+            } : idea);
+            store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
+            // this.idea.label = updateIdea.label;
+          }
+        });
+      })
+    );
+
+  updateIdea(data: any) {
+    this.store.dispatch(new UpdateIdea(data));
+  }
 
   deleteIdea(idea: any) {
     this.apolloService.apolloClient.mutate({

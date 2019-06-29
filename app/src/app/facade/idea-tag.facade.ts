@@ -61,7 +61,7 @@ export class IdeaTagFacade {
                 __typename: 'Mutation',
                 createIdeaTag: {
                   __typename: 'IdeaTag',
-                  id: -uuid(),
+                  id: `-${uuid()}`,
                   tag: {
                     __typename: 'Tag',
                     label: tag.label,

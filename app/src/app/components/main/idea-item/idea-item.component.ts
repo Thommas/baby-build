@@ -81,41 +81,7 @@ export class IdeaItemComponent implements OnInit, OnChanges {
       return;
     }
     const data: any = clone(this.formGroup.value);
-    // this.userFacade.user$.pipe(
-    //   flatMap((user: any) => {
-    //     return this.apollo.mutate({
-    //       mutation: UpdateIdeaMutation,
-    //       variables: data,
-    //       optimisticResponse: {
-    //         __typename: 'Mutation',
-    //         updateIdea: {
-    //           __typename: 'Idea',
-    //           ...data,
-    //           userId: user.id,
-    //           user: {
-    //             __typename: 'User',
-    //             firstName: user.firstName,
-    //             lastName: user.lastName,
-    //           },
-    //           requiredAge: 0,
-    //           score: 0,
-    //         },
-    //       },
-    //       update: (store, { data: { updateIdea } }) => {
-    //         if (!updateIdea) {
-    //           return;
-    //         }
-    //         const query: any = store.readQuery({ query: GetIdeas });
-    //         const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === updateIdea.id ? {
-    //           ...idea,
-    //           label: updateIdea.label,
-    //         } : idea);
-    //         store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
-    //         this.idea.label = updateIdea.label;
-    //       }
-    //     });
-    //   })
-    // ).subscribe();
+    this.ideaFacade.updateIdea(data);
   }
 
   onKey(event: KeyboardEvent) {

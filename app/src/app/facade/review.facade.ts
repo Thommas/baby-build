@@ -45,6 +45,9 @@ export class ReviewFacade {
               .valueChanges
               .pipe(
                 map(({ data }) => {
+                  if (!data || !data.reviews) {
+                    return [];
+                  }
                   return data.reviews.filter((review: any) => review.userId !== user.id);
                 })
               );
@@ -72,6 +75,9 @@ export class ReviewFacade {
               .valueChanges
               .pipe(
                 map(({ data }) => {
+                  if (!data || !data.reviews) {
+                    return null;
+                  }
                   let loggedUserReview = data.reviews.find((review: any) => review.userId === user.id);
                   if (!loggedUserReview) {
                     loggedUserReview = {

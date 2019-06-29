@@ -158,7 +158,7 @@ export class ReviewItemComponent implements OnInit, OnChanges {
     //         __typename: 'Mutation',
     //         [data.id ? 'updateReview' : 'createReview']: {
     //           __typename: 'Review',
-    //           id: -uuid(),
+    //           id: `-${uuid()}`,
     //           ...data,
     //           userId: user.id,
     //           user,
