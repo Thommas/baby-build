@@ -5,17 +5,17 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 import { GetTags } from '../graphql';
+import { ApolloService } from '../services';
 
 @Injectable()
 export class TagFacade {
   tags$: Observable<any>;
 
-  constructor(private apollo: Apollo) {
-    this.tags$ = this.apollo.watchQuery<any>({
+  constructor(private apolloService: ApolloService) {
+    this.tags$ = this.apolloService.apolloClient.watchQuery<any>({
       query: GetTags,
     })
       .valueChanges
@@ -25,7 +25,7 @@ export class TagFacade {
   }
 
   getTagsByLabel(label: string) {
-    return this.apollo.watchQuery<any>({
+    return this.apolloService.apolloClient.watchQuery<any>({
       query: GetTags,
       variables: {
         label,

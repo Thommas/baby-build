@@ -7,14 +7,16 @@
 import uuid from 'uuid/v4';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Apollo } from 'apollo-angular';
-import { flatMap, pluck, take } from 'rxjs/operators';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { EMPTY, of } from 'rxjs';
+import { flatMap, pluck, withLatestFrom, mergeMap } from 'rxjs/operators';
 import {
   CreateIdeaMutation,
   DeleteIdeaMutation,
   GetIdeas
 } from '../graphql';
-import { SelectIdea } from '../store';
+import { ApolloService } from '../services';
+import { IdeaActionTypes, CreateIdea, SelectIdea } from '../store';
 import { IdeaFiltersFacade } from './idea-filters.facade';
 import { UserFacade } from './user.facade';
 
@@ -24,7 +26,8 @@ export class IdeaFacade {
   selectedIdea$ = this.store.pipe(select('idea', 'selected'));
 
   constructor(
-    private apollo: Apollo,
+    private apolloService: ApolloService,
+    private actions$: Actions,
     private ideaFiltersFacade: IdeaFiltersFacade,
     private userFacade: UserFacade,
     private store: Store<{ idea: any }>
@@ -45,7 +48,7 @@ export class IdeaFacade {
           delete currentFilters.name;
         }
 
-        return this.apollo.watchQuery<any>({
+        return this.apolloService.apolloClient.watchQuery<any>({
           query: GetIdeas,
           variables: currentFilters,
         })
@@ -58,10 +61,17 @@ export class IdeaFacade {
   }
 
   createIdea() {
-    this.userFacade.user$.pipe(
-      take(1),
-      flatMap((user: any) => {
-        return this.apollo.mutate({
+    this.store.dispatch(new CreateIdea());
+  }
+
+  @Effect({dispatch: false})
+  createIdea$ = this.actions$
+    .pipe(
+      ofType(IdeaActionTypes.CreateIdea),
+      withLatestFrom(this.userFacade.user$),
+      mergeMap((args: any[]) => {
+        const user: any = args[1];
+        return this.apolloService.apolloClient.mutate({
           mutation: CreateIdeaMutation,
           optimisticResponse: {
             __typename: 'Mutation',
@@ -89,14 +99,14 @@ export class IdeaFacade {
             const updatedIdeas: any = data.ideas;
             updatedIdeas.unshift(createIdea);
             store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas } });
+            // TODO Use a separate list for newly created items
           },
         });
       })
-    ).subscribe();
-  }
+    );
 
   deleteIdea(idea: any) {
-    this.apollo.mutate({
+    this.apolloService.apolloClient.mutate({
       mutation: DeleteIdeaMutation,
       variables: {
         id: idea.id

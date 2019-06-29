@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
+import { Actions, EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   MatButtonModule,
@@ -129,6 +130,9 @@ export function createTranslateLoader(http: HttpClient) {
       maxAge: 25,
       logOnly: environment.production,
     }),
+    EffectsModule.forRoot([
+      IdeaFacade
+    ])
   ],
   providers: [
     appRoutingProviders,
@@ -139,6 +143,7 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserService,
     LocaleService,
     ProgressService,
+    Actions,
     AuthFacade,
     IdeaFacade,
     IdeaFiltersFacade,

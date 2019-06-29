@@ -6,10 +6,10 @@
 
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
 import { GetReviews } from '../graphql';
+import { ApolloService } from '../services';
 import { SelectReview } from '../store';
 import { IdeaFacade } from './idea.facade';
 import { UserFacade } from './user.facade';
@@ -21,7 +21,7 @@ export class ReviewFacade {
   selectedReview$ = this.store.pipe(select('review', 'selected'));
 
   constructor(
-    private apollo: Apollo,
+    private apolloService: ApolloService,
     private ideaFacade: IdeaFacade,
     private userFacade: UserFacade,
     private store: Store<{ review: any }>
@@ -36,7 +36,7 @@ export class ReviewFacade {
             if (!user) {
               return of([]);
             }
-            return this.apollo.watchQuery<any>({
+            return this.apolloService.apolloClient.watchQuery<any>({
               query: GetReviews,
               variables: {
                 ideaId: selectedIdea.id,
@@ -63,7 +63,7 @@ export class ReviewFacade {
             if (!user) {
               return of([]);
             }
-            return this.apollo.watchQuery<any>({
+            return this.apolloService.apolloClient.watchQuery<any>({
               query: GetReviews,
               variables: {
                 ideaId: selectedIdea.id,

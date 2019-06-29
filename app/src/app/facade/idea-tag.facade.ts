@@ -6,7 +6,6 @@
 
 import uuid from 'uuid/v4';
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
 import { of } from 'rxjs';
 import { flatMap, pluck } from 'rxjs/operators';
 import {
@@ -16,13 +15,14 @@ import {
 } from '../graphql';
 import { IdeaFacade } from './idea.facade';
 import { UserFacade } from './user.facade';
+import { ApolloService } from '../services';
 
 @Injectable()
 export class IdeaTagFacade {
   ideaTags$;
 
   constructor(
-    private apollo: Apollo,
+    private apolloService: ApolloService,
     private ideaFacade: IdeaFacade,
     private userFacade: UserFacade
   ) {
@@ -31,8 +31,8 @@ export class IdeaTagFacade {
         if (!selectedIdea) {
           return of([]);
         }
-  
-        return this.apollo.watchQuery<any>({
+
+        return this.apolloService.apolloClient.watchQuery<any>({
           query: GetIdeaTags,
           variables: {
             ideaId: selectedIdea.id,
@@ -51,7 +51,7 @@ export class IdeaTagFacade {
       flatMap((user: any) => {
         return this.ideaFacade.selectedIdea$.pipe(
           flatMap((selectedIdea: any) => {
-            return this.apollo.mutate({
+            return this.apolloService.apolloClient.mutate({
               mutation: CreateIdeaTagMutation,
               variables: {
                 ideaId: selectedIdea.id,
@@ -95,7 +95,7 @@ export class IdeaTagFacade {
   }
 
   deleteIdeaTag(ideaTag: any, idea: any) {
-    this.apollo.mutate({
+    this.apolloService.apolloClient.mutate({
       mutation: DeleteIdeaTagMutation,
       variables: {
         id: ideaTag.id,

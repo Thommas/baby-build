@@ -18,6 +18,8 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ApolloService {
+  private _apolloClient: Apollo;
+
   /**
    * Constructor
    */
@@ -26,6 +28,15 @@ export class ApolloService {
     private httpLink: HttpLink,
     private authService: AuthService
   ) {
+  }
+
+  /**
+   * Returns a valid apollo client
+   */
+  get apolloClient(): Apollo {
+    if (this._apolloClient) {
+      return this._apolloClient;
+    }
     const authLink = new ApolloLink((operation: any, forward: any): any => {
       return this.authService.idToken$.pipe(flatMap((token: string) => {
         operation.setContext({
@@ -34,12 +45,14 @@ export class ApolloService {
         return forward(operation);
       }));
     });
-    apollo.create({
+    this.apollo.create({
       link: concat(
         authLink,
-        httpLink.create({ uri: environment.apollo.url }),
+        this.httpLink.create({ uri: environment.apollo.url }),
       ),
       cache: new InMemoryCache()
     });
+    this._apolloClient = this.apollo;
+    return this._apolloClient;
   }
 }

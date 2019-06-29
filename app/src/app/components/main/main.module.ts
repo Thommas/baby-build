@@ -39,7 +39,6 @@ import {
   ReviewListComponent,
   ReviewShowComponent
 } from './';
-
 import { ideaFiltersReducer } from '../../store';
 
 @NgModule({

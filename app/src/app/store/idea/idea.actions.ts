@@ -7,7 +7,12 @@
 import { Action } from '@ngrx/store';
 
 export enum IdeaActionTypes {
+  CreateIdea = '[Idea] Create',
   SelectIdea = '[Idea] Select',
+}
+
+export class CreateIdea implements Action {
+  readonly type = IdeaActionTypes.CreateIdea;
 }
 
 export class SelectIdea implements Action {
@@ -16,4 +21,4 @@ export class SelectIdea implements Action {
   constructor(public payload: any) {}
 }
 
-export type IdeaActionsUnion = SelectIdea;
+export type IdeaActionsUnion = CreateIdea | SelectIdea;
