@@ -24,9 +24,7 @@ import {
   LocaleServiceStub,
   ProgressService,
   ProgressServiceStub,
-  RouterStub,
-  UserService,
-  UserServiceStub,
+  RouterStub
 } from './services';
 
 describe('AppComponent', () => {
@@ -50,7 +48,6 @@ describe('AppComponent', () => {
         { provide: LocaleService, useClass: LocaleServiceStub },
         { provide: ProgressService, useClass: ProgressServiceStub },
         { provide: Router, useClass: RouterStub },
-        { provide: UserService, useClass: UserServiceStub },
       ]
     }).compileComponents();
   }));

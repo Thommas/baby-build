@@ -9,7 +9,8 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { Apollo } from 'apollo-angular';
-import { ApolloStub, UserService, UserServiceStub } from '../../../services';
+import { UserFacade } from '../../../facade';
+import { ApolloStub } from '../../../services';
 import { MainIndexComponent } from './main-index.component';
 
 describe('MainIndexComponent', () => {
@@ -23,7 +24,7 @@ describe('MainIndexComponent', () => {
       ],
       providers: [
         { provide: Apollo, useClass: ApolloStub },
-        { provide: UserService, useClass: UserServiceStub },
+        { provide: UserFacade },
       ]
     }).compileComponents();
   }));

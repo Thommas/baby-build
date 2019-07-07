@@ -7,10 +7,7 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { map } from 'rxjs/operators';
-import { GetIdeaTags, DeleteIdeaTagMutation } from '../../../graphql';
-import { UserService } from '../../../services';
+import { IdeaTagFacade, UserFacade } from '../../../facade';
 
 @Component({
   selector: 'app-idea-tag-item-cmp',
@@ -20,27 +17,13 @@ import { UserService } from '../../../services';
 export class IdeaTagItemComponent {
   @Input() ideaTag: any;
   @Input() idea: any;
-  loading: boolean;
 
   constructor(
-    private apollo: Apollo,
-    public userService: UserService
+    private ideaTagFacade: IdeaTagFacade,
+    public userFacade: UserFacade
   ) {}
 
   deleteIdeaTag() {
-    this.apollo.mutate({
-      mutation: DeleteIdeaTagMutation,
-      variables: {
-        id: this.ideaTag.id,
-      },
-      update: (store, { data: { deleteIdeaTag } }) => {
-        if (!deleteIdeaTag) {
-          return;
-        }
-        const query: any = store.readQuery({ query: GetIdeaTags, variables: { ideaId: this.idea.id } });
-        const ideaTags: any[] = query.ideaTags.filter((ideaTag: any) => ideaTag.id !== deleteIdeaTag.id);
-        store.writeQuery({ query: GetIdeaTags, variables: { ideaId: this.idea.id }, data: { ideaTags }});
-      }
-    }).subscribe();
+    this.ideaTagFacade.deleteIdeaTag(this.ideaTag, this.idea);
   }
 }

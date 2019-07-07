@@ -29,69 +29,67 @@ export const configuration: any = {
     }
   },
   mappings: {
-    _doc: {
-      properties: {
-        type: {
-          type: 'keyword',
-        },
-        firstName: {
-          type: 'text',
-          analyzer: 'autocomplete',
-          search_analyzer: 'standard'
-        },
-        lastName: {
-          type: 'text',
-          analyzer: 'autocomplete',
-          search_analyzer: 'standard'
-        },
-        label: {
-          type: 'text',
-          analyzer: 'autocomplete',
-          search_analyzer: 'standard'
-        },
-        requiredAge: {
-          type: 'double',
-        },
-        score: {
-          type: 'double',
-        },
-        requiredAgeExplanation: {
-          type: 'text',
-          analyzer: 'autocomplete',
-          search_analyzer: 'standard'
-        },
-        scoreExplanation: {
-          type: 'text',
-          analyzer: 'autocomplete',
-          search_analyzer: 'standard'
-        },
-        xp: {
-          type: 'integer',
-        },
-        lvl: {
-          type: 'integer',
-        },
-        ideaId: {
-          type: 'keyword',
-        },
-        sharerId: {
-          type: 'keyword',
-        },
-        tagId: {
-          type: 'keyword',
-        },
-        tagIdNested: {
-          type: 'nested',
-          properties: {
-            tagId: {
-              type: 'keyword',
-            },
-          }
-        },
-        userId: {
-          type: 'keyword',
-        },
-      }
+    properties: {
+      type: {
+        type: 'keyword',
+      },
+      firstName: {
+        type: 'text',
+        analyzer: 'autocomplete',
+        search_analyzer: 'standard'
+      },
+      lastName: {
+        type: 'text',
+        analyzer: 'autocomplete',
+        search_analyzer: 'standard'
+      },
+      label: {
+        type: 'text',
+        analyzer: 'autocomplete',
+        search_analyzer: 'standard'
+      },
+      requiredAge: {
+        type: 'double',
+      },
+      score: {
+        type: 'double',
+      },
+      requiredAgeExplanation: {
+        type: 'text',
+        analyzer: 'autocomplete',
+        search_analyzer: 'standard'
+      },
+      scoreExplanation: {
+        type: 'text',
+        analyzer: 'autocomplete',
+        search_analyzer: 'standard'
+      },
+      xp: {
+        type: 'integer',
+      },
+      lvl: {
+        type: 'integer',
+      },
+      ideaId: {
+        type: 'keyword',
+      },
+      sharerId: {
+        type: 'keyword',
+      },
+      tagId: {
+        type: 'keyword',
+      },
+      tagIdNested: {
+        type: 'nested',
+        properties: {
+          tagId: {
+            type: 'keyword',
+          },
+        }
+      },
+      userId: {
+        type: 'keyword',
+      },
     }
   }
 };

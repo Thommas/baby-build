@@ -9,6 +9,6 @@
     </mat-autocomplete>
   </mat-form-field>
 </form>
-<div *ngFor="let ideaTag of ideaTags">
-  <app-idea-tag-item-cmp [ideaTag]="ideaTag" [idea]="idea"></app-idea-tag-item-cmp>
+<div *ngFor="let ideaTag of ideaTags$ | async">
+  <app-idea-tag-item-cmp [ideaTag]="ideaTag" [idea]="selectedIdea$ | async"></app-idea-tag-item-cmp>
 </div>

@@ -12,7 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
-import { UserService } from '../../../services';
+import { UserFacade } from '../../../facade';
 import { UpdateUserMutation } from '../../../graphql';
 
 @Component({
@@ -26,7 +26,7 @@ export class UserEditComponent implements OnInit {
   loading: boolean;
 
   constructor(
-    public userService: UserService,
+    public userFacade: UserFacade,
     private apollo: Apollo
   ) {
     this.formGroup = new FormGroup({
@@ -35,14 +35,14 @@ export class UserEditComponent implements OnInit {
       lastName: new FormControl('', []),
     });
     this.loading = true;
-    userService.user$.subscribe((user: any) => {
-      this.loading = false;
-      this.formGroup.setValue({
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName
-      })
-    });
+    // userFacade.user$.subscribe((user: any) => {
+    //   this.loading = false;
+    //   this.formGroup.setValue({
+    //     id: user.id,
+    //     firstName: user.firstName,
+    //     lastName: user.lastName
+    //   })
+    // });
   }
 
   ngOnInit() {

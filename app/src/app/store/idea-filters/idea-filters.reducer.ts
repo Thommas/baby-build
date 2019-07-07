@@ -1,34 +1,31 @@
 /**
  * Path of child
  *
- * Store - Idea filters - Reducers
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { xor } from 'lodash';
-import { Action, State } from '@ngrx/store';
-import { ActionTypes, ActionsUnion } from './idea-filters.actions';
+import { IdeaFiltersActionTypes, IdeaFiltersActionsUnion } from './idea-filters.actions';
 
-export const initialState = {
+const initialState = {
   tagId: null,
   name: null,
   requiredAge: [],
   score: [],
 };
 
-export function ideaFiltersReducer(state: any = initialState, action: ActionsUnion): any {
+export function ideaFiltersReducer(state: any = initialState, action: IdeaFiltersActionsUnion): any {
   switch (action.type) {
-    case ActionTypes.Reset:
+    case IdeaFiltersActionTypes.ResetIdeaFilters:
       return {};
 
-    case ActionTypes.Update:
+    case IdeaFiltersActionTypes.UpdateIdeaFilters:
       return {
         ...state,
-        tagId: action.payload.tagId ? action.payload.tagId : state.tagId,
-        name: action.payload.name ? action.payload.name : state.name,
+        tagId: action.payload.tagId !== undefined ? action.payload.tagId : state.tagId,
+        name: action.payload.name !== undefined ? action.payload.name : state.name,
         score: action.payload.score !== undefined ? xor(state.score, [action.payload.score]) : state.score,
-        requiredAge: action.payload.requiredAge ? xor(state.requiredAge, [action.payload.requiredAge]) : state.requiredAge,
+        requiredAge: action.payload.requiredAge !== undefined ? xor(state.requiredAge, [action.payload.requiredAge]) : state.requiredAge,
       };
 
     default:

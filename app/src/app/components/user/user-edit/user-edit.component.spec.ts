@@ -11,11 +11,8 @@ import { TestBed, async } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatFormFieldModule } from '@angular/material';
 import { Apollo } from 'apollo-angular';
-import {
-  ApolloStub,
-  UserService,
-  UserServiceStub
-} from '../../../services';
+import { ApolloStub } from '../../../services';
+import { UserFacade } from '../../../facade';
 import { UserEditComponent } from './user-edit.component';
 
 describe('UserEditComponent', () => {
@@ -34,7 +31,7 @@ describe('UserEditComponent', () => {
       ],
       providers: [
         { provide: Apollo, useClass: ApolloStub },
-        { provide: UserService, useClass: UserServiceStub },
+        { provide: UserFacade },
       ]
     }).compileComponents();
   }));

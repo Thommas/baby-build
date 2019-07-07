@@ -26,7 +26,7 @@ export class AuthGuardService implements CanActivate {
    * Stores the current url to redirect user after login.
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.authService.isAuthenticated.pipe(
+    return this.authService.isAuthenticated$.pipe(
       map(isAuthenticated => {
         if (!isAuthenticated) {
           return this.authenticationFailed(route);

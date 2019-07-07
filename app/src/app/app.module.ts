@@ -12,14 +12,12 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ApolloModule } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
-import { Apollo } from 'apollo-angular';
-import { HttpLink } from 'apollo-angular-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
+import { Actions, EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   MatButtonModule,
@@ -32,8 +30,8 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import { Angulartics2Module } from 'angulartics2';
+import { localStorageSync } from 'ngrx-store-localstorage';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
-
 import { environment } from '../environments/environment';
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
@@ -52,13 +50,38 @@ import {
   AuthGuardService,
   AuthService,
   BrowserService,
-  DexieService,
   LocaleService,
-  UserService,
   ProgressService
 } from './services';
-import { ideaFiltersReducer } from './store';
+import {
+  AuthFacade,
+  IdeaFacade,
+  IdeaFiltersFacade,
+  IdeaTagFacade,
+  ReviewFacade,
+  TagFacade,
+  UserFacade,
+} from './facade';
+import {
+  authReducer,
+  ideaReducer,
+  ideaFiltersReducer,
+  reviewReducer,
+} from './store';
 
+// ngrx-store-localstorage
+const reducers: ActionReducerMap<any> = {
+  auth: authReducer,
+  idea: ideaReducer,
+  ideaFilters: ideaFiltersReducer,
+  review: reviewReducer,
+};
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({keys: ['auth'], rehydrate: true})(reducer);
+}
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
+
+// ngx-translate
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -99,11 +122,18 @@ export function createTranslateLoader(http: HttpClient) {
     SecurityModule,
     StaticModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
-    StoreModule.forRoot({ ideaFilters: ideaFiltersReducer }),
+    StoreModule.forRoot(
+      reducers,
+      {metaReducers}
+    ),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
+    EffectsModule.forRoot([
+      IdeaFacade,
+      IdeaTagFacade
+    ])
   ],
   providers: [
     appRoutingProviders,
@@ -112,10 +142,16 @@ export function createTranslateLoader(http: HttpClient) {
     AuthGuardService,
     AuthService,
     BrowserService,
-    DexieService,
     LocaleService,
-    UserService,
-    ProgressService
+    ProgressService,
+    Actions,
+    AuthFacade,
+    IdeaFacade,
+    IdeaFiltersFacade,
+    IdeaTagFacade,
+    ReviewFacade,
+    TagFacade,
+    UserFacade,
   ],
   bootstrap: [
     AppComponent

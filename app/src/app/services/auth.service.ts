@@ -11,38 +11,26 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of as observableOf, from, forkJoin } from 'rxjs';
-import { map, flatMap, take } from 'rxjs/operators';
-import * as jwt from 'jsonwebtoken';
+import { Observable, of } from 'rxjs';
+import { flatMap, take } from 'rxjs/operators';
 import { BrowserService } from './browser.service';
-import { DexieService } from './dexie.service';
 import { environment } from '../../environments/environment';
+import { AuthFacade } from '../facade/auth.facade';
 
 @Injectable()
 export class AuthService {
-  static LOCAL_STORAGE_ACCESS_TOKEN = 'access_token';
-  static LOCAL_STORAGE_ID_TOKEN = 'id_token';
-  static LOCAL_STORAGE_EXPIRES_AT = 'expires_at';
-
   private _lock: any;
-  private refreshSubscription: any;
-  private tokenObs: Observable<string>;
-  private isAuthenticatedObs: Observable<boolean>;
-  private renewTokenInnerSubscriber: any;
+  private checkSessionSubscriber: any;
 
   /**
    * Constructor
    */
   constructor(
     private router: Router,
-    private dexieService: DexieService,
-    private browserService: BrowserService
+    private browserService: BrowserService,
+    private authFacade: AuthFacade
   ) {
     this._lock = null;
-    this.refreshSubscription = null;
-    this.tokenObs = null;
-    this.isAuthenticatedObs = null;
-    this.renewTokenInnerSubscriber = null;
   }
 
   /**
@@ -60,11 +48,11 @@ export class AuthService {
    */
   get lock(): Observable<any> {
     if (this._lock) {
-      return observableOf(this._lock);
+      return of(this._lock);
     }
 
     if (!this.browserService.document) {
-      return observableOf(null);
+      return of(null);
     }
 
     return Observable.create(obs => {
@@ -95,9 +83,9 @@ export class AuthService {
       environment.auth0.options
     );
     this._lock.on('authenticated', (authResult: any) => {
-      this.setSession(authResult).subscribe(() => {
-        this.refreshIsAuthenticated();
-      });
+      console.log('authenticated', authResult);
+      this.setSession(authResult);
+      this.router.navigate(['']);
     });
 
     obs.next(this._lock);
@@ -107,27 +95,10 @@ export class AuthService {
   /**
    * Store authentication results in local storage
    */
-  setSession(authResult): Observable<any> {
+  setSession(authResult): void {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + Date.now());
 
-    const obs = [
-      this.dexieService.setItem(AuthService.LOCAL_STORAGE_ACCESS_TOKEN, authResult.accessToken),
-      this.dexieService.setItem(AuthService.LOCAL_STORAGE_ID_TOKEN, authResult.idToken),
-      this.dexieService.setItem(AuthService.LOCAL_STORAGE_EXPIRES_AT, expiresAt)
-    ];
-    return forkJoin(obs, () => {
-      // Nothing
-    });
-  }
-
-  /**
-   * Refresh isAuthenticated and redirect to home
-   */
-  refreshIsAuthenticated() {
-    this.isAuthenticatedObs = null;
-    this.isAuthenticated.pipe(take(1)).subscribe(() => {
-      this.router.navigate(['']);
-    });
+    this.authFacade.loginSuccess(authResult.accessToken, authResult.idToken, expiresAt);
   }
 
   /**
@@ -136,6 +107,7 @@ export class AuthService {
   login() {
     this.lock.subscribe(lock => {
       if (lock) {
+        lock.hide();
         lock.show();
       }
     });
@@ -158,9 +130,8 @@ export class AuthService {
    * Purge local storage and redirect to home
    */
   logout() {
-    this.dexieService.clearKeyValueStoreTable().subscribe(
-      () => this.refreshIsAuthenticated()
-    );
+    this.authFacade.logoutSuccess();
+    this.router.navigate(['/security/login']);
   }
 
   /**
@@ -173,6 +144,7 @@ export class AuthService {
           if (error) {
             console.log('error', error);
           } else if (authResult && authResult.accessToken && authResult.idToken) {
+            console.log('resumeAuth', authResult);
             this.setSession(authResult);
           }
         });
@@ -183,60 +155,70 @@ export class AuthService {
   /**
    * Return the current idToken
    */
-  get token(): Observable<string> {
-    if (!this.tokenObs) {
-      this.tokenObs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_ID_TOKEN);
-    }
-    return this.tokenObs;
+  get idToken$(): Observable<string> {
+    return this.authFacade.idToken$;
   }
 
   /**
    * Check whether the current time is past the access token's expiry time
    */
-  get isAuthenticated(): Observable<boolean> {
-    if (!this.isAuthenticatedObs) {
-      this.isAuthenticatedObs = this.dexieService.getItem(AuthService.LOCAL_STORAGE_EXPIRES_AT)
-        .pipe(flatMap((expiresAt: string) => {
-          if (!expiresAt) {
-            return observableOf(false);
-          }
-          if (new Date().getTime() < parseInt(expiresAt, 10)) {
-            return observableOf(true);
-          }
-          return this.renewToken();
-        }));
-    }
-    return this.isAuthenticatedObs;
+  get isAuthenticated$(): Observable<boolean> {
+    return this.authFacade.expiresAt$.pipe(
+      take(1),
+      flatMap((expiresAt: string) => {
+        if (!expiresAt) {
+          return of(false);
+        }
+        if (new Date().getTime() < parseInt(expiresAt, 10)) {
+          return of(true);
+        }
+        return this.renewToken();
+      })
+    );
   }
 
   /**
    * Renew token
    */
   renewToken(): Observable<boolean> {
-    this.renewTokenInnerSubscriber = null;
     return this.lock.pipe(flatMap(lock => {
       if (!lock) {
-        return observableOf(false);
+        return of(false);
       }
-      return Observable.create(obs => {
-        if (this.renewTokenInnerSubscriber) {
-          return;
-        }
-        this.renewTokenInnerSubscriber = obs;
-        lock.checkSession({}, (err, result) => {
-          if (err) {
-            this.router.navigate(['/security/login']);
-            obs.next(true);
-            obs.complete();
-            // obs.error(`Could not get a new token (${err.error}: ${err.error_description}).`);
-          } else {
-            console.log(`Successfully renewed auth!`);
-            obs.next(true);
-            obs.complete();
-            this.setSession(result).subscribe();
-          }
-        });
-      });
+
+      // FIXME Implement ngrx action/effect
+      this.logout();
+
+      return of(false);
     }));
+  }
+
+  /**
+   * Check auth0 session
+   */
+  checkSession(lock: any) {
+    // if (this.checkSessionSubscriber) {
+    //   console.log('REUSE checkSessionSubscriber');
+    //   return this.checkSessionSubscriber;
+    // }
+    // console.log('CREATE checkSessionSubscriber');
+    // this.checkSessionSubscriber = Observable.create(obs => {
+    //   console.log('checkSession');
+    //   lock.checkSession({}, (err, result) => {
+    //     if (err) {
+    //       this.router.navigate(['/security/login']);
+    //       obs.next(true);
+    //       obs.complete();
+    //       obs.error(`Could not get a new token (${err.error}: ${err.error_description}).`);
+    //       console.log(`Could not get a new token (${err.error}: ${err.error_description}).`);
+    //     } else {
+    //       console.log(`Successfully renewed auth!`, result);
+    //       this.setSession(result);
+    //       obs.next(true);
+    //       obs.complete();
+    //     }
+    //   });
+    // });
+    // return this.checkSessionSubscriber;
   }
 }

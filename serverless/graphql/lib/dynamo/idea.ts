@@ -21,7 +21,7 @@ export function getIdeas(userId: string, args: any) {
       return queryIdeas(userIds, args)
     })
     .then((ideas) => {
-      if (0 === ideas.hits.total) {
+      if (0 === ideas.hits.total.value) {
         return [];
       }
       const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));

@@ -6,29 +6,27 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import uuid from 'uuid/v4';
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { MatOption } from '@angular/material';
-import { fromEvent, Observable, concat } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap, mergeMap, flatMap } from 'rxjs/operators';
-import { Apollo } from 'apollo-angular';
-import { CreateIdeaTagMutation, GetIdeaTags, GetTags } from '../../../graphql';
-import { UserService } from '../../../services';
+import { Component, ViewChild } from '@angular/core';
+import { fromEvent, Observable, of } from 'rxjs';
+import { map, filter, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
+import { IdeaFacade, IdeaTagFacade, TagFacade } from '../../../facade';
 
 @Component({
   selector: 'app-idea-tag-list-cmp',
   templateUrl: './idea-tag-list.component.html',
   styleUrls: ['./idea-tag-list.component.scss']
 })
-export class IdeaTagListComponent implements OnInit, OnChanges {
+export class IdeaTagListComponent {
   @ViewChild('inputElement') inputElement: any;
   tags$: Observable<any>;
-  @Input() idea: any;
-  loading: boolean;
-  ideaTags: any;
+  selectedIdea$ = this.ideaFacade.selectedIdea$;
+  ideaTags$ = this.ideaTagFacade.ideaTags$;
 
-  constructor(private apollo: Apollo, private userService: UserService) {
-    this.ideaTags = [];
+  constructor(
+    private ideaFacade: IdeaFacade,
+    private ideaTagFacade: IdeaTagFacade,
+    private tagFacade: TagFacade
+  ) {
   }
 
   ngOnInit() {
@@ -38,88 +36,17 @@ export class IdeaTagListComponent implements OnInit, OnChanges {
       debounceTime(800),
       distinctUntilChanged(),
       mergeMap((value: any) => {
-        return this.apollo.watchQuery<any>({
-          query: GetTags,
-          variables: {
-            label: value,
-          },
-        }).valueChanges;
+        if (0 === value.length) {
+          return of([]);
+        }
+        return this.tagFacade.getTagsByLabel(value);
       }),
-      map((res: any) => res.data.tags),
     );
-    this.getIdeaTags();
-  }
-
-  ngOnChanges() {
-    this.getIdeaTags();
-  }
-
-  getIdeaTags() {
-    this.loading = true;
-
-    this.userService.user$.pipe(
-      map((user: any) => {
-        this.apollo.watchQuery<any>({
-          query: GetIdeaTags,
-          variables: {
-            ideaId: this.idea.id,
-          },
-        })
-          .valueChanges
-          .subscribe(
-            ({ data, loading }) => {
-              this.loading = loading;
-              this.ideaTags = data.ideaTags;
-            },
-            (e) => console.log('error while loading reviews', e)
-          );
-        }),
-      ).subscribe();
   }
 
   optionSelected(event: any) {
     this.inputElement.nativeElement.value = '';
     const tag: any = event.option.value;
-    this.userService.user$.pipe(
-      flatMap((user: any) => {
-        return this.apollo.mutate({
-          mutation: CreateIdeaTagMutation,
-          variables: {
-            ideaId: this.idea.id,
-            tagId: tag.id,
-          },
-          optimisticResponse: {
-            __typename: 'Mutation',
-            createIdeaTag: {
-              __typename: 'IdeaTag',
-              id: -uuid(),
-              tag: {
-                __typename: 'Tag',
-                label: tag.label,
-              },
-              userId: user.id,
-            },
-          },
-          update: (store, { data: { createIdeaTag } }) => {
-            if (!createIdeaTag) {
-              return;
-            }
-            const query: any = store.readQuery({
-              query: GetIdeaTags,
-              variables: {
-                ideaId: this.idea.id,
-              }
-            });
-            store.writeQuery({
-              query: GetIdeaTags,
-              variables: {
-                ideaId: this.idea.id,
-              },
-              data: { ideaTags: [...query.ideaTags, createIdeaTag] }
-            });
-          }
-        });
-      })
-    ).subscribe();
+    this.ideaTagFacade.createIdeaTag(tag);
   }
 }

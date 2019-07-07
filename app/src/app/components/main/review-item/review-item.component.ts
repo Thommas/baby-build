@@ -14,11 +14,12 @@ import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap, flatMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
+  GetIdeas,
   GetReviews,
   CreateReviewMutation,
   UpdateReviewMutation
 } from '../../../graphql';
-import { UserService } from '../../../services';
+import { UserFacade } from '../../../facade';
 
 @Component({
   selector: 'app-review-item-cmp',
@@ -34,7 +35,7 @@ export class ReviewItemComponent implements OnInit, OnChanges {
   ages: number[] = [];
   scores: number[] = [];
 
-  constructor(private apollo: Apollo, private userService: UserService) {
+  constructor(private apollo: Apollo, private userFacade: UserFacade) {
     this.review = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
@@ -61,17 +62,17 @@ export class ReviewItemComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    const elements = [
-      this.requiredAgeExplanationElement,
-      this.scoreExplanationElement,
-    ];
-    for (const element of elements) {
-      fromEvent(element.nativeElement, 'input').pipe(
-        map((e: { target: HTMLInputElement }) => e.target.value),
-        debounceTime(800),
-        distinctUntilChanged(),
-      ).subscribe(data => this.save());
-    }
+    // const elements = [
+    //   this.requiredAgeExplanationElement,
+    //   this.scoreExplanationElement,
+    // ];
+    // for (const element of elements) {
+    //   fromEvent(element.nativeElement, 'input').pipe(
+    //     map((e: { target: HTMLInputElement }) => e.target.value),
+    //     debounceTime(800),
+    //     distinctUntilChanged(),
+    //   ).subscribe(data => this.save());
+    // }
   }
 
   selectRequiredAge(age: number) {
@@ -89,79 +90,93 @@ export class ReviewItemComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.review && changes.review.previousValue
-      && changes.idea && changes.idea.previousValue) {
-      this.save();
-    }
-    if (changes.review) {
-      const review: any = changes.review.currentValue;
-      this.formGroup.patchValue({
-        id: review ? review.id : null,
-        requiredAge: review ? review.requiredAge : null,
-        requiredAgeExplanation: review ? review.requiredAgeExplanation : null,
-        score: review ? review.score : null,
-        scoreExplanation: review ? review.scoreExplanation : null,
-        ideaId: review ? review.ideaId : null,
-      });
-    }
-    if (changes.idea && changes.idea.currentValue) {
-      const idea: any = changes.idea.currentValue;
-      this.formGroup.patchValue({
-        ideaId: idea.id,
-      });
-    }
+    // if (changes.review && changes.review.previousValue
+    //   && changes.idea && changes.idea.previousValue) {
+    //   this.save();
+    // }
+    // if (changes.review) {
+    //   const review: any = changes.review.currentValue;
+    //   this.formGroup.patchValue({
+    //     id: review ? review.id : null,
+    //     requiredAge: review ? review.requiredAge : null,
+    //     requiredAgeExplanation: review ? review.requiredAgeExplanation : null,
+    //     score: review ? review.score : null,
+    //     scoreExplanation: review ? review.scoreExplanation : null,
+    //     ideaId: review ? review.ideaId : null,
+    //   });
+    // }
+    // if (changes.idea && changes.idea.currentValue) {
+    //   const idea: any = changes.idea.currentValue;
+    //   this.formGroup.patchValue({
+    //     ideaId: idea.id,
+    //   });
+    // }
+  }
+
+  updateReviews(store: any, data, updatedReview) {
+    const query: any = store.readQuery({
+      query: GetReviews,
+      variables: { ideaId: this.review.ideaId },
+    });
+    const reviews: any[] = query.reviews.map((review: any) => review.id === data.id ? updatedReview : review);
+    store.writeQuery({
+      query: GetReviews,
+      variables: { ideaId: this.review.ideaId },
+      data: { reviews },
+    });
+    this.review = updatedReview;
+    this.formGroup.patchValue({
+      id: this.review.id,
+      requiredAge: this.review.requiredAge,
+      requiredAgeExplanation: this.review.requiredAgeExplanation,
+      score: this.review.score,
+      scoreExplanation: this.review.scoreExplanation,
+      ideaId: this.review.ideaId,
+    });
+  }
+
+  updateIdeas(store: any, data: any, updatedReview: any) {
+    console.log('Update idea in store');
+    // store.writeQuery({
+    //   query: GetReviews,
+    //   variables: { ideaId: this.review.ideaId },
+    //   data: { reviews },
+    // });
   }
 
   save() {
     if (!this.formGroup.valid) {
       return;
     }
-    this.userService.user$.pipe(
-      flatMap((user: any) => {
-        const data: any = clone(this.formGroup.value);
-        return this.apollo.mutate({
-          mutation: data.id ? UpdateReviewMutation : CreateReviewMutation,
-          variables: data,
-          optimisticResponse: {
-            __typename: 'Mutation',
-            [data.id ? 'updateReview' : 'createReview']: {
-              __typename: 'Review',
-              id: -uuid(),
-              ...data,
-              userId: user.id,
-              user,
-            },
-          },
-          update: (store, { data: { createReview, updateReview } }) => {
-            if (!createReview && !updateReview) {
-              return;
-            }
-            const updatedReview: any = createReview ? createReview : updateReview;
-            if (!updatedReview.id) {
-              return;
-            }
-            const query: any = store.readQuery({
-              query: GetReviews,
-              variables: { ideaId: this.review.ideaId },
-            });
-            const reviews: any[] = query.reviews.map((review: any) => review.id === data.id ? updatedReview : review);
-            store.writeQuery({
-              query: GetReviews,
-              variables: { ideaId: this.review.ideaId },
-              data: { reviews },
-            });
-            this.review = updatedReview;
-            this.formGroup.patchValue({
-              id: this.review.id,
-              requiredAge: this.review.requiredAge,
-              requiredAgeExplanation: this.review.requiredAgeExplanation,
-              score: this.review.score,
-              scoreExplanation: this.review.scoreExplanation,
-              ideaId: this.review.ideaId,
-            });
-          },
-        });
-      })
-    ).subscribe();
+    // this.userFacade.user$.pipe(
+    //   flatMap((user: any) => {
+    //     const data: any = clone(this.formGroup.value);
+    //     return this.apollo.mutate({
+    //       mutation: data.id ? UpdateReviewMutation : CreateReviewMutation,
+    //       variables: data,
+    //       optimisticResponse: {
+    //         __typename: 'Mutation',
+    //         [data.id ? 'updateReview' : 'createReview']: {
+    //           __typename: 'Review',
+    //           id: `-${uuid()}`,
+    //           ...data,
+    //           userId: user.id,
+    //           user,
+    //         },
+    //       },
+    //       update: (store, { data: { createReview, updateReview } }) => {
+    //         if (!createReview && !updateReview) {
+    //           return;
+    //         }
+    //         const updatedReview: any = createReview ? createReview : updateReview;
+    //         if (!updatedReview.id) {
+    //           return;
+    //         }
+    //         this.updateReviews(store, data, updatedReview);
+    //         this.updateIdeas(store, data, updatedReview);
+    //       },
+    //     });
+    //   })
+    // ).subscribe();
   }
 }
