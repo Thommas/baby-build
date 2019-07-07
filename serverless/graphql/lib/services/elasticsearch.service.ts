@@ -47,6 +47,7 @@ export function search(query: any): Promise<any> {
   return elasticsearchClient.search({
     index: configService.elasticSearchIndex,
     type: '_doc',
+    size: 100,
     body: {
       query,
     }

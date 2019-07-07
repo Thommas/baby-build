@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
-import { flatMap, pluck, withLatestFrom, mergeMap } from 'rxjs/operators';
+import { flatMap, pluck, withLatestFrom, mergeMap, take } from 'rxjs/operators';
 import {
   CreateIdeaMutation,
   DeleteIdeaMutation,
@@ -27,8 +27,8 @@ export class IdeaFacade {
   selectedIdea$ = this.store.pipe(select('idea', 'selected'));
 
   constructor(
-    private apolloService: ApolloService,
     private actions$: Actions,
+    private apolloService: ApolloService,
     private ideaFiltersFacade: IdeaFiltersFacade,
     private userFacade: UserFacade,
     private store: Store<{ idea: any }>
@@ -75,7 +75,6 @@ export class IdeaFacade {
         if (!user) {
           return of(EMPTY);
         }
-        console.log('user', user);
         return this.apolloService.apolloClient.mutate({
           mutation: CreateIdeaMutation,
           optimisticResponse: {
