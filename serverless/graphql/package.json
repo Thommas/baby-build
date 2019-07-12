@@ -30,7 +30,7 @@
     "elasticsearch": "^15.3.0",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
-    "graphql": "^14.0.2",
+    "graphql": "14.4.2",
     "graphql-iso-date": "^3.6.1",
     "graphql-server-lambda": "^1.4.0",
     "graphql-tools": "^4.0.3",
