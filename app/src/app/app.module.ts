@@ -132,7 +132,8 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     EffectsModule.forRoot([
       IdeaFacade,
-      IdeaTagFacade
+      IdeaTagFacade,
+      ReviewFacade
     ])
   ],
   providers: [

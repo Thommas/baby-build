@@ -56,8 +56,7 @@ export class IdeaTagFacade {
   }
 
   createIdeaTag(data: any) {
-    // FIXME
-    // this.store.dispatch(new CreateIdeaTag(data));
+    this.store.dispatch(new CreateIdeaTag(data));
   }
 
   @Effect({ dispatch: false })
@@ -73,8 +72,7 @@ export class IdeaTagFacade {
         if (!user || !selectedIdea) {
           return of(EMPTY);
         }
-        console.log('MUTATE');
-        this.apolloService.apolloClient.mutate({
+        return this.apolloService.apolloClient.mutate({
           mutation: CreateIdeaTagMutation,
           variables: {
             ideaId: selectedIdea.id,
@@ -110,8 +108,7 @@ export class IdeaTagFacade {
               data: { ideaTags: [...query.ideaTags, createIdeaTag] }
             });
           }
-        }).subscribe();
-        return of(EMPTY);
+        });
       })
     );
 

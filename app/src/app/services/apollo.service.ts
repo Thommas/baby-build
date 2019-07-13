@@ -42,7 +42,6 @@ export class ApolloService {
 
     const authLink = setContext(async(_, { headers }) => {
       let token = await this.authService.idToken$.pipe(first()).toPromise();
-      console.log('token', token);
 
       return {
         headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
@@ -59,12 +58,16 @@ export class ApolloService {
 
       if (networkError) console.log(`[Network error]: ${networkError}`);
     });
+
     const httpLink: ApolloLink = this.httpLink.create({ uri: environment.apollo.url });
+
     this.apollo.create({
       link: ApolloLink.from([authLink, errorLink, httpLink]),
       cache: new InMemoryCache()
     });
+
     this._apolloClient = this.apollo;
+
     return this._apolloClient;
   }
 }

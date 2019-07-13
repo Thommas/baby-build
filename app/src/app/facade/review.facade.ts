@@ -4,13 +4,23 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import uuid from 'uuid/v4';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { flatMap, map } from 'rxjs/operators';
-import { GetReviews } from '../graphql';
+import { Effect, ofType, Actions } from '@ngrx/effects';
+import { Observable, of, EMPTY } from 'rxjs';
+import { flatMap, map, withLatestFrom, mergeMap } from 'rxjs/operators';
+import {
+  CreateReviewMutation,
+  GetReviews,
+  UpdateReviewMutation
+} from '../graphql';
 import { ApolloService } from '../services';
-import { SelectReview } from '../store';
+import {
+  ReviewActionTypes,
+  SelectReview,
+  UpdateReview
+} from '../store';
 import { IdeaFacade } from './idea.facade';
 import { UserFacade } from './user.facade';
 
@@ -21,6 +31,7 @@ export class ReviewFacade {
   selectedReview$ = this.store.pipe(select('review', 'selected'));
 
   constructor(
+    private actions$: Actions,
     private apolloService: ApolloService,
     private ideaFacade: IdeaFacade,
     private userFacade: UserFacade,
@@ -97,5 +108,80 @@ export class ReviewFacade {
 
   selectReview(idea: any) {
     this.store.dispatch(new SelectReview(idea));
+  }
+
+  updateReview(review: any) {
+    this.store.dispatch(new UpdateReview(review));
+  }
+
+  @Effect({dispatch: false})
+  updateReview$ = this.actions$
+    .pipe(
+      ofType(ReviewActionTypes.UpdateReview),
+      withLatestFrom(this.userFacade.user$),
+      mergeMap((args: any[]) => {
+        const action: any = args[0];
+        const user: any = args[1];
+        const review = action.payload;
+        if (!user) {
+          return of(EMPTY);
+        }
+        return this.apolloService.apolloClient.mutate({
+          mutation: review.id ? UpdateReviewMutation : CreateReviewMutation,
+          variables: review,
+          optimisticResponse: {
+            __typename: 'Mutation',
+            [review.id ? 'updateReview' : 'createReview']: {
+              __typename: 'Review',
+              id: `-${uuid()}`,
+              ...review,
+              userId: user.id,
+              user,
+            },
+          },
+          update: (store, { data: { createReview, updateReview } }) => {
+            if (!createReview && !updateReview) {
+              return;
+            }
+            const updatedReview: any = createReview ? createReview : updateReview;
+            if (!updatedReview.id) {
+              return;
+            }
+            this.updateReviews(store, review, updatedReview);
+            this.updateIdeas(store, review, updatedReview);
+          },
+        });
+      })
+    );
+
+  updateReviews(store: any, review: any, updatedReview) {
+    const query: any = store.readQuery({
+      query: GetReviews,
+      variables: { ideaId: review.ideaId },
+    });
+    const reviews: any[] = query.reviews.map((review: any) => review.id === review.id ? updatedReview : review);
+    store.writeQuery({
+      query: GetReviews,
+      variables: { ideaId: review.ideaId },
+      data: { reviews },
+    });
+    // this.review = updatedReview;
+    // this.formGroup.patchValue({
+    //   id: this.review.id,
+    //   requiredAge: this.review.requiredAge,
+    //   requiredAgeExplanation: this.review.requiredAgeExplanation,
+    //   score: this.review.score,
+    //   scoreExplanation: this.review.scoreExplanation,
+    //   ideaId: this.review.ideaId,
+    // });
+  }
+
+  updateIdeas(store: any, data: any, updatedReview: any) {
+    console.log('Update idea in store');
+    // store.writeQuery({
+    //   query: GetReviews,
+    //   variables: { ideaId: this.review.ideaId },
+    //   data: { reviews },
+    // });
   }
 }

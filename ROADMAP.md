@@ -9,6 +9,7 @@ Short term
 Medium term
 -----------
 
+- Don't double add tag (frontend check and backend ignore duplicate)
 - Add Idea permission based on sharing (mutualize checking sharing)
 - Display requiredAge/score in list + compute based on loaded reviews when changed (+ purge queries)
 - Paginate ideas
