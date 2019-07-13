@@ -116,7 +116,6 @@ export class IdeaFacade {
       mergeMap((args: any[]) => {
         const action: any = args[0];
         const user: any = args[1];
-        console.log('action', action);
         if (!user) {
           return of(EMPTY);
         }
@@ -148,7 +147,6 @@ export class IdeaFacade {
               label: updateIdea.label,
             } : idea);
             store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
-            // this.idea.label = updateIdea.label;
           }
         });
       })

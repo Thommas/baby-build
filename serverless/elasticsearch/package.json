@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "WTFPL",
   "scripts": {
-    "start": "SLS_DEBUG=* serverless offline start --stage dev --region eu-west-2",
+    "start": "serverless offline start --stage dev --region eu-west-2",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "test": "jasmine-ts \"lib/**/*.spec.ts\"",
     "e2e": "jasmine-ts \"e2e/**/*.spec.ts\"",
@@ -19,6 +19,7 @@
     "elasticsearch": "^15.2.0",
     "jasmine": "^3.1.0",
     "jasmine-ts": "^0.2.1",
+    "lodash": "^4.17.14",
     "serverless-offline": "^3.32.2",
     "serverless-offline-dynamodb-streams": "^1.6.0",
     "serverless-plugin-offline-dynamodb-stream": "^1.0.18",

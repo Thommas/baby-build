@@ -80,8 +80,8 @@ export class IdeaItemComponent implements OnInit, OnChanges {
     if (!this.formGroup.valid) {
       return;
     }
-    const data: any = clone(this.formGroup.value);
-    this.ideaFacade.updateIdea(data);
+    const idea: any = clone(this.formGroup.value);
+    this.ideaFacade.updateIdea(idea);
   }
 
   onKey(event: KeyboardEvent) {

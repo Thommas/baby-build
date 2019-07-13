@@ -110,7 +110,10 @@ export class ReviewItemComponent implements OnInit, OnChanges {
       return;
     }
     const review: any = clone(this.formGroup.value);
-    console.log('save', review);
-    this.reviewFacade.updateReview(review);
+    if (review.id) {
+      this.reviewFacade.updateReview(review);
+    } else {
+      this.reviewFacade.createReview(review);
+    }
   }
 }

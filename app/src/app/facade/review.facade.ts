@@ -5,6 +5,7 @@
  */
 
 import uuid from 'uuid/v4';
+import { meanBy } from 'lodash';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Effect, ofType, Actions } from '@ngrx/effects';
@@ -12,11 +13,13 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap, map, withLatestFrom, mergeMap } from 'rxjs/operators';
 import {
   CreateReviewMutation,
+  GetIdeas,
   GetReviews,
   UpdateReviewMutation
 } from '../graphql';
 import { ApolloService } from '../services';
 import {
+  CreateReview,
   ReviewActionTypes,
   SelectReview,
   UpdateReview
@@ -106,9 +109,47 @@ export class ReviewFacade {
     );
   }
 
-  selectReview(idea: any) {
-    this.store.dispatch(new SelectReview(idea));
+  selectReview(review: any) {
+    this.store.dispatch(new SelectReview(review));
   }
+
+  createReview(review: any) {
+    this.store.dispatch(new CreateReview(review));
+  }
+
+  @Effect({dispatch: false})
+  createReview$ = this.actions$
+    .pipe(
+      ofType(ReviewActionTypes.CreateReview),
+      withLatestFrom(this.userFacade.user$),
+      mergeMap((args: any[]) => {
+        const action: any = args[0];
+        const user: any = args[1];
+        const review = action.payload;
+        if (!user) {
+          return of(EMPTY);
+        }
+        return this.apolloService.apolloClient.mutate({
+          mutation: CreateReviewMutation,
+          variables: review,
+          optimisticResponse: {
+            __typename: 'Mutation',
+            createReview: {
+              __typename: 'Review',
+              id: `-${uuid()}`,
+              ...review,
+              userId: user.id,
+              user,
+            },
+          },
+          update: (store, { data: { createReview } }) => {
+            this.selectReview(createReview);
+            this.addToReviews(store, createReview);
+            this.updateIdeas(store, createReview);
+          },
+        });
+      })
+    );
 
   updateReview(review: any) {
     this.store.dispatch(new UpdateReview(review));
@@ -127,11 +168,11 @@ export class ReviewFacade {
           return of(EMPTY);
         }
         return this.apolloService.apolloClient.mutate({
-          mutation: review.id ? UpdateReviewMutation : CreateReviewMutation,
+          mutation: UpdateReviewMutation,
           variables: review,
           optimisticResponse: {
             __typename: 'Mutation',
-            [review.id ? 'updateReview' : 'createReview']: {
+            updateReview: {
               __typename: 'Review',
               id: `-${uuid()}`,
               ...review,
@@ -139,49 +180,69 @@ export class ReviewFacade {
               user,
             },
           },
-          update: (store, { data: { createReview, updateReview } }) => {
-            if (!createReview && !updateReview) {
-              return;
-            }
-            const updatedReview: any = createReview ? createReview : updateReview;
-            if (!updatedReview.id) {
-              return;
-            }
-            this.updateReviews(store, review, updatedReview);
-            this.updateIdeas(store, review, updatedReview);
+          update: (store, { data: { updateReview } }) => {
+            this.selectReview(updateReview);
+            this.updateReviews(store, updateReview);
+            this.updateIdeas(store, updateReview);
           },
         });
       })
     );
 
-  updateReviews(store: any, review: any, updatedReview) {
+  addToReviews(store: any, createdReview: any) {
+    if (!createdReview || !createdReview.id) {
+      return;
+    }
     const query: any = store.readQuery({
       query: GetReviews,
-      variables: { ideaId: review.ideaId },
+      variables: { ideaId: createdReview.ideaId },
+    });
+    query.reviews.push(createdReview);
+    store.writeQuery({
+      query: GetReviews,
+      variables: { ideaId: createdReview.ideaId },
+      data: { reviews: query.reviews },
+    });
+  }
+
+  updateReviews(store: any, updatedReview: any) {
+    if (!updatedReview || !updatedReview.id) {
+      return;
+    }
+    const query: any = store.readQuery({
+      query: GetReviews,
+      variables: { ideaId: updatedReview.ideaId },
     });
     const reviews: any[] = query.reviews.map((review: any) => review.id === review.id ? updatedReview : review);
     store.writeQuery({
       query: GetReviews,
-      variables: { ideaId: review.ideaId },
+      variables: { ideaId: updatedReview.ideaId },
       data: { reviews },
     });
-    // this.review = updatedReview;
-    // this.formGroup.patchValue({
-    //   id: this.review.id,
-    //   requiredAge: this.review.requiredAge,
-    //   requiredAgeExplanation: this.review.requiredAgeExplanation,
-    //   score: this.review.score,
-    //   scoreExplanation: this.review.scoreExplanation,
-    //   ideaId: this.review.ideaId,
-    // });
   }
 
-  updateIdeas(store: any, data: any, updatedReview: any) {
-    console.log('Update idea in store');
-    // store.writeQuery({
-    //   query: GetReviews,
-    //   variables: { ideaId: this.review.ideaId },
-    //   data: { reviews },
-    // });
+  updateIdeas(store: any, review: any) {
+    if (!review || !review.id) {
+      return;
+    }
+    const reviewsQuery: any = store.readQuery({
+      query: GetReviews,
+      variables: { ideaId: review.ideaId },
+    });
+    const averageRequiredAge = Math.round(meanBy(reviewsQuery.reviews, (review) => review.requiredAge));
+    const averageScore = Math.round(meanBy(reviewsQuery.reviews, (review) => review.score));
+
+    const ideasQuery: any = store.readQuery({
+      query: GetIdeas,
+    });
+    const ideas: any[] = ideasQuery.ideas.map((idea: any) => idea.id === review.ideaId ? {
+      ...idea,
+      requiredAge: averageRequiredAge,
+      score: averageScore,
+    } : idea);
+    store.writeQuery({
+      query: GetIdeas,
+      data: { ideas },
+    });
   }
 }
