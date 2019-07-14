@@ -49,7 +49,7 @@ function createTable(): Promise<any> {
   };
   return ddb.createTable(params).promise()
     .catch((err) => {
-      // Ignore error
+      console.log('error', err);
     });
 }
 
@@ -57,7 +57,10 @@ function createDocument(entity: string, document: any): Promise<any> {
   const item = new Entity({
     ...document
   });
-  return item.save();
+  return item.save()
+    .catch((err) => {
+      console.log('error', err);
+    });
 }
 
 function loadData(entity: string): Promise<any> {

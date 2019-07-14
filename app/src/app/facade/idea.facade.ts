@@ -132,9 +132,7 @@ export class IdeaFacade {
                 __typename: 'User',
                 firstName: user.firstName,
                 lastName: user.lastName,
-              },
-              requiredAge: 0,
-              score: 0,
+              }
             },
           },
           update: (store, { data: { updateIdea } }) => {

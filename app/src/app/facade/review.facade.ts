@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap, map, withLatestFrom, mergeMap } from 'rxjs/operators';
+import { flatMap, map, withLatestFrom, mergeMap, tap } from 'rxjs/operators';
 import {
   CreateReviewMutation,
   GetIdeas,
@@ -20,6 +20,7 @@ import {
 import { ApolloService } from '../services';
 import {
   CreateReview,
+  IdeaActionTypes,
   ReviewActionTypes,
   SelectReview,
   UpdateReview
@@ -134,6 +135,7 @@ export class ReviewFacade {
           variables: review,
           optimisticResponse: {
             __typename: 'Mutation',
+            optimistic: true,
             createReview: {
               __typename: 'Review',
               id: `-${uuid()}`,
@@ -142,10 +144,12 @@ export class ReviewFacade {
               user,
             },
           },
-          update: (store, { data: { createReview } }) => {
-            this.selectReview(createReview);
-            this.addToReviews(store, createReview);
-            this.updateIdeas(store, createReview);
+          update: (store, { data: { optimistic, createReview } }) => {
+            if (optimistic) {
+              this.selectReview(createReview);
+              this.addToReviews(store, createReview);
+              this.updateIdea(store, createReview);
+            }
           },
         });
       })
@@ -172,6 +176,7 @@ export class ReviewFacade {
           variables: review,
           optimisticResponse: {
             __typename: 'Mutation',
+            optimistic: true,
             updateReview: {
               __typename: 'Review',
               id: `-${uuid()}`,
@@ -180,19 +185,18 @@ export class ReviewFacade {
               user,
             },
           },
-          update: (store, { data: { updateReview } }) => {
-            this.selectReview(updateReview);
-            this.updateReviews(store, updateReview);
-            this.updateIdeas(store, updateReview);
+          update: (store, { data: { optimistic, updateReview } }) => {
+            if (optimistic) {
+              this.selectReview(updateReview);
+              this.updateReviews(store, updateReview);
+              this.updateIdea(store, updateReview);
+            }
           },
         });
       })
     );
 
   addToReviews(store: any, createdReview: any) {
-    if (!createdReview || !createdReview.id) {
-      return;
-    }
     const query: any = store.readQuery({
       query: GetReviews,
       variables: { ideaId: createdReview.ideaId },
@@ -206,9 +210,6 @@ export class ReviewFacade {
   }
 
   updateReviews(store: any, updatedReview: any) {
-    if (!updatedReview || !updatedReview.id) {
-      return;
-    }
     const query: any = store.readQuery({
       query: GetReviews,
       variables: { ideaId: updatedReview.ideaId },
@@ -221,10 +222,7 @@ export class ReviewFacade {
     });
   }
 
-  updateIdeas(store: any, review: any) {
-    if (!review || !review.id) {
-      return;
-    }
+  updateIdea(store: any, review: any) {
     const reviewsQuery: any = store.readQuery({
       query: GetReviews,
       variables: { ideaId: review.ideaId },
@@ -235,14 +233,17 @@ export class ReviewFacade {
     const ideasQuery: any = store.readQuery({
       query: GetIdeas,
     });
-    const ideas: any[] = ideasQuery.ideas.map((idea: any) => idea.id === review.ideaId ? {
-      ...idea,
-      requiredAge: averageRequiredAge,
-      score: averageScore,
-    } : idea);
-    store.writeQuery({
-      query: GetIdeas,
-      data: { ideas },
-    });
+    const idea: any = ideasQuery.ideas.find((idea: any) => idea.id === review.ideaId);
+    idea.requiredAge = averageRequiredAge;
+    idea.score = averageScore;
+    this.ideaFacade.updateIdea(idea);
   }
+
+  @Effect({dispatch: false})
+  createIdea$ = this.actions$
+    .pipe(
+      ofType(IdeaActionTypes.SelectIdea),
+      withLatestFrom(this.userFacade.user$),
+      tap(() => this.selectReview(null))
+    );
 }

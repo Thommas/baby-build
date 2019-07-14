@@ -51,6 +51,8 @@ export function updateIdea(args: any, userId: string) {
       //   throw new Error('Unauthorized');
       // }
       entity.label = args.label;
+      entity.requiredAge = args.requiredAge;
+      entity.score = args.score;
       return entity.save();
     });
 }

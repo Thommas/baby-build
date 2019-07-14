@@ -24,6 +24,8 @@ const Idea = `
     updateIdea(
       id: String!
       label: String
+      requiredAge: Float
+      score: Float
     ): Idea
     updateIdeaIcon(
       id: String!

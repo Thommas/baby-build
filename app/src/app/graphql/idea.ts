@@ -46,10 +46,14 @@ export const UpdateIdeaMutation = gql`
   mutation UpdateIdea(
     $id: String!
     $label: String
+    $requiredAge: Float
+    $score: Float
   ) {
     updateIdea(
       id: $id
       label: $label
+      requiredAge: $requiredAge
+      score: $score
     ) {
       id
       label
