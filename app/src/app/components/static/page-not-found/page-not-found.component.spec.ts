@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - Static - Page Not Found
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 /* tslint:disable:no-unused-variable */

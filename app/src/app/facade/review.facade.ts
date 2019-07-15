@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap, map, withLatestFrom, mergeMap, tap } from 'rxjs/operators';
+import { flatMap, map, withLatestFrom, mergeMap, tap, take } from 'rxjs/operators';
 import {
   CreateReviewMutation,
   GetIdeas,
@@ -101,6 +101,7 @@ export class ReviewFacade {
                       ideaId: selectedIdea.id,
                     };
                   }
+                  this.selectReview(loggedUserReview);
                   return loggedUserReview;
                 })
               );
@@ -238,12 +239,4 @@ export class ReviewFacade {
     idea.score = averageScore;
     this.ideaFacade.updateIdea(idea);
   }
-
-  @Effect({dispatch: false})
-  createIdea$ = this.actions$
-    .pipe(
-      ofType(IdeaActionTypes.SelectIdea),
-      withLatestFrom(this.userFacade.user$),
-      tap(() => this.selectReview(null))
-    );
 }

@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - Main - Module
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

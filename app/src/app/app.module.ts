@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * App - Module - Browser
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
@@ -133,7 +131,8 @@ export function createTranslateLoader(http: HttpClient) {
     EffectsModule.forRoot([
       IdeaFacade,
       IdeaTagFacade,
-      ReviewFacade
+      ReviewFacade,
+      UserFacade
     ])
   ],
   providers: [

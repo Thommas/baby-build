@@ -103,10 +103,15 @@ export class IdeaFacade {
             updatedIdeas.unshift(createIdea);
             store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas } });
             // TODO Use a separate list for newly created items
+            this.selectIdea(createIdea);
           },
         });
       })
     );
+
+  updateIdea(data: any) {
+    this.store.dispatch(new UpdateIdea(data));
+  }
 
   @Effect({dispatch: false})
   updateIdea$ = this.actions$
@@ -149,10 +154,6 @@ export class IdeaFacade {
         });
       })
     );
-
-  updateIdea(data: any) {
-    this.store.dispatch(new UpdateIdea(data));
-  }
 
   deleteIdea(idea: any) {
     this.apolloService.apolloClient.mutate({

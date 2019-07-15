@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - Idea Tag Item
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

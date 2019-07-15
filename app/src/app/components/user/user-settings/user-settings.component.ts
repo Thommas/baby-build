@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - User - Settings
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

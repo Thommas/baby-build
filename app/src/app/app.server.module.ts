@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * App - Module - Server
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  *
  * @see https://angular.io/guide/universal

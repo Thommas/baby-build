@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Service - Security - Login
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

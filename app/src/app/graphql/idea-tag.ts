@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * GraphQL - IdeaTag
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

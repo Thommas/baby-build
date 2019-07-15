@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * GraphQL - Sharing
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

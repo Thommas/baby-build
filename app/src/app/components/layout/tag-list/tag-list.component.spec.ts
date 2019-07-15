@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - TagList
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

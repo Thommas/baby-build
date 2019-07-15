@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - Idea - Icon
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

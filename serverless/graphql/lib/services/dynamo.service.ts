@@ -18,6 +18,9 @@ export const getDynamoose = () => {
     localDynamoDBPort,
   } = configService;
 
+  console.log('localDynamoDBHost', localDynamoDBHost);
+  console.log('localDynamoDBPort', localDynamoDBPort);
+
   if (localDynamoDBHost && localDynamoDBPort) {
     dynamoose.AWS.config.update({
       region: 'eu-west-2',
@@ -33,6 +36,9 @@ export const getAWSDynamo = () => {
     localDynamoDBHost,
     localDynamoDBPort,
   } = configService;
+
+  console.log('localDynamoDBHost', localDynamoDBHost);
+  console.log('localDynamoDBPort', localDynamoDBPort);
 
   const serviceConfigOptions : ServiceConfigurationOptions = {
     region: 'eu-west-2',

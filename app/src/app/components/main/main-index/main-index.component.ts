@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - Idea - Index
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

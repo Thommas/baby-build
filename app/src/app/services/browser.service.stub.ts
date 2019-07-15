@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Service - Browser - Stub
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

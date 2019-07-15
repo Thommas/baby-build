@@ -4,15 +4,12 @@ Roadmap
 Short term
 -----------
 
-- Refactor everything with facades
-
-Medium term
------------
-
+- Refactor sharing with facade
 - Don't double add tag (frontend check and backend ignore duplicate)
 - Add Idea permission based on sharing (mutualize checking sharing)
-- Display requiredAge/score in list + compute based on loaded reviews when changed (+ purge queries)
 - Paginate ideas
+- Add sort by for ideas
+- Add release date field to ideas
 - Deploy website on a new url
 
 Long term
@@ -27,9 +24,5 @@ Long term
 - Add unit tests
 - Invitations
 - Notifications
-
-Nice to have
-------------
-
 - Loading effect
 - CSS3 animations
