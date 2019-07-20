@@ -4,7 +4,6 @@ Roadmap
 Short term
 -----------
 
-- Refactor sharing with facade
 - Don't double add tag (frontend check and backend ignore duplicate)
 - Add Idea permission based on sharing (mutualize checking sharing)
 - Paginate ideas

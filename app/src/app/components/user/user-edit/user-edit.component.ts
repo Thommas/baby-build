@@ -7,9 +7,10 @@
 import { clone } from 'lodash';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { fromEvent } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged, } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { UserFacade } from '../../../facade';
+import { FormService } from '../../../services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-edit-cmp',
@@ -18,10 +19,12 @@ import { UserFacade } from '../../../facade';
 })
 export class UserEditComponent implements OnInit, OnDestroy {
   @ViewChild('inputElement') inputElement: any;
-  userSubscription;
+  userSubscription: Subscription;
+  formFieldSub: Subscription;
   formGroup: FormGroup;
 
   constructor(
+    private formService: FormService,
     public userFacade: UserFacade
   ) {
     this.formGroup = new FormGroup({
@@ -32,6 +35,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const operator = map(() => this.save());
+    this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
     this.userSubscription = this.userFacade.user$.subscribe((user: any) => {
       this.formGroup.setValue({
         id: user.id,
@@ -39,19 +44,14 @@ export class UserEditComponent implements OnInit, OnDestroy {
         lastName: user.lastName
       })
     });
-    fromEvent(this.inputElement.nativeElement, 'input').pipe(
-      map((e: { target: HTMLInputElement }) => e.target.value),
-      debounceTime(800),
-      distinctUntilChanged(),
-    ).subscribe(data => this.save());
   }
 
   ngOnDestroy() {
+    this.formFieldSub.unsubscribe();
     this.userSubscription.unsubscribe();
   }
 
   save() {
-    console.log('save');
     if (!this.formGroup.valid) {
       return;
     }

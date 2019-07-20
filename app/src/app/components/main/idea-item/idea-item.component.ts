@@ -7,9 +7,10 @@
 import { clone } from 'lodash';
 import { Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { fromEvent } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { IdeaFacade, UserFacade } from '../../../facade';
+import { FormService } from '../../../services';
+import { map } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-idea-item-cmp',
@@ -22,10 +23,12 @@ export class IdeaItemComponent implements OnInit, OnChanges {
   formGroup: FormGroup;
   loading: boolean;
   emptyIdeaReadyForDeletion: boolean;
+  formFieldSub: Subscription;
 
   constructor(
     private ideaFacade: IdeaFacade,
-    private userFacade: UserFacade
+    private userFacade: UserFacade,
+    private formService: FormService
   ) {
     this.emptyIdeaReadyForDeletion = false;
     this.idea = {};
@@ -42,11 +45,12 @@ export class IdeaItemComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    fromEvent(this.inputElement.nativeElement, 'input').pipe(
-      map((e: { target: HTMLInputElement }) => e.target.value),
-      debounceTime(800),
-      distinctUntilChanged(),
-    ).subscribe(data => this.save());
+    const operator = map(() => this.save());
+    this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
+  }
+
+  ngOnDestroy() {
+    this.formFieldSub.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges) {

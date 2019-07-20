@@ -4,23 +4,25 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, ViewChild } from '@angular/core';
-import { fromEvent, Observable, of } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { IdeaFacade, IdeaTagFacade, TagFacade } from '../../../facade';
+import { FormService } from '../../../services';
 
 @Component({
   selector: 'app-idea-tag-list-cmp',
   templateUrl: './idea-tag-list.component.html',
   styleUrls: ['./idea-tag-list.component.scss']
 })
-export class IdeaTagListComponent {
+export class IdeaTagListComponent implements OnInit {
   @ViewChild('inputElement') inputElement: any;
   tags$: Observable<any>;
   selectedIdea$ = this.ideaFacade.selectedIdea$;
   ideaTags$ = this.ideaTagFacade.ideaTags$;
 
   constructor(
+    private formService: FormService,
     private ideaFacade: IdeaFacade,
     private ideaTagFacade: IdeaTagFacade,
     private tagFacade: TagFacade
@@ -28,18 +30,13 @@ export class IdeaTagListComponent {
   }
 
   ngOnInit() {
-    this.tags$ = fromEvent(this.inputElement.nativeElement, 'input').pipe(
-      map((e: { target: HTMLInputElement }) => e.target.value),
-      filter((value: string) => value.length > 2),
-      debounceTime(800),
-      distinctUntilChanged(),
-      mergeMap((value: any) => {
-        if (0 === value.length) {
-          return of([]);
-        }
-        return this.tagFacade.getTagsByLabel(value);
-      }),
-    );
+    const operator = mergeMap((value: any) => {
+      if (0 === value.length) {
+        return of([]);
+      }
+      return this.tagFacade.getTagsByLabel(value);
+    });
+    this.tags$ = this.formService.getFormFieldObs(this.inputElement, operator);
   }
 
   optionSelected(event: any) {

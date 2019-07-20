@@ -5,18 +5,19 @@
  */
 
 import { clone } from 'lodash';
-import { Component, OnInit, OnChanges, Input, ViewChild, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ViewChild, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ReviewFacade } from '../../../facade';
+import { FormService } from '../../../services';
 
 @Component({
   selector: 'app-review-item-cmp',
   templateUrl: './review-item.component.html',
   styleUrls: ['./review-item.component.scss']
 })
-export class ReviewItemComponent implements OnInit, OnChanges {
+export class ReviewItemComponent implements OnInit, OnDestroy, OnChanges {
   @Input() review: any;
   @ViewChild('requiredAgeExplanationElement') requiredAgeExplanationElement: any;
   @ViewChild('scoreExplanationElement') scoreExplanationElement: any;
@@ -24,8 +25,12 @@ export class ReviewItemComponent implements OnInit, OnChanges {
   loading: boolean;
   ages: number[] = [];
   scores: number[] = [];
+  subs: Subscription[] = [];
 
-  constructor(private reviewFacade: ReviewFacade) {
+  constructor(
+    private formService: FormService,
+    private reviewFacade: ReviewFacade
+  ) {
     this.review = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
@@ -56,13 +61,17 @@ export class ReviewItemComponent implements OnInit, OnChanges {
       this.requiredAgeExplanationElement,
       this.scoreExplanationElement,
     ];
+    const operator = map((value: any) => this.save());
     for (const element of elements) {
-      fromEvent(element.nativeElement, 'input').pipe(
-        map((e: { target: HTMLInputElement }) => e.target.value),
-        debounceTime(800),
-        distinctUntilChanged(),
-      ).subscribe(data => this.save());
+      this.subs.push(this.formService.getFormFieldSubscription(element, operator));
     }
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
+    this.subs = [];
   }
 
   selectRequiredAge(age: number) {

@@ -7,4 +7,5 @@ export * from './idea-filters/idea-filters.actions';
 export * from './idea-filters/idea-filters.reducer';
 export * from './review/review.actions';
 export * from './review/review.reducer';
+export * from './sharing/sharing.actions';
 export * from './user/user.actions';

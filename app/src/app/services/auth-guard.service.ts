@@ -1,7 +1,9 @@
 /**
  * Path of child
  *
- * authorization
+ * @author Thomas Bullier <thomasbullier@gmail.com>
+ *
+ * @see https://auth0.com/docs/quickstart/spa/angular2/04-authorization
  */
 
 import { Injectable } from '@angular/core';

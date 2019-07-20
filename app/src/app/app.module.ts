@@ -48,6 +48,7 @@ import {
   AuthGuardService,
   AuthService,
   BrowserService,
+  FormService,
   LocaleService,
   ProgressService
 } from './services';
@@ -57,6 +58,7 @@ import {
   IdeaFiltersFacade,
   IdeaTagFacade,
   ReviewFacade,
+  SharingFacade,
   TagFacade,
   UserFacade,
 } from './facade';
@@ -132,6 +134,7 @@ export function createTranslateLoader(http: HttpClient) {
       IdeaFacade,
       IdeaTagFacade,
       ReviewFacade,
+      SharingFacade,
       UserFacade
     ])
   ],
@@ -142,6 +145,7 @@ export function createTranslateLoader(http: HttpClient) {
     AuthGuardService,
     AuthService,
     BrowserService,
+    FormService,
     LocaleService,
     ProgressService,
     Actions,
@@ -150,6 +154,7 @@ export function createTranslateLoader(http: HttpClient) {
     IdeaFiltersFacade,
     IdeaTagFacade,
     ReviewFacade,
+    SharingFacade,
     TagFacade,
     UserFacade,
   ],

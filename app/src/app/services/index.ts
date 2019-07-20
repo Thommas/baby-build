@@ -6,6 +6,7 @@ export * from './auth.service.stub';
 export * from './auth.service';
 export * from './browser.service.stub';
 export * from './browser.service';
+export * from './form.service';
 export * from './http.service';
 export * from './http.service.stub';
 export * from './locale.service';
