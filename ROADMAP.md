@@ -4,16 +4,17 @@ Roadmap
 Short term
 -----------
 
-- Don't double add tag (frontend check and backend ignore duplicate)
-- Add Idea permission based on sharing (mutualize checking sharing)
 - Paginate ideas
 - Add sort by for ideas
 - Add release date field to ideas
+- Fix remaining bugs
 - Deploy website on a new url
 
 Long term
 ---------
 
+- Add Idea permission based on sharing (mutualize checking sharing)
+- Double add ideaTag (backend ignore duplicate)
 - Implement voice recording to create task
 - Refactor gamification xp/lvl
 - Logs

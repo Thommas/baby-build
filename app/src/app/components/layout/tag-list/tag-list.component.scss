@@ -17,3 +17,13 @@ img {
 header {
   min-height: 68px;
 }
+
+mat-button-toggle {
+  background: transparent;
+  color: white;
+}
+
+.mat-button-toggle-checked {
+  background: white;
+  color: black;
+}

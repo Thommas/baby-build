@@ -1,2 +1,4 @@
-<div (click)="selectTag()">All</div>
-<div (click)="selectTag(tag)" *ngFor="let tag of tags$ | async">{{ tag.label }}</div>
+<mat-button-toggle-group name="tags" aria-label="Tags" vertical>
+  <mat-button-toggle [checked]="true" [value]="null" (click)="selectTag()">All</mat-button-toggle>
+  <mat-button-toggle [checked]="false" [value]="tag.id" (click)="selectTag(tag)" *ngFor="let tag of tags$ | async">{{ tag.label }}</mat-button-toggle>
+</mat-button-toggle-group>

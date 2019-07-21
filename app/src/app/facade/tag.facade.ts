@@ -12,17 +12,15 @@ import { ApolloService } from '../services';
 
 @Injectable()
 export class TagFacade {
-  tags$: Observable<any>;
+  tags$: Observable<any> = this.apolloService.apolloClient.watchQuery<any>({
+    query: GetTags,
+  })
+    .valueChanges
+    .pipe(
+      pluck('data', 'tags')
+    );
 
-  constructor(private apolloService: ApolloService) {
-    this.tags$ = this.apolloService.apolloClient.watchQuery<any>({
-      query: GetTags,
-    })
-      .valueChanges
-      .pipe(
-        pluck('data', 'tags')
-      );
-  }
+  constructor(private apolloService: ApolloService) {}
 
   getTagsByLabel(label: string) {
     return this.apolloService.apolloClient.watchQuery<any>({

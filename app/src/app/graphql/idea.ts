@@ -24,8 +24,8 @@ export const GetIdeas = gql`
 `;
 
 export const CreateIdeaMutation = gql`
-  mutation CreateIdea {
-    createIdea {
+  mutation CreateIdea($tagId: String) {
+    createIdea(tagId: $tagId) {
       id
       label
       icon

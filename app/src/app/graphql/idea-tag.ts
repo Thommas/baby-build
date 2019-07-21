@@ -11,6 +11,7 @@ export const GetIdeaTags = gql`
     ideaTags(ideaId: $ideaId) {
       id
       tag {
+        id
         label
       }
       userId
@@ -23,6 +24,7 @@ export const CreateIdeaTagMutation = gql`
     createIdeaTag(ideaId: $ideaId, tagId: $tagId) {
       id
       tag {
+        id
         label
       }
       userId

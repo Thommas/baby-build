@@ -5,8 +5,6 @@
  */
 
 import { Component, Input, OnChanges } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { UpdateIdeaIconMutation } from '../../../graphql';
 
 @Component({
   selector: 'app-idea-icon-cmp',
@@ -30,7 +28,7 @@ export class IdeaIconComponent implements OnChanges {
     'ffff9d',
   ];
 
-  constructor(private apollo: Apollo) {
+  constructor() {
     this.ideaId = null;
     this.ideaLabel = null;
     this.ideaIcon = null;
@@ -41,18 +39,6 @@ export class IdeaIconComponent implements OnChanges {
   ngOnChanges() {
     this.setColor();
     this.setIcon();
-  }
-
-  updateIcon() {
-    if (!this.ideaId || this.ideaIcon) {
-      return;
-    }
-    this.apollo.mutate({
-      mutation: UpdateIdeaIconMutation,
-      variables: {
-        id: this.ideaId,
-      },
-    }).subscribe();
   }
 
   setColor() {

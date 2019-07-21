@@ -15,20 +15,19 @@ import { Store } from '@ngrx/store';
 
 @Injectable()
 export class SharingFacade {
-  sharings$: Observable<any>;
+  sharings$: Observable<any> = this.apolloService.apolloClient.watchQuery<any>({
+    query: GetSharings
+  })
+    .valueChanges
+    .pipe(
+      pluck('data', 'sharings')
+    );
 
   constructor(
     private actions$: Actions,
     private apolloService: ApolloService,
     private store: Store<any>
   ) {
-    this.sharings$ = this.apolloService.apolloClient.watchQuery<any>({
-      query: GetSharings
-    })
-      .valueChanges
-      .pipe(
-        pluck('data', 'sharings')
-      );
   }
 
   createSharing(userId: string) {

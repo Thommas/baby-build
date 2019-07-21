@@ -19,6 +19,7 @@ import { Actions, EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatIconModule,
   MatMenuModule,
@@ -110,6 +111,7 @@ export function createTranslateLoader(http: HttpClient) {
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatIconModule,
     MatMenuModule,

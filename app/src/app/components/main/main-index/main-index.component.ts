@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { IdeaFacade, IdeaFiltersFacade } from '../../../facade';
+import { IdeaFacade } from '../../../facade';
 
 @Component({
   selector: 'app-main-index-cmp',
@@ -17,14 +17,12 @@ export class MainIndexComponent {
   selectedIdea$ = this.ideaFacade.selectedIdea$;
 
   constructor(
-    private ideaFacade: IdeaFacade,
-    private ideaFiltersFacade: IdeaFiltersFacade
+    private ideaFacade: IdeaFacade
   ) {
     this.displayFilters = false;
   }
 
   createIdea() {
-    this.ideaFiltersFacade.reset();
     this.ideaFacade.createIdea();
   }
 

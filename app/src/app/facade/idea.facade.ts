@@ -21,9 +21,38 @@ import { IdeaActionTypes, CreateIdea, UpdateIdea, SelectIdea } from '../store';
 import { IdeaFiltersFacade } from './idea-filters.facade';
 import { UserFacade } from './user.facade';
 
+const purifyFilters = (filters: any) => {
+  const currentFilters = Object.assign({}, filters);
+  if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
+    delete currentFilters.requiredAge;
+  }
+  if (!currentFilters.score || 0 === currentFilters.score.length) {
+    delete currentFilters.score;
+  }
+  if (!currentFilters.tagId) {
+    delete currentFilters.tagId;
+  }
+  if (!currentFilters.name) {
+    delete currentFilters.name;
+  }
+
+  return currentFilters;
+}
+
 @Injectable()
 export class IdeaFacade {
-  ideas$;
+  ideas$ = this.ideaFiltersFacade.filters$.pipe(
+    flatMap((filters: any) => {
+      return this.apolloService.apolloClient.watchQuery<any>({
+        query: GetIdeas,
+        variables: purifyFilters(filters),
+      })
+        .valueChanges
+        .pipe(
+          pluck('data', 'ideas')
+        )
+    })
+  );
   selectedIdea$ = this.store.pipe(select('idea', 'selected'));
 
   constructor(
@@ -33,32 +62,6 @@ export class IdeaFacade {
     private userFacade: UserFacade,
     private store: Store<{ idea: any }>
   ) {
-    this.ideas$ = this.ideaFiltersFacade.filters$.pipe(
-      flatMap((filters: any) => {
-        const currentFilters = Object.assign({}, filters);
-        if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
-          delete currentFilters.requiredAge;
-        }
-        if (!currentFilters.score || 0 === currentFilters.score.length) {
-          delete currentFilters.score;
-        }
-        if (!currentFilters.tagId) {
-          delete currentFilters.tagId;
-        }
-        if (!currentFilters.name) {
-          delete currentFilters.name;
-        }
-
-        return this.apolloService.apolloClient.watchQuery<any>({
-          query: GetIdeas,
-          variables: currentFilters,
-        })
-          .valueChanges
-          .pipe(
-            pluck('data', 'ideas')
-          )
-      })
-    );
   }
 
   createIdea() {
@@ -69,14 +72,21 @@ export class IdeaFacade {
   createIdea$ = this.actions$
     .pipe(
       ofType(IdeaActionTypes.CreateIdea),
-      withLatestFrom(this.userFacade.user$),
+      withLatestFrom(
+        this.userFacade.user$,
+        this.ideaFiltersFacade.filters$
+      ),
       mergeMap((args: any[]) => {
         const user: any = args[1];
+        const filters = args[2];
         if (!user) {
           return of(EMPTY);
         }
         return this.apolloService.apolloClient.mutate({
           mutation: CreateIdeaMutation,
+          variables: {
+            tagId: filters.tagId
+          },
           optimisticResponse: {
             __typename: 'Mutation',
             createIdea: {
@@ -98,10 +108,19 @@ export class IdeaFacade {
             if (!createIdea) {
               return;
             }
-            const data: any = store.readQuery({ query: GetIdeas });
+            const data: any = store.readQuery({
+              query: GetIdeas,
+              variables: purifyFilters(filters)
+            });
             const updatedIdeas: any = data.ideas;
             updatedIdeas.unshift(createIdea);
-            store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas } });
+            store.writeQuery({
+              query: GetIdeas,
+              variables: purifyFilters(filters),
+              data: {
+                ideas: updatedIdeas
+              }
+            });
             // TODO Use a separate list for newly created items
             this.selectIdea(createIdea);
           },

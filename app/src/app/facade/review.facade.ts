@@ -30,8 +30,73 @@ import { UserFacade } from './user.facade';
 
 @Injectable()
 export class ReviewFacade {
-  reviews$: Observable<any>;
-  loggedUserReview$: Observable<any>;
+  reviews$: Observable<any> = this.ideaFacade.selectedIdea$.pipe(
+    flatMap((selectedIdea: any) => {
+      if (!selectedIdea) {
+        return of([]);
+      }
+      return this.userFacade.user$.pipe(
+        flatMap((user: any) => {
+          if (!user) {
+            return of([]);
+          }
+          return this.apolloService.apolloClient.watchQuery<any>({
+            query: GetReviews,
+            variables: {
+              ideaId: selectedIdea.id,
+            },
+          })
+            .valueChanges
+            .pipe(
+              map(({ data }) => {
+                if (!data || !data.reviews) {
+                  return [];
+                }
+                return data.reviews.filter((review: any) => review.userId !== user.id);
+              })
+            );
+        }),
+      );
+    }),
+  );
+  loggedUserReview$: Observable<any> = this.ideaFacade.selectedIdea$.pipe(
+    flatMap((selectedIdea: any) => {
+      if (!selectedIdea) {
+        return of([]);
+      }
+      return this.userFacade.user$.pipe(
+        flatMap((user: any) => {
+          if (!user) {
+            return of([]);
+          }
+          return this.apolloService.apolloClient.watchQuery<any>({
+            query: GetReviews,
+            variables: {
+              ideaId: selectedIdea.id,
+            },
+          })
+            .valueChanges
+            .pipe(
+              map(({ data }) => {
+                if (!data || !data.reviews) {
+                  return null;
+                }
+                let loggedUserReview = data.reviews.find((review: any) => review.userId === user.id);
+                if (!loggedUserReview) {
+                  loggedUserReview = {
+                    user,
+                    userId: user.id,
+                    ideaId: selectedIdea.id,
+                  };
+                }
+                this.selectReview(loggedUserReview);
+                return loggedUserReview;
+              })
+            );
+          }),
+      );
+    }),
+  );
   selectedReview$ = this.store.pipe(select('review', 'selected'));
 
   constructor(
@@ -41,74 +106,6 @@ export class ReviewFacade {
     private userFacade: UserFacade,
     private store: Store<{ review: any }>
   ) {
-    this.reviews$ = this.ideaFacade.selectedIdea$.pipe(
-      flatMap((selectedIdea: any) => {
-        if (!selectedIdea) {
-          return of([]);
-        }
-        return this.userFacade.user$.pipe(
-          flatMap((user: any) => {
-            if (!user) {
-              return of([]);
-            }
-            return this.apolloService.apolloClient.watchQuery<any>({
-              query: GetReviews,
-              variables: {
-                ideaId: selectedIdea.id,
-              },
-            })
-              .valueChanges
-              .pipe(
-                map(({ data }) => {
-                  if (!data || !data.reviews) {
-                    return [];
-                  }
-                  return data.reviews.filter((review: any) => review.userId !== user.id);
-                })
-              );
-          }),
-        );
-      }),
-    );
-
-    this.loggedUserReview$ = this.ideaFacade.selectedIdea$.pipe(
-      flatMap((selectedIdea: any) => {
-        if (!selectedIdea) {
-          return of([]);
-        }
-        return this.userFacade.user$.pipe(
-          flatMap((user: any) => {
-            if (!user) {
-              return of([]);
-            }
-            return this.apolloService.apolloClient.watchQuery<any>({
-              query: GetReviews,
-              variables: {
-                ideaId: selectedIdea.id,
-              },
-            })
-              .valueChanges
-              .pipe(
-                map(({ data }) => {
-                  if (!data || !data.reviews) {
-                    return null;
-                  }
-                  let loggedUserReview = data.reviews.find((review: any) => review.userId === user.id);
-                  if (!loggedUserReview) {
-                    loggedUserReview = {
-                      user,
-                      userId: user.id,
-                      ideaId: selectedIdea.id,
-                    };
-                  }
-                  this.selectReview(loggedUserReview);
-                  return loggedUserReview;
-                })
-              );
-            }),
-        );
-      }),
-    );
   }
 
   selectReview(review: any) {

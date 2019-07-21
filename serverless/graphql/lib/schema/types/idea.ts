@@ -20,7 +20,9 @@ const Idea = `
     ideas(label: String, requiredAge: [Int], score: [Int], tagId: String): [Idea]
   }
   type Mutation {
-    createIdea: Idea
+    createIdea(
+      tagId: String
+    ): Idea
     updateIdea(
       id: String!
       label: String

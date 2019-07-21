@@ -5,11 +5,12 @@
  */
 
 import uuid from 'uuid/v4';
+import { find } from 'lodash';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
-import { flatMap, switchMap, pluck, map, withLatestFrom, combineLatest, mergeMap, take } from 'rxjs/operators';
+import { flatMap, pluck, withLatestFrom, mergeMap } from 'rxjs/operators';
 import {
   CreateIdeaTagMutation,
   DeleteIdeaTagMutation,
@@ -26,7 +27,25 @@ import {
 
 @Injectable()
 export class IdeaTagFacade {
-  ideaTags$;
+  ideaTags$ = this.ideaFacade.selectedIdea$.pipe(
+    flatMap((selectedIdea: any) => {
+      console.log('INSIDE IDEA TAGS', selectedIdea);
+      if (!selectedIdea) {
+        return of([]);
+      }
+
+      return this.apolloService.apolloClient.watchQuery<any>({
+        query: GetIdeaTags,
+        variables: {
+          ideaId: selectedIdea.id,
+        }
+      })
+        .valueChanges
+        .pipe(
+          pluck('data', 'ideaTags')
+        )
+    })
+  );
 
   constructor(
     private actions$: Actions,
@@ -35,24 +54,6 @@ export class IdeaTagFacade {
     private userFacade: UserFacade,
     private store: Store<{}>
   ) {
-    this.ideaTags$ = this.ideaFacade.selectedIdea$.pipe(
-      flatMap((selectedIdea: any) => {
-        if (!selectedIdea) {
-          return of([]);
-        }
-
-        return this.apolloService.apolloClient.watchQuery<any>({
-          query: GetIdeaTags,
-          variables: {
-            ideaId: selectedIdea.id,
-          }
-        })
-          .valueChanges
-          .pipe(
-            pluck('data', 'ideaTags')
-          )
-      })
-    );
   }
 
   createIdeaTag(data: any) {
@@ -63,13 +64,21 @@ export class IdeaTagFacade {
   createIdeaTag$ = this.actions$
     .pipe(
       ofType(IdeaTagActionTypes.CreateIdeaTag),
-      withLatestFrom(this.userFacade.user$, this.ideaFacade.selectedIdea$),
+      withLatestFrom(
+        this.userFacade.user$,
+        this.ideaFacade.selectedIdea$,
+        this.ideaTags$
+      ),
       flatMap((args: any[]) => {
         const action: any = args[0];
         const tag = action.payload;
         const user: any = args[1];
         const selectedIdea: any = args[2];
+        const ideaTags: any = args[3];
         if (!user || !selectedIdea) {
+          return of(EMPTY);
+        }
+        if (find(ideaTags, ['tag.id', tag.id])) {
           return of(EMPTY);
         }
         return this.apolloService.apolloClient.mutate({

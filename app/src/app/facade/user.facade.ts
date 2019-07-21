@@ -5,9 +5,8 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap, pluck, take, withLatestFrom, mergeMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { flatMap, pluck, take, mergeMap } from 'rxjs/operators';
 import { GetAuthUser, UpdateUserMutation, GetUsers } from '../graphql';
 import { ApolloService, AuthService } from '../services';
 import { Effect, ofType, Actions } from '@ngrx/effects';
@@ -16,7 +15,21 @@ import { Store } from '@ngrx/store';
 
 @Injectable()
 export class UserFacade {
-  user$: Observable<any>;
+  user$: Observable<any> = this.authService.isAuthenticated$.pipe(
+    take(1),
+    flatMap(isAuthenticated => {
+      if (!isAuthenticated) {
+        return of(null);
+      }
+      return this.apolloService.apolloClient.watchQuery<any>({
+        query: GetAuthUser
+      })
+        .valueChanges
+        .pipe(
+          pluck('data', 'authUser')
+        );
+    })
+  );
 
   constructor(
     private actions$: Actions,
@@ -24,21 +37,6 @@ export class UserFacade {
     private authService: AuthService,
     private store: Store<any>
   ) {
-    this.user$ = this.authService.isAuthenticated$.pipe(
-      take(1),
-      flatMap(isAuthenticated => {
-        if (!isAuthenticated) {
-          return of(null);
-        }
-        return this.apolloService.apolloClient.watchQuery<any>({
-          query: GetAuthUser
-        })
-          .valueChanges
-          .pipe(
-            pluck('data', 'authUser')
-          );
-      })
-    );
   }
 
   getUsersBySearchQuery(searchQuery: string) {
