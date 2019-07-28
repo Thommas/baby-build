@@ -9,8 +9,9 @@
     ></app-idea-list-cmp>
   </mat-card-content>
 </mat-card>
-<mat-card fxFlex class="right-card" *ngIf="selectedIdea$ | async">
-  <mat-card-header fxLayoutAlign="end center">
+<mat-card fxFlex class="right-card" *ngIf="selectedIdea$ | async as selectedIdea">
+  <mat-card-header fxLayoutAlign="space-between center">
+    <h1>{{ selectedIdea.label }}</h1>
     <button mat-icon-button (click)="selectIdea()">
       <mat-icon>close</mat-icon>
     </button>
