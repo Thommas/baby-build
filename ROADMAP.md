@@ -4,7 +4,8 @@ Roadmap
 Short term
 -----------
 
-- Paginate ideas
+- Add/remove ideaTag > update ES
+- Paginate ideas (load more)
 - Add sort by for ideas
 - Add release date field to ideas
 - Fix remaining bugs
@@ -26,3 +27,4 @@ Long term
 - Notifications
 - Loading effect
 - CSS3 animations
+- Detect release date

@@ -45,7 +45,9 @@ export function createIdea(args: any, userId: string) {
     return createIdeaTag({
       ideaId: idea.id,
       tagId: args.tagId,
-    }, userId);
+    }, userId).then(() => {
+      return idea;
+    });
   });
 }
 

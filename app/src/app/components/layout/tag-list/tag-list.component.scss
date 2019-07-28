@@ -18,12 +18,11 @@ header {
   min-height: 68px;
 }
 
-mat-button-toggle {
-  background: transparent;
-  color: white;
+.mat-chip {
+  cursor: pointer;
+  text-align: center;
 }
 
-.mat-button-toggle-checked {
-  background: white;
-  color: black;
+.mat-chip.selected {
+  background-color: pink;
 }

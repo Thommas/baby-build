@@ -4,6 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
@@ -20,6 +21,7 @@ export class IdeaTagListComponent implements OnInit {
   tags$: Observable<any>;
   selectedIdea$ = this.ideaFacade.selectedIdea$;
   ideaTags$ = this.ideaTagFacade.ideaTags$;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
     private formService: FormService,
@@ -43,5 +45,13 @@ export class IdeaTagListComponent implements OnInit {
     this.inputElement.nativeElement.value = '';
     const tag: any = event.option.value;
     this.ideaTagFacade.createIdeaTag(tag);
+  }
+
+  add(event: any) {
+    console.log('add', event);
+  }
+
+  remove(event: any) {
+    console.log('remove', event);
   }
 }

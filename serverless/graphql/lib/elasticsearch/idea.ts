@@ -85,5 +85,8 @@ export function queryIdeas(userIds: string[], args: any): Promise<any> {
       },
     });
   }
-  return search(query);
+  const sort: any = {
+    createdAt : 'desc'
+  };
+  return search(query, sort);
 }

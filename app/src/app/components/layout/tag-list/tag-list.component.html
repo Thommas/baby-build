@@ -1,4 +1,5 @@
-<mat-button-toggle-group name="tags" aria-label="Tags" vertical>
-  <mat-button-toggle [checked]="true" [value]="null" (click)="selectTag()">All</mat-button-toggle>
-  <mat-button-toggle [checked]="false" [value]="tag.id" (click)="selectTag(tag)" *ngFor="let tag of tags$ | async">{{ tag.label }}</mat-button-toggle>
-</mat-button-toggle-group>
+<mat-chip-list class="mat-chip-list-stacked" aria-orientation="vertical">
+  <mat-chip [ngClass]="{'selected': (filters$ | async).tagId === null}" (click)="selectTag()">All</mat-chip>
+  <mat-chip [ngClass]="{'selected': (filters$ | async).tagId === tag.id}" (click)="selectTag(tag)" *ngFor="let tag of tags$ | async">{{ tag.label }}</mat-chip>
+</mat-chip-list>
+.

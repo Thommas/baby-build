@@ -36,5 +36,8 @@ export function queryTags(userId: string, args: any): Promise<any> {
       },
     });
   }
-  return search(query);
+  const sort: any = {
+    // FIXME label_raw: 'asc'
+  };
+  return search(query, sort);
 }
