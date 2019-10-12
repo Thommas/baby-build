@@ -2,4 +2,3 @@
   <mat-chip [ngClass]="{'selected': (filters$ | async).tagId === null}" (click)="selectTag()">All</mat-chip>
   <mat-chip [ngClass]="{'selected': (filters$ | async).tagId === tag.id}" (click)="selectTag(tag)" *ngFor="let tag of tags$ | async">{{ tag.label }}</mat-chip>
 </mat-chip-list>
-.

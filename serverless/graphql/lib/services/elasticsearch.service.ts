@@ -43,15 +43,20 @@ export function index(type: string, document: any): Promise<any> {
   });
 }
 
-export function search(query: any, sort: any = {}): Promise<any> {
+export function search(query: any, sort: any = {}, size: number = 100, cursor: string = '-1'): Promise<any> {
+  const body: any = {
+    query,
+    sort,
+  };
+  if (cursor !== '-1') {
+    body.search_after = [cursor];
+    console.log('body', body);
+  }
   return elasticsearchClient.search({
     index: configService.elasticSearchIndex,
     type: '_doc',
-    size: 100,
-    body: {
-      query,
-      sort,
-    }
+    size,
+    body,
   });
 }
 

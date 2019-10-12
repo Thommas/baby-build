@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
-import { flatMap, pluck, withLatestFrom, mergeMap, take } from 'rxjs/operators';
+import { flatMap, map, withLatestFrom, mergeMap } from 'rxjs/operators';
 import {
   CreateIdeaMutation,
   DeleteIdeaMutation,
@@ -17,11 +17,12 @@ import {
   UpdateIdeaMutation
 } from '../graphql';
 import { ApolloService } from '../services';
-import { IdeaActionTypes, CreateIdea, UpdateIdea, SelectIdea } from '../store';
+import { IdeaActionTypes, FetchMoreIdea, CreateIdea, UpdateIdea, SelectIdea } from '../store';
 import { IdeaFiltersFacade } from './idea-filters.facade';
 import { UserFacade } from './user.facade';
+import { QueryRef } from 'apollo-angular';
 
-const purifyFilters = (filters: any) => {
+export const purifyFilters = (filters: any) => {
   const currentFilters = Object.assign({}, filters);
   if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
     delete currentFilters.requiredAge;
@@ -36,24 +37,39 @@ const purifyFilters = (filters: any) => {
     delete currentFilters.name;
   }
 
-  return currentFilters;
+  return {
+    ideaInput: currentFilters,
+    cursor: '-1',
+  };
 }
 
 @Injectable()
 export class IdeaFacade {
+  ideaQuery: QueryRef<any> = null;
+  static total: number = null;
+  static cursor: any;
+
   ideas$ = this.ideaFiltersFacade.filters$.pipe(
     flatMap((filters: any) => {
-      return this.apolloService.apolloClient.watchQuery<any>({
+      this.ideaQuery = this.apolloService.apolloClient.watchQuery<any>({
         query: GetIdeas,
         variables: purifyFilters(filters),
-      })
+      });
+      return this.ideaQuery
         .valueChanges
         .pipe(
-          pluck('data', 'ideas')
-        )
+          map((response: any) => {
+            IdeaFacade.total = response.data.ideas.total;
+            IdeaFacade.cursor = response.data.ideas.cursor;
+            return response.data.ideas.nodes;
+          }),
+        );
     })
   );
   selectedIdea$ = this.store.pipe(select('idea', 'selected'));
+  ideasHasMore$ = this.ideas$.pipe(
+    map((ideas: any) => IdeaFacade.total !== 0 && ideas.length !== IdeaFacade.total),
+  );
 
   constructor(
     private actions$: Actions,
@@ -63,6 +79,52 @@ export class IdeaFacade {
     private store: Store<{ idea: any }>
   ) {
   }
+
+  fetchMore() {
+    this.store.dispatch(new FetchMoreIdea());
+  }
+
+  @Effect({dispatch: false})
+  fetchMoreIdea$ = this.actions$
+    .pipe(
+      ofType(IdeaActionTypes.FetchMoreIdea),
+      withLatestFrom(
+        this.ideaFiltersFacade.filters$,
+        this.ideas$
+      ),
+      mergeMap((args: any[]) => {
+        const filters = args[1];
+        const ideas = args[2];
+        const variables = purifyFilters(filters);
+        variables.cursor = IdeaFacade.cursor;
+
+        if (!this.ideaQuery) {
+          return of(EMPTY);
+        }
+        if (ideas.length === IdeaFacade.total) {
+          return of(EMPTY);
+        }
+        this.ideaQuery.fetchMore({
+          query: GetIdeas,
+          variables,
+          updateQuery: (prev, { fetchMoreResult }) => {
+            IdeaFacade.cursor = fetchMoreResult.ideas.cursor;
+            return {
+              ideas: {
+                total: fetchMoreResult.ideas.total,
+                cursor: fetchMoreResult.ideas.cursor,
+                nodes: [
+                  ...prev.ideas.nodes,
+                  ...fetchMoreResult.ideas.nodes,
+                ],
+                __typename: "IdeaEdge",
+              },
+            };
+          },
+        });
+        return of(EMPTY);
+      })
+    );
 
   createIdea() {
     this.store.dispatch(new CreateIdea());
@@ -159,16 +221,20 @@ export class IdeaFacade {
               }
             },
           },
-          update: (store, { data: { updateIdea } }) => {
+          update: (store: any, { data: { updateIdea } }) => {
             if (!updateIdea) {
               return;
             }
-            const query: any = store.readQuery({ query: GetIdeas });
-            const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === updateIdea.id ? {
-              ...idea,
-              label: updateIdea.label,
-            } : idea);
-            store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
+            const idea = store.data.get(`Idea:${updateIdea.id}`);
+            idea.label = updateIdea.label;
+            store.writeData(idea);
+
+            // const query: any = store.readQuery({ query: GetIdeas });
+            // const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === updateIdea.id ? {
+            //   ...idea,
+            //   label: updateIdea.label,
+            // } : idea);
+            // store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
           }
         });
       })

@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap, map, withLatestFrom, mergeMap, tap, take } from 'rxjs/operators';
+import { flatMap, map, withLatestFrom, mergeMap } from 'rxjs/operators';
 import {
   CreateReviewMutation,
   GetIdeas,
@@ -20,12 +20,12 @@ import {
 import { ApolloService } from '../services';
 import {
   CreateReview,
-  IdeaActionTypes,
   ReviewActionTypes,
   SelectReview,
   UpdateReview
 } from '../store';
-import { IdeaFacade } from './idea.facade';
+import { IdeaFacade, purifyFilters } from './idea.facade';
+import { IdeaFiltersFacade } from './idea-filters.facade';
 import { UserFacade } from './user.facade';
 
 @Injectable()
@@ -103,6 +103,7 @@ export class ReviewFacade {
     private actions$: Actions,
     private apolloService: ApolloService,
     private ideaFacade: IdeaFacade,
+    private ideaFiltersFacade: IdeaFiltersFacade,
     private userFacade: UserFacade,
     private store: Store<{ review: any }>
   ) {
@@ -161,10 +162,14 @@ export class ReviewFacade {
   updateReview$ = this.actions$
     .pipe(
       ofType(ReviewActionTypes.UpdateReview),
-      withLatestFrom(this.userFacade.user$),
+      withLatestFrom(
+        this.userFacade.user$,
+        this.ideaFiltersFacade.filters$
+      ),
       mergeMap((args: any[]) => {
         const action: any = args[0];
         const user: any = args[1];
+        const filters: any = args[2];
         const review = action.payload;
         if (!user) {
           return of(EMPTY);
@@ -187,7 +192,7 @@ export class ReviewFacade {
             if (optimistic) {
               this.selectReview(updateReview);
               this.updateReviews(store, updateReview);
-              this.updateIdea(store, updateReview);
+              this.updateIdea(store, updateReview, filters);
             }
           },
         });
@@ -220,7 +225,7 @@ export class ReviewFacade {
     });
   }
 
-  updateIdea(store: any, review: any) {
+  updateIdea(store: any, review: any, filters: any) {
     const reviewsQuery: any = store.readQuery({
       query: GetReviews,
       variables: { ideaId: review.ideaId },
@@ -230,8 +235,9 @@ export class ReviewFacade {
 
     const ideasQuery: any = store.readQuery({
       query: GetIdeas,
+      variables: purifyFilters(filters),
     });
-    const idea: any = ideasQuery.ideas.find((idea: any) => idea.id === review.ideaId);
+    const idea: any = ideasQuery.ideas.nodes.find((idea: any) => idea.id === review.ideaId);
     idea.requiredAge = averageRequiredAge;
     idea.score = averageScore;
     this.ideaFacade.updateIdea(idea);

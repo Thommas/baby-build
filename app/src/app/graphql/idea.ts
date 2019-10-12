@@ -7,17 +7,21 @@
 import gql from 'graphql-tag';
 
 export const GetIdeas = gql`
-  query GetIdeas($label: String, $requiredAge: [Int], $score: [Int], $tagId: String) {
-    ideas(label: $label, requiredAge: $requiredAge, score: $score, tagId: $tagId) {
-      id
-      label
-      icon
-      requiredAge
-      score
-      userId
-      user {
-        firstName
-        lastName
+  query GetIdeas($ideaInput: IdeaInput, $cursor: String) {
+    ideas(ideaInput: $ideaInput, cursor: $cursor) {
+      total
+      cursor
+      nodes {
+        id
+        label
+        icon
+        requiredAge
+        score
+        userId
+        user {
+          firstName
+          lastName
+        }
       }
     }
   }

@@ -15,18 +15,30 @@ import { fetchImage } from '../puppeteer';
 import { storeBase64File } from '../s3';
 
 export function getIdeas(userId: string, args: any) {
+  const ideaInput = args.ideaInput;
+  const cursor = args.cursor;
+  console.log('cursor', cursor);
   return querySharingsByUserId(userId)
     .then((sharings) => {
       const userIds = sharings.hits.hits.map((hit: any) => hit._source.sharerId);
       userIds.push(userId);
-      return queryIdeas(userIds, args)
+      return queryIdeas(userIds, ideaInput, '-createdAt', cursor)
     })
     .then((ideas) => {
-      if (0 === ideas.hits.total.value) {
-        return [];
+      console.log('ideas', ideas);
+      if (0 === ideas.hits.total.value || 0 === ideas.hits.hits.length) {
+        return {
+          total: 0,
+          cursor: '-1',
+          nodes: [],
+        };
       }
       const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
-      return Entity.batchGet(params);
+      return {
+        total: ideas.hits.total.value,
+        cursor: ideas.hits.hits[ideas.hits.hits.length - 1]._source['createdAt'],
+        nodes: Entity.batchGet(params),
+      };
     });
 }
 

@@ -35,6 +35,7 @@ mat-toolbar {
 mat-drawer-container,
 mat-drawer-content {
   height: 100%;
+  overflow: hidden;
 }
 
 mat-drawer {

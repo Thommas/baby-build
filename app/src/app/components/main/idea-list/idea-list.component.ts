@@ -25,4 +25,8 @@ export class IdeaListComponent {
   selectIdea(idea?: any) {
     this.ideaFacade.selectIdea(idea);
   }
+
+  fetchMore() {
+    this.ideaFacade.fetchMore();
+  }
 }

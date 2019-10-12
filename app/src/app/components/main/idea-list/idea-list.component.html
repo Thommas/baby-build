@@ -6,3 +6,4 @@
   [idea]="idea"
   (click)="selectIdea(idea)"
 ></app-idea-item-cmp>
+<button *ngIf="ideaFacade.ideasHasMore$ | async" (click)="fetchMore()">Load more...</button>

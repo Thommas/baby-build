@@ -16,8 +16,19 @@ const Idea = `
     userId: String
     user: User
   }
+  input IdeaInput {
+    label: String
+    requiredAge: Float
+    score: Float
+    tagId: String
+  }
+  type IdeaEdge {
+    total: Int!
+    cursor: String!
+    nodes: [Idea]
+  }
   type Query {
-    ideas(label: String, requiredAge: [Int], score: [Int], tagId: String): [Idea]
+    ideas(ideaInput: IdeaInput, cursor: String): IdeaEdge
   }
   type Mutation {
     createIdea(

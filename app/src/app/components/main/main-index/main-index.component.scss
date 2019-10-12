@@ -8,6 +8,8 @@
   flex-direction: row;
   padding-top: 20px;
   flex: 1;
+  overflow: hidden;
+  max-height: 90vh;
 }
 
 .header {

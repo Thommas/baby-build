@@ -8,7 +8,7 @@
 
 import { search } from '../services/elasticsearch.service';
 
-export function queryIdeas(userIds: string[], args: any): Promise<any> {
+export function queryIdeas(userIds: string[], filters: any, sortInput: string, cursor: string): Promise<any> {
   const query: any = {
     bool: {
       must: [
@@ -25,26 +25,26 @@ export function queryIdeas(userIds: string[], args: any): Promise<any> {
       ],
     },
   };
-  if (args.ids && args.ids.length > 0) {
+  if (filters.ids && filters.ids.length > 0) {
     query.bool.must.push({
       terms: {
-        id: args.ids,
+        id: filters.ids,
       },
     });
   }
-  if (args.label && args.label.length > 0) {
+  if (filters.label && filters.label.length > 0) {
     query.bool.must.push({
       match: {
         label: {
-          query: args.label,
+          query: filters.label,
           fuzziness: 2,
           prefix_length: 1,
         },
       },
     });
   }
-  if (args.requiredAge && args.requiredAge.length > 0) {
-    for (const requiredAge of args.requiredAge) {
+  if (filters.requiredAge && filters.requiredAge.length > 0) {
+    for (const requiredAge of filters.requiredAge) {
       query.bool.must.push({
         range: {
           requiredAge: {
@@ -55,8 +55,8 @@ export function queryIdeas(userIds: string[], args: any): Promise<any> {
       });
     }
   }
-  if (args.score && args.score.length > 0) {
-    for (const score of args.score) {
+  if (filters.score && filters.score.length > 0) {
+    for (const score of filters.score) {
       query.bool.must.push({
         range: {
           score: {
@@ -67,7 +67,7 @@ export function queryIdeas(userIds: string[], args: any): Promise<any> {
       });
     }
   }
-  if (args.tagId) {
+  if (filters.tagId) {
     query.bool.must.push({
       nested: {
         path: 'tagIdNested',
@@ -76,7 +76,7 @@ export function queryIdeas(userIds: string[], args: any): Promise<any> {
             must: [
               {
                 term: {
-                  'tagIdNested.tagId': args.tagId,
+                  'tagIdNested.tagId': filters.tagId,
                 }
               }
             ]
@@ -85,8 +85,10 @@ export function queryIdeas(userIds: string[], args: any): Promise<any> {
       },
     });
   }
+  const sortKey = sortInput.replace('-', '');
+  const sortOrder = sortInput[0] === '-' ? 'desc' : 'asc';
   const sort: any = {
-    createdAt : 'desc'
+    [sortKey] : sortOrder,
   };
-  return search(query, sort);
+  return search(query, sort, 20, cursor);
 }

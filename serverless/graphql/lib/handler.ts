@@ -9,7 +9,6 @@
 import { graphqlLambda } from 'graphql-server-lambda';
 import schema from './schema/schema';
 import { verify } from 'jsonwebtoken';
-import * as dynamoose from 'dynamoose';
 import * as jwks from 'jwks-rsa';
 
 declare var process: {
@@ -98,11 +97,9 @@ exports.auth = (event, context, callback) => {
 }
 
 exports.graphql = (event, context, callback) => {
-  // console.log('userId', event.requestContext.authorizer.userId);
   const graphQLContext = { userId: event.requestContext.authorizer.userId };
 
   const callbackFilter = (error, output) => {
-    // console.log('output', output)
     const outputWithHeader = Object.assign({}, output, {
       headers: {
         'Access-Control-Allow-Origin': '*',
