@@ -36,11 +36,15 @@ export class IdeaItemComponent implements OnInit, OnChanges {
       id: new FormControl('', [Validators.required]),
       label: new FormControl('', []),
       icon: new FormControl('', []),
+      requiredAge: new FormControl('', []),
+      score: new FormControl('', []),
     });
     this.formGroup.setValue({
       id: null,
       label: '',
       icon: null,
+      requiredAge: null,
+      score: null,
     });
   }
 
@@ -64,6 +68,8 @@ export class IdeaItemComponent implements OnInit, OnChanges {
           id: idea.id,
           label: idea.label,
           icon: idea.icon,
+          requiredAge: idea.requiredAge,
+          score: idea.score,
         });
         if (!idea.label || idea.label.length === 0) {
           this.emptyIdeaReadyForDeletion = true;
@@ -73,6 +79,8 @@ export class IdeaItemComponent implements OnInit, OnChanges {
           id: null,
           label: '',
           icon: null,
+          requiredAge: null,
+          score: null,
         });
       }
     }

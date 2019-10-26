@@ -50,7 +50,6 @@ export function search(query: any, sort: any = {}, size: number = 100, cursor: s
   };
   if (cursor !== '-1') {
     body.search_after = [cursor];
-    console.log('body', body);
   }
   return elasticsearchClient.search({
     index: configService.elasticSearchIndex,

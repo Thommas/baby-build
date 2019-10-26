@@ -17,7 +17,7 @@ import {
   UpdateIdeaMutation
 } from '../graphql';
 import { ApolloService } from '../services';
-import { IdeaActionTypes, FetchMoreIdea, CreateIdea, UpdateIdea, SelectIdea } from '../store';
+import { IdeaActionTypes, FetchMoreIdea, CreateIdea, UpdateIdea, SelectIdea, SelectReview } from '../store';
 import { IdeaFiltersFacade } from './idea-filters.facade';
 import { UserFacade } from './user.facade';
 import { QueryRef } from 'apollo-angular';
@@ -174,13 +174,18 @@ export class IdeaFacade {
               query: GetIdeas,
               variables: purifyFilters(filters)
             });
-            const updatedIdeas: any = data.ideas;
+            const updatedIdeas: any = data.ideas.nodes;
             updatedIdeas.unshift(createIdea);
             store.writeQuery({
               query: GetIdeas,
               variables: purifyFilters(filters),
               data: {
-                ideas: updatedIdeas
+                ideas: {
+                  total: IdeaFacade.total,
+                  cursor: IdeaFacade.cursor,
+                  nodes: updatedIdeas,
+                  __typename: "IdeaEdge",
+                }
               }
             });
             // TODO Use a separate list for newly created items
@@ -266,6 +271,7 @@ export class IdeaFacade {
   }
 
   selectIdea(idea: any) {
+    this.store.dispatch(new SelectReview(null));
     this.store.dispatch(new SelectIdea(idea));
   }
 }

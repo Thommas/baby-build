@@ -7,6 +7,7 @@
  */
 
 import generate = require('nanoid/generate');
+import { orderBy } from 'lodash';
 import { Entity } from '../model';
 import { createIdeaTag } from './idea-tag';
 import { queryIdeas } from '../elasticsearch/idea';
@@ -17,7 +18,6 @@ import { storeBase64File } from '../s3';
 export function getIdeas(userId: string, args: any) {
   const ideaInput = args.ideaInput;
   const cursor = args.cursor;
-  console.log('cursor', cursor);
   return querySharingsByUserId(userId)
     .then((sharings) => {
       const userIds = sharings.hits.hits.map((hit: any) => hit._source.sharerId);
@@ -25,7 +25,6 @@ export function getIdeas(userId: string, args: any) {
       return queryIdeas(userIds, ideaInput, '-createdAt', cursor)
     })
     .then((ideas) => {
-      console.log('ideas', ideas);
       if (0 === ideas.hits.total.value || 0 === ideas.hits.hits.length) {
         return {
           total: 0,
@@ -34,12 +33,20 @@ export function getIdeas(userId: string, args: any) {
         };
       }
       const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
-      return {
-        total: ideas.hits.total.value,
-        cursor: ideas.hits.hits[ideas.hits.hits.length - 1]._source['createdAt'],
-        nodes: Entity.batchGet(params),
-      };
-    });
+      return Entity.batchGet(params).then((items: any) => {
+        return {
+          total: ideas.hits.total.value,
+          cursor: ideas.hits.hits[ideas.hits.hits.length - 1]._source['createdAt'],
+          nodes: orderBy(items, [
+            (item: any) => new Date(item.createdAt),
+            'id',
+          ], [
+            'desc',
+            'asc',
+          ]),
+        }
+      });
+    })
 }
 
 export function createIdea(args: any, userId: string) {

@@ -29,7 +29,6 @@ import {
 export class IdeaTagFacade {
   ideaTags$ = this.ideaFacade.selectedIdea$.pipe(
     flatMap((selectedIdea: any) => {
-      console.log('INSIDE IDEA TAGS', selectedIdea);
       if (!selectedIdea) {
         return of([]);
       }

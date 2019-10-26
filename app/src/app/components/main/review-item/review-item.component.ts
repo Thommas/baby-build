@@ -5,10 +5,10 @@
  */
 
 import { clone } from 'lodash';
-import { Component, OnInit, OnChanges, Input, ViewChild, SimpleChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { fromEvent, Subscription } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { ReviewFacade } from '../../../facade';
 import { FormService } from '../../../services';
 
@@ -17,8 +17,7 @@ import { FormService } from '../../../services';
   templateUrl: './review-item.component.html',
   styleUrls: ['./review-item.component.scss']
 })
-export class ReviewItemComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() review: any;
+export class ReviewItemComponent implements OnInit, OnDestroy {
   @ViewChild('requiredAgeExplanationElement') requiredAgeExplanationElement: any;
   @ViewChild('scoreExplanationElement') scoreExplanationElement: any;
   formGroup: FormGroup;
@@ -31,7 +30,6 @@ export class ReviewItemComponent implements OnInit, OnDestroy, OnChanges {
     private formService: FormService,
     private reviewFacade: ReviewFacade
   ) {
-    this.review = {};
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       requiredAge: new FormControl('', []),
@@ -65,6 +63,13 @@ export class ReviewItemComponent implements OnInit, OnDestroy, OnChanges {
     for (const element of elements) {
       this.subs.push(this.formService.getFormFieldSubscription(element, operator));
     }
+    this.reviewFacade.selectedReview$.pipe(
+      tap(review => {
+        if (review) {
+          this.formGroup.patchValue(review);
+        }
+      }),
+    ).subscribe();
   }
 
   ngOnDestroy() {
@@ -86,30 +91,6 @@ export class ReviewItemComponent implements OnInit, OnDestroy, OnChanges {
       score: score,
     });
     this.save();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.review && changes.review.previousValue
-      && changes.idea && changes.idea.previousValue) {
-      this.save();
-    }
-    if (changes.review) {
-      const review: any = changes.review.currentValue;
-      this.formGroup.patchValue({
-        id: review ? review.id : null,
-        requiredAge: review ? review.requiredAge : null,
-        requiredAgeExplanation: review ? review.requiredAgeExplanation : null,
-        score: review ? review.score : null,
-        scoreExplanation: review ? review.scoreExplanation : null,
-        ideaId: review ? review.ideaId : null,
-      });
-    }
-    if (changes.idea && changes.idea.currentValue) {
-      const idea: any = changes.idea.currentValue;
-      this.formGroup.patchValue({
-        ideaId: idea.id,
-      });
-    }
   }
 
   save() {

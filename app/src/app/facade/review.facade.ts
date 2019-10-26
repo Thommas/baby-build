@@ -84,9 +84,15 @@ export class ReviewFacade {
                 let loggedUserReview = data.reviews.find((review: any) => review.userId === user.id);
                 if (!loggedUserReview) {
                   loggedUserReview = {
+                    id: null,
                     user,
                     userId: user.id,
                     ideaId: selectedIdea.id,
+                    requiredAge: null,
+                    requiredAgeExplanation: null,
+                    score: null,
+                    scoreExplanation: null,
+                    __typename: "Review",
                   };
                 }
                 this.selectReview(loggedUserReview);
@@ -121,10 +127,14 @@ export class ReviewFacade {
   createReview$ = this.actions$
     .pipe(
       ofType(ReviewActionTypes.CreateReview),
-      withLatestFrom(this.userFacade.user$),
+      withLatestFrom(
+        this.userFacade.user$,
+        this.ideaFiltersFacade.filters$
+      ),
       mergeMap((args: any[]) => {
         const action: any = args[0];
         const user: any = args[1];
+        const filters: any = args[2];
         const review = action.payload;
         if (!user) {
           return of(EMPTY);
@@ -136,9 +146,9 @@ export class ReviewFacade {
             __typename: 'Mutation',
             optimistic: true,
             createReview: {
+              ...review,
               __typename: 'Review',
               id: `-${uuid()}`,
-              ...review,
               userId: user.id,
               user,
             },
@@ -147,7 +157,7 @@ export class ReviewFacade {
             if (optimistic) {
               this.selectReview(createReview);
               this.addToReviews(store, createReview);
-              this.updateIdea(store, createReview);
+              this.updateIdea(store, createReview, filters);
             }
           },
         });

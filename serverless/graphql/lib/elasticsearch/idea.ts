@@ -88,7 +88,7 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
   const sortKey = sortInput.replace('-', '');
   const sortOrder = sortInput[0] === '-' ? 'desc' : 'asc';
   const sort: any = {
-    [sortKey] : sortOrder,
+    [sortKey]: sortOrder,
   };
   return search(query, sort, 20, cursor);
 }
