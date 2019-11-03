@@ -24,6 +24,9 @@ class ConfigService {
   constructor() {
     if (process.env.NODE_ENV === 'production') {
       this.envConfig = this.validateInput(process.env);
+    } else if (process.env.NODE_ENV) {
+      const config = dotenv.parse(fs.readFileSync('.env.' + process.env.NODE_ENV));
+      this.envConfig = this.validateInput(config);
     } else {
       const config = dotenv.parse(fs.readFileSync('.env'));
       this.envConfig = this.validateInput(config);

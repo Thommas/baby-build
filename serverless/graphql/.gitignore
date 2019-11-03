@@ -5,3 +5,4 @@
 /.serverless
 /npm-debug.log
 /.env
+/.env.local

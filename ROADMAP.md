@@ -4,16 +4,16 @@ Roadmap
 Short term
 -----------
 
-- Paginate ideas (load more) - Sort by createdAt desc then id ASC
-- Add/remove ideaTag > update ES
-- Add field: Describe how deep to explore (1st episode, 1st season, all core episodes, everything)
-- Add field: Release date
-- Fix remaining bugs
-- Deploy website on a new url
+- Deploy website on a local env
 
 Long term
 ---------
 
+- Add field: Describe how deep to explore (1st episode, 1st season, all core episodes, everything)
+- Add field: Release date
+- Add/remove ideaTag > update ES
+- Implement multiple sorts
+- Fix remaining bugs
 - Be able to sort by label (use raw)
 - Add sort by for ideas
 - Add Idea permission based on sharing (mutualize checking sharing)

@@ -30,6 +30,9 @@ export const configuration: any = {
   },
   mappings: {
     properties: {
+      createdAt: {
+        type: 'long',
+      },
       type: {
         type: 'keyword',
       },

@@ -14,10 +14,10 @@
              autocomplete="off">
     </mat-form-field>
   </form>
-  <button mat-button>
+  <div class="requiredAge">
     {{ idea.requiredAge ? idea.requiredAge : '?' }}
-  </button>
-  <button mat-icon-button>
-    <mat-icon [svgIcon]="'recommandation_' + (idea.score ? (idea.score | number:'1.0-0') : '0')"></mat-icon>
-  </button>
+  </div>
+  <div class="score">
+    <img [src]="getIcon(idea.score ? (idea.score | number:'1.0-0') : '0')" width="36" height="36"/>
+  </div>
 </div>

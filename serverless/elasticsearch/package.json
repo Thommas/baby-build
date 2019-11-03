@@ -4,6 +4,7 @@
   "license": "WTFPL",
   "scripts": {
     "start": "serverless offline start --stage dev --region eu-west-2",
+    "start:local": "serverless offline start --stage local --region eu-west-2",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "test": "jasmine-ts \"lib/**/*.spec.ts\"",
     "e2e": "jasmine-ts \"e2e/**/*.spec.ts\"",
@@ -28,5 +29,8 @@
     "tslint": "^5.5.0",
     "tslint-config-standard": "^6.0.1",
     "typescript": "^2.4.2"
+  },
+  "devDependencies": {
+    "cross-env": "^6.0.3"
   }
 }

@@ -32,10 +32,10 @@
     </div>
     <h2>Recommendation Score</h2>
     <div fxLayout="row" fxLayoutAlign="space-around center">
-      <button mat-fab
+      <button mat-raised-button
               *ngFor="let score of scores"
-              [color]="this.formGroup.get('score').value === score ? 'primary' : ''"
-              (click)="selectScore(score)"><mat-icon [svgIcon]="'recommandation_' + score"></mat-icon></button>
+              [color]="this.formGroup.get('score').value === score ? 'accent' : ''"
+              (click)="selectScore(score)"><img [src]="getIcon(score | number:'1.0-0')" width="44" height="44"/></button>
     </div>
     <mat-divider></mat-divider>
     <div fxLayout="row" class="text-area-container">
