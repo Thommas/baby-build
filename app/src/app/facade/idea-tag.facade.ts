@@ -92,8 +92,8 @@ export class IdeaTagFacade {
               __typename: 'IdeaTag',
               id: `-${uuid()}`,
               tag: {
+                ...tag,
                 __typename: 'Tag',
-                label: tag.label,
               },
               userId: user.id,
             },

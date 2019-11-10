@@ -18,7 +18,7 @@ const Tag = `
   }
   type Mutation {
     createTag(
-      label: String
+      label: String!
     ): Tag
     updateTag(
       id: String!

@@ -5,7 +5,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --disable-host-check --configuration=local",
-    "start:locale": "ng serve --host 0.0.0.0 --disable-host-check --configuration=production --port 4200 --aot --i18n-locale en --i18n-format xlf --i18n-file ./src/locale/messages.en.xlf",
     "build": "ng build --configuration=production --i18n-locale en --i18n-format xlf --i18n-file ./src/locale/messages.en.xlf",
     "test": "ng test",
     "lint": "ng lint",

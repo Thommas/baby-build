@@ -82,7 +82,7 @@ export const configuration: any = {
       tagId: {
         type: 'keyword',
       },
-      tagIdNested: {
+      tagIds: {
         type: 'nested',
         properties: {
           tagId: {

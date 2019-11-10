@@ -153,12 +153,10 @@ export class ReviewFacade {
               user,
             },
           },
-          update: (store, { data: { optimistic, createReview } }) => {
-            if (optimistic) {
-              this.selectReview(createReview);
-              this.addToReviews(store, createReview);
-              this.updateIdea(store, createReview, filters);
-            }
+          update: (store, { data: { createReview } }) => {
+            this.selectReview(createReview);
+            this.addToReviews(store, createReview);
+            this.updateIdea(store, createReview, filters);
           },
         });
       })

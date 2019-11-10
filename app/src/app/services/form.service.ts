@@ -24,14 +24,18 @@ export class FormService {
   /**
    * Listen for form field change after 800ms
    */
-  getFormFieldObs(inputElement: any, operator: any) {
-    return this.getInputElementObs(inputElement).pipe(operator);
+  getFormFieldObs(inputElement: any, operator?: any) {
+    if (operator) {
+      return this.getInputElementObs(inputElement).pipe(operator);
+    }
+
+    return this.getInputElementObs(inputElement);
   }
 
   /**
    * Listen for form field change after 800ms
    */
-  getFormFieldSubscription(inputElement: any, operator: any) {
+  getFormFieldSubscription(inputElement: any, operator?: any) {
     return this.getFormFieldObs(inputElement, operator).subscribe();
   }
 }

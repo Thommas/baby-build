@@ -21,10 +21,19 @@ export const GetTags = gql`
 `;
 
 export const CreateTagMutation = gql`
-  mutation CreateTag {
-    createTag {
+  mutation CreateTag(
+    $label: String!
+  ) {
+    createTag(
+      label: $label
+    ) {
       id
       label
+      userId
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;
@@ -40,6 +49,11 @@ export const UpdateTagMutation = gql`
     ) {
       id
       label
+      userId
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;
@@ -52,6 +66,12 @@ export const DeleteTagMutation = gql`
       id: $id
     ) {
       id
+      label
+      userId
+      user {
+        firstName
+        lastName
+      }
     }
   }
 `;

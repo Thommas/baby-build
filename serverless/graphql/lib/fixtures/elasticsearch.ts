@@ -52,7 +52,7 @@ async function linkData(parentType: string, child: string, parentIdField: string
     };
     const parent = await searchOne(query);
     if (parent) {
-      promises.push(addNestedObject(parentType, parent, item, 'tagIdNested'));
+      promises.push(addNestedObject(parentType, parent, item, 'tagIds'));
     }
   }
   return Promise.all(promises);

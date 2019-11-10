@@ -4,7 +4,9 @@ Roadmap
 Short term
 -----------
 
-- Deploy website on a local env
+- Implement full repopulate
+- Delete IdeaTag
+- Rename Tag
 
 Long term
 ---------

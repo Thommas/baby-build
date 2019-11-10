@@ -6,6 +6,7 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ApolloModule } from 'apollo-angular';
@@ -22,7 +23,9 @@ import {
   MatButtonToggleModule,
   MatCardModule,
   MatChipsModule,
+  MatFormFieldModule,
   MatIconModule,
+  MatInputModule,
   MatMenuModule,
   MatProgressBarModule,
   MatSidenavModule,
@@ -41,6 +44,7 @@ import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
 import {
   SidebarComponent,
+  TagFormComponent,
   TagListComponent,
   TopbarComponent
 } from './components/layout';
@@ -92,11 +96,14 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     SidebarComponent,
+    TagFormComponent,
     TagListComponent,
     TopbarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'path-of-child' }),
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,
@@ -115,7 +122,9 @@ export function createTranslateLoader(http: HttpClient) {
     MatButtonToggleModule,
     MatCardModule,
     MatChipsModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatMenuModule,
     MatProgressBarModule,
     MatSidenavModule,
@@ -139,6 +148,7 @@ export function createTranslateLoader(http: HttpClient) {
       IdeaTagFacade,
       ReviewFacade,
       SharingFacade,
+      TagFacade,
       UserFacade
     ])
   ],

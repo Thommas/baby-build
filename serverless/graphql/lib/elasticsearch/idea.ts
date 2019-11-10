@@ -70,13 +70,13 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
   if (filters.tagId) {
     query.bool.must.push({
       nested: {
-        path: 'tagIdNested',
+        path: 'tagIds',
         query: {
           bool: {
             must: [
               {
                 term: {
-                  'tagIdNested.tagId': filters.tagId,
+                  'tagIds.tagId': filters.tagId,
                 }
               }
             ]
