@@ -5,6 +5,8 @@
   "scripts": {
     "start": "serverless offline start --stage dev --region eu-west-2",
     "start:local": "serverless offline start --stage local --region eu-west-2",
+    "repopulate": "./node_modules/.bin/ts-node ./lib/repopulate/index.ts",
+    "repopulate:local": "cross-env NODE_ENV=local ./node_modules/.bin/ts-node ./lib/repopulate/index.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "test": "jasmine-ts \"lib/**/*.spec.ts\"",
     "e2e": "jasmine-ts \"e2e/**/*.spec.ts\"",
@@ -16,6 +18,7 @@
     "@types/jasmine": "^2.8.6",
     "@types/node": "^7.0.5",
     "aws-sdk": "^2.205.0",
+    "bluebird": "^3.7.1",
     "dotenv": "^5.0.1",
     "elasticsearch": "^15.2.0",
     "jasmine": "^3.1.0",

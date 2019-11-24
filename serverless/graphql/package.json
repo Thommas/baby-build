@@ -5,7 +5,6 @@
   "scripts": {
     "start": "serverless offline start --stage dev --region eu-west-2",
     "start:local": "cross-env NODE_ENV=local serverless offline start --stage dev --region eu-west-2",
-    "puppeteer": "./node_modules/.bin/ts-node ./lib/puppeteer/index.ts",
     "fixtures": "./node_modules/.bin/ts-node ./lib/fixtures/index.ts",
     "fixtures:local": "cross-env NODE_ENV=local ./node_modules/.bin/ts-node ./lib/fixtures/index.ts",
     "graphqli": "./node_modules/.bin/ts-node ./lib/graphqli/index.ts",
@@ -49,9 +48,7 @@
     "ts-node": "^7.0.1",
     "tslint": "^5.12.1",
     "tslint-config-standard": "^8.0.1",
-    "typescript": "^3.2.2"
-  },
-  "devDependencies": {
+    "typescript": "^3.2.2",
     "cross-env": "^6.0.3"
   }
 }

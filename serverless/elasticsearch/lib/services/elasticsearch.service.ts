@@ -7,17 +7,23 @@
  */
 
 import * as elasticsearch from 'elasticsearch';
+import { configService } from './config.service';
 
-declare var process: {
-  env: {
-    ELASTIC_SEARCH_HOST: string,
-    ELASTIC_SEARCH_INDEX: string,
-  }
-}
-
-const client = new elasticsearch.Client({
-  hosts: [process.env.ELASTIC_SEARCH_HOST]
+export const elasticsearchClient = new elasticsearch.Client({
+  hosts: [configService.elasticSearchHost]
 });
+
+export async function wipeIndex() {
+  return elasticsearchClient.indices.delete({
+      index: '_all'
+  }, function(err, res) {
+      if (err) {
+          console.error(err.message);
+      } else {
+          console.log('Indexes have been deleted!');
+      }
+  });
+}
 
 export function detectType(documentId: string)
 {
@@ -48,9 +54,9 @@ export function detectType(documentId: string)
   return null;
 }
 
-export function index(document: any) {
+export async function index(document: any) {
   console.log('document', document);
-  console.log('process.env.ELASTIC_SEARCH_INDEX', process.env.ELASTIC_SEARCH_INDEX);
+  console.log('configService.elasticSearchIndex', configService.elasticSearchIndex);
   const id = document.id;
   console.log('id', id);
   const type = detectType(id);
@@ -65,8 +71,8 @@ export function index(document: any) {
   console.log('document', document);
   console.log('type', type);
 
-  client.index({
-    index: process.env.ELASTIC_SEARCH_INDEX,
+  return elasticsearchClient.index({
+    index: configService.elasticSearchIndex,
     type: '_doc',
     id,
     body: {
@@ -85,8 +91,8 @@ export function searchOne(query: any): Promise<any> {
   const body: any = {
     query,
   };
-  return client.search({
-    index: process.env.ELASTIC_SEARCH_INDEX,
+  return elasticsearchClient.search({
+    index: configService.elasticSearchIndex,
     type: '_doc',
     size: 1,
     body,
@@ -103,8 +109,8 @@ export function searchOne(query: any): Promise<any> {
 }
 
 export function remove(document: any) {
-  client.delete({
-    index: process.env.ELASTIC_SEARCH_INDEX,
+  elasticsearchClient.delete({
+    index: configService.elasticSearchIndex,
     type: '_doc',
     id: document.id,
   }, (err, resp, status) => {
@@ -144,4 +150,8 @@ export function linkData(child: any, parentType: string, parentIdField: string, 
       index(parent);
     }
   });
+}
+
+export function refreshIndex(): Promise<any> {
+  return elasticsearchClient.indices.refresh();
 }

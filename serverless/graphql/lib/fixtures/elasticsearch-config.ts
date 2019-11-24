@@ -6,6 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+ // @see https://www.elastic.co/blog/strings-are-dead-long-live-strings
 export const configuration: any = {
   settings: {
     analysis: {

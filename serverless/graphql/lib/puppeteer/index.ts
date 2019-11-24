@@ -6,9 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as AWS from 'aws-sdk';
 import * as puppeteer from 'puppeteer';
-import * as fs from 'fs';
 
 export async function fetchImage(input: string) {
   const browser = await puppeteer.launch({

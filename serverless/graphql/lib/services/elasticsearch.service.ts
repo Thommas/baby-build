@@ -51,6 +51,8 @@ export function search(query: any, sort: any = {}, size: number = 100, cursor: s
   if (cursor !== '-1') {
     body.search_after = [cursor];
   }
+  console.log('configService.elasticSearchIndex', configService.elasticSearchIndex);
+  console.log('query', JSON.stringify(query));
   return elasticsearchClient.search({
     index: configService.elasticSearchIndex,
     type: '_doc',
