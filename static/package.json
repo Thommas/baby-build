@@ -63,7 +63,7 @@
     "apollo-client": "^2.2.7",
     "apollo-link-context": "^1.0.7",
     "auth0-js": "^9.2.0",
-    "auth0-lock": "^11.3.0",
+    "auth0-lock": "^11.21.0",
     "core-js": "^2.4.1",
     "dexie": "^2.0.2",
     "graphql": "^0.13.2",
