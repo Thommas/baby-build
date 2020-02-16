@@ -62,6 +62,7 @@ import {
   AuthFacade,
   IdeaFacade,
   IdeaFiltersFacade,
+  IdeaSuggestFacade,
   IdeaTagFacade,
   ReviewFacade,
   SharingFacade,
@@ -72,6 +73,7 @@ import {
   authReducer,
   ideaReducer,
   ideaFiltersReducer,
+  ideaSuggestReducer,
   reviewReducer,
 } from './store';
 
@@ -80,6 +82,7 @@ const reducers: ActionReducerMap<any> = {
   auth: authReducer,
   idea: ideaReducer,
   ideaFilters: ideaFiltersReducer,
+  ideaSuggest: ideaSuggestReducer,
   review: reviewReducer,
 };
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -145,6 +148,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     EffectsModule.forRoot([
       IdeaFacade,
+      IdeaSuggestFacade,
       IdeaTagFacade,
       ReviewFacade,
       SharingFacade,

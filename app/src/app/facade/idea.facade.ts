@@ -19,6 +19,7 @@ import {
 import { ApolloService } from '../services';
 import { IdeaActionTypes, FetchMoreIdea, CreateIdea, UpdateIdea, SelectIdea, SelectReview } from '../store';
 import { IdeaFiltersFacade } from './idea-filters.facade';
+import { IdeaSuggestFacade } from './idea-suggest.facade';
 import { UserFacade } from './user.facade';
 import { QueryRef } from 'apollo-angular';
 
@@ -45,10 +46,36 @@ export const purifyFilters = (filters: any) => {
 
 @Injectable()
 export class IdeaFacade {
+  suggestedIdeaQuery: QueryRef<any> = null;
   ideaQuery: QueryRef<any> = null;
   static total: number = null;
   static cursor: any;
 
+  suggestedIdeas$ = this.ideaSuggestFacade.suggest$.pipe(
+    flatMap((suggest: any) => {
+      if (null === suggest.name) {
+        return of([]);
+      }
+      this.suggestedIdeaQuery = this.apolloService.apolloClient.watchQuery<any>({
+        query: GetIdeas,
+        variables: {
+          ideaInput: {
+            label: suggest.name,
+            count: 5,
+          }
+        },
+      });
+      return this.suggestedIdeaQuery
+        .valueChanges
+        .pipe(
+          map((response: any) => {
+            IdeaFacade.total = response.data.ideas.total;
+            IdeaFacade.cursor = response.data.ideas.cursor;
+            return response.data.ideas.nodes;
+          }),
+        );
+    })
+  );
   ideas$ = this.ideaFiltersFacade.filters$.pipe(
     flatMap((filters: any) => {
       this.ideaQuery = this.apolloService.apolloClient.watchQuery<any>({
@@ -75,6 +102,7 @@ export class IdeaFacade {
     private actions$: Actions,
     private apolloService: ApolloService,
     private ideaFiltersFacade: IdeaFiltersFacade,
+    private ideaSuggestFacade: IdeaSuggestFacade,
     private userFacade: UserFacade,
     private store: Store<{ idea: any }>
   ) {
@@ -126,8 +154,8 @@ export class IdeaFacade {
       })
     );
 
-  createIdea() {
-    this.store.dispatch(new CreateIdea());
+  createIdea(idea: any) {
+    this.store.dispatch(new CreateIdea(idea));
   }
 
   @Effect({dispatch: false})
@@ -139,6 +167,7 @@ export class IdeaFacade {
         this.ideaFiltersFacade.filters$
       ),
       mergeMap((args: any[]) => {
+        const action: any = args[0];
         const user: any = args[1];
         const filters = args[2];
         if (!user) {
@@ -147,7 +176,7 @@ export class IdeaFacade {
         return this.apolloService.apolloClient.mutate({
           mutation: CreateIdeaMutation,
           variables: {
-            tagId: filters.tagId
+            label: action.payload.label
           },
           optimisticResponse: {
             __typename: 'Mutation',

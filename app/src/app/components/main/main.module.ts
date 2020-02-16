@@ -26,6 +26,7 @@ import {
 
 import {
   routing,
+  IdeaCreateComponent,
   IdeaIconComponent,
   IdeaItemComponent,
   IdeaListComponent,
@@ -37,7 +38,7 @@ import {
   ReviewListComponent,
   ReviewShowComponent
 } from './';
-import { ideaFiltersReducer } from '../../store';
+import { ideaFiltersReducer, ideaSuggestReducer } from '../../store';
 
 @NgModule({
   imports: [
@@ -58,9 +59,13 @@ import { ideaFiltersReducer } from '../../store';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    StoreModule.forRoot({ ideaFilters: ideaFiltersReducer })
+    StoreModule.forRoot({
+      ideaFilters: ideaFiltersReducer,
+      ideaSuggest: ideaSuggestReducer,
+    })
   ],
   declarations: [
+    IdeaCreateComponent,
     IdeaIconComponent,
     IdeaItemComponent,
     IdeaListComponent,

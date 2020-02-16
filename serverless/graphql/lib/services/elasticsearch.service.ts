@@ -85,3 +85,38 @@ export function addNestedObject(parentType: string, parent: any, child: any, fie
 export function refreshIndex(): Promise<any> {
   return elasticsearchClient.indices.refresh();
 }
+
+export function suggest(type: string, field: string, value: string): Promise<any> {
+  const body: any = {
+    query : {
+      bool: {
+        must: [
+          {
+            term: {
+              type: 'idea',
+            },
+          },
+          {
+            match: {
+              [field]: value,
+            },
+          },
+        ],
+      },
+    },
+    suggest : {
+      suggestion: {
+        text: value,
+        term: {
+          [field]: value,
+        }
+      }
+    }
+  };
+  return elasticsearchClient.search({
+    index: configService.elasticSearchIndex,
+    type: '_doc',
+    size: 5,
+    body,
+  });
+}

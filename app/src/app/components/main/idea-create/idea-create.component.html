@@ -1,0 +1,19 @@
+<div fxFill fxLayout="column" fxLayoutAlign="start center">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <label>Create new idea</label>
+    <form [formGroup]="formGroup" fxFlex fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFill>
+        <input #inputElement fxFill
+              matInput
+              [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write an idea'"
+              formControlName="label"
+              (keyup.backspace)="onKey($event)"
+              autocomplete="off">
+      </mat-form-field>
+    </form>
+    <button (click)="create()">Add</button>
+  </div>
+  <div *ngIf="(suggestedIdeas$ | async).length > 0" fxLayout="row" fxLayoutAlign="start center">
+    <span *ngFor="let idea of (suggestedIdeas$ | async)">{{ idea.label }}</span>
+  </div>
+</div>

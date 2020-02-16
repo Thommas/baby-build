@@ -22,10 +22,6 @@
   }
 }
 
-.label {
-  width: 100%;
-}
-
 .requiredAge {
   display: flex;
   box-sizing: border-box;
@@ -62,4 +58,8 @@
   img {
     align-self: center;
   }
+}
+
+.suggestion {
+  height: 40px;
 }

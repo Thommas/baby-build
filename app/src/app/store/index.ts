@@ -5,6 +5,8 @@ export * from './idea/idea.reducer';
 export * from './idea-tag/idea-tag.actions';
 export * from './idea-filters/idea-filters.actions';
 export * from './idea-filters/idea-filters.reducer';
+export * from './idea-suggest/idea-suggest.actions';
+export * from './idea-suggest/idea-suggest.reducer';
 export * from './review/review.actions';
 export * from './review/review.reducer';
 export * from './sharing/sharing.actions';

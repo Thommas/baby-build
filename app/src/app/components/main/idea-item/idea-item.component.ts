@@ -32,82 +32,82 @@ export class IdeaItemComponent implements OnInit, OnChanges {
   ) {
     this.emptyIdeaReadyForDeletion = false;
     this.idea = {};
-    this.formGroup = new FormGroup({
-      id: new FormControl('', [Validators.required]),
-      label: new FormControl('', []),
-      icon: new FormControl('', []),
-      requiredAge: new FormControl('', []),
-      score: new FormControl('', []),
-    });
-    this.formGroup.setValue({
-      id: null,
-      label: '',
-      icon: null,
-      requiredAge: null,
-      score: null,
-    });
+    // this.formGroup = new FormGroup({
+    //   id: new FormControl('', [Validators.required]),
+    //   label: new FormControl('', []),
+    //   icon: new FormControl('', []),
+    //   requiredAge: new FormControl('', []),
+    //   score: new FormControl('', []),
+    // });
+    // this.formGroup.setValue({
+    //   id: null,
+    //   label: '',
+    //   icon: null,
+    //   requiredAge: null,
+    //   score: null,
+    // });
   }
 
   ngOnInit() {
-    const operator = map(() => this.save());
-    this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
+    // const operator = map(() => this.save());
+    // this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
   }
 
   ngOnDestroy() {
-    this.formFieldSub.unsubscribe();
+    // this.formFieldSub.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.idea && changes.idea.previousValue) {
-      this.save();
-    }
-    if (changes.idea) {
-      if (changes.idea.currentValue) {
-        const idea: any = changes.idea.currentValue;
-        this.formGroup.setValue({
-          id: idea.id,
-          label: idea.label,
-          icon: idea.icon,
-          requiredAge: idea.requiredAge,
-          score: idea.score,
-        });
-        if (!idea.label || idea.label.length === 0) {
-          this.emptyIdeaReadyForDeletion = true;
-        }
-      } else {
-        this.formGroup.setValue({
-          id: null,
-          label: '',
-          icon: null,
-          requiredAge: null,
-          score: null,
-        });
-      }
-    }
+    // if (changes.idea && changes.idea.previousValue) {
+    //   this.save();
+    // }
+    // if (changes.idea) {
+    //   if (changes.idea.currentValue) {
+    //     const idea: any = changes.idea.currentValue;
+    //     this.formGroup.setValue({
+    //       id: idea.id,
+    //       label: idea.label,
+    //       icon: idea.icon,
+    //       requiredAge: idea.requiredAge,
+    //       score: idea.score,
+    //     });
+    //     if (!idea.label || idea.label.length === 0) {
+    //       this.emptyIdeaReadyForDeletion = true;
+    //     }
+    //   } else {
+    //     this.formGroup.setValue({
+    //       id: null,
+    //       label: '',
+    //       icon: null,
+    //       requiredAge: null,
+    //       score: null,
+    //     });
+    //   }
+    // }
   }
 
   save() {
-    if (!this.formGroup.valid) {
-      return;
-    }
-    const idea: any = clone(this.formGroup.value);
-    this.ideaFacade.updateIdea(idea);
+    // if (!this.formGroup.valid) {
+    //   return;
+    // }
+    // const idea: any = clone(this.formGroup.value);
+    // this.ideaFacade.updateIdea(idea);
   }
 
   onKey(event: KeyboardEvent) {
-    if (!this.formGroup.get('label').value || this.formGroup.get('label').value.length === 0) {
-      if (this.emptyIdeaReadyForDeletion) {
-        this.delete();
-      } else {
-        this.emptyIdeaReadyForDeletion = true;
-      }
-    } else {
-      this.emptyIdeaReadyForDeletion = false;
-    }
+    // if (!this.formGroup.get('label').value || this.formGroup.get('label').value.length === 0) {
+    //   if (this.emptyIdeaReadyForDeletion) {
+    //     this.delete();
+    //   } else {
+    //     this.emptyIdeaReadyForDeletion = true;
+    //   }
+    // } else {
+    //   this.emptyIdeaReadyForDeletion = false;
+    // }
   }
 
   delete() {
-    this.ideaFacade.deleteIdea(this.idea);
+    // this.ideaFacade.deleteIdea(this.idea);
   }
 
   getIcon(score: string) {

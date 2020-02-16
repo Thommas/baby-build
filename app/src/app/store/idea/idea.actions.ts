@@ -19,6 +19,8 @@ export class FetchMoreIdea implements Action {
 
 export class CreateIdea implements Action {
   readonly type = IdeaActionTypes.CreateIdea;
+
+  constructor(public payload: any) {}
 }
 
 export class UpdateIdea implements Action {

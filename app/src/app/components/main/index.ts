@@ -1,4 +1,5 @@
 export * from './main.routing';
+export * from './idea-create/idea-create.component';
 export * from './idea-icon/idea-icon.component';
 export * from './idea-item/idea-item.component';
 export * from './idea-list/idea-list.component';

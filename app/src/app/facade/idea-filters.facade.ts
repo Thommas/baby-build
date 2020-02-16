@@ -42,7 +42,7 @@ export class IdeaFiltersFacade {
     }));
   }
 
-  reset(tag?: any) {
+  reset() {
     this.store.dispatch(new ResetIdeaFilters());
   }
 }

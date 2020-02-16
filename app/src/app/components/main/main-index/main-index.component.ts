@@ -23,7 +23,7 @@ export class MainIndexComponent {
   }
 
   createIdea() {
-    this.ideaFacade.createIdea();
+    // this.ideaFacade.createIdea();
   }
 
   selectIdea(idea?: any) {

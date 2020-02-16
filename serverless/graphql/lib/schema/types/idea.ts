@@ -21,6 +21,7 @@ const Idea = `
     requiredAge: Float
     score: Float
     tagId: String
+    count: Int
   }
   type IdeaEdge {
     total: Int!
@@ -32,6 +33,7 @@ const Idea = `
   }
   type Mutation {
     createIdea(
+      label: String!
       tagId: String
     ): Idea
     updateIdea(
