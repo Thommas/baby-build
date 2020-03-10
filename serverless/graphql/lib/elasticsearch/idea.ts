@@ -72,24 +72,6 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
         });
       }
     }
-    if (filters.tagId) {
-      query.bool.must.push({
-        nested: {
-          path: 'tagIds',
-          query: {
-            bool: {
-              must: [
-                {
-                  term: {
-                    'tagIds.tagId': filters.tagId,
-                  }
-                }
-              ]
-            }
-          }
-        },
-      });
-    }
   }
   const sortKey = sortInput.replace('-', '');
   const sortOrder = sortInput[0] === '-' ? 'desc' : 'asc';

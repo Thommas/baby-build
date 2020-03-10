@@ -9,7 +9,6 @@
 import generate = require('nanoid/generate');
 import { orderBy } from 'lodash';
 import { Entity } from '../model';
-import { createIdeaTag } from './idea-tag';
 import { queryIdeas } from '../elasticsearch/idea';
 import { querySharingsByUserId } from '../elasticsearch/sharing';
 import { fetchImage } from '../puppeteer';
@@ -57,17 +56,7 @@ export function createIdea(args: any, userId: string) {
     icon: null,
     ...args
   });
-  return entity.save().then((idea) => {
-    if (!args.tagId) {
-      return idea;
-    }
-    return createIdeaTag({
-      ideaId: idea.id,
-      tagId: args.tagId,
-    }, userId).then(() => {
-      return idea;
-    });
-  });
+  return entity.save();
 }
 
 export function updateIdea(args: any, userId: string) {

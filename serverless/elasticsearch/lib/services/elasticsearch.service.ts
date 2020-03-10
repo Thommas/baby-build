@@ -31,9 +31,6 @@ export function detectType(documentId: string)
   if (!documentId) {
     return null;
   }
-  if (documentId.startsWith('IdeaTag-')) {
-    return 'idea-tag';
-  }
   if (documentId.startsWith('Idea-')) {
     return 'idea';
   }
@@ -42,9 +39,6 @@ export function detectType(documentId: string)
   }
   if (documentId.startsWith('Sharing-')) {
     return 'sharing';
-  }
-  if (documentId.startsWith('Tag-')) {
-    return 'tag';
   }
   if (documentId.startsWith('User-')) {
     return 'user';
@@ -81,9 +75,6 @@ export async function index(document: any) {
     }
   }, (err, resp, status) => {
     console.log(resp);
-    if (type === 'idea-tag') {
-      linkData(document, 'idea', 'ideaId', 'tagId', 'tagIds');
-    }
   });
 }
 
@@ -115,40 +106,6 @@ export function remove(document: any) {
     id: document.id,
   }, (err, resp, status) => {
     console.log(resp);
-  });
-}
-
-export function linkData(child: any, parentType: string, parentIdField: string, childIdField: string, nestedIdField: string) {
-  const query: any = {
-    bool: {
-      must: [
-        {
-          term: {
-            type: parentType,
-          },
-        },
-        {
-          term: {
-            _id: child[parentIdField],
-          },
-        },
-      ],
-    },
-  };
-  console.log('query', JSON.stringify(query));
-  searchOne(query).then((parent: any) => {
-    console.log('parent', parent);
-    if (parent) {
-      if (!parent[nestedIdField]) {
-        parent[nestedIdField] = [];
-      }
-      parent[nestedIdField].push({
-        [childIdField]: child[childIdField],
-      });
-      console.log('child to index', child);
-      console.log('parent to index', parent);
-      index(parent);
-    }
   });
 }
 

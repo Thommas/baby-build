@@ -80,17 +80,6 @@ export const configuration: any = {
       sharerId: {
         type: 'keyword',
       },
-      tagId: {
-        type: 'keyword',
-      },
-      tagIds: {
-        type: 'nested',
-        properties: {
-          tagId: {
-            type: 'keyword',
-          },
-        }
-      },
       userId: {
         type: 'keyword',
       },
