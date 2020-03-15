@@ -1,9 +1,14 @@
-<div fxFlex fxFill *ngIf="selectedIdea$ | async as selectedIdea">
-  <app-review-show-cmp></app-review-show-cmp>
-  <div fxLayout="column" fxLayoutAlign="start stretch">
-    <!-- LOG LIST HERE -->
+<div fxFlex fxFill *ngIf="selectedIdea$ | async as selectedIdea" fxLayout="column" fxLayoutAlign="start center">
+  <div fxLayout="row" fxLayoutAlign="start center"l>
+    <img [src]="selectedIdea.icon"/>
   </div>
-</div>
-<div class="comment-form-container" fxLayout="column" fxLayoutAlign="start stretch">
-  <!-- COMMENT HERE -->
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <app-review-show-cmp></app-review-show-cmp>
+    <div fxLayout="column" fxLayoutAlign="start stretch">
+      <!-- LOG LIST HERE -->
+    </div>
+  </div>
+  <div class="comment-form-container" fxLayout="column" fxLayoutAlign="start stretch">
+    <!-- COMMENT HERE -->
+  </div>
 </div>

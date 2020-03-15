@@ -58,7 +58,7 @@ export class IdeaFacade {
         variables: {
           ideaInput: {
             label: suggest.name,
-            count: 5,
+            count: 25,
           }
         },
       });

@@ -1,6 +1,6 @@
 <div fxFill fxLayout="column" fxLayoutAlign="start center">
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <label>Create new idea</label>
+  <h2>Create new ideas</h2>
+  <div fxLayout="column" fxLayoutAlign="start center">
     <form [formGroup]="formGroup" fxFlex fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFill>
         <input #inputElement fxFill
@@ -10,10 +10,21 @@
               (keyup.backspace)="onKey($event)"
               autocomplete="off">
       </mat-form-field>
+      <div fxFill>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <img src="/assets/img/category/videogame.svg" width="24" height="24"/>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngFor="let category of categories">{{ category.label }}</button>
+        </mat-menu>
+      </div>
     </form>
-    <button (click)="create()">Add</button>
+    <button mat-fab (click)="create()"><mat-icon>add</mat-icon></button>
   </div>
-  <div *ngIf="(suggestedIdeas$ | async).length > 0" fxLayout="row" fxLayoutAlign="start center">
-    <span *ngFor="let idea of (suggestedIdeas$ | async)">{{ idea.label }}</span>
+  <div fxLayout="row wrap">
+    <app-idea-item-cmp
+      *ngFor="let idea of (suggestedIdeas$ | async)"
+      [idea]="idea"
+    ></app-idea-item-cmp>
   </div>
 </div>

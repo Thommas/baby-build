@@ -25,6 +25,23 @@ export class IdeaCreateComponent implements OnInit {
   emptyIdeaReadyForDeletion: boolean;
   formFieldSub: Subscription;
   suggestedIdeas$: any;
+  categories: any[] = [
+    {
+      label: 'Video game',
+    },
+    {
+      label: 'Anime',
+    },
+    {
+      label: 'Music',
+    },
+    {
+      label: 'Movie',
+    },
+    {
+      label: 'Book',
+    },
+  ]
 
   constructor(
     private ideaFacade: IdeaFacade,
@@ -35,9 +52,11 @@ export class IdeaCreateComponent implements OnInit {
     this.idea = {};
     this.formGroup = new FormGroup({
       label: new FormControl('', []),
+      category: new FormControl('', []),
     });
     this.formGroup.setValue({
       label: '',
+      category: '',
     });
     this.suggestedIdeas$ = this.ideaFacade.suggestedIdeas$;
   }
@@ -62,6 +81,7 @@ export class IdeaCreateComponent implements OnInit {
 
   create() {
     if (!this.formGroup.valid) {
+      console.log('INVALID');
       return;
     }
     const idea: any = clone(this.formGroup.value);

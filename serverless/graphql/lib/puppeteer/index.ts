@@ -22,7 +22,7 @@ export async function fetchImage(input: string) {
 
   await page.goto(`https://www.google.com/search?tbm=isch&q=${input}`);
 
-  const IMAGE_SELECTOR = '#rg > div:nth-child(1) > div:nth-child(1) > a > img';
+  const IMAGE_SELECTOR = '#islrg > div:nth-child(1) > div:nth-child(1) > a > div > img';
 
   return await page.evaluate((sel) => {
     return document.querySelector(sel).getAttribute('src');

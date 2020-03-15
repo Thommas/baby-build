@@ -12,7 +12,6 @@ import { Entity } from '../model';
 import { queryIdeas } from '../elasticsearch/idea';
 import { querySharingsByUserId } from '../elasticsearch/sharing';
 import { fetchImage } from '../puppeteer';
-import { storeBase64File } from '../s3';
 
 export function getIdeas(userId: string, args: any) {
   const ideaInput = args.ideaInput;
@@ -50,13 +49,22 @@ export function getIdeas(userId: string, args: any) {
 
 export function createIdea(args: any, userId: string) {
   const id = generate('0123456789', 20);
-  const entity = new Entity({
-    id: `Idea-${id}`,
-    userId,
-    icon: null,
-    ...args
-  });
-  return entity.save();
+  return fetchImage(args.label)
+    .then((imageData: string) => {
+      if (null === imageData) {
+        throw new Error('Cannot fetch image');
+      }
+      return imageData;
+    })
+    .then((icon: string) => {
+      const entity = new Entity({
+        id: `Idea-${id}`,
+        userId,
+        icon,
+        ...args
+      });
+      return entity.save();
+    });
 }
 
 export function updateIdea(args: any, userId: string) {
@@ -74,30 +82,6 @@ export function updateIdea(args: any, userId: string) {
       entity.score = args.score;
       return entity.save();
     });
-}
-
-export function updateIdeaIcon(args: any, userId: string) {
-  return Entity.get(args.id)
-    .then((entity: any) => {
-      if (!entity) {
-        throw new Error('Idea not found');
-      }
-      // FIXME Need to check sharing permission
-      // if (entity.userId !== userId) {
-      //   throw new Error('Unauthorized');
-      // }
-      return fetchImage(entity.label)
-        .then((imageData: string) => {
-          if (null === imageData) {
-            throw new Error('Cannot fetch image');
-          }
-          return imageData;
-        })
-        .then((icon: string) => {
-          entity.icon = icon;
-          return entity.save();
-        });
-    })
 }
 
 export function deleteIdea(args: any, userId: string) {
