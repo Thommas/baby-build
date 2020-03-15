@@ -2,12 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.0] - 2019-01-05
+## [1.0.0] - 2020-03-15
+
+### Added
+- Idea category with fixed list
+
+### Removed
+- Tag
+
+## [0.9.0] - 2019-01-05
 
 ### Refactor
 - Task becomes Idea
 
-## [1.0.0] - 2018-07-08
+## [0.8.0] - 2018-07-08
 
 ### Refactor
 - Separated static and app

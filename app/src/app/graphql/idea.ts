@@ -28,8 +28,8 @@ export const GetIdeas = gql`
 `;
 
 export const CreateIdeaMutation = gql`
-  mutation CreateIdea($label: String!, $tagId: String) {
-    createIdea(label: $label, tagId: $tagId) {
+  mutation CreateIdea($label: String!) {
+    createIdea(label: $label) {
       id
       label
       icon

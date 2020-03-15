@@ -31,9 +31,6 @@ export const purifyFilters = (filters: any) => {
   if (!currentFilters.score || 0 === currentFilters.score.length) {
     delete currentFilters.score;
   }
-  if (!currentFilters.tagId) {
-    delete currentFilters.tagId;
-  }
   if (!currentFilters.name) {
     delete currentFilters.name;
   }

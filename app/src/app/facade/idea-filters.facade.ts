@@ -18,12 +18,6 @@ export class IdeaFiltersFacade {
 
   constructor(private store: Store<{ ideaFilters: any }>) {}
 
-  selectTag(tag?: any) {
-    this.store.dispatch(new UpdateIdeaFilters({
-      tagId: tag ? tag.id : null,
-    }));
-  }
-
   selectLabel(label: string) {
     this.store.dispatch(new UpdateIdeaFilters({
       label,

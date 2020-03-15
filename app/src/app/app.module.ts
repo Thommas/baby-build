@@ -44,8 +44,6 @@ import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
 import {
   SidebarComponent,
-  TagFormComponent,
-  TagListComponent,
   TopbarComponent
 } from './components/layout';
 import {
@@ -63,10 +61,8 @@ import {
   IdeaFacade,
   IdeaFiltersFacade,
   IdeaSuggestFacade,
-  IdeaTagFacade,
   ReviewFacade,
   SharingFacade,
-  TagFacade,
   UserFacade,
 } from './facade';
 import {
@@ -99,8 +95,6 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     SidebarComponent,
-    TagFormComponent,
-    TagListComponent,
     TopbarComponent
   ],
   imports: [
@@ -149,10 +143,8 @@ export function createTranslateLoader(http: HttpClient) {
     EffectsModule.forRoot([
       IdeaFacade,
       IdeaSuggestFacade,
-      IdeaTagFacade,
       ReviewFacade,
       SharingFacade,
-      TagFacade,
       UserFacade
     ])
   ],
@@ -170,10 +162,8 @@ export function createTranslateLoader(http: HttpClient) {
     AuthFacade,
     IdeaFacade,
     IdeaFiltersFacade,
-    IdeaTagFacade,
     ReviewFacade,
     SharingFacade,
-    TagFacade,
     UserFacade,
   ],
   bootstrap: [
