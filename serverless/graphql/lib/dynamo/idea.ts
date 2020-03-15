@@ -91,7 +91,7 @@ export function updateIdeaIcon(args: any, userId: string) {
           if (null === imageData) {
             throw new Error('Cannot fetch image');
           }
-          return storeBase64File(`idea-icon/${userId}/${entity.id}`, imageData);
+          return imageData;
         })
         .then((icon: string) => {
           entity.icon = icon;

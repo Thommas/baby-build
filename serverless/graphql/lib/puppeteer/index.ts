@@ -20,7 +20,7 @@ export async function fetchImage(input: string) {
     height: 800
   });
 
-  await page.goto(`https://www.google.com/search?tbm=isch&q=${input}+symbol+logo`);
+  await page.goto(`https://www.google.com/search?tbm=isch&q=${input}`);
 
   const IMAGE_SELECTOR = '#rg > div:nth-child(1) > div:nth-child(1) > a > img';
 

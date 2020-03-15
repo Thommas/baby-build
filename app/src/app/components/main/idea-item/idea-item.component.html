@@ -1,16 +1,14 @@
-<div fxFill fxLayout="row" fxLayoutAlign="start center">
-  <app-idea-icon-cmp
-    [ideaId]="idea.id"
-    [ideaLabel]="idea.label"
-    [ideaIcon]="idea.icon"
-  ></app-idea-icon-cmp>
-  <div class="label">
-    {{ idea.label ? idea.label : '' }}
-  </div>
+<div class="category" fxLayout="row" fxLayoutAlign="end center">
+  <img src="/assets/img/category/videogame.svg"/>
+</div>
+<div class="icon" fxLayout="row" fxLayoutAlign="space-between center">
+  <img [src]="idea.icon" [matTooltip]="idea.label" matTooltipPosition="above" />
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between center">
   <div class="requiredAge">
     {{ idea.requiredAge ? idea.requiredAge : '?' }}
   </div>
   <div class="score">
-    <img [src]="getIcon(idea.score ? (idea.score | number:'1.0-0') : '0')" width="36" height="36"/>
+    <img [src]="getIcon(idea.score ? (idea.score | number:'1.0-0') : '0')"/>
   </div>
 </div>

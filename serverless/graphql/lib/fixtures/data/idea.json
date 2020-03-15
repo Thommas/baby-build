@@ -6,7 +6,8 @@
     "userId": "User-auth0|5a773beebfd2511753f2c9c0",
     "label": "Mario",
     "requiredAge": 3.1,
-    "score": -2.1
+    "score": -2.1,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Mario"
   },
   {
     "id": "Idea-Sonic",
@@ -15,8 +16,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Sonic",
     "requiredAge": 4.1,
-    "icon": null,
-    "score": -1.1
+    "score": -1.1,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Sonic"
   },
   {
     "id": "Idea-Chess",
@@ -25,8 +26,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Chess",
     "requiredAge": 5.1,
-    "icon": null,
-    "score": -0.1
+    "score": -0.1,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Chess"
   },
   {
     "id": "Idea-Talisman",
@@ -35,8 +36,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Talisman",
     "requiredAge": 6.1,
-    "icon": null,
-    "score": 0.1
+    "score": 0.1,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Talisman"
   },
   {
     "id": "Idea-Simpsons",
@@ -45,8 +46,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Simpsons",
     "requiredAge": 7.1,
-    "icon": null,
-    "score": 0.9
+    "score": 0.9,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Simpsons"
   },
   {
     "id": "Idea-Travelers",
@@ -55,8 +56,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Travelers",
     "requiredAge": 8.1,
-    "icon": null,
-    "score": 0.9
+    "score": 0.9,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Travelers"
   },
   {
     "id": "Idea-Naruto",
@@ -65,8 +66,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Naruto",
     "requiredAge": 7.1,
-    "icon": null,
-    "score": 1.1
+    "score": 1.1,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Naruto"
   },
   {
     "id": "Idea-Bleach",
@@ -75,8 +76,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Bleach",
     "requiredAge": 8.1,
-    "icon": null,
-    "score": 1.9
+    "score": 1.9,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Bleach"
   },
   {
     "id": "Idea-Monster",
@@ -85,8 +86,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Monster",
     "requiredAge": 7.1,
-    "icon": null,
-    "score": 1.9
+    "score": 1.9,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Monster"
   },
   {
     "id": "Idea-Claymore",
@@ -95,8 +96,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Claymore",
     "requiredAge": 8.1,
-    "icon": null,
-    "score": 2.1
+    "score": 2.1,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Claymore"
   },
   {
     "id": "Idea-Football",
@@ -105,8 +106,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Football",
     "requiredAge": 7.1,
-    "icon": null,
-    "score": 2.9
+    "score": 2.9,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Football"
   },
   {
     "id": "Idea-Basketball",
@@ -115,8 +116,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Basketball",
     "requiredAge": 8.1,
-    "icon": null,
-    "score": 3
+    "score": 3,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Basketball"
   },
   {
     "id": "Idea-Matrix",
@@ -125,8 +126,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Matrix",
     "requiredAge": 9.1,
-    "icon": null,
-    "score": 2
+    "score": 2,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Matrix"
   },
   {
     "id": "Idea-Inception",
@@ -135,8 +136,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Inception",
     "requiredAge": 10.1,
-    "icon": null,
-    "score": 1
+    "score": 1,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Inception"
   },
   {
     "id": "Idea-Hiking",
@@ -145,8 +146,8 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Hiking",
     "requiredAge": 11.1,
-    "icon": null,
-    "score": 0
+    "score": 0,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Hiking"
   },
   {
     "id": "Idea-Basketball",
@@ -155,107 +156,7 @@
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Basketball",
     "requiredAge": 12.1,
-    "icon": null,
-    "score": 0
-  },
-  {
-    "id": "Idea-Untitled1",
-    "createdAt": 1521053029017,
-    "updatedAt": 1521053029017,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Untitled1",
-    "requiredAge": 0,
-    "icon": null,
-    "score": 0
-  },
-  {
-    "id": "Idea-Untitled2",
-    "createdAt": 1521053029018,
-    "updatedAt": 1521053029018,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Untitled2",
-    "requiredAge": 0,
-    "icon": null,
-    "score": 0
-  },
-  {
-    "id": "Idea-Untitled3",
-    "createdAt": 1521053029019,
-    "updatedAt": 1521053029019,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Untitled3",
-    "requiredAge": 0,
-    "icon": null,
-    "score": 0
-  },
-  {
-    "id": "Idea-Untitled4",
-    "createdAt": 1521053029020,
-    "updatedAt": 1521053029020,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Untitled4",
-    "requiredAge": 0,
-    "icon": null,
-    "score": 0
-  },
-  {
-    "id": "Idea-Untitled5",
-    "createdAt": 1521053029021,
-    "updatedAt": 1521053029021,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Untitled5",
-    "requiredAge": 0,
-    "icon": null,
-    "score": 0
-  },
-  {
-    "id": "Idea-Untitled6",
-    "createdAt": 1521053029022,
-    "updatedAt": 1521053029022,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Untitled6",
-    "requiredAge": 0,
-    "icon": null,
-    "score": 0
-  },
-  {
-    "id": "Idea-Untitled7",
-    "createdAt": 1521053029023,
-    "updatedAt": 1521053029023,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Untitled7",
-    "requiredAge": 0,
-    "icon": null,
-    "score": 0
-  },
-  {
-    "id": "Idea-Untitled8",
-    "createdAt": 1521053029024,
-    "updatedAt": 1521053029024,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Untitled8",
-    "requiredAge": 0,
-    "icon": null,
-    "score": 0
-  },
-  {
-    "id": "Idea-Untitled9",
-    "createdAt": 1521053029025,
-    "updatedAt": 1521053029025,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Untitled9",
-    "requiredAge": 0,
-    "icon": null,
-    "score": 0
-  },
-  {
-    "id": "Idea-Untitled10",
-    "createdAt": 1521053029026,
-    "updatedAt": 1521053029026,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Untitled10",
-    "requiredAge": 0,
-    "icon": null,
-    "score": 0
+    "score": 0,
+    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Basketball"
   }
 ]
