@@ -8,28 +8,38 @@
   align-self: center;
   width: 160px;
   height: 160px;
-  margin: 10px;
+  margin: 20px;
 }
 
 .icon {
+  z-index: 1;
   align-self: center;
   margin: 2px 0;
   img {
+    transform: scale(1.3);
     width: 92px;
     height: 92px;
+    border-radius: 10px;
   }
 }
 
-.category img {
-  width: 32px;
-  height: 32px;
+.category {
+  z-index: 2;
+  img {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .score {
-  width: 32px;
-  height: 32px;
+  z-index: 2;
   img {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
   }
+}
+
+.requiredAge {
+  z-index: 2;
+  font-size: 24px;
 }

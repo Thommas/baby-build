@@ -14,6 +14,7 @@ export const GetIdeas = gql`
       nodes {
         id
         label
+        category
         icon
         requiredAge
         score
@@ -28,10 +29,11 @@ export const GetIdeas = gql`
 `;
 
 export const CreateIdeaMutation = gql`
-  mutation CreateIdea($label: String!) {
-    createIdea(label: $label) {
+  mutation CreateIdea($label: String!, $category: String!) {
+    createIdea(label: $label, category: $category) {
       id
       label
+      category
       icon
       requiredAge
       score
@@ -48,17 +50,20 @@ export const UpdateIdeaMutation = gql`
   mutation UpdateIdea(
     $id: String!
     $label: String
+    $category: String
     $requiredAge: Float
     $score: Float
   ) {
     updateIdea(
       id: $id
       label: $label
+      category: $category
       requiredAge: $requiredAge
       score: $score
     ) {
       id
       label
+      category
       icon
       requiredAge
       score
@@ -80,6 +85,7 @@ export const UpdateIdeaIconMutation = gql`
     ) {
       id
       label
+      category
       icon
       requiredAge
       score

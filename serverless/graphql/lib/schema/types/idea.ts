@@ -10,6 +10,7 @@ const Idea = `
   type Idea {
     id: String
     label: String
+    category: String
     icon: String
     requiredAge: Float
     score: Float
@@ -33,15 +34,14 @@ const Idea = `
   type Mutation {
     createIdea(
       label: String!
+      category: String!
     ): Idea
     updateIdea(
       id: String!
       label: String
+      category: String
       requiredAge: Float
       score: Float
-    ): Idea
-    updateIdeaIcon(
-      id: String!
     ): Idea
     deleteIdea(
       id: String!

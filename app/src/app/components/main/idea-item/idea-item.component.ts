@@ -24,6 +24,8 @@ export class IdeaItemComponent implements OnInit, OnChanges {
   loading: boolean;
   emptyIdeaReadyForDeletion: boolean;
   formFieldSub: Subscription;
+  categories: any = this.ideaFacade.categories;
+  getCategoryIconByValue = this.ideaFacade.getCategoryIconByValue;
 
   constructor(
     private ideaFacade: IdeaFacade,

@@ -43,6 +43,49 @@ export const purifyFilters = (filters: any) => {
 
 @Injectable()
 export class IdeaFacade {
+  categories: any = [
+    {
+      value: 'videogame',
+      label: 'Video game',
+      icon: '/assets/img/category/videogame.svg',
+    },
+    {
+      value: 'anime',
+      label: 'Anime',
+      icon: '/assets/img/category/anime.svg',
+    },
+    {
+      value: 'music',
+      label: 'Music',
+      icon: '/assets/img/category/music.svg',
+    },
+    {
+      value: 'movie',
+      label: 'Movie',
+      icon: '/assets/img/category/movie.svg',
+    },
+    {
+      value: 'book',
+      label: 'Book',
+      icon: '/assets/img/category/book.svg',
+    },
+    {
+      value: 'tvshow',
+      label: 'TV Show',
+      icon: '/assets/img/category/tvshow.svg',
+    },
+    {
+      value: 'activity',
+      label: 'Activity',
+      icon: '/assets/img/category/activity.svg',
+    },
+    {
+      value: 'manga',
+      label: 'Manga',
+      icon: '/assets/img/category/manga.svg',
+    },
+  ];
+
   suggestedIdeaQuery: QueryRef<any> = null;
   ideaQuery: QueryRef<any> = null;
   static total: number = null;
@@ -73,6 +116,7 @@ export class IdeaFacade {
         );
     })
   );
+  newIdeas = [];
   ideas$ = this.ideaFiltersFacade.filters$.pipe(
     flatMap((filters: any) => {
       this.ideaQuery = this.apolloService.apolloClient.watchQuery<any>({
@@ -103,6 +147,16 @@ export class IdeaFacade {
     private userFacade: UserFacade,
     private store: Store<{ idea: any }>
   ) {
+  }
+
+  getCategoryIconByValue(value: string) {
+    for (const category of this.categories) {
+      if (category.value === value) {
+        return category.icon;
+      }
+    }
+
+    return '';
   }
 
   fetchMore() {
@@ -173,14 +227,17 @@ export class IdeaFacade {
         return this.apolloService.apolloClient.mutate({
           mutation: CreateIdeaMutation,
           variables: {
-            label: action.payload.label
+            label: action.payload.label,
+            category: action.payload.category,
           },
           optimisticResponse: {
             __typename: 'Mutation',
+            optimistic: true,
             createIdea: {
               __typename: 'Idea',
               id: `-${uuid()}`,
-              label: null,
+              label: action.payload.label,
+              category: action.payload.category,
               icon: null,
               userId: user.id,
               user: {
@@ -192,7 +249,7 @@ export class IdeaFacade {
               score: 0,
             },
           },
-          update: (store, { data: { createIdea } }) => {
+          update: (store, { data: { createIdea, optimistic } }) => {
             if (!createIdea) {
               return;
             }
@@ -216,6 +273,7 @@ export class IdeaFacade {
             });
             // TODO Use a separate list for newly created items
             this.selectIdea(createIdea);
+            this.newIdeas.push(createIdea);
           },
         });
       })
@@ -229,20 +287,28 @@ export class IdeaFacade {
   updateIdea$ = this.actions$
     .pipe(
       ofType(IdeaActionTypes.UpdateIdea),
-      withLatestFrom(this.userFacade.user$),
+      withLatestFrom(
+        this.userFacade.user$,
+        this.selectedIdea$
+      ),
       mergeMap((args: any[]) => {
         const action: any = args[0];
         const user: any = args[1];
-        if (!user) {
+        const selectedIdea: any = args[2];
+        if (!user || !selectedIdea) {
           return of(EMPTY);
         }
         return this.apolloService.apolloClient.mutate({
           mutation: UpdateIdeaMutation,
-          variables: action.payload,
+          variables: {
+            id: selectedIdea.id,
+            ...action.payload
+          },
           optimisticResponse: {
             __typename: 'Mutation',
             updateIdea: {
               __typename: 'Idea',
+              id: selectedIdea.id,
               ...action.payload,
               userId: user.id,
               user: {
@@ -257,15 +323,13 @@ export class IdeaFacade {
               return;
             }
             const idea = store.data.get(`Idea:${updateIdea.id}`);
-            idea.label = updateIdea.label;
-            store.writeData(idea);
-
-            // const query: any = store.readQuery({ query: GetIdeas });
-            // const updatedIdeas: any[] = query.ideas.map((idea: any) => idea.id === updateIdea.id ? {
-            //   ...idea,
-            //   label: updateIdea.label,
-            // } : idea);
-            // store.writeQuery({ query: GetIdeas, data: { ideas: updatedIdeas }});
+            if (idea) {
+              idea.label = updateIdea.label;
+              idea.category = updateIdea.category;
+              selectedIdea.label = updateIdea.label;
+              selectedIdea.category = updateIdea.category;
+              store.writeData(idea);
+            }
           }
         });
       })

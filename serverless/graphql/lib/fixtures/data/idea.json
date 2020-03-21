@@ -5,9 +5,10 @@
     "updatedAt": 1521053029001,
     "userId": "User-auth0|5a773beebfd2511753f2c9c0",
     "label": "Mario",
+    "category": "videogame",
     "requiredAge": 3.1,
     "score": -2.1,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Mario"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Mario"
   },
   {
     "id": "Idea-Sonic",
@@ -15,9 +16,10 @@
     "updatedAt": 1521053029002,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Sonic",
+    "category": "videogame",
     "requiredAge": 4.1,
     "score": -1.1,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Sonic"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Sonic"
   },
   {
     "id": "Idea-Chess",
@@ -25,9 +27,10 @@
     "updatedAt": 1521053029003,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Chess",
+    "category": "activity",
     "requiredAge": 5.1,
     "score": -0.1,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Chess"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Chess"
   },
   {
     "id": "Idea-Talisman",
@@ -35,9 +38,10 @@
     "updatedAt": 1521053029004,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Talisman",
+    "category": "activity",
     "requiredAge": 6.1,
     "score": 0.1,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Talisman"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Talisman"
   },
   {
     "id": "Idea-Simpsons",
@@ -45,9 +49,10 @@
     "updatedAt": 1521053029005,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Simpsons",
+    "category": "tvshow",
     "requiredAge": 7.1,
     "score": 0.9,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Simpsons"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Simpsons"
   },
   {
     "id": "Idea-Travelers",
@@ -55,9 +60,10 @@
     "updatedAt": 1521053029006,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Travelers",
+    "category": "tvshow",
     "requiredAge": 8.1,
     "score": 0.9,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Travelers"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Travelers"
   },
   {
     "id": "Idea-Naruto",
@@ -65,9 +71,10 @@
     "updatedAt": 1521053029007,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Naruto",
+    "category": "anime",
     "requiredAge": 7.1,
     "score": 1.1,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Naruto"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Naruto"
   },
   {
     "id": "Idea-Bleach",
@@ -75,9 +82,10 @@
     "updatedAt": 1521053029008,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Bleach",
+    "category": "anime",
     "requiredAge": 8.1,
     "score": 1.9,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Bleach"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Bleach"
   },
   {
     "id": "Idea-Monster",
@@ -85,9 +93,10 @@
     "updatedAt": 1521053029009,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Monster",
+    "category": "manga",
     "requiredAge": 7.1,
     "score": 1.9,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Monster"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Monster"
   },
   {
     "id": "Idea-Claymore",
@@ -95,9 +104,10 @@
     "updatedAt": 1521053029010,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Claymore",
+    "category": "manga",
     "requiredAge": 8.1,
     "score": 2.1,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Claymore"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Claymore"
   },
   {
     "id": "Idea-Football",
@@ -105,9 +115,10 @@
     "updatedAt": 1521053029011,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Football",
+    "category": "activity",
     "requiredAge": 7.1,
     "score": 2.9,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Football"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Football"
   },
   {
     "id": "Idea-Basketball",
@@ -115,9 +126,10 @@
     "updatedAt": 1521053029012,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Basketball",
+    "category": "activity",
     "requiredAge": 8.1,
     "score": 3,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Basketball"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Basketball"
   },
   {
     "id": "Idea-Matrix",
@@ -125,9 +137,10 @@
     "updatedAt": 1521053029013,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Matrix",
+    "category": "movie",
     "requiredAge": 9.1,
     "score": 2,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Matrix"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Matrix"
   },
   {
     "id": "Idea-Inception",
@@ -135,28 +148,9 @@
     "updatedAt": 1521053029014,
     "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
     "label": "Inception",
+    "category": "movie",
     "requiredAge": 10.1,
     "score": 1,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Inception"
-  },
-  {
-    "id": "Idea-Hiking",
-    "createdAt": 1521053029015,
-    "updatedAt": 1521053029015,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Hiking",
-    "requiredAge": 11.1,
-    "score": 0,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Hiking"
-  },
-  {
-    "id": "Idea-Basketball",
-    "createdAt": 1521053029016,
-    "updatedAt": 1521053029016,
-    "userId": "User-auth0|5c76cf3d51aac62f2939ed73",
-    "label": "Basketball",
-    "requiredAge": 12.1,
-    "score": 0,
-    "icon": "https://via.placeholder.com/48x48/7045af/000000?text=Basketball"
+    "icon": "https://via.placeholder.com/480x480/7045af/000000?text=Inception"
   }
 ]

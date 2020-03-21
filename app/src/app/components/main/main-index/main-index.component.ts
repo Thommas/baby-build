@@ -15,15 +15,13 @@ import { IdeaFacade } from '../../../facade';
 export class MainIndexComponent {
   displayFilters: boolean;
   selectedIdea$ = this.ideaFacade.selectedIdea$;
+  categories: any = this.ideaFacade.categories;
+  getCategoryIconByValue = this.ideaFacade.getCategoryIconByValue;
 
   constructor(
     private ideaFacade: IdeaFacade
   ) {
     this.displayFilters = false;
-  }
-
-  createIdea() {
-    // this.ideaFacade.createIdea();
   }
 
   selectIdea(idea?: any) {
@@ -32,5 +30,11 @@ export class MainIndexComponent {
 
   toggleFilters() {
     this.displayFilters = !this.displayFilters;
+  }
+
+  selectCategory(category: string) {
+    this.ideaFacade.updateIdea({
+      category
+    });
   }
 }

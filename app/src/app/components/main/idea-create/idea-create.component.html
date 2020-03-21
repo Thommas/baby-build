@@ -1,29 +1,40 @@
 <div fxFill fxLayout="column" fxLayoutAlign="start center">
   <h2>Create new ideas</h2>
-  <div fxLayout="column" fxLayoutAlign="start center">
-    <form [formGroup]="formGroup" fxFlex fxLayout="row" fxLayoutAlign="start center">
-      <mat-form-field fxFill>
-        <input #inputElement fxFill
-              matInput
-              [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write an idea'"
-              formControlName="label"
-              (keyup.backspace)="onKey($event)"
-              autocomplete="off">
-      </mat-form-field>
-      <div fxFill>
-        <button mat-button [matMenuTriggerFor]="menu">
-          <img src="/assets/img/category/videogame.svg" width="24" height="24"/>
+  <form [formGroup]="formGroup" fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field fxFill>
+      <input #inputElement fxFill
+            matInput
+            [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write an idea'"
+            formControlName="label"
+            (keyup.backspace)="onKey($event)"
+            autocomplete="off">
+    </mat-form-field>
+    <div class="category">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <img [src]="getCategoryIconByValue(this.formGroup.get('category').value)" width="24" height="24"/>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let category of categories" (click)="selectCategory(category.value)">
+          <mat-icon><img [src]="category.icon" width="24" height="24"/></mat-icon>
+          {{ category.label }}
         </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item *ngFor="let category of categories">{{ category.label }}</button>
-        </mat-menu>
-      </div>
-    </form>
-    <button mat-fab (click)="create()"><mat-icon>add</mat-icon></button>
-  </div>
+      </mat-menu>
+    </div>
+    <button mat-mini-fab (click)="create()"><mat-icon>add</mat-icon></button>
+  </form>
+
+  <h2>Similar ideas</h2>
   <div fxLayout="row wrap">
     <app-idea-item-cmp
       *ngFor="let idea of (suggestedIdeas$ | async)"
+      [idea]="idea"
+    ></app-idea-item-cmp>
+  </div>
+
+  <h2>New ideas</h2>
+  <div fxLayout="row wrap">
+    <app-idea-item-cmp
+      *ngFor="let idea of newIdeas"
       [idea]="idea"
     ></app-idea-item-cmp>
   </div>

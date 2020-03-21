@@ -25,23 +25,9 @@ export class IdeaCreateComponent implements OnInit {
   emptyIdeaReadyForDeletion: boolean;
   formFieldSub: Subscription;
   suggestedIdeas$: any;
-  categories: any[] = [
-    {
-      label: 'Video game',
-    },
-    {
-      label: 'Anime',
-    },
-    {
-      label: 'Music',
-    },
-    {
-      label: 'Movie',
-    },
-    {
-      label: 'Book',
-    },
-  ]
+  newIdeas: any[] = this.ideaFacade.newIdeas;
+  categories: any[] = this.ideaFacade.categories;
+  getCategoryIconByValue = this.ideaFacade.getCategoryIconByValue;
 
   constructor(
     private ideaFacade: IdeaFacade,
@@ -56,7 +42,7 @@ export class IdeaCreateComponent implements OnInit {
     });
     this.formGroup.setValue({
       label: '',
-      category: '',
+      category: 'videogame',
     });
     this.suggestedIdeas$ = this.ideaFacade.suggestedIdeas$;
   }
@@ -72,6 +58,7 @@ export class IdeaCreateComponent implements OnInit {
 
   search() {
     if (!this.formGroup.valid) {
+      this.ideaSuggestFacade.setName(null);
       return;
     }
     const data: any = clone(this.formGroup.value);
@@ -86,6 +73,15 @@ export class IdeaCreateComponent implements OnInit {
     }
     const idea: any = clone(this.formGroup.value);
     this.ideaFacade.createIdea(idea);
+    this.formGroup.patchValue({
+      label: '',
+    });
+  }
+
+  selectCategory(value: string) {
+    this.formGroup.patchValue({
+      'category': value,
+    });
   }
 
   onKey(event: KeyboardEvent) {

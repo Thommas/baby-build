@@ -1,12 +1,12 @@
 <div class="category" fxLayout="row" fxLayoutAlign="end center">
-  <img src="/assets/img/category/videogame.svg"/>
+  <img [src]="getCategoryIconByValue(idea.category)"/>
 </div>
 <div class="icon" fxLayout="row" fxLayoutAlign="space-between center">
   <img [src]="idea.icon" [matTooltip]="idea.label" matTooltipPosition="above" />
 </div>
 <div fxLayout="row" fxLayoutAlign="space-between center">
   <div class="requiredAge">
-    {{ idea.requiredAge ? idea.requiredAge : '?' }}
+    {{ idea.requiredAge ? (idea.requiredAge | number:'1.0-0') + '+' : '?' }}
   </div>
   <div class="score">
     <img [src]="getIcon(idea.score ? (idea.score | number:'1.0-0') : '0')"/>
