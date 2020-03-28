@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * ElasticSearch - Services - Config
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import generate = require('nanoid/generate');
+import { nanoid } from 'nanoid'
 import { Entity } from '../model';
 import { queryReviews } from '../elasticsearch/review';
 
@@ -21,7 +21,7 @@ export function getReviews(ideaId: string) {
 }
 
 export function createReview(args: any, userId: string) {
-  const id = generate('0123456789', 20);
+  const id = nanoid();
   const entity = new Entity({
     id: `Review-${id}`,
     userId,

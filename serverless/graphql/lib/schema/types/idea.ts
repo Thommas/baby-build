@@ -6,7 +6,9 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-const Idea = `
+const { gql } = require('apollo-server-lambda');
+
+const Idea = gql`
   type Idea {
     id: String
     label: String

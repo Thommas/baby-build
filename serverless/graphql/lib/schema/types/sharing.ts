@@ -6,7 +6,9 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-const Sharing = `
+const { gql } = require('apollo-server-lambda');
+
+const Sharing = gql`
   type Sharing {
     id: String
     userId: String

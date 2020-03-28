@@ -6,7 +6,6 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { graphqlLambda } from 'graphql-server-lambda';
 import { makeExecutableSchema } from 'graphql-tools';
 import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas';
 
@@ -22,13 +21,14 @@ import reviewResolver from './resolvers/review';
 import sharingResolver from './resolvers/sharing';
 import userResolver from './resolvers/user';
 
-const typeDefs: any = mergeTypes([
+export const typeDefs: any = mergeTypes([
   ideaType,
   reviewType,
   sharingType,
   userType
 ]);
-const resolvers: any = mergeResolvers([
+
+export const resolvers: any = mergeResolvers([
   ideaResolver,
   reviewResolver,
   sharingResolver,

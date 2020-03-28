@@ -6,7 +6,9 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-const Review = `
+const { gql } = require('apollo-server-lambda');
+
+const Review = gql`
   type Review {
     id: String
     requiredAge: Int

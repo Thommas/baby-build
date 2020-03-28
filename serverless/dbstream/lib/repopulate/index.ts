@@ -1,7 +1,5 @@
 /**
- * Path of child - Repopulate
- *
- * Repopulate ElasticSearch from DynamoDB
+ * Path of child
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */

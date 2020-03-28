@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Elastic search - Services - Elastic search
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

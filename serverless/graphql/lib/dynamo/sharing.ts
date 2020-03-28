@@ -6,7 +6,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import generate = require('nanoid/generate');
+import { nanoid } from 'nanoid'
 import { Entity } from '../model';
 import { querySharingsBySharerId } from '../elasticsearch/sharing';
 
@@ -22,7 +22,7 @@ export function getSharings(sharerId: string) {
 }
 
 export function createSharing(args: any, userId: string) {
-  const id = generate('0123456789', 20);
+  const id = nanoid();
   const entity = new Entity({
     id: `Sharing-${id}`,
     sharerId: userId,

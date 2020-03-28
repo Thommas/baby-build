@@ -6,8 +6,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { graphqlLambda } from 'graphql-server-lambda';
-import schema from './schema/schema';
+import { ApolloServer } from 'apollo-server-lambda';
+import { typeDefs, resolvers } from './schema/schema';
 import { verify } from 'jsonwebtoken';
 import * as jwks from 'jwks-rsa';
 
@@ -64,7 +64,7 @@ exports.auth = (event, context, callback) => {
     return callback('Unauthorized')
   }
 
-  const options = {
+  const options: any = {
     audience: process.env.AUTH0_CLIENT_ID,
     algorithms: ['RS256']
   }
@@ -74,7 +74,7 @@ exports.auth = (event, context, callback) => {
       cache: true,
       jwksUri: process.env.AUTH0_JWKS_URI
     });
-    return jwksClient.getSigningKey(process.env.AUTH0_JWKS_KID, (err, key) => {
+    return jwksClient.getSigningKey(process.env.AUTH0_JWKS_KID, (err: any, key: any) => {
       const signingKey = key.publicKey || key.rsaPublicKey || '';
       verify(tokenValue, signingKey, options, (verifyError: any, decoded: any) => {
         if (verifyError) {
@@ -97,16 +97,26 @@ exports.auth = (event, context, callback) => {
 }
 
 exports.graphql = (event, context, callback) => {
-  const graphQLContext = { userId: event.requestContext.authorizer.userId };
+  const server = new ApolloServer({
+    playground: true,
+    introspection: true,
+    typeDefs,
+    resolvers,
+    context: ({ event, context }) => ({
+      headers: event.headers,
+      functionName: context.functionName,
+      event,
+      context,
+      userId: event.requestContext.authorizer.userId,
+    }),
+  });
 
-  const callbackFilter = (error, output) => {
-    const outputWithHeader = Object.assign({}, output, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    });
-    callback(error, outputWithHeader);
-  };
+  const handler = server.createHandler({
+    cors: {
+      origin: '*',
+      credentials: true,
+    },
+  });
 
-  graphqlLambda({ schema, context: graphQLContext })(event, context, callbackFilter);
+  return handler(event, context, callback);
 };
