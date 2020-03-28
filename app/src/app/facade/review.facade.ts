@@ -156,7 +156,7 @@ export class ReviewFacade {
           update: (store, { data: { createReview } }) => {
             this.selectReview(createReview);
             this.addToReviews(store, createReview);
-            this.updateIdea(store, createReview, filters);
+            // this.updateIdea(store, createReview, filters);
           },
         });
       })
@@ -197,10 +197,11 @@ export class ReviewFacade {
             },
           },
           update: (store, { data: { optimistic, updateReview } }) => {
+            console.log('updateReview', updateReview);
             if (optimistic) {
-              this.selectReview(updateReview);
-              this.updateReviews(store, updateReview);
-              this.updateIdea(store, updateReview, filters);
+              // this.selectReview(updateReview);
+              // this.updateReviews(store, updateReview);
+              // this.updateIdea(store, updateReview, filters);
             }
           },
         });

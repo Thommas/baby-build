@@ -52,6 +52,7 @@ import {
   AuthGuardService,
   AuthService,
   BrowserService,
+  ConstantsService,
   FormService,
   LocaleService,
   ProgressService
@@ -155,6 +156,7 @@ export function createTranslateLoader(http: HttpClient) {
     AuthGuardService,
     AuthService,
     BrowserService,
+    ConstantsService,
     FormService,
     LocaleService,
     ProgressService,

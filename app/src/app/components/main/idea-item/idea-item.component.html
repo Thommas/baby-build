@@ -1,5 +1,5 @@
 <div class="category" fxLayout="row" fxLayoutAlign="end center">
-  <img [src]="getCategoryIconByValue(idea.category)"/>
+  <img [src]="constantsService.getCategoryIconByValue(idea.category)"/>
 </div>
 <div class="icon" fxLayout="row" fxLayoutAlign="space-between center">
   <img [src]="idea.icon" [matTooltip]="idea.label" matTooltipPosition="above" />

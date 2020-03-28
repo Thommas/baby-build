@@ -89,7 +89,18 @@ export function updateIdea(args: any, userId: string) {
       if (args.category) {
         entity.category = args.category;
       }
-      return entity.save();
+
+      return fetchImage(`${entity.label}+${entity.category}`)
+        .then((imageData: string) => {
+          if (null === imageData) {
+            throw new Error('Cannot fetch image');
+          }
+          return imageData;
+        })
+        .then((icon: string) => {
+          entity.icon = icon;
+          return entity.save();
+        });
     });
 }
 

@@ -1,4 +1,4 @@
-service: pathofchild-es
+service: pathofchild-dbstream
 
 plugins:
   - serverless-plugin-typescript

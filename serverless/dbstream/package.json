@@ -1,12 +1,10 @@
 {
-  "name": "pathofchild-elasticsearch",
+  "name": "pathofchild-dbstream",
   "version": "0.1.0",
   "license": "WTFPL",
   "scripts": {
     "start": "serverless offline start --stage dev --region eu-west-2",
-    "start:local": "serverless offline start --stage local --region eu-west-2",
     "repopulate": "./node_modules/.bin/ts-node ./lib/repopulate/index.ts",
-    "repopulate:local": "cross-env NODE_ENV=local ./node_modules/.bin/ts-node ./lib/repopulate/index.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "test": "jasmine-ts \"lib/**/*.spec.ts\"",
     "e2e": "jasmine-ts \"e2e/**/*.spec.ts\"",

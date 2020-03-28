@@ -43,49 +43,6 @@ export const purifyFilters = (filters: any) => {
 
 @Injectable()
 export class IdeaFacade {
-  categories: any = [
-    {
-      value: 'videogame',
-      label: 'Video game',
-      icon: '/assets/img/category/videogame.svg',
-    },
-    {
-      value: 'anime',
-      label: 'Anime',
-      icon: '/assets/img/category/anime.svg',
-    },
-    {
-      value: 'music',
-      label: 'Music',
-      icon: '/assets/img/category/music.svg',
-    },
-    {
-      value: 'movie',
-      label: 'Movie',
-      icon: '/assets/img/category/movie.svg',
-    },
-    {
-      value: 'book',
-      label: 'Book',
-      icon: '/assets/img/category/book.svg',
-    },
-    {
-      value: 'tvshow',
-      label: 'TV Show',
-      icon: '/assets/img/category/tvshow.svg',
-    },
-    {
-      value: 'activity',
-      label: 'Activity',
-      icon: '/assets/img/category/activity.svg',
-    },
-    {
-      value: 'manga',
-      label: 'Manga',
-      icon: '/assets/img/category/manga.svg',
-    },
-  ];
-
   suggestedIdeaQuery: QueryRef<any> = null;
   ideaQuery: QueryRef<any> = null;
   static total: number = null;
@@ -147,16 +104,6 @@ export class IdeaFacade {
     private userFacade: UserFacade,
     private store: Store<{ idea: any }>
   ) {
-  }
-
-  getCategoryIconByValue(value: string) {
-    for (const category of this.categories) {
-      if (category.value === value) {
-        return category.icon;
-      }
-    }
-
-    return '';
   }
 
   fetchMore() {
@@ -308,14 +255,8 @@ export class IdeaFacade {
             __typename: 'Mutation',
             updateIdea: {
               __typename: 'Idea',
-              id: selectedIdea.id,
+              ...selectedIdea,
               ...action.payload,
-              userId: user.id,
-              user: {
-                __typename: 'User',
-                firstName: user.firstName,
-                lastName: user.lastName,
-              }
             },
           },
           update: (store: any, { data: { updateIdea } }) => {
@@ -324,10 +265,8 @@ export class IdeaFacade {
             }
             const idea = store.data.get(`Idea:${updateIdea.id}`);
             if (idea) {
-              idea.label = updateIdea.label;
-              idea.category = updateIdea.category;
-              selectedIdea.label = updateIdea.label;
-              selectedIdea.category = updateIdea.category;
+              Object.assign(idea, updateIdea);
+              Object.assign(selectedIdea, updateIdea);
               store.writeData(idea);
             }
           }

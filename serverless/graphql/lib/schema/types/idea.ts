@@ -11,6 +11,7 @@ const Idea = `
     id: String
     label: String
     category: String
+    platform: String
     icon: String
     requiredAge: Float
     score: Float
@@ -35,11 +36,13 @@ const Idea = `
     createIdea(
       label: String!
       category: String!
+      platform: String
     ): Idea
     updateIdea(
       id: String!
       label: String
       category: String
+      platform: String
       requiredAge: Float
       score: Float
     ): Idea

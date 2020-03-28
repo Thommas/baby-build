@@ -4,26 +4,19 @@ Roadmap
 Short term
 ----------
 
+- Refactor fetching icon into dbstream
+- Transform fixtures load into load/save DB
 - Updating name
-- Updating category
 - Delete idea
 - Add language
-- Add release date
 - Implement multi sort
-
-Medium term
------------
-
-- Test backup dynamodb data folder
 - Add field: Describe how deep to explore (1st episode, 1st season, all core episodes, everything)
 - Add field: Release date (detect it)
-- Fix remaining bugs
-- Add sort by for ideas
-- Add Idea permission based on sharing (mutualize checking sharing)
 
 Long term
 ---------
 
+- Add Idea permission based on sharing (mutualize checking sharing)
 - Suggest 5 icons/5 detected api references
 - Batch import ideas
 - Implement voice recording to create task

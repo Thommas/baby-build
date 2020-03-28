@@ -8,7 +8,7 @@ import { clone } from 'lodash';
 import { Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IdeaFacade, IdeaSuggestFacade } from '../../../facade';
-import { FormService } from '../../../services';
+import { ConstantsService, FormService } from '../../../services';
 import { map } from 'rxjs/operators';
 import { of, Subscription } from 'rxjs';
 
@@ -26,10 +26,9 @@ export class IdeaCreateComponent implements OnInit {
   formFieldSub: Subscription;
   suggestedIdeas$: any;
   newIdeas: any[] = this.ideaFacade.newIdeas;
-  categories: any[] = this.ideaFacade.categories;
-  getCategoryIconByValue = this.ideaFacade.getCategoryIconByValue;
 
   constructor(
+    public constantsService: ConstantsService,
     private ideaFacade: IdeaFacade,
     private ideaSuggestFacade: IdeaSuggestFacade,
     private formService: FormService
@@ -39,10 +38,12 @@ export class IdeaCreateComponent implements OnInit {
     this.formGroup = new FormGroup({
       label: new FormControl('', []),
       category: new FormControl('', []),
+      platform: new FormControl('', []),
     });
     this.formGroup.setValue({
       label: '',
       category: 'videogame',
+      platform: 'atari-st',
     });
     this.suggestedIdeas$ = this.ideaFacade.suggestedIdeas$;
   }
@@ -62,13 +63,11 @@ export class IdeaCreateComponent implements OnInit {
       return;
     }
     const data: any = clone(this.formGroup.value);
-    console.log('search', data.label);
     this.ideaSuggestFacade.setName(data.label);
   }
 
   create() {
     if (!this.formGroup.valid) {
-      console.log('INVALID');
       return;
     }
     const idea: any = clone(this.formGroup.value);
@@ -81,6 +80,17 @@ export class IdeaCreateComponent implements OnInit {
   selectCategory(value: string) {
     this.formGroup.patchValue({
       'category': value,
+    });
+    if (value != 'videogame') {
+      this.formGroup.patchValue({
+        'platform': null,
+      });
+    }
+  }
+
+  selectPlatform(value: string) {
+    this.formGroup.patchValue({
+      'platform': value,
     });
   }
 

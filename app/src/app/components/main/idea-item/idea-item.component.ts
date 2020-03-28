@@ -8,7 +8,7 @@ import { clone } from 'lodash';
 import { Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IdeaFacade, UserFacade } from '../../../facade';
-import { FormService } from '../../../services';
+import { ConstantsService, FormService } from '../../../services';
 import { map } from 'rxjs/operators';
 import { of, Subscription } from 'rxjs';
 
@@ -24,10 +24,9 @@ export class IdeaItemComponent implements OnInit, OnChanges {
   loading: boolean;
   emptyIdeaReadyForDeletion: boolean;
   formFieldSub: Subscription;
-  categories: any = this.ideaFacade.categories;
-  getCategoryIconByValue = this.ideaFacade.getCategoryIconByValue;
 
   constructor(
+    public constantsService: ConstantsService,
     private ideaFacade: IdeaFacade,
     private userFacade: UserFacade,
     private formService: FormService

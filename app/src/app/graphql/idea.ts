@@ -29,11 +29,12 @@ export const GetIdeas = gql`
 `;
 
 export const CreateIdeaMutation = gql`
-  mutation CreateIdea($label: String!, $category: String!) {
-    createIdea(label: $label, category: $category) {
+  mutation CreateIdea($label: String!, $category: String!, $platform: String) {
+    createIdea(label: $label, category: $category, platform: $platform) {
       id
       label
       category
+      platform
       icon
       requiredAge
       score
@@ -51,6 +52,7 @@ export const UpdateIdeaMutation = gql`
     $id: String!
     $label: String
     $category: String
+    $platform: String
     $requiredAge: Float
     $score: Float
   ) {
@@ -58,34 +60,14 @@ export const UpdateIdeaMutation = gql`
       id: $id
       label: $label
       category: $category
+      platform: $platform
       requiredAge: $requiredAge
       score: $score
     ) {
       id
       label
       category
-      icon
-      requiredAge
-      score
-      userId
-      user {
-        firstName
-        lastName
-      }
-    }
-  }
-`;
-
-export const UpdateIdeaIconMutation = gql`
-  mutation UpdateIdeaIcon(
-    $id: String!
-  ) {
-    updateIdeaIcon(
-      id: $id
-    ) {
-      id
-      label
-      category
+      platform
       icon
       requiredAge
       score

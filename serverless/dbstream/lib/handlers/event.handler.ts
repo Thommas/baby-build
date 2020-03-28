@@ -12,6 +12,7 @@ import { index, remove } from '../services/elasticsearch.service';
 export function handleEvent(event, context, callback) {
   for (const record of event.Records) {
     if (record.eventName == 'INSERT' || record.eventName == 'MODIFY') {
+      console.log('record', record);
       const document = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage);
       index(document);
     }

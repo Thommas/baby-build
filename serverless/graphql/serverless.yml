@@ -6,9 +6,6 @@ plugins:
 
 custom:
   stage: ${opt:stage, self:provider.stage}
-  ideaTable: ${self:service}-${self:custom.stage}-idea
-  ideaUserTable: ${self:service}-${self:custom.stage}-review
-  userTable: ${self:service}-${self:custom.stage}-user
   secrets: ${file(secrets.yml):${self:custom.stage}}
   serverless-offline:
     port: 4001
@@ -58,73 +55,3 @@ functions:
           method: post
           cors: true
           authorizer: customAuthorizer
-
-resources:
-  Resources:
-    IdeaTable:
-      Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
-          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.ideaTable}
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
-    ReviewTable:
-      Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
-          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.ideaUserTable}
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
-    UserTable:
-      Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.secrets.READ_CAPACITY_UNITS}
-          WriteCapacityUnits: ${self:custom.secrets.WRITE_CAPACITY_UNITS}
-        TableName: ${self:custom.userTable}
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
-  Outputs:
-    IdeaTableStreamArn:
-      Description: The StreamArn for the Idea Table
-      Value:
-        "Fn::GetAtt": [ IdeaTable, StreamArn ]
-      Export:
-        Name: ${self:service}:${self:custom.stage}:IdeaTableStreamArn
-    ReviewTableStreamArn:
-      Description: The StreamArn for the Review Table
-      Value:
-        "Fn::GetAtt": [ ReviewTable, StreamArn ]
-      Export:
-        Name: ${self:service}:${self:custom.stage}:ReviewTableStreamArn
-    UserTableStreamArn:
-      Description: The StreamArn for the User Table
-      Value:
-        "Fn::GetAtt": [ UserTable, StreamArn ]
-      Export:
-        Name: ${self:service}:${self:custom.stage}:UserTableStreamArn

@@ -4,9 +4,7 @@
   "license": "WTFPL",
   "scripts": {
     "start": "serverless offline start --stage dev --region eu-west-2",
-    "start:local": "cross-env NODE_ENV=local serverless offline start --stage dev --region eu-west-2",
     "fixtures": "./node_modules/.bin/ts-node ./lib/fixtures/index.ts",
-    "fixtures:local": "cross-env NODE_ENV=local ./node_modules/.bin/ts-node ./lib/fixtures/index.ts",
     "graphqli": "./node_modules/.bin/ts-node ./lib/graphqli/index.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "lint": "tslint -c tslint.json './src/**/*.ts'",

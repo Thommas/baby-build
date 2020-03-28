@@ -6,6 +6,7 @@
 
 import { Component } from '@angular/core';
 import { IdeaFacade } from '../../../facade';
+import { ConstantsService } from '../../../services';
 
 @Component({
   selector: 'app-main-index-cmp',
@@ -15,10 +16,9 @@ import { IdeaFacade } from '../../../facade';
 export class MainIndexComponent {
   displayFilters: boolean;
   selectedIdea$ = this.ideaFacade.selectedIdea$;
-  categories: any = this.ideaFacade.categories;
-  getCategoryIconByValue = this.ideaFacade.getCategoryIconByValue;
 
   constructor(
+    public constantsService: ConstantsService,
     private ideaFacade: IdeaFacade
   ) {
     this.displayFilters = false;
