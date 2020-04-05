@@ -4,17 +4,17 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { loadDynamoFixtures } from './dynamo';
-import { loadElasticSearchFixtures } from './elasticsearch';
+import { dynamoService } from './services/dynamo.service';
+import { elasticSearchService } from './services/elasticsearch.service';
 
 declare var process;
 
 const promises = [
-  loadDynamoFixtures(),
-  loadElasticSearchFixtures(),
+  dynamoService.load(),
+  elasticSearchService.load(),
 ];
 
 Promise.all(promises).then(() => {
-  console.log('Loading fixtures completed');
+  console.log('Loading data completed');
   process.exit();
 });

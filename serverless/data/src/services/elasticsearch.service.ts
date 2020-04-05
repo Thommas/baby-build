@@ -7,62 +7,66 @@
 import * as elasticsearch from 'elasticsearch';
 import * as fs from 'fs';
 import { configService } from './config.service';
-import { entities } from '../model';
+import { ENTITIES } from '../model/entity.model';
 import { configuration } from '../config/elasticsearch.config';
 
-export const elasticsearchClient = new elasticsearch.Client({
-  hosts: [configService.elasticSearchHost]
-});
-
-export function createIndex(body: any): Promise<any> {
-  return elasticsearchClient.indices.create({
-    index: configService.elasticSearchIndex,
-    body
+class ElasticSearchService {
+  elasticsearchClient = new elasticsearch.Client({
+    hosts: [configService.elasticSearchHost]
   });
-}
 
-export function deleteIndex(): Promise<any> {
-  return elasticsearchClient.indices.delete({
-    index: configService.elasticSearchIndex,
-  }).catch((err) => {
-    // Ignore error
-  });
-}
-
-export function index(type: string, document: any): Promise<any> {
-  const id = document.id;
-  delete document.id;
-  return elasticsearchClient.index({
-    index: configService.elasticSearchIndex,
-    type: '_doc',
-    id,
-    body: {
-      ...document,
-      type,
-    },
-    refresh: true,
-  });
-}
-
-export function refreshIndex(): Promise<any> {
-  return elasticsearchClient.indices.refresh();
-}
-
-function loadData(entity: string): Promise<any> {
-  const data: any = fs.readFileSync(`${configService.dbDumpLocalPath}/${entity}.json`);
-  const items: any[] = JSON.parse(data);
-  const promises: Promise<any>[] = [];
-  for (let item of items) {
-    promises.push(index(entity, item));
+  createIndex(body: any): Promise<any> {
+    return this.elasticsearchClient.indices.create({
+      index: configService.elasticSearchIndex,
+      body
+    });
   }
-  return Promise.all(promises);
+
+  deleteIndex(): Promise<any> {
+    return this.elasticsearchClient.indices.delete({
+      index: configService.elasticSearchIndex,
+    }).catch((err) => {
+      // Ignore error
+    });
+  }
+
+  index(type: string, document: any): Promise<any> {
+    const id = document.id;
+    delete document.id;
+    return this.elasticsearchClient.index({
+      index: configService.elasticSearchIndex,
+      type: '_doc',
+      id,
+      body: {
+        ...document,
+        type,
+      },
+      refresh: true,
+    });
+  }
+
+  refreshIndex(): Promise<any> {
+    return this.elasticsearchClient.indices.refresh();
+  }
+
+  loadData(entity: string): Promise<any> {
+    const data: any = fs.readFileSync(`${configService.dbDumpLocalPath}/${entity}.json`);
+    const items: any[] = JSON.parse(data);
+    const promises: Promise<any>[] = [];
+    for (let item of items) {
+      promises.push(this.index(entity, item));
+    }
+    return Promise.all(promises);
+  }
+
+  async load(): Promise<any> {
+    await this.deleteIndex();
+    await this.createIndex(configuration);
+    for (let entity of ENTITIES) {
+      await this.loadData(entity);
+    }
+    await this.refreshIndex();
+  }
 }
 
-export async function loadElasticSearchFixtures(): Promise<any> {
-  await deleteIndex();
-  await createIndex(configuration);
-  for (let entity of entities) {
-    await loadData(entity);
-  }
-  await refreshIndex();
-}
+export const elasticSearchService = new ElasticSearchService();
