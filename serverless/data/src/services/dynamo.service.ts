@@ -98,14 +98,38 @@ class DynamoService {
       });
   }
 
-  loadData(entity: string): Promise<any> {
-    const data: any = fs.readFileSync(`${configService.dbDumpLocalPath}/${entity}.json`);
+  loadData(): Promise<any> {
+    const data: any = fs.readFileSync(`${configService.dbDumpLocalPath}/dump.json`);
     const documents: any[] = JSON.parse(data);
     const promises: Promise<any>[] = [];
     for (let document of documents) {
       promises.push(this.createDocument(document));
     }
     return Promise.all(promises);
+  }
+
+  async loadAllItems(): Promise<any[]> {
+    const params: any = {
+      TableName: configService.localDynamoDBTable,
+    };
+
+    let scanResults: any[] = [];
+    let items;
+    do {
+        items = await this.getAWSDynamo().scan(params).promise();
+        items.Items.forEach((item: any) => {
+          const document = AWS.DynamoDB.Converter.unmarshall(item);
+          scanResults.push(document);
+        });
+        params.ExclusiveStartKey = items.LastEvaluatedKey;
+    } while (typeof items.LastEvaluatedKey != "undefined");
+
+    return scanResults;
+  }
+
+  async saveData() {
+    const items: any[] = await this.loadAllItems();
+    fs.writeFileSync(`${configService.dbDumpLocalPath}/dump.json`, JSON.stringify(items));
   }
 
   timeout(ms) {
@@ -117,9 +141,31 @@ class DynamoService {
     await this.timeout(1000);
     await this.createTable();
     await this.timeout(1000);
-    for (let entity of ENTITIES) {
-      await this.loadData(entity);
+    await this.loadData();
+  }
+
+  deleteFolderRecursive(path) {
+    if (fs.existsSync(path) ) {
+      fs.readdirSync(path).forEach((file) => {
+        var curPath = `${path}/${file}`;
+        if (fs.lstatSync(curPath).isDirectory()) {
+          this.deleteFolderRecursive(curPath);
+        } else {
+          fs.unlinkSync(curPath);
+        }
+      });
+      fs.rmdirSync(path);
     }
+  };
+
+  wipeDirectories() {
+    this.deleteFolderRecursive(configService.dbDumpLocalPath);
+    fs.mkdirSync(configService.dbDumpLocalPath);
+  }
+
+  async save() {
+    this.wipeDirectories();
+    await this.saveData();
   }
 }
 
