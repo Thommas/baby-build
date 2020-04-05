@@ -49,18 +49,22 @@ const childIAMPolicy = (userId, effect, resource, context) => {
 };
 
 exports.auth = (event, context, callback) => {
+  console.log('PLOP');
   if (!event.authorizationToken) {
+    console.log('PLOP1');
     return callback('Unauthorized')
   }
 
   const tokenParts = event.authorizationToken.split(' ')
   if (tokenParts.length !== 2) {
+    console.log('PLOP2');
     return callback('Unauthorized')
   }
 
   const bearerValue = tokenParts[0]
   const tokenValue = tokenParts[1]
   if (!(bearerValue.toLowerCase() === 'bearer' && tokenValue)) {
+    console.log('PLOP3');
     return callback('Unauthorized')
   }
 

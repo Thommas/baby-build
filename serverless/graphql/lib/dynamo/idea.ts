@@ -11,10 +11,8 @@ import { orderBy } from 'lodash';
 import { Entity } from '../model';
 import { queryIdeas } from '../elasticsearch/idea';
 import { querySharingsByUserId } from '../elasticsearch/sharing';
-import { fetchImage } from '../puppeteer';
 
 export function getIdeas(userId: string, args: any) {
-  console.log('getIdeas', userId, args);
   const ideaInput = args.ideaInput;
   const cursor = args.cursor;
   return querySharingsByUserId(userId)
@@ -32,7 +30,6 @@ export function getIdeas(userId: string, args: any) {
         };
       }
       const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
-      console.log('params', params);
       return Entity.batchGet(params).then((items: any) => {
         return {
           total: ideas.hits.total.value,
@@ -54,18 +51,10 @@ export function createIdea(args: any, userId: string) {
   const entity = new Entity({
     id: `Idea-${id}`,
     userId,
+    imgsReady: false,
     ...args
   });
   return entity.save();
-  // return fetchImage(args.label)
-  //   .then((imageData: string) => {
-  //     if (null === imageData) {
-  //       throw new Error('Cannot fetch image');
-  //     }
-  //     return imageData;
-  //   })
-  //   .then((icon: string) => {
-  //   });
 }
 
 export function updateIdea(args: any, userId: string) {
@@ -90,18 +79,9 @@ export function updateIdea(args: any, userId: string) {
       if (args.category) {
         entity.category = args.category;
       }
+      entity.imgsReady = false;
 
-      return fetchImage(`${entity.label}+${entity.category}`)
-        .then((imageData: string) => {
-          if (null === imageData) {
-            throw new Error('Cannot fetch image');
-          }
-          return imageData;
-        })
-        .then((icon: string) => {
-          entity.icon = icon;
-          return entity.save();
-        });
+      return entity.save();
     });
 }
 

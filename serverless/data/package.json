@@ -1,0 +1,33 @@
+{
+  "name": "pathofchild-data",
+  "version": "0.6.0",
+  "license": "WTFPL",
+  "scripts": {
+    "start": "./node_modules/.bin/ts-node ./src/load.ts",
+    "save": "./node_modules/.bin/ts-node ./src/save.ts",
+    "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
+    "lint": "tslint -c tslint.json './src/**/*.ts'",
+    "test": "jasmine-ts \"lib/**/*.spec.ts\""
+  },
+  "dependencies": {
+    "@types/jasmine": "^3.5.10",
+    "@types/node": "^13.9.5",
+    "aws-lambda": "^1.0.5",
+    "aws-sdk": "^2.648.0",
+    "bluebird": "^3.7.2",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "dynamoose": "^1.11.1",
+    "elasticsearch": "^16.7.1",
+    "jasmine": "^3.5.0",
+    "jasmine-ts": "^0.3.0",
+    "joi": "^14.3.1",
+    "lodash": "^4.17.15",
+    "nanoid": "^3.0.0",
+    "ts-node": "^8.8.1",
+    "tslint": "^6.1.0",
+    "tslint-config-standard": "^9.0.0",
+    "typescript": "^3.8.3"
+  }
+}

@@ -15,13 +15,17 @@ export const GetIdeas = gql`
         id
         label
         category
-        icon
         requiredAge
         score
         userId
         user {
           firstName
           lastName
+        }
+        imgs {
+          icon
+          cover
+          screenshot
         }
       }
     }
@@ -35,7 +39,6 @@ export const CreateIdeaMutation = gql`
       label
       category
       platform
-      icon
       requiredAge
       score
       userId
@@ -68,7 +71,7 @@ export const UpdateIdeaMutation = gql`
       label
       category
       platform
-      icon
+      imgs
       requiredAge
       score
       userId

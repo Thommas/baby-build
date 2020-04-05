@@ -11,13 +11,11 @@ import * as dbUser from '../../dynamo/user';
 
 export default {
   Idea: {
+    imgs: (obj) => obj.imgs,
     user: (obj) => dbUser.getUser(obj.userId),
   },
   Query: {
-    ideas: (_, args, context) => {
-      console.log('context', context);
-      return dbIdea.getIdeas(context.userId, args);
-    },
+    ideas: (_, args, context) => dbIdea.getIdeas(context.userId, args),
   },
   Mutation: {
     createIdea: (_, args, context) => dbIdea.createIdea(args, context.userId),

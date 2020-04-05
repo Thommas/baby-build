@@ -2,7 +2,7 @@
   <img [src]="constantsService.getCategoryIconByValue(idea.category)"/>
 </div>
 <div class="icon" fxLayout="row" fxLayoutAlign="space-between center">
-  <img [src]="idea.icon" [matTooltip]="idea.label" matTooltipPosition="above" />
+  <img [src]="idea.imgs ? idea.imgs.icon : 'https://placehold.it/40x40'" [matTooltip]="idea.label" matTooltipPosition="above" />
 </div>
 <div fxLayout="row" fxLayoutAlign="space-between center">
   <div class="requiredAge">

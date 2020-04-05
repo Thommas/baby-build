@@ -4,7 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Refactor fetching icon into dbstream
 - Transform fixtures load into load/save DB
 - Updating name
 - Delete idea

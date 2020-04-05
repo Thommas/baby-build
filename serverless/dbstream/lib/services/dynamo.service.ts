@@ -7,7 +7,27 @@
 import * as AWS from 'aws-sdk';
 import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
 import * as bluebird from 'bluebird';
+import * as dynamoose from 'dynamoose';
 import { configService } from './config.service';
+
+export const getDynamoose = () => {
+  const {
+    localDynamoDBHost,
+    localDynamoDBPort,
+  } = configService;
+
+  console.log('localDynamoDBHost', localDynamoDBHost);
+  console.log('localDynamoDBPort', localDynamoDBPort);
+
+  if (localDynamoDBHost && localDynamoDBPort) {
+    dynamoose.AWS.config.update({
+      region: 'eu-west-2',
+    });
+    dynamoose.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
+  }
+
+  return dynamoose;
+}
 
 export const getAWSDynamo = () => {
   const {
@@ -27,11 +47,4 @@ export const getAWSDynamo = () => {
   AWS.config.update(serviceConfigOptions);
 
   return new AWS.DynamoDB(serviceConfigOptions);
-}
-
-export const fetchAll = (): Promise<any> => {
-  const dynamoClient = getAWSDynamo();
-  return dynamoClient.scan({
-    TableName: configService.localDynamoDBTable
-  }).promise().then((data) => data.Items);
 }

@@ -5,6 +5,7 @@
  */
 
 import * as elasticsearch from 'elasticsearch';
+import { detectType } from '../model';
 import { configService } from './config.service';
 
 export const elasticsearchClient = new elasticsearch.Client({
@@ -21,29 +22,6 @@ export async function wipeIndex() {
           console.log('Indexes have been deleted!');
       }
   });
-}
-
-export function detectType(documentId: string)
-{
-  console.log('detectType', documentId);
-  if (!documentId) {
-    return null;
-  }
-  if (documentId.startsWith('Idea-')) {
-    return 'idea';
-  }
-  if (documentId.startsWith('Review-')) {
-    return 'review';
-  }
-  if (documentId.startsWith('Sharing-')) {
-    return 'sharing';
-  }
-  if (documentId.startsWith('User-')) {
-    return 'user';
-  }
-
-  console.log('NO VALID TYPE FOUND');
-  return null;
 }
 
 export async function index(document: any) {

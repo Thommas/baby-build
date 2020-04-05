@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * GraphQL - S3
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

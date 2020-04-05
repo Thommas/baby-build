@@ -40,11 +40,14 @@ textarea:hover {
 }
 
 .icon {
-  margin: 10px 0;
   height: 200px;
 
-  img {
-    height: 100%;
-    width: auto;
+  div {
+    height: 200px;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
   }
 }

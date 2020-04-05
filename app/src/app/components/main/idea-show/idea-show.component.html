@@ -1,6 +1,11 @@
 <div fxFlex fxFill *ngIf="selectedIdea$ | async as selectedIdea" fxLayout="column" fxLayoutAlign="start center">
   <div class="icon" fxLayout="row" fxLayoutAlign="start center">
-    <img [src]="selectedIdea.icon"/>
+    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="selectedIdea.imgs && selectedIdea.imgs.cover">
+      <img *ngFor="let cover of selectedIdea.imgs.cover" [src]="cover"/>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="selectedIdea.imgs && selectedIdea.imgs.screenshot">
+      <img *ngFor="let screenshot of selectedIdea.imgs.screenshot" [src]="screenshot"/>
+    </div>
   </div>
   <div fxLayout="row" fxLayoutAlign="start center">
     <app-review-show-cmp></app-review-show-cmp>

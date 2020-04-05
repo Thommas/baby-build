@@ -15,7 +15,7 @@ import {
 
 describe('Idea', () => {
   it('getIdeas', (done) => {
-    getIdeas('auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
+    getIdeas('auth0|5a773beebfd2511753f2c9c0', {}).then((data: any) => {
       done();
     })
   });

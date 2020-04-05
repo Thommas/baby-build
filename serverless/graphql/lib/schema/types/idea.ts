@@ -9,16 +9,21 @@
 const { gql } = require('apollo-server-lambda');
 
 const Idea = gql`
+  type Imgs {
+    icon: [String]
+    cover: [String]
+    screenshot: [String]
+  }
   type Idea {
     id: String
     label: String
     category: String
     platform: String
-    icon: String
     requiredAge: Float
     score: Float
     userId: String
     user: User
+    imgs: Imgs
   }
   input IdeaInput {
     label: String

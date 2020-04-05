@@ -1,12 +1,11 @@
 /**
- * Path of child - Fixtures
- *
- * Load fixtures for Elasticsearch
+ * Path of child
  *
  * @author Thomas Bullier <thomasbullier@gmail.com>
+ *
+ * @see https://www.elastic.co/blog/strings-are-dead-long-live-strings
  */
 
- // @see https://www.elastic.co/blog/strings-are-dead-long-live-strings
 export const configuration: any = {
   settings: {
     analysis: {
