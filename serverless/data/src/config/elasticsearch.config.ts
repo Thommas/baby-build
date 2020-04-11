@@ -6,7 +6,7 @@
  * @see https://www.elastic.co/blog/strings-are-dead-long-live-strings
  */
 
-export const configuration: any = {
+export const ELASTIC_SEARCH_CONFIG: any = {
   settings: {
     analysis: {
       filter: {

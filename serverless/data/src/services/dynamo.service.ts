@@ -10,7 +10,6 @@ import * as bluebird from 'bluebird';
 import * as dynamoose from 'dynamoose';
 import * as fs from 'fs';
 import { configService } from './config.service';
-import { ENTITIES, getEntity } from '../model/entity.model';
 
 class DynamoService {
   getDynamoose() {
@@ -87,8 +86,25 @@ class DynamoService {
       });
   }
 
+  getEntity() {
+    const dynamoose = this.getDynamoose();
+
+    const Schema = dynamoose.Schema;
+
+    const EntitySchema = new Schema({
+      id: {
+        type: String,
+      },
+    }, {
+      timestamps: true,
+      saveUnknown: true,
+    });
+
+    return dynamoose.model(configService.localDynamoDBTable, EntitySchema);
+  }
+
   createDocument(document: any): Promise<any> {
-    const Entity = getEntity(this.getDynamoose(), configService.localDynamoDBTable);
+    const Entity = this.getEntity();
     const item = new Entity({
       ...document
     });
@@ -99,7 +115,7 @@ class DynamoService {
   }
 
   loadData(): Promise<any> {
-    const data: any = fs.readFileSync(`${configService.dbDumpLocalPath}/dump.json`);
+    const data: any = fs.readFileSync(`${configService.dbDumpLocalPath}`);
     const documents: any[] = JSON.parse(data);
     const promises: Promise<any>[] = [];
     for (let document of documents) {
@@ -129,7 +145,7 @@ class DynamoService {
 
   async saveData() {
     const items: any[] = await this.loadAllItems();
-    fs.writeFileSync(`${configService.dbDumpLocalPath}/dump.json`, JSON.stringify(items));
+    fs.writeFileSync(`${configService.dbDumpLocalPath}`, JSON.stringify(items));
   }
 
   timeout(ms) {

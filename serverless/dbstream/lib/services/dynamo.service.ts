@@ -10,41 +10,45 @@ import * as bluebird from 'bluebird';
 import * as dynamoose from 'dynamoose';
 import { configService } from './config.service';
 
-export const getDynamoose = () => {
-  const {
-    localDynamoDBHost,
-    localDynamoDBPort,
-  } = configService;
+class DynamoService {
+  getDynamoose() {
+    const {
+      localDynamoDBHost,
+      localDynamoDBPort,
+    } = configService;
 
-  console.log('localDynamoDBHost', localDynamoDBHost);
-  console.log('localDynamoDBPort', localDynamoDBPort);
+    console.log('localDynamoDBHost', localDynamoDBHost);
+    console.log('localDynamoDBPort', localDynamoDBPort);
 
-  if (localDynamoDBHost && localDynamoDBPort) {
-    dynamoose.AWS.config.update({
-      region: 'eu-west-2',
-    });
-    dynamoose.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
+    if (localDynamoDBHost && localDynamoDBPort) {
+      dynamoose.AWS.config.update({
+        region: 'eu-west-2',
+      });
+      dynamoose.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
+    }
+
+    return dynamoose;
   }
 
-  return dynamoose;
+  getAWSDynamo() {
+    const {
+      localDynamoDBHost,
+      localDynamoDBPort,
+    } = configService;
+
+    console.log('localDynamoDBHost', localDynamoDBHost);
+    console.log('localDynamoDBPort', localDynamoDBPort);
+
+    const serviceConfigOptions : ServiceConfigurationOptions = {
+      region: 'eu-west-2',
+      endpoint: `http://${localDynamoDBHost}:${localDynamoDBPort}`,
+    };
+
+    AWS.config.setPromisesDependency(bluebird);
+    AWS.config.update(serviceConfigOptions);
+
+    return new AWS.DynamoDB(serviceConfigOptions);
+  }
 }
 
-export const getAWSDynamo = () => {
-  const {
-    localDynamoDBHost,
-    localDynamoDBPort,
-  } = configService;
-
-  console.log('localDynamoDBHost', localDynamoDBHost);
-  console.log('localDynamoDBPort', localDynamoDBPort);
-
-  const serviceConfigOptions : ServiceConfigurationOptions = {
-    region: 'eu-west-2',
-    endpoint: `http://${localDynamoDBHost}:${localDynamoDBPort}`,
-  };
-
-  AWS.config.setPromisesDependency(bluebird);
-  AWS.config.update(serviceConfigOptions);
-
-  return new AWS.DynamoDB(serviceConfigOptions);
-}
+export const dynamoService = new DynamoService();

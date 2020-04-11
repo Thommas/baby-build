@@ -7,8 +7,7 @@
 import * as elasticsearch from 'elasticsearch';
 import * as fs from 'fs';
 import { configService } from './config.service';
-import { ENTITIES } from '../model/entity.model';
-import { configuration } from '../config/elasticsearch.config';
+import { ELASTIC_SEARCH_CONFIG } from '../config/elasticsearch.config';
 
 class ElasticSearchService {
   elasticsearchClient = new elasticsearch.Client({
@@ -30,9 +29,42 @@ class ElasticSearchService {
     });
   }
 
-  index(type: string, document: any): Promise<any> {
+  refreshIndex(): Promise<any> {
+    return this.elasticsearchClient.indices.refresh();
+  }
+
+  loadData(): Promise<any> {
+    const data: any = fs.readFileSync(configService.dbDumpLocalPath);
+    const items: any[] = JSON.parse(data);
+    const promises: Promise<any>[] = [];
+    for (let item of items) {
+      promises.push(this.index(item));
+    }
+    return Promise.all(promises);
+  }
+
+  async load(): Promise<any> {
+    await this.deleteIndex();
+    await this.createIndex(ELASTIC_SEARCH_CONFIG);
+    await this.loadData();
+    await this.refreshIndex();
+  }
+
+  async wipeIndex(): Promise<any> {
+    return this.elasticsearchClient.indices.delete({
+        index: '_all'
+    }, function(err, res) {
+        if (err) {
+            console.error(err.message);
+        } else {
+            console.log('Indexes have been deleted!');
+        }
+    });
+  }
+
+  async index(document: any): Promise<any> {
     const id = document.id;
-    delete document.id;
+    const type = id.split('-')[0];
     return this.elasticsearchClient.index({
       index: configService.elasticSearchIndex,
       type: '_doc',
@@ -40,32 +72,10 @@ class ElasticSearchService {
       body: {
         ...document,
         type,
-      },
-      refresh: true,
+      }
+    }, (err, resp, status) => {
+      console.log(resp);
     });
-  }
-
-  refreshIndex(): Promise<any> {
-    return this.elasticsearchClient.indices.refresh();
-  }
-
-  loadData(entity: string): Promise<any> {
-    const data: any = fs.readFileSync(`${configService.dbDumpLocalPath}/${entity}.json`);
-    const items: any[] = JSON.parse(data);
-    const promises: Promise<any>[] = [];
-    for (let item of items) {
-      promises.push(this.index(entity, item));
-    }
-    return Promise.all(promises);
-  }
-
-  async load(): Promise<any> {
-    await this.deleteIndex();
-    await this.createIndex(configuration);
-    for (let entity of ENTITIES) {
-      await this.loadData(entity);
-    }
-    await this.refreshIndex();
   }
 }
 

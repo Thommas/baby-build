@@ -4,7 +4,6 @@
   "license": "WTFPL",
   "scripts": {
     "start": "cross-env AWS_REGION=eu-west-2 serverless offline start --stage dev --region eu-west-2 --lambdaPort 3004",
-    "repopulate": "./node_modules/.bin/ts-node ./lib/repopulate/index.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "test": "jasmine-ts \"lib/**/*.spec.ts\"",
     "e2e": "jasmine-ts \"e2e/**/*.spec.ts\"",

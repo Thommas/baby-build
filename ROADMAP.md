@@ -4,7 +4,7 @@ Roadmap
 Short term
 ----------
 
-- Transform fixtures load into load/save DB
+- Transform fixtures load into load/save DB > test it
 - Updating name
 - Delete idea
 - Add language

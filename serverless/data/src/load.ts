@@ -4,8 +4,10 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { dynamoService } from './services/dynamo.service';
-import { elasticSearchService } from './services/elasticsearch.service';
+import {
+  dynamoService,
+  elasticSearchService,
+} from './services';
 
 declare var process;
 

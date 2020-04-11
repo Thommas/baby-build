@@ -5,6 +5,7 @@
   "scripts": {
     "start": "./node_modules/.bin/ts-node ./src/load.ts",
     "save": "./node_modules/.bin/ts-node ./src/save.ts",
+    "repopulate": "./node_modules/.bin/ts-node ./src/repopulate.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "lint": "tslint -c tslint.json './src/**/*.ts'",
     "test": "jasmine-ts \"lib/**/*.spec.ts\""

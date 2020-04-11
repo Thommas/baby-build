@@ -86,7 +86,7 @@ class ConfigService {
   }
 
   get dbDumpLocalPath() {
-    return path.join(__dirname, `../../db/${this.envConfig.LOCAL_DYNAMODB_TABLE}`);
+    return path.join(__dirname, `../../db/${this.envConfig.LOCAL_DYNAMODB_TABLE}.json`);
   }
 }
 
