@@ -12,7 +12,7 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
       must: [
         {
           term: {
-            type: 'idea',
+            type: 'Idea',
           },
         },
         {

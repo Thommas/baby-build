@@ -12,7 +12,7 @@ export function queryReviews(ideaId: string): Promise<any> {
       must: [
         {
           term: {
-            type: 'review',
+            type: 'Review',
           },
         },
         {

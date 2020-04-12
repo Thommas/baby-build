@@ -66,20 +66,8 @@ export function updateIdea(args: any, userId: string) {
       // if (entity.userId !== userId) {
       //   throw new Error('Unauthorized');
       // }
-      if (args.label) {
-        entity.label = args.label;
-      }
-      if (args.requiredAge) {
-        entity.requiredAge = args.requiredAge;
-      }
-      if (args.score) {
-        entity.score = args.score;
-      }
-      if (args.category) {
-        entity.category = args.category;
-      }
+      Object.assign(entity, args);
       entity.imgsReady = false;
-
       return entity.save();
     });
 }

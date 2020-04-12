@@ -1,6 +1,6 @@
 {
   "name": "pathofchild-data",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "license": "WTFPL",
   "scripts": {
     "start": "./node_modules/.bin/ts-node ./src/load.ts",

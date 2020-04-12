@@ -12,7 +12,7 @@ export function querySharingsByUserId(userId: string): Promise<any> {
       must: [
         {
           term: {
-            type: 'sharing',
+            type: 'Sharing',
           },
         },
         {

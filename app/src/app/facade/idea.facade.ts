@@ -174,8 +174,7 @@ export class IdeaFacade {
         return this.apolloService.apolloClient.mutate({
           mutation: CreateIdeaMutation,
           variables: {
-            label: action.payload.label,
-            category: action.payload.category,
+            ...action.payload,
           },
           optimisticResponse: {
             __typename: 'Mutation',
@@ -183,8 +182,7 @@ export class IdeaFacade {
             createIdea: {
               __typename: 'Idea',
               id: `-${uuid()}`,
-              label: action.payload.label,
-              category: action.payload.category,
+              ...action.payload,
               icon: null,
               userId: user.id,
               user: {

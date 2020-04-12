@@ -65,6 +65,13 @@ class AuthService {
         jwksUri: configService.auth0JwksUri
       });
       return jwksClient.getSigningKey(configService.auth0JwksKid, (err: any, key: any) => {
+        if (err) {
+          console.error(err);
+          return callback('Unauthorized');
+        }
+        if (!key) {
+          return callback('Unauthorized');
+        }
         const signingKey = key.publicKey || key.rsaPublicKey || '';
         verify(tokenValue, signingKey, options, (verifyError: any, decoded: any) => {
           if (verifyError) {
@@ -81,7 +88,7 @@ class AuthService {
         })
       })
     } catch (err) {
-      console.log('catch error. Invalid token', err)
+      console.error('Invalid token', err)
       return callback('Unauthorized')
     }
   }

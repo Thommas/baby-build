@@ -26,11 +26,14 @@ const MAPPING = {
   ]
 };
 
-async function fetchImgs(label: string, category: string) {
+async function fetchImgs(document: any) {
   const imgs = {};
-  if (MAPPING[category]) {
-    for (const data of MAPPING[category]) {
-      imgs[data.key] = await puppeteerService.fetchImage(`${label}+${category}+${data.searchInput}`, data.limit);
+  if (MAPPING[document.category]) {
+    for (const data of MAPPING[document.category]) {
+      imgs[data.key] = await puppeteerService.fetchImage(
+        `${document.label}+${document.platform ? document.platform : document.category}+${data.searchInput}`,
+        data.limit
+      );
     }
   }
   return imgs;
@@ -45,7 +48,7 @@ function updateIdea(document: any) {
       if (!entity) {
         throw new Error('Idea not found');
       }
-      return fetchImgs(document.label, document.category)
+      return fetchImgs(document)
         .then((imgs: string[]) => {
           entity.imgs = imgs;
           entity.imgsReady = true;

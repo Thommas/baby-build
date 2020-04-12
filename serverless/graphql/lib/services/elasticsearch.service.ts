@@ -20,7 +20,7 @@ class ElasticSearchService {
     if (cursor !== '-1') {
       body.search_after = [cursor];
     }
-    return this.search({
+    return this.elasticsearchClient.search({
       index: configService.elasticSearchIndex,
       type: '_doc',
       size,

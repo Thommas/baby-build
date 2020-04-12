@@ -12,7 +12,7 @@ export function queryUsersBySearchQuery(searchQuery: string): Promise<any> {
       must: [
         {
           term: {
-            type: 'user',
+            type: 'User',
           },
         },
         {
