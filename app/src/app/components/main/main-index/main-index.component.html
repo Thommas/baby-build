@@ -9,25 +9,7 @@
     ></app-idea-list-cmp>
   </mat-card-content>
 </mat-card>
-<mat-card fxFlex class="right-card" *ngIf="selectedIdea$ | async as selectedIdea">
-  <mat-card-header fxLayoutAlign="space-between center">
-    <h2>{{ selectedIdea.label }}</h2>
-    <button mat-button [matMenuTriggerFor]="menu">
-      <img [src]="constantsService.getCategoryIconByValue(selectedIdea.category)" width="24" height="24"/>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item *ngFor="let category of constantsService.categories" (click)="selectCategory(category.value)">
-        <mat-icon><img [src]="category.icon" width="24" height="24"/></mat-icon>
-        {{ category.label }}
-      </button>
-    </mat-menu>
-    <button mat-icon-button (click)="selectIdea()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-card-header>
-  <mat-card-content>
-    <app-idea-show-cmp
-      fxFlex fxLayout="column" fxLayoutAlign="space-between none"
-    ></app-idea-show-cmp>
-  </mat-card-content>
-</mat-card>
+<app-idea-show-cmp
+  fxFlex fxLayout="column" fxLayoutAlign="space-between none"
+  *ngIf="selectedIdea$ | async"
+></app-idea-show-cmp>

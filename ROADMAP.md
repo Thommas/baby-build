@@ -4,8 +4,7 @@ Roadmap
 Short term
 ----------
 
-- Transform fixtures load into load/save DB > test it
-- Updating name
+- Updating fields
 - Delete idea
 - Add language
 - Implement multi sort

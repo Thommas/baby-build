@@ -1,19 +1,32 @@
-<div fxFlex fxFill *ngIf="selectedIdea$ | async as selectedIdea" fxLayout="column" fxLayoutAlign="start center">
-  <div class="icon" fxLayout="row" fxLayoutAlign="start center">
-    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="selectedIdea.imgs && selectedIdea.imgs.cover">
-      <img *ngFor="let cover of selectedIdea.imgs.cover" [src]="cover"/>
+<mat-card fxFlex class="right-card" *ngIf="selectedIdea$ | async as selectedIdea">
+  <mat-card-header fxLayoutAlign="space-between center">
+    <h2>{{ selectedIdea.label }}</h2>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <img [src]="constantsService.getCategoryIconByValue(selectedIdea.category)" width="24" height="24"/>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngFor="let category of constantsService.categories" (click)="selectCategory(category.value)">
+        <mat-icon><img [src]="category.icon" width="24" height="24"/></mat-icon>
+        {{ category.label }}
+      </button>
+    </mat-menu>
+    <button mat-icon-button (click)="selectIdea()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxFlex fxFill *ngIf="selectedIdea$ | async as selectedIdea" fxLayout="column" fxLayoutAlign="start center">
+      <div class="icon" fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="selectedIdea.imgs && selectedIdea.imgs.cover">
+          <img *ngFor="let cover of selectedIdea.imgs.cover" [src]="cover"/>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="selectedIdea.imgs && selectedIdea.imgs.screenshot">
+          <img *ngFor="let screenshot of selectedIdea.imgs.screenshot" [src]="screenshot"/>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <app-review-show-cmp></app-review-show-cmp>
+      </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="selectedIdea.imgs && selectedIdea.imgs.screenshot">
-      <img *ngFor="let screenshot of selectedIdea.imgs.screenshot" [src]="screenshot"/>
-    </div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <app-review-show-cmp></app-review-show-cmp>
-    <div fxLayout="column" fxLayoutAlign="start stretch">
-      <!-- LOG LIST HERE -->
-    </div>
-  </div>
-  <div class="comment-form-container" fxLayout="column" fxLayoutAlign="start stretch">
-    <!-- COMMENT HERE -->
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>

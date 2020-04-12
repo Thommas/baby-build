@@ -1,6 +1,15 @@
 :host {
-  padding: 0px 20px;
-  width: 100%;
+  display: block;
+  min-width: 0px;
+  max-width: 675px;
+  margin-left: 15px;
+  margin-right: 20px;
+  padding: 0;
+  overflow: hidden;
+}
+
+mat-card {
+  padding: 0;
 }
 
 .mat-form-field input {

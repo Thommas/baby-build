@@ -115,7 +115,7 @@ class DynamoService {
   }
 
   loadData(): Promise<any> {
-    const data: any = fs.readFileSync(`${configService.dbDumpLocalPath}`);
+    const data: any = fs.readFileSync(configService.dbDumpLocalPath);
     const documents: any[] = JSON.parse(data);
     const promises: Promise<any>[] = [];
     for (let document of documents) {
@@ -160,27 +160,8 @@ class DynamoService {
     await this.loadData();
   }
 
-  deleteFolderRecursive(path) {
-    if (fs.existsSync(path) ) {
-      fs.readdirSync(path).forEach((file) => {
-        var curPath = `${path}/${file}`;
-        if (fs.lstatSync(curPath).isDirectory()) {
-          this.deleteFolderRecursive(curPath);
-        } else {
-          fs.unlinkSync(curPath);
-        }
-      });
-      fs.rmdirSync(path);
-    }
-  };
-
-  wipeDirectories() {
-    this.deleteFolderRecursive(configService.dbDumpLocalPath);
-    fs.mkdirSync(configService.dbDumpLocalPath);
-  }
-
   async save() {
-    this.wipeDirectories();
+    fs.unlinkSync(configService.dbDumpLocalPath);
     await this.saveData();
   }
 }

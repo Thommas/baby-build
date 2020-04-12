@@ -62,6 +62,22 @@ class ElasticSearchService {
       console.log(resp);
     });
   }
+
+  search(query: any, sort: any = {}, size: number = 100, cursor: string = '-1'): Promise<any> {
+    const body: any = {
+      query,
+      sort,
+    };
+    if (cursor !== '-1') {
+      body.search_after = [cursor];
+    }
+    return this.elasticsearchClient.search({
+      index: configService.elasticSearchIndex,
+      type: '_doc',
+      size,
+      body,
+    });
+  }
 }
 
 export const elasticSearchService = new ElasticSearchService();

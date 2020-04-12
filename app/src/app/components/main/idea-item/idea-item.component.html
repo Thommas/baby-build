@@ -1,10 +1,10 @@
-<div class="category" fxLayout="row" fxLayoutAlign="end center">
-  <img [src]="constantsService.getCategoryIconByValue(idea.category)"/>
-</div>
-<div class="icon" fxLayout="row" fxLayoutAlign="space-between center">
-  <img [src]="idea.imgs ? idea.imgs.icon : 'https://placehold.it/40x40'" [matTooltip]="idea.label" matTooltipPosition="above" />
-</div>
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div class="container">
+  <div class="icon">
+    <img [src]="idea.imgs ? idea.imgs.icon : 'https://placehold.it/40x40'" [matTooltip]="idea.label" matTooltipPosition="above" />
+  </div>
+  <div class="category">
+    <img [src]="constantsService.getCategoryIconByValue(idea.category)"/>
+  </div>
   <div class="requiredAge">
     {{ idea.requiredAge ? (idea.requiredAge | number:'1.0-0') + '+' : '?' }}
   </div>
