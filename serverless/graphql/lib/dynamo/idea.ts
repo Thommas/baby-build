@@ -1,16 +1,14 @@
 /**
  * Path of child
  *
- * GraphQL - Dynamo - Idea
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { nanoid } from 'nanoid'
 import { orderBy } from 'lodash';
-import { Entity } from '../model';
 import { queryIdeas } from '../elasticsearch/idea';
 import { querySharingsByUserId } from '../elasticsearch/sharing';
+import { dynamoService } from '../services';
 
 export function getIdeas(userId: string, args: any) {
   const ideaInput = args.ideaInput;
@@ -30,7 +28,7 @@ export function getIdeas(userId: string, args: any) {
         };
       }
       const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
-      return Entity.batchGet(params).then((items: any) => {
+      return dynamoService.getEntity().batchGet(params).then((items: any) => {
         return {
           total: ideas.hits.total.value,
           cursor: ideas.hits.hits[ideas.hits.hits.length - 1]._source['createdAt'],
@@ -48,6 +46,7 @@ export function getIdeas(userId: string, args: any) {
 
 export function createIdea(args: any, userId: string) {
   const id = nanoid();
+  const Entity = dynamoService.getEntity();
   const entity = new Entity({
     id: `Idea-${id}`,
     userId,
@@ -58,7 +57,7 @@ export function createIdea(args: any, userId: string) {
 }
 
 export function updateIdea(args: any, userId: string) {
-  return Entity.get(args.id)
+  return dynamoService.getEntity().get(args.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Idea not found');
@@ -86,7 +85,7 @@ export function updateIdea(args: any, userId: string) {
 }
 
 export function deleteIdea(args: any, userId: string) {
-  return Entity.get(args.id)
+  return dynamoService.getEntity().get(args.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Idea not found');

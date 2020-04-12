@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * GraphQL - Root Schema
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

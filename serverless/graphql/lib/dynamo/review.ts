@@ -1,14 +1,12 @@
 /**
  * Path of child
  *
- * GraphQL - Dynamo - Review
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { nanoid } from 'nanoid'
-import { Entity } from '../model';
 import { queryReviews } from '../elasticsearch/review';
+import { dynamoService } from '../services';
 
 export function getReviews(ideaId: string) {
   return queryReviews(ideaId).then((reviews) => {
@@ -16,12 +14,13 @@ export function getReviews(ideaId: string) {
     if (params.length === 0) {
       return [];
     }
-    return Entity.batchGet(params);
+    return dynamoService.getEntity().batchGet(params);
   });
 }
 
 export function createReview(args: any, userId: string) {
   const id = nanoid();
+  const Entity = dynamoService.getEntity();
   const entity = new Entity({
     id: `Review-${id}`,
     userId,
@@ -31,7 +30,7 @@ export function createReview(args: any, userId: string) {
 }
 
 export function updateReview(args: any, userId: string) {
-  return Entity.get(args.id)
+  return dynamoService.getEntity().get(args.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Idea not found');

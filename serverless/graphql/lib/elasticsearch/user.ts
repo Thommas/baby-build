@@ -1,12 +1,10 @@
 /**
  * Path of child
  *
- * GraphQL - Elasticsearch - User
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { search } from '../services/elasticsearch.service';
+import { elasticSearchService } from '../services';
 
 export function queryUsersBySearchQuery(searchQuery: string): Promise<any> {
   const query: any = {
@@ -44,5 +42,5 @@ export function queryUsersBySearchQuery(searchQuery: string): Promise<any> {
       ],
     }
   };
-  return search(query);
+  return elasticSearchService.search(query);
 }

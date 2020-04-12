@@ -5,44 +5,63 @@
  */
 
 import * as elasticsearch from 'elasticsearch';
-import { detectType } from '../model';
 import { configService } from './config.service';
 
-export const elasticsearchClient = new elasticsearch.Client({
-  hosts: [configService.elasticSearchHost]
-});
+class ElasticSearchService {
+  elasticsearchClient = new elasticsearch.Client({
+    hosts: [configService.elasticSearchHost]
+  });
 
-export function searchOne(query: any): Promise<any> {
-  const body: any = {
-    query,
-  };
-  return elasticsearchClient.search({
-    index: configService.elasticSearchIndex,
-    type: '_doc',
-    size: 1,
-    body,
-  }).then((items) => {
-    if (items.hits.total.value > 0) {
-      return {
-        id: items.hits.hits[0]._id,
-        ...items.hits.hits[0]._source,
+  searchOne(query: any): Promise<any> {
+    const body: any = {
+      query,
+    };
+    return this.elasticsearchClient.search({
+      index: configService.elasticSearchIndex,
+      type: '_doc',
+      size: 1,
+      body,
+    }).then((items) => {
+      if (items.hits.total.value > 0) {
+        return {
+          id: items.hits.hits[0]._id,
+          ...items.hits.hits[0]._source,
+        }
       }
-    }
 
-    return null;
-  });
+      return null;
+    });
+  }
+
+  remove(document: any) {
+    this.elasticsearchClient.delete({
+      index: configService.elasticSearchIndex,
+      type: '_doc',
+      id: document.id,
+    }, (err, resp, status) => {
+      console.log(resp);
+    });
+  }
+
+  refreshIndex(): Promise<any> {
+    return this.elasticsearchClient.indices.refresh();
+  }
+
+  async index(document: any): Promise<any> {
+    const id = document.id;
+    const type = id.split('-')[0];
+    return this.elasticsearchClient.index({
+      index: configService.elasticSearchIndex,
+      type: '_doc',
+      id,
+      body: {
+        ...document,
+        type,
+      }
+    }, (err, resp, status) => {
+      console.log(resp);
+    });
+  }
 }
 
-export function remove(document: any) {
-  elasticsearchClient.delete({
-    index: configService.elasticSearchIndex,
-    type: '_doc',
-    id: document.id,
-  }, (err, resp, status) => {
-    console.log(resp);
-  });
-}
-
-export function refreshIndex(): Promise<any> {
-  return elasticsearchClient.indices.refresh();
-}
+export const elasticSearchService = new ElasticSearchService();

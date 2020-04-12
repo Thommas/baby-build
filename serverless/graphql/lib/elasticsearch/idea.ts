@@ -1,12 +1,10 @@
 /**
  * Path of child
  *
- * GraphQL - Elasticsearch - Idea
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { search } from '../services/elasticsearch.service';
+import { elasticSearchService } from '../services';
 
 export function queryIdeas(userIds: string[], filters: any, sortInput: string, cursor: string): Promise<any> {
   const query: any = {
@@ -78,5 +76,5 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
   const sort: any = {
     [sortKey]: sortOrder,
   };
-  return search(query, sort, count, cursor);
+  return elasticSearchService.search(query, sort, count, cursor);
 }

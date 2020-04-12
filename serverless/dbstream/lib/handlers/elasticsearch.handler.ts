@@ -4,16 +4,16 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { index, remove } from '../services';
+import { elasticSearchService } from '../services';
 
 export function handleInsert(document) {
-  index(document);
+  elasticSearchService.index(document);
 }
 
 export function handleModify(document) {
-  index(document);
+  elasticSearchService.index(document);
 }
 
 export function handleRemove(document) {
-  remove(document);
+  elasticSearchService.remove(document);
 }

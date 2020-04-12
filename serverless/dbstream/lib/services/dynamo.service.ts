@@ -49,6 +49,23 @@ class DynamoService {
 
     return new AWS.DynamoDB(serviceConfigOptions);
   }
+
+  getEntity() {
+    const dynamoose = this.getDynamoose();
+
+    const Schema = dynamoose.Schema;
+
+    const EntitySchema = new Schema({
+      id: {
+        type: String,
+      },
+    }, {
+      timestamps: true,
+      saveUnknown: true,
+    });
+
+    return dynamoose.model(configService.localDynamoDBTable, EntitySchema);
+  }
 }
 
 export const dynamoService = new DynamoService();

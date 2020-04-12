@@ -1,122 +1,80 @@
 /**
  * Path of child
  *
- * Elastic search - Services - Elastic search
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import * as elasticsearch from 'elasticsearch';
 import { configService } from './config.service';
 
-export const elasticsearchClient = new elasticsearch.Client({
-  hosts: [configService.elasticSearchHost]
-});
-
-export function createIndex(body: any): Promise<any> {
-  return elasticsearchClient.indices.create({
-    index: configService.elasticSearchIndex,
-    body
+class ElasticSearchService {
+  elasticsearchClient = new elasticsearch.Client({
+    hosts: [configService.elasticSearchHost]
   });
-}
 
-export function deleteIndex(): Promise<any> {
-  return elasticsearchClient.indices.delete({
-    index: configService.elasticSearchIndex,
-  }).catch((err) => {
-    // Ignore error
-  });
-}
-
-export function index(type: string, document: any): Promise<any> {
-  const id = document.id;
-  delete document.id;
-  return elasticsearchClient.index({
-    index: configService.elasticSearchIndex,
-    type: '_doc',
-    id,
-    body: {
-      ...document,
-      type,
-    },
-    refresh: true,
-  });
-}
-
-export function search(query: any, sort: any = {}, size: number = 100, cursor: string = '-1'): Promise<any> {
-  const body: any = {
-    query,
-    sort,
-  };
-  if (cursor !== '-1') {
-    body.search_after = [cursor];
-  }
-  console.log('configService.elasticSearchIndex', configService.elasticSearchIndex);
-  console.log('query', JSON.stringify(query));
-  return elasticsearchClient.search({
-    index: configService.elasticSearchIndex,
-    type: '_doc',
-    size,
-    body,
-  });
-}
-
-export function searchOne(query: any): Promise<any> {
-  return this.search(query).then((items) => {
-    if (items.hits.total.value > 0) {
-      return {
-        id: items.hits.hits[0]._id,
-        ...items.hits.hits[0]._source,
-      }
+  search(query: any, sort: any = {}, size: number = 100, cursor: string = '-1'): Promise<any> {
+    const body: any = {
+      query,
+      sort,
+    };
+    if (cursor !== '-1') {
+      body.search_after = [cursor];
     }
-
-    return null;
-  });
-}
-
-export function addNestedObject(parentType: string, parent: any, child: any, field: string): Promise<any> {
-  if (!parent[field]) {
-    parent[field] = [];
+    return this.search({
+      index: configService.elasticSearchIndex,
+      type: '_doc',
+      size,
+      body,
+    });
   }
-  parent[field].push(child);
-  return this.index(parentType, parent);
-}
 
-export function refreshIndex(): Promise<any> {
-  return elasticsearchClient.indices.refresh();
-}
-
-export function suggest(type: string, field: string, value: string): Promise<any> {
-  const body: any = {
-    query : {
-      bool: {
-        must: [
-          {
-            term: {
-              type: 'idea',
-            },
-          },
-          {
-            match: {
-              [field]: value,
-            },
-          },
-        ],
-      },
-    },
-    suggest : {
-      suggestion: {
-        text: value,
-        term: {
-          [field]: value,
+  searchOne(query: any): Promise<any> {
+    return this.search(query).then((items) => {
+      if (items.hits.total.value > 0) {
+        return {
+          id: items.hits.hits[0]._id,
+          ...items.hits.hits[0]._source,
         }
       }
-    }
-  };
-  return elasticsearchClient.search({
-    index: configService.elasticSearchIndex,
-    type: '_doc',
-    size: 5,
-    body,
-  });
+
+      return null;
+    });
+  }
+
+  suggest(type: string, field: string, value: string): Promise<any> {
+    const body: any = {
+      query : {
+        bool: {
+          must: [
+            {
+              term: {
+                type: 'idea',
+              },
+            },
+            {
+              match: {
+                [field]: value,
+              },
+            },
+          ],
+        },
+      },
+      suggest : {
+        suggestion: {
+          text: value,
+          term: {
+            [field]: value,
+          }
+        }
+      }
+    };
+    return this.elasticsearchClient.search({
+      index: configService.elasticSearchIndex,
+      type: '_doc',
+      size: 5,
+      body,
+    });
+  }
 }
+
+export const elasticSearchService = new ElasticSearchService();

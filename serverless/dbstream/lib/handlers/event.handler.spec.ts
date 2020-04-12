@@ -4,12 +4,12 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as elasticsearchService from '../services/elasticsearch.service';
+import { elasticSearchService } from '../services';
 import { handleEvent } from './event.handler';
 
 describe('Handlers', function() {
   it('handleEvent', function() {
-    spyOn(elasticsearchService, 'index').and.returnValue(new Promise((resolve) =>
+    spyOn(elasticSearchService, 'index').and.returnValue(new Promise((resolve) =>
       resolve()
     ))
     const event = {

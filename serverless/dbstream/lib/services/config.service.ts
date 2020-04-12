@@ -45,7 +45,6 @@ class ConfigService {
       LOCAL_DYNAMODB_HOST: Joi.string().default('localhost'),
       LOCAL_DYNAMODB_PORT: Joi.number().default(4567),
       LOCAL_DYNAMODB_TABLE: Joi.string().default('pathofchild-graphql-dev'),
-      S3_BUCKET: Joi.string().default('pathofchild-local'),
     });
 
     const { error, value: validatedEnvConfig } = Joi.validate(
@@ -76,10 +75,6 @@ class ConfigService {
 
   get localDynamoDBTable(): string {
     return String(this.envConfig.LOCAL_DYNAMODB_TABLE);
-  }
-
-  get s3Bucket(): string {
-    return String(this.envConfig.S3_BUCKET);
   }
 }
 

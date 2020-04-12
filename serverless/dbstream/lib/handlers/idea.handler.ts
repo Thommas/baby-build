@@ -4,8 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { detectType, Entity } from '../model';
-import { fetchImage } from '../services';
+import { dynamoService, puppeteerService } from '../services';
 
 const MAPPING = {
   videogame: [
@@ -31,7 +30,7 @@ async function fetchImgs(label: string, category: string) {
   const imgs = {};
   if (MAPPING[category]) {
     for (const data of MAPPING[category]) {
-      imgs[data.key] = await fetchImage(`${label}+${category}+${data.searchInput}`, data.limit);
+      imgs[data.key] = await puppeteerService.fetchImage(`${label}+${category}+${data.searchInput}`, data.limit);
     }
   }
   return imgs;
@@ -41,7 +40,7 @@ function updateIdea(document: any) {
   if (document.imgsReady) {
     return;
   }
-  return Entity.get(document.id)
+  return dynamoService.getEntity().get(document.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Idea not found');
@@ -56,15 +55,14 @@ function updateIdea(document: any) {
 }
 
 export function handleInsert(document) {
-  if ('idea' !== detectType(document.id)) {
+  if ('Idea' !== document.id.split('-')[0]) {
     return;
   }
   updateIdea(document);
 }
 
 export function handleModify(document) {
-  console.log('document', document);
-  if ('idea' !== detectType(document.id)) {
+  if ('Idea' !== document.id.split('-')[0]) {
     return;
   }
   updateIdea(document);
