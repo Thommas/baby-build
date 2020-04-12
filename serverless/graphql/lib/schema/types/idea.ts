@@ -42,6 +42,7 @@ const Idea = gql`
       label: String!
       category: String!
       platform: String
+      imgs: Imgs
     ): Idea
     updateIdea(
       id: String!

@@ -46,6 +46,11 @@ export const CreateIdeaMutation = gql`
         firstName
         lastName
       }
+      imgs {
+        icon
+        cover
+        screenshot
+      }
     }
   }
 `;
@@ -71,13 +76,17 @@ export const UpdateIdeaMutation = gql`
       label
       category
       platform
-      imgs
       requiredAge
       score
       userId
       user {
         firstName
         lastName
+      }
+      imgs {
+        icon
+        cover
+        screenshot
       }
     }
   }

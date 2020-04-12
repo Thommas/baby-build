@@ -185,6 +185,7 @@ export class IdeaFacade {
               ...action.payload,
               icon: null,
               userId: user.id,
+              imgs: {},
               user: {
                 __typename: 'User',
                 firstName: user.firstName,
@@ -218,7 +219,9 @@ export class IdeaFacade {
             });
             // TODO Use a separate list for newly created items
             this.selectIdea(createIdea);
-            this.newIdeas.push(createIdea);
+            if (optimistic) {
+              this.newIdeas.push(createIdea);
+            }
           },
         });
       })

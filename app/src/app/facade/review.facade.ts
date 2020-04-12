@@ -144,7 +144,6 @@ export class ReviewFacade {
           variables: review,
           optimisticResponse: {
             __typename: 'Mutation',
-            optimistic: true,
             createReview: {
               ...review,
               __typename: 'Review',
@@ -156,7 +155,7 @@ export class ReviewFacade {
           update: (store, { data: { createReview } }) => {
             this.selectReview(createReview);
             this.addToReviews(store, createReview);
-            // this.updateIdea(store, createReview, filters);
+            this.updateIdea(store, createReview, filters);
           },
         });
       })
@@ -187,7 +186,6 @@ export class ReviewFacade {
           variables: review,
           optimisticResponse: {
             __typename: 'Mutation',
-            optimistic: true,
             updateReview: {
               __typename: 'Review',
               id: `-${uuid()}`,
@@ -196,13 +194,11 @@ export class ReviewFacade {
               user,
             },
           },
-          update: (store, { data: { optimistic, updateReview } }) => {
+          update: (store, { data: { updateReview } }) => {
             console.log('updateReview', updateReview);
-            if (optimistic) {
-              // this.selectReview(updateReview);
-              // this.updateReviews(store, updateReview);
-              // this.updateIdea(store, updateReview, filters);
-            }
+            this.selectReview(updateReview);
+            this.updateReviews(store, updateReview);
+            this.updateIdea(store, updateReview, filters);
           },
         });
       })
@@ -249,6 +245,10 @@ export class ReviewFacade {
     const idea: any = ideasQuery.ideas.nodes.find((idea: any) => idea.id === review.ideaId);
     idea.requiredAge = averageRequiredAge;
     idea.score = averageScore;
-    this.ideaFacade.updateIdea(idea);
+    store.writeQuery({
+      query: GetIdeas,
+      variables: purifyFilters(filters),
+      data: { ideas: ideasQuery.ideas },
+    });
   }
 }

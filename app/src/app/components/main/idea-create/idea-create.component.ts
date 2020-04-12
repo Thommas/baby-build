@@ -5,12 +5,12 @@
  */
 
 import { clone } from 'lodash';
-import { Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, Input, ViewChild, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { IdeaFacade, IdeaSuggestFacade } from '../../../facade';
 import { ConstantsService, FormService } from '../../../services';
 import { map } from 'rxjs/operators';
-import { of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-idea-create-cmp',

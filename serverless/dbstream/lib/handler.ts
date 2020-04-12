@@ -7,5 +7,5 @@
 import { handleEvent } from './handlers/event.handler'
 
 exports.handle = (event, context, callback) => {
-  handleEvent(event, context, callback);
+  handleEvent(event, callback);
 };

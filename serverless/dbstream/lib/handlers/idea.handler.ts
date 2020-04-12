@@ -4,32 +4,13 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import { IDEA_IMGS_CONFIG } from '../config/idea.config';
 import { dynamoService, puppeteerService } from '../services';
-
-const MAPPING = {
-  videogame: [
-    {
-      key: 'icon',
-      searchInput: 'logo',
-      limit: 1,
-    },
-    {
-      key: 'cover',
-      searchInput: 'cover',
-      limit: 1,
-    },
-    {
-      key: 'screenshot',
-      searchInput: 'screenshot',
-      limit: 5,
-    },
-  ]
-};
 
 async function fetchImgs(document: any) {
   const imgs = {};
-  if (MAPPING[document.category]) {
-    for (const data of MAPPING[document.category]) {
+  if (IDEA_IMGS_CONFIG[document.category]) {
+    for (const data of IDEA_IMGS_CONFIG[document.category]) {
       imgs[data.key] = await puppeteerService.fetchImage(
         `${document.label}+${document.platform ? document.platform : document.category}+${data.searchInput}`,
         data.limit
@@ -52,6 +33,7 @@ function updateIdea(document: any) {
         .then((imgs: string[]) => {
           entity.imgs = imgs;
           entity.imgsReady = true;
+          console.log(`Updated images for idea: ${document.id}`)
           return entity.save();
         });
     })
