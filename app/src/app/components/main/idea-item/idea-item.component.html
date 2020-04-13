@@ -1,14 +1,14 @@
 <div class="container">
   <div class="icon">
-    <img [src]="idea.imgs ? idea.imgs.icon : 'https://placehold.it/40x40'" [matTooltip]="idea.label" matTooltipPosition="above" />
+    <img [src]="idea.imgs && idea.imgs.icon ? idea.imgs.icon : 'https://placehold.it/40x40'" [matTooltip]="idea.label" matTooltipPosition="above" />
   </div>
   <div class="category">
     <img [src]="constantsService.getCategoryIconByValue(idea.category)"/>
   </div>
-  <div class="requiredAge">
-    {{ idea.requiredAge ? (idea.requiredAge | number:'1.0-0') + '+' : '?' }}
+  <div class="requiredAge" *ngIf="idea.requiredAge">
+    {{ (idea.requiredAge | number:'1.0-0') + '+' }}
   </div>
-  <div class="score">
-    <img [src]="getIcon(idea.score ? (idea.score | number:'1.0-0') : '0')"/>
+  <div class="score" *ngIf="idea.score">
+    <img [src]="getIcon(idea.score | number:'1.0-0')"/>
   </div>
 </div>

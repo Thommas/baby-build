@@ -185,7 +185,6 @@ export class IdeaFacade {
               ...action.payload,
               icon: null,
               userId: user.id,
-              imgs: {},
               user: {
                 __typename: 'User',
                 firstName: user.firstName,

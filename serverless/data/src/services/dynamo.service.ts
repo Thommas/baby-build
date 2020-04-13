@@ -56,7 +56,6 @@ class DynamoService {
   }
 
   createTable(): Promise<any> {
-    console.log('configService.localDynamoDBTable', configService.localDynamoDBTable);
     const params = {
       TableName: configService.localDynamoDBTable,
       AttributeDefinitions: [

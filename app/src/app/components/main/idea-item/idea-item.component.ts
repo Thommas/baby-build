@@ -112,25 +112,28 @@ export class IdeaItemComponent implements OnInit, OnChanges {
   }
 
   getIcon(score: string) {
-    if (score === '-3') {
+    if (!score) {
       return '/assets/img/tier/tier-d.png';
     }
-    if (score === '-2') {
-      return '/assets/img/tier/tier-c.png';
-    }
-    if (score === '-1') {
-      return '/assets/img/tier/tier-b.png';
-    }
-    if (score === '0') {
-      return '/assets/img/tier/tier-a.png';
-    }
     if (score === '1') {
-      return '/assets/img/tier/tier-s.png';
+      return '/assets/img/tier/tier-d.png';
     }
     if (score === '2') {
-      return '/assets/img/tier/tier-ss.png';
+      return '/assets/img/tier/tier-c.png';
     }
     if (score === '3') {
+      return '/assets/img/tier/tier-b.png';
+    }
+    if (score === '4') {
+      return '/assets/img/tier/tier-a.png';
+    }
+    if (score === '5') {
+      return '/assets/img/tier/tier-s.png';
+    }
+    if (score === '6') {
+      return '/assets/img/tier/tier-ss.png';
+    }
+    if (score === '7') {
       return '/assets/img/tier/tier-sss.png';
     }
     return '';

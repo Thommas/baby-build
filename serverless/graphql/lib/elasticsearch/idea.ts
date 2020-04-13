@@ -6,6 +6,8 @@
 
 import { elasticSearchService } from '../services';
 
+let SIZE = 150;
+
 export function queryIdeas(userIds: string[], filters: any, sortInput: string, cursor: string): Promise<any> {
   const query: any = {
     bool: {
@@ -23,7 +25,6 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
       ],
     },
   };
-  let count = 20;
   if (filters) {
     if (filters.count) {
       count = filters.count;
@@ -76,5 +77,5 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
   const sort: any = {
     [sortKey]: sortOrder,
   };
-  return elasticSearchService.search(query, sort, count, cursor);
+  return elasticSearchService.search(query, sort, SIZE, cursor);
 }

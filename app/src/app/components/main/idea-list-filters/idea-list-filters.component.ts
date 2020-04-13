@@ -29,7 +29,7 @@ export class IdeaListFiltersComponent implements OnInit, OnDestroy {
     for (let age = 1; age <= 20; age++) {
       this.ages.push(age);
     }
-    for (let score = -3; score <= 3; score++) {
+    for (let score = 0; score <= 7; score++) {
       this.scores.push(score);
     }
   }

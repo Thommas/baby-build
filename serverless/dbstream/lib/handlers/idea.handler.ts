@@ -12,7 +12,7 @@ async function fetchImgs(document: any) {
   if (IDEA_IMGS_CONFIG[document.category]) {
     for (const data of IDEA_IMGS_CONFIG[document.category]) {
       imgs[data.key] = await puppeteerService.fetchImage(
-        `${document.label}+${document.platform ? document.platform : document.category}+${data.searchInput}`,
+        `"${document.label}"+${document.platform ? document.platform : document.category}+${data.searchInput}`,
         data.limit
       );
     }
@@ -33,7 +33,8 @@ function updateIdea(document: any) {
         .then((imgs: string[]) => {
           entity.imgs = imgs;
           entity.imgsReady = true;
-          console.log(`Updated images for idea: ${document.id}`)
+          const ideaLabel = `${document.label} ${document.category} ${document.platform ? document.platform : ''}`;
+          console.log(`Updated images for idea: ${ideaLabel}`)
           return entity.save();
         });
     })

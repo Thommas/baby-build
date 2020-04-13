@@ -86,7 +86,7 @@ export const IDEA_IMGS_CONFIG = {
     },
     {
       key: 'screenshot',
-      searchInput: 'screenshot',
+      searchInput: 'page',
       limit: 5,
     },
   ],
@@ -103,7 +103,7 @@ export const IDEA_IMGS_CONFIG = {
     },
     {
       key: 'screenshot',
-      searchInput: 'screenshot',
+      searchInput: 'page',
       limit: 5,
     },
   ],
@@ -120,7 +120,7 @@ export const IDEA_IMGS_CONFIG = {
     },
     {
       key: 'screenshot',
-      searchInput: 'screen',
+      searchInput: 'screenshot',
       limit: 5,
     },
   ],

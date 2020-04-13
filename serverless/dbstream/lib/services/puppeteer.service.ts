@@ -32,6 +32,8 @@ class PuppeteerService {
       imgs.push(img);
     }
 
+    await browser.close();
+
     return imgs;
   }
 }

@@ -51,7 +51,6 @@ export function createIdea(args: any, userId: string) {
     id: `Idea-${id}`,
     userId,
     imgsReady: false,
-    imgs: {},
     ...args
   });
   return entity.save();
@@ -69,7 +68,6 @@ export function updateIdea(args: any, userId: string) {
       // }
       Object.assign(entity, args);
       entity.imgsReady = false;
-      entity.imgs = {};
       return entity.save();
     });
 }
