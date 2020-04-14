@@ -4,12 +4,14 @@ Roadmap
 Short term
 ----------
 
-- Updating fields
 - Delete idea
+- Updating category/platform
 - Add language
 - Implement multi sort
+- Reactivate filters
 - Add field: Describe how deep to explore (1st episode, 1st season, all core episodes, everything)
-- Add field: Release date (detect it)
+- Add field: Release date (detect it with puppeteer)
+- Fix auth service issues
 
 Long term
 ---------

@@ -2,7 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.0.0] - 2020-03-15
+## [0.11.0] - 2020-04-14
+
+### Refactor
+- Idea category/platform
+- Idea creation with suggest
+- Idea design with pictures
+- Load/save data
+
+## [0.10.0] - 2020-03-15
 
 ### Added
 - Idea category with fixed list
