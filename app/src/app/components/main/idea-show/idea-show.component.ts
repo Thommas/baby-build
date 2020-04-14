@@ -64,4 +64,8 @@ export class IdeaShowComponent implements OnInit {
   onKey(event: KeyboardEvent) {
     // FIXME
   }
+
+  deleteIdea() {
+    console.log('DELETE');
+  }
 }

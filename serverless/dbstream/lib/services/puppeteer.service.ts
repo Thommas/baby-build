@@ -27,9 +27,11 @@ class PuppeteerService {
       const IMAGE_SELECTOR = `#islrg > div:nth-child(1) > div:nth-child(${i + 1}) > a > div > img`;
 
       const img = await page.evaluate((sel) => {
-        return document.querySelector(sel).getAttribute('src');
+        return document.querySelector(sel) ? document.querySelector(sel).getAttribute('src') : null;
       }, IMAGE_SELECTOR);
-      imgs.push(img);
+      if (img) {
+        imgs.push(img);
+      }
     }
 
     await browser.close();
