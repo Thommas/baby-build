@@ -38,7 +38,7 @@
     "jasmine-ts": "^0.3.0",
     "jsonwebtoken": "^8.4.0",
     "jwks-rsa": "^1.3.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "merge-graphql-schemas": "^1.5.8",
     "nanoid": "^2.0.0",
     "puppeteer": "^1.15.0",
