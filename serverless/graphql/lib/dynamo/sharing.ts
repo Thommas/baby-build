@@ -1,14 +1,12 @@
 /**
  * Path of child
  *
- * GraphQL - Dynamo - Sharing
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import generate = require('nanoid/generate');
-import { Entity } from '../model';
+import { nanoid } from 'nanoid'
 import { querySharingsBySharerId } from '../elasticsearch/sharing';
+import { dynamoService } from '../services';
 
 export function getSharings(sharerId: string) {
   return querySharingsBySharerId(sharerId)
@@ -17,12 +15,13 @@ export function getSharings(sharerId: string) {
       if (params.length === 0) {
         return [];
       }
-      return Entity.batchGet(params);
+      return dynamoService.getEntity().batchGet(params);
     });
 }
 
 export function createSharing(args: any, userId: string) {
-  const id = generate('0123456789', 20);
+  const id = nanoid();
+  const Entity = dynamoService.getEntity();
   const entity = new Entity({
     id: `Sharing-${id}`,
     sharerId: userId,
@@ -32,7 +31,7 @@ export function createSharing(args: any, userId: string) {
 }
 
 export function deleteSharing(args: any, userId: string) {
-  return Entity.get(args.id)
+  return dynamoService.getEntity().get(args.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Sharing not found');

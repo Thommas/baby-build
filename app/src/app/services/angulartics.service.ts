@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Service - Angulartics
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

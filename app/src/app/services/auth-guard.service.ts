@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Service - AuthGuard
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  *
  * @see https://auth0.com/docs/quickstart/spa/angular2/04-authorization

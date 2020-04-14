@@ -9,19 +9,12 @@
 require('dotenv').config();
 import {
   getReviews,
-  getLoggedReview,
   updateReview
 } from '../lib/dynamo/review'
 
 describe('Review', () => {
   it('getReviews', (done) => {
     getReviews('0986945c-36de-4f34-b869-d06039501879').then((data: any) => {
-      done();
-    })
-  });
-
-  it('getLoggedReview', (done) => {
-    getLoggedReview('0986945c-36de-4f34-b869-d06039501879', 'auth0|5a773beebfd2511753f2c9c0').then((data: any) => {
       done();
     })
   });

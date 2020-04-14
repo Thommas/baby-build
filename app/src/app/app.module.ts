@@ -1,13 +1,12 @@
 /**
  * Path of child
  *
- * App - Module - Browser
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ApolloModule } from 'apollo-angular';
@@ -21,8 +20,12 @@ import { Actions, EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
+  MatChipsModule,
+  MatFormFieldModule,
   MatIconModule,
+  MatInputModule,
   MatMenuModule,
   MatProgressBarModule,
   MatSidenavModule,
@@ -41,7 +44,6 @@ import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
 import {
   SidebarComponent,
-  TagListComponent,
   TopbarComponent
 } from './components/layout';
 import {
@@ -50,6 +52,8 @@ import {
   AuthGuardService,
   AuthService,
   BrowserService,
+  ConstantsService,
+  FormService,
   LocaleService,
   ProgressService
 } from './services';
@@ -57,15 +61,16 @@ import {
   AuthFacade,
   IdeaFacade,
   IdeaFiltersFacade,
-  IdeaTagFacade,
+  IdeaSuggestFacade,
   ReviewFacade,
-  TagFacade,
+  SharingFacade,
   UserFacade,
 } from './facade';
 import {
   authReducer,
   ideaReducer,
   ideaFiltersReducer,
+  ideaSuggestReducer,
   reviewReducer,
 } from './store';
 
@@ -74,6 +79,7 @@ const reducers: ActionReducerMap<any> = {
   auth: authReducer,
   idea: ideaReducer,
   ideaFilters: ideaFiltersReducer,
+  ideaSuggest: ideaSuggestReducer,
   review: reviewReducer,
 };
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -90,11 +96,12 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     SidebarComponent,
-    TagListComponent,
     TopbarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'path-of-child' }),
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,
@@ -110,8 +117,12 @@ export function createTranslateLoader(http: HttpClient) {
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
+    MatChipsModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatMenuModule,
     MatProgressBarModule,
     MatSidenavModule,
@@ -132,7 +143,10 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     EffectsModule.forRoot([
       IdeaFacade,
-      IdeaTagFacade
+      IdeaSuggestFacade,
+      ReviewFacade,
+      SharingFacade,
+      UserFacade
     ])
   ],
   providers: [
@@ -142,15 +156,16 @@ export function createTranslateLoader(http: HttpClient) {
     AuthGuardService,
     AuthService,
     BrowserService,
+    ConstantsService,
+    FormService,
     LocaleService,
     ProgressService,
     Actions,
     AuthFacade,
     IdeaFacade,
     IdeaFiltersFacade,
-    IdeaTagFacade,
     ReviewFacade,
-    TagFacade,
+    SharingFacade,
     UserFacade,
   ],
   bootstrap: [

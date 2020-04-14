@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - Security - Callback
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

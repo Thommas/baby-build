@@ -5,25 +5,80 @@
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   place-content: center space-around;
-  align-ideas: center;
+  align-self: center;
+  width: 160px;
+  height: 160px;
+  margin: 5px;
+}
+
+.container {
   width: 100%;
-}
+  height: 100%;
+  display: block;
+  position: relative;
+  border-radius: 10px;
 
-.done {
-  font-size: 12px;
-  margin-right: 10px;
-  border: 1px solid #e0e6e8;
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
-
-  .mat-icon {
-    font-size: 16px;
+  ::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #000;
   }
-}
 
-.mat-button {
-  margin-bottom: 5px;
-  padding: 0;
-  min-width: 44px;
+  .icon {
+    z-index: 1;
+    align-self: center;
+    img {
+      width: 160px;
+      height: 160px;
+    }
+  }
+
+  .category {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+    width: 32px;
+    height: 29px;
+    z-index: 2;
+    border-radius: 0;
+    padding-top: 3px;
+    text-align: center;
+    img {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  .requiredAge {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    color: white;
+    background-color: black;
+    width: 24px;
+    height: 14px;
+    z-index: 2;
+    font-size: 12px;
+    text-align: center;
+    padding: 5px 0;
+  }
+
+  .score {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    width: 24px;
+    height: 24px;
+    z-index: 2;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }

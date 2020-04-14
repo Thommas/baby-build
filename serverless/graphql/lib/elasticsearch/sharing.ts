@@ -1,12 +1,10 @@
 /**
  * Path of child
  *
- * GraphQL - Elasticsearch - Sharing
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { search } from '../services/elasticsearch.service';
+import { elasticSearchService } from '../services';
 
 export function querySharingsByUserId(userId: string): Promise<any> {
   const query: any = {
@@ -14,7 +12,7 @@ export function querySharingsByUserId(userId: string): Promise<any> {
       must: [
         {
           term: {
-            type: 'sharing',
+            type: 'Sharing',
           },
         },
         {
@@ -25,7 +23,7 @@ export function querySharingsByUserId(userId: string): Promise<any> {
       ],
     },
   };
-  return search(query);
+  return elasticSearchService.search(query);
 }
 
 export function querySharingsBySharerId(sharerId: string): Promise<any> {
@@ -45,5 +43,5 @@ export function querySharingsBySharerId(sharerId: string): Promise<any> {
       ],
     },
   };
-  return search(query);
+  return elasticSearchService.search(query);
 }

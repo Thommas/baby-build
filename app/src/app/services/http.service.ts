@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Service - Http
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

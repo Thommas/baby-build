@@ -1,14 +1,6 @@
 /**
  * Path of child
  *
- * Service - Browser
- *
- * Provides global variables only accessible in a browser:
- * - document
- * - localStorage
- * - locale
- * - window
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

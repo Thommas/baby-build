@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * GraphQL - Services - Config
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
@@ -24,6 +22,9 @@ class ConfigService {
   constructor() {
     if (process.env.NODE_ENV === 'production') {
       this.envConfig = this.validateInput(process.env);
+    } else if (process.env.NODE_ENV) {
+      const config = dotenv.parse(fs.readFileSync('.env.' + process.env.NODE_ENV));
+      this.envConfig = this.validateInput(config);
     } else {
       const config = dotenv.parse(fs.readFileSync('.env'));
       this.envConfig = this.validateInput(config);
@@ -44,7 +45,9 @@ class ConfigService {
       LOCAL_DYNAMODB_HOST: Joi.string().default('localhost'),
       LOCAL_DYNAMODB_PORT: Joi.number().default(4567),
       LOCAL_DYNAMODB_TABLE: Joi.string().default('pathofchild-graphql-dev'),
-      S3_BUCKET: Joi.string().default('pathofchild-local'),
+      AUTH0_CLIENT_ID: Joi.string(),
+      AUTH0_JWKS_URI: Joi.string(),
+      AUTH0_JWKS_KID: Joi.string(),
     });
 
     const { error, value: validatedEnvConfig } = Joi.validate(
@@ -77,8 +80,16 @@ class ConfigService {
     return String(this.envConfig.LOCAL_DYNAMODB_TABLE);
   }
 
-  get s3Bucket(): string {
-    return String(this.envConfig.S3_BUCKET);
+  get auth0ClientId(): string {
+    return String(this.envConfig.AUTH0_CLIENT_ID);
+  }
+
+  get auth0JwksUri(): string {
+    return String(this.envConfig.AUTH0_JWKS_URI);
+  }
+
+  get auth0JwksKid(): string {
+    return String(this.envConfig.AUTH0_JWKS_KID);
   }
 }
 

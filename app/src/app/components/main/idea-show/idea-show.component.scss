@@ -1,10 +1,19 @@
 :host {
-  padding: 0px 20px;
-  width: 100%;
+  display: block;
+  min-width: 0px;
+  max-width: 675px;
+  margin-left: 15px;
+  margin-right: 20px;
+  padding: 0;
+  overflow: hidden;
+}
+
+mat-card {
+  padding: 0;
 }
 
 .mat-form-field input {
-  font-size: 24px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 32px;
   min-height: 0;
@@ -37,4 +46,30 @@ textarea:hover {
 .comment-form-container {
   height: 107px;
   padding: 10px 30px;
+}
+
+.icon {
+  height: 100px;
+  margin-bottom: 20px;
+
+  div {
+    height: 100px;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+}
+
+form {
+  width: 100%;
+}
+
+.mat-form-field input:hover {
+  border: 1px solid #FFF;
+}
+
+.mat-form-field .mat-form-field-wrapper {
+  padding-bottom: 10px;
 }

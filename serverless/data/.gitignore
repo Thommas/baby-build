@@ -1,0 +1,7 @@
+/node_modules
+/.build
+/.dynamodb
+/npm-debug.log
+/.env
+/.env.local
+/db

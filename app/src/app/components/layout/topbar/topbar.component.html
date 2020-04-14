@@ -6,7 +6,10 @@
       </button>
     </div>
     <div fxLayout="row" fxLayoutAlign="end center">
-      <span>Me</span>
+      <button mat-button [routerLink]="['create']">
+        <mat-icon>add</mat-icon>
+        Add new ideas
+      </button>
       <button mat-icon-button [matMenuTriggerFor]="mainMenu">
         <mat-icon>more_vert</mat-icon>
       </button>

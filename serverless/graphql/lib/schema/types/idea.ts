@@ -1,32 +1,55 @@
 /**
  * Path of child
  *
- * GraphQL - Types - Idea
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-const Idea = `
+const { gql } = require('apollo-server-lambda');
+
+const Idea = gql`
+  type Imgs {
+    icon: [String]
+    cover: [String]
+    screenshot: [String]
+  }
   type Idea {
     id: String
     label: String
-    icon: String
+    category: String
+    platform: String
     requiredAge: Float
     score: Float
     userId: String
     user: User
+    imgs: Imgs
+  }
+  input IdeaInput {
+    label: String
+    requiredAge: Float
+    score: Float
+    count: Int
+  }
+  type IdeaEdge {
+    total: Int!
+    cursor: String!
+    nodes: [Idea]
   }
   type Query {
-    ideas(label: String, requiredAge: [Int], score: [Int], tagId: String): [Idea]
+    ideas(ideaInput: IdeaInput, cursor: String): IdeaEdge
   }
   type Mutation {
-    createIdea: Idea
+    createIdea(
+      label: String!
+      category: String!
+      platform: String
+    ): Idea
     updateIdea(
       id: String!
       label: String
-    ): Idea
-    updateIdeaIcon(
-      id: String!
+      category: String
+      platform: String
+      requiredAge: Float
+      score: Float
     ): Idea
     deleteIdea(
       id: String!

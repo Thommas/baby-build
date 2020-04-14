@@ -1,13 +1,12 @@
 /**
  * Path of child
  *
- * Component - Idea - Index
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { Component } from '@angular/core';
-import { IdeaFacade, IdeaFiltersFacade } from '../../../facade';
+import { IdeaFacade } from '../../../facade';
+import { ConstantsService } from '../../../services';
 
 @Component({
   selector: 'app-main-index-cmp',
@@ -19,15 +18,10 @@ export class MainIndexComponent {
   selectedIdea$ = this.ideaFacade.selectedIdea$;
 
   constructor(
-    private ideaFacade: IdeaFacade,
-    private ideaFiltersFacade: IdeaFiltersFacade
+    public constantsService: ConstantsService,
+    private ideaFacade: IdeaFacade
   ) {
     this.displayFilters = false;
-  }
-
-  createIdea() {
-    this.ideaFiltersFacade.reset();
-    this.ideaFacade.createIdea();
   }
 
   selectIdea(idea?: any) {
@@ -36,5 +30,11 @@ export class MainIndexComponent {
 
   toggleFilters() {
     this.displayFilters = !this.displayFilters;
+  }
+
+  selectCategory(category: string) {
+    this.ideaFacade.updateIdea({
+      category
+    });
   }
 }

@@ -1,12 +1,12 @@
 /**
  * Path of child
  *
- * GraphQL - Types - User
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-const User = `
+const { gql } = require('apollo-server-lambda');
+
+const User = gql`
   type User {
     id: String
     firstName: String

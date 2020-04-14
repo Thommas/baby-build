@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - Sidebar
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

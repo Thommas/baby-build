@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Service - Translate - Stub
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

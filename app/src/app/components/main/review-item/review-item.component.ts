@@ -1,42 +1,35 @@
 /**
  * Path of child
  *
- * Component - Review - Item
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import uuid from 'uuid/v4';
-import { clone, isEmpty } from 'lodash';
-import { Component, Inject, OnInit, OnChanges, Input, ViewChild, SimpleChanges } from '@angular/core';
+import { clone } from 'lodash';
+import { Component, OnInit, ViewChild, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { fromEvent } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap, flatMap } from 'rxjs/operators';
-import { Apollo } from 'apollo-angular';
-import {
-  GetIdeas,
-  GetReviews,
-  CreateReviewMutation,
-  UpdateReviewMutation
-} from '../../../graphql';
-import { UserFacade } from '../../../facade';
+import { Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { ReviewFacade } from '../../../facade';
+import { FormService } from '../../../services';
 
 @Component({
   selector: 'app-review-item-cmp',
   templateUrl: './review-item.component.html',
   styleUrls: ['./review-item.component.scss']
 })
-export class ReviewItemComponent implements OnInit, OnChanges {
-  @Input() review: any;
+export class ReviewItemComponent implements OnInit, OnDestroy {
   @ViewChild('requiredAgeExplanationElement') requiredAgeExplanationElement: any;
   @ViewChild('scoreExplanationElement') scoreExplanationElement: any;
   formGroup: FormGroup;
   loading: boolean;
   ages: number[] = [];
   scores: number[] = [];
+  subs: Subscription[] = [];
 
-  constructor(private apollo: Apollo, private userFacade: UserFacade) {
-    this.review = {};
+  constructor(
+    private formService: FormService,
+    private reviewFacade: ReviewFacade
+  ) {
     this.formGroup = new FormGroup({
       id: new FormControl('', []),
       requiredAge: new FormControl('', []),
@@ -56,23 +49,34 @@ export class ReviewItemComponent implements OnInit, OnChanges {
     for (let age = 1; age <= 20; age++) {
       this.ages.push(age);
     }
-    for (let score = -3; score <= 3; score++) {
+    for (let score = 0; score <= 7; score++) {
       this.scores.push(score);
     }
   }
 
   ngOnInit() {
-    // const elements = [
-    //   this.requiredAgeExplanationElement,
-    //   this.scoreExplanationElement,
-    // ];
-    // for (const element of elements) {
-    //   fromEvent(element.nativeElement, 'input').pipe(
-    //     map((e: { target: HTMLInputElement }) => e.target.value),
-    //     debounceTime(800),
-    //     distinctUntilChanged(),
-    //   ).subscribe(data => this.save());
-    // }
+    const elements = [
+      this.requiredAgeExplanationElement,
+      this.scoreExplanationElement,
+    ];
+    const operator = map((value: any) => this.save());
+    for (const element of elements) {
+      this.subs.push(this.formService.getFormFieldSubscription(element, operator));
+    }
+    this.reviewFacade.selectedReview$.pipe(
+      tap(review => {
+        if (review) {
+          this.formGroup.patchValue(review);
+        }
+      }),
+    ).subscribe();
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
+    this.subs = [];
   }
 
   selectRequiredAge(age: number) {
@@ -89,94 +93,43 @@ export class ReviewItemComponent implements OnInit, OnChanges {
     this.save();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // if (changes.review && changes.review.previousValue
-    //   && changes.idea && changes.idea.previousValue) {
-    //   this.save();
-    // }
-    // if (changes.review) {
-    //   const review: any = changes.review.currentValue;
-    //   this.formGroup.patchValue({
-    //     id: review ? review.id : null,
-    //     requiredAge: review ? review.requiredAge : null,
-    //     requiredAgeExplanation: review ? review.requiredAgeExplanation : null,
-    //     score: review ? review.score : null,
-    //     scoreExplanation: review ? review.scoreExplanation : null,
-    //     ideaId: review ? review.ideaId : null,
-    //   });
-    // }
-    // if (changes.idea && changes.idea.currentValue) {
-    //   const idea: any = changes.idea.currentValue;
-    //   this.formGroup.patchValue({
-    //     ideaId: idea.id,
-    //   });
-    // }
-  }
-
-  updateReviews(store: any, data, updatedReview) {
-    const query: any = store.readQuery({
-      query: GetReviews,
-      variables: { ideaId: this.review.ideaId },
-    });
-    const reviews: any[] = query.reviews.map((review: any) => review.id === data.id ? updatedReview : review);
-    store.writeQuery({
-      query: GetReviews,
-      variables: { ideaId: this.review.ideaId },
-      data: { reviews },
-    });
-    this.review = updatedReview;
-    this.formGroup.patchValue({
-      id: this.review.id,
-      requiredAge: this.review.requiredAge,
-      requiredAgeExplanation: this.review.requiredAgeExplanation,
-      score: this.review.score,
-      scoreExplanation: this.review.scoreExplanation,
-      ideaId: this.review.ideaId,
-    });
-  }
-
-  updateIdeas(store: any, data: any, updatedReview: any) {
-    console.log('Update idea in store');
-    // store.writeQuery({
-    //   query: GetReviews,
-    //   variables: { ideaId: this.review.ideaId },
-    //   data: { reviews },
-    // });
-  }
-
   save() {
     if (!this.formGroup.valid) {
       return;
     }
-    // this.userFacade.user$.pipe(
-    //   flatMap((user: any) => {
-    //     const data: any = clone(this.formGroup.value);
-    //     return this.apollo.mutate({
-    //       mutation: data.id ? UpdateReviewMutation : CreateReviewMutation,
-    //       variables: data,
-    //       optimisticResponse: {
-    //         __typename: 'Mutation',
-    //         [data.id ? 'updateReview' : 'createReview']: {
-    //           __typename: 'Review',
-    //           id: `-${uuid()}`,
-    //           ...data,
-    //           userId: user.id,
-    //           user,
-    //         },
-    //       },
-    //       update: (store, { data: { createReview, updateReview } }) => {
-    //         if (!createReview && !updateReview) {
-    //           return;
-    //         }
-    //         const updatedReview: any = createReview ? createReview : updateReview;
-    //         if (!updatedReview.id) {
-    //           return;
-    //         }
-    //         this.updateReviews(store, data, updatedReview);
-    //         this.updateIdeas(store, data, updatedReview);
-    //       },
-    //     });
-    //   })
-    // ).subscribe();
+    const review: any = clone(this.formGroup.value);
+    if (review.id) {
+      this.reviewFacade.updateReview(review);
+    } else {
+      this.reviewFacade.createReview(review);
+    }
+  }
+
+  getIcon(score: string) {
+    if (!score) {
+      return '/assets/img/tier/tier-d.png';
+    }
+    if (score === '1') {
+      return '/assets/img/tier/tier-d.png';
+    }
+    if (score === '2') {
+      return '/assets/img/tier/tier-c.png';
+    }
+    if (score === '3') {
+      return '/assets/img/tier/tier-b.png';
+    }
+    if (score === '4') {
+      return '/assets/img/tier/tier-a.png';
+    }
+    if (score === '5') {
+      return '/assets/img/tier/tier-s.png';
+    }
+    if (score === '6') {
+      return '/assets/img/tier/tier-ss.png';
+    }
+    if (score === '7') {
+      return '/assets/img/tier/tier-sss.png';
+    }
+    return '';
   }
 }

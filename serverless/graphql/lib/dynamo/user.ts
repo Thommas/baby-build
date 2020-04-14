@@ -1,18 +1,17 @@
 /**
  * Path of child
  *
- * GraphQL - Dynamo - User
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import { queryUsersBySearchQuery } from '../elasticsearch/user';
-import { Entity } from '../model';
+import { dynamoService } from '../services';
 
 export function getAuthUser(userId: string) {
-  return Entity.get(userId)
+  return dynamoService.getEntity().get(userId)
     .then((entity: any) => {
       if (!entity) {
+        const Entity = dynamoService.getEntity();
         entity = new Entity();
         entity.type = 'user';
         entity.id = userId;
@@ -31,12 +30,12 @@ export function getUsers(args: any) {
       if (params.length === 0) {
         return [];
       }
-      return Entity.batchGet(params);
+      return dynamoService.getEntity().batchGet(params);
     });
 }
 
 export function getUser(userId: string) {
-  return Entity.get(userId)
+  return dynamoService.getEntity().get(userId)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('User not found');
@@ -46,7 +45,7 @@ export function getUser(userId: string) {
 }
 
 export function updateUser(args: any, userId: string) {
-  return Entity.get(userId)
+  return dynamoService.getEntity().get(userId)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('User not found');

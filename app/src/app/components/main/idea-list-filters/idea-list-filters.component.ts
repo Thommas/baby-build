@@ -1,42 +1,46 @@
 /**
  * Path of child
  *
- * Component - Idea List Filters
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { IdeaFiltersFacade } from '../../../facade';
+import { FormService } from '../../../services';
+import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-idea-list-filters-cmp',
   templateUrl: './idea-list-filters.component.html',
   styleUrls: ['./idea-list-filters.component.scss']
 })
-export class IdeaListFiltersComponent implements OnInit {
+export class IdeaListFiltersComponent implements OnInit, OnDestroy {
   @ViewChild('inputElement') inputElement: any;
   filters$ = this.ideaFiltersFacade.filters$;
+  formFieldSub: Subscription;
   ages: number[] = [];
   scores: number[] = [];
 
-  constructor(private ideaFiltersFacade: IdeaFiltersFacade) {
+  constructor(
+    private formService: FormService,
+    private ideaFiltersFacade: IdeaFiltersFacade
+  ) {
     for (let age = 1; age <= 20; age++) {
       this.ages.push(age);
     }
-    for (let score = -3; score <= 3; score++) {
+    for (let score = 0; score <= 7; score++) {
       this.scores.push(score);
     }
   }
 
   ngOnInit() {
-    fromEvent(this.inputElement.nativeElement, 'input').pipe(
-      map((e: { target: HTMLInputElement }) => e.target.value),
-      debounceTime(800),
-      distinctUntilChanged(),
-    ).subscribe((value: string) => this.selectLabel(value));
+    const operator = map((value: any) => this.selectLabel(value));
+    this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
+  }
+
+  ngOnDestroy() {
+    this.formFieldSub.unsubscribe();
   }
 
   selectLabel(label: string) {

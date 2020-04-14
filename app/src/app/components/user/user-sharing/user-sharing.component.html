@@ -1,5 +1,5 @@
 <h2 i18n>user_sharing.invited_users</h2>
-<div *ngFor="let sharing of sharings">
+<div *ngFor="let sharing of (sharings$ | async)">
   <span>{{ sharing.user.firstName }} {{ sharing.user.lastName }}</span>
   <button (click)="deleteSharing(sharing.id)">X</button>
 </div>

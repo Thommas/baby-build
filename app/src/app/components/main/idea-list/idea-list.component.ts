@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - Idea - List
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
@@ -26,5 +24,9 @@ export class IdeaListComponent {
 
   selectIdea(idea?: any) {
     this.ideaFacade.selectIdea(idea);
+  }
+
+  fetchMore() {
+    this.ideaFacade.fetchMore();
   }
 }

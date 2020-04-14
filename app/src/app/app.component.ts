@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * App
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
@@ -41,34 +39,10 @@ export class AppComponent implements OnInit {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
-    this.matIconRegistry.addSvgIcon(
-      'recommandation_-3',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/-3.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'recommandation_-2',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/-2.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'recommandation_-1',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/-1.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'recommandation_0',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/0.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'recommandation_1',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/1.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'recommandation_2',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/2.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'recommandation_3',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/recommandation/3.svg')
-    );
+    // this.matIconRegistry.addSvgIcon(
+    //   'recommandation_-3',
+    //   this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/img/tier/tier-d.png')
+    // );
   }
 
   ngOnInit() {

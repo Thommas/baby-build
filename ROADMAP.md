@@ -2,21 +2,21 @@ Roadmap
 =======
 
 Short term
------------
+----------
 
-- Refactor everything with facades
-
-Medium term
------------
-
-- Add Idea permission based on sharing (mutualize checking sharing)
-- Display requiredAge/score in list + compute based on loaded reviews when changed (+ purge queries)
-- Paginate ideas
-- Deploy website on a new url
+- Updating fields
+- Delete idea
+- Add language
+- Implement multi sort
+- Add field: Describe how deep to explore (1st episode, 1st season, all core episodes, everything)
+- Add field: Release date (detect it)
 
 Long term
 ---------
 
+- Add Idea permission based on sharing (mutualize checking sharing)
+- Suggest 5 icons/5 detected api references
+- Batch import ideas
 - Implement voice recording to create task
 - Refactor gamification xp/lvl
 - Logs
@@ -26,9 +26,5 @@ Long term
 - Add unit tests
 - Invitations
 - Notifications
-
-Nice to have
-------------
-
 - Loading effect
 - CSS3 animations

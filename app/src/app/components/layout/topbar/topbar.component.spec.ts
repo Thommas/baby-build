@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Component - Topbar
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

@@ -7,7 +7,21 @@
 import { Action } from '@ngrx/store';
 
 export enum ReviewActionTypes {
+  CreateReview = '[Review] Create',
+  UpdateReview = '[Review] Update',
   SelectReview = '[Review] Select',
+}
+
+export class CreateReview implements Action {
+  readonly type = ReviewActionTypes.CreateReview;
+
+  constructor(public payload: any) {}
+}
+
+export class UpdateReview implements Action {
+  readonly type = ReviewActionTypes.UpdateReview;
+
+  constructor(public payload: any) {}
 }
 
 export class SelectReview implements Action {
@@ -16,4 +30,4 @@ export class SelectReview implements Action {
   constructor(public payload: any) {}
 }
 
-export type ReviewActionsUnion = SelectReview;
+export type ReviewActionsUnion = CreateReview | UpdateReview | SelectReview;

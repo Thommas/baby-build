@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Main for browser
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

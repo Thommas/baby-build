@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * Service - Locale
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

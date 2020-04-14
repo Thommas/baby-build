@@ -1,8 +1,6 @@
 /**
  * Path of child
  *
- * GraphQL - Review
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 

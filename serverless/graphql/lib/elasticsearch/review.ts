@@ -1,12 +1,10 @@
 /**
  * Path of child
  *
- * GraphQL - Elasticsearch - Review
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { search } from '../services/elasticsearch.service';
+import { elasticSearchService } from '../services';
 
 export function queryReviews(ideaId: string): Promise<any> {
   const query: any = {
@@ -14,7 +12,7 @@ export function queryReviews(ideaId: string): Promise<any> {
       must: [
         {
           term: {
-            type: 'review',
+            type: 'Review',
           },
         },
         {
@@ -25,5 +23,5 @@ export function queryReviews(ideaId: string): Promise<any> {
       ],
     },
   };
-  return search(query);
+  return elasticSearchService.search(query);
 }

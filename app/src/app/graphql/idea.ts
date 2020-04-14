@@ -1,19 +1,44 @@
 /**
  * Path of child
  *
- * GraphQL - Idea
- *
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
 import gql from 'graphql-tag';
 
 export const GetIdeas = gql`
-  query GetIdeas($label: String, $requiredAge: [Int], $score: [Int], $tagId: String) {
-    ideas(label: $label, requiredAge: $requiredAge, score: $score, tagId: $tagId) {
+  query GetIdeas($ideaInput: IdeaInput, $cursor: String) {
+    ideas(ideaInput: $ideaInput, cursor: $cursor) {
+      total
+      cursor
+      nodes {
+        id
+        label
+        category
+        requiredAge
+        score
+        userId
+        user {
+          firstName
+          lastName
+        }
+        imgs {
+          icon
+          cover
+          screenshot
+        }
+      }
+    }
+  }
+`;
+
+export const CreateIdeaMutation = gql`
+  mutation CreateIdea($label: String!, $category: String!, $platform: String) {
+    createIdea(label: $label, category: $category, platform: $platform) {
       id
       label
-      icon
+      category
+      platform
       requiredAge
       score
       userId
@@ -21,22 +46,10 @@ export const GetIdeas = gql`
         firstName
         lastName
       }
-    }
-  }
-`;
-
-export const CreateIdeaMutation = gql`
-  mutation CreateIdea {
-    createIdea {
-      id
-      label
-      icon
-      requiredAge
-      score
-      userId
-      user {
-        firstName
-        lastName
+      imgs {
+        icon
+        cover
+        screenshot
       }
     }
   }
@@ -46,14 +59,23 @@ export const UpdateIdeaMutation = gql`
   mutation UpdateIdea(
     $id: String!
     $label: String
+    $category: String
+    $platform: String
+    $requiredAge: Float
+    $score: Float
   ) {
     updateIdea(
       id: $id
       label: $label
+      category: $category
+      platform: $platform
+      requiredAge: $requiredAge
+      score: $score
     ) {
       id
       label
-      icon
+      category
+      platform
       requiredAge
       score
       userId
@@ -61,26 +83,10 @@ export const UpdateIdeaMutation = gql`
         firstName
         lastName
       }
-    }
-  }
-`;
-
-export const UpdateIdeaIconMutation = gql`
-  mutation UpdateIdeaIcon(
-    $id: String!
-  ) {
-    updateIdeaIcon(
-      id: $id
-    ) {
-      id
-      label
-      icon
-      requiredAge
-      score
-      userId
-      user {
-        firstName
-        lastName
+      imgs {
+        icon
+        cover
+        screenshot
       }
     }
   }
