@@ -1,6 +1,6 @@
 {
   "name": "pathofchild-dbstream",
-  "version": "1.0.0",
+  "private": true,
   "license": "WTFPL",
   "scripts": {
     "start": "cross-env AWS_REGION=eu-west-2 serverless offline start --stage dev --region eu-west-2 --lambdaPort 3004",

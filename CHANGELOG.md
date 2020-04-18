@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.12.0] - 2020-04-18
+
+### Added
+- Delete idea
+
 ## [0.11.0] - 2020-04-14
 
 ### Refactor

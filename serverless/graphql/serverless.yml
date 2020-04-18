@@ -7,6 +7,8 @@ plugins:
 custom:
   stage: ${opt:stage, self:provider.stage}
   secrets: ${file(secrets.yml):${self:custom.stage}}
+  serverless-offline:
+    httpPort: 3010
 
 package:
   exclude:

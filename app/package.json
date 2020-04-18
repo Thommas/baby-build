@@ -1,15 +1,15 @@
 {
   "name": "pathofchild-app",
-  "version": "1.0.0",
+  "private": true,
   "license": "WTFPL",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --disable-host-check --configuration=local",
+    "start": "ng serve --host 0.0.0.0 --disable-host-check --configuration=dev",
     "start:staging": "ng serve --host 0.0.0.0 --disable-host-check --configuration=staging",
     "start:locale": "ng serve --host 0.0.0.0 --disable-host-check --configuration=$BUILD_ENVIRONMENT --port 4200 --aot --i18n-locale $BUILD_LOCALE --i18n-format xlf --i18n-file ./src/locale/messages.$BUILD_LOCALE.xlf",
-    "start:en": "BUILD_ENVIRONMENT=local BUILD_LOCALE=en npm run start:locale",
-    "start:ja": "BUILD_ENVIRONMENT=local BUILD_LOCALE=ja npm run start:locale",
-    "start:fr": "BUILD_ENVIRONMENT=local BUILD_LOCALE=fr npm run start:locale",
+    "start:en": "BUILD_ENVIRONMENT=dev BUILD_LOCALE=en npm run start:locale",
+    "start:ja": "BUILD_ENVIRONMENT=dev BUILD_LOCALE=ja npm run start:locale",
+    "start:fr": "BUILD_ENVIRONMENT=dev BUILD_LOCALE=fr npm run start:locale",
     "build:staging": "BUILD_ENVIRONMENT=staging npm run build:all",
     "build:production": "BUILD_ENVIRONMENT=production npm run build:all",
     "build:all": "npm run build-prepare && npm run build:en && npm run build:fr && npm run build:ja && npm run build:all:finish",
@@ -28,7 +28,6 @@
     "deploy:production": "npm run build:production && aws s3 sync --delete build/production s3://pathofchild-app-production",
     "deploy:all": "npm run deploy:staging && npm run deploy:production"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~7.0.0",
     "@angular/cdk": "~7.0.0",

@@ -40,17 +40,20 @@ const childIAMPolicy = (userId, effect, resource, context) => {
 class AuthService {
   authenticate(event, callback) {
     if (!event.authorizationToken) {
+      console.error('No authorization token');
       return callback('Unauthorized')
     }
 
     const tokenParts = event.authorizationToken.split(' ')
     if (tokenParts.length !== 2) {
+      console.error('Invalid authorization token');
       return callback('Unauthorized')
     }
 
     const bearerValue = tokenParts[0]
     const tokenValue = tokenParts[1]
     if (!(bearerValue.toLowerCase() === 'bearer' && tokenValue)) {
+      console.error('Invalid authorization token bearer');
       return callback('Unauthorized')
     }
 
@@ -70,13 +73,13 @@ class AuthService {
           return callback('Unauthorized');
         }
         if (!key) {
+          console.error('No key found in signing key');
           return callback('Unauthorized');
         }
         const signingKey = key.publicKey || key.rsaPublicKey || '';
         verify(tokenValue, signingKey, options, (verifyError: any, decoded: any) => {
           if (verifyError) {
-            console.log('verifyError', verifyError)
-            console.log(`Token invalid. ${verifyError}`)
+            console.error('verifyError', verifyError);
             return callback('Unauthorized')
           }
           const userId = decoded.sub

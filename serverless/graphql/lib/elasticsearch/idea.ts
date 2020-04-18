@@ -9,6 +9,7 @@ import { elasticSearchService } from '../services';
 let SIZE = 150;
 
 export function queryIdeas(userIds: string[], filters: any, sortInput: string, cursor: string): Promise<any> {
+  let count = SIZE;
   const query: any = {
     bool: {
       must: [
@@ -77,5 +78,5 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
   const sort: any = {
     [sortKey]: sortOrder,
   };
-  return elasticSearchService.search(query, sort, SIZE, cursor);
+  return elasticSearchService.search(query, sort, count, cursor);
 }

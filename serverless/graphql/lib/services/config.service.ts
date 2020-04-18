@@ -6,7 +6,7 @@
 
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
-import * as Joi from 'joi';
+import * as Joi from '@hapi/joi';
 
 declare var process: {
   env: EnvConfig
@@ -38,7 +38,7 @@ class ConfigService {
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       NODE_ENV: Joi.string()
-        .valid(['local', 'production'])
+        .valid('local', 'production')
         .default('local'),
       ELASTIC_SEARCH_INDEX: Joi.string().default('app'),
       ELASTIC_SEARCH_HOST: Joi.string().default('http://localhost:9200'),
@@ -50,9 +50,8 @@ class ConfigService {
       AUTH0_JWKS_KID: Joi.string(),
     });
 
-    const { error, value: validatedEnvConfig } = Joi.validate(
+    const { error, value: validatedEnvConfig } = envVarsSchema.validate(
       envConfig,
-      envVarsSchema,
     );
     if (error) {
       throw new Error(`Config validation error: ${error.message}`);
