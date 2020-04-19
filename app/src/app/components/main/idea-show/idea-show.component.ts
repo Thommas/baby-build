@@ -66,6 +66,12 @@ export class IdeaShowComponent implements OnInit {
   }
 
   deleteIdea() {
-    console.log('DELETE');
+    this.ideaFacade.deleteIdea();
+  }
+
+  selectCategory(category: string) {
+    this.ideaFacade.updateIdea({
+      category,
+    });
   }
 }

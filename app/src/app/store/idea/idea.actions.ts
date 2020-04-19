@@ -11,6 +11,7 @@ export enum IdeaActionTypes {
   CreateIdea = '[Idea] Create',
   UpdateIdea = '[Idea] Update',
   SelectIdea = '[Idea] Select',
+  DeleteIdea = '[Idea] Delete',
 }
 
 export class FetchMoreIdea implements Action {
@@ -35,4 +36,14 @@ export class SelectIdea implements Action {
   constructor(public payload: any) {}
 }
 
-export type IdeaActionsUnion = FetchMoreIdea | CreateIdea | UpdateIdea | SelectIdea;
+export class DeleteIdea implements Action {
+  readonly type = IdeaActionTypes.DeleteIdea;
+
+  constructor() {}
+}
+
+export type IdeaActionsUnion = FetchMoreIdea
+  | CreateIdea
+  | UpdateIdea
+  | SelectIdea
+  | DeleteIdea;

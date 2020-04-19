@@ -4,7 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Delete idea
 - Updating category/platform
 - Add language
 - Implement multi sort
