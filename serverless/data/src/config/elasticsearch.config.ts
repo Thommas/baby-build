@@ -11,77 +11,74 @@ export const ELASTIC_SEARCH_CONFIG: any = {
     analysis: {
       filter: {
         autocomplete_filter: {
-          type: 'edge_ngram',
+          type: "edge_ngram",
           min_gram: 1,
-          max_gram: 20
-        }
+          max_gram: 20,
+        },
       },
       analyzer: {
         autocomplete: {
-          type: 'custom',
-          tokenizer: 'standard',
-          filter: [
-            'lowercase',
-            'autocomplete_filter',
-          ]
-        }
-      }
-    }
+          type: "custom",
+          tokenizer: "standard",
+          filter: ["lowercase", "autocomplete_filter"],
+        },
+      },
+    },
   },
   mappings: {
     properties: {
       createdAt: {
-        type: 'long',
+        type: "long",
       },
       type: {
-        type: 'keyword',
+        type: "keyword",
       },
       firstName: {
-        type: 'text',
-        analyzer: 'autocomplete',
-        search_analyzer: 'standard'
+        type: "text",
+        analyzer: "autocomplete",
+        search_analyzer: "standard",
       },
       lastName: {
-        type: 'text',
-        analyzer: 'autocomplete',
-        search_analyzer: 'standard'
+        type: "text",
+        analyzer: "autocomplete",
+        search_analyzer: "standard",
       },
       label: {
-        type: 'text',
-        analyzer: 'autocomplete',
-        search_analyzer: 'standard'
+        type: "text",
+        analyzer: "autocomplete",
+        search_analyzer: "standard",
       },
       requiredAge: {
-        type: 'double',
+        type: "double",
       },
       score: {
-        type: 'double',
+        type: "double",
       },
       requiredAgeExplanation: {
-        type: 'text',
-        analyzer: 'autocomplete',
-        search_analyzer: 'standard'
+        type: "text",
+        analyzer: "autocomplete",
+        search_analyzer: "standard",
       },
       scoreExplanation: {
-        type: 'text',
-        analyzer: 'autocomplete',
-        search_analyzer: 'standard'
+        type: "text",
+        analyzer: "autocomplete",
+        search_analyzer: "standard",
       },
       xp: {
-        type: 'integer',
+        type: "integer",
       },
       lvl: {
-        type: 'integer',
+        type: "integer",
       },
       ideaId: {
-        type: 'keyword',
+        type: "keyword",
       },
       sharerId: {
-        type: 'keyword',
+        type: "keyword",
       },
       userId: {
-        type: 'keyword',
+        type: "keyword",
       },
-    }
-  }
+    },
+  },
 };

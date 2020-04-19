@@ -3,5 +3,8 @@
 /.dynamodb
 /npm-debug.log
 /.env
+/.env.dev
 /.env.local
 /db
+/coverage
+/.nyc_output

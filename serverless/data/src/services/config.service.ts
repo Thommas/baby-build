@@ -4,16 +4,16 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
-import * as Joi from 'joi';
-import * as path from 'path';
+import * as dotenv from "dotenv";
+import * as fs from "fs";
+import * as Joi from "@hapi/joi";
+import * as path from "path";
 
 declare var __dirname;
 
 declare var process: {
-  env: EnvConfig
-}
+  env: EnvConfig;
+};
 
 export interface EnvConfig {
   [key: string]: string;
@@ -23,13 +23,15 @@ class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor() {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === "production") {
       this.envConfig = this.validateInput(process.env);
     } else if (process.env.NODE_ENV) {
-      const config = dotenv.parse(fs.readFileSync('.env.' + process.env.NODE_ENV));
+      const config = dotenv.parse(
+        fs.readFileSync(".env." + process.env.NODE_ENV)
+      );
       this.envConfig = this.validateInput(config);
     } else {
-      const config = dotenv.parse(fs.readFileSync('.env'));
+      const config = dotenv.parse(fs.readFileSync(".env"));
       this.envConfig = this.validateInput(config);
     }
   }
@@ -40,20 +42,17 @@ class ConfigService {
    */
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
-      NODE_ENV: Joi.string()
-        .valid(['local', 'production'])
-        .default('local'),
-      ELASTIC_SEARCH_INDEX: Joi.string().default('app'),
-      ELASTIC_SEARCH_HOST: Joi.string().default('http://localhost:9200'),
-      LOCAL_DYNAMODB_HOST: Joi.string().default('localhost'),
+      NODE_ENV: Joi.string().valid("local", "production").default("local"),
+      ELASTIC_SEARCH_INDEX: Joi.string().default("app"),
+      ELASTIC_SEARCH_HOST: Joi.string().default("http://localhost:9200"),
+      LOCAL_DYNAMODB_HOST: Joi.string().default("localhost"),
       LOCAL_DYNAMODB_PORT: Joi.number().default(4567),
-      LOCAL_DYNAMODB_TABLE: Joi.string().default('pathofchild-graphql-dev'),
-      S3_BUCKET: Joi.string().default('pathofchild-local'),
+      LOCAL_DYNAMODB_TABLE: Joi.string().default("pathofchild-graphql-dev"),
+      S3_BUCKET: Joi.string().default("pathofchild-local"),
     });
 
-    const { error, value: validatedEnvConfig } = Joi.validate(
-      envConfig,
-      envVarsSchema,
+    const { error, value: validatedEnvConfig } = envVarsSchema.validate(
+      envConfig
     );
     if (error) {
       throw new Error(`Config validation error: ${error.message}`);
@@ -86,7 +85,10 @@ class ConfigService {
   }
 
   get dbDumpLocalPath() {
-    return path.join(__dirname, `../../db/${this.envConfig.LOCAL_DYNAMODB_TABLE}.json`);
+    return path.join(
+      __dirname,
+      `../../db/${this.envConfig.LOCAL_DYNAMODB_TABLE}.json`
+    );
   }
 }
 

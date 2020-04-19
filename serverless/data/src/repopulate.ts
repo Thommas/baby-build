@@ -4,19 +4,13 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import {
-  dynamoService,
-  elasticSearchService,
-} from './services';
+import { dynamoService, elasticSearchService } from "./services";
 
 async function loadData(): Promise<any> {
-  const promises: Promise<any>[] = [];
-  await dynamoService.loadAllItems().then((items) => {
-    for (const item of items) {
-      promises.push(elasticSearchService.index(item));
-    }
-  });
-  return Promise.all(promises);
+  const items = await dynamoService.loadAllItems();
+  for (const item of items) {
+    await elasticSearchService.index(item);
+  }
 }
 
 async function repopulate(): Promise<any> {
@@ -24,4 +18,8 @@ async function repopulate(): Promise<any> {
   await loadData();
   await elasticSearchService.refreshIndex();
 }
-repopulate();
+
+repopulate().then(() => {
+  console.log("Repopulate completed");
+  process.exit();
+});

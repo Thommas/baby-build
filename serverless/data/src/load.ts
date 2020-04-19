@@ -4,19 +4,14 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import {
-  dynamoService,
-  elasticSearchService,
-} from './services';
+import { dynamoService, elasticSearchService } from "./services";
 
-declare var process;
+async function load(): Promise<any> {
+  await dynamoService.load();
+  await elasticSearchService.load();
+}
 
-const promises = [
-  dynamoService.load(),
-  elasticSearchService.load(),
-];
-
-Promise.all(promises).then(() => {
-  console.log('Loading data completed');
+load().then(() => {
+  console.log("Loading data completed");
   process.exit();
 });

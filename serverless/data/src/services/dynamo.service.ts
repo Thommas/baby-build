@@ -4,23 +4,20 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as AWS from 'aws-sdk';
-import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
-import * as bluebird from 'bluebird';
-import * as dynamoose from 'dynamoose';
-import * as fs from 'fs';
-import { configService } from './config.service';
+import * as AWS from "aws-sdk";
+import { ServiceConfigurationOptions } from "aws-sdk/lib/service";
+import * as bluebird from "bluebird";
+import * as dynamoose from "dynamoose";
+import * as fs from "fs";
+import { configService } from "./config.service";
 
-class DynamoService {
+export class DynamoService {
   getDynamoose() {
-    const {
-      localDynamoDBHost,
-      localDynamoDBPort,
-    } = configService;
+    const { localDynamoDBHost, localDynamoDBPort } = configService;
 
     if (localDynamoDBHost && localDynamoDBPort) {
       dynamoose.AWS.config.update({
-        region: 'eu-west-2',
+        region: "eu-west-2",
       });
       dynamoose.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
     }
@@ -29,13 +26,10 @@ class DynamoService {
   }
 
   getAWSDynamo() {
-    const {
-      localDynamoDBHost,
-      localDynamoDBPort,
-    } = configService;
+    const { localDynamoDBHost, localDynamoDBPort } = configService;
 
-    const serviceConfigOptions : ServiceConfigurationOptions = {
-      region: 'eu-west-2',
+    const serviceConfigOptions: ServiceConfigurationOptions = {
+      region: "eu-west-2",
       endpoint: `http://${localDynamoDBHost}:${localDynamoDBPort}`,
     };
 
@@ -49,8 +43,10 @@ class DynamoService {
     const params = {
       TableName: configService.localDynamoDBTable,
     };
-    return this.getAWSDynamo().deleteTable(params).promise()
-      .catch((err) => {
+    return this.getAWSDynamo()
+      .deleteTable(params)
+      .promise()
+      .catch(() => {
         // Ignore error
       });
   }
@@ -60,28 +56,30 @@ class DynamoService {
       TableName: configService.localDynamoDBTable,
       AttributeDefinitions: [
         {
-          AttributeName: 'id',
-          AttributeType: 'S'
-        }
+          AttributeName: "id",
+          AttributeType: "S",
+        },
       ],
       KeySchema: [
         {
-          AttributeName: 'id',
-          KeyType: 'HASH'
+          AttributeName: "id",
+          KeyType: "HASH",
         },
       ],
       ProvisionedThroughput: {
         ReadCapacityUnits: 2,
-        WriteCapacityUnits: 2
+        WriteCapacityUnits: 2,
       },
       StreamSpecification: {
         StreamEnabled: true,
-        StreamViewType: 'NEW_AND_OLD_IMAGES',
-      }
+        StreamViewType: "NEW_AND_OLD_IMAGES",
+      },
     };
-    return this.getAWSDynamo().createTable(params).promise()
+    return this.getAWSDynamo()
+      .createTable(params)
+      .promise()
       .catch((err) => {
-        console.log('error', err);
+        console.log("error", err);
       });
   }
 
@@ -90,14 +88,17 @@ class DynamoService {
 
     const Schema = dynamoose.Schema;
 
-    const EntitySchema = new Schema({
-      id: {
-        type: String,
+    const EntitySchema = new Schema(
+      {
+        id: {
+          type: String,
+        },
       },
-    }, {
-      timestamps: true,
-      saveUnknown: true,
-    });
+      {
+        timestamps: true,
+        saveUnknown: true,
+      }
+    );
 
     return dynamoose.model(configService.localDynamoDBTable, EntitySchema);
   }
@@ -105,12 +106,11 @@ class DynamoService {
   createDocument(document: any): Promise<any> {
     const Entity = this.getEntity();
     const item = new Entity({
-      ...document
+      ...document,
     });
-    return item.save()
-      .catch((err) => {
-        console.log('error', err);
-      });
+    return item.save().catch((err) => {
+      console.log("error", err);
+    });
   }
 
   loadData(): Promise<any> {
@@ -131,12 +131,12 @@ class DynamoService {
     let scanResults: any[] = [];
     let items;
     do {
-        items = await this.getAWSDynamo().scan(params).promise();
-        items.Items.forEach((item: any) => {
-          const document = AWS.DynamoDB.Converter.unmarshall(item);
-          scanResults.push(document);
-        });
-        params.ExclusiveStartKey = items.LastEvaluatedKey;
+      items = await this.getAWSDynamo().scan(params).promise();
+      items.Items.forEach((item: any) => {
+        const document = AWS.DynamoDB.Converter.unmarshall(item);
+        scanResults.push(document);
+      });
+      params.ExclusiveStartKey = items.LastEvaluatedKey;
     } while (typeof items.LastEvaluatedKey != "undefined");
 
     return scanResults;
@@ -148,7 +148,7 @@ class DynamoService {
   }
 
   timeout(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   async load() {
