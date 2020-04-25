@@ -195,7 +195,6 @@ export class ReviewFacade {
             },
           },
           update: (store, { data: { updateReview } }) => {
-            console.log('updateReview', updateReview);
             this.selectReview(updateReview);
             this.updateReviews(store, updateReview);
             this.updateIdea(store, updateReview, filters);

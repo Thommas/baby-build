@@ -54,7 +54,9 @@ export class ApolloService {
           ),
         );
 
-      if (networkError) console.log(`[Network error]: ${networkError}`);
+      if (networkError) {
+        console.log(`[Network error]: ${networkError}`);
+      }
     });
 
     const httpLink: ApolloLink = this.httpLink.create({ uri: environment.apollo.url });

@@ -10,22 +10,49 @@
               autocomplete="off">
       </mat-form-field>
     </form>
-    <button mat-button [matMenuTriggerFor]="menu">
-      <img [src]="constantsService.getCategoryIconByValue((selectedIdea$ | async).category)" width="24" height="24"/>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item *ngFor="let category of constantsService.categories" (click)="selectCategory(category.value)">
-        <mat-icon><img [src]="category.icon" width="24" height="24"/></mat-icon>
-        {{ category.label }}
+    <div class="language">
+      <button mat-button [matMenuTriggerFor]="languageMenu">
+        <img *ngIf="this.formGroup.get('language').value !== null"
+             [src]="constantsService.getLanguageIconByValue(this.formGroup.get('language').value)" width="24" height="24"/>
+        <img *ngIf="this.formGroup.get('language').value === null"
+             src="/assets/img/unknown.svg" width="24" height="24"/>
       </button>
-    </mat-menu>
+      <mat-menu #languageMenu="matMenu">
+        <button mat-menu-item *ngFor="let language of constantsService.languages" (click)="selectLanguage(language.value)">
+          <mat-icon><img [src]="language.icon" width="24" height="24"/></mat-icon>
+          {{ language.label }}
+        </button>
+      </mat-menu>
+    </div>
+    <div class="category">
+      <button mat-button [matMenuTriggerFor]="categoryMenu">
+        <img [src]="constantsService.getCategoryIconByValue(this.formGroup.get('category').value)" width="24" height="24"/>
+      </button>
+      <mat-menu #categoryMenu="matMenu">
+        <button mat-menu-item *ngFor="let category of constantsService.categories" (click)="selectCategory(category.value)">
+          <mat-icon><img [src]="category.icon" width="24" height="24"/></mat-icon>
+          {{ category.label }}
+        </button>
+      </mat-menu>
+    </div>
+    <div class="platform" *ngIf="this.formGroup.get('category').value == 'videogame'">
+      <button mat-button [matMenuTriggerFor]="platformMenu">
+        <img [src]="constantsService.getPlatformIconByValue(this.formGroup.get('platform').value)" width="24" height="24"/>
+      </button>
+      <mat-menu #platformMenu="matMenu">
+        <button mat-menu-item *ngFor="let platform of constantsService.platforms" (click)="selectPlatform(platform.value)">
+          <mat-icon><img [src]="platform.icon" width="24" height="24"/></mat-icon>
+          {{ platform.label }}
+        </button>
+      </mat-menu>
+    </div>
     <button mat-icon-button (click)="selectIdea()">
       <mat-icon>close</mat-icon>
     </button>
-    <button mat-icon-button [matMenuTriggerFor]="mainMenu">
+    <button mat-icon-button [matMenuTriggerFor]="actionMenu">
       <mat-icon>more_vert</mat-icon>
     </button>
-    <mat-menu #mainMenu="matMenu">
+    <mat-menu #actionMenu="matMenu">
       <button mat-menu-item (click)="deleteIdea()" i18n>idea.delete</button>
     </mat-menu>
   </mat-card-header>

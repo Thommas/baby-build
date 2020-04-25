@@ -7,11 +7,13 @@
 import { Injectable } from '@angular/core';
 import { CATEGORIES } from '../constants/categories';
 import { PLATFORMS } from '../constants/platforms';
+import { LANGUAGES } from '../constants/languages';
 
 @Injectable()
 export class ConstantsService {
   categories: any = CATEGORIES;
   platforms: any = PLATFORMS;
+  languages: any = LANGUAGES;
 
   getIconByValue(value: string, items: any) {
     for (const item of items) {
@@ -29,5 +31,9 @@ export class ConstantsService {
 
   getPlatformIconByValue(value: string) {
     return this.getIconByValue(value, this.platforms);
+  }
+
+  getLanguageIconByValue(value: string) {
+    return this.getIconByValue(value, this.languages);
   }
 }

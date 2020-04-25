@@ -30,6 +30,9 @@ export class IdeaShowComponent implements OnInit {
   ) {
     this.formGroup = new FormGroup({
       label: new FormControl('', []),
+      category: new FormControl('', []),
+      platform: new FormControl('', []),
+      language: new FormControl('', []),
     });
   }
 
@@ -70,8 +73,29 @@ export class IdeaShowComponent implements OnInit {
   }
 
   selectCategory(category: string) {
+    this.formGroup.patchValue({
+      category
+    });
     this.ideaFacade.updateIdea({
       category,
+    });
+  }
+
+  selectPlatform(platform: string) {
+    this.formGroup.patchValue({
+      platform
+    });
+    this.ideaFacade.updateIdea({
+      platform,
+    });
+  }
+
+  selectLanguage(language: string) {
+    this.formGroup.patchValue({
+      language
+    });
+    this.ideaFacade.updateIdea({
+      language,
     });
   }
 }

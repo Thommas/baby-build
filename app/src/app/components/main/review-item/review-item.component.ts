@@ -49,7 +49,7 @@ export class ReviewItemComponent implements OnInit, OnDestroy {
     for (let age = 1; age <= 20; age++) {
       this.ages.push(age);
     }
-    for (let score = 0; score <= 7; score++) {
+    for (let score = 1; score <= 7; score++) {
       this.scores.push(score);
     }
   }
@@ -79,16 +79,16 @@ export class ReviewItemComponent implements OnInit, OnDestroy {
     this.subs = [];
   }
 
-  selectRequiredAge(age: number) {
+  selectRequiredAge(requiredAge: number) {
     this.formGroup.patchValue({
-      requiredAge: age,
+      requiredAge,
     });
     this.save();
   }
 
   selectScore(score: number) {
     this.formGroup.patchValue({
-      score: score,
+      score,
     });
     this.save();
   }
@@ -106,9 +106,6 @@ export class ReviewItemComponent implements OnInit, OnDestroy {
   }
 
   getIcon(score: string) {
-    if (!score) {
-      return '/assets/img/tier/tier-d.png';
-    }
     if (score === '1') {
       return '/assets/img/tier/tier-d.png';
     }
@@ -130,6 +127,6 @@ export class ReviewItemComponent implements OnInit, OnDestroy {
     if (score === '7') {
       return '/assets/img/tier/tier-sss.png';
     }
-    return '';
+    return '/assets/img/unknown.svg';
   }
 }

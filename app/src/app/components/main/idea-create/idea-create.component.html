@@ -10,10 +10,10 @@
             autocomplete="off">
     </mat-form-field>
     <div class="category">
-      <button mat-button [matMenuTriggerFor]="menu">
+      <button mat-button [matMenuTriggerFor]="categoryMenu">
         <img [src]="constantsService.getCategoryIconByValue(this.formGroup.get('category').value)" width="24" height="24"/>
       </button>
-      <mat-menu #menu="matMenu">
+      <mat-menu #categoryMenu="matMenu">
         <button mat-menu-item *ngFor="let category of constantsService.categories" (click)="selectCategory(category.value)">
           <mat-icon><img [src]="category.icon" width="24" height="24"/></mat-icon>
           {{ category.label }}
@@ -21,10 +21,10 @@
       </mat-menu>
     </div>
     <div class="platform" *ngIf="this.formGroup.get('category').value == 'videogame'">
-      <button mat-button [matMenuTriggerFor]="menu">
+      <button mat-button [matMenuTriggerFor]="platformMenu">
         <img [src]="constantsService.getPlatformIconByValue(this.formGroup.get('platform').value)" width="24" height="24"/>
       </button>
-      <mat-menu #menu="matMenu">
+      <mat-menu #platformMenu="matMenu">
         <button mat-menu-item *ngFor="let platform of constantsService.platforms" (click)="selectPlatform(platform.value)">
           <mat-icon><img [src]="platform.icon" width="24" height="24"/></mat-icon>
           {{ platform.label }}

@@ -70,7 +70,7 @@ export class UserFacade {
             },
           },
           update: (store, { data: { updateUser } }) => {
-            console.log('updateUser', updateUser);
+            // TODO
           }
         });
       })

@@ -33,6 +33,9 @@
     <h2>Recommendation Score</h2>
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <button mat-raised-button
+              [color]="this.formGroup.get('score').value === null ? 'accent' : ''"
+              (click)="selectScore(null)"><img src="/assets/img/unknown.svg" width="44" height="44"/></button>
+      <button mat-raised-button
               *ngFor="let score of scores"
               [color]="this.formGroup.get('score').value === score ? 'accent' : ''"
               (click)="selectScore(score)"><img [src]="getIcon(score | number:'1.0-0')" width="44" height="44"/></button>

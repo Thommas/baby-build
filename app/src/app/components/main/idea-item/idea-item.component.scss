@@ -37,6 +37,23 @@
     }
   }
 
+  .language {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    width: 32px;
+    height: 29px;
+    padding-top: 3px;
+    z-index: 2;
+    border-radius: 0;
+    text-align: center;
+    img {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
   .category {
     position: absolute;
     top: 0;

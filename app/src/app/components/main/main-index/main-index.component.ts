@@ -37,4 +37,8 @@ export class MainIndexComponent {
       category
     });
   }
+
+  refreshList() {
+    this.ideaFacade.ideaQuery.refetch();
+  }
 }
