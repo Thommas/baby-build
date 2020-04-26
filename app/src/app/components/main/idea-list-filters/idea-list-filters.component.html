@@ -1,13 +1,33 @@
-<h2>Label</h2>
-<div fxLayout="row" fxLayoutAlign="space-around center">
-  <mat-form-field fxFill>
-    <input #inputElement fxFill
-           matInput
-           placeholder="Search for an idea"
-           autocomplete="off">
-  </mat-form-field>
+<div fxFill fxLayout="row" fxLayoutAlign="start center">
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-icon>search</mat-icon>
+    <mat-form-field fxFill>
+      <input #inputElement fxFill
+            matInput
+            placeholder="Search for an idea"
+            autocomplete="off">
+    </mat-form-field>
+  </div>
+  <div class="language" *ngIf="filters$ | async as filters">
+    <button mat-button [matMenuTriggerFor]="languageMenu">
+      <img *ngIf="filters.language !== null"
+          [src]="constantsService.getLanguageIconByValue(filters.language)" width="24" height="24"/>
+      <img *ngIf="filters.language === null"
+          src="/assets/img/unknown.svg" width="24" height="24"/>
+    </button>
+    <mat-menu #languageMenu="matMenu">
+      <button mat-menu-item (click)="selectLanguage(null)">
+        <mat-icon><img src="/assets/img/unknown.svg" width="24" height="24"/></mat-icon>
+        Any
+      </button>
+      <button mat-menu-item *ngFor="let language of constantsService.languages" (click)="selectLanguage(language.value)">
+        <mat-icon><img [src]="language.icon" width="24" height="24"/></mat-icon>
+        {{ language.label }}
+      </button>
+    </mat-menu>
+  </div>
 </div>
-<h2>Required age</h2>
+<!--
 <div fxLayout="row" fxLayoutAlign="space-around center">
   <ng-container *ngFor="let age of ages">
     <button mat-raised-button
@@ -17,7 +37,6 @@
     </button>
   </ng-container>
 </div>
-<h2>Score</h2>
 <div fxLayout="row" fxLayoutAlign="space-around center">
   <ng-container *ngFor="let score of scores">
     <button mat-fab
@@ -27,4 +46,4 @@
     </button>
   </ng-container>
 </div>
-<mat-divider></mat-divider>
+-->

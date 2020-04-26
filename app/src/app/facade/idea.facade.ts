@@ -39,8 +39,11 @@ export const purifyFilters = (filters: any) => {
   if (!currentFilters.score || 0 === currentFilters.score.length) {
     delete currentFilters.score;
   }
-  if (!currentFilters.name) {
-    delete currentFilters.name;
+  if (!currentFilters.label) {
+    delete currentFilters.label;
+  }
+  if (!currentFilters.language) {
+    delete currentFilters.language;
   }
 
   return {

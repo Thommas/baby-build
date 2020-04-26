@@ -1,13 +1,12 @@
 <mat-card fxFlex class="left-card">
   <mat-card-header fxLayout="row" fxLayoutAlign="start center">
-    <!--<button mat-raised-button color='primary' (click)="toggleFilters()" i18n>main_index.toggle_filters</button>-->
-    <button mat-raised-button color='primary' (click)="refreshList()" i18n>main_index.refresh</button>
+    <app-idea-list-filters-cmp></app-idea-list-filters-cmp>
+    <button mat-icon-button color='primary' (click)="refreshList()" i18n>
+      <mat-icon>refresh</mat-icon>
+    </button>
   </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="start start">
-    <!--<app-idea-create-cmp></app-idea-create-cmp>-->
-    <app-idea-list-cmp
-      [displayFilters]="displayFilters"
-    ></app-idea-list-cmp>
+    <app-idea-list-cmp></app-idea-list-cmp>
   </mat-card-content>
 </mat-card>
 <app-idea-show-cmp

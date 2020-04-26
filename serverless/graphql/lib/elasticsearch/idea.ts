@@ -72,6 +72,15 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
         });
       }
     }
+    if (filters.language && filters.language.length > 0) {
+      query.bool.must.push({
+        match: {
+          language: {
+            query: filters.language,
+          }
+        },
+      });
+    }
   }
   const sortKey = sortInput.replace('-', '');
   const sortOrder = sortInput[0] === '-' ? 'desc' : 'asc';

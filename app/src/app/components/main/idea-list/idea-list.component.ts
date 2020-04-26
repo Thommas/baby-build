@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { IdeaFacade } from '../../../facade';
 
 @Component({
@@ -13,7 +13,6 @@ import { IdeaFacade } from '../../../facade';
   styleUrls: ['./idea-list.component.scss']
 })
 export class IdeaListComponent {
-  @Input() displayFilters: boolean;
   ideas$: any;
 
   constructor(

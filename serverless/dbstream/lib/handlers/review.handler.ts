@@ -48,8 +48,8 @@ function updateIdeaBasedOnReviews(review: any) {
       const score = mean(reviews.hits.hits.map((document: any) => document._source.score));
       const requiredAge = mean(reviews.hits.hits.map((document: any) => document._source.requiredAge));
       return updateIdea(review.ideaId, {
-        score,
-        requiredAge,
+        score: score ? score : null,
+        requiredAge: requiredAge ? requiredAge : null,
       });
     })
 }

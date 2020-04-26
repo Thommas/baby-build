@@ -28,6 +28,7 @@ const Idea = gql`
     label: String
     requiredAge: Float
     score: Float
+    language: String
     count: Int
   }
   type IdeaEdge {

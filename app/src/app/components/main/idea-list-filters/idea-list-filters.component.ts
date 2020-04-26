@@ -6,7 +6,7 @@
 
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { IdeaFiltersFacade } from '../../../facade';
-import { FormService } from '../../../services';
+import { ConstantsService, FormService } from '../../../services';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
@@ -23,6 +23,7 @@ export class IdeaListFiltersComponent implements OnInit, OnDestroy {
   scores: number[] = [];
 
   constructor(
+    public constantsService: ConstantsService,
     private formService: FormService,
     private ideaFiltersFacade: IdeaFiltersFacade
   ) {
@@ -53,5 +54,9 @@ export class IdeaListFiltersComponent implements OnInit, OnDestroy {
 
   selectScore(score: number) {
     this.ideaFiltersFacade.selectScore(score);
+  }
+
+  selectLanguage(language: string) {
+    this.ideaFiltersFacade.selectLanguage(language);
   }
 }
