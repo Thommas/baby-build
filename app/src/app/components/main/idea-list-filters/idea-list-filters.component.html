@@ -26,24 +26,32 @@
       </button>
     </mat-menu>
   </div>
-</div>
-<!--
-<div fxLayout="row" fxLayoutAlign="space-around center">
-  <ng-container *ngFor="let age of ages">
-    <button mat-raised-button
-            [color]="(filters$ | async).requiredAge.includes(age) ? 'accent' : ''"
-            (click)="selectRequiredAge(age)">
-      {{ age }}
+  <div class="required-age" *ngIf="filters$ | async as filters">
+    <button mat-button [matMenuTriggerFor]="requiredAgeMenu">
+      <p *ngIf="filters.requiredAge !== null">{{ filters.requiredAge }}</p>
+      <p *ngIf="filters.requiredAge === null">Age</p>
     </button>
-  </ng-container>
-</div>
-<div fxLayout="row" fxLayoutAlign="space-around center">
-  <ng-container *ngFor="let score of scores">
-    <button mat-fab
-            [color]="(filters$ | async).score.includes(score) ? 'accent' : ''"
-            (click)="selectScore(score)">
-      <mat-icon [svgIcon]="'recommandation_' + score"></mat-icon>
+    <mat-menu #requiredAgeMenu="matMenu">
+      <button mat-menu-item (click)="selectRequiredAge(null)">
+        Any
+      </button>
+      <button mat-menu-item *ngFor="let age of ideaFacade.ages" (click)="selectRequiredAge(age)">
+        {{ age }}+
+      </button>
+    </mat-menu>
+  </div>
+  <div class="score" *ngIf="filters$ | async as filters">
+    <button mat-button [matMenuTriggerFor]="scoreMenu">
+      <p *ngIf="filters.score !== null">{{ filters.score }}</p>
+      <p *ngIf="filters.score === null">Score</p>
     </button>
-  </ng-container>
+    <mat-menu #scoreMenu="matMenu">
+      <button mat-menu-item (click)="selectScore(null)">
+        Any
+      </button>
+      <button mat-menu-item *ngFor="let score of ideaFacade.scores" (click)="selectScore(score)">
+        <img [src]="ideaFacade.getIcon(score)" width="24" height="24"/>
+      </button>
+    </mat-menu>
+  </div>
 </div>
--->

@@ -27,7 +27,7 @@ export class IdeaItemComponent implements OnInit, OnChanges {
 
   constructor(
     public constantsService: ConstantsService,
-    private ideaFacade: IdeaFacade,
+    public ideaFacade: IdeaFacade,
     private userFacade: UserFacade,
     private formService: FormService
   ) {
@@ -109,33 +109,5 @@ export class IdeaItemComponent implements OnInit, OnChanges {
 
   delete() {
     // this.ideaFacade.deleteIdea(this.idea);
-  }
-
-  getIcon(score: string) {
-    if (!score) {
-      return '/assets/img/tier/tier-d.png';
-    }
-    if (score === '1') {
-      return '/assets/img/tier/tier-d.png';
-    }
-    if (score === '2') {
-      return '/assets/img/tier/tier-c.png';
-    }
-    if (score === '3') {
-      return '/assets/img/tier/tier-b.png';
-    }
-    if (score === '4') {
-      return '/assets/img/tier/tier-a.png';
-    }
-    if (score === '5') {
-      return '/assets/img/tier/tier-s.png';
-    }
-    if (score === '6') {
-      return '/assets/img/tier/tier-ss.png';
-    }
-    if (score === '7') {
-      return '/assets/img/tier/tier-sss.png';
-    }
-    return '';
   }
 }

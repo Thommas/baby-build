@@ -58,6 +58,33 @@ export class IdeaFacade {
   ideaQuery: QueryRef<any> = null;
   static total: number = null;
   static cursor: any;
+  ages: number[] = [];
+  scores: number[] = [];
+
+  getIcon(score: number) {
+    if (score === 1) {
+      return '/assets/img/tier/tier-d.png';
+    }
+    if (score === 2) {
+      return '/assets/img/tier/tier-c.png';
+    }
+    if (score === 3) {
+      return '/assets/img/tier/tier-b.png';
+    }
+    if (score === 4) {
+      return '/assets/img/tier/tier-a.png';
+    }
+    if (score === 5) {
+      return '/assets/img/tier/tier-s.png';
+    }
+    if (score === 6) {
+      return '/assets/img/tier/tier-ss.png';
+    }
+    if (score === 7) {
+      return '/assets/img/tier/tier-sss.png';
+    }
+    return '/assets/img/unknown.svg';
+  }
 
   suggestedIdeas$ = this.ideaSuggestFacade.suggest$.pipe(
     flatMap((suggest: any) => {
@@ -115,6 +142,12 @@ export class IdeaFacade {
     private userFacade: UserFacade,
     private store: Store<{ idea: any }>
   ) {
+    for (let age = 1; age <= 20; age++) {
+      this.ages.push(age);
+    }
+    for (let score = 0; score <= 7; score++) {
+      this.scores.push(score);
+    }
   }
 
   fetchMore() {

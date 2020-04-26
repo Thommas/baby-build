@@ -2,7 +2,7 @@
   <form [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="start stretch">
     <h2>Required age</h2>
     <div fxLayout="row" fxLayoutAlign="space-around center">
-      <ng-container *ngFor="let age of ages">
+      <ng-container *ngFor="let age of ideaFacade.ages">
         <button mat-raised-button
                 *ngIf="age <= 10"
                 [color]="this.formGroup.get('requiredAge').value === age ? 'accent' : ''"
@@ -12,7 +12,7 @@
       </ng-container>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-around center">
-      <ng-container *ngFor="let age of ages">
+      <ng-container *ngFor="let age of ideaFacade.ages">
         <button mat-raised-button
                 *ngIf="age > 10"
                 [color]="this.formGroup.get('requiredAge').value === age ? 'accent' : ''"
@@ -36,9 +36,9 @@
               [color]="this.formGroup.get('score').value === null ? 'accent' : ''"
               (click)="selectScore(null)"><img src="/assets/img/unknown.svg" width="44" height="44"/></button>
       <button mat-raised-button
-              *ngFor="let score of scores"
+              *ngFor="let score of ideaFacade.scores"
               [color]="this.formGroup.get('score').value === score ? 'accent' : ''"
-              (click)="selectScore(score)"><img [src]="getIcon(score | number:'1.0-0')" width="44" height="44"/></button>
+              (click)="selectScore(score)"><img [src]="ideaFacade.getIcon(score | number:'1.0-0')" width="44" height="44"/></button>
     </div>
     <mat-divider></mat-divider>
     <div fxLayout="row" class="text-area-container">

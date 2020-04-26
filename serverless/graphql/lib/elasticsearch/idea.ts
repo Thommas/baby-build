@@ -37,7 +37,7 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
         },
       });
     }
-    if (filters.label && filters.label.length > 0) {
+    if (filters.label) {
       query.bool.must.push({
         match: {
           label: {
@@ -48,31 +48,27 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
         },
       });
     }
-    if (filters.requiredAge && filters.requiredAge.length > 0) {
-      for (const requiredAge of filters.requiredAge) {
-        query.bool.must.push({
-          range: {
-            requiredAge: {
-              gte: requiredAge,
-              lt: requiredAge + 1,
-            },
+    if (filters.requiredAge) {
+      query.bool.must.push({
+        range: {
+          requiredAge: {
+            gte: filters.requiredAge,
+            lt: filters.requiredAge + 1,
           },
-        });
-      }
+        },
+      });
     }
-    if (filters.score && filters.score.length > 0) {
-      for (const score of filters.score) {
-        query.bool.must.push({
-          range: {
-            score: {
-              gte: score,
-              lt: score + 1,
-            },
+    if (filters.score) {
+      query.bool.must.push({
+        range: {
+          score: {
+            gte: filters.score,
+            lt: filters.score + 1,
           },
-        });
-      }
+        },
+      });
     }
-    if (filters.language && filters.language.length > 0) {
+    if (filters.language) {
       query.bool.must.push({
         match: {
           language: {

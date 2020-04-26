@@ -5,7 +5,7 @@
  */
 
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { IdeaFiltersFacade } from '../../../facade';
+import { IdeaFacade, IdeaFiltersFacade } from '../../../facade';
 import { ConstantsService, FormService } from '../../../services';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -19,20 +19,13 @@ export class IdeaListFiltersComponent implements OnInit, OnDestroy {
   @ViewChild('inputElement') inputElement: any;
   filters$ = this.ideaFiltersFacade.filters$;
   formFieldSub: Subscription;
-  ages: number[] = [];
-  scores: number[] = [];
 
   constructor(
     public constantsService: ConstantsService,
+    public ideaFacade: IdeaFacade,
     private formService: FormService,
     private ideaFiltersFacade: IdeaFiltersFacade
   ) {
-    for (let age = 1; age <= 20; age++) {
-      this.ages.push(age);
-    }
-    for (let score = 0; score <= 7; score++) {
-      this.scores.push(score);
-    }
   }
 
   ngOnInit() {

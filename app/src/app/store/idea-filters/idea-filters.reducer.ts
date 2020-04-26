@@ -4,14 +4,13 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { xor } from 'lodash';
 import { IdeaFiltersActionTypes, IdeaFiltersActionsUnion } from './idea-filters.actions';
 
 const initialState = {
   label: null,
   language: null,
-  requiredAge: [],
-  score: [],
+  requiredAge: null,
+  score: null,
 };
 
 export function ideaFiltersReducer(state: any = initialState, action: IdeaFiltersActionsUnion): any {
@@ -23,8 +22,8 @@ export function ideaFiltersReducer(state: any = initialState, action: IdeaFilter
       return {
         ...state,
         label: action.payload.label !== undefined ? action.payload.label : state.label,
-        score: action.payload.score !== undefined ? xor(state.score, [action.payload.score]) : state.score,
-        requiredAge: action.payload.requiredAge !== undefined ? xor(state.requiredAge, [action.payload.requiredAge]) : state.requiredAge,
+        score: action.payload.score !== undefined ? action.payload.score : state.score,
+        requiredAge: action.payload.requiredAge !== undefined ? action.payload.requiredAge : state.requiredAge,
         language: action.payload.language !== undefined ? action.payload.language : state.language,
       };
 

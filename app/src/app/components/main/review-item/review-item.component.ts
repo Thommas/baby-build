@@ -5,11 +5,11 @@
  */
 
 import { clone } from 'lodash';
-import { Component, OnInit, ViewChild, SimpleChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { ReviewFacade } from '../../../facade';
+import { IdeaFacade, ReviewFacade } from '../../../facade';
 import { FormService } from '../../../services';
 
 @Component({
@@ -22,12 +22,11 @@ export class ReviewItemComponent implements OnInit, OnDestroy {
   @ViewChild('scoreExplanationElement') scoreExplanationElement: any;
   formGroup: FormGroup;
   loading: boolean;
-  ages: number[] = [];
-  scores: number[] = [];
   subs: Subscription[] = [];
 
   constructor(
     private formService: FormService,
+    public ideaFacade: IdeaFacade,
     private reviewFacade: ReviewFacade
   ) {
     this.formGroup = new FormGroup({
@@ -46,12 +45,6 @@ export class ReviewItemComponent implements OnInit, OnDestroy {
       scoreExplanation: '',
       ideaId: null
     });
-    for (let age = 1; age <= 20; age++) {
-      this.ages.push(age);
-    }
-    for (let score = 1; score <= 7; score++) {
-      this.scores.push(score);
-    }
   }
 
   ngOnInit() {
@@ -103,30 +96,5 @@ export class ReviewItemComponent implements OnInit, OnDestroy {
     } else {
       this.reviewFacade.createReview(review);
     }
-  }
-
-  getIcon(score: string) {
-    if (score === '1') {
-      return '/assets/img/tier/tier-d.png';
-    }
-    if (score === '2') {
-      return '/assets/img/tier/tier-c.png';
-    }
-    if (score === '3') {
-      return '/assets/img/tier/tier-b.png';
-    }
-    if (score === '4') {
-      return '/assets/img/tier/tier-a.png';
-    }
-    if (score === '5') {
-      return '/assets/img/tier/tier-s.png';
-    }
-    if (score === '6') {
-      return '/assets/img/tier/tier-ss.png';
-    }
-    if (score === '7') {
-      return '/assets/img/tier/tier-sss.png';
-    }
-    return '/assets/img/unknown.svg';
   }
 }

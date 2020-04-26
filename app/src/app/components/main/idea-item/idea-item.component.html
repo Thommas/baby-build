@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" [matTooltip]="idea.label" matTooltipPosition="above">
   <div class="icon">
-    <img [src]="idea.imgs && idea.imgs.icon ? idea.imgs.icon : 'https://placehold.it/40x40'" [matTooltip]="idea.label" matTooltipPosition="above" />
+    <img [src]="idea.imgs && idea.imgs.icon ? idea.imgs.icon : 'https://placehold.it/40x40'" />
   </div>
   <div class="language" *ngIf="constantsService.getLanguageIconByValue(idea.language).length > 0">
     <img [src]="constantsService.getLanguageIconByValue(idea.language)"/>
@@ -12,6 +12,6 @@
     {{ (idea.requiredAge | number:'1.0-0') + '+' }}
   </div>
   <div class="score" *ngIf="idea.score">
-    <img [src]="getIcon(idea.score | number:'1.0-0')"/>
+    <img [src]="ideaFacade.getIcon(idea.score | number:'1.0-0')"/>
   </div>
 </div>
