@@ -4,10 +4,11 @@ Roadmap
 Short term
 ----------
 
-- Reactivate filters + Implement multi sort
+- Implement world
+- Add multi sort
 - Add field: Describe how deep to explore (1st episode, 1st season, all core episodes, everything)
 - Add field: Release date (detect it with puppeteer)
-- Fix review create/update
+- Fix bug with average score computation
 - Fix auth service
 
 Long term

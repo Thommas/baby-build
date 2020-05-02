@@ -12,6 +12,6 @@
     {{ (idea.requiredAge | number:'1.0-0') + '+' }}
   </div>
   <div class="score" *ngIf="idea.score">
-    <img [src]="ideaFacade.getIcon(idea.score | number:'1.0-0')"/>
+    <img [src]="ideaFacade.getIcon(idea.score)"/>
   </div>
 </div>

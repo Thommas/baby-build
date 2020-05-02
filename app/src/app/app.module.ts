@@ -39,6 +39,7 @@ import { environment } from '../environments/environment';
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { MainModule } from './components/main/main.module';
+import { WorldModule } from './components/world/world.module';
 import { UserModule } from './components/user/user.module';
 import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
@@ -129,6 +130,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatToolbarModule,
     MatTooltipModule,
     MainModule,
+    WorldModule,
     UserModule,
     SecurityModule,
     StaticModule,
