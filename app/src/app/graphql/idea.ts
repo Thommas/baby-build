@@ -28,6 +28,7 @@ export const GetIdeas = gql`
           icon
           cover
           screenshot
+          png
         }
       }
     }
@@ -53,6 +54,7 @@ export const CreateIdeaMutation = gql`
         icon
         cover
         screenshot
+        png
       }
     }
   }
@@ -93,6 +95,7 @@ export const UpdateIdeaMutation = gql`
         icon
         cover
         screenshot
+        png
       }
     }
   }

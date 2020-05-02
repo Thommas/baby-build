@@ -37,6 +37,13 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
         },
       });
     }
+    if (filters.category) {
+      query.bool.must.push({
+        term: {
+          category: filters.category,
+        },
+      });
+    }
     if (filters.label) {
       query.bool.must.push({
         match: {
@@ -83,5 +90,6 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
   const sort: any = {
     [sortKey]: sortOrder,
   };
+  console.log('query', query);
   return elasticSearchService.search(query, sort, count, cursor);
 }

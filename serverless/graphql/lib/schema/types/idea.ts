@@ -11,6 +11,7 @@ const Idea = gql`
     icon: [String]
     cover: [String]
     screenshot: [String]
+    png: [String]
   }
   type Idea {
     id: String
@@ -26,6 +27,7 @@ const Idea = gql`
   }
   input IdeaInput {
     label: String
+    category: String
     requiredAge: Float
     score: Float
     language: String

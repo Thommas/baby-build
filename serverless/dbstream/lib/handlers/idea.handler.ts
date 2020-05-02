@@ -14,7 +14,8 @@ async function fetchImgs(document: any) {
       const category = document.category === 'videogame' && document.platform ? document.platform : document.category;
       imgs[data.key] = await puppeteerService.fetchImage(
         `"${document.label}"+${category}+${data.searchInput}`,
-        data.limit
+        data.limit,
+        data.getOriginal
       );
     }
   }

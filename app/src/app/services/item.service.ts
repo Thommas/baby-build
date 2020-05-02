@@ -19,7 +19,9 @@ export class ItemService {
   assetsIdeas$ = this.apolloService.apolloClient.watchQuery<any>({
     query: GetIdeas,
     variables: {
-      category: 'character',
+      ideaInput: {
+        category: 'character',
+      }
     },
   }).valueChanges
     .pipe(

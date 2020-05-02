@@ -147,5 +147,11 @@ export const IDEA_IMGS_CONFIG = {
       searchInput: 'official',
       limit: 5,
     },
+    {
+      key: 'png',
+      searchInput: 'png',
+      limit: 1,
+      getOriginal: true,
+    }
   ],
 };
