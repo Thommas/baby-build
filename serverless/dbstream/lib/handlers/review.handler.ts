@@ -45,8 +45,19 @@ function updateIdeaBasedOnReviews(review: any) {
       if (0 === reviews.hits.hits.length) {
         return;
       }
-      const score = mean(reviews.hits.hits.map((document: any) => document._source.score));
-      const requiredAge = mean(reviews.hits.hits.map((document: any) => document._source.requiredAge));
+      const scores = reviews.hits.hits
+        .filter((document: any) => document._source.score)
+        .map((document: any) => document._source.score);
+      const score = scores.length > 0 ? mean(scores) : undefined;
+
+      const requiredAges = reviews.hits.hits
+        .filter((document: any) => document._source.requiredAge)
+        .map((document: any) => document._source.requiredAge);
+      const requiredAge = requiredAges.length > 0 ? mean(requiredAges) : undefined;
+
+      console.log('computed average score: ', score);
+      console.log('computed average requiredAge: ', requiredAge);
+
       return updateIdea(review.ideaId, {
         score: score ? score : null,
         requiredAge: requiredAge ? requiredAge : null,

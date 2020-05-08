@@ -13,11 +13,12 @@ import { dynamoService } from '../services';
 export function getIdeas(userId: string, args: any) {
   const ideaInput = args.ideaInput;
   const cursor = args.cursor;
+  const sort = args.sort;
   return querySharingsByUserId(userId)
     .then((sharings) => {
       const userIds = sharings.hits.hits.map((hit: any) => hit._source.sharerId);
       userIds.push(userId);
-      return queryIdeas(userIds, ideaInput, '-createdAt', cursor)
+      return queryIdeas(userIds, ideaInput, sort, cursor)
     })
     .then((ideas) => {
       if (0 === ideas.hits.total.value || 0 === ideas.hits.hits.length) {

@@ -56,4 +56,8 @@ export class IdeaListFiltersComponent implements OnInit, OnDestroy {
   selectCategory(category: string) {
     this.ideaFiltersFacade.selectCategory(category);
   }
+
+  selectSort(sort: string) {
+    this.ideaFiltersFacade.selectSort(sort);
+  }
 }

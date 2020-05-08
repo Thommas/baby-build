@@ -7,8 +7,8 @@
 import gql from 'graphql-tag';
 
 export const GetIdeas = gql`
-  query GetIdeas($ideaInput: IdeaInput, $cursor: String) {
-    ideas(ideaInput: $ideaInput, cursor: $cursor) {
+  query GetIdeas($ideaInput: IdeaInput, $cursor: String, $sort: String) {
+    ideas(ideaInput: $ideaInput, cursor: $cursor, sort: $sort) {
       total
       cursor
       nodes {

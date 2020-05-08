@@ -39,7 +39,7 @@ const Idea = gql`
     nodes: [Idea]
   }
   type Query {
-    ideas(ideaInput: IdeaInput, cursor: String): IdeaEdge
+    ideas(ideaInput: IdeaInput, cursor: String, sort: String): IdeaEdge
   }
   type Mutation {
     createIdea(

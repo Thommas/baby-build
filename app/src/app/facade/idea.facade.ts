@@ -32,7 +32,7 @@ import { UserFacade } from './user.facade';
 import { QueryRef } from 'apollo-angular';
 
 export const purifyFilters = (filters: any) => {
-  const currentFilters = Object.assign({}, filters);
+  const currentFilters = Object.assign({}, filters.ideaInput);
   if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
     delete currentFilters.requiredAge;
   }
@@ -49,6 +49,7 @@ export const purifyFilters = (filters: any) => {
   return {
     ideaInput: currentFilters,
     cursor: '-1',
+    sort: filters.sort ? filters.sort : undefined,
   };
 }
 

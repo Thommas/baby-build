@@ -48,6 +48,12 @@ export class IdeaFiltersFacade {
     }));
   }
 
+  selectSort(sort: string) {
+    this.store.dispatch(new UpdateIdeaFilters({
+      sort,
+    }));
+  }
+
   reset() {
     this.store.dispatch(new ResetIdeaFilters());
   }

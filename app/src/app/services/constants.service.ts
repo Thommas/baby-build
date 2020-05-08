@@ -5,6 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
+import { IDEA_SORTS } from '../constants/idea-sorts';
 import { CATEGORIES } from '../constants/categories';
 import { PLATFORMS } from '../constants/platforms';
 import { LANGUAGES } from '../constants/languages';
@@ -14,6 +15,17 @@ export class ConstantsService {
   categories: any = CATEGORIES;
   platforms: any = PLATFORMS;
   languages: any = LANGUAGES;
+  ideaSorts: any = IDEA_SORTS;
+
+  getLabelByValue(value: string, items: any) {
+    for (const item of items) {
+      if (item.value === value) {
+        return item.label;
+      }
+    }
+
+    return '';
+  }
 
   getIconByValue(value: string, items: any) {
     for (const item of items) {

@@ -85,11 +85,15 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
       });
     }
   }
+  if (!sortInput) {
+    sortInput = '-createdAt';
+  }
   const sortKey = sortInput.replace('-', '');
   const sortOrder = sortInput[0] === '-' ? 'desc' : 'asc';
   const sort: any = {
     [sortKey]: sortOrder,
   };
   console.log('query', query);
+  console.log('sort', sort);
   return elasticSearchService.search(query, sort, count, cursor);
 }

@@ -97,4 +97,8 @@ export class IdeaCreateComponent implements OnInit {
   onKey(event: KeyboardEvent) {
     // FIXME
   }
+
+  focusInput() {
+    this.inputElement.nativeElement.focus();
+  }
 }

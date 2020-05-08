@@ -1,6 +1,6 @@
-<div fxFill fxLayout="column" fxLayoutAlign="start center">
+<div fxFill fxLayout="column" fxLayoutAlign="start center" (click)="focusInput($event)">
   <h2>Create new ideas</h2>
-  <form [formGroup]="formGroup" fxFlex fxLayout="row" fxLayoutAlign="start center">
+  <form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="start center">
     <mat-form-field fxFill>
       <input #inputElement fxFill
             matInput
