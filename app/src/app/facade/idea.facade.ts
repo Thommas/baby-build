@@ -96,7 +96,7 @@ export class IdeaFacade {
         variables: {
           ideaInput: {
             label: suggest.name,
-            count: 25,
+            count: 5,
           }
         },
       });
@@ -263,7 +263,7 @@ export class IdeaFacade {
             // TODO Use a separate list for newly created items
             this.selectIdea(createIdea);
             if (optimistic) {
-              this.newIdeas.push(createIdea);
+              this.newIdeas.unshift(createIdea);
             }
           },
         });

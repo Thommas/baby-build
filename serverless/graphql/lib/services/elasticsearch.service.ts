@@ -12,7 +12,7 @@ class ElasticSearchService {
     hosts: [configService.elasticSearchHost]
   });
 
-  search(query: any, sort: any = {}, size: number = 100, cursor: string = '-1'): Promise<any> {
+  search(query: any, sort: any = {}, size: number = 50, cursor: string = '-1'): Promise<any> {
     const body: any = {
       query,
       sort,

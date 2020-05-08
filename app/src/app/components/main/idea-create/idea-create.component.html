@@ -43,10 +43,11 @@
   </div>
 
   <h2>New ideas</h2>
-  <div fxLayout="row wrap">
-    <app-idea-item-cmp
-      *ngFor="let idea of newIdeas"
-      [idea]="idea"
-    ></app-idea-item-cmp>
+  <div fxLayout="column">
+    <div *ngFor="let idea of newIdeas" fxLayout="row">
+      <mat-icon><img [src]="constantsService.getCategoryIconByValue(idea.category)" width="24" height="24"/></mat-icon>
+      <mat-icon><img [src]="constantsService.getPlatformIconByValue(idea.platform)" width="24" height="24"/></mat-icon>
+      {{ idea.label }}
+    </div>
   </div>
 </div>

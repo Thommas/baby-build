@@ -3,17 +3,17 @@
     <mat-icon>search</mat-icon>
     <mat-form-field fxFill>
       <input #inputElement fxFill
-            matInput
-            placeholder="Search for an idea"
-            autocomplete="off">
+             matInput
+             placeholder="Search for an idea"
+             autocomplete="off">
     </mat-form-field>
   </div>
   <div class="language" *ngIf="filters$ | async as filters">
     <button mat-button [matMenuTriggerFor]="languageMenu">
       <img *ngIf="filters.language !== null"
-          [src]="constantsService.getLanguageIconByValue(filters.language)" width="24" height="24"/>
+           [src]="constantsService.getLanguageIconByValue(filters.language)" width="24" height="24"/>
       <img *ngIf="filters.language === null"
-          src="/assets/img/unknown.svg" width="24" height="24"/>
+           src="/assets/img/unknown.svg" width="24" height="24"/>
     </button>
     <mat-menu #languageMenu="matMenu">
       <button mat-menu-item (click)="selectLanguage(null)">
@@ -51,6 +51,22 @@
       </button>
       <button mat-menu-item *ngFor="let score of ideaFacade.scores" (click)="selectScore(score)">
         <img [src]="ideaFacade.getIcon(score)" width="24" height="24"/>
+      </button>
+    </mat-menu>
+  </div>
+  <div class="category" *ngIf="filters$ | async as filters">
+    <button mat-button [matMenuTriggerFor]="categoryMenu">
+      <img *ngIf="filters.category !== null"
+           [src]="constantsService.getCategoryIconByValue(filters.category)" width="24" height="24"/>
+      <p *ngIf="filters.category === null">Category</p>
+    </button>
+    <mat-menu #categoryMenu="matMenu">
+      <button mat-menu-item (click)="selectCategory(null)">
+        Any
+      </button>
+      <button mat-menu-item *ngFor="let category of constantsService.categories" (click)="selectCategory(category.value)">
+        <img [src]="category.icon" width="24" height="24"/>
+        {{ category.label }}
       </button>
     </mat-menu>
   </div>

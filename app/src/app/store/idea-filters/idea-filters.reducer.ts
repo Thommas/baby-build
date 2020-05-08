@@ -11,6 +11,7 @@ const initialState = {
   language: null,
   requiredAge: null,
   score: null,
+  category: null,
 };
 
 export function ideaFiltersReducer(state: any = initialState, action: IdeaFiltersActionsUnion): any {
@@ -25,6 +26,7 @@ export function ideaFiltersReducer(state: any = initialState, action: IdeaFilter
         score: action.payload.score !== undefined ? action.payload.score : state.score,
         requiredAge: action.payload.requiredAge !== undefined ? action.payload.requiredAge : state.requiredAge,
         language: action.payload.language !== undefined ? action.payload.language : state.language,
+        category: action.payload.category !== undefined ? action.payload.category : state.category,
       };
 
     default:

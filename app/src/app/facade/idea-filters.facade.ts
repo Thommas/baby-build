@@ -42,6 +42,12 @@ export class IdeaFiltersFacade {
     }));
   }
 
+  selectCategory(category: string) {
+    this.store.dispatch(new UpdateIdeaFilters({
+      category,
+    }));
+  }
+
   reset() {
     this.store.dispatch(new ResetIdeaFilters());
   }

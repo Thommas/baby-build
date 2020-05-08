@@ -52,4 +52,8 @@ export class IdeaListFiltersComponent implements OnInit, OnDestroy {
   selectLanguage(language: string) {
     this.ideaFiltersFacade.selectLanguage(language);
   }
+
+  selectCategory(category: string) {
+    this.ideaFiltersFacade.selectCategory(category);
+  }
 }

@@ -6,7 +6,7 @@
 
 import { elasticSearchService } from '../services';
 
-let SIZE = 150;
+let SIZE = 50;
 
 export function queryIdeas(userIds: string[], filters: any, sortInput: string, cursor: string): Promise<any> {
   let count = SIZE;
