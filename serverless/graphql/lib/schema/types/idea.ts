@@ -19,6 +19,8 @@ const Idea = gql`
     category: String
     platform: String
     language: String
+    releaseDate: String
+    timeToCompletion: Int
     requiredAge: Float
     score: Float
     userId: String
@@ -53,6 +55,8 @@ const Idea = gql`
       category: String
       platform: String
       language: String
+      releaseDate: String
+      timeToCompletion: Int
       requiredAge: Float
       score: Float
     ): Idea

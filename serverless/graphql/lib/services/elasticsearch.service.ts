@@ -20,6 +20,8 @@ class ElasticSearchService {
     if (cursor !== '-1') {
       body.search_after = [cursor];
     }
+    console.log('query', JSON.stringify(query));
+    console.log('sort', sort);
     return this.elasticsearchClient.search({
       index: configService.elasticSearchIndex,
       type: '_doc',

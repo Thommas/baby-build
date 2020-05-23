@@ -1,8 +1,8 @@
-<div fxLayout="row wrap">
+<div class="list" fxLayout="row wrap" (scroll)="onScroll($event)" cdkScrollable>
   <app-idea-item-cmp
     *ngFor="let idea of (ideas$ | async)"
     [idea]="idea"
     (click)="selectIdea(idea)"
   ></app-idea-item-cmp>
 </div>
-<button *ngIf="ideaFacade.ideasHasMore$ | async" (click)="fetchMore()">Load more...</button>
+<div *ngIf="fetchMoreLoading$ | async">LOADING</div>

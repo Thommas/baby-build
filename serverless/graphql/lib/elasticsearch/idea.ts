@@ -15,12 +15,12 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
       must: [
         {
           term: {
-            type: 'Idea',
+            ['type.keyword']: 'Idea',
           },
         },
         {
           terms: {
-            userId: userIds,
+            ['userId.keyword']: userIds,
           },
         },
       ],
@@ -93,7 +93,5 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
   const sort: any = {
     [sortKey]: sortOrder,
   };
-  console.log('query', query);
-  console.log('sort', sort);
   return elasticSearchService.search(query, sort, count, cursor);
 }

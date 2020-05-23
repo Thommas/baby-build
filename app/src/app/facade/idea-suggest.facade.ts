@@ -18,10 +18,8 @@ export class IdeaSuggestFacade {
 
   constructor(private store: Store<{ ideaSuggest: any }>) {}
 
-  setName(name: string) {
-    this.store.dispatch(new SetIdeaSuggest({
-      name,
-    }));
+  set(suggest: any) {
+    this.store.dispatch(new SetIdeaSuggest(suggest));
   }
 
   reset() {

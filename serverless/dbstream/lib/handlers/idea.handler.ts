@@ -12,7 +12,7 @@ async function fetchImgs(document: any) {
   if (IDEA_IMGS_CONFIG[document.category]) {
     for (const data of IDEA_IMGS_CONFIG[document.category]) {
       const category = document.category === 'videogame' && document.platform ? document.platform : document.category;
-      imgs[data.key] = await puppeteerService.fetchImage(
+      imgs[data.key] = await puppeteerService.fetchImgs(
         `"${document.label}"+${category}+${data.searchInput}`,
         data.limit,
         data.getOriginal
@@ -22,10 +22,23 @@ async function fetchImgs(document: any) {
   return imgs;
 }
 
-function updateIdea(document: any) {
-  if (document.imgsReady) {
-    return;
-  }
+export function updateIdeaReleaseDate(document: any) {
+  return dynamoService.getEntity().get(document.id)
+    .then((entity: any) => {
+      if (!entity) {
+        throw new Error('Idea not found');
+      }
+      const category = document.category === 'videogame' && document.platform ? document.platform : document.category;
+      return puppeteerService.fetchReleaseDate(`"${document.label}"+${category}`)
+        .then((releaseDate: number|null) => {
+          entity.releaseDate = releaseDate;
+          console.log(`Release date ${releaseDate} found for idea: ${document.label}`)
+          return entity.save();
+        });
+    })
+}
+
+export function updateIdeaImgs(document: any) {
   return dynamoService.getEntity().get(document.id)
     .then((entity: any) => {
       if (!entity) {
@@ -41,6 +54,14 @@ function updateIdea(document: any) {
           return entity.save();
         });
     })
+}
+
+function updateIdea(document: any) {
+  updateIdeaReleaseDate(document);
+  if (document.imgsReady) {
+    return;
+  }
+  updateIdeaImgs(document);
 }
 
 export function handleInsert(document) {

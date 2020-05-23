@@ -8,7 +8,7 @@ import uuid from 'uuid/v4';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
+import { EMPTY, of, from } from 'rxjs';
 import { flatMap, map, withLatestFrom, mergeMap, tap } from 'rxjs/operators';
 import {
   CreateIdeaMutation,
@@ -20,6 +20,8 @@ import { ApolloService } from '../services';
 import {
   IdeaActionTypes,
   FetchMoreIdea,
+  FetchMoreIdeaLoading,
+  FetchMoreIdeaComplete,
   CreateIdea,
   UpdateIdea,
   SelectIdea,
@@ -44,6 +46,9 @@ export const purifyFilters = (filters: any) => {
   }
   if (!currentFilters.language) {
     delete currentFilters.language;
+  }
+  if (!currentFilters.category) {
+    delete currentFilters.category;
   }
 
   return {
@@ -97,6 +102,7 @@ export class IdeaFacade {
         variables: {
           ideaInput: {
             label: suggest.name,
+            category: suggest.category,
             count: 5,
           }
         },
@@ -130,6 +136,7 @@ export class IdeaFacade {
         );
     })
   );
+  fetchMoreLoading$ = this.store.pipe(select('idea', 'fetchMoreLoading'));
   selectedIdea$ = this.store.pipe(select('idea', 'selected'));
   ideasHasMore$ = this.ideas$.pipe(
     map((ideas: any) => IdeaFacade.total !== 0 && ideas.length !== IdeaFacade.total),
@@ -180,6 +187,7 @@ export class IdeaFacade {
           variables,
           updateQuery: (prev, { fetchMoreResult }) => {
             IdeaFacade.cursor = fetchMoreResult.ideas.cursor;
+            this.store.dispatch(new FetchMoreIdeaComplete());
             return {
               ideas: {
                 total: fetchMoreResult.ideas.total,
@@ -193,8 +201,9 @@ export class IdeaFacade {
             };
           },
         });
+        this.store.dispatch(new FetchMoreIdeaLoading());
         return of(EMPTY);
-      })
+      }),
     );
 
   createIdea(idea: any) {

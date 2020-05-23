@@ -6,10 +6,10 @@
   -webkit-box-direction: normal;
   place-content: stretch center;
   flex-direction: row;
+  justify-items: start;
+  align-items: start;
   padding-top: 20px;
-  flex: 1;
-  overflow: hidden;
-  max-height: 90vh;
+  height: 92vh;
 }
 
 .header {
@@ -22,6 +22,7 @@
 }
 
 .left-card {
+  height: 100%;
   min-width: 405px;
   max-width: 1000px;
   margin-left: 20px;
@@ -29,7 +30,7 @@
 
   .mat-card-content {
     padding: 10px;
-    overflow-y: auto;
+    height: 100%;
   }
 }
 

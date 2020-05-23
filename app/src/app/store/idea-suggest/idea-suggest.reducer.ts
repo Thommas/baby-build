@@ -8,6 +8,7 @@ import { IdeaSuggestActionTypes, IdeaSuggestActionsUnion } from './idea-suggest.
 
 const initialState = {
   name: null,
+  category: null,
 };
 
 export function ideaSuggestReducer(state: any = initialState, action: IdeaSuggestActionsUnion): any {
@@ -18,7 +19,7 @@ export function ideaSuggestReducer(state: any = initialState, action: IdeaSugges
     case IdeaSuggestActionTypes.SetIdeaSuggest:
       return {
         ...state,
-        name: action.payload.name,
+        ...action.payload,
       };
 
     default:

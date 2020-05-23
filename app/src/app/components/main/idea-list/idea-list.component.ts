@@ -14,6 +14,7 @@ import { IdeaFacade } from '../../../facade';
 })
 export class IdeaListComponent {
   ideas$: any;
+  fetchMoreLoading$ = this.ideaFacade.fetchMoreLoading$;
 
   constructor(
     private ideaFacade: IdeaFacade
@@ -25,7 +26,9 @@ export class IdeaListComponent {
     this.ideaFacade.selectIdea(idea);
   }
 
-  fetchMore() {
-    this.ideaFacade.fetchMore();
+  onScroll(event) {
+    if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 100) {
+      this.ideaFacade.fetchMore();
+    }
   }
 }

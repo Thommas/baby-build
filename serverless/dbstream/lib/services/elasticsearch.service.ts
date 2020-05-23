@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as elasticsearch from 'elasticsearch';
+import elasticsearch from 'elasticsearch';
 import { configService } from './config.service';
 
 class ElasticSearchService {

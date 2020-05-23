@@ -16,6 +16,8 @@ export const GetIdeas = gql`
         label
         category
         platform
+        releaseDate
+        timeToCompletion
         language
         requiredAge
         score
@@ -42,6 +44,8 @@ export const CreateIdeaMutation = gql`
       label
       category
       platform
+      releaseDate
+      timeToCompletion
       language
       requiredAge
       score
@@ -66,6 +70,8 @@ export const UpdateIdeaMutation = gql`
     $label: String
     $category: String
     $platform: String
+    $releaseDate: String
+    $timeToCompletion: Int
     $language: String
     $requiredAge: Float
     $score: Float
@@ -75,6 +81,8 @@ export const UpdateIdeaMutation = gql`
       label: $label
       category: $category
       platform: $platform
+      releaseDate: $releaseDate
+      timeToCompletion: $timeToCompletion
       language: $language
       requiredAge: $requiredAge
       score: $score
@@ -83,6 +91,8 @@ export const UpdateIdeaMutation = gql`
       label
       category
       platform
+      releaseDate
+      timeToCompletion
       language
       requiredAge
       score

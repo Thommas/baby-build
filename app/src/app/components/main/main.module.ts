@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { StoreModule } from '@ngrx/store';
 import {
   MatAutocompleteModule,
@@ -46,6 +47,7 @@ import { ideaFiltersReducer, ideaSuggestReducer } from '../../store';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    ScrollingModule,
     routing,
     MatAutocompleteModule,
     MatButtonModule,

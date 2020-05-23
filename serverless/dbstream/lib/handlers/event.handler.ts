@@ -4,10 +4,10 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as AWS from 'aws-sdk';
-import * as elasticSearchHandler from './elasticsearch.handler';
-import * as ideaHandler from './idea.handler';
-import * as reviewHandler from './review.handler';
+import AWS from 'aws-sdk';
+import elasticSearchHandler from './elasticsearch.handler';
+import ideaHandler from './idea.handler';
+import reviewHandler from './review.handler';
 
 export async function handleEvent(event, callback) {
   for (const record of event.Records) {
@@ -15,13 +15,13 @@ export async function handleEvent(event, callback) {
       const document = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage);
       elasticSearchHandler.handleInsert(document);
       ideaHandler.handleInsert(document);
-      await reviewHandler.handleInsert(document);
+      reviewHandler.handleInsert(document);
     }
     if (record.eventName == 'MODIFY') {
       const document = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage);
       elasticSearchHandler.handleModify(document);
       ideaHandler.handleModify(document);
-      await reviewHandler.handleModify(document);
+      reviewHandler.handleModify(document);
     }
     if (record.eventName == 'REMOVE') {
       const document = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.OldImage);

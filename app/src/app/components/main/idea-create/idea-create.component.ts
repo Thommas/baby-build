@@ -59,11 +59,17 @@ export class IdeaCreateComponent implements OnInit {
 
   search() {
     if (!this.formGroup.valid) {
-      this.ideaSuggestFacade.setName(null);
+      this.ideaSuggestFacade.set({
+        name: null,
+        category: null,
+      });
       return;
     }
     const data: any = clone(this.formGroup.value);
-    this.ideaSuggestFacade.setName(data.label);
+    this.ideaSuggestFacade.set({
+      name: data.label,
+      category: data.category,
+    });
   }
 
   create() {

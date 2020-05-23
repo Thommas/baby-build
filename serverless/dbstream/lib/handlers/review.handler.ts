@@ -39,8 +39,8 @@ function queryReviewsByIdeaId(ideaId: string)
   return elasticSearchService.search(query);
 }
 
-function updateIdeaBasedOnReviews(review: any) {
-  return queryReviewsByIdeaId(review.ideaId)
+export function updateIdeaBasedOnReviews(ideaId: string) {
+  return queryReviewsByIdeaId(ideaId)
     .then((reviews: any) => {
       if (0 === reviews.hits.hits.length) {
         return;
@@ -58,7 +58,7 @@ function updateIdeaBasedOnReviews(review: any) {
       console.log('computed average score: ', score);
       console.log('computed average requiredAge: ', requiredAge);
 
-      return updateIdea(review.ideaId, {
+      return updateIdea(ideaId, {
         score: score ? score : null,
         requiredAge: requiredAge ? requiredAge : null,
       });
@@ -80,7 +80,7 @@ export async function handleInsert(document) {
     return;
   }
   await timeout(5000);
-  updateIdeaBasedOnReviews(document);
+  updateIdeaBasedOnReviews(document.ideaId);
 }
 
 export async function handleModify(document) {
@@ -88,5 +88,5 @@ export async function handleModify(document) {
     return;
   }
   await timeout(5000);
-  updateIdeaBasedOnReviews(document);
+  updateIdeaBasedOnReviews(document.ideaId);
 }

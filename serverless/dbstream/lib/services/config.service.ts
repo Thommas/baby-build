@@ -4,9 +4,9 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
-import * as Joi from 'joi';
+import dotenv from 'dotenv';
+import fs from 'fs';
+import Joi from 'joi';
 
 declare var process: {
   env: EnvConfig

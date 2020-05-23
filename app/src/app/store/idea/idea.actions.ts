@@ -8,6 +8,8 @@ import { Action } from '@ngrx/store';
 
 export enum IdeaActionTypes {
   FetchMoreIdea = '[Idea] FetchMore',
+  FetchMoreIdeaLoading = '[Idea] FetchMore Loading',
+  FetchMoreIdeaComplete = '[Idea] FetchMore Complete',
   CreateIdea = '[Idea] Create',
   UpdateIdea = '[Idea] Update',
   SelectIdea = '[Idea] Select',
@@ -16,6 +18,14 @@ export enum IdeaActionTypes {
 
 export class FetchMoreIdea implements Action {
   readonly type = IdeaActionTypes.FetchMoreIdea;
+}
+
+export class FetchMoreIdeaLoading implements Action {
+  readonly type = IdeaActionTypes.FetchMoreIdeaLoading;
+}
+
+export class FetchMoreIdeaComplete implements Action {
+  readonly type = IdeaActionTypes.FetchMoreIdeaComplete;
 }
 
 export class CreateIdea implements Action {
@@ -42,7 +52,10 @@ export class DeleteIdea implements Action {
   constructor() {}
 }
 
-export type IdeaActionsUnion = FetchMoreIdea
+export type IdeaActionsUnion =
+  FetchMoreIdea
+  | FetchMoreIdeaLoading
+  | FetchMoreIdeaComplete
   | CreateIdea
   | UpdateIdea
   | SelectIdea
