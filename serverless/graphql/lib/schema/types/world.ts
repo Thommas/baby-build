@@ -16,6 +16,10 @@ const World = gql`
     cursor: String!
     nodes: [World]
   }
+  input WorldInput {
+    label: String
+    count: Int
+  }
   type Query {
     worlds(worldInput: WorldInput, cursor: String, sort: String): WorldEdge
   }
