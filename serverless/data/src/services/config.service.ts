@@ -19,7 +19,7 @@ export interface EnvConfig {
   [key: string]: string;
 }
 
-class ConfigService {
+export class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor() {
@@ -42,13 +42,12 @@ class ConfigService {
    */
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
-      NODE_ENV: Joi.string().valid("local", "production").default("local"),
+      NODE_ENV: Joi.string().valid("local", "test", "production").default("local"),
       ELASTIC_SEARCH_INDEX: Joi.string().default("app"),
       ELASTIC_SEARCH_HOST: Joi.string().default("http://localhost:9200"),
       LOCAL_DYNAMODB_HOST: Joi.string().default("localhost"),
       LOCAL_DYNAMODB_PORT: Joi.number().default(4567),
       LOCAL_DYNAMODB_TABLE: Joi.string().default("pathofchild-graphql-dev"),
-      S3_BUCKET: Joi.string().default("pathofchild-local"),
     });
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(
@@ -78,10 +77,6 @@ class ConfigService {
 
   get localDynamoDBTable(): string {
     return String(this.envConfig.LOCAL_DYNAMODB_TABLE);
-  }
-
-  get s3Bucket(): string {
-    return String(this.envConfig.S3_BUCKET);
   }
 
   get dbDumpLocalPath() {
