@@ -7,8 +7,8 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[world-item-host]',
+  selector: '[world-view-item-host]',
 })
-export class WorldItemDirective {
+export class WorldViewItemDirective {
   constructor(public viewContainerRef: ViewContainerRef) { }
 }

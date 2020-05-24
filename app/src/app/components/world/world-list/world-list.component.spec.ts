@@ -6,30 +6,26 @@
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserFacade } from '../../../facade';
-import { WorldItemComponent } from './world-item.component';
+import { Apollo } from 'apollo-angular';
+import { ApolloStub } from '../../../services';
+import { WorldListComponent } from './world-list.component';
 
-describe('WorldItemComponent', () => {
+describe('WorldListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       schemas: [
         NO_ERRORS_SCHEMA
       ],
-      imports: [
-        FormsModule,
-        ReactiveFormsModule
-      ],
       declarations: [
-        WorldItemComponent
+        WorldListComponent
       ],
       providers: [
-        { provide: UserFacade },
+        { provide: Apollo, useClass: ApolloStub },
       ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(WorldItemComponent);
+    const fixture = TestBed.createComponent(WorldListComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

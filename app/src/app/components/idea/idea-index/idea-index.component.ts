@@ -9,11 +9,11 @@ import { IdeaFacade } from '../../../facade';
 import { ConstantsService } from '../../../services';
 
 @Component({
-  selector: 'app-main-index-cmp',
-  templateUrl: './main-index.component.html',
-  styleUrls: ['./main-index.component.scss']
+  selector: 'app-idea-index-cmp',
+  templateUrl: './idea-index.component.html',
+  styleUrls: ['./idea-index.component.scss']
 })
-export class MainIndexComponent {
+export class IdeaIndexComponent {
   displayFilters: boolean;
   selectedIdea$ = this.ideaFacade.selectedIdea$;
 

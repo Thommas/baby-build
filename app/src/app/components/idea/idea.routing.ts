@@ -8,7 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
 import { IdeaCreateComponent } from './idea-create/idea-create.component';
-import { MainIndexComponent } from './main-index/main-index.component';
+import { IdeaIndexComponent } from './idea-index/idea-index.component';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: MainIndexComponent,
+    component: IdeaIndexComponent,
     canActivate: [AuthGuardService]
   }
 ];

@@ -38,7 +38,7 @@
       <button mat-raised-button
               *ngFor="let score of ideaFacade.scores"
               [color]="this.formGroup.get('score').value === score ? 'accent' : ''"
-              (click)="selectScore(score)"><img [src]="ideaFacade.getIcon(score)" width="44" height="44"/></button>
+              (click)="selectScore(score)"><img [src]="constantsService.getScoreIcon(score)" width="44" height="44"/></button>
     </div>
     <mat-divider></mat-divider>
     <div fxLayout="row" class="text-area-container">

@@ -28,13 +28,18 @@ import {
 
 import {
   routing,
-  WorldItemComponent,
-  WorldListComponent,
-  WorldListFiltersComponent,
-  WorldShowComponent,
-  WorldIndexComponent
+  IdeaCreateComponent,
+  IdeaIconComponent,
+  IdeaItemComponent,
+  IdeaListComponent,
+  IdeaListFiltersComponent,
+  IdeaShowComponent,
+  IdeaIndexComponent,
+  ReviewItemComponent,
+  ReviewListComponent,
+  ReviewShowComponent
 } from './';
-import { worldFiltersReducer } from '../../store';
+import { ideaFiltersReducer, ideaSuggestReducer } from '../../store';
 
 @NgModule({
   imports: [
@@ -58,18 +63,24 @@ import { worldFiltersReducer } from '../../store';
     MatToolbarModule,
     MatTooltipModule,
     StoreModule.forRoot({
-      worldFilters: worldFiltersReducer,
+      ideaFilters: ideaFiltersReducer,
+      ideaSuggest: ideaSuggestReducer,
     })
   ],
   declarations: [
-    WorldItemComponent,
-    WorldListComponent,
-    WorldListFiltersComponent,
-    WorldShowComponent,
-    WorldIndexComponent
+    IdeaCreateComponent,
+    IdeaIconComponent,
+    IdeaItemComponent,
+    IdeaListComponent,
+    IdeaListFiltersComponent,
+    IdeaShowComponent,
+    IdeaIndexComponent,
+    ReviewItemComponent,
+    ReviewListComponent,
+    ReviewShowComponent
   ],
   providers: [
   ]
 })
-export class WorldModule {
+export class IdeaModule {
 }

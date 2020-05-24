@@ -10,3 +10,7 @@ export * from './review/review.actions';
 export * from './review/review.reducer';
 export * from './sharing/sharing.actions';
 export * from './user/user.actions';
+export * from './world/world.actions';
+export * from './world/world.reducer';
+export * from './world-filters/world-filters.actions';
+export * from './world-filters/world-filters.reducer';

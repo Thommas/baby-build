@@ -33,31 +33,6 @@ import { IdeaSuggestFacade } from './idea-suggest.facade';
 import { UserFacade } from './user.facade';
 import { QueryRef } from 'apollo-angular';
 
-export const purifyFilters = (filters: any) => {
-  const currentFilters = Object.assign({}, filters.ideaInput);
-  if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
-    delete currentFilters.requiredAge;
-  }
-  if (!currentFilters.score || 0 === currentFilters.score.length) {
-    delete currentFilters.score;
-  }
-  if (!currentFilters.label) {
-    delete currentFilters.label;
-  }
-  if (!currentFilters.language) {
-    delete currentFilters.language;
-  }
-  if (!currentFilters.category) {
-    delete currentFilters.category;
-  }
-
-  return {
-    ideaInput: currentFilters,
-    cursor: '-1',
-    sort: filters.sort ? filters.sort : undefined,
-  };
-}
-
 @Injectable()
 export class IdeaFacade {
   suggestedIdeaQuery: QueryRef<any> = null;
@@ -66,31 +41,6 @@ export class IdeaFacade {
   static cursor: any;
   ages: number[] = [];
   scores: number[] = [];
-
-  getIcon(score: number) {
-    if (score === 1) {
-      return '/assets/img/tier/tier-d.png';
-    }
-    if (score === 2) {
-      return '/assets/img/tier/tier-c.png';
-    }
-    if (score === 3) {
-      return '/assets/img/tier/tier-b.png';
-    }
-    if (score === 4) {
-      return '/assets/img/tier/tier-a.png';
-    }
-    if (score === 5) {
-      return '/assets/img/tier/tier-s.png';
-    }
-    if (score === 6) {
-      return '/assets/img/tier/tier-ss.png';
-    }
-    if (score === 7) {
-      return '/assets/img/tier/tier-sss.png';
-    }
-    return '/assets/img/unknown.svg';
-  }
 
   suggestedIdeas$ = this.ideaSuggestFacade.suggest$.pipe(
     flatMap((suggest: any) => {
@@ -123,7 +73,7 @@ export class IdeaFacade {
     flatMap((filters: any) => {
       this.ideaQuery = this.apolloService.apolloClient.watchQuery<any>({
         query: GetIdeas,
-        variables: purifyFilters(filters),
+        variables: this.purifyFilters(filters),
       });
       return this.ideaQuery
         .valueChanges
@@ -158,6 +108,31 @@ export class IdeaFacade {
     }
   }
 
+  purifyFilters(filters: any) {
+    const currentFilters = Object.assign({}, filters.ideaInput);
+    if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
+      delete currentFilters.requiredAge;
+    }
+    if (!currentFilters.score || 0 === currentFilters.score.length) {
+      delete currentFilters.score;
+    }
+    if (!currentFilters.label) {
+      delete currentFilters.label;
+    }
+    if (!currentFilters.language) {
+      delete currentFilters.language;
+    }
+    if (!currentFilters.category) {
+      delete currentFilters.category;
+    }
+
+    return {
+      ideaInput: currentFilters,
+      cursor: '-1',
+      sort: filters.sort ? filters.sort : undefined,
+    };
+  }
+
   fetchMore() {
     this.store.dispatch(new FetchMoreIdea());
   }
@@ -173,7 +148,7 @@ export class IdeaFacade {
       mergeMap((args: any[]) => {
         const filters = args[1];
         const ideas = args[2];
-        const variables = purifyFilters(filters);
+        const variables = this.purifyFilters(filters);
         variables.cursor = IdeaFacade.cursor;
 
         if (!this.ideaQuery) {
@@ -254,13 +229,13 @@ export class IdeaFacade {
             }
             const data: any = store.readQuery({
               query: GetIdeas,
-              variables: purifyFilters(filters)
+              variables: this.purifyFilters(filters)
             });
             const updatedIdeas: any = data.ideas.nodes;
             updatedIdeas.unshift(createIdea);
             store.writeQuery({
               query: GetIdeas,
-              variables: purifyFilters(filters),
+              variables: this.purifyFilters(filters),
               data: {
                 ideas: {
                   total: IdeaFacade.total,

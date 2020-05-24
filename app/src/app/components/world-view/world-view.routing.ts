@@ -7,14 +7,14 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../services';
-import { WorldIndexComponent } from './world-index/world-index.component';
+import { WorldViewIndexComponent } from './world-view-index/world-view-index.component';
 
 const routes: Routes = [
   {
-    path: 'world',
-    component: WorldIndexComponent,
+    path: 'world/view',
+    component: WorldViewIndexComponent,
     canActivate: [AuthGuardService]
-  }
+  },
 ];
 
 export const routing = RouterModule.forChild(routes);

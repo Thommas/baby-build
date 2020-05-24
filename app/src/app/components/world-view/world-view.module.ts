@@ -8,8 +8,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-import { StoreModule } from '@ngrx/store';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -25,21 +23,14 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
+import { AudioService, ItemService } from '../../services';
 
 import {
   routing,
-  IdeaCreateComponent,
-  IdeaIconComponent,
-  IdeaItemComponent,
-  IdeaListComponent,
-  IdeaListFiltersComponent,
-  IdeaShowComponent,
-  MainIndexComponent,
-  ReviewItemComponent,
-  ReviewListComponent,
-  ReviewShowComponent
+  WorldViewIndexComponent,
+  WorldViewItemComponent,
+  WorldViewItemDirective,
 } from './';
-import { ideaFiltersReducer, ideaSuggestReducer } from '../../store';
 
 @NgModule({
   imports: [
@@ -47,7 +38,6 @@ import { ideaFiltersReducer, ideaSuggestReducer } from '../../store';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    ScrollingModule,
     routing,
     MatAutocompleteModule,
     MatButtonModule,
@@ -62,25 +52,19 @@ import { ideaFiltersReducer, ideaSuggestReducer } from '../../store';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    StoreModule.forRoot({
-      ideaFilters: ideaFiltersReducer,
-      ideaSuggest: ideaSuggestReducer,
-    })
   ],
   declarations: [
-    IdeaCreateComponent,
-    IdeaIconComponent,
-    IdeaItemComponent,
-    IdeaListComponent,
-    IdeaListFiltersComponent,
-    IdeaShowComponent,
-    MainIndexComponent,
-    ReviewItemComponent,
-    ReviewListComponent,
-    ReviewShowComponent
+    WorldViewIndexComponent,
+    WorldViewItemComponent,
+    WorldViewItemDirective,
   ],
   providers: [
-  ]
+    AudioService,
+    ItemService,
+  ],
+  entryComponents: [
+    WorldViewItemComponent,
+  ],
 })
-export class MainModule {
+export class WorldViewModule {
 }

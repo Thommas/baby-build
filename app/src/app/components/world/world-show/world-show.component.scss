@@ -1,0 +1,75 @@
+:host {
+  display: block;
+  min-width: 0px;
+  max-width: 675px;
+  margin-left: 15px;
+  margin-right: 20px;
+  padding: 0;
+  overflow: hidden;
+}
+
+mat-card {
+  padding: 0;
+}
+
+.mat-form-field input {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 32px;
+  min-height: 0;
+  padding: 4px 9px;
+}
+
+.cdk-textarea-autosize {
+  min-height: 100px;
+}
+
+textarea {
+  min-height: 1px;
+  padding: 4px 9px;
+}
+
+.mat-form-field input,
+textarea {
+  border: 1px solid transparent;
+}
+
+.mat-form-field input:hover,
+textarea:hover {
+  border: 1px solid #d5dce0;
+}
+
+.text-area-container {
+  padding: 20px 0px;
+}
+
+.comment-form-container {
+  height: 107px;
+  padding: 10px 30px;
+}
+
+.icon {
+  height: 100px;
+  margin-bottom: 20px;
+
+  div {
+    height: 100px;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+}
+
+form {
+  width: 100%;
+}
+
+.mat-form-field input:hover {
+  border: 1px solid #FFF;
+}
+
+.mat-form-field .mat-form-field-wrapper {
+  padding-bottom: 10px;
+}

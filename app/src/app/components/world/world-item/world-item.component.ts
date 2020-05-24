@@ -4,95 +4,110 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, Input, OnInit, HostBinding, OnDestroy, OnChanges, Output, EventEmitter } from '@angular/core';
-import { timer } from 'rxjs';
-import { take, finalize } from 'rxjs/operators';
-import { AudioService, ItemService } from '../../../services';
+import { clone } from 'lodash';
+import { Component, Input, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { WorldFacade, UserFacade } from '../../../facade';
+import { ConstantsService, FormService } from '../../../services';
+import { map } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'world-item-cmp',
+  selector: 'app-world-item-cmp',
   templateUrl: './world-item.component.html',
-  styleUrls: ['./world-item.component.scss'],
+  styleUrls: ['./world-item.component.scss']
 })
-export class WorldItemComponent implements OnInit, OnDestroy, OnChanges {
-  @Output() destroy: EventEmitter<any> = new EventEmitter<any>();
-  @Input() data: any;
-  sub: any;
-  animation = '';
-  animations = [
-    'scale-up-center',
-    'scale-down-center',
-    'rotate-center',
-    'rotate-scale-up',
-    'scale-in-center',
-    'rotate-in-center',
-    'rotate-in-2-fwd',
-    'rotate-in-2-bck',
-    'swirl-in-fwd',
-    'swirl-in-top-fwd',
-    'slide-in-top',
-    'slide-in-tr',
-    'slide-in-right',
-    'slide-in-br',
-    'slide-in-bottom',
-    'slide-in-bl',
-    'slide-in-left',
-    'slide-in-tl',
-    'bounce-in-top',
-  ];
+export class WorldItemComponent implements OnInit, OnChanges {
+  @Input() world: any;
+  @ViewChild('inputElement') inputElement: any;
+  formGroup: FormGroup;
+  loading: boolean;
+  emptyWorldReadyForDeletion: boolean;
+  formFieldSub: Subscription;
 
-  constructor(private audioService: AudioService, private itemService: ItemService) {}
-
-  @HostBinding('class')
-  get themeClass(){
-    return this.animation;
-  };
-
-  @HostBinding('style.top')
-  x = "50%";
-
-  @HostBinding('style.left')
-  y = "50%";
+  constructor(
+    public constantsService: ConstantsService,
+    public worldFacade: WorldFacade,
+    private userFacade: UserFacade,
+    private formService: FormService
+  ) {
+    this.emptyWorldReadyForDeletion = false;
+    this.world = {};
+    // this.formGroup = new FormGroup({
+    //   id: new FormControl('', [Validators.required]),
+    //   label: new FormControl('', []),
+    //   icon: new FormControl('', []),
+    //   requiredAge: new FormControl('', []),
+    //   score: new FormControl('', []),
+    // });
+    // this.formGroup.setValue({
+    //   id: null,
+    //   label: '',
+    //   icon: null,
+    //   requiredAge: null,
+    //   score: null,
+    // });
+  }
 
   ngOnInit() {
-    this.x = (Math.round(Math.random() * 90)) + '%';
-    this.y = (Math.round(Math.random() * 90)) + '%';
-    if (!this.data.asset.animations || 0 === this.data.asset.animations.length) {
-      this.generateRandomAnimation();
-    }
-    this.init();
-  }
-
-  generateRandomAnimation() {
-    const animationsCount = this.animations.length;
-    const rand = Math.floor(Math.random() * animationsCount);
-    this.animation = this.animations[rand];
-  }
-
-  ngOnChanges() {
-    this.init();
-  }
-
-  init() {
-    console.log('this.data', this.data);
-    this.startTimer();
-    if (this.data.sound) {
-      this.audioService.playSound(this.data.world.name + '/' + this.data.sound);
-    }
+    // const operator = map(() => this.save());
+    // this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    // this.formFieldSub.unsubscribe();
   }
 
-  startTimer() {
-    this.sub = timer(4000).pipe(
-      take(1),
-      finalize(() => this.destroyThis()),
-    ).subscribe();
+  ngOnChanges(changes: SimpleChanges) {
+    // if (changes.world && changes.world.previousValue) {
+    //   this.save();
+    // }
+    // if (changes.world) {
+    //   if (changes.world.currentValue) {
+    //     const world: any = changes.world.currentValue;
+    //     this.formGroup.setValue({
+    //       id: world.id,
+    //       label: world.label,
+    //       icon: world.icon,
+    //       requiredAge: world.requiredAge,
+    //       score: world.score,
+    //     });
+    //     if (!world.label || world.label.length === 0) {
+    //       this.emptyWorldReadyForDeletion = true;
+    //     }
+    //   } else {
+    //     this.formGroup.setValue({
+    //       id: null,
+    //       label: '',
+    //       icon: null,
+    //       requiredAge: null,
+    //       score: null,
+    //     });
+    //   }
+    // }
   }
 
-  destroyThis() {
-    this.destroy.emit(this.data.id);
+  save() {
+    // if (!this.formGroup.valid) {
+    //   return;
+    // }
+    // const world: any = clone(this.formGroup.value);
+    // this.worldFacade.updateWorld(world);
+  }
+
+  onKey(event: KeyboardEvent) {
+    // if (!this.formGroup.get('label').value || this.formGroup.get('label').value.length === 0) {
+    //   if (this.emptyWorldReadyForDeletion) {
+    //     this.delete();
+    //   } else {
+    //     this.emptyWorldReadyForDeletion = true;
+    //   }
+    // } else {
+    //   this.emptyWorldReadyForDeletion = false;
+    // }
+  }
+
+  delete() {
+    // this.worldFacade.deleteWorld(this.world);
   }
 }

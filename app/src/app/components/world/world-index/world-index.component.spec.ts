@@ -4,38 +4,32 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Apollo } from 'apollo-angular';
+import { UserFacade } from '../../../facade';
+import { ApolloStub } from '../../../services';
 import { WorldIndexComponent } from './world-index.component';
 
 describe('WorldIndexComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
+      schemas: [
+        NO_ERRORS_SCHEMA
       ],
       declarations: [
         WorldIndexComponent
       ],
+      providers: [
+        { provide: Apollo, useClass: ApolloStub },
+        { provide: UserFacade },
+      ]
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
+  it('should create the app', async(() => {
     const fixture = TestBed.createComponent(WorldIndexComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'angular'`, () => {
-    const fixture = TestBed.createComponent(WorldIndexComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('angular');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(WorldIndexComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to angular!');
-  });
+  }));
 });

@@ -50,7 +50,7 @@
           Any
         </button>
         <button mat-menu-item *ngFor="let score of ideaFacade.scores" (click)="selectScore(score)">
-          <img [src]="ideaFacade.getIcon(score)" width="24" height="24"/>
+          <img [src]="constantsService.getScoreIcon(score)" width="24" height="24"/>
         </button>
       </mat-menu>
     </div>

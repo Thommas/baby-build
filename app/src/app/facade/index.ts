@@ -5,3 +5,5 @@ export * from './idea.facade';
 export * from './review.facade';
 export * from './sharing.facade';
 export * from './user.facade';
+export * from './world.facade';
+export * from './world-filters.facade';
