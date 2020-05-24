@@ -1,0 +1,53 @@
+<div fxFill fxLayout="column" fxLayoutAlign="start center" (click)="focusInput($event)">
+  <h2>Create new ideas</h2>
+  <form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field fxFill>
+      <input #inputElement fxFill
+            matInput
+            [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write an idea'"
+            formControlName="label"
+            (keyup.backspace)="onKey($event)"
+            autocomplete="off">
+    </mat-form-field>
+    <div class="category">
+      <button mat-button [matMenuTriggerFor]="categoryMenu">
+        <img [src]="constantsService.getCategoryIconByValue(this.formGroup.get('category').value)" width="24" height="24"/>
+      </button>
+      <mat-menu #categoryMenu="matMenu">
+        <button mat-menu-item *ngFor="let category of constantsService.categories" (click)="selectCategory(category.value)">
+          <mat-icon><img [src]="category.icon" width="24" height="24"/></mat-icon>
+          {{ category.label }}
+        </button>
+      </mat-menu>
+    </div>
+    <div class="platform" *ngIf="this.formGroup.get('category').value == 'videogame'">
+      <button mat-button [matMenuTriggerFor]="platformMenu">
+        <img [src]="constantsService.getPlatformIconByValue(this.formGroup.get('platform').value)" width="24" height="24"/>
+      </button>
+      <mat-menu #platformMenu="matMenu">
+        <button mat-menu-item *ngFor="let platform of constantsService.platforms" (click)="selectPlatform(platform.value)">
+          <mat-icon><img [src]="platform.icon" width="24" height="24"/></mat-icon>
+          {{ platform.label }}
+        </button>
+      </mat-menu>
+    </div>
+    <button mat-mini-fab (click)="create()"><mat-icon>add</mat-icon></button>
+  </form>
+
+  <h2>Similar ideas</h2>
+  <div fxLayout="row wrap">
+    <app-idea-item-cmp
+      *ngFor="let idea of (suggestedIdeas$ | async)"
+      [idea]="idea"
+    ></app-idea-item-cmp>
+  </div>
+
+  <h2>New ideas</h2>
+  <div fxLayout="column">
+    <div *ngFor="let idea of newIdeas" fxLayout="row">
+      <mat-icon><img [src]="constantsService.getCategoryIconByValue(idea.category)" width="24" height="24"/></mat-icon>
+      <mat-icon><img [src]="constantsService.getPlatformIconByValue(idea.platform)" width="24" height="24"/></mat-icon>
+      {{ idea.label }}
+    </div>
+  </div>
+</div>

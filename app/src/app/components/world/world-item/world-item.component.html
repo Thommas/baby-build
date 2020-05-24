@@ -1,0 +1,17 @@
+<div class="container" [matTooltip]="world.label + (world.releaseDate ? ' (' + world.releaseDate + ')' : ' (????)')" matTooltipPosition="above">
+  <div class="icon">
+    <img [src]="world.imgs && world.imgs.icon ? world.imgs.icon : 'https://placehold.it/40x40'" />
+  </div>
+  <div class="language" *ngIf="constantsService.getLanguageIconByValue(world.language).length > 0">
+    <img [src]="constantsService.getLanguageIconByValue(world.language)"/>
+  </div>
+  <div class="category">
+    <img [src]="constantsService.getCategoryIconByValue(world.category)"/>
+  </div>
+  <div class="requiredAge" *ngIf="world.requiredAge">
+    {{ (world.requiredAge | number:'1.0-0') + '+' }}
+  </div>
+  <div class="score" *ngIf="world.score">
+    <img [src]="constantsService.getScoreIcon(world.score)"/>
+  </div>
+</div>

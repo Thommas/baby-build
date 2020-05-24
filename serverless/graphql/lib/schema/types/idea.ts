@@ -11,12 +11,16 @@ const Idea = gql`
     icon: [String]
     cover: [String]
     screenshot: [String]
+    png: [String]
   }
   type Idea {
     id: String
     label: String
     category: String
     platform: String
+    language: String
+    releaseDate: String
+    timeToCompletion: Int
     requiredAge: Float
     score: Float
     userId: String
@@ -25,8 +29,10 @@ const Idea = gql`
   }
   input IdeaInput {
     label: String
+    category: String
     requiredAge: Float
     score: Float
+    language: String
     count: Int
   }
   type IdeaEdge {
@@ -35,7 +41,7 @@ const Idea = gql`
     nodes: [Idea]
   }
   type Query {
-    ideas(ideaInput: IdeaInput, cursor: String): IdeaEdge
+    ideas(ideaInput: IdeaInput, cursor: String, sort: String): IdeaEdge
   }
   type Mutation {
     createIdea(
@@ -48,6 +54,9 @@ const Idea = gql`
       label: String
       category: String
       platform: String
+      language: String
+      releaseDate: String
+      timeToCompletion: Int
       requiredAge: Float
       score: Float
     ): Idea

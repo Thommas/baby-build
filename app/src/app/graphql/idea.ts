@@ -7,14 +7,18 @@
 import gql from 'graphql-tag';
 
 export const GetIdeas = gql`
-  query GetIdeas($ideaInput: IdeaInput, $cursor: String) {
-    ideas(ideaInput: $ideaInput, cursor: $cursor) {
+  query GetIdeas($ideaInput: IdeaInput, $cursor: String, $sort: String) {
+    ideas(ideaInput: $ideaInput, cursor: $cursor, sort: $sort) {
       total
       cursor
       nodes {
         id
         label
         category
+        platform
+        releaseDate
+        timeToCompletion
+        language
         requiredAge
         score
         userId
@@ -26,6 +30,7 @@ export const GetIdeas = gql`
           icon
           cover
           screenshot
+          png
         }
       }
     }
@@ -39,6 +44,9 @@ export const CreateIdeaMutation = gql`
       label
       category
       platform
+      releaseDate
+      timeToCompletion
+      language
       requiredAge
       score
       userId
@@ -50,6 +58,7 @@ export const CreateIdeaMutation = gql`
         icon
         cover
         screenshot
+        png
       }
     }
   }
@@ -61,6 +70,9 @@ export const UpdateIdeaMutation = gql`
     $label: String
     $category: String
     $platform: String
+    $releaseDate: String
+    $timeToCompletion: Int
+    $language: String
     $requiredAge: Float
     $score: Float
   ) {
@@ -69,6 +81,9 @@ export const UpdateIdeaMutation = gql`
       label: $label
       category: $category
       platform: $platform
+      releaseDate: $releaseDate
+      timeToCompletion: $timeToCompletion
+      language: $language
       requiredAge: $requiredAge
       score: $score
     ) {
@@ -76,6 +91,9 @@ export const UpdateIdeaMutation = gql`
       label
       category
       platform
+      releaseDate
+      timeToCompletion
+      language
       requiredAge
       score
       userId
@@ -87,6 +105,7 @@ export const UpdateIdeaMutation = gql`
         icon
         cover
         screenshot
+        png
       }
     }
   }

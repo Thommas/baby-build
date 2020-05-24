@@ -1,6 +1,7 @@
 export * from './angulartics.service';
 export * from './apollo.service';
 export * from './apollo.stub';
+export * from './audio.service';
 export * from './auth-guard.service';
 export * from './auth.service.stub';
 export * from './auth.service';
@@ -8,6 +9,7 @@ export * from './browser.service.stub';
 export * from './browser.service';
 export * from './constants.service';
 export * from './form.service';
+export * from './item.service';
 export * from './http.service';
 export * from './http.service.stub';
 export * from './locale.service';

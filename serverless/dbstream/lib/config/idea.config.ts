@@ -131,4 +131,27 @@ export const IDEA_IMGS_CONFIG = {
       limit: 1,
     },
   ],
+  character: [
+    {
+      key: 'icon',
+      searchInput: '',
+      limit: 1,
+    },
+    {
+      key: 'cover',
+      searchInput: 'cover',
+      limit: 1,
+    },
+    {
+      key: 'screenshot',
+      searchInput: 'official',
+      limit: 5,
+    },
+    {
+      key: 'png',
+      searchInput: 'png',
+      limit: 1,
+      getOriginal: true,
+    }
+  ],
 };

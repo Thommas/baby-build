@@ -4,28 +4,26 @@ Roadmap
 Short term
 ----------
 
-- Updating category/platform
-- Add language
-- Implement multi sort
-- Reactivate filters
-- Add field: Describe how deep to explore (1st episode, 1st season, all core episodes, everything)
-- Add field: Release date (detect it with puppeteer)
-- Fix auth service issues
+- Add world entity
+- IdeaList with smaller icons display for world
+- Add ideas to world by dragndrop
 
 Long term
 ---------
 
+- Add path entity
+- Add levels to ideas in paths with estimated time
+- Fix auth service
+- Add stats dashboard with counts/charts
+- Manage worlds and add more options
 - Add Idea permission based on sharing (mutualize checking sharing)
-- Suggest 5 icons/5 detected api references
-- Batch import ideas
-- Implement voice recording to create task
-- Refactor gamification xp/lvl
-- Logs
-- Comments
-- Achievements based on count
 - Security checks in graphql lambda
 - Add unit tests
-- Invitations
-- Notifications
-- Loading effect
-- CSS3 animations
+- Loading effects and more CSS3 animations
+
+Bonus
+-----
+
+- Detect when puppeteer stops working
+- Batch import
+- Implement voice recording to create task

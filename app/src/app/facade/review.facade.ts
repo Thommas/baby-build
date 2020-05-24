@@ -24,7 +24,7 @@ import {
   SelectReview,
   UpdateReview
 } from '../store';
-import { IdeaFacade, purifyFilters } from './idea.facade';
+import { IdeaFacade } from './idea.facade';
 import { IdeaFiltersFacade } from './idea-filters.facade';
 import { UserFacade } from './user.facade';
 
@@ -195,7 +195,6 @@ export class ReviewFacade {
             },
           },
           update: (store, { data: { updateReview } }) => {
-            console.log('updateReview', updateReview);
             this.selectReview(updateReview);
             this.updateReviews(store, updateReview);
             this.updateIdea(store, updateReview, filters);
@@ -240,14 +239,14 @@ export class ReviewFacade {
 
     const ideasQuery: any = store.readQuery({
       query: GetIdeas,
-      variables: purifyFilters(filters),
+      variables: this.ideaFacade.purifyFilters(filters),
     });
     const idea: any = ideasQuery.ideas.nodes.find((idea: any) => idea.id === review.ideaId);
     idea.requiredAge = averageRequiredAge;
     idea.score = averageScore;
     store.writeQuery({
       query: GetIdeas,
-      variables: purifyFilters(filters),
+      variables: this.ideaFacade.purifyFilters(filters),
       data: { ideas: ideasQuery.ideas },
     });
   }

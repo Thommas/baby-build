@@ -38,7 +38,9 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { environment } from '../environments/environment';
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
-import { MainModule } from './components/main/main.module';
+import { IdeaModule } from './components/idea/idea.module';
+import { WorldModule } from './components/world/world.module';
+import { WorldViewModule } from './components/world-view/world-view.module';
 import { UserModule } from './components/user/user.module';
 import { SecurityModule } from './components/security/security.module';
 import { StaticModule } from './components/static/static.module';
@@ -65,6 +67,8 @@ import {
   ReviewFacade,
   SharingFacade,
   UserFacade,
+  WorldFacade,
+  WorldFiltersFacade,
 } from './facade';
 import {
   authReducer,
@@ -72,6 +76,8 @@ import {
   ideaFiltersReducer,
   ideaSuggestReducer,
   reviewReducer,
+  worldReducer,
+  worldFiltersReducer,
 } from './store';
 
 // ngrx-store-localstorage
@@ -81,6 +87,8 @@ const reducers: ActionReducerMap<any> = {
   ideaFilters: ideaFiltersReducer,
   ideaSuggest: ideaSuggestReducer,
   review: reviewReducer,
+  world: worldReducer,
+  worldFilters: worldFiltersReducer,
 };
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return localStorageSync({keys: ['auth'], rehydrate: true})(reducer);
@@ -128,7 +136,9 @@ export function createTranslateLoader(http: HttpClient) {
     MatSidenavModule,
     MatToolbarModule,
     MatTooltipModule,
-    MainModule,
+    IdeaModule,
+    WorldModule,
+    WorldViewModule,
     UserModule,
     SecurityModule,
     StaticModule,
@@ -146,7 +156,8 @@ export function createTranslateLoader(http: HttpClient) {
       IdeaSuggestFacade,
       ReviewFacade,
       SharingFacade,
-      UserFacade
+      UserFacade,
+      WorldFacade,
     ])
   ],
   providers: [
@@ -167,6 +178,8 @@ export function createTranslateLoader(http: HttpClient) {
     ReviewFacade,
     SharingFacade,
     UserFacade,
+    WorldFacade,
+    WorldFiltersFacade,
   ],
   bootstrap: [
     AppComponent

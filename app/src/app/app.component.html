@@ -7,11 +7,11 @@
     [style.height]="progressService.progress === 0 ? '0' : '2px'">
   </mat-progress-bar>
   <mat-drawer-container>
-    <mat-drawer #drawer mode="side" opened="true" *ngIf="authService.isAuthenticated$ | async">
+    <mat-drawer #drawer mode="side" opened="true" *ngIf="(authService.isAuthenticated$ | async) && router.url !== '/world'">
       <app-sidebar-cmp (toggleSidebar)="toggleDrawer()"></app-sidebar-cmp>
     </mat-drawer>
     <mat-drawer-content fxFlex fxLayout="column">
-      <app-topbar-cmp *ngIf="authService.isAuthenticated$ | async" (toggleSidebar)="toggleDrawer()"></app-topbar-cmp>
+      <app-topbar-cmp *ngIf="(authService.isAuthenticated$ | async) && router.url !== '/world'" (toggleSidebar)="toggleDrawer()"></app-topbar-cmp>
       <div class="router-content" fxFlex fxLayout="column">
         <router-outlet></router-outlet>
       </div>

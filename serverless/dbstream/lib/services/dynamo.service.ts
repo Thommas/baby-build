@@ -4,10 +4,10 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as AWS from 'aws-sdk';
+import AWS from 'aws-sdk';
 import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
-import * as bluebird from 'bluebird';
-import * as dynamoose from 'dynamoose';
+import bluebird from 'bluebird';
+import dynamoose from 'dynamoose';
 import { configService } from './config.service';
 
 class DynamoService {
@@ -59,6 +59,28 @@ class DynamoService {
     });
 
     return dynamoose.model(configService.localDynamoDBTable, EntitySchema);
+  }
+
+  async loadAllItems(type: string): Promise<any[]> {
+    const params: any = {
+      TableName: configService.localDynamoDBTable,
+    };
+
+    let scanResults: any[] = [];
+    let items;
+    do {
+      items = await this.getAWSDynamo().scan(params).promise();
+      items.Items.forEach((item: any) => {
+        const document = AWS.DynamoDB.Converter.unmarshall(item);
+        // TODO Query with begin_with filter on ID
+        if (!type || document.id.startsWith(type)) {
+          scanResults.push(document);
+        }
+      });
+      params.ExclusiveStartKey = items.LastEvaluatedKey;
+    } while (typeof items.LastEvaluatedKey != "undefined");
+
+    return scanResults;
   }
 }
 

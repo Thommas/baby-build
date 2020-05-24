@@ -6,7 +6,7 @@
 
 import { elasticSearchService } from '../services';
 
-let SIZE = 150;
+let SIZE = 50;
 
 export function queryIdeas(userIds: string[], filters: any, sortInput: string, cursor: string): Promise<any> {
   let count = SIZE;
@@ -15,12 +15,12 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
       must: [
         {
           term: {
-            type: 'Idea',
+            ['type.keyword']: 'Idea',
           },
         },
         {
           terms: {
-            userId: userIds,
+            ['userId.keyword']: userIds,
           },
         },
       ],
@@ -37,7 +37,14 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
         },
       });
     }
-    if (filters.label && filters.label.length > 0) {
+    if (filters.category) {
+      query.bool.must.push({
+        term: {
+          category: filters.category,
+        },
+      });
+    }
+    if (filters.label) {
       query.bool.must.push({
         match: {
           label: {
@@ -48,30 +55,38 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
         },
       });
     }
-    if (filters.requiredAge && filters.requiredAge.length > 0) {
-      for (const requiredAge of filters.requiredAge) {
-        query.bool.must.push({
-          range: {
-            requiredAge: {
-              gte: requiredAge,
-              lt: requiredAge + 1,
-            },
+    if (filters.requiredAge) {
+      query.bool.must.push({
+        range: {
+          requiredAge: {
+            gte: filters.requiredAge,
+            lt: filters.requiredAge + 1,
           },
-        });
-      }
+        },
+      });
     }
-    if (filters.score && filters.score.length > 0) {
-      for (const score of filters.score) {
-        query.bool.must.push({
-          range: {
-            score: {
-              gte: score,
-              lt: score + 1,
-            },
+    if (filters.score) {
+      query.bool.must.push({
+        range: {
+          score: {
+            gte: filters.score,
+            lt: filters.score + 1,
           },
-        });
-      }
+        },
+      });
     }
+    if (filters.language) {
+      query.bool.must.push({
+        match: {
+          language: {
+            query: filters.language,
+          }
+        },
+      });
+    }
+  }
+  if (!sortInput) {
+    sortInput = '-createdAt';
   }
   const sortKey = sortInput.replace('-', '');
   const sortOrder = sortInput[0] === '-' ? 'desc' : 'asc';

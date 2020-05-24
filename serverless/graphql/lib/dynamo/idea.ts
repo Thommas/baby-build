@@ -13,11 +13,12 @@ import { dynamoService } from '../services';
 export function getIdeas(userId: string, args: any) {
   const ideaInput = args.ideaInput;
   const cursor = args.cursor;
+  const sort = args.sort;
   return querySharingsByUserId(userId)
     .then((sharings) => {
       const userIds = sharings.hits.hits.map((hit: any) => hit._source.sharerId);
       userIds.push(userId);
-      return queryIdeas(userIds, ideaInput, '-createdAt', cursor)
+      return queryIdeas(userIds, ideaInput, sort, cursor)
     })
     .then((ideas) => {
       if (0 === ideas.hits.total.value || 0 === ideas.hits.hits.length) {
@@ -28,6 +29,7 @@ export function getIdeas(userId: string, args: any) {
         };
       }
       const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
+      console.log('params.length', params.length);
       return dynamoService.getEntity().batchGet(params).then((items: any) => {
         return {
           total: ideas.hits.total.value,
@@ -42,6 +44,12 @@ export function getIdeas(userId: string, args: any) {
         }
       });
     })
+}
+
+export function getIdeasByIds(ids: string[]) {
+  const params: any = ids.map((id: any) => ({ id }));
+
+  return dynamoService.getEntity().batchGet(params);
 }
 
 export function createIdea(args: any, userId: string) {

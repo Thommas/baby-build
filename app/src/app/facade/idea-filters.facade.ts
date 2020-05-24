@@ -18,6 +18,12 @@ export class IdeaFiltersFacade {
 
   constructor(private store: Store<{ ideaFilters: any }>) {}
 
+  selectLanguage(language: string) {
+    this.store.dispatch(new UpdateIdeaFilters({
+      language,
+    }));
+  }
+
   selectLabel(label: string) {
     this.store.dispatch(new UpdateIdeaFilters({
       label,
@@ -33,6 +39,18 @@ export class IdeaFiltersFacade {
   selectScore(score: number) {
     this.store.dispatch(new UpdateIdeaFilters({
       score,
+    }));
+  }
+
+  selectCategory(category: string) {
+    this.store.dispatch(new UpdateIdeaFilters({
+      category,
+    }));
+  }
+
+  selectSort(sort: string) {
+    this.store.dispatch(new UpdateIdeaFilters({
+      sort,
     }));
   }
 

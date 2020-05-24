@@ -160,7 +160,9 @@ export class DynamoService {
   }
 
   async save() {
-    fs.unlinkSync(configService.dbDumpLocalPath);
+    if (fs.existsSync(configService.dbDumpLocalPath)) {
+      fs.unlinkSync(configService.dbDumpLocalPath);
+    }
     await this.saveData();
   }
 }

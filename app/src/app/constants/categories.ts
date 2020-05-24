@@ -45,4 +45,9 @@ export const CATEGORIES: any = [
     label: 'Manga',
     icon: '/assets/img/category/manga.svg',
   },
+  {
+    value: 'character',
+    label: 'Character',
+    icon: '/assets/img/category/character.svg',
+  },
 ];

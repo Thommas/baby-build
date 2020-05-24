@@ -4,13 +4,17 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { xor } from 'lodash';
 import { IdeaFiltersActionTypes, IdeaFiltersActionsUnion } from './idea-filters.actions';
 
 const initialState = {
-  name: null,
-  requiredAge: [],
-  score: [],
+  ideaInput: {
+    label: null,
+    language: null,
+    requiredAge: null,
+    score: null,
+    category: null,
+  },
+  sort: null,
 };
 
 export function ideaFiltersReducer(state: any = initialState, action: IdeaFiltersActionsUnion): any {
@@ -21,9 +25,14 @@ export function ideaFiltersReducer(state: any = initialState, action: IdeaFilter
     case IdeaFiltersActionTypes.UpdateIdeaFilters:
       return {
         ...state,
-        name: action.payload.name !== undefined ? action.payload.name : state.name,
-        score: action.payload.score !== undefined ? xor(state.score, [action.payload.score]) : state.score,
-        requiredAge: action.payload.requiredAge !== undefined ? xor(state.requiredAge, [action.payload.requiredAge]) : state.requiredAge,
+        ideaInput: {
+          label: action.payload.label !== undefined ? action.payload.label : state.ideaInput.label,
+          score: action.payload.score !== undefined ? action.payload.score : state.ideaInput.score,
+          requiredAge: action.payload.requiredAge !== undefined ? action.payload.requiredAge : state.ideaInput.requiredAge,
+          language: action.payload.language !== undefined ? action.payload.language : state.ideaInput.language,
+          category: action.payload.category !== undefined ? action.payload.category : state.ideaInput.category,
+        },
+        sort: action.payload.sort !== undefined ? action.payload.sort : state.sort,
       };
 
     default:

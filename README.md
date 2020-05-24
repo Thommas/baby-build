@@ -1,7 +1,9 @@
 Path of child
 =============
 
-Gamified life planning platform for your child.
+Gamified life planning platform for your child
+
+aka 'yet another glorified spreadsheet app'
 
 
 Stack
@@ -20,6 +22,8 @@ Similar apps
 ------------
 
 https://asana.com
+
+https://www.hanselman.com/babysmash
 
 https://habitica.com
 

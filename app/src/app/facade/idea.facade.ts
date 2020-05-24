@@ -8,7 +8,7 @@ import uuid from 'uuid/v4';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
+import { EMPTY, of, from } from 'rxjs';
 import { flatMap, map, withLatestFrom, mergeMap, tap } from 'rxjs/operators';
 import {
   CreateIdeaMutation,
@@ -20,6 +20,8 @@ import { ApolloService } from '../services';
 import {
   IdeaActionTypes,
   FetchMoreIdea,
+  FetchMoreIdeaLoading,
+  FetchMoreIdeaComplete,
   CreateIdea,
   UpdateIdea,
   SelectIdea,
@@ -31,30 +33,14 @@ import { IdeaSuggestFacade } from './idea-suggest.facade';
 import { UserFacade } from './user.facade';
 import { QueryRef } from 'apollo-angular';
 
-export const purifyFilters = (filters: any) => {
-  const currentFilters = Object.assign({}, filters);
-  if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
-    delete currentFilters.requiredAge;
-  }
-  if (!currentFilters.score || 0 === currentFilters.score.length) {
-    delete currentFilters.score;
-  }
-  if (!currentFilters.name) {
-    delete currentFilters.name;
-  }
-
-  return {
-    ideaInput: currentFilters,
-    cursor: '-1',
-  };
-}
-
 @Injectable()
 export class IdeaFacade {
   suggestedIdeaQuery: QueryRef<any> = null;
   ideaQuery: QueryRef<any> = null;
   static total: number = null;
   static cursor: any;
+  ages: number[] = [];
+  scores: number[] = [];
 
   suggestedIdeas$ = this.ideaSuggestFacade.suggest$.pipe(
     flatMap((suggest: any) => {
@@ -66,7 +52,8 @@ export class IdeaFacade {
         variables: {
           ideaInput: {
             label: suggest.name,
-            count: 25,
+            category: suggest.category,
+            count: 5,
           }
         },
       });
@@ -86,7 +73,7 @@ export class IdeaFacade {
     flatMap((filters: any) => {
       this.ideaQuery = this.apolloService.apolloClient.watchQuery<any>({
         query: GetIdeas,
-        variables: purifyFilters(filters),
+        variables: this.purifyFilters(filters),
       });
       return this.ideaQuery
         .valueChanges
@@ -99,6 +86,7 @@ export class IdeaFacade {
         );
     })
   );
+  fetchMoreLoading$ = this.store.pipe(select('idea', 'fetchMoreLoading'));
   selectedIdea$ = this.store.pipe(select('idea', 'selected'));
   ideasHasMore$ = this.ideas$.pipe(
     map((ideas: any) => IdeaFacade.total !== 0 && ideas.length !== IdeaFacade.total),
@@ -112,6 +100,37 @@ export class IdeaFacade {
     private userFacade: UserFacade,
     private store: Store<{ idea: any }>
   ) {
+    for (let age = 1; age <= 20; age++) {
+      this.ages.push(age);
+    }
+    for (let score = 1; score <= 7; score++) {
+      this.scores.push(score);
+    }
+  }
+
+  purifyFilters(filters: any) {
+    const currentFilters = Object.assign({}, filters.ideaInput);
+    if (!currentFilters.requiredAge || 0 === currentFilters.requiredAge.length) {
+      delete currentFilters.requiredAge;
+    }
+    if (!currentFilters.score || 0 === currentFilters.score.length) {
+      delete currentFilters.score;
+    }
+    if (!currentFilters.label) {
+      delete currentFilters.label;
+    }
+    if (!currentFilters.language) {
+      delete currentFilters.language;
+    }
+    if (!currentFilters.category) {
+      delete currentFilters.category;
+    }
+
+    return {
+      ideaInput: currentFilters,
+      cursor: '-1',
+      sort: filters.sort ? filters.sort : undefined,
+    };
   }
 
   fetchMore() {
@@ -129,7 +148,7 @@ export class IdeaFacade {
       mergeMap((args: any[]) => {
         const filters = args[1];
         const ideas = args[2];
-        const variables = purifyFilters(filters);
+        const variables = this.purifyFilters(filters);
         variables.cursor = IdeaFacade.cursor;
 
         if (!this.ideaQuery) {
@@ -143,6 +162,7 @@ export class IdeaFacade {
           variables,
           updateQuery: (prev, { fetchMoreResult }) => {
             IdeaFacade.cursor = fetchMoreResult.ideas.cursor;
+            this.store.dispatch(new FetchMoreIdeaComplete());
             return {
               ideas: {
                 total: fetchMoreResult.ideas.total,
@@ -156,8 +176,9 @@ export class IdeaFacade {
             };
           },
         });
+        this.store.dispatch(new FetchMoreIdeaLoading());
         return of(EMPTY);
-      })
+      }),
     );
 
   createIdea(idea: any) {
@@ -208,13 +229,13 @@ export class IdeaFacade {
             }
             const data: any = store.readQuery({
               query: GetIdeas,
-              variables: purifyFilters(filters)
+              variables: this.purifyFilters(filters)
             });
             const updatedIdeas: any = data.ideas.nodes;
             updatedIdeas.unshift(createIdea);
             store.writeQuery({
               query: GetIdeas,
-              variables: purifyFilters(filters),
+              variables: this.purifyFilters(filters),
               data: {
                 ideas: {
                   total: IdeaFacade.total,
@@ -227,7 +248,7 @@ export class IdeaFacade {
             // TODO Use a separate list for newly created items
             this.selectIdea(createIdea);
             if (optimistic) {
-              this.newIdeas.push(createIdea);
+              this.newIdeas.unshift(createIdea);
             }
           },
         });
