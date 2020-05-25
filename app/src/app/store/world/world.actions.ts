@@ -10,6 +10,7 @@ export enum WorldActionTypes {
   FetchMoreWorld = '[World] FetchMore',
   FetchMoreWorldLoading = '[World] FetchMore Loading',
   FetchMoreWorldComplete = '[World] FetchMore Complete',
+  GetWorld = '[World] Get',
   CreateWorld = '[World] Create',
   UpdateWorld = '[World] Update',
   SelectWorld = '[World] Select',
@@ -26,6 +27,12 @@ export class FetchMoreWorldLoading implements Action {
 
 export class FetchMoreWorldComplete implements Action {
   readonly type = WorldActionTypes.FetchMoreWorldComplete;
+}
+
+export class GetWorld implements Action {
+  readonly type = WorldActionTypes.GetWorld;
+
+  constructor(public payload: any) {}
 }
 
 export class CreateWorld implements Action {
@@ -54,6 +61,7 @@ export class DeleteWorld implements Action {
 
 export type WorldActionsUnion =
   FetchMoreWorld
+  | GetWorld
   | FetchMoreWorldLoading
   | FetchMoreWorldComplete
   | CreateWorld

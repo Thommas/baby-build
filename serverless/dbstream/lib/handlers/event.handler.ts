@@ -5,9 +5,9 @@
  */
 
 import AWS from 'aws-sdk';
-import elasticSearchHandler from './elasticsearch.handler';
-import ideaHandler from './idea.handler';
-import reviewHandler from './review.handler';
+import * as elasticSearchHandler from './elasticsearch.handler';
+import * as ideaHandler from './idea.handler';
+import * as reviewHandler from './review.handler';
 
 export async function handleEvent(event, callback) {
   for (const record of event.Records) {

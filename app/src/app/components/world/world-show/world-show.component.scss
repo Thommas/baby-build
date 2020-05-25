@@ -1,75 +1,47 @@
 :host {
-  display: block;
-  min-width: 0px;
-  max-width: 675px;
-  margin-left: 15px;
-  margin-right: 20px;
-  padding: 0;
-  overflow: hidden;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  place-content: stretch center;
+  flex-direction: row;
+  justify-items: start;
+  align-items: start;
+  padding-top: 20px;
+  height: 92vh;
 }
 
-mat-card {
-  padding: 0;
-}
+.header {
+  color: grey;
+  border-bottom: 1px solid #cccccc;
 
-.mat-form-field input {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 32px;
-  min-height: 0;
-  padding: 4px 9px;
-}
-
-.cdk-textarea-autosize {
-  min-height: 100px;
-}
-
-textarea {
-  min-height: 1px;
-  padding: 4px 9px;
-}
-
-.mat-form-field input,
-textarea {
-  border: 1px solid transparent;
-}
-
-.mat-form-field input:hover,
-textarea:hover {
-  border: 1px solid #d5dce0;
-}
-
-.text-area-container {
-  padding: 20px 0px;
-}
-
-.comment-form-container {
-  height: 107px;
-  padding: 10px 30px;
-}
-
-.icon {
-  height: 100px;
-  margin-bottom: 20px;
-
-  div {
-    height: 100px;
-
-    img {
-      height: 100%;
-      width: auto;
-    }
+  .mat-raised-button {
+    margin: 10px;
   }
 }
 
-form {
+.left-card {
+  height: 100%;
+  min-width: 405px;
+  max-width: 1000px;
+  margin-left: 20px;
+  padding: 0;
+
+  .mat-card-content {
+    padding: 10px;
+    height: 100%;
+  }
+}
+
+mat-card-header h2 {
+  img {
+    margin-left: 10px;
+  }
+}
+
+#list-2 {
+  background-color: green;
   width: 100%;
-}
-
-.mat-form-field input:hover {
-  border: 1px solid #FFF;
-}
-
-.mat-form-field .mat-form-field-wrapper {
-  padding-bottom: 10px;
+  height: 200px;
 }

@@ -10,6 +10,7 @@ const World = gql`
   type World {
     id: String
     label: String
+    ideas: [Idea]
   }
   type WorldEdge {
     total: Int!
@@ -21,6 +22,7 @@ const World = gql`
     count: Int
   }
   type Query {
+    world(id: String): World
     worlds(worldInput: WorldInput, cursor: String, sort: String): WorldEdge
   }
   type Mutation {

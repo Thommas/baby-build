@@ -5,6 +5,7 @@
  */
 
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { WorldFacade } from '../../../facade';
 
 @Component({
@@ -17,13 +18,14 @@ export class WorldListComponent {
   fetchMoreLoading$ = this.worldFacade.fetchMoreLoading$;
 
   constructor(
+    private router: Router,
     private worldFacade: WorldFacade
   ) {
     this.worlds$ = this.worldFacade.worlds$;
   }
 
   selectWorld(world?: any) {
-    this.worldFacade.selectWorld(world);
+    this.router.navigate([`world/${world.id}`]);
   }
 
   onScroll(event) {

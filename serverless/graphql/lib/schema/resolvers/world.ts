@@ -9,9 +9,10 @@ import * as dbIdea from '../../dynamo/idea';
 
 export default {
   World: {
-    // ideas: (obj) => dbIdea.getIdeasByIds(obj.ideas),
+    ideas: (obj) => dbIdea.getIdeasByIds(obj.ideas),
   },
   Query: {
+    world: (_, args, context) => dbWorld.getWorld(context.userId, args),
     worlds: (_, args, context) => dbWorld.getWorlds(context.userId, args),
   },
   Mutation: {

@@ -1,0 +1,9 @@
+<div class="list" fxLayout="row wrap" (scroll)="onScroll($event)" cdkScrollable
+     cdkDropList id="list-1" cdkDropListConnectedTo="list-2" (cdkDropListDropped)="drop($event)">
+  <app-idea-item-cmp
+    cdkDrag
+    *ngFor="let idea of (ideas$ | async)"
+    [idea]="idea"
+  ></app-idea-item-cmp>
+</div>
+<div *ngIf="fetchMoreLoading$ | async">LOADING</div>

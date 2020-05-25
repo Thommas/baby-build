@@ -10,7 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { IdeaFacade, ReviewFacade } from '../../../facade';
-import { FormService } from '../../../services';
+import { ConstantsService, FormService } from '../../../services';
 
 @Component({
   selector: 'app-review-item-cmp',
@@ -25,6 +25,7 @@ export class ReviewItemComponent implements OnInit, OnDestroy {
   subs: Subscription[] = [];
 
   constructor(
+    public constantsService: ConstantsService,
     private formService: FormService,
     public ideaFacade: IdeaFacade,
     private reviewFacade: ReviewFacade

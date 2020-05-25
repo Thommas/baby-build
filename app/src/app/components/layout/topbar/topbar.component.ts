@@ -6,6 +6,7 @@
 
 import { Component, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { WorldFacade } from '../../../facade';
 import { AuthService } from '../../../services';
 import { UserSettingsComponent } from '../../user/user-settings/user-settings.component';
 
@@ -19,6 +20,7 @@ export class TopbarComponent {
 
   constructor(
     public authService: AuthService,
+    private worldFacade: WorldFacade,
     public dialog: MatDialog
   ) {}
 
@@ -32,6 +34,10 @@ export class TopbarComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  createNewWorld() {
+    this.worldFacade.createWorld();
   }
 
   logout() {

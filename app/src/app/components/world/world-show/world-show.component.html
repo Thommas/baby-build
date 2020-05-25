@@ -1,26 +1,28 @@
-<mat-card fxFlex class="right-card">
-  <mat-card-header fxLayoutAlign="space-between center">
-    <form [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="start stretch">
-      <mat-form-field fxFill appearance="none">
-        <input #inputElement fxFill
-              matInput
-              [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'Write an world'"
-              formControlName="label"
-              (keyup.backspace)="onKey($event)"
-              autocomplete="off">
-      </mat-form-field>
-    </form>
-    <button mat-icon-button (click)="selectWorld()">
-      <mat-icon>close</mat-icon>
-    </button>
-    <button mat-icon-button [matMenuTriggerFor]="actionMenu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #actionMenu="matMenu">
-      <button mat-menu-item (click)="deleteWorld()" i18n>world.delete</button>
-    </mat-menu>
-  </mat-card-header>
-  <mat-card-content>
-    LIST
-  </mat-card-content>
-</mat-card>
+<div *ngIf="world$ | async">
+  <mat-card fxFlex class="left-card">
+    <mat-card-header>
+      <form [formGroup]="formGroup">
+        <mat-form-field fxFill appearance="none">
+          <input #inputElement fxFill
+                matInput
+                formControlName="label"
+                (keyup.backspace)="onKey($event)"
+                autocomplete="off">
+        </mat-form-field>
+      </form>
+    </mat-card-header>
+    <mat-card-content>
+      <div id="list-2" cdkDropList cdkDropListConnectedTo="list-1" (cdkDropListDropped)="drop($event)">
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxFlex class="right-card" fxLayout="column" fxLayoutAlign="space-between none">
+    <mat-card-header fxLayout="row" fxLayoutAlign="start center">
+      <app-idea-list-filters-cmp></app-idea-list-filters-cmp>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="start start">
+      <app-idea-list-cmp></app-idea-list-cmp>
+    </mat-card-content>
+  </mat-card>
+</div>

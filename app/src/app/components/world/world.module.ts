@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { StoreModule } from '@ngrx/store';
 import {
@@ -28,6 +29,9 @@ import {
 
 import {
   routing,
+  IdeaItemComponent,
+  IdeaListComponent,
+  IdeaListFiltersComponent,
   WorldItemComponent,
   WorldListComponent,
   WorldListFiltersComponent,
@@ -42,6 +46,7 @@ import { worldFiltersReducer } from '../../store';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    DragDropModule,
     ScrollingModule,
     routing,
     MatAutocompleteModule,
@@ -62,6 +67,9 @@ import { worldFiltersReducer } from '../../store';
     })
   ],
   declarations: [
+    IdeaItemComponent,
+    IdeaListComponent,
+    IdeaListFiltersComponent,
     WorldItemComponent,
     WorldListComponent,
     WorldListFiltersComponent,

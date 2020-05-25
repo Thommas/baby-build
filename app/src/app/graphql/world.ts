@@ -6,7 +6,16 @@
 
 import gql from 'graphql-tag';
 
-export const GetWorlds = gql`
+export const GetWorldQuery = gql`
+  query GetWorld($id: String) {
+    world(id: $id) {
+      id
+      label
+    }
+  }
+`;
+
+export const GetWorldsQuery = gql`
   query GetWorlds($worldInput: WorldInput, $cursor: String, $sort: String) {
     worlds(worldInput: $worldInput, cursor: $cursor, sort: $sort) {
       total
@@ -14,7 +23,6 @@ export const GetWorlds = gql`
       nodes {
         id
         label
-        ideas
       }
     }
   }

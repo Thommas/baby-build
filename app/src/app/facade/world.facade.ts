@@ -13,12 +13,14 @@ import { flatMap, map, withLatestFrom, mergeMap, tap } from 'rxjs/operators';
 import {
   CreateWorldMutation,
   DeleteWorldMutation,
-  GetWorlds,
+  GetWorldQuery,
+  GetWorldsQuery,
   UpdateWorldMutation
 } from '../graphql';
 import { ApolloService } from '../services';
 import {
   WorldActionTypes,
+  GetWorld,
   FetchMoreWorld,
   FetchMoreWorldLoading,
   FetchMoreWorldComplete,
@@ -34,19 +36,35 @@ import { QueryRef } from 'apollo-angular';
 @Injectable()
 export class WorldFacade {
   worldQuery: QueryRef<any> = null;
+  worldsQuery: QueryRef<any> = null;
   static total: number = null;
   static cursor: any;
-  ages: number[] = [];
-  scores: number[] = [];
 
   newWorlds = [];
+  world$ = this.store
+    .pipe(
+      select('world', 'id'),
+      mergeMap((id: string) => {
+        if (!id) {
+          return null;
+        }
+        return this.apolloService.apolloClient.watchQuery<any>({
+          query: GetWorldQuery,
+          variables: {
+            id,
+          }
+        })
+          .valueChanges
+          .pipe(map((res: any) => res.data.world))
+      })
+    );
   worlds$ = this.worldFiltersFacade.filters$.pipe(
     flatMap((filters: any) => {
-      this.worldQuery = this.apolloService.apolloClient.watchQuery<any>({
-        query: GetWorlds,
+      this.worldsQuery = this.apolloService.apolloClient.watchQuery<any>({
+        query: GetWorldsQuery,
         variables: this.purifyFilters(filters),
       });
-      return this.worldQuery
+      return this.worldsQuery
         .valueChanges
         .pipe(
           map((response: any) => {
@@ -85,6 +103,10 @@ export class WorldFacade {
     };
   }
 
+  getWorldById(id: string) {
+    this.store.dispatch(new GetWorld({ id }));
+  }
+
   fetchMore() {
     this.store.dispatch(new FetchMoreWorld());
   }
@@ -103,14 +125,14 @@ export class WorldFacade {
         const variables = this.purifyFilters(filters);
         variables.cursor = WorldFacade.cursor;
 
-        if (!this.worldQuery) {
+        if (!this.worldsQuery) {
           return of(EMPTY);
         }
         if (worlds.length === WorldFacade.total) {
           return of(EMPTY);
         }
-        this.worldQuery.fetchMore({
-          query: GetWorlds,
+        this.worldsQuery.fetchMore({
+          query: GetWorldsQuery,
           variables,
           updateQuery: (prev, { fetchMoreResult }) => {
             WorldFacade.cursor = fetchMoreResult.worlds.cursor;
@@ -133,8 +155,10 @@ export class WorldFacade {
       }),
     );
 
-  createWorld(world: any) {
-    this.store.dispatch(new CreateWorld(world));
+  createWorld() {
+    this.store.dispatch(new CreateWorld({
+      label: 'New world',
+    }));
   }
 
   @Effect({dispatch: false})
@@ -164,15 +188,6 @@ export class WorldFacade {
               __typename: 'World',
               id: `-${uuid()}`,
               ...action.payload,
-              icon: null,
-              userId: user.id,
-              user: {
-                __typename: 'User',
-                firstName: user.firstName,
-                lastName: user.lastName,
-              },
-              requiredAge: 0,
-              score: 0,
             },
           },
           update: (store, { data: { createWorld, optimistic } }) => {
@@ -180,13 +195,13 @@ export class WorldFacade {
               return;
             }
             const data: any = store.readQuery({
-              query: GetWorlds,
+              query: GetWorldsQuery,
               variables: this.purifyFilters(filters)
             });
             const updatedWorlds: any = data.worlds.nodes;
             updatedWorlds.unshift(createWorld);
             store.writeQuery({
-              query: GetWorlds,
+              query: GetWorldsQuery,
               variables: this.purifyFilters(filters),
               data: {
                 worlds: {
@@ -198,10 +213,10 @@ export class WorldFacade {
               }
             });
             // TODO Use a separate list for newly created items
-            this.selectWorld(createWorld);
-            if (optimistic) {
-              this.newWorlds.unshift(createWorld);
-            }
+            // this.selectWorld(createWorld);
+            // if (optimistic) {
+            //   this.newWorlds.unshift(createWorld);
+            // }
           },
         });
       })
@@ -290,9 +305,9 @@ export class WorldFacade {
             if (!deleteWorld) {
               return;
             }
-            const query: any = store.readQuery({ query: GetWorlds });
+            const query: any = store.readQuery({ query: GetWorldsQuery });
             const updatedWorlds: any[] = query.worlds.filter((world: any) => world.id && world.id !== deleteWorld.id);
-            store.writeQuery({ query: GetWorlds, data: { worlds: updatedWorlds }});
+            store.writeQuery({ query: GetWorldsQuery, data: { worlds: updatedWorlds }});
           },
         }).pipe(
           tap(() => {

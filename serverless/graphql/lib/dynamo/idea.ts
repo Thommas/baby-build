@@ -47,6 +47,10 @@ export function getIdeas(userId: string, args: any) {
 }
 
 export function getIdeasByIds(ids: string[]) {
+  if (!ids || 0 === ids.length) {
+    return [];
+  }
+
   const params: any = ids.map((id: any) => ({ id }));
 
   return dynamoService.getEntity().batchGet(params);

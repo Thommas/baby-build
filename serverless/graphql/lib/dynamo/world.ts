@@ -9,6 +9,20 @@ import { orderBy } from 'lodash';
 import { queryWorlds } from '../elasticsearch/world';
 import { dynamoService } from '../services';
 
+export function getWorld(userId: string, args: any) {
+  return dynamoService.getEntity().get(args.id)
+    .then((entity: any) => {
+      if (!entity) {
+        throw new Error('World not found');
+      }
+      // FIXME Need to check sharing permission
+      // if (entity.userId !== userId) {
+      //   throw new Error('Unauthorized');
+      // }
+      return entity;
+    });
+}
+
 export function getWorlds(userId: string, args: any) {
   const worldInput = args.worldInput;
   const cursor = args.cursor;

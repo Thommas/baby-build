@@ -11,6 +11,8 @@ import { WorldFacade } from '../../../facade';
 import { ConstantsService, FormService } from '../../../services';
 import { map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-world-show-cmp',
@@ -19,37 +21,39 @@ import { Subscription } from 'rxjs';
 })
 export class WorldShowComponent implements OnInit {
   @ViewChild('inputElement') inputElement: any;
+  world$: any = this.worldFacade.world$;
   formGroup: FormGroup;
   formFieldSub: Subscription;
   selectedWorld$ = this.worldFacade.selectedWorld$;
 
   constructor(
+    private route: ActivatedRoute,
     public constantsService: ConstantsService,
     private formService: FormService,
     private worldFacade: WorldFacade
   ) {
     this.formGroup = new FormGroup({
       label: new FormControl('', []),
-      category: new FormControl('', []),
-      platform: new FormControl('', []),
-      language: new FormControl('', []),
     });
   }
 
   ngOnInit() {
-    const operator = map(() => this.save());
-    this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
-    this.worldFacade.selectedWorld$.pipe(
-      tap(selectedWorld => {
-        if (selectedWorld) {
-          this.formGroup.patchValue(selectedWorld);
-        }
-      }),
-    ).subscribe();
+    // const operator = map(() => this.save());
+    // this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
+    // this.worldFacade.selectedWorld$.pipe(
+    //   tap(selectedWorld => {
+    //     if (selectedWorld) {
+    //       this.formGroup.patchValue(selectedWorld);
+    //     }
+    //   }),
+    // ).subscribe();
+    this.route.params.subscribe(params => {
+      this.worldFacade.getWorldById(params.id);
+    });
   }
 
   ngOnDestroy() {
-    this.formFieldSub.unsubscribe();
+    // this.formFieldSub.unsubscribe();
   }
 
   selectWorld(world?: any) {
@@ -72,30 +76,7 @@ export class WorldShowComponent implements OnInit {
     this.worldFacade.deleteWorld();
   }
 
-  selectCategory(category: string) {
-    this.formGroup.patchValue({
-      category
-    });
-    this.worldFacade.updateWorld({
-      category,
-    });
-  }
-
-  selectPlatform(platform: string) {
-    this.formGroup.patchValue({
-      platform
-    });
-    this.worldFacade.updateWorld({
-      platform,
-    });
-  }
-
-  selectLanguage(language: string) {
-    this.formGroup.patchValue({
-      language
-    });
-    this.worldFacade.updateWorld({
-      language,
-    });
+  drop(event: CdkDragDrop<string[]>) {
+    console.log('event', event);
   }
 }

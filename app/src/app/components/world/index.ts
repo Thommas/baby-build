@@ -1,4 +1,7 @@
 export * from './world.routing';
+export * from './idea-item/idea-item.component';
+export * from './idea-list/idea-list.component';
+export * from './idea-list-filters/idea-list-filters.component';
 export * from './world-item/world-item.component';
 export * from './world-index/world-index.component';
 export * from './world-list/world-list.component';

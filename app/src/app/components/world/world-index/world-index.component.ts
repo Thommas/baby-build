@@ -14,22 +14,10 @@ import { ConstantsService } from '../../../services';
   styleUrls: ['./world-index.component.scss']
 })
 export class WorldIndexComponent {
-  displayFilters: boolean;
-  selectedWorld$ = this.worldFacade.selectedWorld$;
-
   constructor(
     public constantsService: ConstantsService,
     private worldFacade: WorldFacade
   ) {
-    this.displayFilters = false;
-  }
-
-  selectWorld(world?: any) {
-    this.worldFacade.selectWorld(world);
-  }
-
-  toggleFilters() {
-    this.displayFilters = !this.displayFilters;
   }
 
   refreshList() {
