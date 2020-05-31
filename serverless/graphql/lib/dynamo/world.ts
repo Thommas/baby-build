@@ -37,7 +37,6 @@ export function getWorlds(userId: string, args: any) {
         };
       }
       const params: any = worlds.hits.hits.map((hit: any) => ({id: hit._id}));
-      console.log('params.length', params.length);
       return dynamoService.getEntity().batchGet(params).then((items: any) => {
         return {
           total: worlds.hits.total.value,
@@ -92,5 +91,44 @@ export function deleteWorld(args: any, userId: string) {
         throw new Error('Unauthorized');
       }
       return entity.delete();
+    });
+}
+
+export function addIdea(args: any, userId: string) {
+  return dynamoService.getEntity().get(args.id)
+    .then((entity: any) => {
+      if (!entity) {
+        throw new Error('World not found');
+      }
+      if (entity.userId !== userId) {
+        throw new Error('Unauthorized');
+      }
+      if (!entity.ideas) {
+        entity.ideas = [];
+      }
+      if (-1 === entity.ideas.indexOf(args.ideaId)) {
+        entity.ideas.push(args.ideaId);
+      }
+      return entity.save();
+    });
+}
+
+export function removeIdea(args: any, userId: string) {
+  return dynamoService.getEntity().get(args.id)
+    .then((entity: any) => {
+      if (!entity) {
+        throw new Error('World not found');
+      }
+      if (entity.userId !== userId) {
+        throw new Error('Unauthorized');
+      }
+      if (!entity.ideas) {
+        entity.ideas = [];
+      }
+      const index = entity.ideas.indexOf(args.ideaId);
+      if (-1 !== index) {
+        entity.ideas.splice(index, 1);
+      }
+      return entity.save();
     });
 }

@@ -4,6 +4,7 @@
     cdkDrag
     *ngFor="let idea of (ideas$ | async)"
     [idea]="idea"
+    [cdkDragData]="idea"
   ></app-idea-item-cmp>
 </div>
 <div *ngIf="fetchMoreLoading$ | async">LOADING</div>

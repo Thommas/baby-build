@@ -19,5 +19,7 @@ export default {
     createWorld: (_, args, context) => dbWorld.createWorld(args, context.userId),
     updateWorld: (_, args, context) => dbWorld.updateWorld(args, context.userId),
     deleteWorld: (_, args, context) => dbWorld.deleteWorld(args, context.userId),
+    addIdea: (_, args, context) => dbWorld.addIdea(args, context.userId),
+    removeIdea: (_, args, context) => dbWorld.removeIdea(args, context.userId),
   }
 };

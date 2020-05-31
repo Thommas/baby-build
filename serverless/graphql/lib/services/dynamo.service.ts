@@ -18,10 +18,10 @@ class DynamoService {
     } = configService;
 
     if (localDynamoDBHost && localDynamoDBPort) {
-      dynamoose.AWS.config.update({
+      dynamoose.aws.sdk.config.update({
         region: 'eu-west-2',
       });
-      dynamoose.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
+      dynamoose.aws.ddb.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
     }
 
     return dynamoose;

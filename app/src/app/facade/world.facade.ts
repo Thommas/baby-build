@@ -11,11 +11,13 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY, of, from } from 'rxjs';
 import { flatMap, map, withLatestFrom, mergeMap, tap } from 'rxjs/operators';
 import {
-  CreateWorldMutation,
-  DeleteWorldMutation,
   GetWorldQuery,
   GetWorldsQuery,
-  UpdateWorldMutation
+  CreateWorldMutation,
+  UpdateWorldMutation,
+  DeleteWorldMutation,
+  WorldAddIdeaMutation,
+  WorldRemoveIdeaMutation
 } from '../graphql';
 import { ApolloService } from '../services';
 import {
@@ -27,7 +29,9 @@ import {
   CreateWorld,
   UpdateWorld,
   SelectWorld,
-  DeleteWorld
+  DeleteWorld,
+  WorldAddIdea,
+  WorldRemoveIdea,
 } from '../store';
 import { WorldFiltersFacade } from './world-filters.facade';
 import { UserFacade } from './user.facade';
@@ -46,7 +50,7 @@ export class WorldFacade {
       select('world', 'id'),
       mergeMap((id: string) => {
         if (!id) {
-          return null;
+          return of(null);
         }
         return this.apolloService.apolloClient.watchQuery<any>({
           query: GetWorldQuery,
@@ -319,4 +323,45 @@ export class WorldFacade {
   selectWorld(world: any) {
     this.store.dispatch(new SelectWorld(world));
   }
+
+  addIdea(ideaId: string) {
+    this.store.dispatch(new WorldAddIdea({
+      ideaId,
+    }));
+  }
+
+  @Effect({dispatch: false})
+  addIdea$ = this.actions$
+    .pipe(
+      ofType(WorldActionTypes.WorldAddIdea),
+      withLatestFrom(
+        this.world$
+      ),
+      mergeMap((args: any[]) => {
+        const action = args[0];
+        const world = args[1];
+        return this.apolloService.apolloClient.mutate({
+          mutation: WorldAddIdeaMutation,
+          variables: {
+            id: world.id,
+            ideaId: action.payload.ideaId,
+          },
+          // optimisticResponse: {
+          //   __typename: 'Mutation',
+          //   deleteWorld: {
+          //     __typename: 'World',
+          //     id: selectedWorld.id
+          //   },
+          // },
+          // update: (store, { data: { deleteWorld } }) => {
+          //   if (!deleteWorld) {
+          //     return;
+          //   }
+          //   // const query: any = store.readQuery({ query: GetWorldsQuery });
+          //   // const updatedWorlds: any[] = query.worlds.filter((world: any) => world.id && world.id !== deleteWorld.id);
+          //   // store.writeQuery({ query: GetWorldsQuery, data: { worlds: updatedWorlds }});
+          // },
+        });
+      })
+    );
 }

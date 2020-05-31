@@ -77,6 +77,7 @@ export class WorldShowComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log('event', event);
+    const idea = event.item.data;
+    this.worldFacade.addIdea(idea.id);
   }
 }

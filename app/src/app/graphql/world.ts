@@ -11,6 +11,14 @@ export const GetWorldQuery = gql`
     world(id: $id) {
       id
       label
+      ideas {
+        id
+        label
+        releaseDate
+        imgs {
+          png
+        }
+      }
     }
   }
 `;
@@ -60,6 +68,24 @@ export const DeleteWorldMutation = gql`
       id: $id
     ) {
       id
+    }
+  }
+`;
+
+export const WorldAddIdeaMutation = gql`
+  mutation WorldAddIdea($id: String!, $ideaId: String!) {
+    addIdea(id: $id, ideaId: $ideaId) {
+      id
+      label
+    }
+  }
+`;
+
+export const WorldRemoveIdeaMutation = gql`
+  mutation WorldRemoveIdea($id: String!, $ideaId: String!) {
+    removeIdea(id: $id, ideaId: $ideaId) {
+      id
+      label
     }
   }
 `;

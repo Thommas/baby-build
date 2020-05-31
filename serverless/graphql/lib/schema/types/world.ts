@@ -36,6 +36,14 @@ const World = gql`
     deleteWorld(
       id: String!
     ): World
+    addIdea(
+      id: String!
+      ideaId: String!
+    ): World
+    removeIdea(
+      id: String!
+      ideaId: String!
+    ): World
   }
 `;
 export default World;

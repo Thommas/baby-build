@@ -12,11 +12,12 @@ export function getAuthUser(userId: string) {
     .then((entity: any) => {
       if (!entity) {
         const Entity = dynamoService.getEntity();
-        entity = new Entity();
-        entity.type = 'user';
-        entity.id = userId;
-        entity.xp = 0;
-        entity.lvl = 1;
+        entity = new Entity({
+          type: 'user',
+          id: userId,
+          xp: 0,
+          lvl: 1,
+        });
         return entity.save();
       }
       return entity;
