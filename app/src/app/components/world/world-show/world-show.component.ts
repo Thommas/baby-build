@@ -38,22 +38,9 @@ export class WorldShowComponent implements OnInit {
   }
 
   ngOnInit() {
-    // const operator = map(() => this.save());
-    // this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
-    // this.worldFacade.selectedWorld$.pipe(
-    //   tap(selectedWorld => {
-    //     if (selectedWorld) {
-    //       this.formGroup.patchValue(selectedWorld);
-    //     }
-    //   }),
-    // ).subscribe();
     this.route.params.subscribe(params => {
       this.worldFacade.getWorldById(params.id);
     });
-  }
-
-  ngOnDestroy() {
-    // this.formFieldSub.unsubscribe();
   }
 
   selectWorld(world?: any) {

@@ -11,7 +11,7 @@ import { WorldViewIndexComponent } from './world-view-index/world-view-index.com
 
 const routes: Routes = [
   {
-    path: 'world-view',
+    path: 'world-view/:id',
     component: WorldViewIndexComponent,
     canActivate: [AuthGuardService]
   },

@@ -8,6 +8,8 @@ import { Component, HostListener, ComponentFactoryResolver, ViewChild, OnInit } 
 import { WorldViewItemComponent } from '../world-view-item/world-view-item.component';
 import { WorldViewItemDirective } from '../world-view-item/world-view-item.directive';
 import { ItemService } from '../../../services';
+import { ActivatedRoute } from '@angular/router';
+import { WorldFacade } from '../../../facade';
 
 @Component({
   selector: 'world-view-index-cmp',
@@ -20,8 +22,10 @@ export class WorldViewIndexComponent implements OnInit {
   mainId: string = null;
 
   constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
     private itemService: ItemService,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private worldFacade: WorldFacade,
+    private route: ActivatedRoute
   ) {
   }
 
@@ -31,11 +35,17 @@ export class WorldViewIndexComponent implements OnInit {
     return false;
   }
 
-  addItem(keyCode: number) {
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.worldFacade.getWorldById(params.id);
+    });
+  }
+
+  async addItem(keyCode: number) {
     if (this.components.length > 20) {
       return;
     }
-    const data = this.itemService.getData(keyCode);
+    const data = await this.itemService.getData(keyCode);
     if (!data) {
       return;
     }
@@ -47,10 +57,6 @@ export class WorldViewIndexComponent implements OnInit {
     instance.data = data;
     instance.destroy.subscribe((itemId: any) => this.onDestroy(itemId));
     componentRef.changeDetectorRef.detectChanges();
-  }
-
-  ngOnInit() {
-    this.itemService.loadAssets();
   }
 
   onDestroy(itemId: any) {

@@ -54,10 +54,11 @@ export class WorldViewItemComponent implements OnInit, OnDestroy, OnChanges {
   @HostBinding('style.left')
   y = "50%";
 
-  ngOnInit() {
+  async ngOnInit() {
+    const data = await this.data;
     this.x = (Math.round(Math.random() * 90)) + '%';
     this.y = (Math.round(Math.random() * 90)) + '%';
-    if (!this.data.asset.animations || 0 === this.data.asset.animations.length) {
+    if (!data.asset.animations || 0 === data.asset.animations.length) {
       this.generateRandomAnimation();
     }
     this.init();
@@ -73,11 +74,11 @@ export class WorldViewItemComponent implements OnInit, OnDestroy, OnChanges {
     this.init();
   }
 
-  init() {
-    console.log('this.data', this.data);
+  async init() {
+    const data = await this.data;
     this.startTimer();
-    if (this.data.sound) {
-      this.audioService.playSound(this.data.world.name + '/' + this.data.sound);
+    if (data.sound) {
+      this.audioService.playSound(data.world.name + '/' + data.sound);
     }
   }
 
@@ -92,7 +93,8 @@ export class WorldViewItemComponent implements OnInit, OnDestroy, OnChanges {
     ).subscribe();
   }
 
-  destroyThis() {
-    this.destroy.emit(this.data.id);
+  async destroyThis() {
+    const data = await this.data;
+    this.destroy.emit(data.id);
   }
 }

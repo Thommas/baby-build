@@ -1,15 +1,9 @@
 <div *ngIf="world$ | async as world">
   <mat-card fxFlex class="left-card">
     <mat-card-header>
-      <form [formGroup]="formGroup">
-        <mat-form-field fxFill appearance="none">
-          <input #inputElement fxFill
-                matInput
-                formControlName="label"
-                (keyup.backspace)="onKey($event)"
-                autocomplete="off">
-        </mat-form-field>
-      </form>
+      <button mat-button [routerLink]="['/world-view/' + world.id]">
+        View world
+      </button>
     </mat-card-header>
     <mat-card-content>
       <div id="list-2" cdkDropList cdkDropListConnectedTo="list-1" (cdkDropListDropped)="drop($event)">

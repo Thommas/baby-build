@@ -5,64 +5,46 @@
  */
 
 import { Injectable } from '@angular/core';
-import { find } from 'lodash';
 import * as uuid from 'uuid/v4';
-import { map } from 'rxjs/operators';
-import { GetIdeas } from '../graphql';
+import { map, first } from 'rxjs/operators';
 import { ApolloService } from './apollo.service';
-
-const ASSETS = [];
+import { WorldFacade } from '../facade';
 
 @Injectable()
 export class ItemService {
   isRandom = false;
-  assetsIdeas$ = this.apolloService.apolloClient.watchQuery<any>({
-    query: GetIdeas,
-    variables: {
-      ideaInput: {
-        category: 'character',
-      }
-    },
-  }).valueChanges
+  assetsIdeas$ = this.worldFacade.world$
     .pipe(
-      map((response: any) => {
-        return response.data.ideas.nodes;
+      map((world: any) => {
+        return world.ideas ? world.ideas : [];
       }),
     );
-  assets: any[] = [];
 
-  constructor(private apolloService: ApolloService) {
+  constructor(private apolloService: ApolloService, private worldFacade: WorldFacade) {
 
   }
 
-  loadAssets() {
-    this.assetsIdeas$.subscribe((ideas: any) => {
-      this.assets = ideas;
-      console.log('this.assets.length', this.assets.length);
-    });
-  }
-
-  getData(keyCode: number) {
-    if (this.assets.length === 0) {
+  async getData(keyCode: number) {
+    const assets = await this.assetsIdeas$.pipe(first()).toPromise();
+    if (assets.length === 0) {
       return null;
     }
     const newItem: any = {
       id: uuid(),
       keyCode: keyCode,
     };
-    this.generateRandomAsset(newItem);
+    this.generateRandomAsset(assets, newItem);
     return newItem;
   }
 
-  generateRandomAsset(newItem: any) {
-    const assetsCount = this.assets.length;
+  generateRandomAsset(assets: any, newItem: any) {
+    const assetsCount = assets.length;
     const rand = Math.floor(Math.random() * assetsCount);
     const offset = newItem.keyCode % assetsCount;
-    newItem.asset = this.assets[this.isRandom ? rand : offset];
+    newItem.asset = assets[this.isRandom ? rand : offset];
     if (!newItem.asset) {
       return;
     }
-    console.log('newItem.asset', newItem.asset.label);
     // this.generateRandomPicture(newItem);
     // this.generateRandomSound(newItem);
   }
