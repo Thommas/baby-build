@@ -94,7 +94,7 @@ class PuppeteerService {
       return document.querySelector(sel) ? document.querySelector(sel).innerText : null;
     }, RELEASE_DATE_SELECTOR);
 
-    await page.screenshot({path: 'example.png'});
+    // await page.screenshot({path: 'screenshot.png'});
 
     await browser.close();
 

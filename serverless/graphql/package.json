@@ -7,7 +7,7 @@
     "graphqli": "./node_modules/.bin/ts-node ./lib/graphqli/index.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "test": "ts-node node_modules/jasmine/bin/jasmine \"lib/**/*.spec.ts\"",
-    "e2e": "ts-node node_modules/jasmine/bin/jasmine \"e2e/**/*.spec.ts\"",
+    "e2e": "cross-env NODE_ENV=test ts-node node_modules/jasmine/bin/jasmine \"e2e/**/*.spec.ts\"",
     "deploy:staging": "serverless deploy --stage staging",
     "deploy:production": "serverless deploy --stage production"
   },

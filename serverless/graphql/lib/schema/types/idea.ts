@@ -26,6 +26,7 @@ const Idea = gql`
     userId: String
     user: User
     imgs: Imgs
+    audios: [File]
   }
   input IdeaInput {
     label: String
@@ -59,6 +60,12 @@ const Idea = gql`
       timeToCompletion: Int
       requiredAge: Float
       score: Float
+    ): Idea
+    addAudio(
+      id: String!
+      name: String!
+      size: Int!
+      data: String!
     ): Idea
     deleteIdea(
       id: String!

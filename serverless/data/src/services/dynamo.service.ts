@@ -13,13 +13,16 @@ import { configService } from "./config.service";
 
 export class DynamoService {
   getDynamoose() {
-    const { localDynamoDBHost, localDynamoDBPort } = configService;
+    const {
+      localDynamoDBHost,
+      localDynamoDBPort,
+    } = configService;
 
     if (localDynamoDBHost && localDynamoDBPort) {
-      dynamoose.AWS.config.update({
-        region: "eu-west-2",
+      dynamoose.aws.sdk.config.update({
+        region: 'eu-west-2',
       });
-      dynamoose.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
+      dynamoose.aws.ddb.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
     }
 
     return dynamoose;
@@ -123,6 +126,9 @@ export class DynamoService {
     return Promise.all(promises);
   }
 
+  async deleteEntity(id: string) {
+  }
+
   async loadAllItems(): Promise<any[]> {
     const params: any = {
       TableName: configService.localDynamoDBTable,
@@ -133,7 +139,7 @@ export class DynamoService {
     do {
       items = await this.getAWSDynamo().scan(params).promise();
       items.Items.forEach((item: any) => {
-        const document = AWS.DynamoDB.Converter.unmarshall(item);
+        const document: any = AWS.DynamoDB.Converter.unmarshall(item);
         scanResults.push(document);
       });
       params.ExclusiveStartKey = items.LastEvaluatedKey;

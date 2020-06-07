@@ -5,7 +5,7 @@
  */
 
 import * as elasticsearch from "elasticsearch";
-import * as fs from "fs";
+import { dynamoService } from './dynamo.service';
 import { configService } from "./config.service";
 import { ELASTIC_SEARCH_CONFIG } from "../config/elasticsearch.config";
 
@@ -35,9 +35,8 @@ class ElasticSearchService {
     return this.elasticsearchClient.indices.refresh();
   }
 
-  loadData(): Promise<any> {
-    const data: any = fs.readFileSync(configService.dbDumpLocalPath);
-    const items: any[] = JSON.parse(data);
+  async loadData(): Promise<any> {
+    const items: any = await dynamoService.loadAllItems();
     const promises: Promise<any>[] = [];
     for (let item of items) {
       promises.push(this.index(item));
@@ -70,6 +69,7 @@ class ElasticSearchService {
   async index(document: any): Promise<any> {
     const id = document.id;
     const type = id.split("-")[0];
+    delete document.imgs;
     return this.elasticsearchClient.index(
       {
         index: configService.elasticSearchIndex,
@@ -84,7 +84,7 @@ class ElasticSearchService {
         if (err) {
           return console.error(err);
         }
-        console.log(resp, status);
+        console.log(resp._id, status);
       }
     );
   }

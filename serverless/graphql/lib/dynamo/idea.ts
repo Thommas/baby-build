@@ -95,3 +95,29 @@ export function deleteIdea(args: any, userId: string) {
       return entity.delete();
     });
 }
+
+export function addAudio(args: any, userId: string) {
+  return dynamoService.getEntity().get(args.id)
+    .then((entity: any) => {
+      if (!entity) {
+        throw new Error('Idea not found');
+      }
+      // FIXME Need to check sharing permission
+      // if (entity.userId !== userId) {
+      //   throw new Error('Unauthorized');
+      // }
+      const Entity = dynamoService.getEntity();
+      const id = nanoid();
+      const file = new Entity({
+        id: `File-${id}`,
+        userId,
+        name: args.name,
+        size: args.size,
+        data: args.data,
+      });
+      return file.save().then((file: any) => {
+        entity.audios.push(file.id);
+        return entity.save();
+      });
+    });
+}
