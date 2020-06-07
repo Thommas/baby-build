@@ -6,4 +6,5 @@
 /npm-debug.log
 /.env
 /.env.dev
+/.env.test
 /.env.local

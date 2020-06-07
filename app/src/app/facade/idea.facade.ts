@@ -14,7 +14,9 @@ import {
   CreateIdeaMutation,
   DeleteIdeaMutation,
   GetIdeas,
-  UpdateIdeaMutation
+  UpdateIdeaMutation,
+  AddAudioIdeaMutation,
+  RemoveAudioIdeaMutation,
 } from '../graphql';
 import { ApolloService } from '../services';
 import {
@@ -26,7 +28,9 @@ import {
   UpdateIdea,
   SelectIdea,
   SelectReview,
-  DeleteIdea
+  DeleteIdea,
+  AddAudioIdea,
+  RemoveAudioIdea,
 } from '../store';
 import { IdeaFiltersFacade } from './idea-filters.facade';
 import { IdeaSuggestFacade } from './idea-suggest.facade';
@@ -353,4 +357,84 @@ export class IdeaFacade {
     this.store.dispatch(new SelectReview(null));
     this.store.dispatch(new SelectIdea(idea));
   }
+
+  addAudio(data: any) {
+    this.store.dispatch(new AddAudioIdea(data));
+  }
+
+  @Effect({dispatch: false})
+  addAudio$ = this.actions$
+    .pipe(
+      ofType(IdeaActionTypes.AddAudioIdea),
+      withLatestFrom(
+        this.userFacade.user$,
+        this.selectedIdea$
+      ),
+      mergeMap((args: any[]) => {
+        const action: any = args[0];
+        const user: any = args[1];
+        const selectedIdea: any = args[2];
+        if (!user || !selectedIdea) {
+          return of(EMPTY);
+        }
+        return this.apolloService.apolloClient.mutate({
+          mutation: AddAudioIdeaMutation,
+          variables: {
+            id: selectedIdea.id,
+            ...action.payload
+          },
+          update: (store: any, { data: { addAudio } }) => {
+            if (!addAudio) {
+              return;
+            }
+            const idea = store.data.get(`Idea:${addAudio.id}`);
+            if (idea) {
+              idea.audios = addAudio.audios;
+              store.writeData(idea);
+              this.selectIdea(idea);
+            }
+          }
+        });
+      })
+    );
+
+  removeAudio(data: any) {
+    this.store.dispatch(new RemoveAudioIdea(data));
+  }
+
+  @Effect({dispatch: false})
+  removeAudio$ = this.actions$
+    .pipe(
+      ofType(IdeaActionTypes.RemoveAudioIdea),
+      withLatestFrom(
+        this.userFacade.user$,
+        this.selectedIdea$
+      ),
+      mergeMap((args: any[]) => {
+        const action: any = args[0];
+        const user: any = args[1];
+        const selectedIdea: any = args[2];
+        if (!user || !selectedIdea) {
+          return of(EMPTY);
+        }
+        return this.apolloService.apolloClient.mutate({
+          mutation: RemoveAudioIdeaMutation,
+          variables: {
+            id: selectedIdea.id,
+            ...action.payload
+          },
+          update: (store: any, { data: { removeAudio } }) => {
+            if (!removeAudio) {
+              return;
+            }
+            const idea = store.data.get(`Idea:${removeAudio.id}`);
+            if (idea) {
+              idea.audios = removeAudio.audios;
+              store.writeData(idea);
+              this.selectIdea(idea);
+            }
+          }
+        });
+      })
+    );
 }

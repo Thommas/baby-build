@@ -61,14 +61,19 @@ const Idea = gql`
       requiredAge: Float
       score: Float
     ): Idea
+    deleteIdea(
+      id: String!
+    ): Idea
     addAudio(
       id: String!
       name: String!
       size: Int!
+      type: String!
       data: String!
     ): Idea
-    deleteIdea(
+    removeAudio(
       id: String!
+      fileId: String!
     ): Idea
   }
 `;

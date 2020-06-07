@@ -1,3 +1,5 @@
+export * from './audio-list/audio-list.component';
+export * from './audio-list/audio-list-dragndrop.directive';
 export * from './idea.routing';
 export * from './idea-create/idea-create.component';
 export * from './idea-icon/idea-icon.component';

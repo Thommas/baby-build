@@ -46,7 +46,7 @@ export class ItemService {
       return;
     }
     // this.generateRandomPicture(newItem);
-    // this.generateRandomSound(newItem);
+    this.generateRandomSound(newItem);
   }
 
   generateRandomPicture(newItem: any) {
@@ -58,11 +58,14 @@ export class ItemService {
   }
 
   generateRandomSound(newItem: any) {
-    const filesCount = newItem.asset.sounds.length;
+    if (!newItem.asset.audios) {
+      return;
+    }
+    const filesCount = newItem.asset.audios.length;
     if (0 === filesCount.length) {
       return;
     }
     const rand = Math.floor(Math.random() * filesCount);
-    newItem.sound = newItem.asset.sounds[rand];
+    newItem.sound = newItem.asset.audios[rand];
   }
 }

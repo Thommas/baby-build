@@ -78,7 +78,7 @@ export class WorldViewItemComponent implements OnInit, OnDestroy, OnChanges {
     const data = await this.data;
     this.startTimer();
     if (data.sound) {
-      this.audioService.playSound(data.world.name + '/' + data.sound);
+      this.audioService.playSound(data.sound);
     }
   }
 

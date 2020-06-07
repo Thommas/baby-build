@@ -32,6 +32,13 @@ export const GetIdeas = gql`
           screenshot
           png
         }
+        audios {
+          id
+          name
+          type
+          size
+          data
+        }
       }
     }
   }
@@ -59,6 +66,13 @@ export const CreateIdeaMutation = gql`
         cover
         screenshot
         png
+      }
+      audios {
+        id
+        name
+        type
+        size
+        data
       }
     }
   }
@@ -107,6 +121,13 @@ export const UpdateIdeaMutation = gql`
         screenshot
         png
       }
+      audios {
+        id
+        name
+        type
+        size
+        data
+      }
     }
   }
 `;
@@ -119,6 +140,106 @@ export const DeleteIdeaMutation = gql`
       id: $id
     ) {
       id
+    }
+  }
+`;
+
+export const AddAudioIdeaMutation = gql`
+  mutation AddAudio(
+    $id: String!
+    $name: String!
+    $size: Int!
+    $type: String!
+    $data: String!
+  ) {
+    addAudio(
+      id: $id
+      name: $name
+      size: $size
+      type: $type
+      data: $data
+    ) {
+      id
+      label
+      category
+      platform
+      releaseDate
+      timeToCompletion
+      language
+      requiredAge
+      score
+      userId
+      user {
+        firstName
+        lastName
+      }
+      imgs {
+        icon
+        cover
+        screenshot
+        png
+      }
+      audios {
+        id
+        name
+        type
+        size
+        data
+      }
+      audios {
+        id
+        name
+        type
+        size
+        data
+      }
+    }
+  }
+`;
+
+export const RemoveAudioIdeaMutation = gql`
+  mutation RemoveAudio(
+    $id: String!
+    $fileId: String!
+  ) {
+    removeAudio(
+      id: $id
+      fileId: $fileId
+    ) {
+      id
+      label
+      category
+      platform
+      releaseDate
+      timeToCompletion
+      language
+      requiredAge
+      score
+      userId
+      user {
+        firstName
+        lastName
+      }
+      imgs {
+        icon
+        cover
+        screenshot
+        png
+      }
+      audios {
+        id
+        name
+        type
+        size
+        data
+      }
+      audios {
+        id
+        name
+        type
+        size
+        data
+      }
     }
   }
 `;

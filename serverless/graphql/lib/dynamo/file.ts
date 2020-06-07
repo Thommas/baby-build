@@ -6,8 +6,8 @@
 
 import { dynamoService } from '../services';
 
-export function getFiles(ids: string[]) {
-  if (0 === ids.length) {
+export function getFiles(ids?: string[]) {
+  if (!ids || 0 === ids.length) {
     return [];
   }
   const params = ids.map((id: string) => ({ id }));

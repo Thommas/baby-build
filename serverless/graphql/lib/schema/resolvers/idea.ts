@@ -22,5 +22,6 @@ export default {
     updateIdea: (_, args, context) => dbIdea.updateIdea(args, context.userId),
     deleteIdea: (_, args, context) => dbIdea.deleteIdea(args, context.userId),
     addAudio: (_, args, context) => dbIdea.addAudio(args, context.userId),
+    removeAudio: (_, args, context) => dbIdea.removeAudio(args, context.userId),
   }
 };

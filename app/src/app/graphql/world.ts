@@ -18,6 +18,13 @@ export const GetWorldQuery = gql`
         imgs {
           png
         }
+        audios {
+          id
+          name
+          type
+          size
+          data
+        }
       }
     }
   }

@@ -108,16 +108,46 @@ export function addAudio(args: any, userId: string) {
       // }
       const Entity = dynamoService.getEntity();
       const id = nanoid();
-      const file = new Entity({
+      const newFile = new Entity({
         id: `File-${id}`,
         userId,
         name: args.name,
         size: args.size,
+        type: args.type,
         data: args.data,
       });
-      return file.save().then((file: any) => {
+      return newFile.save().then((file: any) => {
+        if (!entity.audios) {
+          entity.audios = [];
+        }
         entity.audios.push(file.id);
         return entity.save();
       });
+    });
+}
+
+export function removeAudio(args: any, userId: string) {
+  return dynamoService.getEntity().get(args.id)
+    .then((entity: any) => {
+      if (!entity) {
+        throw new Error('Idea not found');
+      }
+      // FIXME Need to check sharing permission
+      // if (entity.userId !== userId) {
+      //   throw new Error('Unauthorized');
+      // }
+      const audios = entity.audios.filter((audioId: string) => audioId === args.fileId);
+      if (audios.length === 1) {
+        dynamoService.getEntity().get(audios[0]).then((file) => {
+          if (file) {
+            console.log('FOUND FILE TO DELETE');
+            file.delete();
+          }
+        });
+      }
+
+      entity.audios = entity.audios.filter((audioId: string) => audioId !== args.fileId);
+      console.log('entity.audios', entity.audios);
+      return entity.save();
     });
 }

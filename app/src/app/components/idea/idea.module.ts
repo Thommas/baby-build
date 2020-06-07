@@ -28,6 +28,8 @@ import {
 
 import {
   routing,
+  AudioListComponent,
+  AudioListDragndropDirective,
   IdeaCreateComponent,
   IdeaIconComponent,
   IdeaItemComponent,
@@ -68,6 +70,8 @@ import { ideaFiltersReducer, ideaSuggestReducer } from '../../store';
     })
   ],
   declarations: [
+    AudioListComponent,
+    AudioListDragndropDirective,
     IdeaCreateComponent,
     IdeaIconComponent,
     IdeaItemComponent,

@@ -11,6 +11,7 @@ const File = gql`
     id: String
     name: String
     size: Int
+    type: String
     data: String
   }
 `;

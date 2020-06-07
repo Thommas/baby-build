@@ -12,13 +12,13 @@ import { take, tap } from 'rxjs/operators';
 export class AudioService {
   isPlaying: boolean = false;
 
-  playSound(filename: string) {
+  playSound(file: any) {
     if (this.isPlaying) {
       return;
     }
     this.isPlaying = true;
     const audio = new Audio();
-    audio.src = `../assets/audio/${filename}`;
+    audio.src = file.data;
     audio.load();
     audio.play();
 

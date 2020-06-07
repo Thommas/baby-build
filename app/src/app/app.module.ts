@@ -79,6 +79,7 @@ import {
   worldReducer,
   worldFiltersReducer,
 } from './store';
+import { AppDragndropDirective } from './app.dragndrop.directive';
 
 // ngrx-store-localstorage
 const reducers: ActionReducerMap<any> = {
@@ -104,7 +105,8 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     SidebarComponent,
-    TopbarComponent
+    TopbarComponent,
+    AppDragndropDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'path-of-child' }),

@@ -14,6 +14,8 @@ export enum IdeaActionTypes {
   UpdateIdea = '[Idea] Update',
   SelectIdea = '[Idea] Select',
   DeleteIdea = '[Idea] Delete',
+  AddAudioIdea = '[Idea] Add Audio',
+  RemoveAudioIdea = '[Idea] Remove Audio',
 }
 
 export class FetchMoreIdea implements Action {
@@ -52,6 +54,18 @@ export class DeleteIdea implements Action {
   constructor() {}
 }
 
+export class AddAudioIdea implements Action {
+  readonly type = IdeaActionTypes.AddAudioIdea;
+
+  constructor(public payload: any) {}
+}
+
+export class RemoveAudioIdea implements Action {
+  readonly type = IdeaActionTypes.RemoveAudioIdea;
+
+  constructor(public payload: any) {}
+}
+
 export type IdeaActionsUnion =
   FetchMoreIdea
   | FetchMoreIdeaLoading
@@ -59,4 +73,6 @@ export type IdeaActionsUnion =
   | CreateIdea
   | UpdateIdea
   | SelectIdea
-  | DeleteIdea;
+  | DeleteIdea
+  | AddAudioIdea
+  | RemoveAudioIdea;
