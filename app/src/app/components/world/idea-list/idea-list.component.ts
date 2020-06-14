@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { IdeaFacade } from '../../../facade';
+import { IdeaFacade, WorldFacade } from '../../../facade';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -18,7 +18,8 @@ export class IdeaListComponent {
   fetchMoreLoading$ = this.ideaFacade.fetchMoreLoading$;
 
   constructor(
-    private ideaFacade: IdeaFacade
+    private ideaFacade: IdeaFacade,
+    private worldFacade: WorldFacade
   ) {
     this.ideas$ = this.ideaFacade.ideas$;
   }
@@ -34,6 +35,9 @@ export class IdeaListComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    // Do nothing
+    if (event.previousContainer.id === 'list-2') {
+      const idea = event.item.data;
+      this.worldFacade.removeIdea(idea.id);
+    }
   }
 }

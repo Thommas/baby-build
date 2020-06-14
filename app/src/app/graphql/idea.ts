@@ -186,13 +186,6 @@ export const AddAudioIdeaMutation = gql`
         size
         data
       }
-      audios {
-        id
-        name
-        type
-        size
-        data
-      }
     }
   }
 `;
@@ -225,13 +218,6 @@ export const RemoveAudioIdeaMutation = gql`
         cover
         screenshot
         png
-      }
-      audios {
-        id
-        name
-        type
-        size
-        data
       }
       audios {
         id

@@ -6,11 +6,13 @@
       </button>
     </mat-card-header>
     <mat-card-content>
-      <div id="list-2" cdkDropList cdkDropListConnectedTo="list-1" (cdkDropListDropped)="drop($event)">
+      <div id="list-2" cdkDropList cdkDropListConnectedTo="list-1" (cdkDropListDropped)="drop($event)" fxLayout="row">
         <ng-container *ngIf="world && world.ideas">
           <app-idea-item-cmp
+            cdkDrag
             *ngFor="let idea of world.ideas"
             [idea]="idea"
+            [cdkDragData]="idea"
           ></app-idea-item-cmp>
         </ng-container>
       </div>

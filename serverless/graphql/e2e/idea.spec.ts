@@ -15,11 +15,12 @@ import {
 import { dynamoService } from '../lib/services';
 
 describe('Idea', () => {
-  // it('getIdeas', (done) => {
-  //   getIdeas('auth0|5a773beebfd2511753f2c9c0', {}).then((data: any) => {
-  //     done();
-  //   })
-  // });
+  it('getIdeas', (done) => {
+    getIdeas('auth0|5a773beebfd2511753f2c9c0', {}).then((result: any) => {
+      console.log('result', result);
+      done();
+    })
+  });
 
   it('createIdea', (done) => {
     const args = {

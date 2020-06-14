@@ -82,6 +82,16 @@ class DynamoService {
 
     return scanResults;
   }
+
+  persist(entity: any) {
+    for (const field in entity) {
+      if (entity[field] === null) {
+        delete entity[field];
+        console.log(`Removed null field: ${field}`);
+      }
+    }
+    return entity.save();
+  }
 }
 
 export const dynamoService = new DynamoService();

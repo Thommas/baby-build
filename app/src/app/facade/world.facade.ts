@@ -364,4 +364,45 @@ export class WorldFacade {
         });
       })
     );
+
+  removeIdea(ideaId: string) {
+    this.store.dispatch(new WorldRemoveIdea({
+      ideaId,
+    }));
+  }
+
+  @Effect({dispatch: false})
+  removeIdea$ = this.actions$
+    .pipe(
+      ofType(WorldActionTypes.WorldRemoveIdea),
+      withLatestFrom(
+        this.world$
+      ),
+      mergeMap((args: any[]) => {
+        const action = args[0];
+        const world = args[1];
+        return this.apolloService.apolloClient.mutate({
+          mutation: WorldRemoveIdeaMutation,
+          variables: {
+            id: world.id,
+            ideaId: action.payload.ideaId,
+          },
+          // optimisticResponse: {
+          //   __typename: 'Mutation',
+          //   deleteWorld: {
+          //     __typename: 'World',
+          //     id: selectedWorld.id
+          //   },
+          // },
+          // update: (store, { data: { deleteWorld } }) => {
+          //   if (!deleteWorld) {
+          //     return;
+          //   }
+          //   // const query: any = store.readQuery({ query: GetWorldsQuery });
+          //   // const updatedWorlds: any[] = query.worlds.filter((world: any) => world.id && world.id !== deleteWorld.id);
+          //   // store.writeQuery({ query: GetWorldsQuery, data: { worlds: updatedWorlds }});
+          // },
+        });
+      })
+    );
 }

@@ -62,7 +62,7 @@ export function createWorld(args: any, userId: string) {
     imgsReady: false,
     ...args
   });
-  return entity.save();
+  return dynamoService.persist(entity);
 }
 
 export function updateWorld(args: any, userId: string) {
@@ -77,7 +77,7 @@ export function updateWorld(args: any, userId: string) {
       // }
       Object.assign(entity, args);
       entity.imgsReady = false;
-      return entity.save();
+      return dynamoService.persist(entity);
     });
 }
 
@@ -109,7 +109,7 @@ export function addIdea(args: any, userId: string) {
       if (-1 === entity.ideas.indexOf(args.ideaId)) {
         entity.ideas.push(args.ideaId);
       }
-      return entity.save();
+      return dynamoService.persist(entity);
     });
 }
 
@@ -129,6 +129,6 @@ export function removeIdea(args: any, userId: string) {
       if (-1 !== index) {
         entity.ideas.splice(index, 1);
       }
-      return entity.save();
+      return dynamoService.persist(entity);
     });
 }

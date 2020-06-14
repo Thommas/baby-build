@@ -26,7 +26,7 @@ export function createReview(args: any, userId: string) {
     userId,
     ...args
   });
-  return entity.save();
+  return dynamoService.persist(entity);
 }
 
 export function updateReview(args: any, userId: string) {
@@ -39,6 +39,6 @@ export function updateReview(args: any, userId: string) {
         throw new Error('Unauthorized');
       }
       Object.assign(entity, args);
-      return entity.save();
+      return dynamoService.persist(entity);
     });
 }

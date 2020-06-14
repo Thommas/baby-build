@@ -27,7 +27,7 @@ export function createSharing(args: any, userId: string) {
     sharerId: userId,
     userId: args.userId,
   });
-  return entity.save();
+  return dynamoService.persist(entity);
 }
 
 export function deleteSharing(args: any, userId: string) {

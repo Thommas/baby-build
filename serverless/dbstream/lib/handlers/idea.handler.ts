@@ -31,9 +31,11 @@ export function updateIdeaReleaseDate(document: any) {
       const category = document.category === 'videogame' && document.platform ? document.platform : document.category;
       return puppeteerService.fetchReleaseDate(`"${document.label}"+${category}`)
         .then((releaseDate: number|null) => {
-          entity.releaseDate = releaseDate;
           console.log(`Release date ${releaseDate} found for idea: ${document.label}`)
-          return entity.save();
+          if (releaseDate) {
+            entity.releaseDate = releaseDate;
+            return dynamoService.persist(entity);
+          }
         });
     })
 }
@@ -51,7 +53,7 @@ export function updateIdeaImgs(document: any) {
           const platform = document.category === 'videogame' && document.platform ? document.platform : '';
           const ideaLabel = `${document.label} ${document.category} ${platform}`;
           console.log(`Updated images for idea: ${ideaLabel}`)
-          return entity.save();
+          return dynamoService.persist(entity);
         });
     })
 }

@@ -18,7 +18,7 @@ export function getAuthUser(userId: string) {
           xp: 0,
           lvl: 1,
         });
-        return entity.save();
+        return dynamoService.persist(entity);
       }
       return entity;
     });
@@ -53,6 +53,6 @@ export function updateUser(args: any, userId: string) {
       }
       entity.firstName = args.firstName;
       entity.lastName = args.lastName;
-      return entity.save();
+      return dynamoService.persist(entity);
     });
 }

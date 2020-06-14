@@ -29,7 +29,9 @@ export function getIdeas(userId: string, args: any) {
         };
       }
       const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
+      console.log('params', params);
       return dynamoService.getEntity().batchGet(params).then((items: any) => {
+        console.log('items', items);
         return {
           total: ideas.hits.total.value,
           cursor: ideas.hits.hits[ideas.hits.hits.length - 1]._source['createdAt'],
@@ -64,7 +66,7 @@ export function createIdea(args: any, userId: string) {
     imgsReady: false,
     ...args
   });
-  return entity.save();
+  return dynamoService.persist(entity);
 }
 
 export function updateIdea(args: any, userId: string) {
@@ -78,8 +80,13 @@ export function updateIdea(args: any, userId: string) {
       //   throw new Error('Unauthorized');
       // }
       Object.assign(entity, args);
+      for (const field in entity) {
+        if (entity[field] === null) {
+          delete entity[field];
+        }
+      }
       entity.imgsReady = false;
-      return entity.save();
+      return dynamoService.persist(entity);
     });
 }
 
@@ -121,7 +128,7 @@ export function addAudio(args: any, userId: string) {
           entity.audios = [];
         }
         entity.audios.push(file.id);
-        return entity.save();
+        return dynamoService.persist(entity);
       });
     });
 }
@@ -148,6 +155,6 @@ export function removeAudio(args: any, userId: string) {
 
       entity.audios = entity.audios.filter((audioId: string) => audioId !== args.fileId);
       console.log('entity.audios', entity.audios);
-      return entity.save();
+      return dynamoService.persist(entity);
     });
 }

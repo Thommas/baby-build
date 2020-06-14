@@ -60,6 +60,15 @@ class DynamoService {
 
     return dynamoose.model(configService.localDynamoDBTable, EntitySchema);
   }
+
+  persist(entity: any) {
+    for (const field in entity) {
+      if (entity[field] === null) {
+        delete entity[field];
+      }
+    }
+    return entity.save();
+  }
 }
 
 export const dynamoService = new DynamoService();
