@@ -32,13 +32,6 @@ export const GetIdeas = gql`
           screenshot
           png
         }
-        audios {
-          id
-          name
-          type
-          size
-          data
-        }
       }
     }
   }
@@ -66,13 +59,6 @@ export const CreateIdeaMutation = gql`
         cover
         screenshot
         png
-      }
-      audios {
-        id
-        name
-        type
-        size
-        data
       }
     }
   }
@@ -120,13 +106,6 @@ export const UpdateIdeaMutation = gql`
         cover
         screenshot
         png
-      }
-      audios {
-        id
-        name
-        type
-        size
-        data
       }
     }
   }
@@ -179,13 +158,6 @@ export const AddAudioIdeaMutation = gql`
         screenshot
         png
       }
-      audios {
-        id
-        name
-        type
-        size
-        data
-      }
     }
   }
 `;
@@ -218,13 +190,6 @@ export const RemoveAudioIdeaMutation = gql`
         cover
         screenshot
         png
-      }
-      audios {
-        id
-        name
-        type
-        size
-        data
       }
     }
   }

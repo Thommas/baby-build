@@ -8,6 +8,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas';
 
 // Types
+import characterType from './types/character';
 import fileType from './types/file';
 import ideaType from './types/idea';
 import reviewType from './types/review';
@@ -16,6 +17,7 @@ import userType from './types/user';
 import worldType from './types/world';
 
 // Resolvers
+import characterResolver from './resolvers/character';
 import ideaResolver from './resolvers/idea';
 import reviewResolver from './resolvers/review';
 import sharingResolver from './resolvers/sharing';
@@ -23,6 +25,7 @@ import userResolver from './resolvers/user';
 import worldResolver from './resolvers/world';
 
 export const typeDefs: any = mergeTypes([
+  characterType,
   fileType,
   ideaType,
   reviewType,
@@ -32,6 +35,7 @@ export const typeDefs: any = mergeTypes([
 ]);
 
 export const resolvers: any = mergeResolvers([
+  characterResolver,
   ideaResolver,
   reviewResolver,
   sharingResolver,

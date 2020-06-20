@@ -13,10 +13,10 @@ import { WorldFacade } from '../facade';
 @Injectable()
 export class ItemService {
   isRandom = false;
-  assetsIdeas$ = this.worldFacade.world$
+  assetsCharacters$ = this.worldFacade.world$
     .pipe(
       map((world: any) => {
-        return world.ideas ? world.ideas : [];
+        return world.characters ? world.characters : [];
       }),
     );
 
@@ -25,7 +25,7 @@ export class ItemService {
   }
 
   async getData(keyCode: number) {
-    const assets = await this.assetsIdeas$.pipe(first()).toPromise();
+    const assets = await this.assetsCharacters$.pipe(first()).toPromise();
     if (assets.length === 0) {
       return null;
     }
@@ -49,13 +49,13 @@ export class ItemService {
     this.generateRandomSound(newItem);
   }
 
-  generateRandomPicture(newItem: any) {
-    const filesCount = newItem.asset.pictures.length;
-    const rand = Math.floor(Math.random() * filesCount);
-    const offset = newItem.keyCode % filesCount;
-    const filename = newItem.asset.pictures[this.isRandom ? rand : offset];
-    newItem.src = `../assets/img/${filename}`;
-  }
+  // generateRandomPicture(newItem: any) {
+  //   const filesCount = newItem.asset.pictures.length;
+  //   const rand = Math.floor(Math.random() * filesCount);
+  //   const offset = newItem.keyCode % filesCount;
+  //   const filename = newItem.asset.pictures[this.isRandom ? rand : offset];
+  //   newItem.src = `../assets/img/${filename}`;
+  // }
 
   generateRandomSound(newItem: any) {
     if (!newItem.asset.audios) {

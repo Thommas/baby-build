@@ -29,9 +29,9 @@ import {
 
 import {
   routing,
-  IdeaItemComponent,
-  IdeaListComponent,
-  IdeaListFiltersComponent,
+  CharacterItemComponent,
+  CharacterListComponent,
+  CharacterListFiltersComponent,
   WorldItemComponent,
   WorldListComponent,
   WorldListFiltersComponent,
@@ -67,9 +67,9 @@ import { worldFiltersReducer } from '../../store';
     })
   ],
   declarations: [
-    IdeaItemComponent,
-    IdeaListComponent,
-    IdeaListFiltersComponent,
+    CharacterItemComponent,
+    CharacterListComponent,
+    CharacterListFiltersComponent,
     WorldItemComponent,
     WorldListComponent,
     WorldListFiltersComponent,

@@ -15,8 +15,8 @@ export enum WorldActionTypes {
   UpdateWorld = '[World] Update',
   SelectWorld = '[World] Select',
   DeleteWorld = '[World] Delete',
-  WorldAddIdea = '[World] Add Idea',
-  WorldRemoveIdea = '[World] Remove Idea',
+  WorldAddCharacter = '[World] Add Character',
+  WorldRemoveCharacter = '[World] Remove Character',
 }
 
 export class FetchMoreWorld implements Action {
@@ -61,14 +61,14 @@ export class DeleteWorld implements Action {
   constructor() {}
 }
 
-export class WorldAddIdea implements Action {
-  readonly type = WorldActionTypes.WorldAddIdea;
+export class WorldAddCharacter implements Action {
+  readonly type = WorldActionTypes.WorldAddCharacter;
 
   constructor(public payload: any) {}
 }
 
-export class WorldRemoveIdea implements Action {
-  readonly type = WorldActionTypes.WorldRemoveIdea;
+export class WorldRemoveCharacter implements Action {
+  readonly type = WorldActionTypes.WorldRemoveCharacter;
 
   constructor(public payload: any) {}
 }
@@ -82,5 +82,5 @@ export type WorldActionsUnion =
   | UpdateWorld
   | SelectWorld
   | DeleteWorld
-  | WorldAddIdea
-  | WorldRemoveIdea;
+  | WorldAddCharacter
+  | WorldRemoveCharacter;

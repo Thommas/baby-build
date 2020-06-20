@@ -4,13 +4,19 @@ Roadmap
 Short term
 ----------
 
-- Remove idea from world
-- Refactor pictures with file entity
-- Add audio to idea
+- Refactor idea character into character type
+- Migrate data
+- Play audio in character
+- Add/Remove character from world > update state
+- Update world name
+- Convert & to 'and' for pupeeteer search
+- Fix broken idea pagination
 
 Long term
 ---------
 
+- Refactor pictures with file entity
+- Add picture to world
 - Add path entity
 - Add levels to ideas in paths with estimated time
 - Fix auth service

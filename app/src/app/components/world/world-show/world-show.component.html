@@ -6,24 +6,24 @@
       </button>
     </mat-card-header>
     <mat-card-content>
-      <div id="list-2" cdkDropList cdkDropListConnectedTo="list-1" (cdkDropListDropped)="drop($event)" fxLayout="row">
-        <ng-container *ngIf="world && world.ideas">
-          <app-idea-item-cmp
+      <div id="list-2" cdkDropList cdkDropListConnectedTo="list-1" (cdkDropListDropped)="drop($event)" fxLayout="row wrap">
+        <ng-container *ngIf="world && world.characters">
+          <app-character-item-cmp
             cdkDrag
-            *ngFor="let idea of world.ideas"
-            [idea]="idea"
-            [cdkDragData]="idea"
-          ></app-idea-item-cmp>
+            *ngFor="let character of world.characters"
+            [character]="character"
+            [cdkDragData]="character"
+          ></app-character-item-cmp>
         </ng-container>
       </div>
     </mat-card-content>
   </mat-card>
   <mat-card fxFlex class="right-card" fxLayout="column" fxLayoutAlign="space-between none">
     <mat-card-header fxLayout="row" fxLayoutAlign="start center">
-      <app-idea-list-filters-cmp></app-idea-list-filters-cmp>
+      <app-character-list-filters-cmp></app-character-list-filters-cmp>
     </mat-card-header>
     <mat-card-content fxLayout="column" fxLayoutAlign="start start">
-      <app-idea-list-cmp></app-idea-list-cmp>
+      <app-character-list-cmp></app-character-list-cmp>
     </mat-card-content>
   </mat-card>
 </div>

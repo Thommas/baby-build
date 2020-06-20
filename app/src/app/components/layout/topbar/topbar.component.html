@@ -7,6 +7,9 @@
       <button mat-button [routerLink]="['']">
         Ideas
       </button>
+      <button mat-button [routerLink]="['character']">
+        Characters
+      </button>
       <button mat-button [routerLink]="['world']">
         Worlds
       </button>
@@ -15,6 +18,10 @@
       <button mat-button [routerLink]="['create']">
         <mat-icon>add</mat-icon>
         Add new ideas
+      </button>
+      <button mat-button [routerLink]="['character/create']">
+        <mat-icon>add</mat-icon>
+        Add new characters
       </button>
       <button mat-button (click)="createNewWorld()">
         <mat-icon>add</mat-icon>

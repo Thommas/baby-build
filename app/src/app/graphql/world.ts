@@ -11,13 +11,10 @@ export const GetWorldQuery = gql`
     world(id: $id) {
       id
       label
-      ideas {
+      characters {
         id
         label
-        releaseDate
-        imgs {
-          png
-        }
+        img
         audios {
           id
           name
@@ -79,18 +76,18 @@ export const DeleteWorldMutation = gql`
   }
 `;
 
-export const WorldAddIdeaMutation = gql`
-  mutation WorldAddIdea($id: String!, $ideaId: String!) {
-    addIdea(id: $id, ideaId: $ideaId) {
+export const WorldAddCharacterMutation = gql`
+  mutation WorldAddCharacter($id: String!, $characterId: String!) {
+    addCharacter(id: $id, characterId: $characterId) {
       id
       label
     }
   }
 `;
 
-export const WorldRemoveIdeaMutation = gql`
-  mutation WorldRemoveIdea($id: String!, $ideaId: String!) {
-    removeIdea(id: $id, ideaId: $ideaId) {
+export const WorldRemoveCharacterMutation = gql`
+  mutation WorldRemoveCharacter($id: String!, $characterId: String!) {
+    removeCharacter(id: $id, characterId: $characterId) {
       id
       label
     }

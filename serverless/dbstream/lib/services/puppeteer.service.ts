@@ -53,7 +53,12 @@ class PuppeteerService {
     const browser = await this.getBrowser();
     const page = await this.getNewPage(browser);
 
-    await page.goto(`https://www.google.com/search?tbm=isch&q=${input}`);
+    let url = `https://www.google.com/search?tbm=isch&q=${input}`;
+    if (getOriginal) {
+      url = `${url}&tbs=ic%3Atrans`;
+    }
+
+    await page.goto(url);
 
     const imgs: string[] = [];
 

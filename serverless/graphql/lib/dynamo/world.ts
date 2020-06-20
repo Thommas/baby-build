@@ -94,7 +94,7 @@ export function deleteWorld(args: any, userId: string) {
     });
 }
 
-export function addIdea(args: any, userId: string) {
+export function addCharacter(args: any, userId: string) {
   return dynamoService.getEntity().get(args.id)
     .then((entity: any) => {
       if (!entity) {
@@ -103,17 +103,17 @@ export function addIdea(args: any, userId: string) {
       if (entity.userId !== userId) {
         throw new Error('Unauthorized');
       }
-      if (!entity.ideas) {
-        entity.ideas = [];
+      if (!entity.characters) {
+        entity.characters = [];
       }
-      if (-1 === entity.ideas.indexOf(args.ideaId)) {
-        entity.ideas.push(args.ideaId);
+      if (-1 === entity.characters.indexOf(args.characterId)) {
+        entity.characters.push(args.characterId);
       }
       return dynamoService.persist(entity);
     });
 }
 
-export function removeIdea(args: any, userId: string) {
+export function removeCharacter(args: any, userId: string) {
   return dynamoService.getEntity().get(args.id)
     .then((entity: any) => {
       if (!entity) {
@@ -122,12 +122,12 @@ export function removeIdea(args: any, userId: string) {
       if (entity.userId !== userId) {
         throw new Error('Unauthorized');
       }
-      if (!entity.ideas) {
-        entity.ideas = [];
+      if (!entity.characters) {
+        entity.characters = [];
       }
-      const index = entity.ideas.indexOf(args.ideaId);
+      const index = entity.characters.indexOf(args.characterId);
       if (-1 !== index) {
-        entity.ideas.splice(index, 1);
+        entity.characters.splice(index, 1);
       }
       return dynamoService.persist(entity);
     });

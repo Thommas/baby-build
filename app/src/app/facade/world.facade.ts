@@ -16,8 +16,8 @@ import {
   CreateWorldMutation,
   UpdateWorldMutation,
   DeleteWorldMutation,
-  WorldAddIdeaMutation,
-  WorldRemoveIdeaMutation
+  WorldAddCharacterMutation,
+  WorldRemoveCharacterMutation
 } from '../graphql';
 import { ApolloService } from '../services';
 import {
@@ -30,8 +30,8 @@ import {
   UpdateWorld,
   SelectWorld,
   DeleteWorld,
-  WorldAddIdea,
-  WorldRemoveIdea,
+  WorldAddCharacter,
+  WorldRemoveCharacter,
 } from '../store';
 import { WorldFiltersFacade } from './world-filters.facade';
 import { UserFacade } from './user.facade';
@@ -95,13 +95,13 @@ export class WorldFacade {
   }
 
   purifyFilters(filters: any) {
-    const currentFilters = Object.assign({}, filters.ideaInput);
+    const currentFilters = Object.assign({}, filters.characterInput);
     if (!currentFilters.label) {
       delete currentFilters.label;
     }
 
     return {
-      ideaInput: currentFilters,
+      characterInput: currentFilters,
       cursor: '-1',
       sort: filters.sort ? filters.sort : undefined,
     };
@@ -324,16 +324,16 @@ export class WorldFacade {
     this.store.dispatch(new SelectWorld(world));
   }
 
-  addIdea(ideaId: string) {
-    this.store.dispatch(new WorldAddIdea({
-      ideaId,
+  addCharacter(characterId: string) {
+    this.store.dispatch(new WorldAddCharacter({
+      characterId,
     }));
   }
 
   @Effect({dispatch: false})
-  addIdea$ = this.actions$
+  addCharacter$ = this.actions$
     .pipe(
-      ofType(WorldActionTypes.WorldAddIdea),
+      ofType(WorldActionTypes.WorldAddCharacter),
       withLatestFrom(
         this.world$
       ),
@@ -341,10 +341,10 @@ export class WorldFacade {
         const action = args[0];
         const world = args[1];
         return this.apolloService.apolloClient.mutate({
-          mutation: WorldAddIdeaMutation,
+          mutation: WorldAddCharacterMutation,
           variables: {
             id: world.id,
-            ideaId: action.payload.ideaId,
+            characterId: action.payload.characterId,
           },
           // optimisticResponse: {
           //   __typename: 'Mutation',
@@ -365,16 +365,16 @@ export class WorldFacade {
       })
     );
 
-  removeIdea(ideaId: string) {
-    this.store.dispatch(new WorldRemoveIdea({
-      ideaId,
+  removeCharacter(characterId: string) {
+    this.store.dispatch(new WorldRemoveCharacter({
+      characterId,
     }));
   }
 
   @Effect({dispatch: false})
-  removeIdea$ = this.actions$
+  removeCharacter$ = this.actions$
     .pipe(
-      ofType(WorldActionTypes.WorldRemoveIdea),
+      ofType(WorldActionTypes.WorldRemoveCharacter),
       withLatestFrom(
         this.world$
       ),
@@ -382,10 +382,10 @@ export class WorldFacade {
         const action = args[0];
         const world = args[1];
         return this.apolloService.apolloClient.mutate({
-          mutation: WorldRemoveIdeaMutation,
+          mutation: WorldRemoveCharacterMutation,
           variables: {
             id: world.id,
-            ideaId: action.payload.ideaId,
+            characterId: action.payload.characterId,
           },
           // optimisticResponse: {
           //   __typename: 'Mutation',

@@ -72,7 +72,6 @@
           <img *ngFor="let screenshot of selectedIdea.imgs.screenshot" [src]="screenshot"/>
         </div>
       </div>
-      <app-audio-list-cmp *ngIf="selectedIdea.category === 'character'"></app-audio-list-cmp>
       <app-review-show-cmp></app-review-show-cmp>
     </div>
   </mat-card-content>

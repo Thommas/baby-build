@@ -26,7 +26,6 @@ const Idea = gql`
     userId: String
     user: User
     imgs: Imgs
-    audios: [File]
   }
   input IdeaInput {
     label: String
@@ -63,17 +62,6 @@ const Idea = gql`
     ): Idea
     deleteIdea(
       id: String!
-    ): Idea
-    addAudio(
-      id: String!
-      name: String!
-      size: Int!
-      type: String!
-      data: String!
-    ): Idea
-    removeAudio(
-      id: String!
-      fileId: String!
     ): Idea
   }
 `;

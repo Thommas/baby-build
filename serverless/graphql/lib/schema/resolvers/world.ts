@@ -5,11 +5,11 @@
  */
 
 import * as dbWorld from '../../dynamo/world';
-import * as dbIdea from '../../dynamo/idea';
+import * as dbCharacter from '../../dynamo/character';
 
 export default {
   World: {
-    ideas: (obj) => dbIdea.getIdeasByIds(obj.ideas),
+    characters: (obj) => dbCharacter.getCharactersByIds(obj.characters),
   },
   Query: {
     world: (_, args, context) => dbWorld.getWorld(context.userId, args),
@@ -19,7 +19,7 @@ export default {
     createWorld: (_, args, context) => dbWorld.createWorld(args, context.userId),
     updateWorld: (_, args, context) => dbWorld.updateWorld(args, context.userId),
     deleteWorld: (_, args, context) => dbWorld.deleteWorld(args, context.userId),
-    addIdea: (_, args, context) => dbWorld.addIdea(args, context.userId),
-    removeIdea: (_, args, context) => dbWorld.removeIdea(args, context.userId),
+    addCharacter: (_, args, context) => dbWorld.addCharacter(args, context.userId),
+    removeCharacter: (_, args, context) => dbWorld.removeCharacter(args, context.userId),
   }
 };

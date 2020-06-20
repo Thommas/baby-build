@@ -1,0 +1,8 @@
+<div class="container" audio-list-dragndrop (fileDropped)="onFileDropped($event)">
+</div>
+<div *ngFor="let audio of (selectedCharacter$ | async).audios" fxLayout="row" fxLayoutAlign="start center">
+  <span>{{ audio.id }} - {{ audio.name }} - {{ audio.size }} - {{ audio.type }}</span>
+  <button mat-icon-button (click)="removeAudio(audio.id)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

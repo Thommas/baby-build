@@ -10,7 +10,7 @@ const World = gql`
   type World {
     id: String
     label: String
-    ideas: [Idea]
+    characters: [Character]
   }
   type WorldEdge {
     total: Int!
@@ -36,13 +36,13 @@ const World = gql`
     deleteWorld(
       id: String!
     ): World
-    addIdea(
+    addCharacter(
       id: String!
-      ideaId: String!
+      characterId: String!
     ): World
-    removeIdea(
+    removeCharacter(
       id: String!
-      ideaId: String!
+      characterId: String!
     ): World
   }
 `;

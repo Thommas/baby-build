@@ -38,6 +38,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { environment } from '../environments/environment';
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
+import { CharacterModule } from './components/character/character.module';
 import { IdeaModule } from './components/idea/idea.module';
 import { WorldModule } from './components/world/world.module';
 import { WorldViewModule } from './components/world-view/world-view.module';
@@ -61,6 +62,9 @@ import {
 } from './services';
 import {
   AuthFacade,
+  CharacterFacade,
+  CharacterFiltersFacade,
+  CharacterSuggestFacade,
   IdeaFacade,
   IdeaFiltersFacade,
   IdeaSuggestFacade,
@@ -72,6 +76,9 @@ import {
 } from './facade';
 import {
   authReducer,
+  characterReducer,
+  characterFiltersReducer,
+  characterSuggestReducer,
   ideaReducer,
   ideaFiltersReducer,
   ideaSuggestReducer,
@@ -84,6 +91,9 @@ import { AppDragndropDirective } from './app.dragndrop.directive';
 // ngrx-store-localstorage
 const reducers: ActionReducerMap<any> = {
   auth: authReducer,
+  character: characterReducer,
+  characterFilters: characterFiltersReducer,
+  characterSuggest: characterSuggestReducer,
   idea: ideaReducer,
   ideaFilters: ideaFiltersReducer,
   ideaSuggest: ideaSuggestReducer,
@@ -138,6 +148,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatSidenavModule,
     MatToolbarModule,
     MatTooltipModule,
+    CharacterModule,
     IdeaModule,
     WorldModule,
     WorldViewModule,
@@ -154,6 +165,8 @@ export function createTranslateLoader(http: HttpClient) {
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([
+      CharacterFacade,
+      CharacterSuggestFacade,
       IdeaFacade,
       IdeaSuggestFacade,
       ReviewFacade,
@@ -175,6 +188,9 @@ export function createTranslateLoader(http: HttpClient) {
     ProgressService,
     Actions,
     AuthFacade,
+    CharacterFacade,
+    CharacterFiltersFacade,
+    CharacterSuggestFacade,
     IdeaFacade,
     IdeaFiltersFacade,
     ReviewFacade,

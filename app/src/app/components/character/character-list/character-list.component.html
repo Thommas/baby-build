@@ -1,0 +1,8 @@
+<div class="list" fxLayout="row wrap" (scroll)="onScroll($event)" cdkScrollable>
+  <app-character-item-cmp
+    *ngFor="let character of (characters$ | async)"
+    [character]="character"
+    (click)="selectCharacter(character)"
+  ></app-character-item-cmp>
+</div>
+<div *ngIf="fetchMoreLoading$ | async">LOADING</div>
