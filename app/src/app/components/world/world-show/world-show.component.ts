@@ -66,7 +66,7 @@ export class WorldShowComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer.id === 'list-1') {
       const character = event.item.data;
-      this.worldFacade.addCharacter(character.id);
+      this.worldFacade.addCharacter(character);
     }
   }
 }

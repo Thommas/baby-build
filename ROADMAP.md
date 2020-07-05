@@ -4,7 +4,6 @@ Roadmap
 Short term
 ----------
 
-- Add/Remove character from world > update state
 - Update world name
 - Convert & to 'and' for pupeeteer search
 - Fix broken idea pagination

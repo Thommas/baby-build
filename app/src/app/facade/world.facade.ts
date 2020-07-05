@@ -324,10 +324,8 @@ export class WorldFacade {
     this.store.dispatch(new SelectWorld(world));
   }
 
-  addCharacter(characterId: string) {
-    this.store.dispatch(new WorldAddCharacter({
-      characterId,
-    }));
+  addCharacter(character: any) {
+    this.store.dispatch(new WorldAddCharacter(character));
   }
 
   @Effect({dispatch: false})
@@ -340,27 +338,38 @@ export class WorldFacade {
       mergeMap((args: any[]) => {
         const action = args[0];
         const world = args[1];
+        const character = action.payload;
         return this.apolloService.apolloClient.mutate({
           mutation: WorldAddCharacterMutation,
           variables: {
             id: world.id,
-            characterId: action.payload.characterId,
+            characterId: character.id,
           },
-          // optimisticResponse: {
-          //   __typename: 'Mutation',
-          //   deleteWorld: {
-          //     __typename: 'World',
-          //     id: selectedWorld.id
-          //   },
-          // },
-          // update: (store, { data: { deleteWorld } }) => {
-          //   if (!deleteWorld) {
-          //     return;
-          //   }
-          //   // const query: any = store.readQuery({ query: GetWorldsQuery });
-          //   // const updatedWorlds: any[] = query.worlds.filter((world: any) => world.id && world.id !== deleteWorld.id);
-          //   // store.writeQuery({ query: GetWorldsQuery, data: { worlds: updatedWorlds }});
-          // },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            addCharacter: {
+              __typename: 'World',
+              id: world.id
+            },
+          },
+          update: (store, { data: { addCharacter } }) => {
+            if (!addCharacter) {
+              return;
+            }
+            const query: any = store.readQuery({
+              query: GetWorldQuery,
+              variables: {
+                id: addCharacter.id
+              }
+            });
+            const updatedWorld: any = query.world;
+            updatedWorld.characters.push(character);
+            store.writeQuery({
+              query: GetWorldQuery,
+              variables: { id: addCharacter.id },
+              data: { world: updatedWorld }
+            });
+          },
         });
       })
     );
@@ -381,27 +390,38 @@ export class WorldFacade {
       mergeMap((args: any[]) => {
         const action = args[0];
         const world = args[1];
+        const characterId = action.payload.characterId;
         return this.apolloService.apolloClient.mutate({
           mutation: WorldRemoveCharacterMutation,
           variables: {
             id: world.id,
-            characterId: action.payload.characterId,
+            characterId,
           },
-          // optimisticResponse: {
-          //   __typename: 'Mutation',
-          //   deleteWorld: {
-          //     __typename: 'World',
-          //     id: selectedWorld.id
-          //   },
-          // },
-          // update: (store, { data: { deleteWorld } }) => {
-          //   if (!deleteWorld) {
-          //     return;
-          //   }
-          //   // const query: any = store.readQuery({ query: GetWorldsQuery });
-          //   // const updatedWorlds: any[] = query.worlds.filter((world: any) => world.id && world.id !== deleteWorld.id);
-          //   // store.writeQuery({ query: GetWorldsQuery, data: { worlds: updatedWorlds }});
-          // },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            removeCharacter: {
+              __typename: 'World',
+              id: world.id
+            },
+          },
+          update: (store, { data: { removeCharacter } }) => {
+            if (!removeCharacter) {
+              return;
+            }
+            const query: any = store.readQuery({
+              query: GetWorldQuery,
+              variables: {
+                id: removeCharacter.id
+              }
+            });
+            const updatedWorld: any = query.world;
+            updatedWorld.characters = updatedWorld.characters.filter((character: any) => character.id !== characterId);
+            store.writeQuery({
+              query: GetWorldQuery,
+              variables: { id: removeCharacter.id },
+              data: { world: updatedWorld }
+            });
+          },
         });
       })
     );
