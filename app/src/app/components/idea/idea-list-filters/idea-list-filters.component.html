@@ -49,6 +49,9 @@
         <button mat-menu-item (click)="selectScore(null)">
           Any
         </button>
+        <button mat-menu-item (click)="selectHasScore(false)">
+          Not scored
+        </button>
         <button mat-menu-item *ngFor="let score of ideaFacade.scores" (click)="selectScore(score)">
           <img [src]="constantsService.getScoreIcon(score)" width="24" height="24"/>
         </button>

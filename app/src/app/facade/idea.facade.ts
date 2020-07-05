@@ -8,8 +8,8 @@ import uuid from 'uuid/v4';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { EMPTY, of, from } from 'rxjs';
-import { flatMap, map, withLatestFrom, mergeMap, tap } from 'rxjs/operators';
+import { EMPTY, of, } from 'rxjs';
+import { flatMap, map, distinct, withLatestFrom, mergeMap, tap, reduce } from 'rxjs/operators';
 import {
   CreateIdeaMutation,
   DeleteIdeaMutation,
@@ -119,6 +119,9 @@ export class IdeaFacade {
     }
     if (!currentFilters.score || 0 === currentFilters.score.length) {
       delete currentFilters.score;
+    }
+    if (null === currentFilters.hasScore) {
+      delete currentFilters.hasScore;
     }
     if (!currentFilters.label) {
       delete currentFilters.label;

@@ -23,6 +23,9 @@ async function fetchImgs(document: any) {
 }
 
 export function updateIdeaReleaseDate(document: any) {
+  if (document.releaseDate) {
+    return;
+  }
   return dynamoService.getEntity().get(document.id)
     .then((entity: any) => {
       if (!entity) {
@@ -34,6 +37,9 @@ export function updateIdeaReleaseDate(document: any) {
           console.log(`Release date ${releaseDate} found for idea: ${document.label}`)
           if (releaseDate) {
             entity.releaseDate = releaseDate;
+            return dynamoService.persist(entity);
+          } else {
+            entity.releaseDate = '????';
             return dynamoService.persist(entity);
           }
         });

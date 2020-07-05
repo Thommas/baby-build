@@ -4,13 +4,11 @@ Roadmap
 Short term
 ----------
 
-- Refactor idea character into character type
-- Migrate data
-- Play audio in character
 - Add/Remove character from world > update state
 - Update world name
 - Convert & to 'and' for pupeeteer search
 - Fix broken idea pagination
+- Add new module 'habits' (daily, weekly, monthly)
 
 Long term
 ---------

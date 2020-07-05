@@ -25,12 +25,12 @@ function queryReviewsByIdeaId(ideaId: string)
       must: [
         {
           term: {
-            type: 'Review',
+            ['type.keyword']: 'Review',
           },
         },
         {
           term: {
-            ideaId,
+            ['ideaId.keyword']: ideaId,
           },
         },
       ],
@@ -43,6 +43,7 @@ export function updateIdeaBasedOnReviews(ideaId: string) {
   return queryReviewsByIdeaId(ideaId)
     .then((reviews: any) => {
       if (0 === reviews.hits.hits.length) {
+        console.log('No review found');
         return;
       }
       const scores = reviews.hits.hits
@@ -58,10 +59,12 @@ export function updateIdeaBasedOnReviews(ideaId: string) {
       console.log('computed average score: ', score);
       console.log('computed average requiredAge: ', requiredAge);
 
-      return updateIdea(ideaId, {
-        score: score ? score : null,
-        requiredAge: requiredAge ? requiredAge : null,
-      });
+      if (score && requiredAge) {
+        return updateIdea(ideaId, {
+          score: score ? score : null,
+          requiredAge: requiredAge ? requiredAge : null,
+        });
+      }
     })
 }
 

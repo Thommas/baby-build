@@ -6,6 +6,7 @@
 
 import { Component } from '@angular/core';
 import { CharacterFacade } from '../../../facade';
+import { AudioService } from '../../../services';
 
 @Component({
   selector: 'app-audio-list-cmp',
@@ -16,6 +17,7 @@ export class AudioListComponent {
   selectedCharacter$ = this.characterFacade.selectedCharacter$;
 
   constructor(
+    private audioService: AudioService,
     private characterFacade: CharacterFacade
   ) {
   }
@@ -49,5 +51,9 @@ export class AudioListComponent {
     this.characterFacade.removeAudio({
       fileId: audioId
     });
+  }
+
+  playAudio(audio: any) {
+    this.audioService.playSound(audio);
   }
 }

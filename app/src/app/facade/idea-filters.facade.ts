@@ -36,8 +36,16 @@ export class IdeaFiltersFacade {
     }));
   }
 
+  selectHasScore(hasScore: boolean) {
+    this.store.dispatch(new UpdateIdeaFilters({
+      hasScore,
+      score: null,
+    }));
+  }
+
   selectScore(score: number) {
     this.store.dispatch(new UpdateIdeaFilters({
+      hasScore: null,
       score,
     }));
   }

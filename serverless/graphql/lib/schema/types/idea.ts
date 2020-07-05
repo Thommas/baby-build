@@ -31,7 +31,9 @@ const Idea = gql`
     label: String
     category: String
     requiredAge: Float
+    hasRequiredAge: Boolean
     score: Float
+    hasScore: Boolean
     language: String
     count: Int
   }

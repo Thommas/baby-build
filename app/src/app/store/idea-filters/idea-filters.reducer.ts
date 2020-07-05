@@ -11,6 +11,7 @@ const initialState = {
     label: null,
     language: null,
     requiredAge: null,
+    hasScore: null,
     score: null,
     category: null,
   },
@@ -27,6 +28,7 @@ export function ideaFiltersReducer(state: any = initialState, action: IdeaFilter
         ...state,
         ideaInput: {
           label: action.payload.label !== undefined ? action.payload.label : state.ideaInput.label,
+          hasScore: action.payload.hasScore !== undefined ? action.payload.hasScore : state.ideaInput.hasScore,
           score: action.payload.score !== undefined ? action.payload.score : state.ideaInput.score,
           requiredAge: action.payload.requiredAge !== undefined ? action.payload.requiredAge : state.ideaInput.requiredAge,
           language: action.payload.language !== undefined ? action.payload.language : state.ideaInput.language,

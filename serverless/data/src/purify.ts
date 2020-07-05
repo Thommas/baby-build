@@ -38,6 +38,6 @@ async function purify(): Promise<any> {
 }
 
 purify().then(() => {
-  console.log("Fix date completed");
+  console.log("Fix completed");
   process.exit();
 });

@@ -45,6 +45,10 @@ export class IdeaListFiltersComponent implements OnInit, OnDestroy {
     this.ideaFiltersFacade.selectRequiredAge(requiredAge);
   }
 
+  selectHasScore(hasScore: boolean) {
+    this.ideaFiltersFacade.selectHasScore(hasScore);
+  }
+
   selectScore(score: number) {
     this.ideaFiltersFacade.selectScore(score);
   }

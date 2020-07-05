@@ -24,6 +24,7 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
           },
         },
       ],
+      must_not: [],
     },
   };
   if (filters) {
@@ -49,11 +50,26 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
         match: {
           label: {
             query: filters.label,
-            fuzziness: 2,
+            fuzziness: 1,
             prefix_length: 1,
           },
         },
       });
+    }
+    if ('hasRequiredAge' in filters) {
+      if (filters.hasRequiredAge) {
+        query.bool.must.push({
+          exists: {
+            field: 'requiredAge'
+          },
+        });
+      } else {
+        query.bool.must_not.push({
+          exists: {
+            field: 'requiredAge'
+          },
+        });
+      }
     }
     if (filters.requiredAge) {
       query.bool.must.push({
@@ -64,6 +80,21 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, c
           },
         },
       });
+    }
+    if ('hasScore' in filters) {
+      if (filters.hasScore) {
+        query.bool.must.push({
+          exists: {
+            field: 'score'
+          },
+        });
+      } else {
+        query.bool.must_not.push({
+          exists: {
+            field: 'score'
+          },
+        });
+      }
     }
     if (filters.score) {
       query.bool.must.push({
