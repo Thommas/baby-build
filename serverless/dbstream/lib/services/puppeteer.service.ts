@@ -17,6 +17,10 @@ class PuppeteerService {
     puppeteer.use(StealthPlugin());
   }
 
+  purifyInput(input: string): string {
+    return input.replace('&', 'and');
+  }
+
   async getBrowser() {
     return await puppeteer.launch({
       headless: true
@@ -53,7 +57,7 @@ class PuppeteerService {
     const browser = await this.getBrowser();
     const page = await this.getNewPage(browser);
 
-    let url = `https://www.google.com/search?tbm=isch&q=${input}`;
+    let url = `https://www.google.com/search?tbm=isch&q=${this.purifyInput(input)}`;
     if (getOriginal) {
       url = `${url}&tbs=ic%3Atrans`;
     }
@@ -90,7 +94,7 @@ class PuppeteerService {
     const browser = await this.getBrowser();
     const page = await this.getNewPage(browser);
 
-    await page.goto(`https://www.google.com/search?q=${input}+release+date`);
+    await page.goto(`https://www.google.com/search?q=${this.purifyInput(input)}+release+date`);
 
     await delay(1000);
 

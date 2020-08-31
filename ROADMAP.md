@@ -4,14 +4,16 @@ Roadmap
 Short term
 ----------
 
-- Update world name
-- Convert & to 'and' for pupeeteer search
-- Fix broken idea pagination
-- Add new module 'habits' (daily, weekly, monthly)
+- README setup
+- Try to merge all lambdas
+- Fix idea pagination
+- Fix display
+- Fix idea delete
 
 Long term
 ---------
 
+- Add new module 'habits' (daily, weekly, monthly)
 - Refactor pictures with file entity
 - Add picture to world
 - Add path entity
