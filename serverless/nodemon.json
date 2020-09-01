@@ -1,0 +1,6 @@
+{
+  "watch": ["lib"],
+  "ext": "ts",
+  "ignore": ["lib/**/*.spec.ts"],
+  "exec": "./node_modules/.bin/ts-node ./lib/graphqli.ts"
+}

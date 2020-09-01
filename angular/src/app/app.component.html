@@ -1,0 +1,20 @@
+<section class="app-content" fxLayout="column" fxLayoutAlign="start stretch" app-dragndrop>
+  <mat-progress-bar
+    class="loading-bar"
+    color="accent"
+    mode="determinate"
+    [value]="progressService.progress"
+    [style.height]="progressService.progress === 0 ? '0' : '2px'">
+  </mat-progress-bar>
+  <mat-drawer-container>
+    <mat-drawer #drawer mode="side" opened="true" *ngIf="(authService.isAuthenticated$ | async) && !router.url.startsWith('/world-view')">
+      <app-sidebar-cmp (toggleSidebar)="toggleDrawer()"></app-sidebar-cmp>
+    </mat-drawer>
+    <mat-drawer-content fxFlex fxLayout="column">
+      <app-topbar-cmp *ngIf="(authService.isAuthenticated$ | async) && !router.url.startsWith('/world-view')" (toggleSidebar)="toggleDrawer()"></app-topbar-cmp>
+      <div class="router-content" fxFlex fxLayout="column">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</section>

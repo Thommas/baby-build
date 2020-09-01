@@ -1,8 +1,0 @@
-<div class="list" fxLayout="row wrap" (scroll)="onScroll($event)" cdkScrollable>
-  <app-world-item-cmp
-    *ngFor="let world of (worlds$ | async)"
-    [world]="world"
-    (click)="selectWorld(world)"
-  ></app-world-item-cmp>
-</div>
-<div *ngIf="fetchMoreLoading$ | async">LOADING</div>

@@ -1,0 +1,10 @@
+<form [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="start stretch">
+  <mat-form-field fxFill appearance="none">
+    <input #inputElement fxFill
+          matInput
+          [placeholder]="this.formGroup.get('label').value && this.formGroup.get('label').value.length !== 0 ? '' : 'World name'"
+          formControlName="label"
+          (keyup.backspace)="onKey($event)"
+          autocomplete="off">
+  </mat-form-field>
+</form>

@@ -1,0 +1,29 @@
+<header fxLayout="row" fxLayoutAlign="start center">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <img src="/assets/img/path-of-child-logo-horizontal-light.svg" width="203" [routerLink]="['']"/>
+  </div>
+  <button mat-icon-button (click)="toggleSidebar.emit({})">
+    <mat-icon>close</mat-icon>
+  </button>
+</header>
+<div fxLayout="column" fxLayoutAlign="start center" *ngIf="(userFacade.user$ | async) as user">
+  <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+    <img src="/assets/img/user.svg"
+         [matTooltip]="user.firstName + ' ' + user.lastName" i18n-matTooltip
+         width="50" height="50"/>
+  </div>
+  <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">
+    <div fxFill fxLayout="row" fxLayoutAlign="center center">
+      <span>Level {{ user.lvl }}</span>
+    </div>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="user.xp / (user.nextLvlXp) * 100"
+      color="primary"
+      [matTooltip]="user.xp + ' / ' + (user.nextLvlXp)">
+    </mat-progress-bar>
+  </div>
+  <!--<app-idea-list-filters-cmp
+    *ngIf="displayFilters"
+  ></app-idea-list-filters-cmp>-->
+</div>

@@ -1,0 +1,91 @@
+<div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-icon>search</mat-icon>
+    <mat-form-field fxFill>
+      <input #inputElement fxFill
+             matInput
+             placeholder="Search for an idea"
+             autocomplete="off">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="language" *ngIf="filters$ | async as filters">
+      <button mat-button [matMenuTriggerFor]="languageMenu">
+        <img *ngIf="filters.ideaInput.language !== null"
+            [src]="constantsService.getLanguageIconByValue(filters.ideaInput.language)" width="24" height="24"/>
+        <p *ngIf="filters.ideaInput.language === null">Language</p>
+      </button>
+      <mat-menu #languageMenu="matMenu">
+        <button mat-menu-item (click)="selectLanguage(null)">
+          <mat-icon><img src="/assets/img/unknown.svg" width="24" height="24"/></mat-icon>
+          Any
+        </button>
+        <button mat-menu-item *ngFor="let language of constantsService.languages" (click)="selectLanguage(language.value)">
+          <mat-icon><img [src]="language.icon" width="24" height="24"/></mat-icon>
+          {{ language.label }}
+        </button>
+      </mat-menu>
+    </div>
+    <div class="required-age" *ngIf="filters$ | async as filters">
+      <button mat-button [matMenuTriggerFor]="requiredAgeMenu">
+        <p *ngIf="filters.ideaInput.requiredAge !== null">{{ filters.ideaInput.requiredAge }}</p>
+        <p *ngIf="filters.ideaInput.requiredAge === null">Age</p>
+      </button>
+      <mat-menu #requiredAgeMenu="matMenu">
+        <button mat-menu-item (click)="selectRequiredAge(null)">
+          Any
+        </button>
+        <button mat-menu-item *ngFor="let age of ideaFacade.ages" (click)="selectRequiredAge(age)">
+          {{ age }}+
+        </button>
+      </mat-menu>
+    </div>
+    <div class="score" *ngIf="filters$ | async as filters">
+      <button mat-button [matMenuTriggerFor]="scoreMenu">
+        <p *ngIf="filters.ideaInput.score !== null">{{ filters.ideaInput.score }}</p>
+        <p *ngIf="filters.ideaInput.score === null">Score</p>
+      </button>
+      <mat-menu #scoreMenu="matMenu">
+        <button mat-menu-item (click)="selectScore(null)">
+          Any
+        </button>
+        <button mat-menu-item (click)="selectHasScore(false)">
+          Not scored
+        </button>
+        <button mat-menu-item *ngFor="let score of ideaFacade.scores" (click)="selectScore(score)">
+          <img [src]="constantsService.getScoreIcon(score)" width="24" height="24"/>
+        </button>
+      </mat-menu>
+    </div>
+    <div class="category" *ngIf="filters$ | async as filters">
+      <button mat-button [matMenuTriggerFor]="categoryMenu">
+        <img *ngIf="filters.ideaInput.category !== null"
+            [src]="constantsService.getCategoryIconByValue(filters.ideaInput.category)" width="24" height="24"/>
+        <p *ngIf="filters.ideaInput.category === null">Category</p>
+      </button>
+      <mat-menu #categoryMenu="matMenu">
+        <button mat-menu-item (click)="selectCategory(null)">
+          Any
+        </button>
+        <button mat-menu-item *ngFor="let category of constantsService.categories" (click)="selectCategory(category.value)">
+          <img [src]="category.icon" width="24" height="24"/>
+          {{ category.label }}
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div class="sort" *ngIf="filters$ | async as filters">
+    <button mat-button [matMenuTriggerFor]="sortMenu">
+      <p *ngIf="filters.sort !== null">{{ constantsService.getLabelByValue(filters.sort, constantsService.ideaSorts) }}</p>
+      <p *ngIf="filters.sort === null">Sort By</p>
+    </button>
+    <mat-menu #sortMenu="matMenu">
+      <button mat-menu-item (click)="selectSort(null)">
+        Most recent
+      </button>
+      <button mat-menu-item *ngFor="let sort of constantsService.ideaSorts" (click)="selectSort(sort.value)">
+        {{ sort.label }}
+      </button>
+    </mat-menu>
+  </div>
+</div>

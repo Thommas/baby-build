@@ -94,6 +94,7 @@ Install serverless framework
 ```
 cd serverless
 cp .env.dist .env.dev
+cp secrets.yml.dist secrets.yml
 ```
 
 Update AUTH0_JWKS_URI and AUTH0_JWKS_KID based on Auth0 credentials.

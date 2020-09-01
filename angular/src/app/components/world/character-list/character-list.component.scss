@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 70px;
+}
+
+.list {
+  height: 100%;
+  overflow-y: auto;
+}

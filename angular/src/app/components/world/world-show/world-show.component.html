@@ -1,0 +1,30 @@
+<div *ngIf="world$ | async as world">
+  <mat-card fxFlex class="left-card">
+    <mat-card-header>
+      <button mat-button [routerLink]="['/world-view/' + world.id]">
+        View world
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <div id="list-2" cdkDropList cdkDropListConnectedTo="list-1" (cdkDropListDropped)="drop($event)" fxLayout="row wrap">
+        <ng-container *ngIf="world && world.characters">
+          <app-character-item-cmp
+            cdkDrag
+            *ngFor="let character of world.characters"
+            [character]="character"
+            [cdkDragData]="character"
+          ></app-character-item-cmp>
+        </ng-container>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxFlex class="right-card" fxLayout="column" fxLayoutAlign="space-between none">
+    <app-world-label-cmp></app-world-label-cmp>
+    <mat-card-header fxLayout="row" fxLayoutAlign="start center">
+      <app-character-list-filters-cmp></app-character-list-filters-cmp>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="start start">
+      <app-character-list-cmp></app-character-list-cmp>
+    </mat-card-content>
+  </mat-card>
+</div>
