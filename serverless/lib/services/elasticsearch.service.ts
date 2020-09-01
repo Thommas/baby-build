@@ -6,6 +6,7 @@
 
 import * as elasticsearch from 'elasticsearch';
 import { configService } from './config.service';
+import { dynamoService } from './dynamo.service';
 
 class ElasticSearchService {
   elasticsearchClient = new elasticsearch.Client({
@@ -114,10 +115,9 @@ class ElasticSearchService {
     });
   }
 
-  createIndex(body: any): Promise<any> {
+  createIndex(): Promise<any> {
     return this.elasticsearchClient.indices.create({
       index: configService.elasticSearchIndex,
-      body,
     });
   }
 
@@ -136,7 +136,7 @@ class ElasticSearchService {
   // }
 
   async loadData(): Promise<any> {
-    const items: any = await this.loadAllItems();
+    const items: any = await dynamoService.loadAllItems();
     const promises: Promise<any>[] = [];
     for (let item of items) {
       promises.push(this.index(item));
@@ -146,7 +146,7 @@ class ElasticSearchService {
 
   async load(): Promise<any> {
     await this.deleteIndex();
-    await this.createIndex(ELASTIC_SEARCH_CONFIG);
+    await this.createIndex();
     await this.loadData();
     await this.refreshIndex();
   }

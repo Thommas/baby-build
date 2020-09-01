@@ -29,9 +29,7 @@ export function getIdeas(userId: string, args: any) {
         };
       }
       const params: any = ideas.hits.hits.map((hit: any) => ({id: hit._id}));
-      console.log('params', params);
       return dynamoService.getEntity().batchGet(params).then((items: any) => {
-        console.log('items', items);
         return {
           total: ideas.hits.total.value,
           cursor: ideas.hits.hits[ideas.hits.hits.length - 1]._source['createdAt'],

@@ -70,7 +70,7 @@ class DynamoService {
     return entity.save();
   }
 
-  async loadAllItems(type: string): Promise<any[]> {
+  async loadAllItems(type?: string): Promise<any[]> {
     const params: any = {
       TableName: configService.localDynamoDBTable,
     };

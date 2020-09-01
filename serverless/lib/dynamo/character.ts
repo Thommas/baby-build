@@ -29,9 +29,7 @@ export function getCharacters(userId: string, args: any) {
         };
       }
       const params: any = characters.hits.hits.map((hit: any) => ({id: hit._id}));
-      console.log('params', params);
       return dynamoService.getEntity().batchGet(params).then((items: any) => {
-        console.log('items', items);
         return {
           total: characters.hits.total.value,
           cursor: characters.hits.hits[characters.hits.hits.length - 1]._source['createdAt'],

@@ -7,6 +7,7 @@
 import { ApolloServer } from 'apollo-server-lambda';
 import { typeDefs, resolvers } from './schema/schema';
 import { authService } from './services';
+import { handleEvent } from './handlers/event.handler';
 
 exports.auth = (event, context, callback) => {
   return authService.authenticate(event, callback);
@@ -38,5 +39,5 @@ exports.graphql = (event, context, callback) => {
 };
 
 exports.handle = (event, context, callback) => {
-  console.log('DYNAMODB STREAM HANDLE');
+  handleEvent(event, callback);
 };
