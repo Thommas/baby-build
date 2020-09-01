@@ -59,11 +59,23 @@ Install dynamodb local
 
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html
 
+Install dynamodb-admin
+
+> npm install -g dynamodb-admin
+
+Run dynamodb-admin
+
+> dynamodb-admin
+
+Check http://localhost:8001
+
 #### ElasticSearch
 
 Install elasticsearch 7.x+
 
 https://www.elastic.co/elasticsearch
+
+Check http://localhost:9200
 
 #### Angular
 
@@ -72,7 +84,7 @@ Install angular-cli
 > npm install -g @angular/cli
 
 ```
-cd app
+cd angular
 cp src/environments/environment.ts.dist src/environments/environment.ts
 cp src/environments/environment.ts.dist src/environments/environment.dev.ts
 cp src/environments/environment.ts.dist src/environments/environment.production.ts
