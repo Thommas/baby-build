@@ -10,6 +10,7 @@ custom:
   secrets: ${file(secrets.yml):${self:custom.stage}}
   serverless-offline:
     httpPort: 3010
+    useChildProcesses: true
   dynamodbStream:
     host: ${self:custom.secrets.LOCAL_DYNAMODB_HOST}
     port: ${self:custom.secrets.LOCAL_DYNAMODB_PORT}

@@ -4,10 +4,8 @@ Roadmap
 Short term
 ----------
 
-- README setup
-- Try to merge all lambdas
-- Fix idea pagination
-- Fix display
+- Upgrade to Apollo 3
+- Refactor idea pagination to use page
 - Fix idea delete
 
 Long term
