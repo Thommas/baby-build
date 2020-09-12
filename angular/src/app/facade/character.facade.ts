@@ -227,7 +227,7 @@ export class CharacterFacade {
               score: 0,
             },
           },
-          update: (store, { data: { createCharacter, optimistic } }) => {
+          update: (store, { data: { createCharacter, optimistic } }: any) => {
             if (!createCharacter) {
               return;
             }
@@ -295,7 +295,7 @@ export class CharacterFacade {
               ...action.payload,
             },
           },
-          update: (store: any, { data: { updateCharacter } }) => {
+          update: (store: any, { data: { updateCharacter } }: any) => {
             if (!updateCharacter) {
               return;
             }
@@ -338,7 +338,7 @@ export class CharacterFacade {
               id: selectedCharacter.id
             },
           },
-          update: (store, { data: { deleteCharacter } }) => {
+          update: (store, { data: { deleteCharacter } }: any) => {
             if (!deleteCharacter) {
               return;
             }
@@ -383,7 +383,7 @@ export class CharacterFacade {
             id: selectedCharacter.id,
             ...action.payload
           },
-          update: (store: any, { data: { addAudio } }) => {
+          update: (store: any, { data: { addAudio } }: any) => {
             if (!addAudio) {
               return;
             }
@@ -423,7 +423,7 @@ export class CharacterFacade {
             id: selectedCharacter.id,
             ...action.payload
           },
-          update: (store: any, { data: { removeAudio } }) => {
+          update: (store: any, { data: { removeAudio } }: any) => {
             if (!removeAudio) {
               return;
             }

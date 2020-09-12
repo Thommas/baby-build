@@ -69,7 +69,7 @@ export class UserFacade {
               ...user
             },
           },
-          update: (store, { data: { updateUser } }) => {
+          update: (store, { data: { updateUser } }: any) => {
             // TODO
           }
         });

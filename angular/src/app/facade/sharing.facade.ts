@@ -58,7 +58,7 @@ export class SharingFacade {
         return this.apolloService.apolloClient.mutate({
           mutation: DeleteSharingMutation,
           variables: action.payload,
-          update: (store, { data: { deleteSharing } }) => {
+          update: (store, { data: { deleteSharing } }: any) => {
             const query: any = store.readQuery({ query: GetSharings });
             const sharings: any[] = query.sharings.filter((sharing: any) => sharing.id !== deleteSharing.id);
             store.writeQuery({ query: GetSharings, data: { sharings }});

@@ -152,7 +152,7 @@ export class ReviewFacade {
               user,
             },
           },
-          update: (store, { data: { createReview } }) => {
+          update: (store, { data: { createReview } }: any) => {
             this.selectReview(createReview);
             this.addToReviews(store, createReview);
             this.updateIdea(store, createReview, filters);
@@ -194,7 +194,7 @@ export class ReviewFacade {
               user,
             },
           },
-          update: (store, { data: { updateReview } }) => {
+          update: (store, { data: { updateReview } }: any) => {
             this.selectReview(updateReview);
             this.updateReviews(store, updateReview);
             this.updateIdea(store, updateReview, filters);

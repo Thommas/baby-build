@@ -230,7 +230,7 @@ export class IdeaFacade {
               score: 0,
             },
           },
-          update: (store, { data: { createIdea, optimistic } }) => {
+          update: (store, { data: { createIdea, optimistic } }: any) => {
             if (!createIdea) {
               return;
             }
@@ -298,7 +298,7 @@ export class IdeaFacade {
               ...action.payload,
             },
           },
-          update: (store: any, { data: { updateIdea } }) => {
+          update: (store: any, { data: { updateIdea } }: any) => {
             if (!updateIdea) {
               return;
             }
@@ -341,7 +341,7 @@ export class IdeaFacade {
               id: selectedIdea.id
             },
           },
-          update: (store, { data: { deleteIdea } }) => {
+          update: (store, { data: { deleteIdea } }: any) => {
             if (!deleteIdea) {
               return;
             }
@@ -386,7 +386,7 @@ export class IdeaFacade {
             id: selectedIdea.id,
             ...action.payload
           },
-          update: (store: any, { data: { addAudio } }) => {
+          update: (store: any, { data: { addAudio } }: any) => {
             if (!addAudio) {
               return;
             }
@@ -426,7 +426,7 @@ export class IdeaFacade {
             id: selectedIdea.id,
             ...action.payload
           },
-          update: (store: any, { data: { removeAudio } }) => {
+          update: (store: any, { data: { removeAudio } }: any) => {
             if (!removeAudio) {
               return;
             }

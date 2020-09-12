@@ -194,7 +194,7 @@ export class WorldFacade {
               ...action.payload,
             },
           },
-          update: (store, { data: { createWorld, optimistic } }) => {
+          update: (store, { data: { createWorld, optimistic } }: any) => {
             if (!createWorld) {
               return;
             }
@@ -262,7 +262,7 @@ export class WorldFacade {
               ...action.payload,
             },
           },
-          update: (store: any, { data: { updateWorld } }) => {
+          update: (store: any, { data: { updateWorld } }: any) => {
             if (!updateWorld) {
               return;
             }
@@ -305,7 +305,7 @@ export class WorldFacade {
               id: selectedWorld.id
             },
           },
-          update: (store, { data: { deleteWorld } }) => {
+          update: (store, { data: { deleteWorld } }: any) => {
             if (!deleteWorld) {
               return;
             }
@@ -352,7 +352,7 @@ export class WorldFacade {
               id: world.id
             },
           },
-          update: (store, { data: { addCharacter } }) => {
+          update: (store, { data: { addCharacter } }: any) => {
             if (!addCharacter) {
               return;
             }
@@ -404,7 +404,7 @@ export class WorldFacade {
               id: world.id
             },
           },
-          update: (store, { data: { removeCharacter } }) => {
+          update: (store, { data: { removeCharacter } }: any) => {
             if (!removeCharacter) {
               return;
             }
