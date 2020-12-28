@@ -10,7 +10,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { flatMap, take } from 'rxjs/operators';
+import { mergeMap, take } from 'rxjs/operators';
 import { BrowserService } from './browser.service';
 import { environment } from '../../environments/environment';
 import { AuthFacade } from '../facade/auth.facade';
@@ -82,8 +82,8 @@ export class AuthService {
     );
     this._lock.on('authenticated', (authResult: any) => {
       console.log('authenticated', authResult);
-      this.setSession(authResult);
-      this.router.navigate(['']);
+      // this.setSession(authResult);
+      // this.router.navigate(['']);
     });
 
     obs.next(this._lock);
@@ -136,18 +136,18 @@ export class AuthService {
    * Resume authentication process after redirect from auth0
    */
   resumeAuth(hash) {
-    this.lock.subscribe(lock => {
-      if (lock) {
-        lock.resumeAuth(hash, (error, authResult) => {
-          if (error) {
-            console.log('error', error);
-          } else if (authResult && authResult.accessToken && authResult.idToken) {
-            console.log('resumeAuth', authResult);
-            this.setSession(authResult);
-          }
-        });
-      }
-    });
+    // this.lock.subscribe(lock => {
+    //   if (lock) {
+    //     lock.resumeAuth(hash, (error, authResult) => {
+    //       if (error) {
+    //         console.log('error', error);
+    //       } else if (authResult && authResult.accessToken && authResult.idToken) {
+    //         console.log('resumeAuth', authResult);
+    //         this.setSession(authResult);
+    //       }
+    //     });
+    //   }
+    // });
   }
 
   /**
@@ -163,14 +163,15 @@ export class AuthService {
   get isAuthenticated$(): Observable<boolean> {
     return this.authFacade.expiresAt$.pipe(
       take(1),
-      flatMap((expiresAt: string) => {
-        if (!expiresAt) {
-          return of(false);
-        }
-        if (new Date().getTime() < parseInt(expiresAt, 10)) {
-          return of(true);
-        }
-        return this.renewToken();
+      mergeMap((expiresAt: string) => {
+        return of(true);
+        // if (!expiresAt) {
+        //   return of(false);
+        // }
+        // if (new Date().getTime() < parseInt(expiresAt, 10)) {
+        //   return of(true);
+        // }
+        // return this.renewToken();
       })
     );
   }
@@ -179,7 +180,7 @@ export class AuthService {
    * Renew token
    */
   renewToken(): Observable<boolean> {
-    return this.lock.pipe(flatMap(lock => {
+    return this.lock.pipe(mergeMap(lock => {
       if (!lock) {
         return of(false);
       }

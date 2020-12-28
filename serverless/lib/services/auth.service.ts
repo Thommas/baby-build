@@ -5,7 +5,7 @@
  */
 
 import { verify } from 'jsonwebtoken';
-import * as jwks from 'jwks-rsa';
+import jwks from 'jwks-rsa';
 import { configService } from './config.service';
 
 /**
@@ -38,25 +38,7 @@ const childIAMPolicy = (userId, effect, resource, context) => {
 };
 
 class AuthService {
-  authenticate(event, callback) {
-    if (!event.authorizationToken) {
-      console.error('No authorization token');
-      return callback('Unauthorized')
-    }
-
-    const tokenParts = event.authorizationToken.split(' ')
-    if (tokenParts.length !== 2) {
-      console.error('Invalid authorization token');
-      return callback('Unauthorized')
-    }
-
-    const bearerValue = tokenParts[0]
-    const tokenValue = tokenParts[1]
-    if (!(bearerValue.toLowerCase() === 'bearer' && tokenValue)) {
-      console.error('Invalid authorization token bearer');
-      return callback('Unauthorized')
-    }
-
+  authenticateToken(event: any, callback: any, tokenValue: string) {
     const options: any = {
       audience: configService.auth0ClientId,
       algorithms: ['RS256']
@@ -82,18 +64,46 @@ class AuthService {
             console.error('verifyError', verifyError);
             return callback('Unauthorized')
           }
-          const userId = decoded.sub
-          const effect = 'Allow'
-          const resource = event.methodArn
-          const authorizerContext = { userId: `User-${userId}` }
-          console.log('Valid userId', userId)
-          return callback(null, childIAMPolicy(userId, effect, resource, authorizerContext))
+          return this.authenticateUser(event, callback, decoded.sub);
         })
       })
     } catch (err) {
       console.error('Invalid token', err)
       return callback('Unauthorized')
     }
+  }
+
+  authenticate(event: any, callback: any) {
+    if (configService.userId) {
+      return this.authenticateUser(event, callback, configService.userId);
+    }
+
+    if (!event.authorizationToken) {
+      console.error('No authorization token');
+      return callback('Unauthorized')
+    }
+
+    const tokenParts = event.authorizationToken.split(' ')
+    if (tokenParts.length !== 2) {
+      console.error('Invalid authorization token');
+      return callback('Unauthorized')
+    }
+
+    const bearerValue = tokenParts[0]
+    const tokenValue = tokenParts[1]
+    if (!(bearerValue.toLowerCase() === 'bearer' && tokenValue)) {
+      console.error('Invalid authorization token bearer');
+      return callback('Unauthorized')
+    }
+
+    this.authenticateToken(event, callback, tokenValue);
+  }
+
+  authenticateUser(event: any, callback: any, userId: string) {
+    const effect = 'Allow'
+    const resource = event.methodArn
+    const authorizerContext = { userId: `User-${userId}` }
+    return callback(null, childIAMPolicy(userId, effect, resource, authorizerContext))
   }
 }
 

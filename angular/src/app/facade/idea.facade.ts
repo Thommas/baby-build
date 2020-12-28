@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY, of, } from 'rxjs';
-import { flatMap, map, distinct, withLatestFrom, mergeMap, tap, reduce } from 'rxjs/operators';
+import { mergeMap, map, withLatestFrom, tap } from 'rxjs/operators';
 import {
   CreateIdeaMutation,
   DeleteIdeaMutation,
@@ -47,7 +47,7 @@ export class IdeaFacade {
   scores: number[] = [];
 
   suggestedIdeas$ = this.ideaSuggestFacade.suggest$.pipe(
-    flatMap((suggest: any) => {
+    mergeMap((suggest: any) => {
       if (null === suggest.name) {
         return of([]);
       }
@@ -74,7 +74,7 @@ export class IdeaFacade {
   );
   newIdeas = [];
   ideas$ = this.ideaFiltersFacade.filters$.pipe(
-    flatMap((filters: any) => {
+    mergeMap((filters: any) => {
       this.ideaQuery = this.apolloService.apolloClient.watchQuery<any>({
         query: GetIdeas,
         variables: this.purifyFilters(filters),

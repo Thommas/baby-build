@@ -1,5 +1,6 @@
-<div class="container" [matTooltip]="character.label" matTooltipPosition="above">
+<div class="container">
   <div class="icon">
-    <img [src]="character.img ? character.img : 'https://placehold.it/40x40'" />
+    <img [src]="character.img ? character.img : 'https://picsum.photos/100/100'" />
   </div>
+  <p>{{ character.label }}</p>
 </div>

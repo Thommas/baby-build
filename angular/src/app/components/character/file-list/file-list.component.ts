@@ -6,18 +6,16 @@
 
 import { Component } from '@angular/core';
 import { CharacterFacade } from '../../../facade';
-import { AudioService } from '../../../services';
 
 @Component({
-  selector: 'app-audio-list-cmp',
-  templateUrl: './audio-list.component.html',
-  styleUrls: ['./audio-list.component.scss']
+  selector: 'app-file-list-cmp',
+  templateUrl: './file-list.component.html',
+  styleUrls: ['./file-list.component.scss']
 })
-export class AudioListComponent {
+export class FileListComponent {
   selectedCharacter$ = this.characterFacade.selectedCharacter$;
 
   constructor(
-    private audioService: AudioService,
     private characterFacade: CharacterFacade
   ) {
   }
@@ -47,13 +45,9 @@ export class AudioListComponent {
     });
   }
 
-  removeFile(audioId: string) {
+  removeFile(fileId: string) {
     this.characterFacade.removeFile({
-      fileId: audioId
+      fileId: fileId
     });
-  }
-
-  playFile(audio: any) {
-    this.audioService.playSound(audio);
   }
 }

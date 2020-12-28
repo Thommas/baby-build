@@ -101,7 +101,7 @@ export function deleteCharacter(args: any, userId: string) {
     });
 }
 
-export function addAudio(args: any, userId: string) {
+export function addFile(args: any, userId: string) {
   return dynamoService.getEntity().get(args.id)
     .then((entity: any) => {
       if (!entity) {
@@ -122,16 +122,16 @@ export function addAudio(args: any, userId: string) {
         data: args.data,
       });
       return newFile.save().then((file: any) => {
-        if (!entity.audios) {
-          entity.audios = [];
+        if (!entity.files) {
+          entity.files = [];
         }
-        entity.audios.push(file.id);
+        entity.files.push(file.id);
         return dynamoService.persist(entity);
       });
     });
 }
 
-export function removeAudio(args: any, userId: string) {
+export function removeFile(args: any, userId: string) {
   return dynamoService.getEntity().get(args.id)
     .then((entity: any) => {
       if (!entity) {
@@ -141,18 +141,20 @@ export function removeAudio(args: any, userId: string) {
       // if (entity.userId !== userId) {
       //   throw new Error('Unauthorized');
       // }
-      const audios = entity.audios.filter((audioId: string) => audioId === args.fileId);
-      if (audios.length === 1) {
-        dynamoService.getEntity().get(audios[0]).then((file) => {
-          if (file) {
-            console.log('FOUND FILE TO DELETE');
-            file.delete();
-          }
-        });
-      }
 
-      entity.audios = entity.audios.filter((audioId: string) => audioId !== args.fileId);
-      console.log('entity.audios', entity.audios);
+      // FIXME
+      // const files = entity.files.filter((fileId: string) => fileId === args.fileId);
+      // if (files.length === 1) {
+      //   dynamoService.getEntity().get(files[0]).then((file) => {
+      //     if (file) {
+      //       console.log('FOUND FILE TO DELETE');
+      //       file.delete();
+      //     }
+      //   });
+      // }
+
+      entity.files = entity.files.filter((fileId: string) => fileId !== args.fileId);
+      console.log('entity.files', entity.files);
       return dynamoService.persist(entity);
     });
 }

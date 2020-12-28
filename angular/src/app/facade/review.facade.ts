@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap, map, withLatestFrom, mergeMap } from 'rxjs/operators';
+import { mergeMap, map, withLatestFrom } from 'rxjs/operators';
 import {
   CreateReviewMutation,
   GetIdeas,
@@ -31,12 +31,12 @@ import { UserFacade } from './user.facade';
 @Injectable()
 export class ReviewFacade {
   reviews$: Observable<any> = this.ideaFacade.selectedIdea$.pipe(
-    flatMap((selectedIdea: any) => {
+    mergeMap((selectedIdea: any) => {
       if (!selectedIdea) {
         return of([]);
       }
       return this.userFacade.user$.pipe(
-        flatMap((user: any) => {
+        mergeMap((user: any) => {
           if (!user) {
             return of([]);
           }
@@ -60,12 +60,12 @@ export class ReviewFacade {
     }),
   );
   loggedUserReview$: Observable<any> = this.ideaFacade.selectedIdea$.pipe(
-    flatMap((selectedIdea: any) => {
+    mergeMap((selectedIdea: any) => {
       if (!selectedIdea) {
         return of([]);
       }
       return this.userFacade.user$.pipe(
-        flatMap((user: any) => {
+        mergeMap((user: any) => {
           if (!user) {
             return of([]);
           }

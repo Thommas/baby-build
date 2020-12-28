@@ -7,3 +7,5 @@ export * from './character-index/character-index.component';
 export * from './character-list/character-list.component';
 export * from './character-list-filters/character-list-filters.component';
 export * from './character-show/character-show.component';
+export * from './file-list/file-list.component';
+export * from './file-list/file-list-dragndrop.directive';

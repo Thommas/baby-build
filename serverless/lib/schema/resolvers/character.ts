@@ -11,7 +11,7 @@ import * as dbUser from '../../dynamo/user';
 export default {
   Character: {
     user: (obj) => dbUser.getUser(obj.userId),
-    audios: (obj) => dbFile.getFiles(obj.audios),
+    files: (obj) => dbFile.getFilesByIds(obj.files),
   },
   Query: {
     characters: (_, args, context) => dbCharacter.getCharacters(context.userId, args),
@@ -20,7 +20,7 @@ export default {
     createCharacter: (_, args, context) => dbCharacter.createCharacter(args, context.userId),
     updateCharacter: (_, args, context) => dbCharacter.updateCharacter(args, context.userId),
     deleteCharacter: (_, args, context) => dbCharacter.deleteCharacter(args, context.userId),
-    addAudio: (_, args, context) => dbCharacter.addAudio(args, context.userId),
-    removeAudio: (_, args, context) => dbCharacter.removeAudio(args, context.userId),
+    addFile: (_, args, context) => dbCharacter.addFile(args, context.userId),
+    removeFile: (_, args, context) => dbCharacter.removeFile(args, context.userId),
   }
 };

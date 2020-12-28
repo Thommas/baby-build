@@ -6,7 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { flatMap, pluck, take, mergeMap } from 'rxjs/operators';
+import { mergeMap, pluck, take } from 'rxjs/operators';
 import { GetAuthUser, UpdateUserMutation, GetUsers } from '../graphql';
 import { ApolloService, AuthService } from '../services';
 import { Effect, ofType, Actions } from '@ngrx/effects';
@@ -17,7 +17,7 @@ import { Store } from '@ngrx/store';
 export class UserFacade {
   user$: Observable<any> = this.authService.isAuthenticated$.pipe(
     take(1),
-    flatMap(isAuthenticated => {
+    mergeMap(isAuthenticated => {
       if (!isAuthenticated) {
         return of(null);
       }

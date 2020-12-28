@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY, of, from } from 'rxjs';
-import { flatMap, map, withLatestFrom, mergeMap, tap } from 'rxjs/operators';
+import { mergeMap, map, withLatestFrom, tap } from 'rxjs/operators';
 import {
   GetWorldQuery,
   GetWorldsQuery,
@@ -63,7 +63,7 @@ export class WorldFacade {
       })
     );
   worlds$ = this.worldFiltersFacade.filters$.pipe(
-    flatMap((filters: any) => {
+    mergeMap((filters: any) => {
       this.worldsQuery = this.apolloService.apolloClient.watchQuery<any>({
         query: GetWorldsQuery,
         variables: this.purifyFilters(filters),

@@ -2,6 +2,7 @@ export * from './auth.facade';
 export * from './character-filters.facade';
 export * from './character-suggest.facade';
 export * from './character.facade';
+export * from './file.facade';
 export * from './idea-filters.facade';
 export * from './idea-suggest.facade';
 export * from './idea.facade';

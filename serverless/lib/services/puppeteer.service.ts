@@ -4,6 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import { nanoid } from 'nanoid';
 import moment from 'moment';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
@@ -45,15 +46,32 @@ class PuppeteerService {
       }
     }, imageSelector);
 
-    await delay(1000);
+    const ORIGINAL_IMAGE_SELECTOR = `#islsp > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(1) > div:nth-child(1) img`;
+    let src = 'data:';
+    let attempt = 0;
+    while (attempt < 5000)
+    {
+      src = await page.evaluate((sel) => {
+        return document.querySelector(sel) ? document.querySelector(sel).getAttribute('src') : null;
+      }, ORIGINAL_IMAGE_SELECTOR);
+      if (src) {
+        if (src.substring(0, 5) !== 'data:') {
+          break;
+        }
+      }
+      attempt++;
+    }
 
-    const ORIGINAL_IMAGE_SELECTOR = `#islsp img`;
-    return await page.evaluate((sel) => {
-      return document.querySelector(sel) ? document.querySelector(sel).getAttribute('src') : null;
-    }, ORIGINAL_IMAGE_SELECTOR);
+    if (src.substring(0, 5) === 'data:') {
+      return '';
+    }
+
+    return src;
   }
 
   async fetchImgs(input: string, limit: number = 1, getOriginal: boolean = false): Promise<string[]> {
+    const imgs: string[] = [];
+
     const browser = await this.getBrowser();
     const page = await this.getNewPage(browser);
 
@@ -63,8 +81,6 @@ class PuppeteerService {
     }
 
     await page.goto(url);
-
-    const imgs: string[] = [];
 
     for (let i = 0; i < limit; i++) {
       const imageSelector = `#islrg > div:nth-child(1) > div:nth-child(${i + 1}) > a > div > img`;
@@ -108,6 +124,49 @@ class PuppeteerService {
     await browser.close();
 
     return releaseDate ? moment(releaseDate, "DD MMMM YYYY").year() : null;
+  }
+
+  async getFiles(input: string): Promise<any[]> {
+    console.log('getFiles', input);
+
+    const imgs: string[] = [];
+
+    if (!input) {
+      return imgs;
+    }
+
+    const browser = await this.getBrowser();
+    const page = await this.getNewPage(browser);
+
+    let url = `https://www.google.com/search?tbm=isch&tbs=ic%3Atrans&q=${this.purifyInput(input)}`;
+
+    await page.goto(url);
+
+    for (let i = 0; i < 20; i++) {
+      const imageSelector = `#islrg > div.islrc > div:nth-child(${i + 1}) > a > div > img`;
+      console.log('imageSelector', imageSelector);
+
+      const originalImageUrl = await this.getOriginalImageUrl(page, imageSelector);
+
+      if (originalImageUrl) {
+        imgs.push(originalImageUrl);
+      }
+    }
+
+    await browser.close();
+
+    return imgs.map((img: string) => {
+      const id = nanoid();
+      const file: any = {
+        id: `File-${id}`,
+        name: input,
+        data: img,
+        type: 'image/png',
+        size: img.length,
+      };
+
+      return file;
+    });
   }
 }
 

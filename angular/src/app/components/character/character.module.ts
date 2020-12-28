@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { StoreModule } from '@ngrx/store';
 import {
@@ -35,7 +36,9 @@ import {
   CharacterListComponent,
   CharacterListFiltersComponent,
   CharacterShowComponent,
-  CharacterIndexComponent
+  CharacterIndexComponent,
+  FileListComponent,
+  FileListDragndropDirective
 } from './';
 import { characterFiltersReducer, characterSuggestReducer } from '../../store';
 
@@ -45,6 +48,7 @@ import { characterFiltersReducer, characterSuggestReducer } from '../../store';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    DragDropModule,
     ScrollingModule,
     routing,
     MatAutocompleteModule,
@@ -73,7 +77,9 @@ import { characterFiltersReducer, characterSuggestReducer } from '../../store';
     CharacterListComponent,
     CharacterListFiltersComponent,
     CharacterShowComponent,
-    CharacterIndexComponent
+    CharacterIndexComponent,
+    FileListComponent,
+    FileListDragndropDirective
   ],
   providers: [
   ]

@@ -6,6 +6,8 @@ export * from './character-filters/character-filters.actions';
 export * from './character-filters/character-filters.reducer';
 export * from './character-suggest/character-suggest.actions';
 export * from './character-suggest/character-suggest.reducer';
+export * from './file/file.actions';
+export * from './file/file.reducer';
 export * from './idea/idea.actions';
 export * from './idea/idea.reducer';
 export * from './idea-filters/idea-filters.actions';

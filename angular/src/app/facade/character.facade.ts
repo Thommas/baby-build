@@ -9,14 +9,14 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY, of, from } from 'rxjs';
-import { flatMap, map, withLatestFrom, mergeMap, tap } from 'rxjs/operators';
+import { mergeMap, map, withLatestFrom, tap } from 'rxjs/operators';
 import {
   CreateCharacterMutation,
   DeleteCharacterMutation,
   GetCharacters,
   UpdateCharacterMutation,
-  AddAudioCharacterMutation,
-  RemoveAudioCharacterMutation,
+  AddFileCharacterMutation,
+  RemoveFileCharacterMutation,
 } from '../graphql';
 import { ApolloService } from '../services';
 import {
@@ -29,8 +29,8 @@ import {
   SelectCharacter,
   SelectReview,
   DeleteCharacter,
-  AddAudioCharacter,
-  RemoveAudioCharacter,
+  AddFileCharacter,
+  RemoveFileCharacter,
 } from '../store';
 import { CharacterFiltersFacade } from './character-filters.facade';
 import { CharacterSuggestFacade } from './character-suggest.facade';
@@ -47,7 +47,7 @@ export class CharacterFacade {
   scores: number[] = [];
 
   suggestedCharacters$ = this.characterSuggestFacade.suggest$.pipe(
-    flatMap((suggest: any) => {
+    mergeMap((suggest: any) => {
       if (null === suggest.name) {
         return of([]);
       }
@@ -74,7 +74,7 @@ export class CharacterFacade {
   );
   newCharacters = [];
   characters$ = this.characterFiltersFacade.filters$.pipe(
-    flatMap((filters: any) => {
+    mergeMap((filters: any) => {
       this.characterQuery = this.apolloService.apolloClient.watchQuery<any>({
         query: GetCharacters,
         variables: this.purifyFilters(filters),
@@ -358,14 +358,14 @@ export class CharacterFacade {
     this.store.dispatch(new SelectCharacter(character));
   }
 
-  addAudio(data: any) {
-    this.store.dispatch(new AddAudioCharacter(data));
+  addFile(data: any) {
+    this.store.dispatch(new AddFileCharacter(data));
   }
 
   @Effect({dispatch: false})
-  addAudio$ = this.actions$
+  addFile$ = this.actions$
     .pipe(
-      ofType(CharacterActionTypes.AddAudioCharacter),
+      ofType(CharacterActionTypes.AddFileCharacter),
       withLatestFrom(
         this.userFacade.user$,
         this.selectedCharacter$
@@ -378,18 +378,18 @@ export class CharacterFacade {
           return of(EMPTY);
         }
         return this.apolloService.apolloClient.mutate({
-          mutation: AddAudioCharacterMutation,
+          mutation: AddFileCharacterMutation,
           variables: {
             id: selectedCharacter.id,
             ...action.payload
           },
-          update: (store: any, { data: { addAudio } }: any) => {
-            if (!addAudio) {
+          update: (store: any, { data: { addFile } }: any) => {
+            if (!addFile) {
               return;
             }
-            const character = store.data.get(`Character:${addAudio.id}`);
+            const character = store.data.get(`Character:${addFile.id}`);
             if (character) {
-              character.audios = addAudio.audios;
+              character.files = addFile.files;
               store.writeData(character);
               this.selectCharacter(character);
             }
@@ -398,14 +398,14 @@ export class CharacterFacade {
       })
     );
 
-  removeAudio(data: any) {
-    this.store.dispatch(new RemoveAudioCharacter(data));
+  removeFile(data: any) {
+    this.store.dispatch(new RemoveFileCharacter(data));
   }
 
   @Effect({dispatch: false})
-  removeAudio$ = this.actions$
+  removeFile$ = this.actions$
     .pipe(
-      ofType(CharacterActionTypes.RemoveAudioCharacter),
+      ofType(CharacterActionTypes.RemoveFileCharacter),
       withLatestFrom(
         this.userFacade.user$,
         this.selectedCharacter$
@@ -418,18 +418,18 @@ export class CharacterFacade {
           return of(EMPTY);
         }
         return this.apolloService.apolloClient.mutate({
-          mutation: RemoveAudioCharacterMutation,
+          mutation: RemoveFileCharacterMutation,
           variables: {
             id: selectedCharacter.id,
             ...action.payload
           },
-          update: (store: any, { data: { removeAudio } }: any) => {
-            if (!removeAudio) {
+          update: (store: any, { data: { removeFile } }: any) => {
+            if (!removeFile) {
               return;
             }
-            const character = store.data.get(`Character:${removeAudio.id}`);
+            const character = store.data.get(`Character:${removeFile.id}`);
             if (character) {
-              character.audios = removeAudio.audios;
+              character.files = removeFile.files;
               store.writeData(character);
               this.selectCharacter(character);
             }

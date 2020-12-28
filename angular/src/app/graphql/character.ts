@@ -20,7 +20,7 @@ export const GetCharacters = gql`
           lastName
         }
         img
-        audios {
+        files {
           id
           name
           type
@@ -43,7 +43,7 @@ export const CreateCharacterMutation = gql`
         lastName
       }
       img
-      audios {
+      files {
         id
         name
         type
@@ -71,7 +71,7 @@ export const UpdateCharacterMutation = gql`
         lastName
       }
       img
-      audios {
+      files {
         id
         name
         type
@@ -94,15 +94,15 @@ export const DeleteCharacterMutation = gql`
   }
 `;
 
-export const AddAudioCharacterMutation = gql`
-  mutation AddAudio(
+export const AddFileCharacterMutation = gql`
+  mutation AddFile(
     $id: String!
     $name: String!
     $size: Int!
     $type: String!
     $data: String!
   ) {
-    addAudio(
+    addFile(
       id: $id
       name: $name
       size: $size
@@ -117,7 +117,7 @@ export const AddAudioCharacterMutation = gql`
         lastName
       }
       img
-      audios {
+      files {
         id
         name
         type
@@ -128,12 +128,12 @@ export const AddAudioCharacterMutation = gql`
   }
 `;
 
-export const RemoveAudioCharacterMutation = gql`
-  mutation RemoveAudio(
+export const RemoveFileCharacterMutation = gql`
+  mutation RemoveFile(
     $id: String!
     $fileId: String!
   ) {
-    removeAudio(
+    removeFile(
       id: $id
       fileId: $fileId
     ) {
@@ -145,7 +145,7 @@ export const RemoveAudioCharacterMutation = gql`
         lastName
       }
       img
-      audios {
+      files {
         id
         name
         type

@@ -48,6 +48,7 @@ class ConfigService {
       AUTH0_CLIENT_ID: Joi.string(),
       AUTH0_JWKS_URI: Joi.string(),
       AUTH0_JWKS_KID: Joi.string(),
+      USER_ID: Joi.string(),
     });
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(
@@ -89,6 +90,10 @@ class ConfigService {
 
   get auth0JwksKid(): string {
     return String(this.envConfig.AUTH0_JWKS_KID);
+  }
+
+  get userId(): string {
+    return String(this.envConfig.USER_ID);
   }
 }
 

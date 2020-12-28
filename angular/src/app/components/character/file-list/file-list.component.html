@@ -1,0 +1,9 @@
+<div class="container" file-list-dragndrop (fileDropped)="onFileDropped($event)">
+</div>
+<div *ngFor="let file of (selectedCharacter$ | async).files" fxLayout="row" fxLayoutAlign="start center">
+  <span>{{ file.id }} - {{ file.name }} - {{ file.size }} - {{ file.type }}</span>
+  <img [src]="file.data" width="100" height="100">
+  <button mat-icon-button (click)="removeFile(file.id)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

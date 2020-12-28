@@ -4,13 +4,31 @@ Roadmap
 Short term
 ----------
 
-- Upgrade to Apollo 3
+- Finish creating characters
+- Add character items
+
+Medium term
+-----------
+
 - Refactor idea pagination to use page
+- Refactor filters on left side bar
+- Refactor view/edit inline
+- Refactor world/character with image selection
+
+Bugs
+----
+
 - Fix idea delete
+- Fix need to reload after first login
+- Fix login again stuck
+- Fix tooltip (TypeError: Cannot read property 'matches' of null)
 
 Long term
 ---------
 
+- Implement multiple UX based on gacha (start with Epic Seven)
+- 7 links type
+- Starter Pack module
 - Add new module 'habits' (daily, weekly, monthly)
 - Refactor pictures with file entity
 - Add picture to world

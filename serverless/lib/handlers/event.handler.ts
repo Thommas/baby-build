@@ -15,15 +15,15 @@ export async function handleEvent(event, callback) {
     if (record.eventName == 'INSERT') {
       const document = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage);
       elasticSearchHandler.handleInsert(document);
-      characterHandler.handleModify(document);
-      ideaHandler.handleInsert(document);
+      // characterHandler.handleModify(document);
+      // ideaHandler.handleInsert(document);
       reviewHandler.handleInsert(document);
     }
     if (record.eventName == 'MODIFY') {
       const document = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage);
       elasticSearchHandler.handleModify(document);
-      characterHandler.handleModify(document);
-      ideaHandler.handleModify(document);
+      // characterHandler.handleModify(document);
+      // ideaHandler.handleModify(document);
       reviewHandler.handleModify(document);
     }
     if (record.eventName == 'REMOVE') {

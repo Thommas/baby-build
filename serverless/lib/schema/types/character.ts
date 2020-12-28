@@ -13,7 +13,7 @@ const Character = gql`
     userId: String
     user: User
     img: String
-    audios: [File]
+    files: [File]
   }
   input CharacterInput {
     label: String
@@ -38,14 +38,14 @@ const Character = gql`
     deleteCharacter(
       id: String!
     ): Character
-    addAudio(
+    addFile(
       id: String!
       name: String!
       size: Int!
       type: String!
       data: String!
     ): Character
-    removeAudio(
+    removeFile(
       id: String!
       fileId: String!
     ): Character

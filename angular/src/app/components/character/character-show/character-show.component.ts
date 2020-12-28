@@ -5,12 +5,13 @@
  */
 
 import { clone } from 'lodash';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { CharacterFacade } from '../../../facade';
+import { CharacterFacade, FileFacade } from '../../../facade';
 import { ConstantsService, FormService } from '../../../services';
-import { map, tap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { debounceTime, map, mergeMap, tap } from 'rxjs/operators';
+import { fromEvent, Subscription } from 'rxjs';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-character-show-cmp',
@@ -45,10 +46,6 @@ export class CharacterShowComponent implements OnInit {
     ).subscribe();
   }
 
-  ngOnDestroy() {
-    this.formFieldSub.unsubscribe();
-  }
-
   selectCharacter(character?: any) {
     this.characterFacade.selectCharacter(character);
   }
@@ -67,5 +64,22 @@ export class CharacterShowComponent implements OnInit {
 
   deleteCharacter() {
     this.characterFacade.deleteCharacter();
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    const origin = event.previousContainer.id;
+    const data = event.item.data;
+
+    console.log('event.previousContainer.id', event.previousContainer.id);
+    console.log('event.item.data', event.item.data);
+
+    if (origin === 'list-new-files') {
+      this.characterFacade.addFile({
+        data: data.data,
+        name: data.name,
+        size: data.size,
+        type: data.type,
+      });
+    }
   }
 }

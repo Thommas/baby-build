@@ -1,3 +1,16 @@
+<div>
+  <input #inputElement matInput autocomplete="off">
+  <button #btn>CLICK</button>
+</div>
+<div class="list" fxLayout="column wrap" cdkDropList id="list-new-files" cdkDropListConnectedTo="list-character-files">
+  <div
+    cdkDrag
+    *ngFor="let file of (files$ | async)"
+    [cdkDragData]="file"
+  >
+    <img [src]="file.data" width="100" height="100"/>
+  </div>
+</div>
 <mat-card fxFlex class="left-card" [fxHide.lt-lg]="selectedCharacter$ | async">
   <mat-card-header fxLayout="row" fxLayoutAlign="start center">
     <app-character-list-filters-cmp></app-character-list-filters-cmp>

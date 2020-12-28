@@ -14,8 +14,8 @@ export enum CharacterActionTypes {
   UpdateCharacter = '[Character] Update',
   SelectCharacter = '[Character] Select',
   DeleteCharacter = '[Character] Delete',
-  AddAudioCharacter = '[Character] Add Audio',
-  RemoveAudioCharacter = '[Character] Remove Audio',
+  AddFileCharacter = '[Character] Add File',
+  RemoveFileCharacter = '[Character] Remove File',
 }
 
 export class FetchMoreCharacter implements Action {
@@ -54,14 +54,14 @@ export class DeleteCharacter implements Action {
   constructor() {}
 }
 
-export class AddAudioCharacter implements Action {
-  readonly type = CharacterActionTypes.AddAudioCharacter;
+export class AddFileCharacter implements Action {
+  readonly type = CharacterActionTypes.AddFileCharacter;
 
   constructor(public payload: any) {}
 }
 
-export class RemoveAudioCharacter implements Action {
-  readonly type = CharacterActionTypes.RemoveAudioCharacter;
+export class RemoveFileCharacter implements Action {
+  readonly type = CharacterActionTypes.RemoveFileCharacter;
 
   constructor(public payload: any) {}
 }
@@ -74,5 +74,5 @@ export type CharacterActionsUnion =
   | UpdateCharacter
   | SelectCharacter
   | DeleteCharacter
-  | AddAudioCharacter
-  | RemoveAudioCharacter;
+  | AddFileCharacter
+  | RemoveFileCharacter;

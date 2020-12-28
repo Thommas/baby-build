@@ -18,6 +18,7 @@ import worldType from './types/world';
 
 // Resolvers
 import characterResolver from './resolvers/character';
+import fileResolver from './resolvers/file';
 import ideaResolver from './resolvers/idea';
 import reviewResolver from './resolvers/review';
 import sharingResolver from './resolvers/sharing';
@@ -36,6 +37,7 @@ export const typeDefs: any = mergeTypeDefs([
 
 export const resolvers: any = mergeResolvers([
   characterResolver,
+  fileResolver,
   ideaResolver,
   reviewResolver,
   sharingResolver,
