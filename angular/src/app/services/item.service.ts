@@ -45,17 +45,15 @@ export class ItemService {
     if (!newItem.asset) {
       return;
     }
-    // this.generateRandomPicture(newItem);
+    this.generateRandomPicture(newItem);
     this.generateRandomSound(newItem);
   }
 
-  // generateRandomPicture(newItem: any) {
-  //   const filesCount = newItem.asset.pictures.length;
-  //   const rand = Math.floor(Math.random() * filesCount);
-  //   const offset = newItem.keyCode % filesCount;
-  //   const filename = newItem.asset.pictures[this.isRandom ? rand : offset];
-  //   newItem.src = `../assets/img/${filename}`;
-  // }
+  generateRandomPicture(newItem: any) {
+    const filesCount = newItem.asset.files.filter((file: any) => file.type === 'image/png').length;
+    const rand = Math.floor(Math.random() * filesCount);
+    newItem.img = newItem.asset.files[rand].data;
+  }
 
   generateRandomSound(newItem: any) {
     if (!newItem.asset.audios) {

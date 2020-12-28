@@ -142,7 +142,7 @@ class PuppeteerService {
 
     await page.goto(url);
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 10; i++) {
       const imageSelector = `#islrg > div.islrc > div:nth-child(${i + 1}) > a > div > img`;
       console.log('imageSelector', imageSelector);
 

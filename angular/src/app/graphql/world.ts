@@ -15,7 +15,7 @@ export const GetWorldQuery = gql`
         id
         label
         img
-        audios {
+        files {
           id
           name
           type

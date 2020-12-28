@@ -6,8 +6,8 @@
   -webkit-box-direction: normal;
   place-content: center space-around;
   align-self: center;
-  width: 64px;
-  height: 64px;
+  width: 100px;
+  height: 100px;
   margin: 5px;
 }
 
@@ -17,6 +17,7 @@
   display: block;
   position: relative;
   border-radius: 10px;
+  background-color: grey;
 
   ::after {
     content: '';
@@ -26,14 +27,5 @@
     bottom: 0;
     left: 0;
     border: 1px solid #000;
-  }
-
-  .icon {
-    z-index: 1;
-    align-self: center;
-    img {
-      width: 48px;
-      height: 24px;
-    }
   }
 }

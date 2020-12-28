@@ -1,6 +1,4 @@
 <div class="container">
-  <div class="icon">
-    <img [src]="character.img ? character.img : 'https://picsum.photos/100/100'" />
-  </div>
+  <img [src]="character.files && character.files.length > 0 ? character.files[0].data : 'https://picsum.photos/100/100'" width="100" height="100"/>
   <p>{{ character.label }}</p>
 </div>
