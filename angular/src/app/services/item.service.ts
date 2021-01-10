@@ -50,20 +50,20 @@ export class ItemService {
   }
 
   generateRandomPicture(newItem: any) {
-    const filesCount = newItem.asset.files.filter((file: any) => file.type === 'image/png').length;
+    const imgs = newItem.asset.files.filter((file: any) => file.type === 'image/png');
+    console.log('imgs', imgs);
+    const filesCount = imgs.length;
     const rand = Math.floor(Math.random() * filesCount);
-    newItem.img = newItem.asset.files[rand].data;
+    newItem.img = imgs[rand].data;
   }
 
   generateRandomSound(newItem: any) {
-    if (!newItem.asset.audios) {
-      return;
-    }
-    const filesCount = newItem.asset.audios.length;
+    const audios = newItem.asset.files.filter((file: any) => file.type === 'audio/wav');
+    const filesCount = audios.length;
     if (0 === filesCount.length) {
       return;
     }
     const rand = Math.floor(Math.random() * filesCount);
-    newItem.sound = newItem.asset.audios[rand];
+    newItem.sound = audios[rand];
   }
 }

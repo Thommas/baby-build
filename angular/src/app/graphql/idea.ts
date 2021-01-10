@@ -7,10 +7,10 @@
 import gql from 'graphql-tag';
 
 export const GetIdeas = gql`
-  query GetIdeas($ideaInput: IdeaInput, $cursor: String, $sort: String) {
-    ideas(ideaInput: $ideaInput, cursor: $cursor, sort: $sort) {
+  query GetIdeas($ideaInput: IdeaInput, $page: Int, $sort: String) {
+    ideas(ideaInput: $ideaInput, page: $page, sort: $sort) {
       total
-      cursor
+      page
       nodes {
         id
         label
@@ -119,78 +119,6 @@ export const DeleteIdeaMutation = gql`
       id: $id
     ) {
       id
-    }
-  }
-`;
-
-export const AddAudioIdeaMutation = gql`
-  mutation AddAudio(
-    $id: String!
-    $name: String!
-    $size: Int!
-    $type: String!
-    $data: String!
-  ) {
-    addAudio(
-      id: $id
-      name: $name
-      size: $size
-      type: $type
-      data: $data
-    ) {
-      id
-      label
-      category
-      platform
-      releaseDate
-      timeToCompletion
-      language
-      requiredAge
-      score
-      userId
-      user {
-        firstName
-        lastName
-      }
-      imgs {
-        icon
-        cover
-        screenshot
-        png
-      }
-    }
-  }
-`;
-
-export const RemoveAudioIdeaMutation = gql`
-  mutation RemoveAudio(
-    $id: String!
-    $fileId: String!
-  ) {
-    removeAudio(
-      id: $id
-      fileId: $fileId
-    ) {
-      id
-      label
-      category
-      platform
-      releaseDate
-      timeToCompletion
-      language
-      requiredAge
-      score
-      userId
-      user {
-        firstName
-        lastName
-      }
-      imgs {
-        icon
-        cover
-        screenshot
-        png
-      }
     }
   }
 `;

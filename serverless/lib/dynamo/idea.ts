@@ -12,19 +12,19 @@ import { dynamoService } from '../services';
 
 export function getIdeas(userId: string, args: any) {
   const ideaInput = args.ideaInput;
-  const cursor = args.cursor;
+  const page = args.page;
   const sort = args.sort;
   return querySharingsByUserId(userId)
     .then((sharings) => {
       const userIds = sharings.hits.hits.map((hit: any) => hit._source.sharerId);
       userIds.push(userId);
-      return queryIdeas(userIds, ideaInput, sort, cursor)
+      return queryIdeas(userIds, ideaInput, sort, page)
     })
     .then((ideas) => {
       if (0 === ideas.hits.total.value || 0 === ideas.hits.hits.length) {
         return {
           total: 0,
-          cursor: '-1',
+          page,
           nodes: [],
         };
       }
@@ -32,7 +32,7 @@ export function getIdeas(userId: string, args: any) {
       return dynamoService.getEntity().batchGet(params).then((items: any) => {
         return {
           total: ideas.hits.total.value,
-          cursor: ideas.hits.hits[ideas.hits.hits.length - 1]._source['createdAt'],
+          page,
           nodes: orderBy(items, [
             (item: any) => new Date(item.createdAt),
             'id',

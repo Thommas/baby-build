@@ -7,10 +7,10 @@
 import gql from 'graphql-tag';
 
 export const GetCharacters = gql`
-  query GetCharacters($characterInput: CharacterInput, $cursor: String, $sort: String) {
-    characters(characterInput: $characterInput, cursor: $cursor, sort: $sort) {
+  query GetCharacters($characterInput: CharacterInput, $page: Int, $sort: String) {
+    characters(characterInput: $characterInput, page: $page, sort: $sort) {
       total
-      cursor
+      page
       nodes {
         id
         label

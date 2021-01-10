@@ -42,7 +42,7 @@ export class WorldFacade {
   worldQuery: QueryRef<any> = null;
   worldsQuery: QueryRef<any> = null;
   static total: number = null;
-  static cursor: any;
+  static page: any;
 
   newWorlds = [];
   world$ = this.store
@@ -64,19 +64,21 @@ export class WorldFacade {
     );
   worlds$ = this.worldFiltersFacade.filters$.pipe(
     mergeMap((filters: any) => {
-      this.worldsQuery = this.apolloService.apolloClient.watchQuery<any>({
-        query: GetWorldsQuery,
-        variables: this.purifyFilters(filters),
-      });
-      return this.worldsQuery
-        .valueChanges
-        .pipe(
-          map((response: any) => {
-            WorldFacade.total = response.data.worlds.total;
-            WorldFacade.cursor = response.data.worlds.cursor;
-            return response.data.worlds.nodes;
-          }),
-        );
+      console.log('WORLDS $');
+      return of([]);
+      // this.worldsQuery = this.apolloService.apolloClient.watchQuery<any>({
+      //   query: GetWorldsQuery,
+      //   variables: this.purifyFilters(filters),
+      // });
+      // return this.worldsQuery
+      //   .valueChanges
+      //   .pipe(
+      //     map((response: any) => {
+      //       WorldFacade.total = response.data.worlds.total;
+      //       WorldFacade.page = response.data.worlds.page;
+      //       return response.data.worlds.nodes;
+      //     }),
+      //   );
     })
   );
   fetchMoreLoading$ = this.store.pipe(select('world', 'fetchMoreLoading'));
@@ -102,7 +104,7 @@ export class WorldFacade {
 
     return {
       characterInput: currentFilters,
-      cursor: '-1',
+      page: 1,
       sort: filters.sort ? filters.sort : undefined,
     };
   }
@@ -127,7 +129,7 @@ export class WorldFacade {
         const filters = args[1];
         const worlds = args[2];
         const variables = this.purifyFilters(filters);
-        variables.cursor = WorldFacade.cursor;
+        variables.page = WorldFacade.page;
 
         if (!this.worldsQuery) {
           return of(EMPTY);
@@ -139,12 +141,12 @@ export class WorldFacade {
           query: GetWorldsQuery,
           variables,
           updateQuery: (prev, { fetchMoreResult }) => {
-            WorldFacade.cursor = fetchMoreResult.worlds.cursor;
+            WorldFacade.page = fetchMoreResult.worlds.page;
             this.store.dispatch(new FetchMoreWorldComplete());
             return {
               worlds: {
                 total: fetchMoreResult.worlds.total,
-                cursor: fetchMoreResult.worlds.cursor,
+                page: fetchMoreResult.worlds.page,
                 nodes: [
                   ...prev.worlds.nodes,
                   ...fetchMoreResult.worlds.nodes,
@@ -210,7 +212,7 @@ export class WorldFacade {
               data: {
                 worlds: {
                   total: WorldFacade.total,
-                  cursor: WorldFacade.cursor,
+                  page: WorldFacade.page,
                   nodes: updatedWorlds,
                   __typename: "WorldEdge",
                 }

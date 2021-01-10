@@ -8,23 +8,23 @@ import * as elasticsearch from 'elasticsearch';
 import { configService } from './config.service';
 import { dynamoService } from './dynamo.service';
 
+const ITEMS_PER_PAGE = 10;
+
 class ElasticSearchService {
   elasticsearchClient = new elasticsearch.Client({
     hosts: [configService.elasticSearchHost]
   });
 
-  search(query: any, sort: any = {}, size: number = 50, cursor: string = '-1'): Promise<any> {
+  search(query: any, sort: any = {}, size: number = ITEMS_PER_PAGE, page: number = 1): Promise<any> {
     const body: any = {
       query,
       sort,
     };
-    if (cursor !== '-1') {
-      body.search_after = [cursor];
-    }
     return this.elasticsearchClient.search({
       index: configService.elasticSearchIndex,
       type: '_doc',
       size,
+      from: (page - 1) * ITEMS_PER_PAGE,
       body,
     });
   }

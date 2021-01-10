@@ -6,9 +6,9 @@
 
 import { elasticSearchService } from '../services';
 
-let SIZE = 50;
+let SIZE = 10;
 
-export function queryCharacters(userIds: string[], filters: any, sortInput: string, cursor: string): Promise<any> {
+export function queryCharacters(userIds: string[], filters: any, sortInput: string, page: number): Promise<any> {
   let count = SIZE;
   const query: any = {
     bool: {
@@ -57,5 +57,5 @@ export function queryCharacters(userIds: string[], filters: any, sortInput: stri
   const sort: any = {
     [sortKey]: sortOrder,
   };
-  return elasticSearchService.search(query, sort, count, cursor);
+  return elasticSearchService.search(query, sort, count, page);
 }

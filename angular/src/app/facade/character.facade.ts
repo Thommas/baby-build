@@ -42,7 +42,7 @@ export class CharacterFacade {
   suggestedCharacterQuery: QueryRef<any> = null;
   characterQuery: QueryRef<any> = null;
   static total: number = null;
-  static cursor: any;
+  static page: any;
   ages: number[] = [];
   scores: number[] = [];
 
@@ -66,7 +66,7 @@ export class CharacterFacade {
         .pipe(
           map((response: any) => {
             CharacterFacade.total = response.data.characters.total;
-            CharacterFacade.cursor = response.data.characters.cursor;
+            CharacterFacade.page = response.data.characters.page;
             return response.data.characters.nodes;
           }),
         );
@@ -84,7 +84,7 @@ export class CharacterFacade {
         .pipe(
           map((response: any) => {
             CharacterFacade.total = response.data.characters.total;
-            CharacterFacade.cursor = response.data.characters.cursor;
+            CharacterFacade.page = response.data.characters.page;
             return response.data.characters.nodes;
           }),
         );
@@ -132,7 +132,7 @@ export class CharacterFacade {
 
     return {
       characterInput: currentFilters,
-      cursor: '-1',
+      page: 1,
       sort: filters.sort ? filters.sort : undefined,
     };
   }
@@ -153,7 +153,7 @@ export class CharacterFacade {
         const filters = args[1];
         const characters = args[2];
         const variables = this.purifyFilters(filters);
-        variables.cursor = CharacterFacade.cursor;
+        variables.page = CharacterFacade.page;
 
         if (!this.characterQuery) {
           return of(EMPTY);
@@ -165,12 +165,12 @@ export class CharacterFacade {
           query: GetCharacters,
           variables,
           updateQuery: (prev, { fetchMoreResult }) => {
-            CharacterFacade.cursor = fetchMoreResult.characters.cursor;
+            CharacterFacade.page = fetchMoreResult.characters.page;
             this.store.dispatch(new FetchMoreCharacterComplete());
             return {
               characters: {
                 total: fetchMoreResult.characters.total,
-                cursor: fetchMoreResult.characters.cursor,
+                page: fetchMoreResult.characters.page,
                 nodes: [
                   ...prev.characters.nodes,
                   ...fetchMoreResult.characters.nodes,
@@ -243,7 +243,7 @@ export class CharacterFacade {
               data: {
                 characters: {
                   total: CharacterFacade.total,
-                  cursor: CharacterFacade.cursor,
+                  page: CharacterFacade.page,
                   nodes: updatedCharacters,
                   __typename: "CharacterEdge",
                 }

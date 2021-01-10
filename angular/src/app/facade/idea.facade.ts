@@ -15,8 +15,6 @@ import {
   DeleteIdeaMutation,
   GetIdeas,
   UpdateIdeaMutation,
-  AddAudioIdeaMutation,
-  RemoveAudioIdeaMutation,
 } from '../graphql';
 import { ApolloService } from '../services';
 import {
@@ -29,8 +27,6 @@ import {
   SelectIdea,
   SelectReview,
   DeleteIdea,
-  AddAudioIdea,
-  RemoveAudioIdea,
 } from '../store';
 import { IdeaFiltersFacade } from './idea-filters.facade';
 import { IdeaSuggestFacade } from './idea-suggest.facade';
@@ -42,7 +38,7 @@ export class IdeaFacade {
   suggestedIdeaQuery: QueryRef<any> = null;
   ideaQuery: QueryRef<any> = null;
   static total: number = null;
-  static cursor: any;
+  static page: any;
   ages: number[] = [];
   scores: number[] = [];
 
@@ -65,9 +61,11 @@ export class IdeaFacade {
         .valueChanges
         .pipe(
           map((response: any) => {
-            IdeaFacade.total = response.data.ideas.total;
-            IdeaFacade.cursor = response.data.ideas.cursor;
-            return response.data.ideas.nodes;
+            return {
+              total: response.data.ideas.total,
+              page: response.data.ideas.page,
+              items: response.data.ideas.nodes
+            };
           }),
         );
     })
@@ -83,18 +81,17 @@ export class IdeaFacade {
         .valueChanges
         .pipe(
           map((response: any) => {
-            IdeaFacade.total = response.data.ideas.total;
-            IdeaFacade.cursor = response.data.ideas.cursor;
-            return response.data.ideas.nodes;
+            return {
+              total: response.data.ideas.total,
+              page: response.data.ideas.page,
+              items: response.data.ideas.nodes
+            };
           }),
         );
     })
   );
   fetchMoreLoading$ = this.store.pipe(select('idea', 'fetchMoreLoading'));
   selectedIdea$ = this.store.pipe(select('idea', 'selected'));
-  ideasHasMore$ = this.ideas$.pipe(
-    map((ideas: any) => IdeaFacade.total !== 0 && ideas.length !== IdeaFacade.total),
-  );
 
   constructor(
     private actions$: Actions,
@@ -135,7 +132,7 @@ export class IdeaFacade {
 
     return {
       ideaInput: currentFilters,
-      cursor: '-1',
+      page: 1,
       sort: filters.sort ? filters.sort : undefined,
     };
   }
@@ -156,7 +153,7 @@ export class IdeaFacade {
         const filters = args[1];
         const ideas = args[2];
         const variables = this.purifyFilters(filters);
-        variables.cursor = IdeaFacade.cursor;
+        variables.page = IdeaFacade.page;
 
         if (!this.ideaQuery) {
           return of(EMPTY);
@@ -168,12 +165,12 @@ export class IdeaFacade {
           query: GetIdeas,
           variables,
           updateQuery: (prev, { fetchMoreResult }) => {
-            IdeaFacade.cursor = fetchMoreResult.ideas.cursor;
+            IdeaFacade.page = fetchMoreResult.ideas.page;
             this.store.dispatch(new FetchMoreIdeaComplete());
             return {
               ideas: {
                 total: fetchMoreResult.ideas.total,
-                cursor: fetchMoreResult.ideas.cursor,
+                page: fetchMoreResult.ideas.page,
                 nodes: [
                   ...prev.ideas.nodes,
                   ...fetchMoreResult.ideas.nodes,
@@ -246,7 +243,7 @@ export class IdeaFacade {
               data: {
                 ideas: {
                   total: IdeaFacade.total,
-                  cursor: IdeaFacade.cursor,
+                  page: IdeaFacade.page,
                   nodes: updatedIdeas,
                   __typename: "IdeaEdge",
                 }
@@ -360,84 +357,4 @@ export class IdeaFacade {
     this.store.dispatch(new SelectReview(null));
     this.store.dispatch(new SelectIdea(idea));
   }
-
-  addAudio(data: any) {
-    this.store.dispatch(new AddAudioIdea(data));
-  }
-
-  @Effect({dispatch: false})
-  addAudio$ = this.actions$
-    .pipe(
-      ofType(IdeaActionTypes.AddAudioIdea),
-      withLatestFrom(
-        this.userFacade.user$,
-        this.selectedIdea$
-      ),
-      mergeMap((args: any[]) => {
-        const action: any = args[0];
-        const user: any = args[1];
-        const selectedIdea: any = args[2];
-        if (!user || !selectedIdea) {
-          return of(EMPTY);
-        }
-        return this.apolloService.apolloClient.mutate({
-          mutation: AddAudioIdeaMutation,
-          variables: {
-            id: selectedIdea.id,
-            ...action.payload
-          },
-          update: (store: any, { data: { addAudio } }: any) => {
-            if (!addAudio) {
-              return;
-            }
-            const idea = store.data.get(`Idea:${addAudio.id}`);
-            if (idea) {
-              idea.audios = addAudio.audios;
-              store.writeData(idea);
-              this.selectIdea(idea);
-            }
-          }
-        });
-      })
-    );
-
-  removeAudio(data: any) {
-    this.store.dispatch(new RemoveAudioIdea(data));
-  }
-
-  @Effect({dispatch: false})
-  removeAudio$ = this.actions$
-    .pipe(
-      ofType(IdeaActionTypes.RemoveAudioIdea),
-      withLatestFrom(
-        this.userFacade.user$,
-        this.selectedIdea$
-      ),
-      mergeMap((args: any[]) => {
-        const action: any = args[0];
-        const user: any = args[1];
-        const selectedIdea: any = args[2];
-        if (!user || !selectedIdea) {
-          return of(EMPTY);
-        }
-        return this.apolloService.apolloClient.mutate({
-          mutation: RemoveAudioIdeaMutation,
-          variables: {
-            id: selectedIdea.id,
-            ...action.payload
-          },
-          update: (store: any, { data: { removeAudio } }: any) => {
-            if (!removeAudio) {
-              return;
-            }
-            const idea = store.data.get(`Idea:${removeAudio.id}`);
-            if (idea) {
-              idea.audios = removeAudio.audios;
-              store.writeData(idea);
-              this.selectIdea(idea);
-            }
-          }
-        });
-      })
-    );
 }

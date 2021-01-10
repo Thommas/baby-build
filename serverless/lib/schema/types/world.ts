@@ -14,7 +14,7 @@ const World = gql`
   }
   type WorldEdge {
     total: Int!
-    cursor: String!
+    page: Int!
     nodes: [World]
   }
   input WorldInput {
@@ -23,7 +23,7 @@ const World = gql`
   }
   type Query {
     world(id: String): World
-    worlds(worldInput: WorldInput, cursor: String, sort: String): WorldEdge
+    worlds(worldInput: WorldInput, page: Int, sort: String): WorldEdge
   }
   type Mutation {
     createWorld(

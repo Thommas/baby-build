@@ -39,11 +39,11 @@ const Idea = gql`
   }
   type IdeaEdge {
     total: Int!
-    cursor: String!
+    page: Int!
     nodes: [Idea]
   }
   type Query {
-    ideas(ideaInput: IdeaInput, cursor: String, sort: String): IdeaEdge
+    ideas(ideaInput: IdeaInput, page: Int, sort: String): IdeaEdge
   }
   type Mutation {
     createIdea(

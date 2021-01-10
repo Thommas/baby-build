@@ -15,6 +15,7 @@ import { IdeaFacade } from '../../../facade';
 export class IdeaListComponent {
   ideas$: any;
   fetchMoreLoading$ = this.ideaFacade.fetchMoreLoading$;
+  page = IdeaFacade.page;
 
   constructor(
     private ideaFacade: IdeaFacade

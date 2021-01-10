@@ -28,10 +28,10 @@ export const GetWorldQuery = gql`
 `;
 
 export const GetWorldsQuery = gql`
-  query GetWorlds($worldInput: WorldInput, $cursor: String, $sort: String) {
-    worlds(worldInput: $worldInput, cursor: $cursor, sort: $sort) {
+  query GetWorlds($worldInput: WorldInput, $page: Int, $sort: String) {
+    worlds(worldInput: $worldInput, page: $page, sort: $sort) {
       total
-      cursor
+      page
       nodes {
         id
         label

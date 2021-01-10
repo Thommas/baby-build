@@ -21,11 +21,11 @@ const Character = gql`
   }
   type CharacterEdge {
     total: Int!
-    cursor: String!
+    page: Int!
     nodes: [Character]
   }
   type Query {
-    characters(characterInput: CharacterInput, cursor: String, sort: String): CharacterEdge
+    characters(characterInput: CharacterInput, page: Int, sort: String): CharacterEdge
   }
   type Mutation {
     createCharacter(

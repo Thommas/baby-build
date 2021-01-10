@@ -12,19 +12,19 @@ import { dynamoService } from '../services';
 
 export function getCharacters(userId: string, args: any) {
   const characterInput = args.characterInput;
-  const cursor = args.cursor;
+  const page = args.page;
   const sort = args.sort;
   return querySharingsByUserId(userId)
     .then((sharings) => {
       const userIds = sharings.hits.hits.map((hit: any) => hit._source.sharerId);
       userIds.push(userId);
-      return queryCharacters(userIds, characterInput, sort, cursor)
+      return queryCharacters(userIds, characterInput, sort, page)
     })
     .then((characters) => {
       if (0 === characters.hits.total.value || 0 === characters.hits.hits.length) {
         return {
           total: 0,
-          cursor: '-1',
+          page: 1,
           nodes: [],
         };
       }
@@ -32,7 +32,7 @@ export function getCharacters(userId: string, args: any) {
       return dynamoService.getEntity().batchGet(params).then((items: any) => {
         return {
           total: characters.hits.total.value,
-          cursor: characters.hits.hits[characters.hits.hits.length - 1]._source['createdAt'],
+          page,
           nodes: orderBy(items, [
             (item: any) => new Date(item.createdAt),
             'id',

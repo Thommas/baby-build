@@ -53,7 +53,11 @@ export class AudioListComponent {
     });
   }
 
-  playFile(audio: any) {
+  playAudio(audio: any) {
     this.audioService.playSound(audio);
+  }
+
+  isAudio(audio: any) {
+    return audio.type === 'audio/wav';
   }
 }
