@@ -25,14 +25,14 @@ export function getWorld(userId: string, args: any) {
 
 export function getWorlds(userId: string, args: any) {
   const worldInput = args.worldInput;
-  const cursor = args.cursor;
+  const page = args.page;
   const sort = args.sort;
-  return queryWorlds([userId], worldInput, sort, cursor)
+  return queryWorlds([userId], worldInput, sort, page)
     .then((worlds) => {
       if (0 === worlds.hits.total.value || 0 === worlds.hits.hits.length) {
         return {
           total: 0,
-          cursor: '-1',
+          page: 1,
           nodes: [],
         };
       }
@@ -40,7 +40,7 @@ export function getWorlds(userId: string, args: any) {
       return dynamoService.getEntity().batchGet(params).then((items: any) => {
         return {
           total: worlds.hits.total.value,
-          cursor: worlds.hits.hits[worlds.hits.hits.length - 1]._source['createdAt'],
+          page: 1,
           nodes: orderBy(items, [
             (item: any) => new Date(item.createdAt),
             'id',

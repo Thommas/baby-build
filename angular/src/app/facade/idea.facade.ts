@@ -38,7 +38,6 @@ export class IdeaFacade {
   suggestedIdeaQuery: QueryRef<any> = null;
   ideaQuery: QueryRef<any> = null;
   static total: number = null;
-  static page: any;
   ages: number[] = [];
   scores: number[] = [];
 
@@ -132,7 +131,7 @@ export class IdeaFacade {
 
     return {
       ideaInput: currentFilters,
-      page: 1,
+      page: filters.page ? filters.page : 1,
       sort: filters.sort ? filters.sort : undefined,
     };
   }
@@ -153,7 +152,6 @@ export class IdeaFacade {
         const filters = args[1];
         const ideas = args[2];
         const variables = this.purifyFilters(filters);
-        variables.page = IdeaFacade.page;
 
         if (!this.ideaQuery) {
           return of(EMPTY);
@@ -165,7 +163,6 @@ export class IdeaFacade {
           query: GetIdeas,
           variables,
           updateQuery: (prev, { fetchMoreResult }) => {
-            IdeaFacade.page = fetchMoreResult.ideas.page;
             this.store.dispatch(new FetchMoreIdeaComplete());
             return {
               ideas: {
@@ -243,7 +240,7 @@ export class IdeaFacade {
               data: {
                 ideas: {
                   total: IdeaFacade.total,
-                  page: IdeaFacade.page,
+                  page: filters.page,
                   nodes: updatedIdeas,
                   __typename: "IdeaEdge",
                 }

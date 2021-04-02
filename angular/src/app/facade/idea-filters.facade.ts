@@ -18,6 +18,12 @@ export class IdeaFiltersFacade {
 
   constructor(private store: Store<{ ideaFilters: any }>) {}
 
+  changePage(offset: number) {
+    this.store.dispatch(new UpdateIdeaFilters({
+      offset,
+    }));
+  }
+
   selectLanguage(language: string) {
     this.store.dispatch(new UpdateIdeaFilters({
       language,

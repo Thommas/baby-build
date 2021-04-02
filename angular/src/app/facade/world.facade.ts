@@ -42,7 +42,6 @@ export class WorldFacade {
   worldQuery: QueryRef<any> = null;
   worldsQuery: QueryRef<any> = null;
   static total: number = null;
-  static page: any;
 
   newWorlds = [];
   world$ = this.store
@@ -64,21 +63,18 @@ export class WorldFacade {
     );
   worlds$ = this.worldFiltersFacade.filters$.pipe(
     mergeMap((filters: any) => {
-      console.log('WORLDS $');
-      return of([]);
-      // this.worldsQuery = this.apolloService.apolloClient.watchQuery<any>({
-      //   query: GetWorldsQuery,
-      //   variables: this.purifyFilters(filters),
-      // });
-      // return this.worldsQuery
-      //   .valueChanges
-      //   .pipe(
-      //     map((response: any) => {
-      //       WorldFacade.total = response.data.worlds.total;
-      //       WorldFacade.page = response.data.worlds.page;
-      //       return response.data.worlds.nodes;
-      //     }),
-      //   );
+      this.worldsQuery = this.apolloService.apolloClient.watchQuery<any>({
+        query: GetWorldsQuery,
+        variables: this.purifyFilters(filters),
+      });
+      return this.worldsQuery
+        .valueChanges
+        .pipe(
+          map((response: any) => {
+            WorldFacade.total = response.data.worlds.total;
+            return response.data.worlds.nodes;
+          }),
+        );
     })
   );
   fetchMoreLoading$ = this.store.pipe(select('world', 'fetchMoreLoading'));
@@ -104,7 +100,7 @@ export class WorldFacade {
 
     return {
       characterInput: currentFilters,
-      page: 1,
+      page: filters.page ? filters.page : 1,
       sort: filters.sort ? filters.sort : undefined,
     };
   }
@@ -129,7 +125,6 @@ export class WorldFacade {
         const filters = args[1];
         const worlds = args[2];
         const variables = this.purifyFilters(filters);
-        variables.page = WorldFacade.page;
 
         if (!this.worldsQuery) {
           return of(EMPTY);
@@ -141,7 +136,6 @@ export class WorldFacade {
           query: GetWorldsQuery,
           variables,
           updateQuery: (prev, { fetchMoreResult }) => {
-            WorldFacade.page = fetchMoreResult.worlds.page;
             this.store.dispatch(new FetchMoreWorldComplete());
             return {
               worlds: {
@@ -212,7 +206,7 @@ export class WorldFacade {
               data: {
                 worlds: {
                   total: WorldFacade.total,
-                  page: WorldFacade.page,
+                  page: filters.page,
                   nodes: updatedWorlds,
                   __typename: "WorldEdge",
                 }

@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { IdeaFacade } from '../../../facade';
+import { IdeaFacade, IdeaFiltersFacade } from '../../../facade';
 
 @Component({
   selector: 'app-idea-list-cmp',
@@ -15,9 +15,9 @@ import { IdeaFacade } from '../../../facade';
 export class IdeaListComponent {
   ideas$: any;
   fetchMoreLoading$ = this.ideaFacade.fetchMoreLoading$;
-  page = IdeaFacade.page;
 
   constructor(
+    private ideaFiltersFacade: IdeaFiltersFacade,
     private ideaFacade: IdeaFacade
   ) {
     this.ideas$ = this.ideaFacade.ideas$;
@@ -31,5 +31,9 @@ export class IdeaListComponent {
     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 100) {
       this.ideaFacade.fetchMore();
     }
+  }
+
+  changePage(offset: number) {
+    this.ideaFiltersFacade.changePage(offset);
   }
 }

@@ -15,6 +15,7 @@ const initialState = {
     score: null,
     category: null,
   },
+  page: 1,
   sort: null,
 };
 
@@ -34,6 +35,7 @@ export function ideaFiltersReducer(state: any = initialState, action: IdeaFilter
           language: action.payload.language !== undefined ? action.payload.language : state.ideaInput.language,
           category: action.payload.category !== undefined ? action.payload.category : state.ideaInput.category,
         },
+        page: action.payload.offset !== undefined ? state.page + action.payload.offset : state.page,
         sort: action.payload.sort !== undefined ? action.payload.sort : state.sort,
       };
 
