@@ -64,8 +64,8 @@ functions:
           method: post
           cors: true
           authorizer: customAuthorizer
-  handle:
-    handler: lib/handler.handle
+  stream:
+    handler: lib/handler.stream
     events:
       - stream:
           enabled: true

@@ -38,6 +38,6 @@ exports.graphql = (event, context, callback) => {
   return handler(event, context, callback);
 };
 
-exports.handle = (event, context, callback) => {
+exports.stream = (event, context, callback) => {
   handleEvent(event, callback);
 };

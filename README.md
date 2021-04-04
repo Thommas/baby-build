@@ -11,10 +11,11 @@ Stack
 
 - Angular
 - Ngrx
-- Serverless framework
 - Apollo GraphQL
+- Serverless framework
 - AWS Lambda
 - AWS DynamoDB
+- ElasticSearch
 - Auth0
 
 
