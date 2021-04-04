@@ -74,10 +74,6 @@ class AuthService {
   }
 
   authenticate(event: any, callback: any) {
-    if (configService.userId) {
-      return this.authenticateUser(event, callback, configService.userId);
-    }
-
     if (!event.authorizationToken) {
       console.error('No authorization token');
       return callback('Unauthorized')
