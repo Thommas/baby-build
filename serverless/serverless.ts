@@ -41,7 +41,7 @@ const serverlessConfiguration: Serverless = {
   plugins: [
     'serverless-webpack',
     'serverless-plugin-typescript',
-    'serverless-plugin-offline-dynamodb-stream',
+    // 'serverless-plugin-offline-dynamodb-stream',
     'serverless-offline',
   ],
   provider: {
@@ -75,7 +75,7 @@ const serverlessConfiguration: Serverless = {
           http: {
             path: 'graphql',
             method: 'post',
-            cors: 'true',
+            cors: true,
             authorizer: 'customAuthorizer',
           }
         }
@@ -87,6 +87,7 @@ const serverlessConfiguration: Serverless = {
         stream: {
           enabled: true,
           type: 'dynamodb',
+          arn: '',
         }
       }]
     }

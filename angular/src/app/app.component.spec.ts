@@ -9,7 +9,6 @@ import { TestBed, async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateService } from '@ngx-translate/core';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { AppComponent } from './app.component';
 import {

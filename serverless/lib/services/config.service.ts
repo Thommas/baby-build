@@ -4,8 +4,6 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
 import * as Joi from 'joi';
 
 declare var process: {
@@ -20,15 +18,12 @@ class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor() {
-    if (process.env.NODE_ENV === 'production') {
-      this.envConfig = this.validateInput(process.env);
-    } else if (process.env.NODE_ENV) {
-      const config = dotenv.parse(fs.readFileSync('.env.' + process.env.NODE_ENV));
-      this.envConfig = this.validateInput(config);
-    } else {
-      const config = dotenv.parse(fs.readFileSync('.env'));
-      this.envConfig = this.validateInput(config);
+    if (process.env.NODE_ENV === 'test') {
+      require('dotenv').config({
+        path: __dirname + '/../../.env.' + process.env.NODE_ENV
+      });
     }
+    this.envConfig = this.validateInput(process.env);
   }
 
   /**
@@ -38,8 +33,9 @@ class ConfigService {
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       NODE_ENV: Joi.string()
-        .valid('local', 'production')
-        .default('local'),
+        .valid('dev')
+        .default('dev'),
+      AWS_REGION: Joi.string().default('eu-west-1'),
       ELASTIC_SEARCH_INDEX: Joi.string().default('app'),
       ELASTIC_SEARCH_HOST: Joi.string().default('http://localhost:9200'),
       LOCAL_DYNAMODB_HOST: Joi.string().default('localhost'),
@@ -57,6 +53,10 @@ class ConfigService {
       throw new Error(`Config validation error: ${error.message}`);
     }
     return validatedEnvConfig;
+  }
+
+  get awsRegion(): string {
+    return String(this.envConfig.AWS_REGION);
   }
 
   get elasticSearchIndex(): string {

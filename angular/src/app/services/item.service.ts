@@ -5,7 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import * as uuid from 'uuid/v4';
+import * as nanoid from 'nanoid';
 import { map, first } from 'rxjs/operators';
 import { ApolloService } from './apollo.service';
 import { WorldFacade } from '../facade';
@@ -30,7 +30,7 @@ export class ItemService {
       return null;
     }
     const newItem: any = {
-      id: uuid(),
+      id: nanoid.nanoid(),
       keyCode: keyCode,
     };
     this.generateRandomAsset(assets, newItem);

@@ -17,12 +17,10 @@ class DynamoService {
       localDynamoDBPort,
     } = configService;
 
-    if (localDynamoDBHost && localDynamoDBPort) {
-      dynamoose.aws.sdk.config.update({
-        region: 'eu-west-2',
-      });
-      dynamoose.aws.ddb.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
-    }
+    dynamoose.aws.sdk.config.update({
+      region: configService.awsRegion,
+    });
+    dynamoose.aws.ddb.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
 
     return dynamoose;
   }
@@ -34,7 +32,7 @@ class DynamoService {
     } = configService;
 
     const serviceConfigOptions : ServiceConfigurationOptions = {
-      region: 'eu-west-2',
+      region: configService.awsRegion,
       endpoint: `http://${localDynamoDBHost}:${localDynamoDBPort}`,
     };
 

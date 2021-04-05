@@ -7,8 +7,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ApolloModule } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { NgModule } from '@angular/core';
@@ -32,9 +30,7 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
-import { Angulartics2Module } from 'angulartics2';
 import { localStorageSync } from 'ngrx-store-localstorage';
-import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { environment } from '../environments/environment';
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
@@ -109,11 +105,6 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
 }
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
-// ngx-translate
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -128,13 +119,6 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
-    }),
     RouterModule,
     routing,
     FlexLayoutModule,
@@ -158,7 +142,6 @@ export function createTranslateLoader(http: HttpClient) {
     UserModule,
     SecurityModule,
     StaticModule,
-    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     StoreModule.forRoot(
       reducers,
       {metaReducers}

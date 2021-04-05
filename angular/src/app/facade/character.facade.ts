@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import uuid from 'uuid/v4';
+import * as nanoid from 'nanoid';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -214,7 +214,7 @@ export class CharacterFacade {
             optimistic: true,
             createCharacter: {
               __typename: 'Character',
-              id: `-${uuid()}`,
+              id: `-${nanoid.nanoid()}`,
               ...action.payload,
               icon: null,
               userId: user.id,

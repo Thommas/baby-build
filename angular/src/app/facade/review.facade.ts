@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import uuid from 'uuid/v4';
+import * as nanoid from 'nanoid';
 import { meanBy } from 'lodash';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
@@ -147,7 +147,7 @@ export class ReviewFacade {
             createReview: {
               ...review,
               __typename: 'Review',
-              id: `-${uuid()}`,
+              id: `-${nanoid.nanoid()}`,
               userId: user.id,
               user,
             },
@@ -188,7 +188,7 @@ export class ReviewFacade {
             __typename: 'Mutation',
             updateReview: {
               __typename: 'Review',
-              id: `-${uuid()}`,
+              id: `-${nanoid.nanoid()}`,
               ...review,
               userId: user.id,
               user,

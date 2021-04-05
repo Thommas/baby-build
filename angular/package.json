@@ -1,32 +1,10 @@
 {
   "name": "pathofchild-angular",
-  "private": true,
-  "license": "WTFPL",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --disable-host-check --configuration=dev",
-    "start:staging": "ng serve --host 0.0.0.0 --disable-host-check --configuration=staging",
-    "start:locale": "ng serve --host 0.0.0.0 --disable-host-check --configuration=$BUILD_ENVIRONMENT --port 4200 --aot --i18n-locale $BUILD_LOCALE --i18n-format xlf --i18n-file ./src/locale/messages.$BUILD_LOCALE.xlf",
-    "start:en": "BUILD_ENVIRONMENT=dev BUILD_LOCALE=en npm run start:locale",
-    "start:ja": "BUILD_ENVIRONMENT=dev BUILD_LOCALE=ja npm run start:locale",
-    "start:fr": "BUILD_ENVIRONMENT=dev BUILD_LOCALE=fr npm run start:locale",
-    "build:staging": "BUILD_ENVIRONMENT=staging npm run build:all",
-    "build:production": "BUILD_ENVIRONMENT=production npm run build:all",
-    "build:all": "npm run build-prepare && npm run build:en && npm run build:fr && npm run build:ja && npm run build:all:finish",
-    "build:all:finish": "mv build/$BUILD_ENVIRONMENT/en/* build/$BUILD_ENVIRONMENT && rm -rf build/$BUILD_ENVIRONMENT/en",
-    "build:en": "BUILD_LOCALE=en npm run build-locale",
-    "build:ja": "BUILD_LOCALE=ja npm run build-locale",
-    "build:fr": "BUILD_LOCALE=fr npm run build-locale",
-    "build-prepare": "rm -rf build/$BUILD_ENVIRONMENT/$BUILD_LOCALE && mkdir -p build/$BUILD_ENVIRONMENT",
-    "build-locale": "npm run build-browser && mv dist/browser build/$BUILD_ENVIRONMENT/$BUILD_LOCALE",
-    "build-browser": "ng build --configuration=$BUILD_ENVIRONMENT --i18n-locale $BUILD_LOCALE --i18n-format xlf --i18n-file ./src/locale/messages.$BUILD_LOCALE.xlf",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "i18n-extract": "./node_modules/.bin/ng-xi18n --i18nFormat=xlf -p src/tsconfig.app.json",
-    "deploy:staging": "npm run build:staging && aws s3 sync --delete build/staging s3://pathofchild-app-staging",
-    "deploy:production": "npm run build:production && aws s3 sync --delete build/production s3://pathofchild-app-production",
-    "deploy:all": "npm run deploy:staging && npm run deploy:production"
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/animations": "^10.2.3",
@@ -56,6 +34,7 @@
     "core-js": "^3.10.0",
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
+    "hammerjs": "^2.0.8",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
@@ -65,6 +44,7 @@
     "zone.js": "^0.10.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^0.1002.0",
     "@angular/cli": "^10.2.3",
     "@angular/compiler-cli": "^10.2.3",
     "@angular/language-service": "^10.2.3",

@@ -12,8 +12,6 @@ export * from './form.service';
 export * from './item.service';
 export * from './http.service';
 export * from './http.service.stub';
-export * from './locale.service';
-export * from './locale.service.stub';
 export * from './progress.service';
 export * from './progress.service.stub';
 export * from './router.stub';
