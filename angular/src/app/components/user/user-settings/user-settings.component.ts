@@ -4,8 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { Component, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-user-settings-cmp',
@@ -13,9 +12,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./user-settings.component.scss']
 })
 export class UserSettingsComponent {
-  constructor(public dialogRef: MatDialogRef<UserSettingsComponent>) {}
+  // constructor(public dialogRef: MatDialogRef<UserSettingsComponent>) {}
 
   onNoClick(): void {
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 }

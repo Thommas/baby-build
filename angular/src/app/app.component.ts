@@ -8,13 +8,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import {
   AngularticsService,
   AuthService,
   BrowserService,
-  ProgressService,
-  LocaleService
+  ProgressService
 } from './services';
 
 @Component({
@@ -32,10 +30,8 @@ export class AppComponent implements OnInit {
     public router: Router,
     public authService: AuthService,
     private browserService: BrowserService,
-    private localeService: LocaleService,
     public progressService: ProgressService,
     private angularticsService: AngularticsService,
-    private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
