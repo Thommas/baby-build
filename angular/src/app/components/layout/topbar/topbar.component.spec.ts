@@ -8,7 +8,8 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { AuthService, AuthServiceStub } from '../../../services';
 import { TopbarComponent } from './topbar.component';
-import { MatDialogModule, MatMenuModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('TopbarComponent', () => {
   beforeEach(async(() => {

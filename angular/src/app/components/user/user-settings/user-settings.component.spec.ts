@@ -8,7 +8,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule, MatDialogRef } from '@angular/material';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Apollo } from 'apollo-angular';
 import { ApolloStub, AuthService, AuthServiceStub, RouterStub } from '../../../services';
 import { UserSettingsComponent } from './user-settings.component';

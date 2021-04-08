@@ -7,17 +7,14 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { MatProgressBarModule } from '@angular/material';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import {
-  AngularticsService,
   AuthService,
   AuthServiceStub,
   BrowserService,
   BrowserServiceStub,
-  LocaleService,
-  LocaleServiceStub,
   ProgressService,
   ProgressServiceStub,
   RouterStub
@@ -37,10 +34,8 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        { provide: Angulartics2GoogleAnalytics, useMock: Angulartics2GoogleAnalytics },
         { provide: AuthService, useClass: AuthServiceStub },
         { provide: BrowserService, useClass: BrowserServiceStub },
-        { provide: LocaleService, useClass: LocaleServiceStub },
         { provide: ProgressService, useClass: ProgressServiceStub },
         { provide: Router, useClass: RouterStub },
       ]
