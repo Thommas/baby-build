@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { clone } from 'lodash';
+import clone from 'lodash/clone';
 import { Component, Input, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { IdeaFacade, IdeaSuggestFacade } from '../../../facade';

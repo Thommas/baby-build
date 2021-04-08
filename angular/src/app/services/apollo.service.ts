@@ -61,9 +61,13 @@ export class ApolloService {
 
     const httpLink: ApolloLink = this.httpLink.create({ uri: environment.apollo.url });
 
+    const link: any = ApolloLink.from([authLink, errorLink, httpLink]);
+
+    const cache: any = new InMemoryCache();
+
     this.apollo.create({
-      link: ApolloLink.from([authLink, errorLink, httpLink]),
-      cache: new InMemoryCache()
+      link,
+      cache,
     });
 
     this._apolloClient = this.apollo;

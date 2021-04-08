@@ -5,10 +5,10 @@
  */
 
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ApolloModule } from 'apollo-angular';
-import { HttpLinkModule } from 'apollo-angular-link-http';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -51,7 +51,7 @@ import {
   BrowserService,
   ConstantsService,
   FormService,
-  ProgressService
+  ProgressService,
 } from './services';
 import {
   AuthFacade,
@@ -82,6 +82,7 @@ import {
   worldFiltersReducer,
 } from './store';
 import { AppDragndropDirective } from './app.dragndrop.directive';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 // ngrx-store-localstorage
 const reducers: ActionReducerMap<any> = {
@@ -114,7 +115,6 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ApolloModule,
     HttpLinkModule,
     RouterModule,
     routing,

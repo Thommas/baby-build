@@ -22,7 +22,7 @@ export class FileFacade {
   constructor(
     private actions$: Actions,
     private apolloService: ApolloService,
-    private store: Store<{ idea: any }>
+    private store: Store<{ file: any }>
   ) {
   }
 
