@@ -23,10 +23,10 @@ class S3Service {
       ACL: 'public-read',
     })
       .promise()
-      .then((res) => {
+      .then(() => {
         return `https://${bucket}.s3.amazonaws.com/${key}`;
       })
-      .catch((err) => {
+      .catch(() => {
         return null;
       })
   }

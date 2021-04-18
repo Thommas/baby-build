@@ -7,8 +7,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
+import { HttpLinkModule } from 'apollo-angular-link-http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -82,7 +81,6 @@ import {
   worldFiltersReducer,
 } from './store';
 import { AppDragndropDirective } from './app.dragndrop.directive';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 
 // ngrx-store-localstorage
 const reducers: ActionReducerMap<any> = {

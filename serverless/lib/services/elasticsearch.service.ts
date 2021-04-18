@@ -50,7 +50,7 @@ class ElasticSearchService {
     });
   }
 
-  suggest(type: string, field: string, value: string): Promise<any> {
+  suggest(field: string, value: string): Promise<any> {
     const body: any = {
       query : {
         bool: {
@@ -91,7 +91,9 @@ class ElasticSearchService {
       type: '_doc',
       id: document.id,
     }, (err, resp, status) => {
+      console.log(err);
       console.log(resp);
+      console.log(status);
     });
   }
 
@@ -111,7 +113,9 @@ class ElasticSearchService {
         type,
       }
     }, (err, resp, status) => {
+      console.log(err);
       console.log(resp);
+      console.log(status);
     });
   }
 

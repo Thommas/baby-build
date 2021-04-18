@@ -6,6 +6,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
+    "esModuleInterop": true,
     "target": "es2017",
     "outDir": "lib"
   },

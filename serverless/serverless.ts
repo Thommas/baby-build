@@ -36,6 +36,18 @@ const serverlessConfiguration: Serverless = {
           ]
         }
       ]
+    },
+    localstack: {
+      stages: ['dev'],
+      host: 'http://localhost',
+      edgePort: 4566,
+      autostart: true,
+      lambda: {
+        mountCode: true
+      },
+      docker: {
+        sudo: false
+      }
     }
   },
   plugins: [
@@ -43,6 +55,7 @@ const serverlessConfiguration: Serverless = {
     'serverless-plugin-typescript',
     // 'serverless-plugin-offline-dynamodb-stream',
     'serverless-offline',
+    'serverless-localstack',
   ],
   provider: {
     name: 'aws',

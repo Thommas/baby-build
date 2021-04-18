@@ -17,7 +17,7 @@ export default {
   },
   Mutation: {
     createIdea: (_, args, context) => dbIdea.createIdea(args, context.userId),
-    updateIdea: (_, args, context) => dbIdea.updateIdea(args, context.userId),
+    updateIdea: (_, args) => dbIdea.updateIdea(args),
     deleteIdea: (_, args, context) => dbIdea.deleteIdea(args, context.userId),
   }
 };

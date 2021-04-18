@@ -4,9 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { ApolloServer } from 'apollo-server-lambda';
-import { typeDefs, resolvers } from './schema/schema';
-import { authService } from './services';
+import { authService, graphqlService } from './services';
 import { handleEvent } from './handlers/event.handler';
 
 exports.auth = (event, context, callback) => {
@@ -14,19 +12,7 @@ exports.auth = (event, context, callback) => {
 }
 
 exports.graphql = (event, context, callback) => {
-  const server = new ApolloServer({
-    playground: true,
-    introspection: true,
-    typeDefs,
-    resolvers,
-    context: ({ event, context }) => ({
-      headers: event.headers,
-      functionName: context.functionName,
-      event,
-      context,
-      userId: event.requestContext.authorizer.userId,
-    }),
-  });
+  const server = graphqlService.createServer();
 
   const handler = server.createHandler({
     cors: {

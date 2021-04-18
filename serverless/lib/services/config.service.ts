@@ -33,7 +33,7 @@ class ConfigService {
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       NODE_ENV: Joi.string()
-        .valid('dev')
+        .valid('dev', 'test')
         .default('dev'),
       AWS_REGION: Joi.string().default('eu-west-1'),
       ELASTIC_SEARCH_INDEX: Joi.string().default('app'),
@@ -45,7 +45,7 @@ class ConfigService {
       AUTH0_JWKS_URI: Joi.string(),
       AUTH0_JWKS_KID: Joi.string(),
       USER_ID: Joi.optional(),
-    });
+    }).unknown(true);
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(
       envConfig,

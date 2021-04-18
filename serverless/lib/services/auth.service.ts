@@ -45,7 +45,6 @@ class AuthService {
     }
     try {
       const jwksClient = jwks({
-        strictSsl: true,
         cache: true,
         jwksUri: configService.auth0JwksUri
       });
@@ -74,6 +73,7 @@ class AuthService {
   }
 
   authenticate(event: any, callback: any) {
+    console.log('configService.userId', configService.userId);
     if (configService.userId) {
       return this.authenticateUser(event, callback, configService.userId);
     }

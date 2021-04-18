@@ -7,19 +7,13 @@
 import { nanoid } from 'nanoid'
 import { orderBy } from 'lodash';
 import { queryIdeas } from '../elasticsearch/idea';
-import { querySharingsByUserId } from '../elasticsearch/sharing';
 import { dynamoService } from '../services';
 
 export function getIdeas(userId: string, args: any) {
   const ideaInput = args.ideaInput;
   const page = args.page;
   const sort = args.sort;
-  return querySharingsByUserId(userId)
-    .then((sharings) => {
-      const userIds = sharings.hits.hits.map((hit: any) => hit._source.sharerId);
-      userIds.push(userId);
-      return queryIdeas(userIds, ideaInput, sort, page)
-    })
+  return queryIdeas([userId], ideaInput, sort, page)
     .then((ideas) => {
       if (0 === ideas.hits.total.value || 0 === ideas.hits.hits.length) {
         return {
@@ -67,7 +61,7 @@ export function createIdea(args: any, userId: string) {
   return dynamoService.persist(entity);
 }
 
-export function updateIdea(args: any, userId: string) {
+export function updateIdea(args: any) {
   return dynamoService.getEntity().get(args.id)
     .then((entity: any) => {
       if (!entity) {
