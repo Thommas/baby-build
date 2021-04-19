@@ -41,9 +41,9 @@ class ConfigService {
       LOCAL_DYNAMODB_HOST: Joi.string().default('localhost'),
       LOCAL_DYNAMODB_PORT: Joi.number().default(4567),
       LOCAL_DYNAMODB_TABLE: Joi.string().default('pathofchild-graphql-dev'),
-      AUTH0_CLIENT_ID: Joi.string(),
-      AUTH0_JWKS_URI: Joi.string(),
-      AUTH0_JWKS_KID: Joi.string(),
+      AUTH0_CLIENT_ID: Joi.optional(),
+      AUTH0_JWKS_URI: Joi.optional(),
+      AUTH0_JWKS_KID: Joi.optional(),
       USER_ID: Joi.optional(),
     }).unknown(true);
 

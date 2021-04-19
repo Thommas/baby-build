@@ -4,10 +4,10 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dbFile from '../../dynamo/file';
+import * as fileRepository from '../../repository/file';
 
 export default {
   Query: {
-    files: (_, args) => dbFile.getFiles(args),
+    files: (_, args) => fileRepository.getFiles(args),
   },
 };

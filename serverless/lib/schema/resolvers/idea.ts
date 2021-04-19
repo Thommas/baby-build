@@ -4,20 +4,20 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dbIdea from '../../dynamo/idea';
-import * as dbUser from '../../dynamo/user';
+import * as ideaRepository from '../../repository/idea';
+import * as userRepository from '../../repository/user';
 
 export default {
   Idea: {
     imgs: (obj) => obj.imgs,
-    user: (obj) => dbUser.getUser(obj.userId),
+    user: (obj) => userRepository.getUser(obj.userId),
   },
   Query: {
-    ideas: (_, args, context) => dbIdea.getIdeas(context.userId, args),
+    ideas: (_, args, context) => ideaRepository.getIdeas(context.userId, args),
   },
   Mutation: {
-    createIdea: (_, args, context) => dbIdea.createIdea(args, context.userId),
-    updateIdea: (_, args) => dbIdea.updateIdea(args),
-    deleteIdea: (_, args, context) => dbIdea.deleteIdea(args, context.userId),
+    createIdea: (_, args, context) => ideaRepository.createIdea(args, context.userId),
+    updateIdea: (_, args) => ideaRepository.updateIdea(args),
+    deleteIdea: (_, args, context) => ideaRepository.deleteIdea(args, context.userId),
   }
 };

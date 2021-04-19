@@ -4,15 +4,15 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dbUser from '../../dynamo/user';
+import * as userRepository from '../../repository/user';
 
 export default {
   Query: {
-    user: (_, args) => dbUser.getUser(args.id),
-    users: (_, args) => dbUser.getUsers(args),
-    authUser: (_, __, context) => dbUser.getAuthUser(context.userId),
+    user: (_, args) => userRepository.getUser(args.id),
+    users: (_, args) => userRepository.getUsers(args),
+    authUser: (_, __, context) => userRepository.getAuthUser(context.userId),
   },
   Mutation: {
-    updateUser: (_, args, context) => dbUser.updateUser(args, context.userId),
+    updateUser: (_, args, context) => userRepository.updateUser(args, context.userId),
   }
 };

@@ -6,6 +6,7 @@
 
 import { ApolloServer } from 'apollo-server-lambda';
 import { typeDefs, resolvers } from '../schema/schema';
+import { configService } from './config.service';
 
 class GraphQLService {
   createServer(): ApolloServer {
@@ -19,7 +20,7 @@ class GraphQLService {
         functionName: context?.functionName,
         event,
         context,
-        userId: event?.requestContext?.authorizer?.userId,
+        userId: configService.userId ? configService.userId : event?.requestContext?.authorizer?.userId,
       }),
     });
    }

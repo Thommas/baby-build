@@ -30,6 +30,8 @@ describe('Idea', () => {
     expect(res).toBeDefined();
     expect(res.data).toBeDefined();
     expect(res.data.ideas).toBeDefined();
-    // expect(res.data.ideas).toHaveSize(1);
+    expect(res.data.ideas.total).toEqual(0);
+    expect(res.data.ideas.page).toEqual(1);
+    expect(res.data.ideas.nodes).toHaveSize(0);
   });
 });

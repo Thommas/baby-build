@@ -4,18 +4,18 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as dbReview from '../../dynamo/review';
-import * as dbUser from '../../dynamo/user';
+import * as reviewRepository from '../../repository/review';
+import * as userRepository from '../../repository/user';
 
 export default {
   Review: {
-    user: (obj) => dbUser.getUser(obj.userId),
+    user: (obj) => userRepository.getUser(obj.userId),
   },
   Query: {
-    reviews: (_, args) => dbReview.getReviews(args.ideaId),
+    reviews: (_, args) => reviewRepository.getReviews(args.ideaId),
   },
   Mutation: {
-    createReview: (_, args, context) => dbReview.createReview(args, context.userId),
-    updateReview: (_, args, context) => dbReview.updateReview(args, context.userId),
+    createReview: (_, args, context) => reviewRepository.createReview(args, context.userId),
+    updateReview: (_, args, context) => reviewRepository.updateReview(args, context.userId),
   }
 };

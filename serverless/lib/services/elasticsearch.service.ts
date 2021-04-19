@@ -26,6 +26,9 @@ class ElasticSearchService {
       size,
       from: (page - 1) * ITEMS_PER_PAGE,
       body,
+    }).catch((err) => {
+      console.log('err', err);
+      return [];
     });
   }
 

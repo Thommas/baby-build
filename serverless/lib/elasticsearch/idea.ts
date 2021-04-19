@@ -8,7 +8,7 @@ import { elasticSearchService } from '../services';
 
 let SIZE = 10;
 
-export function queryIdeas(userIds: string[], filters: any, sortInput: string, page: number): Promise<any> {
+export function getIdeas(userIds: string[], filters: any, sortInput: string, page: number): Promise<any> {
   let count = SIZE;
   const query: any = {
     bool: {
@@ -122,7 +122,10 @@ export function queryIdeas(userIds: string[], filters: any, sortInput: string, p
   const sortKey = sortInput.replace('-', '');
   const sortOrder = sortInput[0] === '-' ? 'desc' : 'asc';
   const sort: any = {
-    [sortKey]: sortOrder,
+    [sortKey]: {
+      order: sortOrder,
+      unmapped_type: 'long'
+    }
   };
   return elasticSearchService.search(query, sort, count, page);
 }
