@@ -1,7 +1,7 @@
 <mat-card fxFlex class="left-card" [fxHide.lt-lg]="selectedIdea$ | async">
   <mat-card-header fxLayout="row" fxLayoutAlign="start center">
     <app-idea-list-filters-cmp></app-idea-list-filters-cmp>
-    <button mat-icon-button color='primary' (click)="refreshList()" i18n>
+    <button mat-icon-button color='primary' (click)="refreshList()">
       <mat-icon>refresh</mat-icon>
     </button>
   </mat-card-header>

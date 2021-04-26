@@ -10,7 +10,7 @@ import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
 import * as dynamoose from 'dynamoose';
 import { configService } from './config.service';
 
-class DynamoService {
+export class DynamoService {
   getDynamoose() {
     dynamoose.aws.sdk.config.update({
       region: configService.awsRegion,

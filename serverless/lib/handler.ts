@@ -4,15 +4,15 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { authService, graphqlService } from './services';
+import { authService, graphQLService } from './services';
 import { handleEvent } from './handlers/event.handler';
 
-exports.auth = (event, context, callback) => {
+exports.auth = (event, _, callback) => {
   return authService.authenticate(event, callback);
 }
 
 exports.graphql = (event, context, callback) => {
-  const server = graphqlService.createServer();
+  const server = graphQLService.createServer();
 
   const handler = server.createHandler({
     cors: {
@@ -24,6 +24,6 @@ exports.graphql = (event, context, callback) => {
   return handler(event, context, callback);
 };
 
-exports.stream = (event, context, callback) => {
+exports.stream = (event, _, callback) => {
   handleEvent(event, callback);
 };

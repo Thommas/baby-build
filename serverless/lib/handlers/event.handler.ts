@@ -6,8 +6,8 @@
 
 import AWS from 'aws-sdk';
 import * as elasticSearchHandler from './elasticsearch.handler';
-import * as characterHandler from './character.handler';
-import * as ideaHandler from './idea.handler';
+// import * as characterHandler from './character.handler';
+// import * as ideaHandler from './idea.handler';
 import * as reviewHandler from './review.handler';
 
 export async function handleEvent(event, callback) {

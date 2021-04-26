@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { puppeteerService } from '../services'
+//import { puppeteerService } from '../services'
 
 // async function fetchImgs() {
 //   const imgs = await puppeteerService.fetchImgs(
@@ -26,9 +26,9 @@ import { puppeteerService } from '../services'
 // }
 // fetchReleaseDate();
 
-async function getFiles() {
-  const files = await puppeteerService.getFiles('pere noel png');
-  console.log('files', files);
-  process.exit();
-}
-getFiles();
+// async function getFiles() {
+//   const files = await puppeteerService.getFiles('pere noel png');
+//   console.log('files', files);
+//   process.exit();
+// }
+// getFiles();

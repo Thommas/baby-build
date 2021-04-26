@@ -9,7 +9,7 @@
 <div fxLayout="column" fxLayoutAlign="start center" *ngIf="(userFacade.user$ | async) as user">
   <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
     <img src="/assets/img/user.svg"
-         [matTooltip]="user.firstName + ' ' + user.lastName" i18n-matTooltip
+         [matTooltip]="user.firstName + ' ' + user.lastName"-matTooltip
          width="50" height="50"/>
   </div>
   <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">

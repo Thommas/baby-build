@@ -6,7 +6,7 @@
 
 
 import * as AWS from "aws-sdk";
-import * as dynamoose from "dynamoose";
+// import * as dynamoose from "dynamoose";
 import { Substitute } from '@fluffy-spoon/substitute';
 import { dynamoService, DynamoService } from "./dynamo.service";
 

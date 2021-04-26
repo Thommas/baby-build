@@ -1,13 +1,13 @@
 <div mat-dialog-title fxLayout="row" fxLayoutAlign="space-between center">
-  <h1 i18n>user_settings.title</h1>
+  <h1>user_settings.title</h1>
   <button mat-button (click)="onNoClick()">X</button>
 </div>
 <div mat-dialog-content fxLayout="row" fxLayoutAlign="start center">
   <mat-tab-group>
-    <mat-tab label="user_settings.tab.information" i18n-label>
+    <mat-tab label="user_settings.tab.information"-label>
       <app-user-edit-cmp></app-user-edit-cmp>
     </mat-tab>
-    <mat-tab label="user_settings.tab.sharing" i18n-label>
+    <mat-tab label="user_settings.tab.sharing"-label>
       <app-user-sharing-cmp></app-user-sharing-cmp>
     </mat-tab>
   </mat-tab-group>

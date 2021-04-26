@@ -14,7 +14,7 @@ export interface EnvConfig {
   [key: string]: string;
 }
 
-class ConfigService {
+export class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor() {
