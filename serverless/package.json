@@ -2,7 +2,7 @@
   "name": "pathofchild-serverless",
   "scripts": {
     "start": "NODE_ENV=dev serverless offline start --stage dev",
-    "load": "ts-node ./lib/commands/load.ts",
+    "load": "NODE_ENV=dev ts-node ./lib/commands/load.ts",
     "save": "ts-node ./lib/commands/save.ts",
     "repopulate": "ts-node ./lib/commands/repopulate.ts",
     "migrate": "ts-node ./lib/commands/migrate.ts",

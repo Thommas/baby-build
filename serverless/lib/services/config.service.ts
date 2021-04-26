@@ -18,11 +18,9 @@ class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor() {
-    if (process.env.NODE_ENV === 'test') {
-      require('dotenv').config({
-        path: __dirname + '/../../.env.' + process.env.NODE_ENV
-      });
-    }
+    require('dotenv').config({
+      path: __dirname + '/../../.env.' + process.env.NODE_ENV
+    });
     this.envConfig = this.validateInput(process.env);
   }
 

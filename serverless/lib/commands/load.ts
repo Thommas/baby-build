@@ -10,8 +10,12 @@ var commandArgs = process.argv.slice(2);
 
 async function load(): Promise<any> {
   if (commandArgs.length > 0) {
-    console.log(`Loading fixtures ${commandArgs[0]}}`);
-    await dynamoService.load(commandArgs[0]);
+    const dataFolder = commandArgs[0];
+    const path = __dirname + '/../../data/' + dataFolder;
+
+    console.log(`Loading fixtures from folder: ${dataFolder}`);
+
+    await dynamoService.load(path);
     await elasticSearchService.load();
   }
 }

@@ -12,28 +12,18 @@ import { configService } from './config.service';
 
 class DynamoService {
   getDynamoose() {
-    const {
-      localDynamoDBHost,
-      localDynamoDBPort,
-    } = configService;
-
     dynamoose.aws.sdk.config.update({
       region: configService.awsRegion,
     });
-    dynamoose.aws.ddb.local(`http://${localDynamoDBHost}:${localDynamoDBPort}`);
+    dynamoose.aws.ddb.local(`http://${configService.localDynamoDBHost}:${configService.localDynamoDBPort}`);
 
     return dynamoose;
   }
 
   getAWSDynamo() {
-    const {
-      localDynamoDBHost,
-      localDynamoDBPort,
-    } = configService;
-
     const serviceConfigOptions : ServiceConfigurationOptions = {
       region: configService.awsRegion,
-      endpoint: `http://${localDynamoDBHost}:${localDynamoDBPort}`,
+      endpoint: `http://${configService.localDynamoDBHost}:${configService.localDynamoDBPort}`,
     };
 
     AWS.config.update(serviceConfigOptions);
@@ -76,7 +66,6 @@ class DynamoService {
     const params = {
       TableName: configService.localDynamoDBTable,
     };
-    console.log('debug', this.getAWSDynamo().deleteTable(params));
     return this.getAWSDynamo().deleteTable(params).promise()
       .catch((err) => {
         console.log('error', err);

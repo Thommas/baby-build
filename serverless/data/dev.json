@@ -1,0 +1,14 @@
+[
+  {
+    "id": "Idea-Sonic1",
+    "label": "Sonic The Hedgehog",
+    "category": "videogame",
+    "platform": "megadrive"
+  },
+  {
+    "id": "Idea-SuperMarioBros",
+    "label": "Super Mario Bros",
+    "category": "videogame",
+    "platform": "nes"
+  }
+]
