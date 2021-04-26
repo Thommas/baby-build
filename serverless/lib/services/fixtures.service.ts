@@ -7,11 +7,11 @@
  import { dynamoService, elasticSearchService } from ".";
 
  class FixturesService {
-   async load(fixturesName: string) {
-     await dynamoService.load();
-     await elasticSearchService.wipeIndex();
-     await elasticSearchService.load();
-     await elasticSearchService.refreshIndex();
+   async load(dataFolder: string) {
+      const path = __dirname + '/../../data/' + dataFolder;
+
+      await dynamoService.load(path);
+      await elasticSearchService.load();
    }
  }
 

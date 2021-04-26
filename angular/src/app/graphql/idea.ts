@@ -16,22 +16,6 @@ export const GetIdeas = gql`
         label
         category
         platform
-        releaseDate
-        timeToCompletion
-        language
-        requiredAge
-        score
-        userId
-        user {
-          firstName
-          lastName
-        }
-        imgs {
-          icon
-          cover
-          screenshot
-          png
-        }
       }
     }
   }
@@ -44,22 +28,6 @@ export const CreateIdeaMutation = gql`
       label
       category
       platform
-      releaseDate
-      timeToCompletion
-      language
-      requiredAge
-      score
-      userId
-      user {
-        firstName
-        lastName
-      }
-      imgs {
-        icon
-        cover
-        screenshot
-        png
-      }
     }
   }
 `;
@@ -70,43 +38,17 @@ export const UpdateIdeaMutation = gql`
     $label: String
     $category: String
     $platform: String
-    $releaseDate: String
-    $timeToCompletion: Int
-    $language: String
-    $requiredAge: Float
-    $score: Float
   ) {
     updateIdea(
       id: $id
       label: $label
       category: $category
       platform: $platform
-      releaseDate: $releaseDate
-      timeToCompletion: $timeToCompletion
-      language: $language
-      requiredAge: $requiredAge
-      score: $score
     ) {
       id
       label
       category
       platform
-      releaseDate
-      timeToCompletion
-      language
-      requiredAge
-      score
-      userId
-      user {
-        firstName
-        lastName
-      }
-      imgs {
-        icon
-        cover
-        screenshot
-        png
-      }
     }
   }
 `;

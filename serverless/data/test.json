@@ -4,13 +4,13 @@
     "label": "Sonic The Hedgehog",
     "category": "videogame",
     "platform": "megadrive",
-    "userId": "User-thomas"
+    "userId": "User-test"
   },
   {
     "id": "Idea-SuperMarioBros",
     "label": "Super Mario Bros",
     "category": "videogame",
     "platform": "nes",
-    "userId": "User-thomas"
+    "userId": "User-test"
   }
 ]

@@ -14,7 +14,8 @@ export function getIdeas(userId: string, args: any): Promise<any> {
   const page = args.page;
   const sort = args.sort;
   return elasticsearchIdea.getIdeas([userId], ideaInput, sort, page)
-    .then((ideas) => {
+    .then((res) => {
+      const ideas = res.body;
       if (0 === ideas.hits.total.value || 0 === ideas.hits.hits.length) {
         return {
           total: 0,

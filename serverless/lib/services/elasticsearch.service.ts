@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as elasticsearch from 'elasticsearch';
+import * as elasticsearch from '@elastic/elasticsearch';
 import { configService } from './config.service';
 import { dynamoService } from './dynamo.service';
 
@@ -12,7 +12,7 @@ const ITEMS_PER_PAGE = 10;
 
 class ElasticSearchService {
   elasticsearchClient = new elasticsearch.Client({
-    hosts: [configService.elasticSearchHost]
+    node: configService.elasticSearchHost
   });
 
   search(query: any, sort: any = {}, size: number = ITEMS_PER_PAGE, page: number = 1): Promise<any> {
@@ -22,7 +22,6 @@ class ElasticSearchService {
     };
     return this.elasticsearchClient.search({
       index: configService.elasticSearchIndex,
-      type: '_doc',
       size,
       from: (page - 1) * ITEMS_PER_PAGE,
       body,
@@ -38,14 +37,14 @@ class ElasticSearchService {
     };
     return this.elasticsearchClient.search({
       index: configService.elasticSearchIndex,
-      type: '_doc',
       size: 1,
       body,
-    }).then((items) => {
-      if (items.hits.total.value > 0) {
+    }).then((res) => {
+      const { hits } = res.body.hits;
+      if (hits.total.value > 0) {
         return {
-          id: items.hits.hits[0]._id,
-          ...items.hits.hits[0]._source,
+          id: hits[0]._id,
+          ...hits[0]._source,
         }
       }
 
@@ -82,7 +81,6 @@ class ElasticSearchService {
     };
     return this.elasticsearchClient.search({
       index: configService.elasticSearchIndex,
-      type: '_doc',
       size: 5,
       body,
     });
@@ -91,12 +89,7 @@ class ElasticSearchService {
   remove(document: any) {
     this.elasticsearchClient.delete({
       index: configService.elasticSearchIndex,
-      type: '_doc',
       id: document.id,
-    }, (err, resp, status) => {
-      console.log(err);
-      console.log(resp);
-      console.log(status);
     });
   }
 
@@ -115,10 +108,6 @@ class ElasticSearchService {
         ...document,
         type,
       }
-    }, (err, resp, status) => {
-      console.log(err);
-      console.log(resp);
-      console.log(status);
     });
   }
 
@@ -172,29 +161,6 @@ class ElasticSearchService {
       }
     );
   }
-
-  // async index(document: any): Promise<any> {
-  //   const id = document.id;
-  //   const type = id.split("-")[0];
-  //   delete document.imgs;
-  //   return this.elasticsearchClient.index(
-  //     {
-  //       index: configService.elasticSearchIndex,
-  //       type: "_doc",
-  //       id,
-  //       body: {
-  //         ...document,
-  //         type,
-  //       },
-  //     },
-  //     (err, resp, status) => {
-  //       if (err) {
-  //         return console.error(err);
-  //       }
-  //       console.log(resp._id, status);
-  //     }
-  //   );
-  // }
 }
 
 export const elasticSearchService = new ElasticSearchService();
