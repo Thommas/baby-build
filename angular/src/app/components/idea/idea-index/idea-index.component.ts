@@ -8,7 +8,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, mergeMap, tap } from 'rxjs/operators';
 import { IdeaFacade } from '../../../facade';
-import { FileFacade } from '../../../facade/file.facade';
 import { ConstantsService } from '../../../services';
 
 @Component({
@@ -22,7 +21,6 @@ export class IdeaIndexComponent {
 
   constructor(
     public constantsService: ConstantsService,
-    private fileFacade: FileFacade,
     private ideaFacade: IdeaFacade
   ) {
     this.displayFilters = false;

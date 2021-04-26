@@ -49,12 +49,12 @@ export class IdeaCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    const operator = map(() => this.search());
-    this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
+    // const operator = map(() => this.search());
+    // this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
   }
 
   ngOnDestroy() {
-    this.formFieldSub.unsubscribe();
+    // this.formFieldSub.unsubscribe();
   }
 
   search() {

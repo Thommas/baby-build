@@ -5,7 +5,6 @@
  */
 
 import { Component, Output, EventEmitter } from '@angular/core';
-import { WorldFacade } from '../../../facade';
 import { AuthService } from '../../../services';
 import { UserSettingsComponent } from '../../user/user-settings/user-settings.component';
 
@@ -18,8 +17,7 @@ export class TopbarComponent {
   @Output('toggleSidebar') toggleSidebar: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    public authService: AuthService,
-    private worldFacade: WorldFacade
+    public authService: AuthService
   ) {}
 
   openSettings(): void {
@@ -35,7 +33,7 @@ export class TopbarComponent {
   }
 
   createNewWorld() {
-    this.worldFacade.createWorld();
+    // this.worldFacade.createWorld();
   }
 
   logout() {

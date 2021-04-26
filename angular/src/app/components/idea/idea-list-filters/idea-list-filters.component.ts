@@ -29,12 +29,12 @@ export class IdeaListFiltersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const operator = map((value: any) => this.selectLabel(value));
-    this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
+    // const operator = map((value: any) => this.selectLabel(value));
+    // this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
   }
 
   ngOnDestroy() {
-    this.formFieldSub.unsubscribe();
+    // this.formFieldSub.unsubscribe();
   }
 
   selectLabel(label: string) {
