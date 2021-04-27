@@ -30,7 +30,11 @@ export function getIdeas(userId: string, args: any): Promise<any> {
         params,
         ideas.hits.total.value,
         page
-      )
+      );
+    })
+    .then((ideas) => {
+      console.log('ideas', ideas);
+      return ideas;
     })
 }
 

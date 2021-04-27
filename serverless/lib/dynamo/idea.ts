@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { orderBy } from 'lodash';
+// import { orderBy } from 'lodash';
 import { dynamoService } from '../services';
 
 export function getIdeas(params: any, total: number, page: number) {
@@ -12,13 +12,14 @@ export function getIdeas(params: any, total: number, page: number) {
     return {
       total,
       page,
-      nodes: orderBy(items, [
-        (item: any) => new Date(item.createdAt),
-        'id',
-      ], [
-        'desc',
-        'asc',
-      ]),
+      nodes: items.toJSON()
+      // nodes: orderBy(items, [
+      //   (item: any) => new Date(item.createdAt),
+      //   'id',
+      // ], [
+      //   'desc',
+      //   'asc',
+      // ]),
     }
   });
 }
