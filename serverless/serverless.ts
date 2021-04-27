@@ -52,7 +52,6 @@ const serverlessConfiguration: Serverless = {
   },
   plugins: [
     'serverless-webpack',
-    'serverless-plugin-typescript',
     // 'serverless-plugin-offline-dynamodb-stream',
     'serverless-offline',
     'serverless-localstack',
@@ -78,9 +77,9 @@ const serverlessConfiguration: Serverless = {
     ]
   },
   functions: {
-    customAuthorizer: {
-      handler: 'lib/handler.auth'
-    },
+    // customAuthorizer: {
+    //   handler: 'lib/handler.auth'
+    // },
     graphql: {
       handler: 'lib/handler.graphql',
       events: [
@@ -89,7 +88,7 @@ const serverlessConfiguration: Serverless = {
             path: 'graphql',
             method: 'post',
             cors: true,
-            authorizer: 'customAuthorizer',
+            // authorizer: 'customAuthorizer',
           }
         }
       ]
