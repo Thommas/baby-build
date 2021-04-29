@@ -7,7 +7,7 @@
 import { dynamoService, puppeteerService } from '../services';
 
 export function updateCharacterImg(document: any) {
-  return dynamoService.getEntity().get(document.id)
+  return dynamoService.get(document.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Character not found');

@@ -7,20 +7,13 @@
 import * as fs from 'fs';
 import * as AWS from 'aws-sdk';
 import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
-import * as dynamoose from 'dynamoose';
 import { configService } from './config.service';
 
 export class DynamoService {
-  getDynamoose() {
-    dynamoose.aws.sdk.config.update({
-      region: configService.awsRegion,
-    });
-    dynamoose.aws.ddb.local(`http://${configService.localDynamoDBHost}:${configService.localDynamoDBPort}`);
+  private awsDynamoDB;
+  private documentClient;
 
-    return dynamoose;
-  }
-
-  getAWSDynamo() {
+  constructor() {
     const serviceConfigOptions : ServiceConfigurationOptions = {
       region: configService.awsRegion,
       endpoint: `http://${configService.localDynamoDBHost}:${configService.localDynamoDBPort}`,
@@ -28,7 +21,8 @@ export class DynamoService {
 
     AWS.config.update(serviceConfigOptions);
 
-    return new AWS.DynamoDB(serviceConfigOptions);
+    this.awsDynamoDB = new AWS.DynamoDB(serviceConfigOptions);
+    this.documentClient = new AWS.DynamoDB.DocumentClient();
   }
 
   persist(entity: any) {
@@ -48,7 +42,7 @@ export class DynamoService {
     let scanResults: any[] = [];
     let items;
     do {
-      items = await this.getAWSDynamo().scan(params).promise();
+      items = await this.awsDynamoDB.scan(params).promise();
       items.Items.forEach((item: any) => {
         const document = AWS.DynamoDB.Converter.unmarshall(item);
         // TODO Query with begin_with filter on ID
@@ -66,7 +60,7 @@ export class DynamoService {
     const params = {
       TableName: configService.localDynamoDBTable,
     };
-    return this.getAWSDynamo().deleteTable(params).promise()
+    return this.awsDynamoDB.deleteTable(params).promise()
       .catch((err) => {
         console.log('error', err);
         // Ignore error
@@ -97,38 +91,45 @@ export class DynamoService {
         StreamViewType: 'NEW_AND_OLD_IMAGES',
       }
     };
-    return this.getAWSDynamo().createTable(params).promise()
+    return this.awsDynamoDB.createTable(params).promise()
       .catch((err) => {
         console.log('error', err);
       });
-  }
-
-  getEntity() {
-    const dynamoose = this.getDynamoose();
-
-    const Schema = dynamoose.Schema;
-
-    const EntitySchema = new Schema({
-      id: {
-        type: String,
-      },
-    }, {
-      timestamps: true,
-      saveUnknown: true,
-    });
-
-    return dynamoose.model(configService.localDynamoDBTable, EntitySchema);
   }
 
   createDocument(document: any): Promise<any> {
-    const Entity = this.getEntity();
-    const item = new Entity({
-      ...document
-    });
-    return item.save()
-      .catch((err) => {
-        console.log('error', err);
-      });
+    const params = {
+      TableName: configService.localDynamoDBTable,
+      Item: document
+    };
+    return this.documentClient.put(params).promise();
+  }
+
+  get(id: string): Promise<any> {
+    const params = {
+      TableName: configService.localDynamoDBTable,
+      Key: {
+        id
+      }
+    };
+    return this.awsDynamoDB.get(params).promise();
+  }
+
+  batchGet(ids: string[]): Promise<any> {
+    const keys = ids.map((id: string) => ({
+      id: {
+        S: id,
+      }
+    }))
+    const params = {
+      TableName: configService.localDynamoDBTable,
+      RequestItems: {
+        [configService.localDynamoDBTable]: {
+          Keys: keys
+        }
+      }
+    };
+    return this.awsDynamoDB.batchGetItem(params).promise();
   }
 
   loadData(path: string): Promise<any> {

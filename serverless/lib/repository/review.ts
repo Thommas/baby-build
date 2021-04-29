@@ -10,27 +10,25 @@ import { dynamoService } from '../services';
 
 export function getReviews(ideaId: string) {
   return queryReviews(ideaId).then((reviews) => {
-    const params: any = reviews.hits.hits.map((hit: any) => ({id: hit._id}));
-    if (params.length === 0) {
+    const ids: any = reviews.hits.hits.map((hit: any) => hit._id);
+    if (ids.length === 0) {
       return [];
     }
-    return dynamoService.getEntity().batchGet(params);
+    return dynamoService.batchGet(ids);
   });
 }
 
 export function createReview(args: any, userId: string) {
   const id = nanoid();
-  const Entity = dynamoService.getEntity();
-  const entity = new Entity({
+  return dynamoService.createDocument({
     id: `Review-${id}`,
     userId,
     ...args
   });
-  return dynamoService.persist(entity);
 }
 
 export function updateReview(args: any, userId: string) {
-  return dynamoService.getEntity().get(args.id)
+  return dynamoService.get(args.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Idea not found');

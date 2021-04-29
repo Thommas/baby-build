@@ -14,7 +14,7 @@
 //       continue;
 //     }
 //     console.log('ITEM', `${item.id} - ${item.label}`);
-//     await dynamoService.getEntity().get(item.id)
+//     await dynamoService.get(item.id)
 //       .then((entity: any) => {
 //         return entity.delete();
 //       });

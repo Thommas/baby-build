@@ -23,11 +23,9 @@ export function getIdeas(userId: string, args: any): Promise<any> {
           nodes: [],
         };
       }
-      const params: any = ideas.hits.hits.map((hit: any) => ({
-        id: hit._id
-      }));
+      const ids: any = ideas.hits.hits.map((hit: any) => hit._id);
       return dynamoIdea.getIdeas(
-        params,
+        ids,
         ideas.hits.total.value,
         page
       );
@@ -43,25 +41,21 @@ export function getIdeasByIds(ids: string[]) {
     return [];
   }
 
-  const params: any = ids.map((id: any) => ({ id }));
-
-  return dynamoService.getEntity().batchGet(params);
+  return dynamoService.batchGet(ids);
 }
 
 export function createIdea(args: any, userId: string) {
   const id = nanoid();
-  const Entity = dynamoService.getEntity();
-  const entity = new Entity({
+  return dynamoService.createDocument({
     id: `Idea-${id}`,
     userId,
     imgsReady: false,
     ...args
   });
-  return dynamoService.persist(entity);
 }
 
 export function updateIdea(args: any) {
-  return dynamoService.getEntity().get(args.id)
+  return dynamoService.get(args.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Idea not found');
@@ -82,7 +76,7 @@ export function updateIdea(args: any) {
 }
 
 export function deleteIdea(args: any, userId: string) {
-  return dynamoService.getEntity().get(args.id)
+  return dynamoService.get(args.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Idea not found');

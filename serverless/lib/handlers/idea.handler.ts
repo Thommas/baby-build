@@ -26,7 +26,7 @@ export function updateIdeaReleaseDate(document: any) {
   if (document.releaseDate) {
     return;
   }
-  return dynamoService.getEntity().get(document.id)
+  return dynamoService.get(document.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Idea not found');
@@ -47,7 +47,7 @@ export function updateIdeaReleaseDate(document: any) {
 }
 
 export function updateIdeaImgs(document: any) {
-  return dynamoService.getEntity().get(document.id)
+  return dynamoService.get(document.id)
     .then((entity: any) => {
       if (!entity) {
         throw new Error('Idea not found');

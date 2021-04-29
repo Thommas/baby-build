@@ -7,8 +7,8 @@
 // import { orderBy } from 'lodash';
 import { dynamoService } from '../services';
 
-export function getIdeas(params: any, total: number, page: number) {
-  return dynamoService.getEntity().batchGet(params).then((items: any) => {
+export function getIdeas(ids: string[], total: number, page: number) {
+  return dynamoService.batchGet(ids).then((items: any) => {
     return {
       total,
       page,

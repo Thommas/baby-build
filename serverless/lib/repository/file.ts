@@ -8,9 +8,8 @@ import { nanoid } from 'nanoid'
 import { dynamoService, puppeteerService } from '../services';
 
 export function createFile(args: any, userId: string) {
-  const Entity = dynamoService.getEntity();
   const id = nanoid();
-  const newFile = new Entity({
+  return dynamoService.createDocument({
     id: `File-${id}`,
     userId,
     name: args.name,
@@ -18,15 +17,13 @@ export function createFile(args: any, userId: string) {
     type: args.type,
     data: args.data,
   });
-  return newFile.save();
 }
 
 export function getFilesByIds(ids?: string[]) {
   if (!ids || 0 === ids.length) {
     return [];
   }
-  const params = ids.map((id: string) => ({ id }));
-  return dynamoService.getEntity().batchGet(params);
+  return dynamoService.batchGet(ids);
 }
 
 export function getFiles(args: any) {

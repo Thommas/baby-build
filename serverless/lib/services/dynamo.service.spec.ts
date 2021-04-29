@@ -6,14 +6,10 @@
 
 
 import * as AWS from "aws-sdk";
-// import * as dynamoose from "dynamoose";
 import { Substitute } from '@fluffy-spoon/substitute';
 import { dynamoService, DynamoService } from "./dynamo.service";
 
 describe("DynamoService", () => {
-  it("getDynamoose", () => {
-    expect(dynamoService.getDynamoose()).toBeDefined();
-  });
   it("getAWSDynamo", () => {
     expect(dynamoService.getAWSDynamo()).toBeDefined();
     expect(dynamoService.getAWSDynamo()).toBeInstanceOf(AWS.DynamoDB);

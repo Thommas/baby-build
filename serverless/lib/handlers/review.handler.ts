@@ -8,7 +8,7 @@ import { mean } from 'lodash';
 import { dynamoService, elasticSearchService } from '../services';
 
 function updateIdea(ideaId: string, args: any) {
-  return dynamoService.getEntity().get(ideaId)
+  return dynamoService.get(ideaId)
     .then((idea: any) => {
       if (!idea) {
         throw new Error('Idea not found');
