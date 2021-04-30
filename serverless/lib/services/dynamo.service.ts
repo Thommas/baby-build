@@ -100,9 +100,11 @@ export class DynamoService {
   createDocument(document: any): Promise<any> {
     const params = {
       TableName: configService.localDynamoDBTable,
-      Item: document
+      Item: AWS.DynamoDB.Converter.marshall(document)
     };
-    return this.documentClient.put(params).promise();
+    return this.awsDynamoDB.putItem(params).promise().then(() => {
+      return document;
+    });
   }
 
   get(id: string): Promise<any> {
