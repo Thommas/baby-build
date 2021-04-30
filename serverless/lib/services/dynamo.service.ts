@@ -109,10 +109,12 @@ export class DynamoService {
     const params = {
       TableName: configService.localDynamoDBTable,
       Key: {
-        id
+        id: {
+          S: id
+        }
       }
     };
-    return this.awsDynamoDB.get(params).promise();
+    return this.awsDynamoDB.getItem(params).promise();
   }
 
   batchGet(ids: string[]): Promise<any> {
@@ -122,14 +124,15 @@ export class DynamoService {
       }
     }))
     const params = {
-      TableName: configService.localDynamoDBTable,
       RequestItems: {
         [configService.localDynamoDBTable]: {
           Keys: keys
         }
       }
     };
-    return this.awsDynamoDB.batchGetItem(params).promise();
+    return this.awsDynamoDB.batchGetItem(params).promise().then((items) => {
+      return items.Responses[configService.localDynamoDBTable].map((item) => AWS.DynamoDB.Converter.unmarshall(item));
+    });
   }
 
   loadData(path: string): Promise<any> {
