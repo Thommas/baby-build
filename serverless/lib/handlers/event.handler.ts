@@ -14,6 +14,7 @@ export async function handleEvent(event, callback) {
   for (const record of event.Records) {
     if (record.eventName == 'INSERT') {
       const document = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage);
+      console.log('INSERT', document);
       elasticSearchHandler.handleInsert(document);
       // characterHandler.handleModify(document);
       // ideaHandler.handleInsert(document);

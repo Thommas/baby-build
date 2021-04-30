@@ -48,11 +48,20 @@ const serverlessConfiguration: Serverless = {
       docker: {
         sudo: false
       }
+    },
+    'serverless-offline-dynamodb-streams': {
+      apiVersion: '2013-12-02',
+      endpoint: 'http://0.0.0.0:4566',
+      region: 'local',
+      accessKeyId: 'test',
+      secretAccessKey: 'test',
+      skipCacheInvalidation: false,
+      readInterval: 500
     }
   },
   plugins: [
     'serverless-webpack',
-    // 'serverless-plugin-offline-dynamodb-stream',
+    'serverless-offline-dynamodb-streams',
     'serverless-offline',
     'serverless-localstack',
   ],
@@ -99,7 +108,7 @@ const serverlessConfiguration: Serverless = {
         stream: {
           enabled: true,
           type: 'dynamodb',
-          arn: '',
+          arn: 'arn:aws:dynamodb:ddblocal:000000000000:table/pathofchild-dev/stream/2021-04-30T19:55:02.778',
         }
       }]
     }

@@ -43,6 +43,7 @@ export class ConfigService {
       AUTH0_JWKS_URI: Joi.optional(),
       AUTH0_JWKS_KID: Joi.optional(),
       USER_ID: Joi.optional(),
+      SQS_QUEUE_URL: Joi.optional(),
     }).unknown(true);
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(
@@ -92,6 +93,10 @@ export class ConfigService {
 
   get userId(): string {
     return String(this.envConfig.USER_ID);
+  }
+
+  get sqsQueueUrl(): string {
+    return String(this.envConfig.SQS_QUEUE_URL);
   }
 }
 
