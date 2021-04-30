@@ -11,7 +11,6 @@ import { configService } from './config.service';
 
 export class DynamoService {
   private awsDynamoDB;
-  private documentClient;
 
   constructor() {
     const serviceConfigOptions : ServiceConfigurationOptions = {
@@ -22,7 +21,6 @@ export class DynamoService {
     AWS.config.update(serviceConfigOptions);
 
     this.awsDynamoDB = new AWS.DynamoDB(serviceConfigOptions);
-    this.documentClient = new AWS.DynamoDB.DocumentClient();
   }
 
   persist(entity: any) {
