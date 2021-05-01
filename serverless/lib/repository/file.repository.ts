@@ -5,7 +5,7 @@
  */
 
 import { nanoid } from 'nanoid'
-import { dynamoService, puppeteerService } from '../service';
+import { dynamoService, puppeteerService, s3Service } from '../service';
 
 class FileRepository {
   async create(args: any, userId: string) {
@@ -13,10 +13,7 @@ class FileRepository {
     return dynamoService.createDocument({
       id: `File-${id}`,
       userId,
-      name: args.name,
-      size: args.size,
-      type: args.type,
-      data: args.data,
+      ...args,
     });
   }
 
@@ -37,9 +34,11 @@ class FileRepository {
     const fileIds = []
     for (let data of files) {
       const id = nanoid();
+      const path = await s3Service.storeBase64File(id, data);
+      console.log('path', path);
       const file: any = {
         id: `File-${id}`,
-        data,
+        path,
         type: 'image/png',
         size: data.length,
       };

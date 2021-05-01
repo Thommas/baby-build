@@ -45,7 +45,6 @@ export function createIdea(args: any, userId: string) {
   return dynamoService.createDocument({
     id: `Idea-${id}`,
     userId,
-    imgsReady: false,
     ...args
   });
 }

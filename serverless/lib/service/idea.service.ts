@@ -9,7 +9,7 @@ import { dynamoService, puppeteerService } from '.';
 
 export class IdeaService {
   async updateIdeaImgs(idea: any) {
-    if (idea.imgsReady) {
+    if (idea.imgs) {
       return;
     }
     const category = idea.category === 'videogame' && idea.platform ? idea.platform : idea.category;
@@ -20,7 +20,6 @@ export class IdeaService {
     );
     const files = await fileRepository.storeFiles(imgs, idea.userId);
     idea.imgs = files;
-    idea.imgsReady = true;
     await dynamoService.createDocument(idea);
   }
 
@@ -31,14 +30,9 @@ export class IdeaService {
     const category = idea.category === 'videogame' && idea.platform ? idea.platform : idea.category;
     await puppeteerService.fetchReleaseDate(`"${idea.label}"+${category}`)
       .then((releaseDate: number|null) => {
-        console.log(`Release date ${releaseDate} found for idea: ${idea.label}`)
-        if (releaseDate) {
-          idea.releaseDate = releaseDate;
-          return dynamoService.createDocument(idea);
-        } else {
-          idea.releaseDate = '????';
-          return dynamoService.createDocument(idea);
-        }
+        console.log(`Release date ${releaseDate} found for idea: ${idea.label}`);
+        idea.releaseDate = releaseDate ? releaseDate : '????';
+        return dynamoService.createDocument(idea);
       });
   }
 

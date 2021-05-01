@@ -44,6 +44,8 @@ export class ConfigService {
       AUTH0_JWKS_KID: Joi.optional(),
       USER_ID: Joi.optional(),
       SQS_QUEUE_URL: Joi.optional(),
+      S3_BUCKET: Joi.optional(),
+      S3_ENDPOINT: Joi.optional(),
     }).unknown(true);
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(
@@ -97,6 +99,14 @@ export class ConfigService {
 
   get sqsQueueUrl(): string {
     return String(this.envConfig.SQS_QUEUE_URL);
+  }
+
+  get s3Bucket(): string {
+    return String(this.envConfig.S3_BUCKET);
+  }
+
+  get s3Endpoint(): string {
+    return String(this.envConfig.S3_ENDPOINT);
   }
 }
 

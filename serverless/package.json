@@ -7,7 +7,8 @@
     "test": "NODE_ENV=test ts-node node_modules/jasmine/bin/jasmine \"lib/**/*.spec.ts\"",
     "e2e": "NODE_ENV=test ts-node node_modules/jasmine/bin/jasmine \"e2e/**/*.spec.ts\"",
     "db-admin": "DYNAMO_ENDPOINT=http://localhost:4566 dynamodb-admin",
-    "create-queue": "AWS_ACCESS_KEY_ID=foobar AWS_SECRET_ACCESS_KEY=foobar aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name pathofchild-dev"
+    "create-queue": "AWS_ACCESS_KEY_ID=foobar AWS_SECRET_ACCESS_KEY=foobar aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name pathofchild-dev",
+    "create-bucket": "AWS_ACCESS_KEY_ID=foobar AWS_SECRET_ACCESS_KEY=foobar aws --endpoint-url=http://localhost:4566 s3 mb s3://pathofchild-dev"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^7.12.0",
