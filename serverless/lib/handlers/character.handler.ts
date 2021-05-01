@@ -20,7 +20,7 @@ export function updateCharacterImg(document: any) {
         entity.img = imgs[0];
         entity.imgsReady = true;
         console.log(`Updated image for character: ${document.label}`)
-        return dynamoService.persist(entity);
+        return dynamoService.createDocument(entity);
       });
     });
 }

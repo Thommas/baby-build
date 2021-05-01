@@ -37,6 +37,6 @@ export function updateReview(args: any, userId: string) {
         throw new Error('Unauthorized');
       }
       Object.assign(entity, args);
-      return dynamoService.persist(entity);
+      return dynamoService.createDocument(entity);
     });
 }

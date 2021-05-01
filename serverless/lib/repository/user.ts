@@ -51,6 +51,6 @@ export function updateUser(args: any, userId: string) {
       }
       entity.firstName = args.firstName;
       entity.lastName = args.lastName;
-      return dynamoService.persist(entity);
+      return dynamoService.createDocument(entity);
     });
 }

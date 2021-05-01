@@ -23,15 +23,6 @@ export class DynamoService {
     this.awsDynamoDB = new AWS.DynamoDB(serviceConfigOptions);
   }
 
-  persist(entity: any) {
-    for (const field in entity) {
-      if (entity[field] === null) {
-        delete entity[field];
-      }
-    }
-    return entity.save();
-  }
-
   async loadAllItems(type?: string): Promise<any[]> {
     const params: any = {
       TableName: configService.localDynamoDBTable,
@@ -114,7 +105,9 @@ export class DynamoService {
         }
       }
     };
-    return this.awsDynamoDB.getItem(params).promise();
+    return this.awsDynamoDB.getItem(params).promise().then((res) => {
+      return AWS.DynamoDB.Converter.unmarshall(res.Item)
+    });
   }
 
   batchGet(ids: string[]): Promise<any> {

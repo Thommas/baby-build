@@ -107,6 +107,8 @@ class PuppeteerService {
   }
 
   async fetchReleaseDate(input: string): Promise<number|null> {
+    console.log('fetchReleaseDate', input);
+
     const browser = await this.getBrowser();
     const page = await this.getNewPage(browser);
 

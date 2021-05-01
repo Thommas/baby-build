@@ -8,13 +8,13 @@
  import { dynamoService, puppeteerService } from '../services';
 
 export class IdeaService {
-  async fetchImgs(document: any) {
+  async fetchImgs(idea: any) {
     const imgs = {};
-    if (IDEA_IMGS_CONFIG[document.category]) {
-      for (const data of IDEA_IMGS_CONFIG[document.category]) {
-        const category = document.category === 'videogame' && document.platform ? document.platform : document.category;
+    if (IDEA_IMGS_CONFIG[idea.category]) {
+      for (const data of IDEA_IMGS_CONFIG[idea.category]) {
+        const category = idea.category === 'videogame' && idea.platform ? idea.platform : idea.category;
         imgs[data.key] = await puppeteerService.fetchImgs(
-          `"${document.label}"+${category}+${data.searchInput}`,
+          `"${idea.label}"+${category}+${data.searchInput}`,
           data.limit,
           data.getOriginal
         );
@@ -23,44 +23,39 @@ export class IdeaService {
     return imgs;
   }
 
-  updateIdeaReleaseDate(document: any) {
-    if (document.releaseDate) {
+  async updateIdeaReleaseDate(idea: any) {
+    console.log('updateIdeaReleaseDate', idea);
+    if (idea.releaseDate) {
       return;
     }
-    return dynamoService.get(document.id)
-      .then((entity: any) => {
-        if (!entity) {
-          throw new Error('Idea not found');
+    const category = idea.category === 'videogame' && idea.platform ? idea.platform : idea.category;
+    await puppeteerService.fetchReleaseDate(`"${idea.label}"+${category}`)
+      .then((releaseDate: number|null) => {
+        console.log(`Release date ${releaseDate} found for idea: ${idea.label}`)
+        if (releaseDate) {
+          idea.releaseDate = releaseDate;
+          return dynamoService.createDocument(idea);
+        } else {
+          idea.releaseDate = '????';
+          return dynamoService.createDocument(idea);
         }
-        const category = document.category === 'videogame' && document.platform ? document.platform : document.category;
-        return puppeteerService.fetchReleaseDate(`"${document.label}"+${category}`)
-          .then((releaseDate: number|null) => {
-            console.log(`Release date ${releaseDate} found for idea: ${document.label}`)
-            if (releaseDate) {
-              entity.releaseDate = releaseDate;
-              return dynamoService.persist(entity);
-            } else {
-              entity.releaseDate = '????';
-              return dynamoService.persist(entity);
-            }
-          });
-      })
+      });
   }
 
   async updateIdeaImgs(idea: any) {
-    await this.fetchImgs(document)
+    await this.fetchImgs(idea)
       .then((imgs: string[]) => {
         idea.imgs = imgs;
         idea.imgsReady = true;
         const platform = idea.category === 'videogame' && idea.platform ? idea.platform : '';
         const ideaLabel = `${idea.label} ${idea.category} ${platform}`;
         console.log(`Updated images for idea: ${ideaLabel}`)
-        return dynamoService.persist(idea);
+        return dynamoService.createDocument(idea);
       });
   }
 
   async updateIdea(id: string) {
-    const idea = dynamoService.get(id);
+    const idea = await dynamoService.get(id);
     if (idea) {
       await this.updateIdeaReleaseDate(idea);
       // if (!idea.imgsReady) {
