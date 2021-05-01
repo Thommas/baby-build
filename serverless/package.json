@@ -44,6 +44,7 @@
     "puppeteer-extra-plugin-stealth": "^2.7.6",
     "serverless-offline": "^6.9.0",
     "serverless-offline-dynamodb-streams": "4.1.0",
+    "serverless-offline-sqs-external": "^1.0.6",
     "serverless-plugin-offline-dynamodb-stream": "^1.0.20",
     "serverless-plugin-typescript": "^1.1.9",
     "serverless-webpack": "^5.2.0",

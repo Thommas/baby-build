@@ -5,7 +5,8 @@
  */
 
 import { authService, graphQLService } from './services';
-import { handleEvent } from './handlers/event.handler';
+import { handleStream } from './handlers/stream.handler';
+import { handleSQS } from './handlers/sqs.handler';
 
 exports.auth = (event, _, callback) => {
   return authService.authenticate(event, callback);
@@ -25,5 +26,9 @@ exports.graphql = (event, context, callback) => {
 };
 
 exports.stream = (event, _, callback) => {
-  handleEvent(event, callback);
+  handleStream(event, callback);
+};
+
+exports.sqs = (event, _, callback) => {
+  handleSQS(event, callback);
 };

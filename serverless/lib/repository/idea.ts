@@ -29,11 +29,7 @@ export function getIdeas(userId: string, args: any): Promise<any> {
         ideas.hits.total.value,
         page
       );
-    })
-    .then((ideas) => {
-      console.log('ideas', ideas);
-      return ideas;
-    })
+    });
 }
 
 export function getIdeasByIds(ids: string[]) {

@@ -24,19 +24,6 @@ const serverlessConfiguration: Serverless = {
     'serverless-offline': {
       port: 3010
     },
-    dynamodbStream: {
-      host: process.env.LOCAL_DYNAMODB_HOST,
-      port: process.env.LOCAL_DYNAMODB_PORT,
-      pollForever: true,
-      streams: [
-        {
-          table: process.env.LOCAL_DYNAMODB_TABLE,
-          functions: [
-            'handle',
-          ]
-        }
-      ]
-    },
     localstack: {
       stages: ['dev'],
       host: 'http://localhost',
@@ -57,11 +44,21 @@ const serverlessConfiguration: Serverless = {
       secretAccessKey: 'test',
       skipCacheInvalidation: false,
       readInterval: 500
+    },
+    'serverless-offline-sqs-external': {
+      autoCreate: false,
+      apiVersion: '2013-12-02',
+      endpoint: 'http://0.0.0.0:4566',
+      region: 'local',
+      accessKeyId: 'test',
+      secretAccessKey: 'test',
+      skipCacheInvalidation: false
     }
   },
   plugins: [
     'serverless-webpack',
     'serverless-offline-dynamodb-streams',
+    'serverless-offline-sqs-external',
     'serverless-offline',
     'serverless-localstack',
   ],
@@ -109,6 +106,14 @@ const serverlessConfiguration: Serverless = {
           enabled: true,
           type: 'dynamodb',
           arn: 'arn:aws:dynamodb:ddblocal:000000000000:table/pathofchild-dev/stream/2021-04-30T19:55:02.778',
+        }
+      }]
+    },
+    sqs: {
+      handler: 'lib/handler.sqs',
+      events: [{
+        sqs: {
+          arn: 'arn:aws:sqs:ddblocal:000000000000:pathofchild-dev',
         }
       }]
     }

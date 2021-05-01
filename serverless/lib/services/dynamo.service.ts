@@ -151,9 +151,9 @@ export class DynamoService {
 
   async load(path: string) {
     await this.deleteTable();
-    await this.timeout(1000);
+    await this.timeout(5000);
     await this.createTable();
-    await this.timeout(1000);
+    await this.timeout(5000);
     await this.loadData(path);
   }
 

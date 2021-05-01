@@ -8,25 +8,28 @@
  import { configService } from './config.service';
 
  class SQSService {
-   private sqs;
+  private sqs;
 
-   constructor() {
-     this.sqs = new AWS.SQS();
-   }
+  constructor() {
+    this.sqs = new AWS.SQS();
+  }
 
-   async sendMessage(messageBody: string) {
-     if (!configService.sqsQueueUrl) {
-       return;
-     }
+  async sendMessage(messageBody: any) {
+    if (!configService.sqsQueueUrl) {
+      return;
+    }
 
-     var params = {
-       MessageBody: messageBody,
-       QueueUrl: configService.sqsQueueUrl
-     };
+    var params = {
+      MessageBody: JSON.stringify(messageBody),
+      QueueUrl: configService.sqsQueueUrl
+    };
 
-     return this.sqs.sendMessage(params).promise()
-       .then((data) => data.MessageId);
-   }
- }
+    return this.sqs.sendMessage(params).promise()
+      .then((data) => {
+        console.log('data', data);
+        return data.MessageId
+      });
+  }
+}
 
- export const sqsService = new SQSService();
+export const sqsService = new SQSService();
