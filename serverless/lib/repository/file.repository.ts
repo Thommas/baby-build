@@ -5,7 +5,7 @@
  */
 
 import { nanoid } from 'nanoid'
-import { dynamoService, puppeteerService } from '../services';
+import { dynamoService, puppeteerService } from '../service';
 
 class FileRepository {
   async create(args: any, userId: string) {

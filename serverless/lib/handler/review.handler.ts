@@ -5,7 +5,7 @@
  */
 
 import { mean } from 'lodash';
-import { dynamoService, elasticSearchService } from '../services';
+import { dynamoService, elasticSearchService } from '../service';
 
 function updateIdea(ideaId: string, args: any) {
   return dynamoService.get(ideaId)

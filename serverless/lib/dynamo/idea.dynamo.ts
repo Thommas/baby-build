@@ -5,7 +5,7 @@
  */
 
 // import { orderBy } from 'lodash';
-import { dynamoService } from '../services';
+import { dynamoService } from '../service';
 
 export function getIdeas(ids: string[], total: number, page: number) {
   return dynamoService.batchGet(ids).then((items: any) => {

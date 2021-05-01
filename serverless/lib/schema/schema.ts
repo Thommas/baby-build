@@ -8,16 +8,16 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge';
 
 // Types
-import fileType from './types/file';
-import ideaType from './types/idea';
-import reviewType from './types/review';
-import userType from './types/user';
+import fileType from './type/file.type';
+import ideaType from './type/idea.type';
+import reviewType from './type/review.type';
+import userType from './type/user.type';
 
 // Resolvers
-import fileResolver from './resolvers/file';
-import ideaResolver from './resolvers/idea';
-import reviewResolver from './resolvers/review';
-import userResolver from './resolvers/user';
+import fileResolver from './resolver/file.resolver';
+import ideaResolver from './resolver/idea.resolver';
+import reviewResolver from './resolver/review.resolver';
+import userResolver from './resolver/user.resolver';
 
 export const typeDefs: any = mergeTypeDefs([
   fileType,

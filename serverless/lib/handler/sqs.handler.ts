@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { ideaService } from "../services";
+import { ideaService } from "../service";
 
 export async function handleSQS(event, callback) {
   console.log('event', event);

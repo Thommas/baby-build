@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as userRepository from '../../repository/user';
+import * as userRepository from '../../repository/user.repository';
 
 export default {
   Query: {

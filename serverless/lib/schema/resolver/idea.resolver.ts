@@ -4,8 +4,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as ideaRepository from '../../repository/idea';
-import * as userRepository from '../../repository/user';
+import * as ideaRepository from '../../repository/idea.repository';
+import * as userRepository from '../../repository/user.repository';
 
 export default {
   Idea: {

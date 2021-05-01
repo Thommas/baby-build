@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { fixturesService } from "../services";
+import { fixturesService } from "../service";
 
 var commandArgs = process.argv.slice(2);
 

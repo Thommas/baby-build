@@ -4,8 +4,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
- import { fileRepository } from '../repository/file.repository';
-import { dynamoService, puppeteerService } from '../services';
+import { fileRepository } from '../repository/file.repository';
+import { dynamoService, puppeteerService } from '.';
 
 export class IdeaService {
   async updateIdeaImgs(idea: any) {

@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { sqsService } from '../services/sqs.service';
+import { sqsService } from '../service';
 
 export function handleInsert(document) {
   if ('Idea' !== document.id.split('-')[0]) {

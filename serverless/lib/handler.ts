@@ -4,9 +4,9 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { authService, graphQLService } from './services';
-import { handleStream } from './handlers/stream.handler';
-import { handleSQS } from './handlers/sqs.handler';
+import { authService, graphQLService } from './service';
+import { handleStream } from './handler/stream.handler';
+import { handleSQS } from './handler/sqs.handler';
 
 exports.auth = (event, _, callback) => {
   return authService.authenticate(event, callback);

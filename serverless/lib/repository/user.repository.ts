@@ -4,8 +4,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { queryUsersBySearchQuery } from '../elasticsearch/user';
-import { dynamoService } from '../services';
+import { queryUsersBySearchQuery } from '../elasticsearch/user.elasticsearch';
+import { dynamoService } from '../service';
 
 export function getAuthUser(userId: string) {
   return dynamoService.get(userId)

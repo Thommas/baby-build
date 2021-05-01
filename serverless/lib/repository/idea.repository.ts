@@ -5,9 +5,9 @@
  */
 
 import { nanoid } from 'nanoid';
-import * as dynamoIdea from '../dynamo/idea';
-import * as elasticsearchIdea from '../elasticsearch/idea';
-import { dynamoService } from '../services';
+import * as dynamoIdea from '../dynamo/idea.dynamo';
+import * as elasticsearchIdea from '../elasticsearch/idea.elasticsearch';
+import { dynamoService } from '../service';
 
 export function getIdeas(userId: string, args: any): Promise<any> {
   const ideaInput = args.ideaInput;

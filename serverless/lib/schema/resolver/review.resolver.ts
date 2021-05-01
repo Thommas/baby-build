@@ -4,8 +4,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as reviewRepository from '../../repository/review';
-import * as userRepository from '../../repository/user';
+import * as reviewRepository from '../../repository/review.repository';
+import * as userRepository from '../../repository/user.repository';
 
 export default {
   Review: {

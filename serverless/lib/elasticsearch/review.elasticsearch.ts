@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { elasticSearchService } from '../services';
+import { elasticSearchService } from '../service';
 
 export function queryReviews(ideaId: string): Promise<any> {
   const query: any = {

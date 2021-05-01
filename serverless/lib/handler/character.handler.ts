@@ -4,7 +4,7 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { dynamoService, puppeteerService } from '../services';
+import { dynamoService, puppeteerService } from '../service';
 
 export function updateCharacterImg(document: any) {
   return dynamoService.get(document.id)

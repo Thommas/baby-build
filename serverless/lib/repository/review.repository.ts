@@ -5,8 +5,8 @@
  */
 
 import { nanoid } from 'nanoid'
-import { queryReviews } from '../elasticsearch/review';
-import { dynamoService } from '../services';
+import { queryReviews } from '../elasticsearch/review.elasticsearch';
+import { dynamoService } from '../service';
 
 export function getReviews(ideaId: string) {
   return queryReviews(ideaId).then((reviews) => {
