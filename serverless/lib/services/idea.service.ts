@@ -4,27 +4,27 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
- import { IDEA_IMGS_CONFIG } from '../config/idea.config';
- import { dynamoService, puppeteerService } from '../services';
+ import { fileRepository } from '../repository/file.repository';
+import { dynamoService, puppeteerService } from '../services';
 
 export class IdeaService {
-  async fetchImgs(idea: any) {
-    const imgs = {};
-    if (IDEA_IMGS_CONFIG[idea.category]) {
-      for (const data of IDEA_IMGS_CONFIG[idea.category]) {
-        const category = idea.category === 'videogame' && idea.platform ? idea.platform : idea.category;
-        imgs[data.key] = await puppeteerService.fetchImgs(
-          `"${idea.label}"+${category}+${data.searchInput}`,
-          data.limit,
-          data.getOriginal
-        );
-      }
+  async updateIdeaImgs(idea: any) {
+    if (idea.imgsReady) {
+      return;
     }
-    return imgs;
+    const category = idea.category === 'videogame' && idea.platform ? idea.platform : idea.category;
+    const imgs = await puppeteerService.fetchImgs(
+      `"${idea.label}"+${category}+${idea.label}`,
+      10,
+      false
+    );
+    const files = await fileRepository.storeFiles(imgs, idea.userId);
+    idea.imgs = files;
+    idea.imgsReady = true;
+    await dynamoService.createDocument(idea);
   }
 
   async updateIdeaReleaseDate(idea: any) {
-    console.log('updateIdeaReleaseDate', idea);
     if (idea.releaseDate) {
       return;
     }
@@ -42,25 +42,12 @@ export class IdeaService {
       });
   }
 
-  async updateIdeaImgs(idea: any) {
-    await this.fetchImgs(idea)
-      .then((imgs: string[]) => {
-        idea.imgs = imgs;
-        idea.imgsReady = true;
-        const platform = idea.category === 'videogame' && idea.platform ? idea.platform : '';
-        const ideaLabel = `${idea.label} ${idea.category} ${platform}`;
-        console.log(`Updated images for idea: ${ideaLabel}`)
-        return dynamoService.createDocument(idea);
-      });
-  }
-
   async updateIdea(id: string) {
     const idea = await dynamoService.get(id);
     if (idea) {
+      console.log('updateIdea', idea);
       await this.updateIdeaReleaseDate(idea);
-      // if (!idea.imgsReady) {
-      //   this.updateIdeaImgs(idea);
-      // }
+      await this.updateIdeaImgs(idea);
     }
   }
 }

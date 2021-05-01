@@ -37,19 +37,19 @@ export class IdeaShowComponent implements OnInit {
   }
 
   ngOnInit() {
-    const operator = map(() => this.save());
-    this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
-    this.ideaFacade.selectedIdea$.pipe(
-      tap(selectedIdea => {
-        if (selectedIdea) {
-          this.formGroup.patchValue(selectedIdea);
-        }
-      }),
-    ).subscribe();
+    // const operator = map(() => this.save());
+    // this.formFieldSub = this.formService.getFormFieldSubscription(this.inputElement, operator);
+    // this.ideaFacade.selectedIdea$.pipe(
+    //   tap(selectedIdea => {
+    //     if (selectedIdea) {
+    //       this.formGroup.patchValue(selectedIdea);
+    //     }
+    //   }),
+    // ).subscribe();
   }
 
   ngOnDestroy() {
-    this.formFieldSub.unsubscribe();
+    // this.formFieldSub.unsubscribe();
   }
 
   selectIdea(idea?: any) {

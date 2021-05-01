@@ -4,10 +4,10 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import * as fileRepository from '../../repository/file';
+import { fileRepository } from '../../repository/file.repository';
 
 export default {
   Query: {
-    files: (_, args) => fileRepository.getFiles(args),
+    files: (_, args, context) => fileRepository.getFiles(args, context.userId),
   },
 };

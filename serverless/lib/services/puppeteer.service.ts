@@ -4,7 +4,6 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
-import { nanoid } from 'nanoid';
 import moment from 'moment';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
@@ -157,18 +156,7 @@ class PuppeteerService {
 
     await browser.close();
 
-    return imgs.map((img: string) => {
-      const id = nanoid();
-      const file: any = {
-        id: `File-${id}`,
-        name: input,
-        data: img,
-        type: 'image/png',
-        size: img.length,
-      };
-
-      return file;
-    });
+    return imgs;
   }
 }
 

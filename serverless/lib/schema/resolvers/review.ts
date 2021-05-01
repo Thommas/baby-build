@@ -12,7 +12,7 @@ export default {
     user: (obj) => userRepository.getUser(obj.userId),
   },
   Query: {
-    reviews: (_, args) => reviewRepository.getReviews(args.ideaId),
+    reviews: (_, __) => [],//reviewRepository.getReviews(args.ideaId),
   },
   Mutation: {
     createReview: (_, args, context) => reviewRepository.createReview(args, context.userId),
