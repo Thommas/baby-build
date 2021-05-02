@@ -4,12 +4,13 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+import { fileRepository } from '../../repository/file.repository';
 import * as ideaRepository from '../../repository/idea.repository';
 import * as userRepository from '../../repository/user.repository';
 
 export default {
   Idea: {
-    imgs: (obj) => obj.imgs,
+    icons: (obj) => fileRepository.getFilesByIds(obj.icons),
     user: (obj) => userRepository.getUser(obj.userId),
   },
   Query: {

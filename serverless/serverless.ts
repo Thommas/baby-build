@@ -71,6 +71,7 @@ const serverlessConfiguration: Serverless = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      ...process.env,
     },
     iamRoleStatements: [
       {
@@ -99,8 +100,18 @@ const serverlessConfiguration: Serverless = {
         }
       ]
     },
-    stream: {
-      handler: 'lib/handler.stream',
+    streamElasticsearch: {
+      handler: 'lib/handler.streamElasticsearch',
+      events: [{
+        stream: {
+          enabled: true,
+          type: 'dynamodb',
+          arn: 'arn:aws:dynamodb:ddblocal:000000000000:table/pathofchild-dev/stream/2021-04-30T19:55:02.778',
+        }
+      }]
+    },
+    streamIdea: {
+      handler: 'lib/handler.streamIdea',
       events: [{
         stream: {
           enabled: true,

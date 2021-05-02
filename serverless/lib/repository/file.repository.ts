@@ -25,9 +25,9 @@ class FileRepository {
   }
 
   async getFiles(args: any, userId: string) {
-    const imgs = await puppeteerService.getFiles(args.fileInput.input);
+    const files = await puppeteerService.getFiles(args.fileInput.input);
 
-    return this.storeFiles(imgs, userId);
+    return this.storeFiles(files, userId);
   }
 
   async storeFiles(files: any, userId: string) {

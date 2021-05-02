@@ -26,11 +26,12 @@ export const GetIdeas = gql`
           firstName
           lastName
         }
-        imgs {
-          icon
-          cover
-          screenshot
-          png
+        icons {
+          id
+          name
+          type
+          size
+          data
         }
       }
     }
@@ -53,12 +54,6 @@ export const CreateIdeaMutation = gql`
       user {
         firstName
         lastName
-      }
-      imgs {
-        icon
-        cover
-        screenshot
-        png
       }
     }
   }
@@ -100,12 +95,6 @@ export const UpdateIdeaMutation = gql`
       user {
         firstName
         lastName
-      }
-      imgs {
-        icon
-        cover
-        screenshot
-        png
       }
     }
   }

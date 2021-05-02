@@ -5,27 +5,21 @@
  */
 
 import AWS from 'aws-sdk';
-import * as elasticSearchHandler from './elasticsearch.handler';
-import * as ideaHandler from './idea.handler';
-import * as reviewHandler from './review.handler';
+import { elasticSearchService } from '../service';
 
-export async function handleStream(event, callback) {
+export async function handleStreamElasticsearch(event, callback) {
   for (const record of event.Records) {
     if (record.eventName == 'INSERT') {
       const document = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage);
-      elasticSearchHandler.handleInsert(document);
-      ideaHandler.handleInsert(document);
-      reviewHandler.handleInsert(document);
+      elasticSearchService.index(document);
     }
     if (record.eventName == 'MODIFY') {
       const document = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.NewImage);
-      elasticSearchHandler.handleModify(document);
-      ideaHandler.handleModify(document);
-      reviewHandler.handleModify(document);
+      elasticSearchService.index(document);
     }
     if (record.eventName == 'REMOVE') {
       const document = AWS.DynamoDB.Converter.unmarshall(record.dynamodb.OldImage);
-      elasticSearchHandler.handleRemove(document);
+      elasticSearchService.remove(document);
     }
   }
   callback(null, `Successfully processed ${event.Records.length} records.`);

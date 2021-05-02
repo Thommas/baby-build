@@ -1,7 +1,7 @@
 {
   "name": "pathofchild-serverless",
   "scripts": {
-    "start": "NODE_ENV=dev serverless offline start --stage dev",
+    "start": "SLS_DEBUG=* NODE_ENV=dev serverless offline start --stage dev",
     "load": "NODE_ENV=dev ts-node ./lib/command/load.command.ts",
     "build": "NODE_ENV=production ./node_modules/.bin/tsc -p ./tsconfig.json",
     "test": "NODE_ENV=test ts-node node_modules/jasmine/bin/jasmine \"lib/**/*.spec.ts\"",

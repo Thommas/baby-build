@@ -8,22 +8,22 @@ import { fileRepository } from '../repository/file.repository';
 import { dynamoService, puppeteerService } from '.';
 
 export class IdeaService {
-  async updateIdeaImgs(idea: any) {
-    if (idea.imgs) {
+  async fetchIcons(idea: any) {
+    if (idea.icons) {
       return;
     }
     const category = idea.category === 'videogame' && idea.platform ? idea.platform : idea.category;
-    const imgs = await puppeteerService.fetchImgs(
+    const icons = await puppeteerService.fetchImgs(
       `"${idea.label}"+${category}+${idea.label}`,
       10,
       false
     );
-    const files = await fileRepository.storeFiles(imgs, idea.userId);
-    idea.imgs = files;
+    const files = await fileRepository.storeFiles(icons, idea.userId);
+    idea.icons = files;
     await dynamoService.createDocument(idea);
   }
 
-  async updateIdeaReleaseDate(idea: any) {
+  async fetchReleaseDate(idea: any) {
     if (idea.releaseDate) {
       return;
     }
@@ -40,8 +40,8 @@ export class IdeaService {
     const idea = await dynamoService.get(id);
     if (idea) {
       console.log('updateIdea', idea);
-      await this.updateIdeaReleaseDate(idea);
-      await this.updateIdeaImgs(idea);
+      await this.fetchReleaseDate(idea);
+      await this.fetchIcons(idea);
     }
   }
 }

@@ -65,7 +65,6 @@ export function updateIdea(args: any) {
           delete entity[field];
         }
       }
-      entity.imgsReady = false;
       return dynamoService.createDocument(entity);
     });
 }

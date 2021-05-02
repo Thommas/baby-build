@@ -5,7 +5,8 @@
  */
 
 import { authService, graphQLService } from './service';
-import { handleStream } from './handler/stream.handler';
+import { handleStreamElasticsearch } from './handler/stream-elasticsearch.handler';
+import { handleStreamIdea } from './handler/stream-idea.handler';
 import { handleSQS } from './handler/sqs.handler';
 
 exports.auth = (event, _, callback) => {
@@ -25,8 +26,12 @@ exports.graphql = (event, context, callback) => {
   return handler(event, context, callback);
 };
 
-exports.stream = (event, _, callback) => {
-  handleStream(event, callback);
+exports.streamElasticsearch = (event, _, callback) => {
+  handleStreamElasticsearch(event, callback);
+};
+
+exports.streamIdea = (event, _, callback) => {
+  handleStreamIdea(event, callback);
 };
 
 exports.sqs = (event, _, callback) => {
