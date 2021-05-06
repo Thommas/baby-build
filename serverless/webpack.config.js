@@ -21,7 +21,7 @@ module.exports = {
   },
   output: {
     libraryTarget: 'commonjs',
-    path: path.join(__dirname, '.build'),
+    path: path.join(__dirname, '.webpack'),
     filename: '[name].js',
   },
   target: 'node',
@@ -36,7 +36,7 @@ module.exports = {
           [
             path.resolve(__dirname, 'node_modules'),
             path.resolve(__dirname, '.serverless'),
-            path.resolve(__dirname, '.build'),
+            path.resolve(__dirname, '.webpack'),
           ],
         ],
         options: {

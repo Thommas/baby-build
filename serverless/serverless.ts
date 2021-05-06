@@ -13,22 +13,24 @@ require('dotenv').config({
 
 const serverlessConfiguration: Serverless = {
   service: {
-    name: 'pathofchild-serverless',
+    name: 'pathofchild',
   },
   frameworkVersion: '2',
+  package: {
+    individually: false
+  },
   custom: {
     webpack: {
       webpackConfig: './webpack.config.js',
-      includeModules: true
-    },
-    'serverless-offline': {
-      port: 3010
+      includeModules: true,
+      keepoutputDirectory: true
     },
     localstack: {
-      stages: ['dev'],
+      stages: ['local'],
       host: 'http://localhost',
       edgePort: 4566,
       autostart: true,
+      debug: true,
       lambda: {
         mountCode: true
       },
@@ -36,52 +38,54 @@ const serverlessConfiguration: Serverless = {
         sudo: false
       }
     },
-    'serverless-offline-dynamodb-streams': {
-      apiVersion: '2013-12-02',
-      endpoint: 'http://0.0.0.0:4566',
-      region: 'local',
-      accessKeyId: 'test',
-      secretAccessKey: 'test',
-      skipCacheInvalidation: false,
-      readInterval: 500
-    },
-    'serverless-offline-sqs-external': {
-      autoCreate: false,
-      apiVersion: '2013-12-02',
-      endpoint: 'http://0.0.0.0:4566',
-      region: 'local',
-      accessKeyId: 'test',
-      secretAccessKey: 'test',
-      skipCacheInvalidation: false
-    }
+    // 'serverless-offline': {
+    //   port: 3010
+    // },
+    // 'serverless-offline-dynamodb-streams': {
+    //   apiVersion: '2013-12-02',
+    //   endpoint: 'http://0.0.0.0:4566',
+    //   region: 'local',
+    //   accessKeyId: 'test',
+    //   secretAccessKey: 'test',
+    //   skipCacheInvalidation: false,
+    //   readInterval: 500
+    // },
+    // 'serverless-offline-sqs-external': {
+    //   autoCreate: false,
+    //   apiVersion: '2013-12-02',
+    //   endpoint: 'http://0.0.0.0:4566',
+    //   region: 'local',
+    //   accessKeyId: 'test',
+    //   secretAccessKey: 'test',
+    //   skipCacheInvalidation: false
+    // }
   },
   plugins: [
     'serverless-webpack',
-    'serverless-offline-dynamodb-streams',
-    'serverless-offline-sqs-external',
-    'serverless-offline',
+    // 'serverless-offline-dynamodb-streams',
+    // 'serverless-offline-sqs-external',
+    // 'serverless-offline',
     'serverless-localstack',
   ],
   provider: {
     name: 'aws',
-    region: 'eu-west-1',
+    region: process.env.AWS_REGION,
     runtime: 'nodejs12.x',
     apiGateway: {
       minimumCompressionSize: 1024,
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      ...process.env,
     },
-    iamRoleStatements: [
-      {
-        Effect: 'Allow',
-        Action: [
-          'dynamodb:*'
-        ],
-        Resource: 'arn:aws:dynamodb:${self:provider.region}:*:*'
-      }
-    ]
+    // iamRoleStatements: [
+    //   {
+    //     Effect: 'Allow',
+    //     Action: [
+    //       'dynamodb:*'
+    //     ],
+    //     Resource: 'arn:aws:dynamodb:${self:provider.region}:*:*'
+    //   }
+    // ]
   },
   functions: {
     // customAuthorizer: {

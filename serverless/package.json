@@ -1,9 +1,12 @@
 {
   "name": "pathofchild-serverless",
   "scripts": {
-    "start": "SLS_DEBUG=* NODE_ENV=dev serverless offline start --stage dev",
-    "load": "NODE_ENV=dev ts-node ./lib/command/load.command.ts",
-    "build": "NODE_ENV=production ./node_modules/.bin/tsc -p ./tsconfig.json",
+    "build": "NODE_ENV=local serverless webpack --stage local",
+    "deploy": "NODE_ENV=local serverless deploy --stage local",
+    "watch": "nodemon -w lib -e '.*' -x 'npm run build'",
+    "start": "npm run deploy && npm run watch",
+    "info": "serverless info --stage local",
+    "load": "NODE_ENV=local ts-node ./lib/command/load.command.ts",
     "test": "NODE_ENV=test ts-node node_modules/jasmine/bin/jasmine \"lib/**/*.spec.ts\"",
     "e2e": "NODE_ENV=test ts-node node_modules/jasmine/bin/jasmine \"e2e/**/*.spec.ts\"",
     "db-admin": "DYNAMO_ENDPOINT=http://localhost:4566 dynamodb-admin",

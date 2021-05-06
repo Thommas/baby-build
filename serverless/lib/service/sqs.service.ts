@@ -25,10 +25,7 @@
     };
 
     return this.sqs.sendMessage(params).promise()
-      .then((data) => {
-        console.log('data', data);
-        return data.MessageId
-      });
+      .then((data) => data.MessageId);
   }
 }
 

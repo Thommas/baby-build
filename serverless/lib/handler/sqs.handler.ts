@@ -7,7 +7,6 @@
 import { ideaService } from "../service";
 
 export async function handleSQS(event, callback) {
-  console.log('event', event);
   for (const record of event.Records) {
     const document = JSON.parse(record.body);
     const id = document.id;

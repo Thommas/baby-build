@@ -1,7 +1,7 @@
 {
   "name": "pathofchild-angular",
   "scripts": {
-    "start": "ng serve --public-host=0.0.0.0:0 --disable-host-check --configuration=dev",
+    "start": "ng serve --public-host=0.0.0.0:0 --disable-host-check --configuration=local",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

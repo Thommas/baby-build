@@ -106,8 +106,6 @@ class PuppeteerService {
   }
 
   async fetchReleaseDate(input: string): Promise<number|null> {
-    console.log('fetchReleaseDate', input);
-
     const browser = await this.getBrowser();
     const page = await this.getNewPage(browser);
 
@@ -128,8 +126,6 @@ class PuppeteerService {
   }
 
   async getFiles(input: string): Promise<any[]> {
-    console.log('getFiles', input);
-
     const imgs: string[] = [];
 
     if (!input) {

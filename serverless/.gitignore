@@ -1,5 +1,5 @@
 /node_modules
-/.build
+/.webpack
 /.dynamodb
 /.serverless
 /npm-debug.log

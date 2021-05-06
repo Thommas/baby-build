@@ -31,8 +31,8 @@ export class ConfigService {
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       NODE_ENV: Joi.string()
-        .valid('dev', 'test')
-        .default('dev'),
+        .valid('local', 'test')
+        .default('local'),
       AWS_REGION: Joi.string().default('eu-west-1'),
       ELASTIC_SEARCH_INDEX: Joi.string().default('app'),
       ELASTIC_SEARCH_HOST: Joi.string().default('http://localhost:9200'),
