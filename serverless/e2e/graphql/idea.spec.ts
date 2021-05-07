@@ -5,7 +5,7 @@
  */
 
 require('dotenv').config();
-import { fixturesService, graphQLService } from '../../lib/services';
+import { fixturesService, graphQLService } from '../../lib/service';
 import { GetIdeas } from '../../lib/graphql';
 
 const { createTestClient } = require('apollo-server-testing');

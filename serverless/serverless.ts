@@ -17,7 +17,7 @@ const serverlessConfiguration: Serverless = {
   },
   frameworkVersion: '2',
   package: {
-    individually: false
+    individually: true
   },
   custom: {
     webpack: {
