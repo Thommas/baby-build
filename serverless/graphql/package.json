@@ -1,5 +1,5 @@
 {
-  "name": "pathofchild-serverless",
+  "name": "pathofchild-serverless-graphql",
   "scripts": {
     "build": "NODE_ENV=local serverless webpack --stage local",
     "deploy": "NODE_ENV=local serverless deploy --stage local",
@@ -44,10 +44,6 @@
     "eslint": "^7.25.0",
     "fork-ts-checker-webpack-plugin": "^6.2.6",
     "serverless-localstack": "^0.4.32",
-    "serverless-offline": "^6.9.0",
-    "serverless-offline-dynamodb-streams": "4.1.0",
-    "serverless-offline-sqs-external": "^1.0.6",
-    "serverless-plugin-offline-dynamodb-stream": "^1.0.20",
     "serverless-plugin-typescript": "^1.1.9",
     "serverless-webpack": "^5.5.0",
     "ts-loader": "^9.1.2",

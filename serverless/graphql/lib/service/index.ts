@@ -11,6 +11,5 @@ export * from './elasticsearch.service';
 export * from './fixtures.service';
 export * from './idea.service';
 export * from './graphql.service';
-export * from './puppeteer.service';
 export * from './s3.service';
 export * from './sqs.service';

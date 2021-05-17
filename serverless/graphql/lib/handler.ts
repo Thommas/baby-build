@@ -39,15 +39,3 @@ exports.graphql = (event, context, callback) => {
 
   return handler(event, context, callback);
 };
-
-exports.streamElasticsearch = (event, _, callback) => {
-  handleStreamElasticsearch(event, callback);
-};
-
-exports.streamIdea = (event, _, callback) => {
-  handleStreamIdea(event, callback);
-};
-
-exports.sqs = (event, _, callback) => {
-  handleSQS(event, callback);
-};
