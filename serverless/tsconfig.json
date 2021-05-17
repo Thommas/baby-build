@@ -13,7 +13,9 @@
   "include": ["./**/*.ts"],
   "exclude": [
     "node_modules/**/*",
+    "data/**/*",
+    "e2e/**/*",
     ".serverless/**/*",
-    ".build/**/*"
+    ".webpack/**/*"
   ]
 }

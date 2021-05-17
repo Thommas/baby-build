@@ -11,8 +11,8 @@ import { configService } from './config.service';
 class GraphQLService {
   createServer(): ApolloServer {
     return new ApolloServer({
-      playground: true,
-      introspection: true,
+      playground: false,
+      introspection: false,
       typeDefs,
       resolvers,
       context: ({ event, context }) => ({

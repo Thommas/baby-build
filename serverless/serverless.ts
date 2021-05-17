@@ -17,13 +17,18 @@ const serverlessConfiguration: Serverless = {
   },
   frameworkVersion: '2',
   package: {
-    individually: true
+    individually: false
   },
   custom: {
     webpack: {
       webpackConfig: './webpack.config.js',
       includeModules: true,
-      keepoutputDirectory: true
+      keepOutputDirectory: true,
+      // packagerOptions: {
+      //   scripts: [
+      //     'rm -rf ./node_modules/puppeteer/.local-chromium/*',
+      //   ]
+      // }
     },
     localstack: {
       stages: ['local'],
@@ -61,16 +66,19 @@ const serverlessConfiguration: Serverless = {
     // }
   },
   plugins: [
-    'serverless-webpack',
     // 'serverless-offline-dynamodb-streams',
     // 'serverless-offline-sqs-external',
     // 'serverless-offline',
+    'serverless-webpack',
     'serverless-localstack',
   ],
   provider: {
     name: 'aws',
     region: process.env.AWS_REGION,
+    stage: 'local',
+    lambdaHashingVersion: 20201221,
     runtime: 'nodejs12.x',
+    timeout: 30,
     apiGateway: {
       minimumCompressionSize: 1024,
     },
@@ -91,6 +99,17 @@ const serverlessConfiguration: Serverless = {
     // customAuthorizer: {
     //   handler: 'lib/handler.auth'
     // },
+    hello: {
+      handler: 'lib/handler.hello',
+      events: [
+        {
+          http: {
+            path: 'hello',
+            method: 'get',
+          }
+        }
+      ]
+    },
     graphql: {
       handler: 'lib/handler.graphql',
       events: [
@@ -104,34 +123,34 @@ const serverlessConfiguration: Serverless = {
         }
       ]
     },
-    streamElasticsearch: {
-      handler: 'lib/handler.streamElasticsearch',
-      events: [{
-        stream: {
-          enabled: true,
-          type: 'dynamodb',
-          arn: 'arn:aws:dynamodb:ddblocal:000000000000:table/pathofchild-dev/stream/2021-04-30T19:55:02.778',
-        }
-      }]
-    },
-    streamIdea: {
-      handler: 'lib/handler.streamIdea',
-      events: [{
-        stream: {
-          enabled: true,
-          type: 'dynamodb',
-          arn: 'arn:aws:dynamodb:ddblocal:000000000000:table/pathofchild-dev/stream/2021-04-30T19:55:02.778',
-        }
-      }]
-    },
-    sqs: {
-      handler: 'lib/handler.sqs',
-      events: [{
-        sqs: {
-          arn: 'arn:aws:sqs:ddblocal:000000000000:pathofchild-dev',
-        }
-      }]
-    }
+    // streamElasticsearch: {
+    //   handler: 'handler.streamElasticsearch',
+    //   events: [{
+    //     stream: {
+    //       enabled: true,
+    //       type: 'dynamodb',
+    //       arn: 'arn:aws:dynamodb:ddblocal:000000000000:table/pathofchild-dev/stream/2021-04-30T19:55:02.778',
+    //     }
+    //   }]
+    // },
+    // streamIdea: {
+    //   handler: 'handler.streamIdea',
+    //   events: [{
+    //     stream: {
+    //       enabled: true,
+    //       type: 'dynamodb',
+    //       arn: 'arn:aws:dynamodb:ddblocal:000000000000:table/pathofchild-dev/stream/2021-04-30T19:55:02.778',
+    //     }
+    //   }]
+    // },
+    // sqs: {
+    //   handler: 'handler.sqs',
+    //   events: [{
+    //     sqs: {
+    //       arn: 'arn:aws:sqs:ddblocal:000000000000:pathofchild-dev',
+    //     }
+    //   }]
+    // }
   }
 }
 

@@ -11,11 +11,11 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  mode: 'development', // slsw.lib.webpack.isLocal ? 'development' : 'production',
+  mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
   entry: slsw.lib.entries,
-  devtool: 'cheap-module-eval-source-map', // slsw.lib.webpack.isLocal ? 'cheap-module-eval-source-map' : 'source-map',
+  devtool: slsw.lib.webpack.isLocal ? 'cheap-module-eval-source-map' : 'source-map',
   resolve: {
-    extensions: ['.mjs', '.json', '.ts'],
+    extensions: ['.mjs', '.json', '.ts', '.js'],
     symlinks: false,
     cacheWithContext: false,
   },
@@ -35,11 +35,6 @@ module.exports = {
         exclude: [
           [
             path.resolve(__dirname, 'node_modules'),
-            path.resolve(__dirname, '.serverless'),
-            path.resolve(__dirname, '.webpack'),
-            path.resolve(__dirname, 'data'),
-            path.resolve(__dirname, 'e2e'),
-            path.resolve(__dirname, 'localstack-data'),
           ],
         ],
         options: {
@@ -49,15 +44,15 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new ForkTsCheckerWebpackPlugin({
-      eslint: true,
-      eslintOptions: {
-        cache: true
-      }
-    })
-  ],
-  optimization: {
-    minimize: false,
-  },
+  // plugins: [
+  //   new ForkTsCheckerWebpackPlugin({
+  //     eslint: true,
+  //     eslintOptions: {
+  //       cache: true
+  //     }
+  //   })
+  // ],
+  // optimization: {
+  //   minimize: false,
+  // },
 };

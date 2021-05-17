@@ -10,26 +10,31 @@ import * as elasticsearchIdea from '../elasticsearch/idea.elasticsearch';
 import { dynamoService } from '../service';
 
 export function getIdeas(userId: string, args: any): Promise<any> {
-  const ideaInput = args.ideaInput;
-  const page = args.page;
-  const sort = args.sort;
-  return elasticsearchIdea.getIdeas([userId], ideaInput, sort, page)
-    .then((res) => {
-      const ideas = res.body;
-      if (0 === ideas.hits.total.value || 0 === ideas.hits.hits.length) {
-        return {
-          total: 0,
-          page,
-          nodes: [],
-        };
-      }
-      const ids: any = ideas.hits.hits.map((hit: any) => hit._id);
-      return dynamoIdea.getIdeas(
-        ids,
-        ideas.hits.total.value,
-        page
-      );
-    });
+  return {
+    total: 0,
+    page: 1,
+    nodes: [],
+  };
+  // const ideaInput = args.ideaInput;
+  // const page = args.page;
+  // const sort = args.sort;
+  // return elasticsearchIdea.getIdeas([userId], ideaInput, sort, page)
+  //   .then((res) => {
+  //     const ideas = res.body;
+  //     if (!ideas || 0 === ideas.hits.total.value || 0 === ideas.hits.hits.length) {
+  //       return {
+  //         total: 0,
+  //         page,
+  //         nodes: [],
+  //       };
+  //     }
+  //     const ids: any = ideas.hits.hits.map((hit: any) => hit._id);
+  //     return dynamoIdea.getIdeas(
+  //       ids,
+  //       ideas.hits.total.value,
+  //       page
+  //     );
+  //   });
 }
 
 export function getIdeasByIds(ids: string[]) {
