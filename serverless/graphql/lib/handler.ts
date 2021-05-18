@@ -5,9 +5,6 @@
  */
 
 import { authService, graphQLService } from './service';
-import { handleStreamElasticsearch } from './handler/stream-elasticsearch.handler';
-import { handleStreamIdea } from './handler/stream-idea.handler';
-import { handleSQS } from './handler/sqs.handler';
 
 exports.auth = (event, _, callback) => {
   return authService.authenticate(event, callback);

@@ -5,7 +5,7 @@
  */
 
 import { nanoid } from 'nanoid'
-import { dynamoService, puppeteerService, s3Service } from '../service';
+import { dynamoService, s3Service } from '../service';
 
 class FileRepository {
   async create(args: any, userId: string) {
@@ -22,12 +22,6 @@ class FileRepository {
       return [];
     }
     return dynamoService.batchGet(ids);
-  }
-
-  async getFiles(args: any, userId: string) {
-    const files = await puppeteerService.getFiles(args.fileInput.input);
-
-    return this.storeFiles(files, userId);
   }
 
   async storeFiles(files: any, userId: string) {

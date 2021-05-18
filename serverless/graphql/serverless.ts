@@ -29,7 +29,7 @@ const serverlessConfiguration: Serverless = {
       stages: ['local'],
       host: 'http://localhost',
       edgePort: 4566,
-      autostart: true,
+      autostart: false,
       debug: true,
       lambda: {
         mountCode: true
