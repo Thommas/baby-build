@@ -13,6 +13,6 @@ services:
       - HOST_TMP_FOLDER=${PWD}/.localstack
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
-      - "./data:/tmp/localstack"
+      - ".localstack:/tmp/localstack"
 #      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"

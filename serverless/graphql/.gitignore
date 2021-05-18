@@ -1,6 +1,7 @@
 /node_modules
 /.webpack
 /.dynamodb
+/.localstack
 /.serverless
 /npm-debug.log
 /.env
