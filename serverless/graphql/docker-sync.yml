@@ -1,0 +1,5 @@
+version: "2"
+syncs:
+  appcode-native-osx-sync:
+    src: '.localstack'
+    sync_strategy: native_osx

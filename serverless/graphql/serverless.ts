@@ -29,13 +29,17 @@ const serverlessConfiguration: Serverless = {
       stages: ['local'],
       host: 'http://localhost',
       edgePort: 4566,
-      autostart: false,
+      autostart: true,
       debug: true,
       lambda: {
-        mountCode: true
+        mountCode: false
       },
       docker: {
         sudo: false
+      },
+      s3: {
+        host: 'localhost',
+        directory: '/tmp'
       }
     },
   },
@@ -55,6 +59,9 @@ const serverlessConfiguration: Serverless = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      LAMBDA_EXECUTOR: 'docker-reuse',
+      HOST_TMP_FOLDER: '/tmp/localstack',
+      LAMBDA_REMOTE_DOCKER: false,
     },
   },
   functions: {
