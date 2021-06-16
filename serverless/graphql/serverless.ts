@@ -25,44 +25,19 @@ const serverlessConfiguration: Serverless = {
       includeModules: true,
       keepOutputDirectory: true,
     },
-    localstack: {
-      stages: ['local'],
-      host: 'http://localhost',
-      edgePort: 4566,
-      autostart: true,
-      debug: true,
-      lambda: {
-        mountCode: false
-      },
-      docker: {
-        sudo: false
-      },
-      s3: {
-        host: 'localhost',
-        directory: '/tmp'
-      }
-    },
+    'serverless-offline': {
+      useChildProcesses: true
+    }
   },
   plugins: [
     'serverless-webpack',
-    'serverless-localstack',
+    'serverless-offline',
   ],
   provider: {
     name: 'aws',
     region: process.env.AWS_REGION,
     stage: 'local',
-    lambdaHashingVersion: 20201221,
-    runtime: 'nodejs12.x',
-    timeout: 30,
-    apiGateway: {
-      minimumCompressionSize: 1024,
-    },
-    environment: {
-      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      LAMBDA_EXECUTOR: 'docker-reuse',
-      HOST_TMP_FOLDER: '/tmp/localstack',
-      LAMBDA_REMOTE_DOCKER: false,
-    },
+    runtime: 'nodejs12.x'
   },
   functions: {
     // customAuthorizer: {
