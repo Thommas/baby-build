@@ -16,19 +16,6 @@ const serverlessConfiguration: Serverless = {
     name: 'pathofchild-graphql',
   },
   frameworkVersion: '2',
-  package: {
-    individually: false
-  },
-  custom: {
-    webpack: {
-      webpackConfig: './webpack.config.js',
-      includeModules: true,
-      keepOutputDirectory: true,
-    },
-    'serverless-offline': {
-      useChildProcesses: true
-    }
-  },
   plugins: [
     'serverless-webpack',
     'serverless-offline',
@@ -36,7 +23,7 @@ const serverlessConfiguration: Serverless = {
   provider: {
     name: 'aws',
     region: process.env.AWS_REGION,
-    stage: 'local',
+    //stage: 'local',
     runtime: 'nodejs12.x'
   },
   functions: {

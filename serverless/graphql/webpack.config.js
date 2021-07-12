@@ -1,21 +1,25 @@
 /**
- * Path of child
+ * Labstep.
  *
- * @author Thomas Bullier <thomasbullier@gmail.com>
+ * @author     Thomas Bullier <thomas@labstep.com>
  */
 
 const path = require('path');
 const slsw = require('serverless-webpack');
 const nodeExternals = require('webpack-node-externals');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const webpack = require('webpack');
+const dotenv = require('dotenv').config({
+  path: __dirname + '/.env.' + process.env.NODE_ENV
+});
 
 module.exports = {
   context: __dirname,
   mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
   entry: slsw.lib.entries,
-  devtool: slsw.lib.webpack.isLocal ? 'eval-cheap-module-source-map' : 'source-map',
+  devtool: slsw.lib.webpack.isLocal ? 'cheap-module-eval-source-map' : 'source-map',
   resolve: {
-    extensions: ['.mjs', '.json', '.ts', '.js'],
+    extensions: ['.ts'],
     symlinks: false,
     cacheWithContext: false,
   },
@@ -25,16 +29,22 @@ module.exports = {
     filename: '[name].js',
   },
   target: 'node',
-  externals: [nodeExternals()],
+  externals: [
+    nodeExternals(),
+    {
+      'sharp': 'commonjs sharp'
+    }
+  ],
   module: {
     rules: [
-      // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
       {
         test: /\.(tsx?)$/,
         loader: 'ts-loader',
         exclude: [
           [
             path.resolve(__dirname, 'node_modules'),
+            path.resolve(__dirname, '.serverless'),
+            path.resolve(__dirname, '.webpack'),
           ],
         ],
         options: {
@@ -44,15 +54,15 @@ module.exports = {
       },
     ],
   },
-  // plugins: [
-  //   new ForkTsCheckerWebpackPlugin({
-  //     eslint: true,
-  //     eslintOptions: {
-  //       cache: true
-  //     }
-  //   })
-  // ],
-  // optimization: {
-  //   minimize: false,
-  // },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(dotenv.parsed)
+    }),
+    // new ForkTsCheckerWebpackPlugin({
+    //   eslint: true,
+    //   eslintOptions: {
+    //     cache: true
+    //   }
+    // })
+  ]
 };
